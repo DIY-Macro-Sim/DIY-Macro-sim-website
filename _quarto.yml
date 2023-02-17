@@ -1,0 +1,64 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "DIY seminal macroeconomic models"
+  author: "<a href='https://github.com/DIY-Macro-Sim'>DIY-Macro-Sim<a/>"
+  reader-mode: false
+  # description: |
+  #   Do it yourself open-source codes for seminal macroeconomic models.
+    
+  page-footer:
+    left: |
+       An open-source platform for macroeconomic model simulation. 
+    right: |
+      <a>License: ...<a/> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a>
+
+  site-url: https://github.com/DIY-Macro-Sim
+  repo-url: https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website
+  repo-branch: main
+  repo-actions: [edit, issue]
+  
+  chapters:
+    - index.qmd
+    - how_to_use.qmd
+    - how_to_contribute.qmd
+    - references.qmd
+    
+    - part: static_models.qmd
+      chapters:
+        - a_neoclassical_macro_model.qmd
+        - an_IS_LM_model.qmd
+        - a_neoclassical_synthesis_model_IS_LM_AS_AD.qmd
+        
+    - part: dynamic_models.qmd
+      chapters:
+        - a_new_keynesian_3_equation_model.qmd
+        - a_post_keynesian_macro_model_with_endogenous_money.qmd
+        - a_post_kaleckian_distribution_and_growth_model.qmd
+        - a_sraffian_supermultiplier_model.qmd
+        - a_malthusian_model.qmd
+        - a_ricardian_one_sector_model.qmd
+        - a_ricardian_two_sector_model.qmd
+    
+    
+bibliography: references.bib
+
+format:
+  html:
+    toc: true
+    toc-depth: 5
+    number-depth: 1
+    theme:
+      light: cosmo
+      dark: darkly
+    code-link: true
+    code-copy: true
+  pdf:
+    documentclass: scrreprt
+    
+editor: source
+
+df-print: paged
+

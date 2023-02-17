@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "DIY seminal macroeconomic models",
+    "section": "",
+    "text": "Welcome\nThis project provides a DIY - “Do it yourself” - open source code repository and online script for numerical simulations of some seminal macroeconomic models (codes are currently provided in R, but we invite everyone to provide scripts based on other programming languages). Comments, questions and corrections are welcome! Please create an issue or pull request.\n\n\nOverview\nStructure of the repository\nThe repository is structured …\n(maybe some other categorisation, maybe also with sub-categories)"
+  },
+  {
+    "objectID": "how_to_use.html#section",
+    "href": "how_to_use.html#section",
+    "title": "1  How to use this site",
+    "section": "…",
+    "text": "…\nMaybe some general notes here, e.g. from our project proposal draft."
+  },
+  {
+    "objectID": "how_to_use.html#how-to-simulate",
+    "href": "how_to_use.html#how-to-simulate",
+    "title": "1  How to use this site",
+    "section": "How to simulate",
+    "text": "How to simulate\nTO DO: Add some notes based on KK slides."
+  },
+  {
+    "objectID": "how_to_contribute.html",
+    "href": "how_to_contribute.html",
+    "title": "2  How to contribute",
+    "section": "",
+    "text": "TO DO: Add some notes on how to contribute."
+  },
+  {
+    "objectID": "static_models.html",
+    "href": "static_models.html",
+    "title": "Static models",
+    "section": "",
+    "text": "…"
+  }
+]

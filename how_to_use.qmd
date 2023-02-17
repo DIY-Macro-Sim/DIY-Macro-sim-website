@@ -1,0 +1,14 @@
+# How to use this site
+
+## ...
+
+Maybe some general notes here, e.g. from our project proposal draft.
+
+## How to simulate 
+
+**TO DO: Add some notes based on KK slides.**
+
+<!-- ## Plotting -->
+
+<!-- ## Directed graphs -->
+

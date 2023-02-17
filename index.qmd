@@ -1,0 +1,12 @@
+# Welcome {.unnumbered}
+
+This project provides a DIY - "Do it yourself" - open source code repository and online script for numerical simulations of some seminal macroeconomic models (codes are currently provided in R, but we invite everyone to provide scripts based on other programming languages). Comments, questions and corrections are welcome! Please create an issue or pull request.
+
+# Overview
+
+Structure of the repository
+
+The repository is structured ...
+
+(maybe some other categorisation, maybe also with sub-categories)
+
