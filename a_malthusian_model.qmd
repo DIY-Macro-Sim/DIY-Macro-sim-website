@@ -1,1 +1,257 @@
 # A Malthusian Model
+
+## Overview
+
+This model captures some key feature of Thomas Malthus' theory of population dynamics as developed in his 1798 book [An Essay on the Principle of Population](https://en.wikipedia.org/wiki/An_Essay_on_the_Principle_of_Population). The theory revolves around the interaction between living standards and population growth.[^a_malthusian_model-1] It assumes that birth rates increase with rising living standards, while death rates decline. Economic growth thus spurs population growth. However, due to supply constraints in agricultural production, population growth drives up food prices and thereby undermines real income, bringing population growth to a halt. The model is adapted from [Karl Whelan's lecture notes](https://karlwhelan.com/blog/?p=759).
+
+[^a_malthusian_model-1]: See chapter 2 of \[Foley (2006)\](https://www.hup.harvard.edu/catalog.php?isbn=9780674027299) for an excellent introduction.
+
+## Model
+
+The following equations describe the model:
+
+$$
+N_t = N_{t-1} + B_{t-1} - D_{t-1} 
+$$ {#eq-malthus_N}
+
+$$
+\frac{B_{t}}{N_t} = b_0 + b_1Y_t 
+$$ {#eq-malthus_B}
+
+$$
+\frac{D_{t}}{N_t} = d_0 - d_1Y_t 
+$$ {#eq-malthus_D}
+
+$$
+Y_t = a_0-a_1N_t 
+$$ {#eq-malthus_Y}
+
+where $N_t$, $B_t$, $D_t$, and $Y_t$ represent population, number of births, number of deaths, and real income, respectively.
+
+Equation @eq-malthus_N describes population dynamics as driven by births and deaths. Equations @eq-malthus_B and @eq-malthus_D the Malthusian hypothesis that birth rates are positively and death rates negatively related to income. Equation @eq-malthus_Y makes real income a negative function of the population, which captures the idea of supply constraints in agriculture.
+
+## Simulation
+
+### Parameterisation
+
+Table reports the parameterisation and initial values used in the simulation. Besides a baseline (labelled as scenario 1), three further scenarios will be considered. Scenario 2 models what Malthus called preventative checks: a fall in the exogenous component of the birth rate ($b_0$) due to an increased use of contraception, changes in marriage norms etc. Scenario 3 models\`positive checks': a rise in the sensitivity of real income with respect to the population ($a_1$), capturing factors such as increased food scarcity. Scenario 4 considers a rise in the exogenous component of real income ($a_0$), which could be interpreted as a productivity boost due to the invention of better fertilisers. All scenarios initialise the population below its steady state value at $N_0=1$ and the other variables at their steady state values.
+
+**Table 1: Parameterisation, initial values, and steady state values**
+
+| Scenario                                 | $b_0$ | $b_1$ | $d_0$ | $d_1$ | $a_0$ | $a_1$ | $N_0$ | $N^*$ | $Y_0$ | $Y^*$ | $B_0$ | $B^*$ | $D_0$ | $D^*$ |
+|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+| 1: baseline                              | 0.5   | 0.5   | 2.5   | 0.5   | 2.5   | 0.05  | 1     | 10    | $Y^*$ | 2     | $B^*$ | 15    | $D^*$ | 15    |
+| 2: fall in exog birth rate ($b_0$)       | 0.4   | 0.5   | 2.5   | 0.5   | 2.5   | 0.05  | 1     | 8     | $Y^*$ | 2.1   | $B^*$ | 11.6  | $D^*$ | 11.6  |
+| 3: rise in sensitivity of income ($a_1$) | 0.5   | 0.5   | 2.5   | 0.5   | 2.5   | 0.07  | 1     | 7.1   | $Y^*$ | 2     | $B^*$ | 10.7  | $D^*$ | 10.7  |
+| 4: productivity boost ($a_0$)            | 0.5   | 0.5   | 2.5   | 0.5   | 2.6   | 0.05  | 1     | 12    | $Y^*$ | 2     | $B^*$ | 18    | $D^*$ | 18    |
+
+### Simulation code -- R
+
+```{r malthus1}
+# Clear the environment
+rm(list=ls(all=TRUE))
+
+# Set number of periods
+T=100
+
+# Set number of scenarios (including baseline)
+S=4
+
+# Set period in which shock/shift will occur
+s=5
+
+# Create (S x T)-matrices that will contain the simulated data
+N=matrix(data=0,nrow=S,ncol=T) # population
+Y=matrix(data=0,nrow=S,ncol=T) # real income
+B=matrix(data=0,nrow=S,ncol=T) # births
+D=matrix(data=0,nrow=S,ncol=T) # deaths
+N_eq=vector(length=S)          # equilibrium population
+Y_eq=vector(length=S)          # equilibrium real income
+B_eq=vector(length=S)          # equilibrium births
+D_eq=vector(length=S)          # equilibrium deaths
+
+# Set baseline parameter values
+b0=matrix(data=0.5,nrow=S,ncol=T) # Exogenous birth rate
+b1=0.5 # Sensitivity of births with respect to real income
+d0=2.5 # Exogenous death rate
+d1=0.5 # Sensitivity of deaths with respect to real income
+a0=matrix(data=2.5,nrow=S,ncol=T) # Exogenous component of real income 
+a1=matrix(data=0.05,nrow=S,ncol=T) #Sensitivity of the real income with respect to population
+
+# Set parameter values for different scenarios
+for (i in 1:S){  
+  for (t in 1:T){
+   if (t>=s && i==2){ # scenario 2: reduction in birth rate
+    b0[2,t]=0.4
+    }
+    if (t>=s && i==3){ # scenario 3: increase in sensitivity of real income with respect to population
+    a1[3,t]=0.07
+   }
+   if (t>=s && i==4){ # scenario 4: improvement in productivity
+    a0[4,t]=2.6
+   }
+  }
+}
+  
+# Initialise 
+N[,1]=1
+Y[,1]=1
+B[,1]=1
+D[,1]=1
+
+# Simulate the model by looping over T time periods for S different scenarios
+for (i in 1:S){  
+
+  for (t in 2:T){
+ 
+    for (iterations in 1:1000){ # run the model 1000-times in each period 
+       
+      # (1) Population dynamics    
+      N[i,t] = N[i,t-1] + B[i,t-1] - D[i,t-1]
+      
+      # (2) Births
+      B[i,t] = (b0[i,t] + b1*Y[i,t])*N[i,t]
+      
+      # (3) Deaths
+      D[i,t] = (d0 - d1*Y[i,t])*N[i,t]  
+      
+      # (4) Real income
+      Y[i,t] = a0[i,t] - a1[i,t]*N[i,t]   
+      
+    }   
+  }
+}
+
+```
+
+### Plots
+
+Figure 1 displays population and real income dynamics for the baseline scenario. Starting from a below-equilibrium level of population, the population initially grows rapidly (seemingly exponentially) but then approaches a steady state. During the adjustment phase, real income is driven down to its steady state level (which can be interpreted as the subsistence level). Figure 2 displays the corresponding dynamics of births and deaths.
+
+```{r malthus2}
+# Set maximum period for plots
+Tmax=20
+
+## Baseline
+#Population and real income
+plot(N[1, 2:(Tmax+1)],type="l", lwd=2, lty=1, xlim=range(0:(Tmax)), ylab = '', xlab = '')
+title(main="Figure 1: Population and real income, baseline",ylab = 'N', xlab = 'Time',cex=0.8, line=2)
+par(mar = c(5, 4, 4, 4) + 0.3)
+par(new = TRUE)
+plot(Y[1, 2:Tmax],type="l", col=1, lwd=2, lty=2, font.main=1,cex.main=1,ylab = '', axes=FALSE,
+     xlab = '',ylim = range(Y[1, 2:20]),cex=0.8)
+axis(side = 4, at = pretty(range(Y[1, 2:Tmax])))  
+mtext("Y", side = 4, line = 2)
+legend(15, 2.3, legend=c("N", "Y"),
+        lty=1:2, cex=0.8, bty = "n", y.intersp=0.5)
+
+# Births and deaths
+plot(B[1, 2:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlim=range(0:(Tmax)), xlab="", ylab="") 
+title(main="Figure 2: Births and deaths, baseline", xlab = 'Time',cex=0.8,line=2)
+lines(D[1, 2:Tmax],lty=2)
+legend("bottomright", legend=c("B", "D"),
+       lty=1:2, cex=0.8, bty = "n", y.intersp=0.5)
+
+```
+
+Figure 3 displays population dynamics under the different scenarios described in Table 1. As expected, both preventative and positive checks are effective: a fall in the exogenous component of the birth rate and an increase in the sensitivity of real income slow down population dynamics and lower its steady state value. By contrast, a productivity boost allows for a higher equilibrium level of population.
+
+```{r malthus3}
+## Population dynamics under different scenarios
+plot(N[1, 2:(Tmax+1)],type="l", lwd=2, lty=1, xlim=range(0:(Tmax)), ylim=range(N[4, 2:Tmax]), ylab = '', xlab = '')
+title(main="Figure 3: Population dynamics under different scenarios",ylab = 'N', xlab = 'Time',cex=0.8, line=2)
+lines(N[2, 2:(Tmax+1)],lty=2, lwd=2)
+lines(N[3, 2:(Tmax+1)],lty=3, lwd=2)
+lines(N[4, 2:(Tmax+1)],lty=4, lwd=2)
+legend("bottomright", legend=c("1: baseline","2: fall in exog birth rate", "3: rise in sensitivity of income",
+      "4: productivity boost"), lty=1:4, cex=0.8, bty = "n", y.intersp=0.5)
+
+```
+
+## Directed graph
+
+Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.
+
+```{r malthus4}
+## Create directed graph
+# Construct auxiliary Jacobian matrix for 6 variables: N, B, D, Y, b0, a0,
+# where non-zero elements in regular Jacobian are set to 1 and zero elements are unchanged
+
+M_mat=matrix(c(0,1,1,0,0,0,
+              1,0,0,1,1,0,
+              1,0,0,1,0,0,
+              1,0,0,0,0,1,
+              0,0,0,0,0,0,
+              0,0,0,0,0,0), 6, 6, byrow=TRUE)
+
+# Create adjacency matrix from transpose of auxiliary Jacobian and add column names
+A_mat=t(M_mat)
+
+# Create and plot directed graph from adjacency matrix
+library(igraph)
+dg= graph_from_adjacency_matrix(A_mat, mode="directed", weighted= NULL)
+
+# Define node labels
+V(dg)$name=c("N", "B", "D", "Y", expression(b[0]), expression(a[0]))
+
+# Plot adjacency matrix
+plot(dg, main="Figure 4: Directed graph of Malthusian model", vertex.size=20, vertex.color="lightblue", 
+     vertex.label.color="black", edge.arrow.size=0.2, edge.width=1.1, edge.size=1.2,
+     edge.arrow.width=1, edge.color="black", vertex.label.cex=1.2, 
+     vertex.frame.color="NA", margin=-0.1)
+```
+
+In Figure 4, it can be seen that the exogenous birth rate ($b0$) and productivity ($a0$) are exogenous variables that impact births and income, respectively. Births, deaths, employment and income are endogenous and form a closed loop (or cycle) within the system. Births and deaths affect the population size (with simultaneous feedback from population to births and deaths), and the population affects income. Income, in turn, feeds back into population size.
+
+## Analytical Model Solution
+
+To find the steady state solution for $N$, substitute @eq-malthus_B - @eq-malthus_Y into @eq-malthus_N and collect terms::
+
+$$
+N_t = N_{t-1}[1+b_0-d_0+a_0(b_1+d_1)] - N_{t-1}^2 [a_1(b_1+d_1)].
+$$ {#eq-malthus_N_reduced}
+
+Subtract $N_{t-1}$ and divide through by $N_{t-1}$: $$
+\frac{N_t - N_{t-1}}{N_{t-1}} = [b_0-d_0+a_0(b_1+d_1)] - N_{t-1} [a_1(b_1+d_1)].
+$$
+
+Set $\frac{N_t - N_{t-1}}{N_t{t-1}}=0$ and solve for $N_{t}$ to find the non-trivial steady state:[^a_malthusian_model-2] $$
+N^* = \frac{b_0-d_0+a_0(b_1+d_1)}{a_1(b_1+d_1)}.
+$$
+
+[^a_malthusian_model-2]: A trivial steady state is at $N^*=0$.
+
+Substitution of $N^*$ into @eq-malthus_Y and simplifying yields: $$
+Y^* = \frac{d_0-b_0}{b_1+d_1}.
+$$
+
+Finally, to assess the dynamic stability of the model, differentiate @eq-malthus_N_reduced with respect to $N_{t-1}$: $$
+\frac{\partial N_t}{\partial N_{t-1}} = 1+b_0-d_0+a_0(b_1+d_1)-2N_{t-1}[a_1(b_1+d_1)].
+$$
+
+Due to then non-linearity of the model, stability can only be assessed locally around the steady state. To do this, substitute the steady state solution and simplify: $$
+\frac{\partial N_t}{\partial N_{t-1}} = 1-b_0+d_0-a_0(b_1+d_1).
+$$ From this, we can conclude that the steady state is stable iff: $$
+ |1-b_0+d_0-a_0(b_1+d_1)| < 1.
+$$
+
+You can verify these analytical solutions by comparing them with your results from the numerical solution:
+
+```{r malthus5}
+# Calculate analytical equilibrium solutions 
+for (i in 1:S){
+N_eq[i]=(b0[i,T]-d0+a0[i,T]*(b1+d1))/(a1[i,T]*(b1+d1))
+Y_eq[i]=(d0-b0[i,T])/(b1+d1)
+B_eq[i]=(b0[i,T] + b1*Y_eq[i])*N_eq[i]
+D_eq[i]=(d0 - d1*Y_eq[i])*N_eq[i]
+}
+
+# Compare with numerical solutions (here for the example of Y, scenario1)
+Y_eq[1]
+Y[1,T]
+
+# Check stability condition for all scenarios
+for (i in 1:S){
+print(abs(1-b0[i,T]+d0-a0[i,T]*(b1+d1)) < 1)
+}
+```
