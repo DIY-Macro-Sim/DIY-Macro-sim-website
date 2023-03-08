@@ -4,9 +4,9 @@
 
 This model captures some key feature of Thomas Malthus' theory of population dynamics as developed in his 1798 book [An Essay on the Principle of Population](https://en.wikipedia.org/wiki/An_Essay_on_the_Principle_of_Population). The theory revolves around the interaction between living standards and population growth.[^a_malthusian_model-1] It assumes that birth rates increase with rising living standards, while death rates decline. Economic growth thus spurs population growth. However, due to supply constraints in agricultural production, population growth drives up food prices and thereby undermines real income, bringing population growth to a halt. The model is adapted from [Karl Whelan's lecture notes](https://karlwhelan.com/blog/?p=759).
 
-[^a_malthusian_model-1]: See chapter 2 of \[Foley (2006)\](https://www.hup.harvard.edu/catalog.php?isbn=9780674027299) for an excellent introduction.
+[^a_malthusian_model-1]: See chapter 2 of [Foley (2006)](https://www.hup.harvard.edu/catalog.php?isbn=9780674027299) for an excellent introduction.
 
-## Model
+## The Model
 
 The following equations describe the model:
 
@@ -45,7 +45,7 @@ Table reports the parameterisation and initial values used in the simulation. Be
 | 3: rise in sensitivity of income ($a_1$) | 0.5   | 0.5   | 2.5   | 0.5   | 2.5   | 0.07  | 1     | 7.1   | $Y^*$ | 2     | $B^*$ | 10.7  | $D^*$ | 10.7  |
 | 4: productivity boost ($a_0$)            | 0.5   | 0.5   | 2.5   | 0.5   | 2.6   | 0.05  | 1     | 12    | $Y^*$ | 2     | $B^*$ | 18    | $D^*$ | 18    |
 
-### Simulation code -- R
+### Simulation code
 
 ```{r malthus1}
 # Clear the environment
@@ -118,9 +118,9 @@ for (i in 1:S){
       # (4) Real income
       Y[i,t] = a0[i,t] - a1[i,t]*N[i,t]   
       
-    }   
-  }
-}
+    }  # close iterations loop 
+  }    # close time loop
+}      # close scenario loop
 
 ```
 
@@ -198,7 +198,7 @@ V(dg)$name=c("N", "B", "D", "Y", expression(b[0]), expression(a[0]))
 plot(dg, main="Figure 4: Directed graph of Malthusian model", vertex.size=20, vertex.color="lightblue", 
      vertex.label.color="black", edge.arrow.size=0.2, edge.width=1.1, edge.size=1.2,
      edge.arrow.width=1, edge.color="black", vertex.label.cex=1.2, 
-     vertex.frame.color="NA", margin=-0.1)
+     vertex.frame.color="NA", margin=-0.05)
 ```
 
 In Figure 4, it can be seen that the exogenous birth rate ($b0$) and productivity ($a0$) are exogenous variables that impact births and income, respectively. Births, deaths, employment and income are endogenous and form a closed loop (or cycle) within the system. Births and deaths affect the population size (with simultaneous feedback from population to births and deaths), and the population affects income. Income, in turn, feeds back into population size.
@@ -235,7 +235,7 @@ $$ From this, we can conclude that the steady state is stable iff: $$
  |1-b_0+d_0-a_0(b_1+d_1)| < 1.
 $$
 
-You can verify these analytical solutions by comparing them with your results from the numerical solution:
+We can verify these analytical solutions by comparing them with the results from the numerical solution:
 
 ```{r malthus5}
 # Calculate analytical equilibrium solutions 
