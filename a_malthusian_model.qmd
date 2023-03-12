@@ -4,7 +4,7 @@
 
 This model captures some key feature of Thomas Malthus' theory of population dynamics as developed in his 1798 book [An Essay on the Principle of Population](https://en.wikipedia.org/wiki/An_Essay_on_the_Principle_of_Population). The theory revolves around the interaction between living standards and population growth.[^a_malthusian_model-1] It assumes that birth rates increase with rising living standards, while death rates decline. Economic growth thus spurs population growth. However, due to supply constraints in agricultural production, population growth drives up food prices and thereby undermines real income, bringing population growth to a halt. The model is adapted from [Karl Whelan's lecture notes](https://karlwhelan.com/blog/?p=759).
 
-[^a_malthusian_model-1]: See chapter 2 of [Foley (2006)](https://www.hup.harvard.edu/catalog.php?isbn=9780674027299) for an excellent introduction.
+[^a_malthusian_model-1]: See chapter 2 of @Foley2006 for an excellent introduction.
 
 ## The Model
 
@@ -36,14 +36,14 @@ Equation @eq-malthus_N describes population dynamics as driven by births and dea
 
 Table reports the parameterisation and initial values used in the simulation. Besides a baseline (labelled as scenario 1), three further scenarios will be considered. Scenario 2 models what Malthus called preventative checks: a fall in the exogenous component of the birth rate ($b_0$) due to an increased use of contraception, changes in marriage norms etc. Scenario 3 models\`positive checks': a rise in the sensitivity of real income with respect to the population ($a_1$), capturing factors such as increased food scarcity. Scenario 4 considers a rise in the exogenous component of real income ($a_0$), which could be interpreted as a productivity boost due to the invention of better fertilisers. All scenarios initialise the population below its steady state value at $N_0=1$ and the other variables at their steady state values.
 
-**Table 1: Parameterisation, initial values, and steady state values**
+**Table 1: Parameterisation**
 
-| Scenario                                 | $b_0$ | $b_1$ | $d_0$ | $d_1$ | $a_0$ | $a_1$ | $N_0$ | $N^*$ | $Y_0$ | $Y^*$ | $B_0$ | $B^*$ | $D_0$ | $D^*$ |
-|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
-| 1: baseline                              | 0.5   | 0.5   | 2.5   | 0.5   | 2.5   | 0.05  | 1     | 10    | $Y^*$ | 2     | $B^*$ | 15    | $D^*$ | 15    |
-| 2: fall in exog birth rate ($b_0$)       | 0.4   | 0.5   | 2.5   | 0.5   | 2.5   | 0.05  | 1     | 8     | $Y^*$ | 2.1   | $B^*$ | 11.6  | $D^*$ | 11.6  |
-| 3: rise in sensitivity of income ($a_1$) | 0.5   | 0.5   | 2.5   | 0.5   | 2.5   | 0.07  | 1     | 7.1   | $Y^*$ | 2     | $B^*$ | 10.7  | $D^*$ | 10.7  |
-| 4: productivity boost ($a_0$)            | 0.5   | 0.5   | 2.5   | 0.5   | 2.6   | 0.05  | 1     | 12    | $Y^*$ | 2     | $B^*$ | 18    | $D^*$ | 18    |
+| Scenario                                 | $b_0$ | $b_1$ | $d_0$ | $d_1$ | $a_0$ | $a_1$ |
+|------|------|------|------|------|------|-------|
+| 1: baseline                              | 0.5   | 0.5   | 2.5   | 0.5   | 2.5   | 0.05  |
+| 2: fall in exog birth rate ($b_0$)       | 0.4   | 0.5   | 2.5   | 0.5   | 2.5   | 0.05  |
+| 3: rise in sensitivity of income ($a_1$) | 0.5   | 0.5   | 2.5   | 0.5   | 2.5   | 0.07  |
+| 4: productivity boost ($a_0$)            | 0.5   | 0.5   | 2.5   | 0.5   | 2.6   | 0.05  |
 
 ### Simulation code
 
@@ -128,7 +128,7 @@ for (i in 1:S){
 
 Figure 1 displays population and real income dynamics for the baseline scenario. Starting from a below-equilibrium level of population, the population initially grows rapidly (seemingly exponentially) but then approaches a steady state. During the adjustment phase, real income is driven down to its steady state level (which can be interpreted as the subsistence level). Figure 2 displays the corresponding dynamics of births and deaths.
 
-```{r malthus2}
+```{r malthus2, collapse=TRUE}
 # Set maximum period for plots
 Tmax=20
 
@@ -172,7 +172,7 @@ legend("bottomright", legend=c("1: baseline","2: fall in exog birth rate", "3: r
 
 Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.
 
-```{r malthus4}
+```{r malthus4, message=FALSE}
 ## Create directed graph
 # Construct auxiliary Jacobian matrix for 6 variables: N, B, D, Y, b0, a0,
 # where non-zero elements in regular Jacobian are set to 1 and zero elements are unchanged
@@ -187,14 +187,14 @@ M_mat=matrix(c(0,1,1,0,0,0,
 # Create adjacency matrix from transpose of auxiliary Jacobian and add column names
 A_mat=t(M_mat)
 
-# Create and plot directed graph from adjacency matrix
+# Create directed graph from adjacency matrix
 library(igraph)
-dg= graph_from_adjacency_matrix(A_mat, mode="directed", weighted= NULL)
+dg=graph_from_adjacency_matrix(A_mat, mode="directed", weighted= NULL)
 
 # Define node labels
 V(dg)$name=c("N", "B", "D", "Y", expression(b[0]), expression(a[0]))
 
-# Plot adjacency matrix
+# Plot directed graph matrix
 plot(dg, main="Figure 4: Directed graph of Malthusian model", vertex.size=20, vertex.color="lightblue", 
      vertex.label.color="black", edge.arrow.size=0.2, edge.width=1.1, edge.size=1.2,
      edge.arrow.width=1, edge.color="black", vertex.label.cex=1.2, 
