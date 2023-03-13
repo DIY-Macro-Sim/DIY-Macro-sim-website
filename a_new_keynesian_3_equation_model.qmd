@@ -80,28 +80,18 @@ A=matrix(data=10,nrow=S,ncol=T) # autonomous spending
 pt=matrix(data=2,nrow=S,ncol=T) # Inflation target
 ye=matrix(data=5,nrow=S,ncol=T) # Potential output
 
-for (i in 1:S){  
-  for (t in 1:T){
-    if (t>=s && i==1){ # scenario 1: AD boost  
-      A[1,t]=12
-    }
-    if (t>=s && i==2){ # scenario 2: higher inflation target
-      pt[2,t]=3
-    }
-    if (t>=s && i==3){ # scenario 2: higher potential output
-      ye[3,t]=7
-    }
-  }
-}
-    
+A[,s:T][1,]=12  # scenario 1: AD boost  
+pt[,s:T][2,]=3  # scenario 2: higher inflation target
+ye[,s:T][3,]=7  # scenario 3: higher potential output
+
+# Initialise endogenous variables at equilibrium values
+y[,1]=ye[,1]
+p[,1]=pt[,1]
+rs[,1]=(A[,1] - ye[,1])/a1 
+r[,1]=rs[,1]
+
 # Simulate the model by looping over T time periods for S different scenarios
 for (i in 1:S){
-  
-    # Initialise endogenous variables at equilibrium values
-    y[i,1]=ye[i,1]
-    p[i,1]=pt[i,1]
-    rs[i,1]=(A[i,1] - ye[i,1])/a1 
-    r[i,1]=rs[i,1]
   
   for (t in 2:T){
     
@@ -163,7 +153,6 @@ By contrast, an increase in potential or equilibrium output (scenario 3) allows 
 Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.
 
 ```{r nk3, message=FALSE}
-## Create directed graph
 # Construct auxiliary Jacobian matrix for 7 variables: y, p, r, A, ye, rs, pt
 # where non-zero elements in regular Jacobian are set to 1 and zero elements are unchanged
 

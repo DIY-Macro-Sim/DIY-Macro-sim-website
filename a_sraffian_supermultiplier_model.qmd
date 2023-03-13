@@ -1,1 +1,265 @@
-# A Sraffian Supermultiplier Model 
+# A Sraffian Supermultiplier Model
+
+## Overview
+
+The Sraffian supermultiplier model was proposed by @Serrano1995 to integrate a Sraffian long-run equilibrium into a post-Keynesian growth model.[^a_sraffian_supermultiplier_model-1] The model requires the long-run rate of capacity utilisation to settle on an exogenously given normal rate. This requires investment to fully adjust to any changes in economic activity so as to bring back actual utilisation to the desired normal rate. As a result, investment expenditures (in the long-run) are assumed to be free of any idiosyncratic components such as Keynesian 'animal spirits'. Long-run growth is then driven by those components of autonomous demand that do not create productive capacity -- autonomous consumption in the simplest version of the model. An increase in the growth rate of autonomous consumption will stimulate economic activity and induce firms to adjust their expectations about long-run growth towards the new rate given by autonomous demand growth.
+
+[^a_sraffian_supermultiplier_model-1]: See chapter 7 in @Blecker2019, @Dutt2018, and chapter 6 in @Lavoie2022 for useful introductions. Note that contrary to what the name may suggest, this is a one-sector model.
+
+Income distribution is exogenous in this model. An increase in the wage share has an expansionary effect on economic activity and growth in the short-run as it increases consumption (investment is assumed to be independent of income distribution). However, this expansionary effect is only temporary as economic activity will eventually settle back on the normal rate of capacity utilisation, and the growth rate towards the rate given by autonomous demand growth. The absence of long-run effects of income distribution on output and growth constitutes a key difference between the Sraffian supermultiplier model and the post-Kaleckian model, in which there is no normal rate of capacity utilisation and no autonomous (non-capacity creating) demand.
+
+This is a model of long-run steady state growth. In the steady state, all endogenous variables grow at the same rate.[^a_sraffian_supermultiplier_model-2] The model contains two state variables that determine the model's dynamics: the ratio of autonomous demand to the capital stock (which changes during adjustment periods where the growth rate has not yet settled on the rate given by autonomous demand growth) and the expected growth rate of the capital stock, which sluggishly adjusts to the rate given by autonomous demand growth. We consider a continuous-time version of the model presented in chapter 6.5.8 of @Lavoie2022 .[^a_sraffian_supermultiplier_model-3]
+
+[^a_sraffian_supermultiplier_model-2]: All variables are normalised by the capital stock and thus rendered stationary.
+
+[^a_sraffian_supermultiplier_model-3]: Section X explains how continuous time models can be solved numerically.
+
+## The Model
+
+The following equations describe the model: $$
+r_t=\pi u_t
+$$ {#eq-ssm_r} $$
+s_t=-z_t + s_r r_t
+$$ {#eq-ssm_s} $$
+c_t= u_t-s_t
+$$ {#eq-ssm_c} $$
+g_t=g^0_t+g_1(u_t-u_n)
+$$ {#eq-ssm_g} $$
+u_t=c_t+g_t
+$$ {#eq-ssm_u} $$
+\dot{g^0_t}=\mu(g_t-g^0_t) 
+$$ {#eq-ssm_g0} $$
+\dot{z_t}=z_t(g_z-g_t),
+$$ {#eq-ssm_z}
+
+where $r$, $s$, $c$, $g$, $u$, $g^0$, and $z$ are the profit rate, the saving rate, the consumption rate, the investment rate, the rate of capacity utilisation, the expected growth rate, and the rate of autonomous demand, respectively. A dot over a variable represents the derivative with respect to time ($\dot{x}=\frac{d x}{d t}$).
+
+@eq-ssm_r decomposes the profit rate (total profits over capital stock) into the product of the profit share $\pi$ (total profits over total output) and the rate of capacity utilisation (actual output over capital stock).[^a_sraffian_supermultiplier_model-4] Note that the wage share is given by $1-\pi$. By @eq-ssm_s, the economy-wide saving rate is given by the negative of the rate of autonomous demand ($z$), which in this version of the model is autonomous consumption, i.e. dissaving, and saving out of profits ($s_r$). It is assumed that workers do not save. @eq-ssm_c simply states that consumption is income not saved. According to @eq-ssm_g, investment is determined by an autonomous component $g_0$ that will be specified below and by the deviation of capacity utilisation from its normal rate $u_n$. In other words, firms expand capacity whenever the actual rate of utilisation exceeds the desired normal rate. @eq-ssm_u is the goods market equilibrium condition assuming that the rate of capacity utilisation adjusts to clear the goods market in the short run. @eq-ssm_g0 is a key equation in the Sraffian supermultiplier approach, which posits that firms (sluggishly) adjust the expected growth rate to the actual growth rate. Finally, @eq-ssm_z is an identity that traces changes in the rate of autonomous demand that stem from (temporary) mismatches between the exogenously given growth rate of autonomous demand ($g_z$) and the actual growth rate.
+
+[^a_sraffian_supermultiplier_model-4]: For simplicity, it is assumed that the capital-potential output ratio is equal to unity. This implies that the ratio of actual output to potential output is equal to the ratio of actual output to the capital stock, so that the latter can be taken as a measure of the rate of capacity utilisation.
+
+## Simulation
+
+### Parameterisation
+
+Table 1 reports the parameterisation used in the simulation. Besides a baseline (labelled as scenario 1), three further scenarios will be considered. In scenario 2, the growth rate of autonomous demand $g_z$ increases. In scenario 3, the profit share $\pi$ rises. In scenario 4, the normal rate of capacity utilisation $u_n$ increases. The model is initialised at the equilibrium of the baseline parameterisation and the various shifts then occur in period 50.
+
+**Table 1: Parameterisation**
+
+| Scenario                                               | $\pi$ | $s_r$ | $g_1$ | $u_n$ | $\mu$ | $g_z$ |
+|----------------------------|--------|--------|--------|--------|--------|--------|
+| 1: baseline                                            | 0.35  | 0.8   | 0.2   | 0.75  | 0.08  | 0.02  |
+| 2: rise in autonomous demand growth ($g_z$)            | 0.35  | 0.8   | 0.2   | 0.75  | 0.08  | 0.03  |
+| 3: rise in profit share ($\pi$)                        | 0.4   | 0.8   | 0.2   | 0.75  | 0.08  | 0.02  |
+| 4: rise in normal rate of capacity utilisation ($u_n$) | 0.35  | 0.8   | 0.2   | 0.8   | 0.08  | 0.02  |
+
+### Simulation code
+
+```{r ssm1}
+
+#Clear the environment
+rm(list=ls(all=TRUE))
+
+#Set number of periods
+T = 1000
+
+# Set number of scenarios (including baselines)
+S=4
+
+# Set period in which exogenous shift will occur
+q=50
+
+#Create vector in which equilibrium solutions from different parameterisations will be stored
+u=matrix(data=0,nrow=S,ncol=T) # rate of capacity utilisation
+g=matrix(data=0,nrow=S,ncol=T) # growth rate of capital stock
+s=matrix(data=0,nrow=S,ncol=T) # saving rate
+c=matrix(data=0,nrow=S,ncol=T) # consumption rate
+r=matrix(data=0,nrow=S,ncol=T) # profit rate
+g0=matrix(data=0,nrow=S,ncol=T)# expected growth rate of capital stock
+z=matrix(data=0,nrow=S,ncol=T) # autonomous demand rate
+
+#Set constant parameter values
+g1=0.2  # Sensitivity of investment with respect to utilisation
+sr=0.8  # propensity to save out of profits
+mu=0.08 # adjustment speed of expected growth rate
+d=0.1   # time increment
+
+# Set and initialise exogenous variables/parameters that will be shifted
+pi=matrix(data=0.35,nrow=S,ncol=T) # profit share
+gz=matrix(data=0.02,nrow=S,ncol=T) # growth rate of autonomous demand
+un=matrix(data=0.75,nrow=S,ncol=T)  # normal rate of capacity utilisation
+
+# Set parameter values for different scenarios
+gz[,q:T][2,]=0.03 # scenario 2: rise in autonomous demand growth
+pi[,q:T][3,]=0.4 # scenario 3: rise in profit share
+un[,q:T][4,]=0.8 # scenario 4: rise in normal rate of utilisation
+
+# Initialise endogenous variables at equilibrium values
+u[,1]=un[,1]
+g[,1]=gz[,1]
+s[,1]=g[,1]
+c[,1]=un[,1]-s[,1]
+g0[,1]=gz[,1]
+z[,1]=sr*pi[,1]*un[,1]-gz[,1]
+r[,1]=pi[,1]*un[,1]
+
+# Simulate the model by looping over T time periods for S different scenarios
+for (i in 1:S){
+    
+  for (t in 2:T){
+    
+    for (iterations in 1:1000){ # iterate the model 1000-times in each period
+    
+    #(1) Profit rate
+    r[i,t] =pi[i,t]*u[i,t]
+      
+    #(2) Saving
+    s[i,t] = -z[i,t] + sr*r[i,t]
+    
+    #(3) Consumption
+    c[i,t] = u[i,t] - s[i,t]
+    
+    #(4) Investment
+    g[i,t] = g0[i,t] +g1*(u[i,t] - un[i,t])
+    
+    #(5) Capacity utilisation
+    u[i,t] = c[i,t] + g[i,t]
+    
+    #(6) Dynamic adjustment of expected growth rate of capital stock
+    g0[i,t] = g0[i,t-1] + mu*(g[i,t-1]-g0[i,t-1])*d
+    
+    #(7) Dynamic adjustment of autonomous demand
+    z[i,t] = z[i,t-1] + z[i,t-1]*(gz[i,t-1] - g[i,t-1])*d
+
+  } # close iterations loop
+ }  # close time loop
+}   # close scenarios loop
+```
+
+### Plots
+
+Figures 1-3 depict the response of the three main endogenous variables to changes in the exogenous variables. In the second scenario (solid line), the growth rate of autonomous demand increases from 2% to 3%. As a result, the rate of capacity temporarily increases but then returns to the level given by the normal rate, as the rate of autonomous demand falls due to the increase in the capital stock. By contrast, the growth rate permanently settles to the new rate given by the autonomous rate.
+
+In the third scenario (dashed line), the profit share rises, which initially has a contractionary effect on the rate of utilisation and growth. Both variables then briefly overshoot due to the increase in the autonomous demand rate and then return to their previous values.
+
+```{r ssm2}
+# Set maximum period for plots
+Tmax=700
+
+# Capacity utilisation
+plot(u[2, 2:(Tmax+1)], type="l", col=1, lwd=2, lty=1, font.main=1,cex.main=1, 
+     ylab = 'u',xlab = 'Time',ylim=range(max(u[, 2:Tmax]),min(u[, 2:Tmax])),cex.axis=1,cex.lab=0.75)
+title(main="Figure 1: Rate of capacity utilisation under different scenarios",cex=0.8 ,line=2)
+lines(u[3, 2:(Tmax+1)],lty=2)
+lines(u[4, 2:(Tmax+1)],lty=3)
+legend("bottomright", legend=c("Rise autom demand", "Rise profit share", "Rise normal rate"),
+       lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
+
+# Growth
+plot(g[2, 2:(Tmax+1)], type="l", col=1, lwd=2, lty=1, font.main=1,cex.main=1, 
+     ylab = 'g',xlab = 'Time',ylim=range(max(g[, 2:Tmax]),min(g[, 2:Tmax])),cex.axis=1,cex.lab=0.75)
+title(main="Figure 2: Growth rate under different scenarios",cex=0.8 ,line=2)
+lines(g[3, 2:(Tmax+1)],lty=2)
+lines(g[4, 2:(Tmax+1)],lty=3)
+legend("bottomright", legend=c("Rise autom demand", "Rise profit share", "Rise normal rate"),
+       lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
+
+# Autonomous demand rate
+plot(z[2, 2:(Tmax+1)], type="l", col=1, lwd=2, lty=1, font.main=1,cex.main=1, 
+     ylab = 'z',xlab = 'Time',ylim=range(max(z[, 2:Tmax]),min(z[, 2:Tmax])),cex.axis=1,cex.lab=0.75)
+title(main="Figure 3: Rate of autonomous demand under different scenarios",cex=0.8 ,line=2)
+lines(z[3, 2:(Tmax+1)],lty=2)
+lines(z[4, 2:(Tmax+1)],lty=3)
+legend("right", legend=c("Rise autom demand", "Rise profit share", "Rise normal rate"),
+       lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
+
+```
+
+Finally, a rise in the normal rate (dotted line) initially has contractionary effects on utilisation and growth but eventually raises utilisation to a permanently higher level. The growth rate returns to its previous value.
+
+## Directed Graph
+
+Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.
+
+```{r ssm3, message=FALSE}
+# Construct auxiliary Jacobian matrix for 9 variables: 
+# r, c, g, u, g0, z, pi, gz, un
+
+M_mat=matrix(c(0,0,0,1,0,0,1,0,0,
+               1,0,0,1,0,1,0,0,0,
+               0,0,0,1,1,0,0,0,1,
+               0,1,1,0,0,0,0,0,0,
+               0,0,1,0,0,0,0,0,0,
+               0,0,1,0,0,0,0,1,0,
+               0,0,0,0,0,0,0,0,0,
+               0,0,0,0,0,0,0,0,0,
+               0,0,0,0,0,0,0,0,0), 9, 9, byrow=TRUE)
+
+# Create adjacency matrix from transpose of auxiliary Jacobian and add column names
+A_mat=t(M_mat)
+
+# Create directed graph from adjacency matrix
+library(igraph)
+dg=graph_from_adjacency_matrix(A_mat, mode="directed", weighted=NULL)
+
+# Define node labels
+V(dg)$name=c("r", "c", "g", "u", expression(g^0), "z", expression(pi), expression(g[z]), expression(u[n]))
+
+# Plot directed graph
+plot(dg, main="Figure 4: Directed graph of Sraffian Supermultiplier Model", vertex.size=20, vertex.color="lightblue", 
+     vertex.label.color="black", edge.arrow.size=0.2, edge.width=1.1, edge.size=1.2,
+     edge.arrow.width=1, edge.color="black", vertex.label.cex=1.2, 
+     vertex.frame.color="NA", margin=-0.05)
+```
+
+In Figure 4, it can be seen that the growth rate of autonomous demand ($g_z$), the profit share ($\pi$), and the normal rate of capacity utilisation ($u_n$) are the key exogenous variable of the model. The profit rate ($r$), consumption ($c$), the autonomous demand rate ($z$), investment ($g$), the rate of utilisation ($u$), an the expected growth rate ($g_0$) form a closed loop (or cycle) within the system. For example, an increase in the growth rate of autonomous demand increases consumption, which raises the rate of capacity utilisation, growth, and the expected growth rate. In a second-round effect, the increase in the growth rate then feeds back negatively into the autonomous demand rate, which leads to a return of the rate of capacity utilisation to its previous value.
+
+## Analytical Model Solution
+
+To find the short-run equilibrium solutions for $u$ and $g$, first substitute @eq-ssm_r-@eq-ssm_g into @eq-ssm_u and solve for $u$: $$
+u^* = \frac{g_0+z-g_1u_n}{s_r \pi-g_1}.
+$$ From this, we get: $$
+g^* = g_0 + g_1(u^* - u_n).
+$$ The long-run equilibrium is given by $u^{**}=u_n$, $g^{**}=g_z$, and (from @eq-ssm_z) $z^{**}=u_n s_r \pi - g_z$.
+
+The dynamics are governed by @eq-ssm_g0-@eq-ssm_z. The Jacobian matrix is: $$
+J(g^0, z)=\begin{bmatrix} \frac{\mu g_1}{s_r\pi-g_1}& \frac{\mu g_1}{s_r\pi-g_1} \\ -z(\frac{g_1}{s_r\pi-g_1} +1)& \frac{-zg_1}{s_r\pi-g_1} \end{bmatrix}.
+$$
+
+The determinant of the Jacobian matrix evaluated at the long-run equilibrium is: $$
+det(J^*) = \frac{(u_n s_r \pi - g_z)\mu g_1}{s_r\pi-g_1} > 0,
+$$
+
+which is positive provided $s_r\pi-g_1$, i.e. if the Keynesian stability condition holds.
+
+The trace is: $$
+tr(J^*) = \frac{g_1(\mu-u_n s_r \pi + g_z)}{s_r\pi-g_1}.
+$$
+
+Stability requires a negative trace, yielding a second stability condition: $\mu<u_n s_r \pi - g_z$.
+
+We can verify these analytical solutions by comparing them with the results from the numerical solution:
+
+```{r ssm4}
+
+# Construct Jacobian matrix at the equilibrium 
+
+J=matrix(c((mu*g1)/(sr*pi[1,T]-g1), (mu*g1)/(sr*pi[1,T]-g1),
+           -z[1,T]*(sr*pi[1,T]/(sr*pi[1,T]-g1)), -z[1,T]*(g1/(sr*pi[1,T]-g1))), 2, 2, byrow=TRUE)
+J
+
+# Obtain eigenvalues
+ev=eigen(J)
+(values <- ev$values)
+
+# Obtain determinant and trace
+det(J) # determinant
+sum(diag(J)) # trace
+
+# Check stability conditions for all scenarios
+for (i in 1:S){
+print(paste0("Scenario ", i, ":"))
+print(sr*pi[i,1]>g1) # Keynesian stability condition
+print(mu<sr*un[i,1]*pi[i,1]-gz[i,1])
+}
+```

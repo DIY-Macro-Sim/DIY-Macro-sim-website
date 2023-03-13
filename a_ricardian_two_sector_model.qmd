@@ -151,35 +151,22 @@ beta=1 # Sensitivity of investment with respect to profits
 wS=matrix(data=0.5,nrow=S,ncol=T) # natural wage rate
 
 # Set parameter values for different scenarios
-for (i in 1:S){  
-  for (t in 1:T){
-    if (t>=s && i==2){ # scenario 2: productivity boost I
-      A[2,t]=3
-    }
-    if (t>=s && i==3){ # scenario 3: productivity boost II
-      a1[3,t]=0.75
-    }
-    if (t>=s && i==4){ # scenario 4: productivity boost III
-      a2[4,t]=0.55
-    }
-    if (t>=s && i==5){ # scenario 5: higher subsistence wage
-      wS[5,t]=0.6
-    }
-  }
-}
+A[,s:T][2,]=3     # scenario 2: productivity boost I
+a1[,s:T][3,]=0.75 # scenario 3: productivity boost II
+a2[,s:T][4,]=0.55 # scenario 4: productivity boost III
+wS[,s:T][5,]=0.6  # scenario 5: higher subsistence wage
 
+# Initialise variables such that employment and the capital stock are below the equilibrium
+N1[,1]=1
+N2[,1]=1
+N[,1]=N1[,1]+N2[,1]
+K[,1]=1
+w[,1]=wS[,1]
+Y1[,1]=A[,1]*N1[,1]^(a1[,1])
+MPL[,1]=a1[,1]*A[,1]*(N1[,1]^(a1[,1]-1))
 
 # Simulate the model by looping over T time periods for S different scenarios
 for (i in 1:S){
-  
-  # Initialise variables such that employment, the capital stock, and real wage are below the equilibrium
-  N1[i,1]=1
-  N2[i,1]=1
-  N[i,1]=N1[i,1]+N2[i,1]
-  w[i,1]=wS[i,1]
-  K[i,1]=1
-  Y1[i,1]=A[i,1]*N1[i,1]^(a1[i,1])
-  MPL[i,1]=a1[i,1]*A[i,1]*(N1[i,1]^(a1[i,1]-1))
 
   for (t in 2:T){
     
@@ -469,7 +456,7 @@ print(1-det>0)
 
 # Check specific stability condition for the case beta=1
 for (i in 1:S){
-  print(2-gamma*((a1[i,T]^a1[i,T])*A[i,T]*(wS[i,T]/(((a1[i,T]^a1[i,T])*A[i,T])))^((2-a1[i,T])/(1-a1[i,T]))) 
-                        + a1[i,T]*wS[i,T]*(wS[i,T]/(((a1[i,T]^a1[i,T])*A[i,T]))^(1/(1-a1[i,T])))>0)
+print(paste0("Scenario ", i, ":"))
+print(2-gamma*((a1[i,T]^a1[i,T])*A[i,T]*(wS[i,T]/(((a1[i,T]^a1[i,T])*A[i,T])))^((2-a1[i,T])/(1-a1[i,T]))) + a1[i,T]*wS[i,T]*(wS[i,T]/(((a1[i,T]^a1[i,T])*A[i,T]))^(1/(1-a1[i,T])))>0)
 }
 ```

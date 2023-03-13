@@ -10,7 +10,9 @@ This model captures some key feature of David Ricardo's theory of growth and dis
 
 ## The Model
 
-The following equations describe the model: $$
+The following equations describe the model: 
+
+$$
 Y_t=AN_t^a
 $$ {#eq-ricardo1_Y}
 
@@ -100,29 +102,19 @@ gamma=5 # adjustment speed of population
 wS=matrix(data=0.5,nrow=S,ncol=T) # subsistence wage rate
 
 # Set parameter values for different scenarios
-for (i in 1:S){  
-  for (t in 1:T){
-    if (t>=s && i==2){ # scenario 2: productivity boost I
-      A[2,t]=3
-    }
-    if (t>=s && i==3){ # scenario 3: productivity boost II
-      a[3,t]=0.75
-    }
-    if (t>=s && i==4){ # scenario 3: increase in subsistence wage
-      wS[4,t]=0.6
-    }
-  }
-}
+A[,s:T][2,]=3 # scenario 2: productivity boost I
+a[,s:T][3,]=0.75 # scenario 3: productivity boost II
+wS[,s:T][4,]=0.6 # scenario 4: increase in subsistence wage
+
+# Initialise variables such that employment and the capital stock are below the equilibrium
+N[,1]=1
+K[,1]=1   
+Y[,1]=A[,1]*N[,1]^(a[,1])
+MPL[,1]=a[,1]*A[,1]*(N[,1]^(a[,1]-1))
+w[,1]=wS[,1]
 
 # Simulate the model by looping over T time periods for S different scenarios
 for (i in 1:S){
-  
-  # Initialise variables such that employment is below the equilibrium and the 
-  N[i,1]=1
-  K[i,1]=wS[i,1]*N[i,1]   
-  Y[i,1]=A[i,1]*N[i,1]^(a[i,1])
-  MPL[i,1]=a[i,1]*A[i,1]*(N[i,1]^(a[i,1]-1))
-  w[i,1]=N[i,1]/K[i,1]
   
   for (t in 2:T){
     
@@ -339,6 +331,7 @@ print(1-det>0)
 
 # Check specific stability condition for the case beta=1
 for (i in 1:S){
+print(paste0("Scenario ", i, ":"))
 print(2-gamma*a[i,T]*(A[i,T]*(wS[i,T]/(a[i,T]*A[i,T]))^((2-a[i,T])/(1-a[i,T])) 
                       + wS[i,T]*(wS[i,T]/(a[i,T]*A[i,T]))^(1/(1-a[i,T])))>0)
 }
