@@ -102,9 +102,9 @@ gamma=5 # adjustment speed of population
 wS=matrix(data=0.5,nrow=S,ncol=T) # subsistence wage rate
 
 # Set parameter values for different scenarios
-A[,s:T][2,]=3 # scenario 2: productivity boost I
-a[,s:T][3,]=0.75 # scenario 3: productivity boost II
-wS[,s:T][4,]=0.6 # scenario 4: increase in subsistence wage
+A[2,s:T]=3 # scenario 2: productivity boost I
+a[3,s:T]=0.75 # scenario 3: productivity boost II
+wS[4,s:T]=0.6 # scenario 4: increase in subsistence wage
 
 # Initialise variables such that employment and the capital stock are below the equilibrium
 N[,1]=1
@@ -326,7 +326,7 @@ tr=sum(diag(J)) # trace
 
 #Check general stability conditions
 print(1+tr+det>0)
-print(1+tr-det>0)
+print(1-tr+det>0)
 print(1-det>0)
 
 # Check specific stability condition for the case beta=1

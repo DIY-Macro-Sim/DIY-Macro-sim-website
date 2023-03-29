@@ -1,14 +1,24 @@
-# How to use this site
+# How to Use this Site
 
-## ...
+## Overview
 
 Maybe some general notes here, e.g. from our project proposal draft.
 
-## How to simulate 
+What does the page offer? 
 
-**TO DO: Add some notes based on KK slides.**
+Why is this useful? 
 
-<!-- ## Plotting -->
+How to use it
 
-<!-- ## Directed graphs -->
+## Intro to R and Python
+
+A few words on R and Python
+
+how to install
+
+where to find help (e.g. link to base R cheatsheet and to Python Data Science cheatsheet)
+ 
+ 
+
+
 

@@ -3,7 +3,7 @@ project:
   output-dir: _book
 
 book:
-  title: "DIY seminal macroeconomic models"
+  title: "DIY Macroeconomic Model Simulation"
   author: "<a href='https://github.com/DIY-Macro-Sim'>DIY-Macro-Sim<a/>"
   reader-mode: false
   # description: |
@@ -23,20 +23,22 @@ book:
   chapters:
     - index.qmd
     - how_to_use.qmd
-    - how_to_contribute.qmd
-    - references.qmd
+#    - how_to_contribute.qmd
+    - how_to_simulate.qmd
+    - intro_stability_analysis.qmd
+#    - references.qmd
     
     - part: static_models.qmd
       chapters:
         - a_neoclassical_macro_model.qmd
         - an_IS_LM_model.qmd
         - a_neoclassical_synthesis_model_IS_LM_AS_AD.qmd
+        - a_post_keynesian_macro_model_with_endogenous_money.qmd
+        - a_post_kaleckian_distribution_and_growth_model.qmd
         
     - part: dynamic_models.qmd
       chapters:
         - a_new_keynesian_3_equation_model.qmd
-        - a_post_keynesian_macro_model_with_endogenous_money.qmd
-        - a_post_kaleckian_distribution_and_growth_model.qmd
         - a_sraffian_supermultiplier_model.qmd
         - a_malthusian_model.qmd
         - a_ricardian_one_sector_model.qmd

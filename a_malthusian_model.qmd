@@ -79,9 +79,9 @@ a0=matrix(data=2.5,nrow=S,ncol=T) # Exogenous component of real income
 a1=matrix(data=0.05,nrow=S,ncol=T) #Sensitivity of the real income with respect to population
 
 # Set parameter values for different scenarios
-b0[,s:T][2,]=0.4  # scenario 2: reduction in birth rate
-a1[,s:T][3,]=0.07 # scenario 3: increase in sensitivity of real income with respect to population
-a0[,s:T][4,]=2.6  # scenario 4: improvement in productivity
+b0[2,s:T]=0.4  # scenario 2: reduction in birth rate
+a1[3,s:T]=0.07 # scenario 3: increase in sensitivity of real income with respect to population
+a0[4,s:T]=2.6  # scenario 4: improvement in productivity
 
 # Initialise 
 N[,1]=1

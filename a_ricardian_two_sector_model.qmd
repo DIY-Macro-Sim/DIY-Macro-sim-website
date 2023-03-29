@@ -151,10 +151,10 @@ beta=1 # Sensitivity of investment with respect to profits
 wS=matrix(data=0.5,nrow=S,ncol=T) # natural wage rate
 
 # Set parameter values for different scenarios
-A[,s:T][2,]=3     # scenario 2: productivity boost I
-a1[,s:T][3,]=0.75 # scenario 3: productivity boost II
-a2[,s:T][4,]=0.55 # scenario 4: productivity boost III
-wS[,s:T][5,]=0.6  # scenario 5: higher subsistence wage
+A[2,s:T]=3     # scenario 2: productivity boost I
+a1[3,s:T]=0.75 # scenario 3: productivity boost II
+a2[4,s:T]=0.55 # scenario 4: productivity boost III
+wS[5,s:T]=0.6  # scenario 5: higher subsistence wage
 
 # Initialise variables such that employment and the capital stock are below the equilibrium
 N1[,1]=1
@@ -344,7 +344,7 @@ M_mat=matrix(c(0,1,0,0,0,0,0,0,0,0, 0, 0, 0, 0, 1, 1, 0, 0, #1
                0,0,0,0,0,0,0,0,0,0, 0, 0, 0, 0, 0, 0, 0, 0  #18
                ), 18,18, byrow=TRUE)
 
-# Create adjacency matrix from transpose of auxiliary Jacobian and add column names
+# Create adjacency matrix from transpose of auxiliary Jacobian 
 A_mat=t(M_mat)
 
 # Create and plot directed graph from adjacency matrix
@@ -451,7 +451,7 @@ tr=sum(diag(J)) # trace
 
 #Check stability conditions
 print(1+tr+det>0)
-print(1+tr-det>0)
+print(1-tr+det>0)
 print(1-det>0)
 
 # Check specific stability condition for the case beta=1

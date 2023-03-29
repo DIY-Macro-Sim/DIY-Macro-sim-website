@@ -1,0 +1,365 @@
+# How to Simulate Economic Models
+
+## Introduction: Economic models
+
+Every economic model essentially consist of three things:
+
+1.  a set of $N$ equations
+
+2.  a set of $N$ endogenous variables
+
+3.  a set of exogenous or fixed coefficients ('parameters') and exogenous variables
+
+The solution to the model, its 'equilibrium', will pin down values for the endogenous variables of the model for a given set of parameters and exogenous variables. Thus, the endogenous variables, e.g. consumption, investment, prices etc., are determined within the system, while exogenous variables are determined outside of the system and often reflect policy variables, such as the central bank interest rate or discretionary government spending. The equations connect the variables of the system. They typically express:
+
+-   economic (accounting) identities (e.g. that in a closed economy without government, saving is income that is not consumed, $S=Y-C$)
+
+-   budget constraints (e.g. that business investment can be financed out of retained profits and new debt, $I=\Pi+\Delta D$)
+
+-   behavioural functions (e.g. that households consume a constant proportion of their income, $C=c_1Y$), which often contain key parameters of the model (e.g. the marginal propensity to consume $c_1$)
+
+-   equilibrium conditions (e.g. that demand must be equal to supply)
+
+Equations may be linear or nonlinear. If a model contains nonlinear relationships between the endogenous variables, it may admit more than one solution (often called multiple equilibria).
+
+Economic models can be either static or dynamic. In a static model, time plays no role and all endogenous variables are determined simultaneously. In a dynamic model, time matters and the endogenous variables adjust gradually over time.
+
+The endogenous variables are typically interrelated: e.g. $x$ determines $y$, but $y$ also determines $x$. These interrelationships can be:
+
+-   simultaneous: $x$ and $y$ determine each other simultaneously (within the same period)
+
+-   recursive: $x$ affects $y$ only in $t+1$ (or vice versa)
+
+Note that dynamic models may contain both simultaneous and recursive relationships.
+
+Whether the relationships between the variables is simultaneous or recursive has implications for how the model can be solved. In general, simple economic models can often be solved analytically without a computer. If the model contains simultaneous relationships, it needs to be solved as a simultaneous system by solving for the endogenous variables through repeated substitution. This means going from the so-called 'structural form', i.e. the full set of equations, to the so-called 'reduced form', where the right-hand side of the equations only contains exogenous variables and parameters. If the system is linear, techniques from linear algebra such as matrix inversion or Cramer's rule can be used (see Chiang). If the system contains recursive relationships, the equilibrium solution can be found by setting $x_{t+i}=x_{t-i}=x_{t}$ for all $x$ and then solving the resulting simultaneous system (more on how to formally analyse dynamic systems below).
+
+However, often a complete analytical solution is difficult to come by. Common challenges are:
+
+-   a model has more than 3 dimensions ($N>3$) (then it's tedious to compute analytical solutions)
+
+-   a model has nonlinearities that preclude the computation of analytical solutions
+
+-   a model is dynamic and you want to examine the dynamic adjustment of the endogenous variables (which is tedious to do analytically)
+
+In this case, numerical solution by means of computer simulation comes in handy. The key advantage is that it allows you to study much more complex models than the analytical approach does. A key disadvantage is that numerical solution requires the choice of a (possibly arbitrary) set of numerical values for the models' parameters. It is thus less general than analytical solution -- a limitation which should be borne in mind. We think that both analytical and numerical approaches are useful. Correspondingly, we supplement the numerical simulations with analytical model solutions where possible.
+
+## Solving economic models numerically
+
+If a (dynamic) model exclusively contains recursive relationships, it can be solved iteratively by sequentially updating the endogenous variables from (arbitrarily set) initial conditions. This is easy to do for a computer. By contrast, if interrelationships are simultaneous, solving the system for the endogenous variables as described above is less trivial for a computer (finding the solution for $x$ requires the solution of $y$, but the latter requires in turn the solution for $x$). As mentioned above, one approach is to use linear algebra: cast the system in matrix form ($b=Ax$) and let the computer find $x^*=A^{-1}b$ through some algorithm (e.g. [the Gauss-Seidel method](https://en.wikipedia.org/wiki/Gauss%E2%80%93Seidel_method)).
+
+We will use an approach that is simpler and based on *iteration*:
+
+-   choose a set of numerical parameter values (e.g. $c_1=0.8$)
+
+-   choose (arbitrary but non-zero) initial values for the endogenous variables (e.g. $C_0=1)$
+
+-   then solve the system of equations many times using a *for loop*
+
+In this way, the solution gets approximated successively.
+
+A limitation of the method of iteration is that it will only converge to the solution of the simultaneous component of a model if the equilibrium is stable. For most static models, stability is required for the model to be economically meaningful. In that sense, if the iterative approach does not yield a solution due to instability, this is a sign that the model and/or parameterisation needs to be reconsidered. In dynamic models, stability is a key question that should be addressed in any case. Therefore, this limitation of the method of iteration may not be too restrictive in pratice.
+
+### Solving economic models numerically: some examples
+
+#### Static model
+
+consider a two-dimensional simultaneous system represented by a simple Keynesian goods market model:
+
+$$
+Y= C + I_0
+$$\
+$$
+C = c_0 + c_1Y
+$$ In a closed economy without government, aggregate demand is composed of consumption $C$ and investment $I$, with the latter assumed to be exogenous. Goods market equilibrium requires aggregate demand to be equal to aggregate income. Consumption is asumed to be given by an autonomous component $c_1$ and a marginal propensity to consume out of income $c_0$.
+
+Suppose the parameters are given by $c_0=3, c_1=0.8$. You are interested in how a change in investment from $I_0=5$ to $I_0=6$ affects the solution of the system. From the method of substitution, we can easily derive that $Y^*=\frac{c_0+I_0}{1-c_1}$. The R code below shows how to find this solution via simulation.
+
+```{r howto_1}
+#Clear the environment 
+rm(list=ls(all=TRUE))
+
+# Set number of parameterisations that will be considered
+S=2
+
+# Set fixed parameter values
+c0=3
+c1=0.8
+
+#Create vector in which equilibrium solutions from different parameterisations will be stored
+Y_eq=vector(length=S)
+C_eq=vector(length=S)
+
+#Set parameter value that will change by defining a vector
+I0=vector(length=S)
+I0[1]=5
+I0[2]=6
+
+# Initialise endogenous variables at arbitrary positive value Y=C=1
+Y=C=1
+
+#Solve this system numerically through 1000 iterations based on the initialisation
+for (i in 1:S){
+  for (iteration in 1:1000){
+  Y = C + I0[i]
+  C = c0 + c1*Y
+  } # close iterations loop
+  
+#Save results for different parameterisations in vector
+Y_eq[i]=Y
+C_eq[i]=C
+} # close parameterisations loop
+
+# Display solutions
+Y_eq
+C_eq
+
+# Verify solutions for Y
+(c0+I0[])/(1-c1)
+```
+
+Let's break this down code a little bit:
+
+-   set the number of scenarios $S$, define parameter values, and create vectors of length $S$ in which results for endogenous variables will be stored
+
+-   define changes in exogenous variables or parameters (i.e. construct different scenarios)
+
+-   initialise the endogenous variables
+
+-   write down the equations (solved for the endogenous variables such that every endogenous variable of the system appears on the left-hand side of an equation exactly once)
+
+-   place these equations inside a for loop
+
+-   the loop says: repeat the segment of code insights the curly brackets 1000 times
+
+-   nest the loop that solves the system in an outer loop that loops through different parameterisations (here for $I_0$)
+
+-   after the iterations loop is finished, save the results for the current pameterisation
+
+What happens is the following: in the first iteration, $Y$ and $C$ are calculated based on the initial values and the parameter values. In the second iteration, the values are then overwritten based on the results from the first iteration. This process continues 1000 times. In this way, the correct solution is successively approximated. If you have an analytical solution, you can compare it with the numerical one to double-check your results.
+
+When does the method of iteration fail to provide a solution? In the following code, everything is the change with the only difference that the marginal propensity to consume is now larger than unity ($c_1=1.2$). Now the numerical simulation fails to find the solution. This is because with $c_1>0$, the so-called Keynesian equilibrium condition is violated and the system happens to be unstable. We will discuss below the issue of stability and how to analyse it formally. At this point, we simply note that the method of iterations requires static models to be stable to yield equilibrium solutions.
+
+```{r howto_2}
+#Clear the environment 
+rm(list=ls(all=TRUE))
+
+# Set number of parameterisations that will be considered
+S=2
+
+# Set fixed parameter values
+c0=3
+c1=1.2
+
+#Create vector in which equilibrium solutions from different parameterisations will be store
+Y_eq=vector(length=S)
+C_eq=vector(length=S)
+
+#Set parameter value that will change by defining a vector
+I0=vector(length=S)
+I0[1]=5
+I0[2]=6
+
+# Initialise endogenous variables at arbitrary positive value Y=C=1
+Y=C=1
+
+#Solve this system numerically through 1000 iterations based on the initialisation
+for (i in 1:S){
+  for (iteration in 1:1000){
+  Y = C + I0[i]
+  C = c0 + c1*Y
+  } # close iterations loop
+  
+#Save results for different parameterisations in vector
+Y_eq[i]=Y
+C_eq[i]=C
+} # close parameterisations loop
+
+# Display solutions
+Y_eq
+C_eq
+
+# Verify solutions for Y
+(c0+I0[])/(1-c1)
+```
+
+#### Dynamic model
+
+Consider now a dynamic version of the Keynesian goods market model that was proposed by Paul @Samuelson1939. In this model, investment ($I$) becomes endogenous and reacts to the change in consumption. Aggregate demand now also contains government spending ($G$), which is assumed to be exogenous. Consumption ($C$) responds to changes in income ($Y$) with a lag.
+
+$$
+Y_t = C_t + I_t + G_0
+$$ $$
+I_t = \beta(C_t - C_{t-1})
+$$ $$
+C_t=c_1Y_{t-1}.
+$$ This is a dynamic model, in which the endogenous variables adjust gradually over time. However, the model is not purely recursive as investment reacts to consumption in the same period (and output to consumption and investment). By shifting $Y_t=C_t + I_t + G_0$ one period back, substitution into the consumption, and then investment function, the system can be reduced to two equations that are fully recursive:
+
+$$
+C_t= c_1(C_{t-1} + I_{t-1} + G_0)
+$$ $$
+I_t= \beta[c_1(C_{t-1} + I_{t-1} + G_0) - C_{t-1}]
+$$ We can find the solution for output analytically by setting $x_t=x_{t-1}$ for all variables and then applying the method of substitution. This yields $Y^*=\frac{G_0}{1-c_1}$. The R code below shows how to find this solution through simulation.
+
+```{r howto_3}
+#Clear the environment 
+rm(list=ls(all=TRUE))
+
+# Set number of periods for which you want to simulate
+T=100
+
+# Set number of parameterisations that will be considered
+S=2
+
+# Set period in which shock or shift in an will occur
+s=15
+
+# Set fixed parameter values
+c1=0.8
+beta=0.6
+
+# Construct matrices in which values for different periods will be stored; initialise at 1
+C=matrix(data=1, nrow=S, ncol=T)
+I=matrix(data=1, nrow=S, ncol=T)
+
+#Construct matrices for exogenous variable or parameter that will change over time to capture different scenarios
+G0=matrix(data=5, nrow=S, ncol=T)
+
+# Set parameter values for different scenarios
+G0[,s:T][2,]=6     # scenario: permanent increase in government spending from I0=5 to I0=6 from period s=15 onwards
+
+#Solve this system recursively based on the initialisation
+for (i in 1:S){
+  for (t in 2:T){
+    C[i,t] = c1*(C[i,t-1] + I[i,t-1] + G0[i,t-1])
+    I[i,t] = beta*(c1*(C[i,t-1] + I[i,t-1] + G0[i,t-1]) - C[i,t-1])
+  } # close time loop
+}   # close scenarios loop
+
+# Calculate output
+Y=C+G0+I
+
+# Display solutions
+I[,T]
+C[,T]
+Y[,T]
+
+# Verify solutions for Y
+(G0[,T])/(1-c1)
+```
+
+The code solves the recursive system numerically through iteration. Let's again break down what the code does:
+
+-   set the number of periods for which we want to simulate the model (here $T=100$), set the number of scenarios $S$ and the period $s$ in which a change in the scenario should occur
+
+-   set the parameter values and create $s x T$ matrices in which results for endogenous variables will be stored, such that the columns represent time and the rows represent different scenarios, and initialise endogenous variables
+
+-   define changes in exogenous variables or parameters (i.e. construct different scenarios)
+
+-   write down the equations (solved for the endogenous variables such that every endogenous variable of the system appears on the left-hand side of an equation exactly once)
+
+-   place these equations inside a for loop that runs from $t=2$ to $T$
+
+-   the loop says: repeat the segment of code insights the curly brackets, each time with the index number $t$ shifted by $+1$ until $t=T$
+
+-   nest the loop that solves the system in an outer loop that loops through different parameterisations (here for $G_0$)
+
+Note that due to the exclusive presence of recursive equations, no loop is need that iterates the equations within every period. However, many dynamic models we will present on this website will contain both simultaneous and recursive equations. In this case, a third loop inside the time loop is needed that iterates the equations within each period so as to solve the simultaneous equations. Otherwise, the approach to solving dynamic systems is not fundamentally different from the one for static systems.
+
+At the end of the simulation run, we can again compare the results from the numerical simulation with the analytical solution. However, what is perhaps more interesting is to trace the dynamic adjustment of the endogenous variables towards equilibrium. The best way to examine this is by plotting the results.
+
+## How to plot the results of a model
+
+We will consider two main ways to plot model outputs: bar charts for static models and time series charts for dynamic models. Bar charts compare the equilibrium values of $Y_t$ for different parameterisations:
+
+```{r howto_4}
+# Bar chart of different equilibrium solutions of Samuelson (1939) model
+barplot(Y[,T], ylab="Y", names.arg=c("Baseline", "Increase in G0"))
+```
+
+Next, we show a basic version of a time series chart that displays the dynamics of $Y_t$:
+
+```{r howto_5}
+# Time series chart of output dynamics in Samuelson (1939) model
+plot(Y[1, 1:100],type="l", col=1, lwd=2, lty=1, xlab="Time", ylab="Y") 
+title(main="Figure 1: Output", cex=0.8)
+```
+
+As you can see, there are many settings you can fiddle around with to adjust the appearance of the graph to your liking (run '?plot' to find information about the different options.) If we want to plot the dynamics for the two different parameterisations, we can do the following:
+
+```{r howto_6}
+# Time series chart of output dynamics for different scenarios in Samuelson (1939) model
+plot(Y[1, 1:100],type="l", col=1, lwd=2, lty=1, xlab="Time", ylab="Y", ylim=range(min(Y[1,], Y[2,]), max(Y[1,], Y[2,]))) 
+title(main="Figure 2: Output under different scenarios", cex=0.8)
+lines(Y[2, 1:100],lty=2)
+legend("bottomright", legend=c("Baseline", "Increase in G0"),
+       lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
+
+```
+
+Note that we have adjusted the range of the y-axis to make sure the graph captures the minimum and maximum values from both parameterisations.
+
+Finally, consider a plot for $C_t$ and $I_t$ with two separate axes:
+
+```{r howto_7}
+# Time series chart of Samuelson (1939) model with separate axes for consumption and investment
+plot(C[1, 1:100], type="l", col=1, lwd=2, lty=1, xlab="Time", ylab="Y") 
+title(main="Figure 3: Consumption and Investment", cex=0.8)
+par(mar = c(5, 4, 4, 4) + 0.3)
+par(new = TRUE)
+plot(I[1, 1:100], type="l", col=1, lwd=2, lty=2, font.main=1, cex.main=1,ylab = '', axes=FALSE,
+     xlab = '', ylim = range(I[2, 1:100]), cex=0.8)
+axis(side = 4, at = pretty(range(I[1, 1:100])))  
+mtext("I", side = 4, line = 2)
+legend("right", legend=c("C", "I"),
+       lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
+```
+
+## How to create a directed graph of a model
+
+Another perspective on a model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.
+
+The directed graph can be derived from the model's Jacobian matrix. See @Fennell2015 for a neat exposition. Let $\mathbf{x}$ be the vector containing the model's variables and $\mathbf{f(x)}$ the system of equations making up the model. The Jacobian matrix is then given by $\mathbf{J}=\mathbf{\frac{\partial f()}{\partial x}}$. As we often also want to display exogenous variables in the directed graph, it can be useful to expand the Jacobian matrix by adding rows and columns for those exogenous variables.
+
+Next, construct an 'auxiliary' Jacobian matrix $\mathbf{M}$ in which all the non-zero elements of the Jacobian are replaced by ones, whereas zero elements remain unchanged, i.e.
+
+$$
+M_{ij} =
+\begin{cases}
+1 & \text{if }  J_{ij} \neq 0, \\
+0 & \text{otherwise.}
+\end{cases}
+$$
+
+Finally, taking the transpose of this \`auxiliary' Jacobian matrix yields the **adjacency matrix** ($\mathbf{M^T}=\mathbf{A}$), which is a binary matrix whose elements ($A_{ji}$) indicate whether there is a directed edge from a node $x_j$ to node $x_i$. From the adjacency matrix, the directed graph is constructed. The code below shows this for the example of the @Samuelson1939 model.
+
+```{r how_to8, message=FALSE}
+## Create directed graph
+# Construct auxiliary Jacobian matrix for 4 variables: 
+  # endogenous: (1) Y, (2) C, (3) I
+  # exogenous: (4) G0
+# where non-zero elements in regular Jacobian are set to 1 and zero elements are unchanged
+
+              #1 2 3 4
+M_mat=matrix(c(0,1,1,1, #1
+               1,0,0,0, #2
+               0,1,0,0, #3
+               0,0,0,0), #4 
+               4, 4, byrow=TRUE)
+
+# Create adjacency matrix from transpose of auxiliary Jacobian and add column names
+A_mat=t(M_mat)
+
+# Create directed graph from adjacency matrix
+library(igraph)
+dg=graph_from_adjacency_matrix(A_mat, mode="directed", weighted= NULL)
+
+# Define node labels
+V(dg)$name=c("Y", "C", "I", expression(G[0]))
+
+# Plot directed graph matrix
+plot(dg, main="Figure 4: Directed graph of Samuelson model", vertex.size=20, vertex.color="lightblue", 
+     vertex.label.color="black", edge.arrow.size=0.2, edge.width=1.1, edge.size=1.2,
+     edge.arrow.width=1, edge.color="black", vertex.label.cex=1.2, 
+     vertex.frame.color="NA", margin=-0.05)
+```

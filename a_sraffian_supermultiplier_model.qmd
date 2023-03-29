@@ -90,9 +90,9 @@ gz=matrix(data=0.02,nrow=S,ncol=T) # growth rate of autonomous demand
 un=matrix(data=0.75,nrow=S,ncol=T)  # normal rate of capacity utilisation
 
 # Set parameter values for different scenarios
-gz[,q:T][2,]=0.03 # scenario 2: rise in autonomous demand growth
-pi[,q:T][3,]=0.4 # scenario 3: rise in profit share
-un[,q:T][4,]=0.8 # scenario 4: rise in normal rate of utilisation
+gz[2,q:T]=0.03 # scenario 2: rise in autonomous demand growth
+pi[3,q:T]=0.4 # scenario 3: rise in profit share
+un[4,q:T]=0.8 # scenario 4: rise in normal rate of utilisation
 
 # Initialise endogenous variables at equilibrium values
 u[,1]=un[,1]

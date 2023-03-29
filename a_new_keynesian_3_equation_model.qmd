@@ -80,9 +80,9 @@ A=matrix(data=10,nrow=S,ncol=T) # autonomous spending
 pt=matrix(data=2,nrow=S,ncol=T) # Inflation target
 ye=matrix(data=5,nrow=S,ncol=T) # Potential output
 
-A[,s:T][1,]=12  # scenario 1: AD boost  
-pt[,s:T][2,]=3  # scenario 2: higher inflation target
-ye[,s:T][3,]=7  # scenario 3: higher potential output
+A[1,s:T]=12  # scenario 1: AD boost  
+pt[2,s:T]=3  # scenario 2: higher inflation target
+ye[3,s:T]=7  # scenario 3: higher potential output
 
 # Initialise endogenous variables at equilibrium values
 y[,1]=ye[,1]
