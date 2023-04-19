@@ -55,100 +55,245 @@ $$ {#eq-M_eq}
 
 where $Y$, $K$, $N$, $w$, $C$, $G$, $r$, $I$, $r_n$, $\pi$, $M_s$, $M_d$, and $P_t$ are real output, the capital stock, employment, the real wage, consumption, government expenditures, the real interest rate, investment, the nominal interest rate, inflation, the money supply, money demand, and the price level, respectively. The $f$-superscript denotes (expected) future values. For simplicity, expected future variables will be treated as exogenous.
 
-By @eq-Y, output is determined by a Cobb-Douglass production function with constant returns to scale and diminishing marginal returns to each factor (capital and labour). @eq-w is the labour demand of firms solved for the real wage. Profit maximising firms will hire workers until the real wage is equal to the marginal product of labour ($\frac{\partial Y}{\partial N}=(1-a)AK^aN^{-a}$).\footnote{See the Appendix for a derivation of equations @eq-w -@eq-I and @eq-MD from optimising microfoundations.} @eq-N specifies households' labour supply, which is positively related to the real wage. By @eq-C , consumption is positively related to current and (expected) future income,\footnote{Households are assumed to form rational expectations. In a deterministic setting, this implies perfect foresight so that expected and actual future income coincide.} and negatively related to the real interest rate. This implies that for a higher real interest rate, households increase their saving (the supply of loanable funds). Furthermore, consumption is negatively related to current and future government expenditures. This is an implication of Ricardian Equivalence: as households know that governments will have to repay its debts in the future through higher taxes, an increase in government expenditures today is perceived as an increase in taxes (regardless of whether the government finances its current expenditures through taxes or debt).\footnote{See the Appendix for more details on Ricardian Equivalence.} @eq-I specifies investment as a negative function of the real interest rate and a positive function of productivity. By @eq-G, government expenditures are exogenous. @eq-Y_eq is the goods market equilibrium condition, which pins down the equilibrium real interest rate through the market for loanable funds. @eq-rn specifies the nominal interest rate using the well-known Fisher equation. @eq-MS says that the money supply is exogenous. By @eq-MD, households' money demand is negatively related to the nominal interest rate and positively related to consumption (capturing the transaction demand for money). Finally, @eq-M_eq is the equilibrium condition for the money market, which pins down the price level.
+By @eq-Y, output is determined by a Cobb-Douglass production function with constant returns to scale and diminishing marginal returns to each factor (capital and labour). @eq-w is the labour demand of firms solved for the real wage. Profit maximising firms will hire workers until the real wage is equal to the marginal product of labour ($\frac{\partial Y}{\partial N}=(1-a)AK^aN^{-a}$).^{See the Appendix for a derivation of equations @eq-w -@eq-I and @eq-MD from optimising microfoundations.} @eq-N specifies households' labour supply, which is positively related to the real wage. By @eq-C , consumption is positively related to current and (expected) future income,^{Households are assumed to form rational expectations. In a deterministic setting, this implies perfect foresight so that expected and actual future income coincide.} and negatively related to the real interest rate. This implies that for a higher real interest rate, households increase their saving (the supply of loanable funds). Furthermore, consumption is negatively related to current and future government expenditures. This is an implication of Ricardian Equivalence: as households know that governments will have to repay its debts in the future through higher taxes, an increase in government expenditures today is perceived as an increase in taxes (regardless of whether the government finances its current expenditures through taxes or debt).^{See the Appendix for more details on Ricardian Equivalence.} @eq-I specifies investment as a negative function of the real interest rate and a positive function of productivity. By @eq-G, government expenditures are exogenous. @eq-Y_eq is the goods market equilibrium condition, which pins down the equilibrium real interest rate through the market for loanable funds. @eq-rn specifies the nominal interest rate using the well-known Fisher equation. @eq-MS says that the money supply is exogenous. By @eq-MD, households' money demand is negatively related to the nominal interest rate and positively related to consumption (capturing the transaction demand for money). Finally, @eq-M_eq is the equilibrium condition for the money market, which pins down the price level.
 
 ## Simulation
 
-Table \ref{tab:parm} reports the parameterisation used in the simulation. Besides a baseline (labelled as scenario 1), five further scenarios will be considered. Scenarios 2 and 3 are a monetary expansion (increase in the exogenous money supply $M_0$) and fiscal expansion (increase in $G_0$), respectively. Scenario 4 is an improvement in total factor productivity ($A$) and scenario 5 a fall in expected future income ($Y^f$). Finally, scenario 6 is a shift in household preferences towards more leisure ($b_1$).  \\
+### Parameterisation
 
-\begin{table}[htb]
-	\caption{\textbf{Parameterisation}}
-	\label{tab:parm}
-	\resizebox{\textwidth}{!}{%
-		\begin{tabular}{@{}lllllllllll@{}}
-			\toprule
-			Scenario                                    & $A$ & $a$ & $b_1$ & $b_2$ & $b_3$ & $G_0$ & $Y^f$ & $M_0$ & $K$ & $\pi_f$ \\ \midrule
-			1: baseline                                 & 2   & 0.3 & 0.4   & 0.9   & 0.6   & 1     & 1     & 5     & 5   & 0.02    \\
-			2: monetary expansion ($M_0$)               & 2   & 0.3 & 0.4   & 0.9   & 0.6   & 1     & 1     & 6     & 5   & 0.02    \\
-			3: fiscal expansion ($G_0$)                 & 2   & 0.3 & 0.4   & 0.9   & 0.6   & 2     & 1     & 6     & 5   & 0.02    \\
-			4: productivity boost ($A$)                 & 2.5 & 0.3 & 0.4   & 0.9   & 0.6   & 1     & 1     & 5     & 5   & 0.02    \\
-			5: lower expected future income ($Y^f$)     & 2   & 0.3 & 0.4   & 0.9   & 0.6   & 1     & 0.2    & 5     & 5   & 0.02    \\
-			6: increased preference for leisure ($b_1$) & 2   & 0.3 & 0.8   & 0.9   & 0.6   & 1     & 1     & 5     & 5   & 0.02    \\ \bottomrule
-		\end{tabular}%
-	}
-\end{table}
+Table 1 reports the parameterisation used in the simulation. Besides a baseline (labelled as scenario 1), five further scenarios will be considered. Scenarios 2 and 3 are a monetary expansion (increase in the exogenous money supply $M_0$) and fiscal expansion (increase in $G_0$), respectively. Scenario 4 is an improvement in total factor productivity ($A$) and scenario 5 a fall in expected future income ($Y^f$). Finally, scenario 6 is a shift in household preferences towards more leisure ($b_1$).  \\
 
-Figures \ref{fig:output}-\ref{fig:employment} depicts the model economy's real activity under different scenarios. Monetary expansions (scenario 2) have no effects on output and employment, capturing the idea of money neutrality (Classical Dichotomy). However, the monetary expansion  raises the price level (see Figure \ref{fig:price_level}), capturing the key idea of the Quantity Theory of Money that inflation is driven by a growing money supply. \\
+**Table 1: Parameterisation**
 
-\begin{figure}[H]
-	\centering
-	\caption{\textbf{Output}}
-	\includegraphics[width=0.75\textwidth]{output.pdf}\label{fig:output}
-%	\floatfoot{\footnotesize \textit{Notes}: ...}
-\end{figure}
+| Scenario | A | a | b_(1) | b_(2) | b_(3) | G_(0) | Y^(f) | M_(0) | K | pi _(f) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 1: baseline | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 1 | 1 | 5 | 5 | 0.02 |
+| 2: monetary expansion (M_(0)) | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 1 | 1 | 6 | 5 | 0.02 |
+| 3: fiscal expansion (G_(0)) | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 2 | 1 | 6 | 5 | 0.02 |
+| 4: productivity boost (A) | 2.5 | 0.3 | 0.4 | 0.9 | 0.6 | 1 | 1 | 5 | 5 | 0.02 |
+| 5: lower expected future income (Y^(f)) | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 1 | 0.2 | 5 | 5 | 0.02 |
+| 6: increased preference for leisure (b_(1)) | 2 | 0.3 | 0.8 | 0.9 | 0.6 | 1 | 1 | 5 | 5 | 0.02 |
+
+| Scenario | A | a | $b_{1}$ | $b_(-){2}$ | $b_{3}$ | $G_{O}} | $Y^(^^){f}$ | $M_(-){0}$ | $K$ | $\pi_{f}$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 1: baseline | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 1 | 1 | 5 | 5 | 0.02 |
+| {:[" 2: monetary "],[" expansion "],[($M_(-){0}$)]:} | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 1 | 1 | 6 | 5 | 0.02 |
+| {:[" 3: fiscal "],[" expansion "],[($G_(-){0}$)]:} | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 2 | 1 | 6 | 5 | 0.02 |
+| {:[4:],[" productivity "],[" boost "($A$)]:} | 2.5 | 0.3 | 0.4 | 0.9 | 0.6 | 1 | 1 | 5 | 5 | 0.02 |
+| {:[5" : lower "],[" expected "],[" future "],[" income "],[($Y^(^^){f}$)]:} | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 1 | 0.2 | 5 | 5 | 0.02 |
+| {:[6:],[" increased "],[" preference "],[" for leisure "],[" ($b_{1}$) "]:} | 2 | 0.3 | 0.8 | 0.9 | 0.6 | 1 | 1 | 5 | 5 | 0.02 |
+
+### Simulation code
+
+```{r neoclass1}
+
+
+# Clear the environment
+rm(list=ls(all=TRUE))
+
+# Set number of scenarios (including baseline)
+S=6
+
+#Create vector in which equilibrium solutions from different parameterisations will be stored
+Y_star=vector(length=S) # Income/output
+w_star=vector(length=S) # Real wage
+C_star=vector(length=S) # Consumption
+I_star=vector(length=S) # Investment
+r_star=vector(length=S) # Real interest rate
+rn_star=vector(length=S) # Nominal interest rate
+N_star=vector(length=S) # Employment
+P_star=vector(length=S) # Price level
+
+# Create and parameterise exogenous variables/parameters that will be shifted
+M0=vector(length=S) # money supply
+G0=vector(length=S) # government expenditures
+A=vector(length=S)  # productivity
+Yf=vector(length=S) # expected future income
+b1=vector(length=S) # household preference for leisure
+M0[]=5
+G0[]=1
+A[]=2
+Yf[]=1
+b1[]=0.4
+
+# Set parameter values for different scenarios
+for (i in 1:S){ 
+  if (i==2){ # scenario 2: monetary expansion 
+  M0[2]=6
+  }
+  if (i==3){ # scenario 3: fiscal expansion
+    G0[3]=2
+  }
+  if (i==4){ # scenario 4: productivity boost
+    A[4]=2.5
+    }
+  if (i==5){ # scenario 5: lower expected future income
+    Yf[5]=0.2
+  }
+  if (i==6){ # scenario 6: increased preference for leisure
+    b1[6]=0.8
+  }
+}
+
+#Set constant parameter values
+a=0.3  # Capital elasticity of output
+b2=0.9 # discount rate
+b3=0.6 # household preference for money
+K=5    # Exogenous capital stock
+pe=0.02 # Expected rate of inflation
+Gf=1  # Future government spending
+
+# Initialise endogenous variables at arbitrary positive value
+w=1
+C=1
+I=1
+Y=C+I
+r=0.3
+N=1.3
+P=1
+
+#Solve this system numerically through 1000 iterations based on the initialisation
+for (i in 1:S){
+  
+for (iterations in 1:1000){
+  
+  #Model equations
+  
+  #(1) Cobb-Douglass production function  
+  Y = A[i]*(K^a)*N^(1-a)
+  
+  #(2) Labour demand 
+  w = A[i]*(1-a)*(K^a)*N^(-a) 
+  
+  #(3) Labour supply
+  N = 1 - (b1[i]*C)/w
+  
+  #(4) Consumption demand
+  C = (1/(1+b2+b3))*(Y - G0[i] + (Yf[i]-Gf)/(1+r)) 
+   
+  #(5) Investment demand, solved for r
+  r=(I^(a-1))*a*A[i]*N^(1-a) 
+   
+  #(6) Goods market equilibrium condition, solved for I
+  I = Y - C - G0[i]
+  
+  #(7) Nominal interest rate
+  rn = r + pe
+  
+  #(8) Price level
+  P = (M0[i]*rn)/((1+rn)*b3*C) 
+
+}
+  
+#Save results for different parameterisations in vector
+Y_star[i]=Y
+w_star[i]=w
+C_star[i]=C
+I_star[i]=I
+r_star[i]=r
+N_star[i]=N
+P_star[i]=P
+rn_star[i]=rn
+}
+
+```
+
+### Plots
+
+Figures \ref{fig:output}-\ref{fig:employment} depicts the model economy's real activity under different scenarios. Monetary expansions (scenario 2) have no effects on output and employment, capturing the idea of money neutrality (Classical Dichotomy). However, the monetary expansion  raises the price level (see Figure \ref{fig:price_level}), capturing the key idea of the Quantity Theory of Money that inflation is driven by a growing money supply.
+
+```{r neoclass2}
+
+barplot(Y_star, ylab="Y", names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", 
+                                           "5: Decrease in Yf", "6: Increase in b1"))
+
+```
 
 An increase in government spending (by one unit) in scenario 3 does raise employment and real output, but by less than the initial stimulus (i.e. the fiscal multiplier is smaller than one). Looking at Figures \ref{fig:employment}-\ref{fig:investment}, it can be seen that government spending crowds out private spending (consumption and investment). The decrease in consumption is a result of Ricardian Equivalence: the household anticipates higher taxes in the future and reduces current consumption to smooth out the impact. The increase in government expenditures also raises demand for loanable funds, which pushes up the real interest rate (see Figure \ref{fig:interest_rate}) and reduces investment (Figure \ref{fig:investment}). There is also an inflationary effect linked to the higher real interest rate, which raises the nominal rate and reduces the demand for money. 
 
-\begin{figure}[H]
-	\centering
-	\caption{\textbf{Employment}}
-	\includegraphics[width=0.75\textwidth]{employment.pdf}\label{fig:employment}
-	%	\floatfoot{\footnotesize \textit{Notes}: ...}
-\end{figure}
+```{r neoclass3}
+
+barplot(N_star, ylab="N",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", 
+                                       "5: Decrease in Yf", "6: Increase in b1"))
+
+```
 
 Improvements to the supply-side are captured by an increase in productivity (scenario 4), which raises real output, employment, and aggregate demand. In contrast to expansionary government policy, the price level falls.
 
-\begin{figure}[H]
-	\centering
-	\caption{\textbf{Consumption}}
-	\includegraphics[width=0.75\textwidth]{consumption.pdf}\label{fig:consumption}
-	%	\floatfoot{\footnotesize \textit{Notes}: ...}
-\end{figure}
+```{r neoclass4}
 
-\begin{figure}[H]
-	\centering
-	\caption{\textbf{Investment}}
-	\includegraphics[width=0.75\textwidth]{investment.pdf}\label{fig:investment}
-	%	\floatfoot{\footnotesize \textit{Notes}: ...}
-\end{figure}
+barplot(w_star, ylab="w",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", 
+                                       "5: Decrease in Yf", "6: Increase in b1"))
+
+barplot(r_star, ylab="r", names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", 
+                                      "5: Decrease in Yf", "6: Increase in b1"))
+
+```
 
 A decrease in expected future income (scenario 5) has a small expansionary effect on aggregate output. This is because households will reduce some of their current consumption (see Figure \ref{fig:consumption}) and supply more labour to smooth their consumption over time. The increase in saving reduces the real interest rate (see Figure \ref{fig:interest_rate}) and is compensated by an increase in investment (see Figure \ref{fig:investment}). 
 
-\begin{figure}[H]
-	\centering
-	\caption{\textbf{Real interest rate}}
-	\includegraphics[width=0.75\textwidth]{interest_rate.pdf}\label{fig:interest_rate}
-	%	\floatfoot{\footnotesize \textit{Notes}: ...}
-\end{figure}
+```{r neoclass5}
+
+barplot(P_star, ylab="P",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", 
+                                       "5: Decrease in Yf", "6: Increase in b1"))
+
+```
 
 Finally, an increase in the preference for leisure (scenario 6) reduces labour supply and thereby output.
 
-\begin{figure}[H]
-	\centering
-	\caption{\textbf{Price level}}
-	\includegraphics[width=0.75\textwidth]{price_level.pdf}\label{fig:price_level}
-	%	\floatfoot{\footnotesize \textit{Notes}: ...}
-\end{figure}
+```{r neoclass6}
+
+barplot(I_star, ylab="I",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", 
+                                       "5: Decrease in Yf", "6: Increase in b1"))
+
+barplot(C_star, ylab="C",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", 
+                                       "5: Decrease in Yf", "6: Increase in b1"))
+
+```
+
 
 ## Directed graph
 
 Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$. 
 
-\begin{figure}[H]
-	\centering
-	\caption{\textbf{Directed graph of Neoclassical model}}
-	\includegraphics[width=1\textwidth]{DG.pdf}\label{fig:dg}
-	%\floatfoot{\footnotesize \textit{Notes}: }
-\end{figure}
+```{r neoclassDAG}
+
+## Create directed graph
+# Construct auxiliary Jacobian matrix for 13 variables: Y	w	N	C	I	r	P	rn M0	G0 A Yf Md
+# where non-zero elements in regular Jacobian are set to 1 and zero elements are unchanged
+
+M_mat=matrix(c(0,0,1,0,0,0,0,0,0,0,1,0,0,
+              0,0,1,0,0,0,0,0,0,0,1,0,0,
+              0,1,0,1,0,0,0,0,0,0,0,0,0,
+              1,0,0,0,0,1,0,0,0,1,0,1,0,
+              0,0,1,0,0,1,0,0,0,0,0,0,0,
+              1,0,0,1,1,0,0,0,0,1,0,0,0,
+              0,0,0,0,0,0,0,0,1,0,0,0,1,
+              0,0,0,0,0,1,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,0,0,0,0,0,
+              0,0,0,1,0,0,1,1,0,0,0,0,0), 13, 13, byrow=TRUE)
+
+# Create adjacency matrix from transpose of auxiliary Jacobian and add column names
+A_mat=t(M_mat)
+colnames(A_mat) = c("Y","w","N","C","I","r","P","rn", "M0","G0","A","Yf", "Md")
+
+# Create and plot directed graph from adjacency matrix
+library(igraph)
+dg= graph_from_adjacency_matrix(A_mat, mode="directed", weighted= NULL)
+plot(dg, main="", vertex.size=20, vertex.color="lightblue", 
+     vertex.label.color="black", edge.arrow.size=0.2, edge.width=1,
+     edge.arrow.width=0.8, edge.color="black", vertex.label.cex=1.5, vertex.frame.color="NA", margin=-0.2)
+
+```
 
 In Figure \ref{fig:dg}, it can be seen that productivity ($A$), future income ($Y^f$), the money supply ($M_0$), and government spending ($G_0$) are the key exogenous variables of the model. All other variables are endogenous, and many of them form a closed loop (or cycle) within the system. The left part of the graph captures the supply side: the labour market simultaneously pins down the real wage and employment, which together with the exogenously level of productivity determine output. The part in the middle embodies the demand side: aggregate demand (consumption, investment, and government spending) together with a given level of output determine the real interest rate. The right part captures the nominal side of the model given by the money market, which determines the price level. Notably, while the real side of the model feeds into the money market via the nominal interest rate ($r_n$), there is not causal effect from the money market to the real side reflecting the Classical Dichotomy. 
 
-\begin{appendices}
-\newpage
+## Appendices
 
-{\LARGE \textbf{Appendix}}	
-
-## Derivation of behavioural functions
+### Derivation of behavioural functions
 
 \subsection{The firm's problem: profit maximisation}
 The firm's profit equation is given by:
@@ -157,7 +302,7 @@ The firm's profit equation is given by:
 	&= AK^aN^{1-a}-wN-rk.
 \end{align}
 
-The firm's optimisation problem is to maximise profits using employment and capital as choice variables:\footnote{See \citet[][chap. 12]{Garin2021} for a more elaborate version where the firm maximises its lifetime value. The resulting investment function is very similar.}
+The firm's optimisation problem is to maximise profits using employment and capital as choice variables:^{See \citet[][chap. 12]{Garin2021} for a more elaborate version where the firm maximises its lifetime value. The resulting investment function is very similar.}
 \begin{maxi}|s|
 	{N,K}{\Pi =AK^aN^{1-a}-wN-rk}{}{}.
 	%\addConstraint{},
@@ -187,7 +332,7 @@ Combining the two budget constraints to an intertemporal budget constraint yield
 G + \frac{G^f}{1+r}&= T +\frac{T^f}{1+r}.
 \end{align}
 
-Thus, while the government's budget need not be balanced in every period, it will be balanced over time (in a present value sense).\footnote{See \citet[][chap. 13]{Garin2021} for a more detailed discussion of the government's budget constraints.}
+Thus, while the government's budget need not be balanced in every period, it will be balanced over time (in a present value sense).^{See \citet[][chap. 13]{Garin2021} for a more detailed discussion of the government's budget constraints.}
 
 \subsection{The household's problem: intertemporal utility maximisation}		
 The household derives utility from current consumption, leisure ($1-N$), future consumption $C^f$, and from holding real money balances $\left(\frac{M}{P}\right)$. We use the following log utility function:
@@ -195,7 +340,7 @@ The household derives utility from current consumption, leisure ($1-N$), future 
 U &= \ln(C) + b_1 \ln(1-N) + b_2 \ln(C^f) + b_3 \ln\left(\frac{M}{P}\right).
 \end{align}
 
-The household's current budget constraint is given by:\footnote{See \citet[][chap. 14]{Garin2021} for a more detailed discussion of the household's budget constraints.}
+The household's current budget constraint is given by:^{See \citet[][chap. 14]{Garin2021} for a more detailed discussion of the household's budget constraints.}
 \begin{align}
 C&=Y-T-S-\frac{M}{P}.
 \end{align}
@@ -239,9 +384,9 @@ M - \frac{b_3C^f(1+r_n)P}{b_2(1+r)r_n} &= 0\label{eq:FOC_M}.
 Substituting \eqref{eq:FOC_C}, which is often also called the _Euler equation_, into \eqref{eq:FOC_Ns} and \eqref{eq:FOC_M} yields equation \eqref{eq:N} for labour supply and equation \eqref{eq:MD} for money demand, respectively. Finally, using \eqref{eq:ibc} and \eqref{eq:FOC_M} in the Euler equation \eqref{eq:FOC_C} yields the consumption function \eqref{eq:C}.
 
 
-## Construction of directed graph
+### Construction of directed graph
 
-The directed graph can be derived from the model's Jacobian matrix.\footnote{See \cite{Fennell2015} for a neat exposition.} Let $\mathbf{x}$ be the vector containing the model's variables. The system of equations representing the model can be written as $\mathbf{f(x)=0}$. The Jacobian matrix is then given by $\mathbf{J}=\mathbf{\frac{\partial f}{\partial x}}$.  
+The directed graph can be derived from the model's Jacobian matrix.^{See \cite{Fennell2015} for a neat exposition.} Let $\mathbf{x}$ be the vector containing the model's variables. The system of equations representing the model can be written as $\mathbf{f(x)=0}$. The Jacobian matrix is then given by $\mathbf{J}=\mathbf{\frac{\partial f}{\partial x}}$.  
 
 Next, construct an `auxiliary' Jacobian matrix $\mathbf{M}$ in which the non-zero elements of the Jacobian are replaced by ones, whereas zero elements remain unchanged, i.e.
 \[
@@ -254,4 +399,3 @@ M_{ij} =
 
 Finally, taking the transpose of the `auxiliary' Jacobian matrix yields the adjacency matrix ($\mathbf{M^T}=\mathbf{A}$), which is a binary matrix whose elements ($A_{ji}$) indicate whether there is a directed edge from a node $x_j$ to node $x_i$. From the adjacency matrix, the directed graph is constructed.
 
-## Appendices
