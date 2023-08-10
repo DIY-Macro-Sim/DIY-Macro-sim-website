@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.269">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
-<title>DIY seminal macroeconomic models - 3&nbsp; A Neoclassical Macro Model</title>
+<title>DIY Macroeconomic Model Simulation - 4&nbsp; A Neoclassical Macro Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,8 +17,89 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
-
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -42,8 +120,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -61,31 +138,25 @@ ul.task-list li input[type="checkbox"] {
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
-
-
+}</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></h1>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span>
+</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">DIY seminal macroeconomic models</a> 
+      <a href="./">DIY Macroeconomic Model Simulation</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
@@ -99,24 +170,24 @@ ul.task-list li input[type="checkbox"] {
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./how_to_use.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">How to use this site</span></a>
+  <a href="./how_to_use.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">How to Use this Site</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./how_to_contribute.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to contribute</span></a>
+  <a href="./how_to_simulate.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to Simulate Economic Models</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./intro_stability_analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to Stability Analysis of Dynamic Models</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -126,35 +197,20 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_neoclassical_macro_model.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></a>
+  <a href="./a_neoclassical_macro_model.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./an_IS_LM_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></a>
+  <a href="./an_IS_LM_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_neoclassical_synthesis_model_IS_LM_AS_AD.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Neoclassical Synthesis Model (IS-LM-AS-AD)</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="./dynamic_models.html" class="sidebar-item-text sidebar-link">Dynamic models</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./a_new_keynesian_3_equation_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></a>
+  <a href="./a_neoclassical_synthesis_model_IS_LM_AS_AD.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">A Neoclassical Synthesis Model (IS-LM-AS-AD)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -167,41 +223,82 @@ ul.task-list li input[type="checkbox"] {
   <a href="./a_post_kaleckian_distribution_and_growth_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./dynamic_models.html" class="sidebar-item-text sidebar-link">Dynamic models</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_sraffian_supermultiplier_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></a>
+  <a href="./a_new_keynesian_3_equation_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_malthusian_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></a>
+  <a href="./a_sraffian_supermultiplier_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_ricardian_one_sector_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></a>
+  <a href="./a_malthusian_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_ricardian_two_sector_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span></a>
+  <a href="./a_ricardian_one_sector_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_ricardian_two_sector_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#the-model" id="toc-the-model" class="nav-link" data-scroll-target="#the-model">The Model</a></li>
+  <li>
+<a href="#simulation" id="toc-simulation" class="nav-link" data-scroll-target="#simulation">Simulation</a>
+  <ul>
+<li><a href="#parameterisation" id="toc-parameterisation" class="nav-link" data-scroll-target="#parameterisation">Parameterisation</a></li>
+  <li><a href="#simulation-code" id="toc-simulation-code" class="nav-link" data-scroll-target="#simulation-code">Simulation code</a></li>
+  <li><a href="#plots" id="toc-plots" class="nav-link" data-scroll-target="#plots">Plots</a></li>
+  </ul>
+</li>
+  <li><a href="#directed-graph" id="toc-directed-graph" class="nav-link" data-scroll-target="#directed-graph">Directed graph</a></li>
+  <li>
+<a href="#appendices" id="toc-appendices" class="nav-link" data-scroll-target="#appendices">Appendices</a>
+  <ul>
+<li>
+<a href="#derivation-of-behavioural-functions" id="toc-derivation-of-behavioural-functions" class="nav-link" data-scroll-target="#derivation-of-behavioural-functions">Derivation of behavioural functions</a>
+  <ul>
+<li><a href="#the-firms-problem-profit-maximisation" id="toc-the-firms-problem-profit-maximisation" class="nav-link" data-scroll-target="#the-firms-problem-profit-maximisation">The firm’s problem: profit maximisation</a></li>
+  <li><a href="#the-governments-budget-constraint-ricardian-equivalence" id="toc-the-governments-budget-constraint-ricardian-equivalence" class="nav-link" data-scroll-target="#the-governments-budget-constraint-ricardian-equivalence">The government’s budget constraint: Ricardian Equivalence</a></li>
+  <li><a href="#the-households-problem-intertemporal-utility-maximisation" id="toc-the-households-problem-intertemporal-utility-maximisation" class="nav-link" data-scroll-target="#the-households-problem-intertemporal-utility-maximisation">The household’s problem: intertemporal utility maximisation</a></li>
+  </ul>
+</li>
+  <li><a href="#construction-of-directed-graph" id="toc-construction-of-directed-graph" class="nav-link" data-scroll-target="#construction-of-directed-graph">Construction of directed graph</a></li>
+  </ul>
+</li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/edit/main/a_neoclassical_macro_model.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span>
+</h1>
 </div>
 
 
@@ -214,13 +311,487 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-</header>
+</header><section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This model captures some key features of neoclassical macroeconomics. The model is based on the optimising behaviour of firms and households that interact in perfect markets. Households choose between labour and leisure as well as current and future consumption. They form (rational) expectations about their future income that impact their consumption decisions today. Firms are owned by households and maximise profits using a constant returns to scale technology (with diminishing marginal returns to factors of production). Markets are competitive and clear instantaneously through flexible prices. The most important market is the labour market, in which the equilibrium between firms’ demand and households’ supply of labour is established by a flexible real wage. The level of employment established on the labour market then determines aggregate supply via the production function. Aggregate demand always accommodates to aggregate supply via a flexible real interest rate that establishes an equilibrium between investment and saving (often interpreted as the market for loanable funds). The money supply is exogenous in this model and only impacts the price level but not the real economy – the so-called <em>Classical Dichotomy</em> (or neutrality of money). Government expenditures do influence the real economy but they crowd out private expenditures (through a mechanism called <em>Ricardian Equivalence</em>).</p>
+<p>In this short- to medium-run version of the model, prices are flexible but the capital stock is fixed. The focus is thus on goods market equilibrium rather than economic growth. As all endogenous variables adjust instantaneously, the model is thus static. However, expectations about future income and government spending will impact current consumption of households that intertemporally maximise utility. The model is adapted from <span class="citation" data-cites="Garin2021">Garín, Lester, and Sims (<a href="#ref-Garin2021" role="doc-biblioref">2021</a>)</span>.</p>
+</section><section id="the-model" class="level2"><h2 class="anchored" data-anchor-id="the-model">The Model</h2>
+<p><span id="eq-Y"><span class="math display">\[
+Y=AK^aN^{1-a}, \quad a\in (0,1)
+\tag{4.1}\]</span></span></p>
+<p><span id="eq-w"><span class="math display">\[
+w=(1-a)AK^aN^{-a}
+\tag{4.2}\]</span></span></p>
+<p><span id="eq-N"><span class="math display">\[
+N= 1-\frac{b_1C}{w}, \quad b_1&gt;0
+\tag{4.3}\]</span></span></p>
+<p><span id="eq-C"><span class="math display">\[
+C=\left(\frac{1}{1+b_2+b_3}\right)\left(Y- G +\frac{Y^f-G^f}{1+r}\right), \quad b_2\in (0,1), b_3&gt;0
+\tag{4.4}\]</span></span></p>
+<p><span id="eq-I"><span class="math display">\[
+I =\left(\frac{aAN^{1-a}}{r}\right)^{\frac{1}{1-a}}
+\tag{4.5}\]</span></span></p>
+<p><span id="eq-G"><span class="math display">\[
+G= G_0
+\tag{4.6}\]</span></span></p>
+<p><span id="eq-Y_eq"><span class="math display">\[
+Y= C(r) + I(r) + G
+\tag{4.7}\]</span></span></p>
+<p><span id="eq-rn"><span class="math display">\[
+r_n= r + \pi^f
+\tag{4.8}\]</span></span></p>
+<p><span id="eq-MS"><span class="math display">\[
+M_s=M_0
+\tag{4.9}\]</span></span></p>
+<p><span id="eq-MD"><span class="math display">\[
+M_d=\frac{b_3(1+r_n)PC}{r_n}
+\tag{4.10}\]</span></span></p>
+<p><span id="eq-M_eq"><span class="math display">\[
+M = M_d(P)= M_s
+\tag{4.11}\]</span></span></p>
+<p>where <span class="math inline">\(Y\)</span>, <span class="math inline">\(K\)</span>, <span class="math inline">\(N\)</span>, <span class="math inline">\(w\)</span>, <span class="math inline">\(C\)</span>, <span class="math inline">\(G\)</span>, <span class="math inline">\(r\)</span>, <span class="math inline">\(I\)</span>, <span class="math inline">\(r_n\)</span>, <span class="math inline">\(\pi\)</span>, <span class="math inline">\(M_s\)</span>, <span class="math inline">\(M_d\)</span>, and <span class="math inline">\(P_t\)</span> are real output, the capital stock, employment, the real wage, consumption, government expenditures, the real interest rate, investment, the nominal interest rate, inflation, the money supply, money demand, and the price level, respectively. The <span class="math inline">\(f\)</span>-superscript denotes (expected) future values. For simplicity, expected future variables will be treated as exogenous.</p>
+<p>By <a href="a_post_keynesian_macro_model_with_endogenous_money.html#eq-Y">Equation&nbsp;<span>7.1</span></a>, output is determined by a Cobb-Douglass production function with constant returns to scale and diminishing marginal returns to each factor (capital and labour). <a href="a_post_keynesian_macro_model_with_endogenous_money.html#eq-w">Equation&nbsp;<span>7.11</span></a> is the labour demand of firms solved for the real wage. Profit maximising firms will hire workers until the real wage is equal to the marginal product of labour (<span class="math inline">\(\frac{\partial Y}{\partial N}=(1-a)AK^aN^{-a}\)</span>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <a href="a_post_keynesian_macro_model_with_endogenous_money.html#eq-N">Equation&nbsp;<span>7.12</span></a> specifies households’ labour supply, which is positively related to the real wage. By <a href="a_neoclassical_synthesis_model_IS_LM_AS_AD.html#eq-C">Equation&nbsp;<span>6.2</span></a> , consumption is positively related to current and (expected) future income,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and negatively related to the real interest rate. This implies that for a higher real interest rate, households increase their saving (the supply of loanable funds). Furthermore, consumption is negatively related to current and future government expenditures. This is an implication of Ricardian Equivalence: as households know that governments will have to repay its debts in the future through higher taxes, an increase in government expenditures today is perceived as an increase in taxes (regardless of whether the government finances its current expenditures through taxes or debt).<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <a href="a_neoclassical_synthesis_model_IS_LM_AS_AD.html#eq-I">Equation&nbsp;<span>6.3</span></a> specifies investment as a negative function of the real interest rate and a positive function of productivity. By <a href="#eq-G">Equation&nbsp;<span>4.6</span></a>, government expenditures are exogenous. <a href="#eq-Y_eq">Equation&nbsp;<span>4.7</span></a> is the goods market equilibrium condition, which pins down the equilibrium real interest rate through the market for loanable funds. <a href="#eq-rn">Equation&nbsp;<span>4.8</span></a> specifies the nominal interest rate using the well-known Fisher equation. <a href="#eq-MS">Equation&nbsp;<span>4.9</span></a> says that the money supply is exogenous. By <a href="#eq-MD">Equation&nbsp;<span>4.10</span></a>, households’ money demand is negatively related to the nominal interest rate and positively related to consumption (capturing the transaction demand for money). Finally, <a href="a_neoclassical_synthesis_model_IS_LM_AS_AD.html#eq-M_eq">Equation&nbsp;<span>6.6</span></a> is the equilibrium condition for the money market, which pins down the price level.</p>
+</section><section id="simulation" class="level2"><h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
+<section id="parameterisation" class="level3"><h3 class="anchored" data-anchor-id="parameterisation">Parameterisation</h3>
+<p>Table 1 reports the parameterisation used in the simulation. Besides a baseline (labelled as scenario 1), five further scenarios will be considered. Scenarios 2 and 3 are a monetary expansion (increase in the exogenous money supply <span class="math inline">\(M_0\)</span>) and fiscal expansion (increase in <span class="math inline">\(G_0\)</span>), respectively. Scenario 4 is an improvement in total factor productivity (<span class="math inline">\(A\)</span>) and scenario 5 a fall in expected future income (<span class="math inline">\(Y^f\)</span>). Finally, scenario 6 is a shift in household preferences towards more leisure (<span class="math inline">\(b_1\)</span>).</p>
+<p><strong>Table 1: Parameterisation</strong></p>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">Scenario</th>
+<th style="text-align: left;"><span class="math inline">\(A\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(a\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(b_{1}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(b_{2}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(b_{3}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(G_{0}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(Y^{f}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(M_{0}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(K\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\pi_{f}\)</span></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1: baseline</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">0.3</td>
+<td style="text-align: left;">0.4</td>
+<td style="text-align: left;">0.9</td>
+<td style="text-align: left;">0.6</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">0.02</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2: monetary expansion (<span class="math inline">\(M_{0}\)</span>)</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">0.3</td>
+<td style="text-align: left;">0.4</td>
+<td style="text-align: left;">0.9</td>
+<td style="text-align: left;">0.6</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">0.02</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3: fiscal expansion (<span class="math inline">\(G_{0}\)</span>)</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">0.3</td>
+<td style="text-align: left;">0.4</td>
+<td style="text-align: left;">0.9</td>
+<td style="text-align: left;">0.6</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">0.02</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4: productivity boost (<span class="math inline">\(A\)</span>)</td>
+<td style="text-align: left;">2.5</td>
+<td style="text-align: left;">0.3</td>
+<td style="text-align: left;">0.4</td>
+<td style="text-align: left;">0.9</td>
+<td style="text-align: left;">0.6</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">0.02</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5: lower expected future income (<span class="math inline">\(Y^{f}\)</span>)</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">0.3</td>
+<td style="text-align: left;">0.4</td>
+<td style="text-align: left;">0.9</td>
+<td style="text-align: left;">0.6</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0.2</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">0.02</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6: increased preference for leisure (<span class="math inline">\(b_{1}\)</span>)</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">0.3</td>
+<td style="text-align: left;">0.8</td>
+<td style="text-align: left;">0.9</td>
+<td style="text-align: left;">0.6</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">0.02</td>
+</tr>
+</tbody>
+</table></section><section id="simulation-code" class="level3"><h3 class="anchored" data-anchor-id="simulation-code">Simulation code</h3>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Clear the environment</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set number of scenarios (including baseline)</span></span>
+<span><span class="va">S</span><span class="op">=</span><span class="fl">6</span></span>
+<span></span>
+<span><span class="co">#Create vector in which equilibrium solutions from different parameterisations will be stored</span></span>
+<span><span class="va">Y_star</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># Income/output</span></span>
+<span><span class="va">w_star</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># Real wage</span></span>
+<span><span class="va">C_star</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># Consumption</span></span>
+<span><span class="va">I_star</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># Investment</span></span>
+<span><span class="va">r_star</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># Real interest rate</span></span>
+<span><span class="va">rn_star</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># Nominal interest rate</span></span>
+<span><span class="va">N_star</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># Employment</span></span>
+<span><span class="va">P_star</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># Price level</span></span>
+<span></span>
+<span><span class="co"># Create and parameterise exogenous variables/parameters that will be shifted</span></span>
+<span><span class="va">M0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># money supply</span></span>
+<span><span class="va">G0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># government expenditures</span></span>
+<span><span class="va">A</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span>  <span class="co"># productivity</span></span>
+<span><span class="va">Yf</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># expected future income</span></span>
+<span><span class="va">b1</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># household preference for leisure</span></span>
+<span><span class="va">M0</span><span class="op">[</span><span class="op">]</span><span class="op">=</span><span class="fl">5</span></span>
+<span><span class="va">G0</span><span class="op">[</span><span class="op">]</span><span class="op">=</span><span class="fl">1</span></span>
+<span><span class="va">A</span><span class="op">[</span><span class="op">]</span><span class="op">=</span><span class="fl">2</span></span>
+<span><span class="va">Yf</span><span class="op">[</span><span class="op">]</span><span class="op">=</span><span class="fl">1</span></span>
+<span><span class="va">b1</span><span class="op">[</span><span class="op">]</span><span class="op">=</span><span class="fl">0.4</span></span>
+<span></span>
+<span><span class="co"># Set parameter values for different scenarios</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span> </span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span><span class="op">==</span><span class="fl">2</span><span class="op">)</span><span class="op">{</span> <span class="co"># scenario 2: monetary expansion </span></span>
+<span>  <span class="va">M0</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">=</span><span class="fl">6</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span><span class="op">==</span><span class="fl">3</span><span class="op">)</span><span class="op">{</span> <span class="co"># scenario 3: fiscal expansion</span></span>
+<span>    <span class="va">G0</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">=</span><span class="fl">2</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span><span class="op">==</span><span class="fl">4</span><span class="op">)</span><span class="op">{</span> <span class="co"># scenario 4: productivity boost</span></span>
+<span>    <span class="va">A</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">=</span><span class="fl">2.5</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span><span class="op">==</span><span class="fl">5</span><span class="op">)</span><span class="op">{</span> <span class="co"># scenario 5: lower expected future income</span></span>
+<span>    <span class="va">Yf</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span><span class="op">=</span><span class="fl">0.2</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span><span class="op">==</span><span class="fl">6</span><span class="op">)</span><span class="op">{</span> <span class="co"># scenario 6: increased preference for leisure</span></span>
+<span>    <span class="va">b1</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span><span class="op">=</span><span class="fl">0.8</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">#Set constant parameter values</span></span>
+<span><span class="va">a</span><span class="op">=</span><span class="fl">0.3</span>  <span class="co"># Capital elasticity of output</span></span>
+<span><span class="va">b2</span><span class="op">=</span><span class="fl">0.9</span> <span class="co"># discount rate</span></span>
+<span><span class="va">b3</span><span class="op">=</span><span class="fl">0.6</span> <span class="co"># household preference for money</span></span>
+<span><span class="va">K</span><span class="op">=</span><span class="fl">5</span>    <span class="co"># Exogenous capital stock</span></span>
+<span><span class="va">pe</span><span class="op">=</span><span class="fl">0.02</span> <span class="co"># Expected rate of inflation</span></span>
+<span><span class="va">Gf</span><span class="op">=</span><span class="fl">1</span>  <span class="co"># Future government spending</span></span>
+<span></span>
+<span><span class="co"># Initialise endogenous variables at arbitrary positive value</span></span>
+<span><span class="va">w</span><span class="op">=</span><span class="fl">1</span></span>
+<span><span class="va">C</span><span class="op">=</span><span class="fl">1</span></span>
+<span><span class="va">I</span><span class="op">=</span><span class="fl">1</span></span>
+<span><span class="va">Y</span><span class="op">=</span><span class="va">C</span><span class="op">+</span><span class="va">I</span></span>
+<span><span class="va">r</span><span class="op">=</span><span class="fl">0.3</span></span>
+<span><span class="va">N</span><span class="op">=</span><span class="fl">1.3</span></span>
+<span><span class="va">P</span><span class="op">=</span><span class="fl">1</span></span>
+<span></span>
+<span><span class="co">#Solve this system numerically through 1000 iterations based on the initialisation</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">iterations</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co">#Model equations</span></span>
+<span>  </span>
+<span>  <span class="co">#(1) Cobb-Douglass production function  </span></span>
+<span>  <span class="va">Y</span> <span class="op">=</span> <span class="va">A</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="va">K</span><span class="op">^</span><span class="va">a</span><span class="op">)</span><span class="op">*</span><span class="va">N</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">a</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">#(2) Labour demand </span></span>
+<span>  <span class="va">w</span> <span class="op">=</span> <span class="va">A</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">a</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="va">K</span><span class="op">^</span><span class="va">a</span><span class="op">)</span><span class="op">*</span><span class="va">N</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="va">a</span><span class="op">)</span> </span>
+<span>  </span>
+<span>  <span class="co">#(3) Labour supply</span></span>
+<span>  <span class="va">N</span> <span class="op">=</span> <span class="fl">1</span> <span class="op">-</span> <span class="op">(</span><span class="va">b1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">*</span><span class="va">C</span><span class="op">)</span><span class="op">/</span><span class="va">w</span></span>
+<span>  </span>
+<span>  <span class="co">#(4) Consumption demand</span></span>
+<span>  <span class="va">C</span> <span class="op">=</span> <span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">b2</span><span class="op">+</span><span class="va">b3</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="va">Y</span> <span class="op">-</span> <span class="va">G0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="op">(</span><span class="va">Yf</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">-</span><span class="va">Gf</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">r</span><span class="op">)</span><span class="op">)</span> </span>
+<span>   </span>
+<span>  <span class="co">#(5) Investment demand, solved for r</span></span>
+<span>  <span class="va">r</span><span class="op">=</span><span class="op">(</span><span class="va">I</span><span class="op">^</span><span class="op">(</span><span class="va">a</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="va">a</span><span class="op">*</span><span class="va">A</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">*</span><span class="va">N</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">a</span><span class="op">)</span> </span>
+<span>   </span>
+<span>  <span class="co">#(6) Goods market equilibrium condition, solved for I</span></span>
+<span>  <span class="va">I</span> <span class="op">=</span> <span class="va">Y</span> <span class="op">-</span> <span class="va">C</span> <span class="op">-</span> <span class="va">G0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
+<span>  </span>
+<span>  <span class="co">#(7) Nominal interest rate</span></span>
+<span>  <span class="va">rn</span> <span class="op">=</span> <span class="va">r</span> <span class="op">+</span> <span class="va">pe</span></span>
+<span>  </span>
+<span>  <span class="co">#(8) Price level</span></span>
+<span>  <span class="va">P</span> <span class="op">=</span> <span class="op">(</span><span class="va">M0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">*</span><span class="va">rn</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">rn</span><span class="op">)</span><span class="op">*</span><span class="va">b3</span><span class="op">*</span><span class="va">C</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="op">}</span></span>
+<span>  </span>
+<span><span class="co">#Save results for different parameterisations in vector</span></span>
+<span><span class="va">Y_star</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">Y</span></span>
+<span><span class="va">w_star</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">w</span></span>
+<span><span class="va">C_star</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">C</span></span>
+<span><span class="va">I_star</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">I</span></span>
+<span><span class="va">r_star</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">r</span></span>
+<span><span class="va">N_star</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">N</span></span>
+<span><span class="va">P_star</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">P</span></span>
+<span><span class="va">rn_star</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">rn</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="plots" class="level3"><h3 class="anchored" data-anchor-id="plots">Plots</h3>
+<p>Figures <a href="#fig-output-neocl">Figure&nbsp;<span>4.1</span></a> - <a href="#fig-employment-neocl">Figure&nbsp;<span>4.2</span></a> depicts the model economy’s real activity under different scenarios. Monetary expansions (scenario 2) have no effects on output and employment, capturing the idea of money neutrality (Classical Dichotomy). However, the monetary expansion raises the price level (see <a href="#fig-price_level">Figure&nbsp;<span>4.6</span></a> ), capturing the key idea of the Quantity Theory of Money that inflation is driven by a growing money supply.</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">Y_star</span>, ylab<span class="op">=</span><span class="st">"Y"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: Baseline"</span>, <span class="st">"2: Increase in M0"</span>, <span class="st">"3: Increase in G0"</span>,<span class="st">"4: Increase in A"</span>, </span>
+<span>                                           <span class="st">"5: Decrease in Yf"</span>, <span class="st">"6: Increase in b1"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-output-neocl" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="a_neoclassical_macro_model_files/figure-html/fig-output-neocl-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.1: Output</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>An increase in government spending (by one unit) in scenario 3 does raise employment and real output, but by less than the initial stimulus (i.e.&nbsp;the fiscal multiplier is smaller than one). Looking at Figures <a href="#fig-employment-neocl">Figure&nbsp;<span>4.2</span></a> - <a href="#fig-investment">Figure&nbsp;<span>4.4</span></a> , it can be seen that government spending crowds out private spending (consumption and investment). The decrease in consumption is a result of Ricardian Equivalence: the household anticipates higher taxes in the future and reduces current consumption to smooth out the impact. The increase in government expenditures also raises demand for loanable funds, which pushes up the real interest rate (see <a href="#fig-interest_rate">Figure&nbsp;<span>4.5</span></a> ) and reduces investment (<a href="#fig-investment">Figure&nbsp;<span>4.4</span></a> ). There is also an inflationary effect linked to the higher real interest rate, which raises the nominal rate and reduces the demand for money.</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">N_star</span>, ylab<span class="op">=</span><span class="st">"N"</span>,  names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: Baseline"</span>, <span class="st">"2: Increase in M0"</span>, <span class="st">"3: Increase in G0"</span>,<span class="st">"4: Increase in A"</span>, </span>
+<span>                                       <span class="st">"5: Decrease in Yf"</span>, <span class="st">"6: Increase in b1"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-employment-neocl" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="a_neoclassical_macro_model_files/figure-html/fig-employment-neocl-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.2: Employment</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Improvements to the supply-side are captured by an increase in productivity (scenario 4), which raises real output, employment, and aggregate demand. In contrast to expansionary government policy, the price level falls.</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">C_star</span>, ylab<span class="op">=</span><span class="st">"C"</span>,  names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: Baseline"</span>, <span class="st">"2: Increase in M0"</span>, <span class="st">"3: Increase in G0"</span>,<span class="st">"4: Increase in A"</span>, </span>
+<span>                                       <span class="st">"5: Decrease in Yf"</span>, <span class="st">"6: Increase in b1"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-consumption" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="a_neoclassical_macro_model_files/figure-html/fig-consumption-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.3: Consumption</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">I_star</span>, ylab<span class="op">=</span><span class="st">"I"</span>,  names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: Baseline"</span>, <span class="st">"2: Increase in M0"</span>, <span class="st">"3: Increase in G0"</span>,<span class="st">"4: Increase in A"</span>, </span>
+<span>                                       <span class="st">"5: Decrease in Yf"</span>, <span class="st">"6: Increase in b1"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-investment" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="a_neoclassical_macro_model_files/figure-html/fig-investment-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.4: Investment</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A decrease in expected future income (scenario 5) has a small expansionary effect on aggregate output. This is because households will reduce some of their current consumption (see <a href="#fig-consumption">Figure&nbsp;<span>4.3</span></a> ) and supply more labour to smooth their consumption over time. The increase in saving reduces the real interest rate (see <a href="#fig-interest_rate">Figure&nbsp;<span>4.5</span></a> ) and is compensated by an increase in investment (see <a href="#fig-investment">Figure&nbsp;<span>4.4</span></a> ).</p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">r_star</span>, ylab<span class="op">=</span><span class="st">"r"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: Baseline"</span>, <span class="st">"2: Increase in M0"</span>, <span class="st">"3: Increase in G0"</span>,<span class="st">"4: Increase in A"</span>, </span>
+<span>                                      <span class="st">"5: Decrease in Yf"</span>, <span class="st">"6: Increase in b1"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-interest_rate" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="a_neoclassical_macro_model_files/figure-html/fig-interest_rate-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.5: Interest rate</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Finally, an increase in the preference for leisure (scenario 6) reduces labour supply and thereby output.</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">P_star</span>, ylab<span class="op">=</span><span class="st">"P"</span>,  names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: Baseline"</span>, <span class="st">"2: Increase in M0"</span>, <span class="st">"3: Increase in G0"</span>,<span class="st">"4: Increase in A"</span>, </span>
+<span>                                       <span class="st">"5: Decrease in Yf"</span>, <span class="st">"6: Increase in b1"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-price_level" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="a_neoclassical_macro_model_files/figure-html/fig-price_level-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.6: Price level</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section><section id="directed-graph" class="level2"><h2 class="anchored" data-anchor-id="directed-graph">Directed graph</h2>
+<p>Another perspective on the model’s properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node <span class="math inline">\(x_1\)</span> to node <span class="math inline">\(x_2\)</span> indicates a causal impact of <span class="math inline">\(x_1\)</span> on <span class="math inline">\(x_2\)</span>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Create directed graph</span></span>
+<span><span class="co"># Construct auxiliary Jacobian matrix for 13 variables: Y   w   N   C   I   r   P   rn M0   G0 A Yf Md</span></span>
+<span><span class="co"># where non-zero elements in regular Jacobian are set to 1 and zero elements are unchanged</span></span>
+<span></span>
+<span><span class="va">M_mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>              <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>              <span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>              <span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,</span>
+<span>              <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>              <span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>              <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,</span>
+<span>              <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>              <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>              <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>              <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>              <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>              <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, <span class="fl">13</span>, <span class="fl">13</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create adjacency matrix from transpose of auxiliary Jacobian and add column names</span></span>
+<span><span class="va">A_mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">M_mat</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">A_mat</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Y"</span>,<span class="st">"w"</span>,<span class="st">"N"</span>,<span class="st">"C"</span>,<span class="st">"I"</span>,<span class="st">"r"</span>,<span class="st">"P"</span>,<span class="st">"rn"</span>, <span class="st">"M0"</span>,<span class="st">"G0"</span>,<span class="st">"A"</span>,<span class="st">"Yf"</span>, <span class="st">"Md"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create and plot directed graph from adjacency matrix</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></span>
+<span><span class="va">dg</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_adjacency_matrix.html">graph_from_adjacency_matrix</a></span><span class="op">(</span><span class="va">A_mat</span>, mode<span class="op">=</span><span class="st">"directed"</span>, weighted<span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dg</span>, main<span class="op">=</span><span class="st">""</span>, vertex.size<span class="op">=</span><span class="fl">20</span>, vertex.color<span class="op">=</span><span class="st">"lightblue"</span>, </span>
+<span>     vertex.label.color<span class="op">=</span><span class="st">"black"</span>, edge.arrow.size<span class="op">=</span><span class="fl">0.2</span>, edge.width<span class="op">=</span><span class="fl">1</span>,</span>
+<span>     edge.arrow.width<span class="op">=</span><span class="fl">0.8</span>, edge.color<span class="op">=</span><span class="st">"black"</span>, vertex.label.cex<span class="op">=</span><span class="fl">1.5</span>, vertex.frame.color<span class="op">=</span><span class="st">"NA"</span>, margin<span class="op">=</span><span class="op">-</span><span class="fl">0.2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-dg" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="a_neoclassical_macro_model_files/figure-html/fig-dg-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.7: Directed graph</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In <a href="#fig-dg">Figure&nbsp;<span>4.7</span></a> , it can be seen that productivity (<span class="math inline">\(A\)</span>), future income (<span class="math inline">\(Y^f\)</span>), the money supply (<span class="math inline">\(M_0\)</span>), and government spending (<span class="math inline">\(G_0\)</span>) are the key exogenous variables of the model. All other variables are endogenous, and many of them form a closed loop (or cycle) within the system. The left part of the graph captures the supply side: the labour market simultaneously pins down the real wage and employment, which together with the exogenously level of productivity determine output. The part in the middle embodies the demand side: aggregate demand (consumption, investment, and government spending) together with a given level of output determine the real interest rate. The right part captures the nominal side of the model given by the money market, which determines the price level. Notably, while the real side of the model feeds into the money market via the nominal interest rate (<span class="math inline">\(r_n\)</span>), there is not causal effect from the money market to the real side reflecting the Classical Dichotomy.</p>
+</section><section id="appendices" class="level2"><h2 class="anchored" data-anchor-id="appendices">Appendices</h2>
+<section id="derivation-of-behavioural-functions" class="level3"><h3 class="anchored" data-anchor-id="derivation-of-behavioural-functions">Derivation of behavioural functions</h3>
+<section id="the-firms-problem-profit-maximisation" class="level4"><h4 class="anchored" data-anchor-id="the-firms-problem-profit-maximisation">The firm’s problem: profit maximisation</h4>
+<p>The firm’s profit equation is given by:</p>
+<p><span id="eq-Pi"><span class="math display">\[
+\Pi=Y-w N-r k
+\tag{4.12}\]</span></span></p>
+<p><span id="eq-Pi2"><span class="math display">\[
+=A K^a N^{1-a}-w N-r k .
+\tag{4.13}\]</span></span></p>
+<p>The firm’s optimisation problem is to maximise profits using employment and capital as choice variables:<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p><span id="eq-Pi3"><span class="math display">\[
+\max _{N, K} \Pi=A K^a N^{1-a}-w N-r k .
+\tag{4.14}\]</span></span></p>
+<p>The first-order conditions are given by:</p>
+<p><span id="eq-FOC_Nd"><span class="math display">\[
+(1-a) A K^a N^{-a}-w=0
+\tag{4.15}\]</span></span></p>
+<p><span id="eq-FOC_I"><span class="math display">\[
+a A K^{a-1} N^{1-a}-r=0 .
+\tag{4.16}\]</span></span></p>
+<p>From <a href="#eq-FOC_Nd">Equation&nbsp;<span>4.15</span></a>, <a href="a_post_keynesian_macro_model_with_endogenous_money.html#eq-w">Equation&nbsp;<span>7.11</span></a> for labour demand can be derived. While the capital stock is pre-determined in every period, the firm can adjust the capital stock through investment. We thus use the first-order condition for capital <a href="#eq-FOC_I">Equation&nbsp;<span>4.16</span></a> to derive <a href="a_neoclassical_synthesis_model_IS_LM_AS_AD.html#eq-I">Equation&nbsp;<span>6.3</span></a> for investment demand.</p>
+</section><section id="the-governments-budget-constraint-ricardian-equivalence" class="level4"><h4 class="anchored" data-anchor-id="the-governments-budget-constraint-ricardian-equivalence">The government’s budget constraint: Ricardian Equivalence</h4>
+<p>The government’s current and future budget constraints are given by:</p>
+<p><span id="eq-Gbc"><span class="math display">\[
+G=T+B
+\tag{4.17}\]</span></span></p>
+<p><span id="eq-Gf"><span class="math display">\[
+G^f=T^f+(1+r) B
+\tag{4.18}\]</span></span> where <span class="math inline">\(T\)</span> is tax revenues and <span class="math inline">\(B\)</span> is government debt.</p>
+<p>A crucial assumption here is that the government must repay its debts in the future (it cannot permanently roll over its debts). The underlying assumption is that the government will eventually `die’ and will do so without savings nor debts.</p>
+<p>Combining the two budget constraints to an intertemporal budget constraint yields:</p>
+<p><span id="eq-Gitbc"><span class="math display">\[
+G+\frac{G^f}{1+r}=T+\frac{T^f}{1+r}
+\tag{4.19}\]</span></span></p>
+<p>Thus, while the government’s budget need not be balanced in every period, it will be balanced over time (in a present value sense).<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+</section><section id="the-households-problem-intertemporal-utility-maximisation" class="level4"><h4 class="anchored" data-anchor-id="the-households-problem-intertemporal-utility-maximisation">The household’s problem: intertemporal utility maximisation</h4>
+<p>The household derives utility from current consumption, leisure (<span class="math inline">\(1-N\)</span>), future consumption <span class="math inline">\(C^f\)</span>, and from holding real money balances <span class="math inline">\(\left(\frac{M}{P}\right)\)</span>. We use the following log utility function:</p>
+<p><span id="eq-U"><span class="math display">\[
+U=\ln (C)+b_1 \ln (1-N)+b_2 \ln \left(C^f\right)+b_3 \ln \left(\frac{M}{P}\right)
+\tag{4.20}\]</span></span></p>
+<p>The household’s current budget constraint is given by:<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p><span id="eq-Hbc"><span class="math display">\[
+C=Y-T-S-\frac{M}{P}
+\tag{4.21}\]</span></span></p>
+<p>The income that is not consumed can either be saved (<span class="math inline">\(S\)</span>) at nominal interest rate (<span class="math inline">\(r_n\)</span>) or held as money on which no return is earned.</p>
+<p>The future budget constraint (assuming that households do not save in the future) is given by:</p>
+<p><span id="eq-Cf"><span class="math display">\[
+C^f = Y^f - T^f + (1+r_n)\frac{PS}{P^f} + \frac{M}{P^f}.
+\tag{4.22}\]</span></span></p>
+<p>Using the Fisher equation <span class="math inline">\((1+r)=(1+r_n)\frac{P}{P^f}\)</span>, the future budget constraint can be rewritten as:</p>
+<p><span id="eq-Cf2"><span class="math display">\[
+C^f = Y^f  - T^f + (1+r)S + \frac{(1+r)M}{(1+r_n)P}
+\tag{4.23}\]</span></span></p>
+<p>Finally, the two budget constraints can be combined to yield an intertemporal budget constraint:</p>
+<p><span id="eq-Hbcit"><span class="math display">\[
+C^f = (Y-C-T)(1+r)+Y^f -T^f - \frac{r_nM}{(1+r_n)P}.
+\tag{4.24}\]</span></span></p>
+<p>Substituting the government’s intertemporal budget constraint, the household’s intertemporal budget constraint can also be written as:</p>
+<p><span id="eq-ibc"><span class="math display">\[
+C^f = (Y-C-G)(1+r)+Y^f -G^f - \frac{r_nM}{(1+r_n)P}
+\tag{4.25}\]</span></span></p>
+<p>The fact that current and future tax payments are now replaced by current and future government spending means that it does not matter for the real economy how government spending is financed: the private sector will react to expenditures that are financed out of debt in the same way it reacts to expenditures financed out of taxation. This result is also known as <em>Ricardian Equivalence</em>. Put differently, Ricardian Equivalence means the household behaves as if the government balances its budget in every period.</p>
+<p>With these ingredients, the household’s optimisation problem can be written as:</p>
+<p><span class="math display">\[
+\begin{array}{ll}
+\max _{C, N, M} &amp; U=\ln (C)+b_1 \ln (1-N)+b_2 \ln \left(C^f\right)+b_3 \ln \left(\frac{M}{P}\right), \\
+\text { s.t. } &amp; C^f=(Y-C-G)(1+r)+Y^f-G^f-\frac{r_n M}{\left(1+r_n\right) P} .
+\end{array}
+\]</span></p>
+<p>Substituting the constraint <a href="#eq-ibc">Equation&nbsp;<span>4.25</span></a> for <span class="math inline">\(C^f\)</span> in the utility function allows to obtain the following first-order conditions:</p>
+<p><span id="eq-FOC_C"><span class="math display">\[
+C-\frac{C^f}{b_2(1+r)}=0
+\tag{4.26}\]</span></span></p>
+<p><span id="eq-FOC_Ns"><span class="math display">\[
+N+\frac{b_1 C^f}{b_2(1+r) w}-1=0
+\tag{4.27}\]</span></span></p>
+<p><span id="eq-FOC_M"><span class="math display">\[
+M-\frac{b_3 C^f\left(1+r_n\right) P}{b_2(1+r) r_n}=0 .
+\tag{4.28}\]</span></span></p>
+<p>Substituting <a href="#eq-FOC_C">Equation&nbsp;<span>4.26</span></a>, which is often also called the <em>Euler equation</em>, into <a href="#eq-FOC_Ns">Equation&nbsp;<span>4.27</span></a> and <a href="#eq-FOC_M">Equation&nbsp;<span>4.28</span></a> yields <a href="a_post_keynesian_macro_model_with_endogenous_money.html#eq-N">Equation&nbsp;<span>7.12</span></a> for labour supply and <a href="#eq-MD">Equation&nbsp;<span>4.10</span></a> for money demand, respectively. Finally, using <a href="#eq-ibc">Equation&nbsp;<span>4.25</span></a> and <a href="#eq-FOC_M">Equation&nbsp;<span>4.28</span></a> in the Euler <a href="#eq-FOC_C">Equation&nbsp;<span>4.26</span></a> yields the consumption function <a href="a_neoclassical_synthesis_model_IS_LM_AS_AD.html#eq-C">Equation&nbsp;<span>6.2</span></a>.</p>
+</section></section><section id="construction-of-directed-graph" class="level3"><h3 class="anchored" data-anchor-id="construction-of-directed-graph">Construction of directed graph</h3>
+<p>The directed graph can be derived from the model’s Jacobian matrix.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> Let <span class="math inline">\(\mathbf{x}\)</span> be the vector containing the model’s variables. The system of equations representing the model can be written as <span class="math inline">\(\mathbf{f(x)=0}\)</span>. The Jacobian matrix is then given by <span class="math inline">\(\mathbf{J}=\mathbf{\frac{\partial f}{\partial x}}\)</span>.</p>
+<p>Next, construct an `auxiliary’ Jacobian matrix <span class="math inline">\(\mathbf{M}\)</span> in which the non-zero elements of the Jacobian are replaced by ones, whereas zero elements remain unchanged, i.e.</p>
+<p><span class="math display">\[
+M_{i j}= \begin{cases}1 &amp; \text { if } J_{i j} \neq 0 \\ 0 &amp; \text { otherwise }\end{cases}
+\]</span></p>
+<p>Finally, taking the transpose of the `auxiliary’ Jacobian matrix yields the adjacency matrix (<span class="math inline">\(\mathbf{M^T}=\mathbf{A}\)</span>), which is a binary matrix whose elements (<span class="math inline">\(A_{ji}\)</span>) indicate whether there is a directed edge from a node <span class="math inline">\(x_j\)</span> to node <span class="math inline">\(x_i\)</span>. From the adjacency matrix, the directed graph is constructed.</p>
+</section></section><section id="references" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
 
 
-
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Fennell2015" class="csl-entry" role="doc-biblioentry">
+Fennell, Peter G., David J. P. O’Sullivan, Antoine Godin, and Stephen Kinsella. 2015. <span>“Is It Possible to Visualise Any Stock Flow Consistent Model as a Directed Acyclic Graph?”</span> <em>Computational Economics</em> 48 (2): 307–16. <a href="https://doi.org/10.1007/s10614-015-9521-8">https://doi.org/10.1007/s10614-015-9521-8</a>.
+</div>
+<div id="ref-Garin2021" class="csl-entry" role="doc-biblioentry">
+Garín, Julio, Robert Lester, and Eric Sims. 2021. <em>Intermediate Macroeconomics</em>. Draft Version 3.0.1. <a href="https://www3.nd.edu/~esims1/gls_textbook.html">https://www3.nd.edu/~esims1/gls_textbook.html</a>.
+</div>
+</div>
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>See the Appendix for a derivation of equations <a href="a_post_keynesian_macro_model_with_endogenous_money.html#eq-w">Equation&nbsp;<span>7.11</span></a> -<a href="a_neoclassical_synthesis_model_IS_LM_AS_AD.html#eq-I">Equation&nbsp;<span>6.3</span></a> and <a href="#eq-MD">Equation&nbsp;<span>4.10</span></a> from optimising microfoundations.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Households are assumed to form rational expectations. In a deterministic setting, this implies perfect foresight so that expected and actual future income coincide.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>See the Appendix for more details on Ricardian Equivalence.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>See <span class="citation" data-cites="Garin2021">Garín, Lester, and Sims (<a href="#ref-Garin2021" role="doc-biblioref">2021, chap. 12</a>)</span> for a more elaborate version where the firm maximises its lifetime value. The resulting investment function is very similar.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>See <span class="citation" data-cites="Garin2021">Garín, Lester, and Sims (<a href="#ref-Garin2021" role="doc-biblioref">2021, chap. 13</a>)</span> for a more detailed discussion of the government’s budget constraints.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>See <span class="citation" data-cites="Garin2021">Garín, Lester, and Sims (<a href="#ref-Garin2021" role="doc-biblioref">2021, chap. 14</a>)</span> for a more detailed discussion of the household’s budget constraints.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>See <span class="citation" data-cites="Fennell2015">Fennell et al. (<a href="#ref-Fennell2015" role="doc-biblioref">2015</a>)</span> for a neat exposition.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -467,27 +1038,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./static_models.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Static models</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./an_IS_LM_model.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">An open-source platform for macroeconomic model simulation.</div>   
-    <div class="nav-footer-right"><a>License: …</a><a> </a><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></div>
+    <div class="nav-footer-right"><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></div>
   </div>
 </footer>
-
 
 
 </body></html>

@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.269">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
-<title>DIY seminal macroeconomic models - 8&nbsp; A Post-Kaleckian Distribution and Growth Model</title>
+<title>DIY Macroeconomic Model Simulation - 8&nbsp; A Post-Kaleckian Distribution and Growth Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,8 +17,89 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
-
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -30,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./a_sraffian_supermultiplier_model.html" rel="next">
+<link href="./dynamic_models.html" rel="next">
 <link href="./a_post_keynesian_macro_model_with_endogenous_money.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -42,8 +120,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -61,31 +138,25 @@ ul.task-list li input[type="checkbox"] {
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
-
-
+}</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span></h1>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span>
+</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">DIY seminal macroeconomic models</a> 
+      <a href="./">DIY Macroeconomic Model Simulation</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
@@ -99,24 +170,24 @@ ul.task-list li input[type="checkbox"] {
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./how_to_use.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">How to use this site</span></a>
+  <a href="./how_to_use.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">How to Use this Site</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./how_to_contribute.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to contribute</span></a>
+  <a href="./how_to_simulate.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to Simulate Economic Models</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./intro_stability_analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to Stability Analysis of Dynamic Models</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -126,35 +197,20 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_neoclassical_macro_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></a>
+  <a href="./a_neoclassical_macro_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./an_IS_LM_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></a>
+  <a href="./an_IS_LM_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_neoclassical_synthesis_model_IS_LM_AS_AD.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Neoclassical Synthesis Model (IS-LM-AS-AD)</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="./dynamic_models.html" class="sidebar-item-text sidebar-link">Dynamic models</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./a_new_keynesian_3_equation_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></a>
+  <a href="./a_neoclassical_synthesis_model_IS_LM_AS_AD.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">A Neoclassical Synthesis Model (IS-LM-AS-AD)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -167,41 +223,76 @@ ul.task-list li input[type="checkbox"] {
   <a href="./a_post_kaleckian_distribution_and_growth_model.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./dynamic_models.html" class="sidebar-item-text sidebar-link">Dynamic models</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_sraffian_supermultiplier_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></a>
+  <a href="./a_new_keynesian_3_equation_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_malthusian_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></a>
+  <a href="./a_sraffian_supermultiplier_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_ricardian_one_sector_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></a>
+  <a href="./a_malthusian_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_ricardian_two_sector_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span></a>
+  <a href="./a_ricardian_one_sector_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_ricardian_two_sector_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#the-model" id="toc-the-model" class="nav-link" data-scroll-target="#the-model">The Model</a></li>
+  <li>
+<a href="#simulation" id="toc-simulation" class="nav-link" data-scroll-target="#simulation">Simulation</a>
+  <ul>
+<li><a href="#parameterisation" id="toc-parameterisation" class="nav-link" data-scroll-target="#parameterisation">Parameterisation</a></li>
+  <li><a href="#simulation-code" id="toc-simulation-code" class="nav-link" data-scroll-target="#simulation-code">Simulation code</a></li>
+  <li><a href="#plots" id="toc-plots" class="nav-link" data-scroll-target="#plots">Plots</a></li>
+  </ul>
+</li>
+  <li><a href="#directed-graph" id="toc-directed-graph" class="nav-link" data-scroll-target="#directed-graph">Directed graph</a></li>
+  <li><a href="#calculate-analytical-solutions" id="toc-calculate-analytical-solutions" class="nav-link" data-scroll-target="#calculate-analytical-solutions">Calculate analytical solutions</a></li>
+  <li>
+<a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a>
+  <ul>
+<li><a href="#analytical-solution" id="toc-analytical-solution" class="nav-link" data-scroll-target="#analytical-solution">Analytical solution</a></li>
+  <li><a href="#construction-of-directed-graph" id="toc-construction-of-directed-graph" class="nav-link" data-scroll-target="#construction-of-directed-graph">Construction of directed graph</a></li>
+  </ul>
+</li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/edit/main/a_post_kaleckian_distribution_and_growth_model.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span>
+</h1>
 </div>
 
 
@@ -214,13 +305,429 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-</header>
+</header><section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The post-Kaleckian growth model was developed by <span class="citation" data-cites="bhaduri_unemployment_1990">Bhaduri and Marglin (<a href="#ref-bhaduri_unemployment_1990" role="doc-biblioref">1990</a>)</span> and others to synthesise Marxian and Keynesian ideas about the effects of income distribution on economic growth.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> According to the Marxian view, capital accumulation is driven by profits. By contrast, Michal Kalecki and post-Keynesians such as Nicholas Kaldor argued that a redistribution of income towards profit-earners is likely to reduce consumption, as workers tend to have a higher marginal propensity to consume than capital owners. The post-Kaleckian growth model integrates these two mechanisms in a Keynesian framework in which aggregate demand and growth are demand-determined. It allows for wage-led as well as profit-led demand and growth regimes. In a wage-led regime, a redistribution of income towards workers has expansionary effects on aggregate demand (and possibly growth) as the expansionary effect on consumption outweighs the negative effect on investment. In a profit-led regime, the effect is contradictory as investment falls by more than consumption rises. Whether a regime is wage- or profit-led depends on the relative size of the propensities to consume and the propensity to invest.</p>
+<p>This is a model of long-run steady state growth. In the steady state, all endogenous variables grow at the same rate.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Changes in parameters or exogenous variables lead to an instantaneous adjustment of the model’s variables, so that the model can be analysed like a static one. We consider a version of the model with linear functions based on <span class="citation" data-cites="hein_distribution_2014">Hein (<a href="#ref-hein_distribution_2014" role="doc-biblioref">2014</a>)</span>, chap.&nbsp;7.2.2.</p>
+</section><section id="the-model" class="level2"><h2 class="anchored" data-anchor-id="the-model">The Model</h2>
+<p><span id="eq-r"><span class="math display">\[
+r=h \frac{u}{v}
+\tag{8.1}\]</span></span></p>
+<p><span id="eq-s"><span class="math display">\[
+s=[s_W + (s_\Pi - s_W)h]\frac{u}{v}, \quad 0 \geq s_W &gt; s_\Pi \geq 1
+\tag{8.2}\]</span></span></p>
+<p><span id="eq-c"><span class="math display">\[
+c= \frac{u}{v}-s
+\tag{8.3}\]</span></span></p>
+<p><span id="eq-g"><span class="math display">\[
+g=g_0+g_1u+g_2h, \quad g_i &gt; 0
+\tag{8.4}\]</span></span></p>
+<p><span id="eq-u"><span class="math display">\[
+u=v(c+g)
+\tag{8.5}\]</span></span></p>
+<p>where <span class="math inline">\(r\)</span>, <span class="math inline">\(s\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(g\)</span>, and <span class="math inline">\(u\)</span> are the profit rate, the saving rate, the consumption rate, the investment rate, and the rate of capacity utilisation, respectively.</p>
+<p><a href="#eq-r">Equation&nbsp;<span>8.1</span></a> decomposes the profit rate into the product of the profit share <span class="math inline">\(h\)</span> (total profits over total output), the rate of capacity utilisation (actual output over potential output), and the inverse of <span class="math inline">\(v\)</span> (the capital-potential output ratio). Let <span class="math inline">\(Y\)</span> be output, <span class="math inline">\(K\)</span> be the capital stock, and <span class="math inline">\(Y^P\)</span> be potential output, the decomposition can also be written as <span class="math inline">\(r=\frac{\Pi}{K}=\frac{\Pi}{Y}\frac{Y}{Y^P}\frac{Y^P}{K}\)</span>. The profit share and the capital-potential output ratio are taken to be exogenous in this model. Note also that the wage share is given by <span class="math inline">\(1-h\)</span>. By <a href="#eq-s">Equation&nbsp;<span>8.2</span></a>, the economy-wide saving rate is given by the sum of saving out of wages (<span class="math inline">\(s_W(1-h)\frac{u}{v}\)</span>) and saving out of profits (<span class="math inline">\(s_\Pi h\frac{u}{v}\)</span>). It is assumed that workers have a higher marginal propensity to consume than capital owners (<span class="math inline">\(s_W&gt;s_\Pi\)</span>). <a href="#eq-c">Equation&nbsp;<span>8.3</span></a> simply states that consumption is income not saved. According to <a href="#eq-c">Equation&nbsp;<span>8.3</span></a>, investment is determined by an autonomous component <span class="math inline">\(g_0\)</span> that may capture Keynesian `animal spirits’, by the rate of capacity utilisation, and by the profit share. While the rate of capacity utilisation is a signal of (future) demand, the profit share may stimulate investment as internal funds are typically the cheapest source of finance. Finally, <a href="#eq-u">Equation&nbsp;<span>8.5</span></a> is an equilibrium condition that assumes that the rate of capacity utilisation adjusts to clear the goods market.</p>
+<p>The key question addressed by this model is a how a change in the profit share affects the rate of capacity utilisation and the rate of growth.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> As shown formally in the Appendix, there is no unambiguous answer to this question as the model encompasses different regimes. Three main regimes can be identified. First, a regime in which both the rate of utilisation and the rate of growth are negatively affected by an increase in the profit share. We will call this a wage-led demand and growth regime (WLD/WLG). Second, a regime in which the rate of utilisation is negatively affected and the rate of growth is positively affected by an increase in the profit share. We will call this a wage-led demand regime and profit-led growth regime (WLD/PLG). Third, a regime in which both the rate of utilisation and the rate of growth are positively affected by an increase in the profit share. We will call this a profit-led demand and growth regime (PLD/PLG).</p>
+</section><section id="simulation" class="level2"><h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
+<section id="parameterisation" class="level3"><h3 class="anchored" data-anchor-id="parameterisation">Parameterisation</h3>
+<p>Table 1 reports the parameterisation used in the simulation. We will consider three different parameterisations that represent the three regimes outlined above. For each of these regimes, there is a baseline scenario and a scenario in which the profit share (<span class="math inline">\(h\)</span>) rises. This allows to assess the effects on the model’s endogenous variables for the different regimes.</p>
+<p><strong>Table 1: Parameterisation</strong></p>
+<table class="table">
+<colgroup>
+<col style="width: 41%">
+<col style="width: 6%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 6%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: center;">Scenario</th>
+<th style="text-align: center;"><span class="math inline">\(v\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(s_W\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(s_\Pi\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(g_0\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(g_1\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(g_2\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(h\)</span></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1a: baseline WLD/WLG</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0.3</td>
+<td style="text-align: center;">0.9</td>
+<td style="text-align: center;">0.02</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1b: rise in profit share (<span class="math inline">\(h\)</span>)</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0.3</td>
+<td style="text-align: center;">0.9</td>
+<td style="text-align: center;">0.02</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2a: baseline WLD/PLG</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0.3</td>
+<td style="text-align: center;">0.9</td>
+<td style="text-align: center;">0.02</td>
+<td style="text-align: center;">0.08</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2b: rise in profit share (<span class="math inline">\(h\)</span>)</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0.3</td>
+<td style="text-align: center;">0.9</td>
+<td style="text-align: center;">0.02</td>
+<td style="text-align: center;">0.08</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3a: baseline PLD/PLG</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0.3</td>
+<td style="text-align: center;">0.9</td>
+<td style="text-align: center;">-0.01</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3b: rise in profit share (<span class="math inline">\(h\)</span>)</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0.3</td>
+<td style="text-align: center;">0.9</td>
+<td style="text-align: center;">-0.01</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.3</td>
+</tr>
+</tbody>
+</table></section><section id="simulation-code" class="level3"><h3 class="anchored" data-anchor-id="simulation-code">Simulation code</h3>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set number of scenarios (including baselines)</span></span>
+<span><span class="va">S</span><span class="op">=</span><span class="fl">6</span></span>
+<span></span>
+<span><span class="co">#Create vector in which equilibrium solutions from different parameterisations will be stored</span></span>
+<span><span class="va">u_star</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># utilisation rate</span></span>
+<span><span class="va">g_star</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># growth rate of capital stock</span></span>
+<span><span class="va">s_star</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># saving rate</span></span>
+<span><span class="va">c_star</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># consumption rate</span></span>
+<span><span class="va">r_star</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># profit rate</span></span>
+<span></span>
+<span><span class="co"># Set exogenous variables whose parameterisation changes across regimes </span></span>
+<span><span class="va">g0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># animal spirits</span></span>
+<span><span class="va">sw</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># propensity to save out of wages </span></span>
+<span><span class="va">h</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span>  <span class="co"># profit share</span></span>
+<span><span class="va">g1</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span> <span class="co"># sensitivity of investment with respect to utilisation</span></span>
+<span></span>
+<span><span class="co">### Construct different scenarios across 3 regimes: (1) WLD/WLG, (2) WLD/PLG, (3) PLD/PLG </span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span><span class="op">{</span> <span class="co"># baseline WLD/WLG</span></span>
+<span>    <span class="va">g0</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="fl">0.02</span></span>
+<span>    <span class="va">g1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="fl">0.1</span></span>
+<span>    <span class="va">h</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="fl">0.2</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span><span class="op">==</span><span class="fl">2</span><span class="op">)</span><span class="op">{</span> <span class="co"># increase in profit share in WLD/WLG regime</span></span>
+<span>    <span class="va">g0</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">=</span><span class="fl">0.02</span></span>
+<span>    <span class="va">g1</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">=</span><span class="fl">0.1</span></span>
+<span>    <span class="va">h</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">=</span><span class="fl">0.3</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span><span class="op">==</span><span class="fl">3</span><span class="op">)</span><span class="op">{</span> <span class="co"># baseline WLD/PLG</span></span>
+<span>    <span class="va">g0</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">=</span><span class="fl">0.02</span></span>
+<span>    <span class="va">g1</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">=</span><span class="fl">0.08</span></span>
+<span>    <span class="va">h</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">=</span><span class="fl">0.2</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span><span class="op">==</span><span class="fl">4</span><span class="op">)</span><span class="op">{</span> <span class="co"># increase in profit share in WLD/PLG regime</span></span>
+<span>    <span class="va">g0</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">=</span><span class="fl">0.02</span></span>
+<span>    <span class="va">g1</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">=</span><span class="fl">0.08</span></span>
+<span>    <span class="va">h</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">=</span><span class="fl">0.3</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span><span class="op">==</span><span class="fl">5</span><span class="op">)</span><span class="op">{</span> <span class="co"># baseline PLD/PLG</span></span>
+<span>    <span class="va">g0</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span><span class="op">=</span><span class="op">-</span><span class="fl">0.01</span></span>
+<span>    <span class="va">g1</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span><span class="op">=</span><span class="fl">0.1</span></span>
+<span>    <span class="va">h</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span><span class="op">=</span><span class="fl">0.2</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span><span class="op">==</span><span class="fl">6</span><span class="op">)</span><span class="op">{</span> <span class="co"># increase in profit share in PLD/PLG regime</span></span>
+<span>    <span class="va">g0</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span><span class="op">=</span><span class="op">-</span><span class="fl">0.01</span></span>
+<span>    <span class="va">g1</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span><span class="op">=</span><span class="fl">0.1</span></span>
+<span>    <span class="va">h</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span><span class="op">=</span><span class="fl">0.3</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">#Set constant parameter values</span></span>
+<span><span class="va">v</span><span class="op">=</span><span class="fl">3</span>    <span class="co"># capital-to-potential output ratio</span></span>
+<span><span class="va">g2</span><span class="op">=</span><span class="fl">0.1</span> <span class="co"># sensitivity of investment with respect to profit share</span></span>
+<span><span class="va">sp</span><span class="op">=</span><span class="fl">0.9</span> <span class="co"># propensity to save out of profits</span></span>
+<span><span class="va">sw</span><span class="op">=</span><span class="fl">0.3</span> <span class="co"># propensity to save out of wages</span></span>
+<span></span>
+<span><span class="co">#Check Keynesian stability condition for all scenarios</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="op">(</span><span class="op">(</span><span class="va">sw</span><span class="op">+</span><span class="op">(</span><span class="va">sp</span><span class="op">-</span><span class="va">sw</span><span class="op">)</span><span class="op">*</span><span class="va">h</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">v</span><span class="op">)</span> <span class="op">-</span><span class="va">g1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE
+[1] TRUE
+[1] TRUE
+[1] TRUE
+[1] TRUE
+[1] TRUE</code></pre>
+</div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Check demand and growth regime for 3 baseline scenarios</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Parameterisation"</span>, <span class="va">i</span>, <span class="st">"yields:"</span><span class="op">)</span><span class="op">)</span>   </span>
+<span><span class="kw">if</span><span class="op">(</span><span class="va">g2</span><span class="op">*</span><span class="op">(</span><span class="va">sw</span><span class="op">/</span><span class="va">v</span> <span class="op">-</span> <span class="va">g1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">-</span><span class="va">g0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="va">sp</span><span class="op">-</span><span class="va">sw</span><span class="op">)</span><span class="op">/</span><span class="va">v</span><span class="op">&lt;</span><span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"wage-led demand regime"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span><span class="op">{</span></span>
+<span>   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"profit-led demand regime"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="va">g1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="va">g2</span><span class="op">*</span><span class="op">(</span><span class="va">sw</span><span class="op">/</span><span class="va">v</span> <span class="op">-</span> <span class="va">g1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">-</span><span class="va">g0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="va">sp</span><span class="op">-</span><span class="va">sw</span><span class="op">)</span><span class="op">/</span><span class="va">v</span><span class="op">)</span><span class="op">+</span><span class="va">g2</span><span class="op">*</span><span class="op">(</span><span class="op">(</span><span class="op">(</span><span class="va">sw</span><span class="op">+</span><span class="op">(</span><span class="va">sp</span><span class="op">-</span><span class="va">sw</span><span class="op">)</span><span class="op">*</span><span class="va">h</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">*</span><span class="va">v</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">-</span><span class="va">g1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">&lt;</span><span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"wage-led growth regime"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"profit-led growth regime"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>  </span>
+<span><span class="op">}</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Parameterisation 1 yields:"
+[1] "wage-led demand regime"
+[1] "wage-led growth regime"
+[1] "Parameterisation 3 yields:"
+[1] "wage-led demand regime"
+[1] "profit-led growth regime"
+[1] "Parameterisation 5 yields:"
+[1] "profit-led demand regime"
+[1] "profit-led growth regime"</code></pre>
+</div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Initialise endogenous variables at some arbitrary positive value </span></span>
+<span><span class="va">g</span><span class="op">=</span><span class="fl">1</span></span>
+<span><span class="va">r</span><span class="op">=</span><span class="fl">1</span></span>
+<span><span class="va">c</span><span class="op">=</span><span class="fl">1</span></span>
+<span><span class="va">u</span><span class="op">=</span><span class="fl">1</span></span>
+<span><span class="va">s</span><span class="op">=</span><span class="fl">1</span></span>
+<span></span>
+<span><span class="co">#Solve this system numerically through 1000 iterations based on the initialisation</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">iterations</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span><span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="co">#(1) Profit rate</span></span>
+<span>    <span class="va">r</span> <span class="op">=</span> <span class="op">(</span><span class="va">h</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">*</span><span class="va">u</span><span class="op">)</span><span class="op">/</span><span class="va">v</span></span>
+<span>    </span>
+<span>    <span class="co">#(2) Saving</span></span>
+<span>    <span class="va">s</span> <span class="op">=</span> <span class="op">(</span><span class="va">sw</span><span class="op">+</span><span class="op">(</span><span class="va">sp</span><span class="op">-</span><span class="va">sw</span><span class="op">)</span><span class="op">*</span><span class="va">h</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="va">u</span><span class="op">/</span><span class="va">v</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co">#(3) Consumption</span></span>
+<span>    <span class="va">c</span><span class="op">=</span> <span class="va">u</span><span class="op">/</span><span class="va">v</span><span class="op">-</span><span class="va">s</span></span>
+<span>    </span>
+<span>    <span class="co">#(4) Investment</span></span>
+<span>    <span class="va">g</span> <span class="op">=</span> <span class="va">g0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">+</span><span class="va">g1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">*</span><span class="va">u</span><span class="op">+</span><span class="va">g2</span><span class="op">*</span><span class="va">h</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
+<span>    </span>
+<span>    <span class="co">#(5) Rate of capacity utilisation</span></span>
+<span>    <span class="va">u</span> <span class="op">=</span> <span class="va">v</span><span class="op">*</span><span class="op">(</span><span class="va">c</span><span class="op">+</span><span class="va">g</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="co">#Save results for different parameterisations in vector</span></span>
+<span>  <span class="va">u_star</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">u</span></span>
+<span>  <span class="va">g_star</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">g</span></span>
+<span>  <span class="va">r_star</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">r</span></span>
+<span>  <span class="va">s_star</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">s</span></span>
+<span>  <span class="va">c_star</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">c</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="plots" class="level3"><h3 class="anchored" data-anchor-id="plots">Plots</h3>
+<p>Figures <a href="#fig-utilisation-pkdg">Figure&nbsp;<span>8.1</span></a> - <a href="#fig-profit-rate-pkdg">Figure&nbsp;<span>8.4</span></a> depict the response of the model’s key endogenous variables to changes in the profit share. In the first case of a wage-led demand and growth regime (WLD/WLG), investment is equally sensitive to a change in the rate of capacity utilisation (<span class="math inline">\(g_1\)</span>) and a change in the profit share (<span class="math inline">\(g_2\)</span>). A rise in the profit share reduces consumption, which reduces the rate of capacity utilisation and the rate of growth. This is despite a positive effect on the profit rate.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">u_star</span>, ylab<span class="op">=</span><span class="st">"u"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1a:baseline WLD/WLG"</span>, <span class="st">"1b:rise prof share"</span>, <span class="st">"2a:baseline WLD/PLG"</span>, <span class="st">"2b:rise prof share"</span>, <span class="st">"3a:baseline PLD/PLG"</span>, <span class="st">"3b: rise prof share"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-utilisation-pkdg" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-utilisation-pkdg-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;8.1: Rate of capacity utilisation</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In the second case where the demand regime is wage-led but the growth regime is profit-led (WLD/PLG), investment is slightly less sensitive to a change in the rate of capacity utilisation compared to a change in the profit share. The rise in the profit share reduces consumption and the rate of utilisation, but the ultimate effect on investment is positive because investment reacts more strongly to the rise in the profit share than to the fall in demand.</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">g_star</span>, ylab<span class="op">=</span><span class="st">"g"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:baseline WLD/WLG"</span>, <span class="st">"2:rise prof share"</span>, <span class="st">"3:baseline WLD/PLG"</span>,</span>
+<span>                                      <span class="st">"4:rise prof share"</span>, </span>
+<span>                                      <span class="st">"5:baseline PLD/PLG"</span>, <span class="st">"6: rise prof share"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-growth-pkdg" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-growth-pkdg-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;8.2: Rate of growth</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Finally, in the third case where the demand regime and the growth regime are profit-led, investment is again equally sensitive to a change in the rate of capacity utilisation and to a change in the profit share, but now animal spirits are negative. A rise in the profit share now has strong positive effects on investment, which raises the rate of capacity utilisation and consumption.</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">c_star</span>, ylab<span class="op">=</span><span class="st">"c"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:baseline WLD/WLG"</span>, <span class="st">"2:rise prof share"</span>, <span class="st">"3:baseline WLD/PLG"</span>,</span>
+<span>                                      <span class="st">"4:rise prof share"</span>, </span>
+<span>                                      <span class="st">"5:baseline PLD/PLG"</span>, <span class="st">"6: rise prof share"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-consumption-pkdg" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-consumption-pkdg-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;8.3: Rate of consumption</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">r_star</span>, ylab<span class="op">=</span><span class="st">"r"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:baseline WLD/WLG"</span>, <span class="st">"2:rise prof share"</span>, <span class="st">"3:baseline WLD/PLG"</span>,</span>
+<span>                                     <span class="st">"4:rise prof share"</span>, </span>
+<span>                                     <span class="st">"5:baseline PLD/PLG"</span>, <span class="st">"6: rise prof share"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-profit-rate-pkdg" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-profit-rate-pkdg-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;8.4: Rate of profit</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section><section id="directed-graph" class="level2"><h2 class="anchored" data-anchor-id="directed-graph">Directed graph</h2>
+<p>Another perspective on the model’s properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node <span class="math inline">\(x_1\)</span> to node <span class="math inline">\(x_2\)</span> indicates a causal impact of <span class="math inline">\(x_1\)</span> on <span class="math inline">\(x_2\)</span>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Create directed graph </span></span>
+<span><span class="co"># Construct auxiliary Jacobian matrix for 6 variables: </span></span>
+<span><span class="co"># r, h, u, s, c, g</span></span>
+<span></span>
+<span><span class="va">M_mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,</span>
+<span>               <span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>               <span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, <span class="fl">6</span>, <span class="fl">6</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create adjacency matrix from transpose of auxiliary Jacobian and add column names</span></span>
+<span><span class="va">A_mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">M_mat</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">A_mat</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"r"</span>, <span class="st">"h"</span>, <span class="st">"u"</span>, <span class="st">"s"</span>, <span class="st">"c"</span>, <span class="st">"g"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create and plot directed graph from adjacency matrix</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></span>
+<span><span class="va">dg</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_adjacency_matrix.html">graph_from_adjacency_matrix</a></span><span class="op">(</span><span class="va">A_mat</span>, mode<span class="op">=</span><span class="st">"directed"</span>, weighted<span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dg</span>, main<span class="op">=</span><span class="st">""</span>, vertex.size<span class="op">=</span><span class="fl">15</span>, vertex.color<span class="op">=</span><span class="st">"lightblue"</span>, </span>
+<span>     vertex.label.color<span class="op">=</span><span class="st">"black"</span>, edge.arrow.size<span class="op">=</span><span class="fl">0.4</span>, edge.width<span class="op">=</span><span class="fl">1.3</span>,</span>
+<span>     edge.arrow.width<span class="op">=</span><span class="fl">0.5</span>, edge.color<span class="op">=</span><span class="st">"black"</span>, vertex.label.cex<span class="op">=</span><span class="fl">1.2</span>, </span>
+<span>     vertex.frame.color<span class="op">=</span><span class="st">"NA"</span>, margin<span class="op">=</span><span class="op">-</span><span class="fl">0.2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-dg-pkdg" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-dg-pkdg-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;8.5: Directed graph of post-Kaleckian growth model</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In Figure <a href="#fig-dg-pkdg">Figure&nbsp;<span>8.5</span></a>, it can be seen that the profit share (<span class="math inline">\(h\)</span>) is the key exogenous variable of the model.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Consumption (<span class="math inline">\(c\)</span>), saving (<span class="math inline">\(s\)</span>), investment (<span class="math inline">\(g\)</span>), and the rate of utilisation (<span class="math inline">\(u\)</span>) form a closed loop (or cycle) within the system. The profit share affects both saving and investment, which in turn affect consumption and the rate of capacity utilisation. The profit rate is a residual variable (also called a `sink’) in this model.</p>
+</section><section id="calculate-analytical-solutions" class="level2"><h2 class="anchored" data-anchor-id="calculate-analytical-solutions">Calculate analytical solutions</h2>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Utilisation rate</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="op">(</span><span class="va">g0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">+</span><span class="va">g2</span><span class="op">*</span><span class="va">h</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="op">(</span><span class="va">sw</span><span class="op">+</span><span class="op">(</span><span class="va">sp</span><span class="op">-</span><span class="va">sw</span><span class="op">)</span><span class="op">*</span><span class="va">h</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="va">v</span><span class="op">-</span><span class="va">g1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1
+[1] 0.8333333
+[1] 0.6666667
+[1] 0.625
+[1] 0.25
+[1] 0.3333333</code></pre>
+</div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Growth rate</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="op">(</span><span class="op">(</span><span class="va">g0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">+</span><span class="va">g2</span><span class="op">*</span><span class="va">h</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="va">sw</span><span class="op">+</span><span class="op">(</span><span class="va">sp</span><span class="op">-</span><span class="va">sw</span><span class="op">)</span><span class="op">*</span><span class="va">h</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="va">v</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="op">(</span><span class="va">sw</span><span class="op">+</span><span class="op">(</span><span class="va">sp</span><span class="op">-</span><span class="va">sw</span><span class="op">)</span><span class="op">*</span><span class="va">h</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="va">v</span><span class="op">-</span><span class="va">g1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.14
+[1] 0.1333333
+[1] 0.09333333
+[1] 0.1
+[1] 0.035
+[1] 0.05333333</code></pre>
+</div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Profit rate</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="op">(</span><span class="va">g0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">+</span><span class="va">g2</span><span class="op">*</span><span class="va">h</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="va">h</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">/</span><span class="va">v</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="op">(</span><span class="va">sw</span><span class="op">+</span><span class="op">(</span><span class="va">sp</span><span class="op">-</span><span class="va">sw</span><span class="op">)</span><span class="op">*</span><span class="va">h</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="va">v</span><span class="op">-</span><span class="va">g1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.06666667
+[1] 0.08333333
+[1] 0.04444444
+[1] 0.0625
+[1] 0.01666667
+[1] 0.03333333</code></pre>
+</div>
+</div>
+</section><section id="appendix" class="level2"><h2 class="anchored" data-anchor-id="appendix">Appendix</h2>
+<section id="analytical-solution" class="level3"><h3 class="anchored" data-anchor-id="analytical-solution">Analytical solution</h3>
+<p>To find the equilibrium solutions, substitute <a href="#eq-s">Equation&nbsp;<span>8.2</span></a> - <a href="#eq-g">Equation&nbsp;<span>8.4</span></a> into <a href="#eq-u">Equation&nbsp;<span>8.5</span></a> and solve for <span class="math inline">\(u\)</span>: <span class="math display">\[\begin{align}
+u^* = \frac{g_0+g_2h}{[s_W + (s_\Pi - s_W)h]v^{-1}-g_1}.
+\end{align}\]</span></p>
+<p>The equilibrium solution for <span class="math inline">\(u\)</span> can then be substituted into <a href="#eq-g">Equation&nbsp;<span>8.4</span></a> to find: <span class="math display">\[\begin{align}
+g^* = \frac{(g_0+g_2h)[s_W + (s_\Pi - s_W)h]v^{-1}}{[s_W + (s_\Pi - s_W)h]v^{-1}-g_1}.
+\end{align}\]</span></p>
+<p>The Keynesian stability condition requires <span class="math inline">\([s_W + (s_\Pi - s_W)h]v^{-1}-g_1&gt;0\)</span>, i.e.&nbsp;saving need to react more strongly to income than investment.</p>
+<p>The equilibrium solution for <span class="math inline">\(r\)</span> can be found by substituting <span class="math inline">\(u^*\)</span> into <a href="#eq-r">Equation&nbsp;<span>8.1</span></a>: <span class="math display">\[\begin{align}
+r^* = \frac{h(g_0+g_2h)}{[s_W + (s_\Pi - s_W)h]-vg_1}.
+\end{align}\]</span></p>
+<p>To assess whether the demand regime is wage- or profit-led, take the derivative of <span class="math inline">\(u^*\)</span> with respect to <span class="math inline">\(h\)</span>: <span class="math display">\[\begin{align}
+\frac{\partial u^*}{\partial h} = \frac{\frac{s_W}{v}(g_0+g_2 )-(g_0\frac{s_\Pi}{v} + g_1g_2)}{[[s_W + (s_\Pi - s_W)h]v^{-1}-g_1]^2}.
+\end{align}\]</span></p>
+<p>It can be seen that, e.g., a higher propensity to save out of wages or negative animal spirits make the regime more likely to be profit-led.</p>
+<p>By the same token, the sign of the derivative of <span class="math inline">\(g^*\)</span> with respect to <span class="math inline">\(h\)</span> determines whether the growth regime is wage- or profit-led: <span class="math display">\[\begin{align}
+\frac{\partial g^*}{\partial h} = g_1\frac{\partial u^*}{\partial h}+g_2.
+\end{align}\]</span></p>
+<p>It can be seen that, e.g., a higher sensitivity of investment with respect to the profit share makes the regime more likely to be profit-led.</p>
+<p>Finally, the effect on the profit rate will depend on the sign of the derivative: <span class="math display">\[\begin{align}
+\frac{\partial r^*}{\partial h} = \frac{u^*}{v} + \frac{h}{v}\frac{\partial u^*}{\partial h},
+\end{align}\]</span></p>
+<p>which is likely to be positive but can become negative if the demand regime is strongly wage-led.</p>
+</section><section id="construction-of-directed-graph" class="level3"><h3 class="anchored" data-anchor-id="construction-of-directed-graph">Construction of directed graph</h3>
+<p>The directed graph can be derived from the model’s Jacobian matrix.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> Let <span class="math inline">\(\mathbf{x}\)</span> be the vector containing the model’s variables.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> The system of equations representing the model can be written as <span class="math inline">\(\mathbf{f(x)=0}\)</span>. The Jacobian matrix is then given by <span class="math inline">\(\mathbf{J}=\mathbf{\frac{\partial f}{\partial x}}\)</span>.</p>
+<p>Next, construct an `auxiliary’ Jacobian matrix <span class="math inline">\(\mathbf{M}\)</span> in which the non-zero elements of the Jacobian are replaced by ones, whereas zero elements remain unchanged, i.e.</p>
+<p><span class="math display">\[
+M_{i j}= \begin{cases}1 &amp; \text { if } J_{i j} \neq 0 \\ 0 &amp; \text { otherwise }\end{cases}
+\]</span> Finally, taking the transpose of the `auxiliary’ Jacobian matrix yields the adjacency matrix (<span class="math inline">\(\mathbf{M^T}=\mathbf{A}\)</span>), which is a binary matrix whose elements (<span class="math inline">\(A_{ji}\)</span>) indicate whether there is a directed edge from a node <span class="math inline">\(x_j\)</span> to node <span class="math inline">\(x_i\)</span>. From the adjacency matrix, the directed graph is constructed.</p>
+</section></section><section id="references" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
 
 
-
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-bhaduri_unemployment_1990" class="csl-entry" role="doc-biblioentry">
+Bhaduri, Amit, and Stephen Marglin. 1990. <span>“Unemployment and the Real Wage: The Economic Basis for Contesting Political Ideologies.”</span> <em>Cambridge Journal of Economics</em> 14 (4): 375–93.
+</div>
+<div id="ref-Fennell2015" class="csl-entry" role="doc-biblioentry">
+Fennell, Peter G., David J. P. O’Sullivan, Antoine Godin, and Stephen Kinsella. 2015. <span>“Is It Possible to Visualise Any Stock Flow Consistent Model as a Directed Acyclic Graph?”</span> <em>Computational Economics</em> 48 (2): 307–16. <a href="https://doi.org/10.1007/s10614-015-9521-8">https://doi.org/10.1007/s10614-015-9521-8</a>.
+</div>
+<div id="ref-hein_distribution_2014" class="csl-entry" role="doc-biblioentry">
+Hein, Eckhard. 2014. <em>Distribution and <span>Growth After Keynes</span>: <span>A Post</span>-<span>Keynesian Guide</span></em>. Cheltenham: <span>Edward Elgar</span>.
+</div>
+<div id="ref-lavoie_post-keynesian_2014" class="csl-entry" role="doc-biblioentry">
+Lavoie, M. 2014. <em>Post-<span>Keynesian Economics</span>: <span>New Foundations</span></em>. Cheltenham; Northampton, MA: <span>Edward Elgar</span>.
+</div>
+</div>
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>See <span class="citation" data-cites="hein_distribution_2014">Hein (<a href="#ref-hein_distribution_2014" role="doc-biblioref">2014</a>)</span>, chap.&nbsp;7 and <span class="citation" data-cites="lavoie_post-keynesian_2014">Lavoie (<a href="#ref-lavoie_post-keynesian_2014" role="doc-biblioref">2014</a>)</span>, chap.&nbsp;6 for detailed treatments.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>All variables are normalised by the capital stock and thus rendered stationary.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><span class="citation" data-cites="bhaduri_unemployment_1990">Bhaduri and Marglin (<a href="#ref-bhaduri_unemployment_1990" role="doc-biblioref">1990</a>)</span> further discuss the effects on the profit rate.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>If the negative effect on the rate of capacity utilisation was stronger, the profit rate could fall as well. See the Appendix for a formal derivation of the condition under which this may happen.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Other important exogenous variables or parameters that may shift but are not depicted here are animal spirits (<span class="math inline">\(g_0\)</span>) or the saving propensities (<span class="math inline">\(s_W, s_\Pi\)</span>). See <span class="citation" data-cites="hein_distribution_2014">Hein (<a href="#ref-hein_distribution_2014" role="doc-biblioref">2014</a>)</span>, chap.&nbsp;7.2.2, for a detailed discussion of their effects.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>See <span class="citation" data-cites="Fennell2015">Fennell et al. (<a href="#ref-Fennell2015" role="doc-biblioref">2015</a>)</span> for a neat exposition.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Exogenous variables that are supposed to appear in the directed graph can readily be added to the Jacobian by an appropriate extension of rows and columns.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -467,27 +974,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./a_post_keynesian_macro_model_with_endogenous_money.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">A Post-Keynesian Macro Model with Endogenous Money</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./a_sraffian_supermultiplier_model.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./dynamic_models.html" class="pagination-link">
+        <span class="nav-page-text">Dynamic models</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">An open-source platform for macroeconomic model simulation.</div>   
-    <div class="nav-footer-right"><a>License: …</a><a> </a><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></div>
+    <div class="nav-footer-right"><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></div>
   </div>
 </footer>
-
 
 
 </body></html>

@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.269">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
-<title>DIY seminal macroeconomic models - 9&nbsp; A Sraffian Supermultiplier Model</title>
+<title>DIY Macroeconomic Model Simulation - 10&nbsp; A Sraffian Supermultiplier Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,8 +17,89 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
-
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -31,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./a_malthusian_model.html" rel="next">
-<link href="./a_post_kaleckian_distribution_and_growth_model.html" rel="prev">
+<link href="./a_new_keynesian_3_equation_model.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -42,8 +120,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -61,31 +138,25 @@ ul.task-list li input[type="checkbox"] {
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
-
-
+}</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></h1>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span>
+</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">DIY seminal macroeconomic models</a> 
+      <a href="./">DIY Macroeconomic Model Simulation</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
@@ -99,24 +170,24 @@ ul.task-list li input[type="checkbox"] {
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./how_to_use.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">How to use this site</span></a>
+  <a href="./how_to_use.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">How to Use this Site</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./how_to_contribute.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to contribute</span></a>
+  <a href="./how_to_simulate.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to Simulate Economic Models</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./intro_stability_analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to Stability Analysis of Dynamic Models</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -126,35 +197,20 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_neoclassical_macro_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></a>
+  <a href="./a_neoclassical_macro_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./an_IS_LM_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></a>
+  <a href="./an_IS_LM_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_neoclassical_synthesis_model_IS_LM_AS_AD.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Neoclassical Synthesis Model (IS-LM-AS-AD)</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="./dynamic_models.html" class="sidebar-item-text sidebar-link">Dynamic models</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./a_new_keynesian_3_equation_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></a>
+  <a href="./a_neoclassical_synthesis_model_IS_LM_AS_AD.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">A Neoclassical Synthesis Model (IS-LM-AS-AD)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -167,41 +223,68 @@ ul.task-list li input[type="checkbox"] {
   <a href="./a_post_kaleckian_distribution_and_growth_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./dynamic_models.html" class="sidebar-item-text sidebar-link">Dynamic models</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_sraffian_supermultiplier_model.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></a>
+  <a href="./a_new_keynesian_3_equation_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_malthusian_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></a>
+  <a href="./a_sraffian_supermultiplier_model.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_ricardian_one_sector_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></a>
+  <a href="./a_malthusian_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_ricardian_two_sector_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span></a>
+  <a href="./a_ricardian_one_sector_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_ricardian_two_sector_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#the-model" id="toc-the-model" class="nav-link" data-scroll-target="#the-model">The Model</a></li>
+  <li>
+<a href="#simulation" id="toc-simulation" class="nav-link" data-scroll-target="#simulation">Simulation</a>
+  <ul>
+<li><a href="#parameterisation" id="toc-parameterisation" class="nav-link" data-scroll-target="#parameterisation">Parameterisation</a></li>
+  <li><a href="#simulation-code" id="toc-simulation-code" class="nav-link" data-scroll-target="#simulation-code">Simulation code</a></li>
+  <li><a href="#plots" id="toc-plots" class="nav-link" data-scroll-target="#plots">Plots</a></li>
+  </ul>
+</li>
+  <li><a href="#directed-graph" id="toc-directed-graph" class="nav-link" data-scroll-target="#directed-graph">Directed Graph</a></li>
+  <li><a href="#analytical-model-solution" id="toc-analytical-model-solution" class="nav-link" data-scroll-target="#analytical-model-solution">Analytical Model Solution</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/edit/main/a_sraffian_supermultiplier_model.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span>
+</h1>
 </div>
 
 
@@ -214,13 +297,335 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-</header>
+</header><section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The Sraffian supermultiplier model was proposed by <span class="citation" data-cites="Serrano1995">Serrano (<a href="#ref-Serrano1995" role="doc-biblioref">1995</a>)</span> to integrate a Sraffian long-run equilibrium into a post-Keynesian growth model.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The model requires the long-run rate of capacity utilisation to settle on an exogenously given normal rate. This requires investment to fully adjust to any changes in economic activity so as to bring back actual utilisation to the desired normal rate. As a result, investment expenditures (in the long-run) are assumed to be free of any idiosyncratic components such as Keynesian ‘animal spirits’. Long-run growth is then driven by those components of autonomous demand that do not create productive capacity – autonomous consumption in the simplest version of the model. An increase in the growth rate of autonomous consumption will stimulate economic activity and induce firms to adjust their expectations about long-run growth towards the new rate given by autonomous demand growth.</p>
+<p>Income distribution is exogenous in this model. An increase in the wage share has an expansionary effect on economic activity and growth in the short-run as it increases consumption (investment is assumed to be independent of income distribution). However, this expansionary effect is only temporary as economic activity will eventually settle back on the normal rate of capacity utilisation, and the growth rate towards the rate given by autonomous demand growth. The absence of long-run effects of income distribution on output and growth constitutes a key difference between the Sraffian supermultiplier model and the post-Kaleckian model, in which there is no normal rate of capacity utilisation and no autonomous (non-capacity creating) demand.</p>
+<p>This is a model of long-run steady state growth. In the steady state, all endogenous variables grow at the same rate.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> The model contains two state variables that determine the model’s dynamics: the ratio of autonomous demand to the capital stock (which changes during adjustment periods where the growth rate has not yet settled on the rate given by autonomous demand growth) and the expected growth rate of the capital stock, which sluggishly adjusts to the rate given by autonomous demand growth. We consider a continuous-time version of the model presented in chapter 6.5.8 of <span class="citation" data-cites="Lavoie2022">Lavoie (<a href="#ref-Lavoie2022" role="doc-biblioref">2022</a>)</span> .<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+</section><section id="the-model" class="level2"><h2 class="anchored" data-anchor-id="the-model">The Model</h2>
+<p>The following equations describe the model: <span id="eq-ssm_r"><span class="math display">\[
+r_t=\pi u_t
+\tag{10.1}\]</span></span> <span id="eq-ssm_s"><span class="math display">\[
+s_t=-z_t + s_r r_t
+\tag{10.2}\]</span></span> <span id="eq-ssm_c"><span class="math display">\[
+c_t= u_t-s_t
+\tag{10.3}\]</span></span> <span id="eq-ssm_g"><span class="math display">\[
+g_t=g^0_t+g_1(u_t-u_n)
+\tag{10.4}\]</span></span> <span id="eq-ssm_u"><span class="math display">\[
+u_t=c_t+g_t
+\tag{10.5}\]</span></span> <span id="eq-ssm_g0"><span class="math display">\[
+\dot{g^0_t}=\mu(g_t-g^0_t)
+\tag{10.6}\]</span></span> <span id="eq-ssm_z"><span class="math display">\[
+\dot{z_t}=z_t(g_z-g_t),
+\tag{10.7}\]</span></span></p>
+<p>where <span class="math inline">\(r\)</span>, <span class="math inline">\(s\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(g\)</span>, <span class="math inline">\(u\)</span>, <span class="math inline">\(g^0\)</span>, and <span class="math inline">\(z\)</span> are the profit rate, the saving rate, the consumption rate, the investment rate, the rate of capacity utilisation, the expected growth rate, and the rate of autonomous demand, respectively. A dot over a variable represents the derivative with respect to time (<span class="math inline">\(\dot{x}=\frac{d x}{d t}\)</span>).</p>
+<p><a href="#eq-ssm_r">Equation&nbsp;<span>10.1</span></a> decomposes the profit rate (total profits over capital stock) into the product of the profit share <span class="math inline">\(\pi\)</span> (total profits over total output) and the rate of capacity utilisation (actual output over capital stock).<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Note that the wage share is given by <span class="math inline">\(1-\pi\)</span>. By <a href="#eq-ssm_s">Equation&nbsp;<span>10.2</span></a>, the economy-wide saving rate is given by the negative of the rate of autonomous demand (<span class="math inline">\(z\)</span>), which in this version of the model is autonomous consumption, i.e.&nbsp;dissaving, and saving out of profits (<span class="math inline">\(s_r\)</span>). It is assumed that workers do not save. <a href="#eq-ssm_c">Equation&nbsp;<span>10.3</span></a> simply states that consumption is income not saved. According to <a href="#eq-ssm_g">Equation&nbsp;<span>10.4</span></a>, investment is determined by an autonomous component <span class="math inline">\(g_0\)</span> that will be specified below and by the deviation of capacity utilisation from its normal rate <span class="math inline">\(u_n\)</span>. In other words, firms expand capacity whenever the actual rate of utilisation exceeds the desired normal rate. <a href="#eq-ssm_u">Equation&nbsp;<span>10.5</span></a> is the goods market equilibrium condition assuming that the rate of capacity utilisation adjusts to clear the goods market in the short run. <a href="#eq-ssm_g0">Equation&nbsp;<span>10.6</span></a> is a key equation in the Sraffian supermultiplier approach, which posits that firms (sluggishly) adjust the expected growth rate to the actual growth rate. Finally, <a href="#eq-ssm_z">Equation&nbsp;<span>10.7</span></a> is an identity that traces changes in the rate of autonomous demand that stem from (temporary) mismatches between the exogenously given growth rate of autonomous demand (<span class="math inline">\(g_z\)</span>) and the actual growth rate.</p>
+</section><section id="simulation" class="level2"><h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
+<section id="parameterisation" class="level3"><h3 class="anchored" data-anchor-id="parameterisation">Parameterisation</h3>
+<p>Table 1 reports the parameterisation used in the simulation. Besides a baseline (labelled as scenario 1), three further scenarios will be considered. In scenario 2, the growth rate of autonomous demand <span class="math inline">\(g_z\)</span> increases. In scenario 3, the profit share <span class="math inline">\(\pi\)</span> rises. In scenario 4, the normal rate of capacity utilisation <span class="math inline">\(u_n\)</span> increases. The model is initialised at the equilibrium of the baseline parameterisation and the various shifts then occur in period 50.</p>
+<p><strong>Table 1: Parameterisation</strong></p>
+<table class="table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead><tr class="header">
+<th>Scenario</th>
+<th><span class="math inline">\(\pi\)</span></th>
+<th><span class="math inline">\(s_r\)</span></th>
+<th><span class="math inline">\(g_1\)</span></th>
+<th><span class="math inline">\(u_n\)</span></th>
+<th><span class="math inline">\(\mu\)</span></th>
+<th><span class="math inline">\(g_z\)</span></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>1: baseline</td>
+<td>0.35</td>
+<td>0.8</td>
+<td>0.2</td>
+<td>0.75</td>
+<td>0.08</td>
+<td>0.02</td>
+</tr>
+<tr class="even">
+<td>2: rise in autonomous demand growth (<span class="math inline">\(g_z\)</span>)</td>
+<td>0.35</td>
+<td>0.8</td>
+<td>0.2</td>
+<td>0.75</td>
+<td>0.08</td>
+<td>0.03</td>
+</tr>
+<tr class="odd">
+<td>3: rise in profit share (<span class="math inline">\(\pi\)</span>)</td>
+<td>0.4</td>
+<td>0.8</td>
+<td>0.2</td>
+<td>0.75</td>
+<td>0.08</td>
+<td>0.02</td>
+</tr>
+<tr class="even">
+<td>4: rise in normal rate of capacity utilisation (<span class="math inline">\(u_n\)</span>)</td>
+<td>0.35</td>
+<td>0.8</td>
+<td>0.2</td>
+<td>0.8</td>
+<td>0.08</td>
+<td>0.02</td>
+</tr>
+</tbody>
+</table></section><section id="simulation-code" class="level3"><h3 class="anchored" data-anchor-id="simulation-code">Simulation code</h3>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Set number of periods</span></span>
+<span><span class="cn">T</span> <span class="op">=</span> <span class="fl">1000</span></span>
+<span></span>
+<span><span class="co"># Set number of scenarios (including baselines)</span></span>
+<span><span class="va">S</span><span class="op">=</span><span class="fl">4</span></span>
+<span></span>
+<span><span class="co"># Set period in which exogenous shift will occur</span></span>
+<span><span class="va">q</span><span class="op">=</span><span class="fl">50</span></span>
+<span></span>
+<span><span class="co">#Create vector in which equilibrium solutions from different parameterisations will be stored</span></span>
+<span><span class="va">u</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># rate of capacity utilisation</span></span>
+<span><span class="va">g</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># growth rate of capital stock</span></span>
+<span><span class="va">s</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># saving rate</span></span>
+<span><span class="va">c</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># consumption rate</span></span>
+<span><span class="va">r</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># profit rate</span></span>
+<span><span class="va">g0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="co"># expected growth rate of capital stock</span></span>
+<span><span class="va">z</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># autonomous demand rate</span></span>
+<span></span>
+<span><span class="co">#Set constant parameter values</span></span>
+<span><span class="va">g1</span><span class="op">=</span><span class="fl">0.2</span>  <span class="co"># Sensitivity of investment with respect to utilisation</span></span>
+<span><span class="va">sr</span><span class="op">=</span><span class="fl">0.8</span>  <span class="co"># propensity to save out of profits</span></span>
+<span><span class="va">mu</span><span class="op">=</span><span class="fl">0.08</span> <span class="co"># adjustment speed of expected growth rate</span></span>
+<span><span class="va">d</span><span class="op">=</span><span class="fl">0.1</span>   <span class="co"># time increment</span></span>
+<span></span>
+<span><span class="co"># Set and initialise exogenous variables/parameters that will be shifted</span></span>
+<span><span class="va">pi</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.35</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># profit share</span></span>
+<span><span class="va">gz</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.02</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># growth rate of autonomous demand</span></span>
+<span><span class="va">un</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.75</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span>  <span class="co"># normal rate of capacity utilisation</span></span>
+<span></span>
+<span><span class="co"># Set parameter values for different scenarios</span></span>
+<span><span class="va">gz</span><span class="op">[</span><span class="fl">2</span>,<span class="va">q</span><span class="op">:</span><span class="cn">T</span><span class="op">]</span><span class="op">=</span><span class="fl">0.03</span> <span class="co"># scenario 2: rise in autonomous demand growth</span></span>
+<span><span class="va">pi</span><span class="op">[</span><span class="fl">3</span>,<span class="va">q</span><span class="op">:</span><span class="cn">T</span><span class="op">]</span><span class="op">=</span><span class="fl">0.4</span> <span class="co"># scenario 3: rise in profit share</span></span>
+<span><span class="va">un</span><span class="op">[</span><span class="fl">4</span>,<span class="va">q</span><span class="op">:</span><span class="cn">T</span><span class="op">]</span><span class="op">=</span><span class="fl">0.8</span> <span class="co"># scenario 4: rise in normal rate of utilisation</span></span>
+<span></span>
+<span><span class="co"># Initialise endogenous variables at equilibrium values</span></span>
+<span><span class="va">u</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">un</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">g</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">gz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">s</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">g</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">c</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">un</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="va">s</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">g0</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">gz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">z</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">un</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="va">gz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">r</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">pi</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">un</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Simulate the model by looping over T time periods for S different scenarios</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
+<span>    </span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="cn">T</span><span class="op">)</span><span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="kw">for</span> <span class="op">(</span><span class="va">iterations</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span><span class="op">{</span> <span class="co"># iterate the model 1000-times in each period</span></span>
+<span>    </span>
+<span>    <span class="co">#(1) Profit rate</span></span>
+<span>    <span class="va">r</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span><span class="va">pi</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">*</span><span class="va">u</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span></span>
+<span>      </span>
+<span>    <span class="co">#(2) Saving</span></span>
+<span>    <span class="va">s</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="op">-</span><span class="va">z</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">+</span> <span class="va">sr</span><span class="op">*</span><span class="va">r</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span></span>
+<span>    </span>
+<span>    <span class="co">#(3) Consumption</span></span>
+<span>    <span class="va">c</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">u</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">-</span> <span class="va">s</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span></span>
+<span>    </span>
+<span>    <span class="co">#(4) Investment</span></span>
+<span>    <span class="va">g</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">g0</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">+</span><span class="va">g1</span><span class="op">*</span><span class="op">(</span><span class="va">u</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">-</span> <span class="va">un</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co">#(5) Capacity utilisation</span></span>
+<span>    <span class="va">u</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">c</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">+</span> <span class="va">g</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span></span>
+<span>    </span>
+<span>    <span class="co">#(6) Dynamic adjustment of expected growth rate of capital stock</span></span>
+<span>    <span class="va">g0</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">g0</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">mu</span><span class="op">*</span><span class="op">(</span><span class="va">g</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="va">g0</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">*</span><span class="va">d</span></span>
+<span>    </span>
+<span>    <span class="co">#(7) Dynamic adjustment of autonomous demand</span></span>
+<span>    <span class="va">z</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">z</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">z</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="va">gz</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">g</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">*</span><span class="va">d</span></span>
+<span></span>
+<span>  <span class="op">}</span> <span class="co"># close iterations loop</span></span>
+<span> <span class="op">}</span>  <span class="co"># close time loop</span></span>
+<span><span class="op">}</span>   <span class="co"># close scenarios loop</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="plots" class="level3"><h3 class="anchored" data-anchor-id="plots">Plots</h3>
+<p>Figures 1-3 depict the response of the three main endogenous variables to changes in the exogenous variables. In the second scenario (solid line), the growth rate of autonomous demand increases from 2% to 3%. As a result, the rate of capacity temporarily increases but then returns to the level given by the normal rate, as the rate of autonomous demand falls due to the increase in the capital stock. By contrast, the growth rate permanently settles to the new rate given by the autonomous rate.</p>
+<p>In the third scenario (dashed line), the profit share rises, which initially has a contractionary effect on the rate of utilisation and growth. Both variables then briefly overshoot due to the increase in the autonomous demand rate and then return to their previous values.</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set maximum period for plots</span></span>
+<span><span class="va">Tmax</span><span class="op">=</span><span class="fl">700</span></span>
+<span></span>
+<span><span class="co"># Capacity utilisation</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">u</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, font.main<span class="op">=</span><span class="fl">1</span>,cex.main<span class="op">=</span><span class="fl">1</span>, </span>
+<span>     ylab <span class="op">=</span> <span class="st">'u'</span>,xlab <span class="op">=</span> <span class="st">'Time'</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">u</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">u</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,cex.axis<span class="op">=</span><span class="fl">1</span>,cex.lab<span class="op">=</span><span class="fl">0.75</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Figure 1: Rate of capacity utilisation under different scenarios"</span>,cex<span class="op">=</span><span class="fl">0.8</span> ,line<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">u</span><span class="op">[</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">u</span><span class="op">[</span><span class="fl">4</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Rise autom demand"</span>, <span class="st">"Rise profit share"</span>, <span class="st">"Rise normal rate"</span><span class="op">)</span>,</span>
+<span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="a_sraffian_supermultiplier_model_files/figure-html/ssm2-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Growth</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">g</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, font.main<span class="op">=</span><span class="fl">1</span>,cex.main<span class="op">=</span><span class="fl">1</span>, </span>
+<span>     ylab <span class="op">=</span> <span class="st">'g'</span>,xlab <span class="op">=</span> <span class="st">'Time'</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">g</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">g</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,cex.axis<span class="op">=</span><span class="fl">1</span>,cex.lab<span class="op">=</span><span class="fl">0.75</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Figure 2: Growth rate under different scenarios"</span>,cex<span class="op">=</span><span class="fl">0.8</span> ,line<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">g</span><span class="op">[</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">g</span><span class="op">[</span><span class="fl">4</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Rise autom demand"</span>, <span class="st">"Rise profit share"</span>, <span class="st">"Rise normal rate"</span><span class="op">)</span>,</span>
+<span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="a_sraffian_supermultiplier_model_files/figure-html/ssm2-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Autonomous demand rate</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">z</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, font.main<span class="op">=</span><span class="fl">1</span>,cex.main<span class="op">=</span><span class="fl">1</span>, </span>
+<span>     ylab <span class="op">=</span> <span class="st">'z'</span>,xlab <span class="op">=</span> <span class="st">'Time'</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">z</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">z</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,cex.axis<span class="op">=</span><span class="fl">1</span>,cex.lab<span class="op">=</span><span class="fl">0.75</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Figure 3: Rate of autonomous demand under different scenarios"</span>,cex<span class="op">=</span><span class="fl">0.8</span> ,line<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">z</span><span class="op">[</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">z</span><span class="op">[</span><span class="fl">4</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"right"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Rise autom demand"</span>, <span class="st">"Rise profit share"</span>, <span class="st">"Rise normal rate"</span><span class="op">)</span>,</span>
+<span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="a_sraffian_supermultiplier_model_files/figure-html/ssm2-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Finally, a rise in the normal rate (dotted line) initially has contractionary effects on utilisation and growth but eventually raises utilisation to a permanently higher level. The growth rate returns to its previous value.</p>
+</section></section><section id="directed-graph" class="level2"><h2 class="anchored" data-anchor-id="directed-graph">Directed Graph</h2>
+<p>Another perspective on the model’s properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node <span class="math inline">\(x_1\)</span> to node <span class="math inline">\(x_2\)</span> indicates a causal impact of <span class="math inline">\(x_1\)</span> on <span class="math inline">\(x_2\)</span>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Construct auxiliary Jacobian matrix for 9 variables: </span></span>
+<span><span class="co"># r, c, g, u, g0, z, pi, gz, un</span></span>
+<span></span>
+<span><span class="va">M_mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>               <span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,</span>
+<span>               <span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,</span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, <span class="fl">9</span>, <span class="fl">9</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create adjacency matrix from transpose of auxiliary Jacobian and add column names</span></span>
+<span><span class="va">A_mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">M_mat</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create directed graph from adjacency matrix</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></span>
+<span><span class="va">dg</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_adjacency_matrix.html">graph_from_adjacency_matrix</a></span><span class="op">(</span><span class="va">A_mat</span>, mode<span class="op">=</span><span class="st">"directed"</span>, weighted<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define node labels</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">dg</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"r"</span>, <span class="st">"c"</span>, <span class="st">"g"</span>, <span class="st">"u"</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">g</span><span class="op">^</span><span class="fl">0</span><span class="op">)</span>, <span class="st">"z"</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">pi</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">g</span><span class="op">[</span><span class="va">z</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">u</span><span class="op">[</span><span class="va">n</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot directed graph</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dg</span>, main<span class="op">=</span><span class="st">"Figure 4: Directed graph of Sraffian Supermultiplier Model"</span>, vertex.size<span class="op">=</span><span class="fl">20</span>, vertex.color<span class="op">=</span><span class="st">"lightblue"</span>, </span>
+<span>     vertex.label.color<span class="op">=</span><span class="st">"black"</span>, edge.arrow.size<span class="op">=</span><span class="fl">0.2</span>, edge.width<span class="op">=</span><span class="fl">1.1</span>, edge.size<span class="op">=</span><span class="fl">1.2</span>,</span>
+<span>     edge.arrow.width<span class="op">=</span><span class="fl">1</span>, edge.color<span class="op">=</span><span class="st">"black"</span>, vertex.label.cex<span class="op">=</span><span class="fl">1.2</span>, </span>
+<span>     vertex.frame.color<span class="op">=</span><span class="st">"NA"</span>, margin<span class="op">=</span><span class="op">-</span><span class="fl">0.05</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="a_sraffian_supermultiplier_model_files/figure-html/ssm3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>In Figure 4, it can be seen that the growth rate of autonomous demand (<span class="math inline">\(g_z\)</span>), the profit share (<span class="math inline">\(\pi\)</span>), and the normal rate of capacity utilisation (<span class="math inline">\(u_n\)</span>) are the key exogenous variable of the model. The profit rate (<span class="math inline">\(r\)</span>), consumption (<span class="math inline">\(c\)</span>), the autonomous demand rate (<span class="math inline">\(z\)</span>), investment (<span class="math inline">\(g\)</span>), the rate of utilisation (<span class="math inline">\(u\)</span>), an the expected growth rate (<span class="math inline">\(g_0\)</span>) form a closed loop (or cycle) within the system. For example, an increase in the growth rate of autonomous demand increases consumption, which raises the rate of capacity utilisation, growth, and the expected growth rate. In a second-round effect, the increase in the growth rate then feeds back negatively into the autonomous demand rate, which leads to a return of the rate of capacity utilisation to its previous value.</p>
+</section><section id="analytical-model-solution" class="level2"><h2 class="anchored" data-anchor-id="analytical-model-solution">Analytical Model Solution</h2>
+<p>To find the short-run equilibrium solutions for <span class="math inline">\(u\)</span> and <span class="math inline">\(g\)</span>, first substitute <a href="#eq-ssm_r">Equation&nbsp;<span>10.1</span></a>-<a href="#eq-ssm_g">Equation&nbsp;<span>10.4</span></a> into <a href="#eq-ssm_u">Equation&nbsp;<span>10.5</span></a> and solve for <span class="math inline">\(u\)</span>: <span class="math display">\[
+u^* = \frac{g_0+z-g_1u_n}{s_r \pi-g_1}.
+\]</span> From this, we get: <span class="math display">\[
+g^* = g_0 + g_1(u^* - u_n).
+\]</span> The long-run equilibrium is given by <span class="math inline">\(u^{**}=u_n\)</span>, <span class="math inline">\(g^{**}=g_z\)</span>, and (from <a href="#eq-ssm_z">Equation&nbsp;<span>10.7</span></a>) <span class="math inline">\(z^{**}=u_n s_r \pi - g_z\)</span>.</p>
+<p>The dynamics are governed by <a href="#eq-ssm_g0">Equation&nbsp;<span>10.6</span></a>-<a href="#eq-ssm_z">Equation&nbsp;<span>10.7</span></a>. The Jacobian matrix is: <span class="math display">\[
+J(g^0, z)=\begin{bmatrix} \frac{\mu g_1}{s_r\pi-g_1}&amp; \frac{\mu g_1}{s_r\pi-g_1} \\ -z(\frac{g_1}{s_r\pi-g_1} +1)&amp; \frac{-zg_1}{s_r\pi-g_1} \end{bmatrix}.
+\]</span></p>
+<p>The determinant of the Jacobian matrix evaluated at the long-run equilibrium is: <span class="math display">\[
+det(J^*) = \frac{(u_n s_r \pi - g_z)\mu g_1}{s_r\pi-g_1} &gt; 0,
+\]</span></p>
+<p>which is positive provided <span class="math inline">\(s_r\pi-g_1\)</span>, i.e.&nbsp;if the Keynesian stability condition holds.</p>
+<p>The trace is: <span class="math display">\[
+tr(J^*) = \frac{g_1(\mu-u_n s_r \pi + g_z)}{s_r\pi-g_1}.
+\]</span></p>
+<p>Stability requires a negative trace, yielding a second stability condition: <span class="math inline">\(\mu&lt;u_n s_r \pi - g_z\)</span>.</p>
+<p>We can verify these analytical solutions by comparing them with the results from the numerical solution:</p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Construct Jacobian matrix at the equilibrium </span></span>
+<span></span>
+<span><span class="va">J</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">(</span><span class="va">mu</span><span class="op">*</span><span class="va">g1</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span><span class="fl">1</span>,<span class="cn">T</span><span class="op">]</span><span class="op">-</span><span class="va">g1</span><span class="op">)</span>, <span class="op">(</span><span class="va">mu</span><span class="op">*</span><span class="va">g1</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span><span class="fl">1</span>,<span class="cn">T</span><span class="op">]</span><span class="op">-</span><span class="va">g1</span><span class="op">)</span>,</span>
+<span>           <span class="op">-</span><span class="va">z</span><span class="op">[</span><span class="fl">1</span>,<span class="cn">T</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span><span class="fl">1</span>,<span class="cn">T</span><span class="op">]</span><span class="op">/</span><span class="op">(</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span><span class="fl">1</span>,<span class="cn">T</span><span class="op">]</span><span class="op">-</span><span class="va">g1</span><span class="op">)</span><span class="op">)</span>, <span class="op">-</span><span class="va">z</span><span class="op">[</span><span class="fl">1</span>,<span class="cn">T</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="va">g1</span><span class="op">/</span><span class="op">(</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span><span class="fl">1</span>,<span class="cn">T</span><span class="op">]</span><span class="op">-</span><span class="va">g1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">J</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       [,1]   [,2]
+[1,]  0.200  0.200
+[2,] -0.665 -0.475</code></pre>
+</div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Obtain eigenvalues</span></span>
+<span><span class="va">ev</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="va">values</span> <span class="op">&lt;-</span> <span class="va">ev</span><span class="op">$</span><span class="va">values</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.1375+0.1381801i -0.1375-0.1381801i</code></pre>
+</div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Obtain determinant and trace</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/det.html">det</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span> <span class="co"># determinant</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.038</code></pre>
+</div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span><span class="op">)</span> <span class="co"># trace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.275</code></pre>
+</div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Check stability conditions for all scenarios</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Scenario "</span>, <span class="va">i</span>, <span class="st">":"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">]</span><span class="op">&gt;</span><span class="va">g1</span><span class="op">)</span> <span class="co"># Keynesian stability condition</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">mu</span><span class="op">&lt;</span><span class="va">sr</span><span class="op">*</span><span class="va">un</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="va">gz</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Scenario 1:"
+[1] TRUE
+[1] TRUE
+[1] "Scenario 2:"
+[1] TRUE
+[1] TRUE
+[1] "Scenario 3:"
+[1] TRUE
+[1] TRUE
+[1] "Scenario 4:"
+[1] TRUE
+[1] TRUE</code></pre>
+</div>
+</div>
 
 
-
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Blecker2019" class="csl-entry" role="doc-biblioentry">
+Blecker, Robert A., and Mark Setterfield. 2019. <em>Heterodox Macroeconomics. Models of Demand, Distribution and Growth</em>. Edward Elgar.
+</div>
+<div id="ref-Dutt2018" class="csl-entry" role="doc-biblioentry">
+Dutt, Amitava Krishna. 2018. <span>“Some Observations on Models of Growth and Distribution with Autonomous Demand Growth.”</span> <em>Metroeconomica</em> 70 (2): 288–301. <a href="https://doi.org/10.1111/meca.12234">https://doi.org/10.1111/meca.12234</a>.
+</div>
+<div id="ref-Lavoie2022" class="csl-entry" role="doc-biblioentry">
+Lavoie, Marc. 2022. <em>Post-Keynesian Economics. New Foundations</em>. 2nd ed. Edward Elgar.
+</div>
+<div id="ref-Serrano1995" class="csl-entry" role="doc-biblioentry">
+Serrano, Franklin. 1995. <span>“<span class="nocase">Long Period Effective Demand and the Sraffian Supermultiplier</span>.”</span> <em>Contributions to Political Economy</em> 14 (1): 67–90. <a href="https://doi.org/10.1093/oxfordjournals.cpe.a035642">https://doi.org/10.1093/oxfordjournals.cpe.a035642</a>.
+</div>
+</div>
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>See chapter 7 in <span class="citation" data-cites="Blecker2019">Blecker and Setterfield (<a href="#ref-Blecker2019" role="doc-biblioref">2019</a>)</span>, <span class="citation" data-cites="Dutt2018">Dutt (<a href="#ref-Dutt2018" role="doc-biblioref">2018</a>)</span>, and chapter 6 in <span class="citation" data-cites="Lavoie2022">Lavoie (<a href="#ref-Lavoie2022" role="doc-biblioref">2022</a>)</span> for useful introductions. Note that contrary to what the name may suggest, this is a one-sector model.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>All variables are normalised by the capital stock and thus rendered stationary.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Section X explains how continuous time models can be solved numerically.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>For simplicity, it is assumed that the capital-potential output ratio is equal to unity. This implies that the ratio of actual output to potential output is equal to the ratio of actual output to the capital stock, so that the latter can be taken as a measure of the rate of capacity utilisation.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -467,27 +872,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="./a_post_kaleckian_distribution_and_growth_model.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span></span>
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./a_new_keynesian_3_equation_model.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./a_malthusian_model.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">An open-source platform for macroeconomic model simulation.</div>   
-    <div class="nav-footer-right"><a>License: …</a><a> </a><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></div>
+    <div class="nav-footer-right"><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></div>
   </div>
 </footer>
-
 
 
 </body></html>

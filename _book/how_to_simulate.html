@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>DIY Macroeconomic Model Simulation - 2&nbsp; How to Simulate Economic Models</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./intro_stability_analysis.html" rel="next">
+<link href="./how_to_use.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to Simulate Economic Models</span>
+</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">DIY Macroeconomic Model Simulation</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./how_to_use.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">How to Use this Site</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./how_to_simulate.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to Simulate Economic Models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_stability_analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to Stability Analysis of Dynamic Models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./static_models.html" class="sidebar-item-text sidebar-link">Static models</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_neoclassical_macro_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./an_IS_LM_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_neoclassical_synthesis_model_IS_LM_AS_AD.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">A Neoclassical Synthesis Model (IS-LM-AS-AD)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_post_keynesian_macro_model_with_endogenous_money.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">A Post-Keynesian Macro Model with Endogenous Money</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_post_kaleckian_distribution_and_growth_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./dynamic_models.html" class="sidebar-item-text sidebar-link">Dynamic models</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_new_keynesian_3_equation_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_sraffian_supermultiplier_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_malthusian_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_ricardian_one_sector_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_ricardian_two_sector_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#introduction-economic-models" id="toc-introduction-economic-models" class="nav-link active" data-scroll-target="#introduction-economic-models">Introduction: Economic models</a></li>
+  <li>
+<a href="#solving-economic-models-numerically" id="toc-solving-economic-models-numerically" class="nav-link" data-scroll-target="#solving-economic-models-numerically">Solving economic models numerically</a>
+  <ul>
+<li>
+<a href="#solving-economic-models-numerically-some-examples" id="toc-solving-economic-models-numerically-some-examples" class="nav-link" data-scroll-target="#solving-economic-models-numerically-some-examples">Solving economic models numerically: some examples</a>
+  <ul>
+<li><a href="#static-model" id="toc-static-model" class="nav-link" data-scroll-target="#static-model">Static model</a></li>
+  <li><a href="#dynamic-model" id="toc-dynamic-model" class="nav-link" data-scroll-target="#dynamic-model">Dynamic model</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  <li><a href="#how-to-plot-the-results-of-a-model" id="toc-how-to-plot-the-results-of-a-model" class="nav-link" data-scroll-target="#how-to-plot-the-results-of-a-model">How to plot the results of a model</a></li>
+  <li><a href="#how-to-create-a-directed-graph-of-a-model" id="toc-how-to-create-a-directed-graph-of-a-model" class="nav-link" data-scroll-target="#how-to-create-a-directed-graph-of-a-model">How to create a directed graph of a model</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/edit/main/how_to_simulate.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to Simulate Economic Models</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><section id="introduction-economic-models" class="level2"><h2 class="anchored" data-anchor-id="introduction-economic-models">Introduction: Economic models</h2>
+<p>Every economic model essentially consist of three things:</p>
+<ol type="1">
+<li><p>a set of <span class="math inline">\(N\)</span> equations</p></li>
+<li><p>a set of <span class="math inline">\(N\)</span> endogenous variables</p></li>
+<li><p>a set of exogenous or fixed coefficients (‘parameters’) and exogenous variables</p></li>
+</ol>
+<p>The solution to the model, its ‘equilibrium’, will pin down values for the endogenous variables of the model for a given set of parameters and exogenous variables. Thus, the endogenous variables, e.g.&nbsp;consumption, investment, prices etc., are determined within the system, while exogenous variables are determined outside of the system and often reflect policy variables, such as the central bank interest rate or discretionary government spending. The equations connect the variables of the system. They typically express:</p>
+<ul>
+<li><p>economic (accounting) identities (e.g.&nbsp;that in a closed economy without government, saving is income that is not consumed, <span class="math inline">\(S=Y-C\)</span>)</p></li>
+<li><p>budget constraints (e.g.&nbsp;that business investment can be financed out of retained profits and new debt, <span class="math inline">\(I=\Pi+\Delta D\)</span>)</p></li>
+<li><p>behavioural functions (e.g.&nbsp;that households consume a constant proportion of their income, <span class="math inline">\(C=c_1Y\)</span>), which often contain key parameters of the model (e.g.&nbsp;the marginal propensity to consume <span class="math inline">\(c_1\)</span>)</p></li>
+<li><p>equilibrium conditions (e.g.&nbsp;that demand must be equal to supply)</p></li>
+</ul>
+<p>Equations may be linear or nonlinear. If a model contains nonlinear relationships between the endogenous variables, it may admit more than one solution (often called multiple equilibria).</p>
+<p>Economic models can be either static or dynamic. In a static model, time plays no role and all endogenous variables are determined simultaneously. In a dynamic model, time matters and the endogenous variables adjust gradually over time.</p>
+<p>The endogenous variables are typically interrelated: e.g.&nbsp;<span class="math inline">\(x\)</span> determines <span class="math inline">\(y\)</span>, but <span class="math inline">\(y\)</span> also determines <span class="math inline">\(x\)</span>. These interrelationships can be:</p>
+<ul>
+<li><p>simultaneous: <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> determine each other simultaneously (within the same period)</p></li>
+<li><p>recursive: <span class="math inline">\(x\)</span> affects <span class="math inline">\(y\)</span> only in <span class="math inline">\(t+1\)</span> (or vice versa)</p></li>
+</ul>
+<p>Note that dynamic models may contain both simultaneous and recursive relationships.</p>
+<p>Whether the relationships between the variables is simultaneous or recursive has implications for how the model can be solved. In general, simple economic models can often be solved analytically without a computer. If the model contains simultaneous relationships, it needs to be solved as a simultaneous system by solving for the endogenous variables through repeated substitution. This means going from the so-called ‘structural form’, i.e.&nbsp;the full set of equations, to the so-called ‘reduced form’, where the right-hand side of the equations only contains exogenous variables and parameters. If the system is linear, techniques from linear algebra such as matrix inversion or Cramer’s rule can be used (see Chiang). If the system contains recursive relationships, the equilibrium solution can be found by setting <span class="math inline">\(x_{t+i}=x_{t-i}=x_{t}\)</span> for all <span class="math inline">\(x\)</span> and then solving the resulting simultaneous system (more on how to formally analyse dynamic systems below).</p>
+<p>However, often a complete analytical solution is difficult to come by. Common challenges are:</p>
+<ul>
+<li><p>a model has more than 3 dimensions (<span class="math inline">\(N&gt;3\)</span>) (then it’s tedious to compute analytical solutions)</p></li>
+<li><p>a model has nonlinearities that preclude the computation of analytical solutions</p></li>
+<li><p>a model is dynamic and you want to examine the dynamic adjustment of the endogenous variables (which is tedious to do analytically)</p></li>
+</ul>
+<p>In this case, numerical solution by means of computer simulation comes in handy. The key advantage is that it allows you to study much more complex models than the analytical approach does. A key disadvantage is that numerical solution requires the choice of a (possibly arbitrary) set of numerical values for the models’ parameters. It is thus less general than analytical solution – a limitation which should be borne in mind. We think that both analytical and numerical approaches are useful. Correspondingly, we supplement the numerical simulations with analytical model solutions where possible.</p>
+</section><section id="solving-economic-models-numerically" class="level2"><h2 class="anchored" data-anchor-id="solving-economic-models-numerically">Solving economic models numerically</h2>
+<p>If a (dynamic) model exclusively contains recursive relationships, it can be solved iteratively by sequentially updating the endogenous variables from (arbitrarily set) initial conditions. This is easy to do for a computer. By contrast, if interrelationships are simultaneous, solving the system for the endogenous variables as described above is less trivial for a computer (finding the solution for <span class="math inline">\(x\)</span> requires the solution of <span class="math inline">\(y\)</span>, but the latter requires in turn the solution for <span class="math inline">\(x\)</span>). As mentioned above, one approach is to use linear algebra: cast the system in matrix form (<span class="math inline">\(b=Ax\)</span>) and let the computer find <span class="math inline">\(x^*=A^{-1}b\)</span> through some algorithm (e.g.&nbsp;<a href="https://en.wikipedia.org/wiki/Gauss%E2%80%93Seidel_method">the Gauss-Seidel method</a>).</p>
+<p>We will use an approach that is simpler and based on <em>iteration</em>:</p>
+<ul>
+<li><p>choose a set of numerical parameter values (e.g.&nbsp;<span class="math inline">\(c_1=0.8\)</span>)</p></li>
+<li><p>choose (arbitrary but non-zero) initial values for the endogenous variables (e.g.&nbsp;<span class="math inline">\(C_0=1)\)</span></p></li>
+<li><p>then solve the system of equations many times using a <em>for loop</em></p></li>
+</ul>
+<p>In this way, the solution gets approximated successively.</p>
+<p>A limitation of the method of iteration is that it will only converge to the solution of the simultaneous component of a model if the equilibrium is stable. For most static models, stability is required for the model to be economically meaningful. In that sense, if the iterative approach does not yield a solution due to instability, this is a sign that the model and/or parameterisation needs to be reconsidered. In dynamic models, stability is a key question that should be addressed in any case. Therefore, this limitation of the method of iteration may not be too restrictive in pratice.</p>
+<section id="solving-economic-models-numerically-some-examples" class="level3"><h3 class="anchored" data-anchor-id="solving-economic-models-numerically-some-examples">Solving economic models numerically: some examples</h3>
+<section id="static-model" class="level4"><h4 class="anchored" data-anchor-id="static-model">Static model</h4>
+<p>consider a two-dimensional simultaneous system represented by a simple Keynesian goods market model:</p>
+<p><span class="math display">\[
+Y= C + I_0
+\]</span><br><span class="math display">\[
+C = c_0 + c_1Y
+\]</span> In a closed economy without government, aggregate demand is composed of consumption <span class="math inline">\(C\)</span> and investment <span class="math inline">\(I\)</span>, with the latter assumed to be exogenous. Goods market equilibrium requires aggregate demand to be equal to aggregate income. Consumption is asumed to be given by an autonomous component <span class="math inline">\(c_1\)</span> and a marginal propensity to consume out of income <span class="math inline">\(c_0\)</span>.</p>
+<p>Suppose the parameters are given by <span class="math inline">\(c_0=3, c_1=0.8\)</span>. You are interested in how a change in investment from <span class="math inline">\(I_0=5\)</span> to <span class="math inline">\(I_0=6\)</span> affects the solution of the system. From the method of substitution, we can easily derive that <span class="math inline">\(Y^*=\frac{c_0+I_0}{1-c_1}\)</span>. The R code below shows how to find this solution via simulation.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set number of parameterisations that will be considered</span></span>
+<span><span class="va">S</span><span class="op">=</span><span class="fl">2</span></span>
+<span></span>
+<span><span class="co"># Set fixed parameter values</span></span>
+<span><span class="va">c0</span><span class="op">=</span><span class="fl">3</span></span>
+<span><span class="va">c1</span><span class="op">=</span><span class="fl">0.8</span></span>
+<span></span>
+<span><span class="co">#Create vector in which equilibrium solutions from different parameterisations will be stored</span></span>
+<span><span class="va">Y_eq</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span></span>
+<span><span class="va">C_eq</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Set parameter value that will change by defining a vector</span></span>
+<span><span class="va">I0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span></span>
+<span><span class="va">I0</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="fl">5</span></span>
+<span><span class="va">I0</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">=</span><span class="fl">6</span></span>
+<span></span>
+<span><span class="co"># Initialise endogenous variables at arbitrary positive value Y=C=1</span></span>
+<span><span class="va">Y</span><span class="op">=</span><span class="va">C</span><span class="op">=</span><span class="fl">1</span></span>
+<span></span>
+<span><span class="co">#Solve this system numerically through 1000 iterations based on the initialisation</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">iteration</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">Y</span> <span class="op">=</span> <span class="va">C</span> <span class="op">+</span> <span class="va">I0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
+<span>  <span class="va">C</span> <span class="op">=</span> <span class="va">c0</span> <span class="op">+</span> <span class="va">c1</span><span class="op">*</span><span class="va">Y</span></span>
+<span>  <span class="op">}</span> <span class="co"># close iterations loop</span></span>
+<span>  </span>
+<span><span class="co">#Save results for different parameterisations in vector</span></span>
+<span><span class="va">Y_eq</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">Y</span></span>
+<span><span class="va">C_eq</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">C</span></span>
+<span><span class="op">}</span> <span class="co"># close parameterisations loop</span></span>
+<span></span>
+<span><span class="co"># Display solutions</span></span>
+<span><span class="va">Y_eq</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 40 45</code></pre>
+</div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">C_eq</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 35 39</code></pre>
+</div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Verify solutions for Y</span></span>
+<span><span class="op">(</span><span class="va">c0</span><span class="op">+</span><span class="va">I0</span><span class="op">[</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">c1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 40 45</code></pre>
+</div>
+</div>
+<p>Let’s break this down code a little bit:</p>
+<ul>
+<li><p>set the number of scenarios <span class="math inline">\(S\)</span>, define parameter values, and create vectors of length <span class="math inline">\(S\)</span> in which results for endogenous variables will be stored</p></li>
+<li><p>define changes in exogenous variables or parameters (i.e.&nbsp;construct different scenarios)</p></li>
+<li><p>initialise the endogenous variables</p></li>
+<li><p>write down the equations (solved for the endogenous variables such that every endogenous variable of the system appears on the left-hand side of an equation exactly once)</p></li>
+<li><p>place these equations inside a for loop</p></li>
+<li><p>the loop says: repeat the segment of code insights the curly brackets 1000 times</p></li>
+<li><p>nest the loop that solves the system in an outer loop that loops through different parameterisations (here for <span class="math inline">\(I_0\)</span>)</p></li>
+<li><p>after the iterations loop is finished, save the results for the current pameterisation</p></li>
+</ul>
+<p>What happens is the following: in the first iteration, <span class="math inline">\(Y\)</span> and <span class="math inline">\(C\)</span> are calculated based on the initial values and the parameter values. In the second iteration, the values are then overwritten based on the results from the first iteration. This process continues 1000 times. In this way, the correct solution is successively approximated. If you have an analytical solution, you can compare it with the numerical one to double-check your results.</p>
+<p>When does the method of iteration fail to provide a solution? In the following code, everything is the change with the only difference that the marginal propensity to consume is now larger than unity (<span class="math inline">\(c_1=1.2\)</span>). Now the numerical simulation fails to find the solution. This is because with <span class="math inline">\(c_1&gt;0\)</span>, the so-called Keynesian equilibrium condition is violated and the system happens to be unstable. We will discuss below the issue of stability and how to analyse it formally. At this point, we simply note that the method of iterations requires static models to be stable to yield equilibrium solutions.</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set number of parameterisations that will be considered</span></span>
+<span><span class="va">S</span><span class="op">=</span><span class="fl">2</span></span>
+<span></span>
+<span><span class="co"># Set fixed parameter values</span></span>
+<span><span class="va">c0</span><span class="op">=</span><span class="fl">3</span></span>
+<span><span class="va">c1</span><span class="op">=</span><span class="fl">1.2</span></span>
+<span></span>
+<span><span class="co">#Create vector in which equilibrium solutions from different parameterisations will be store</span></span>
+<span><span class="va">Y_eq</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span></span>
+<span><span class="va">C_eq</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Set parameter value that will change by defining a vector</span></span>
+<span><span class="va">I0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span></span>
+<span><span class="va">I0</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="fl">5</span></span>
+<span><span class="va">I0</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">=</span><span class="fl">6</span></span>
+<span></span>
+<span><span class="co"># Initialise endogenous variables at arbitrary positive value Y=C=1</span></span>
+<span><span class="va">Y</span><span class="op">=</span><span class="va">C</span><span class="op">=</span><span class="fl">1</span></span>
+<span></span>
+<span><span class="co">#Solve this system numerically through 1000 iterations based on the initialisation</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">iteration</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">Y</span> <span class="op">=</span> <span class="va">C</span> <span class="op">+</span> <span class="va">I0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
+<span>  <span class="va">C</span> <span class="op">=</span> <span class="va">c0</span> <span class="op">+</span> <span class="va">c1</span><span class="op">*</span><span class="va">Y</span></span>
+<span>  <span class="op">}</span> <span class="co"># close iterations loop</span></span>
+<span>  </span>
+<span><span class="co">#Save results for different parameterisations in vector</span></span>
+<span><span class="va">Y_eq</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">Y</span></span>
+<span><span class="va">C_eq</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">C</span></span>
+<span><span class="op">}</span> <span class="co"># close parameterisations loop</span></span>
+<span></span>
+<span><span class="co"># Display solutions</span></span>
+<span><span class="va">Y_eq</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  5.818655e+80 8.832196e+159</code></pre>
+</div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">C_eq</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  6.982386e+80 1.059863e+160</code></pre>
+</div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Verify solutions for Y</span></span>
+<span><span class="op">(</span><span class="va">c0</span><span class="op">+</span><span class="va">I0</span><span class="op">[</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">c1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -40 -45</code></pre>
+</div>
+</div>
+</section><section id="dynamic-model" class="level4"><h4 class="anchored" data-anchor-id="dynamic-model">Dynamic model</h4>
+<p>Consider now a dynamic version of the Keynesian goods market model that was proposed by Paul <span class="citation" data-cites="Samuelson1939">Samuelson (<a href="#ref-Samuelson1939" role="doc-biblioref">1939</a>)</span>. In this model, investment (<span class="math inline">\(I\)</span>) becomes endogenous and reacts to the change in consumption. Aggregate demand now also contains government spending (<span class="math inline">\(G\)</span>), which is assumed to be exogenous. Consumption (<span class="math inline">\(C\)</span>) responds to changes in income (<span class="math inline">\(Y\)</span>) with a lag.</p>
+<p><span class="math display">\[
+Y_t = C_t + I_t + G_0
+\]</span> <span class="math display">\[
+I_t = \beta(C_t - C_{t-1})
+\]</span> <span class="math display">\[
+C_t=c_1Y_{t-1}.
+\]</span> This is a dynamic model, in which the endogenous variables adjust gradually over time. However, the model is not purely recursive as investment reacts to consumption in the same period (and output to consumption and investment). By shifting <span class="math inline">\(Y_t=C_t + I_t + G_0\)</span> one period back, substitution into the consumption, and then investment function, the system can be reduced to two equations that are fully recursive:</p>
+<p><span class="math display">\[
+C_t= c_1(C_{t-1} + I_{t-1} + G_0)
+\]</span> <span class="math display">\[
+I_t= \beta[c_1(C_{t-1} + I_{t-1} + G_0) - C_{t-1}]
+\]</span> We can find the solution for output analytically by setting <span class="math inline">\(x_t=x_{t-1}\)</span> for all variables and then applying the method of substitution. This yields <span class="math inline">\(Y^*=\frac{G_0}{1-c_1}\)</span>. The R code below shows how to find this solution through simulation.</p>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set number of periods for which you want to simulate</span></span>
+<span><span class="cn">T</span><span class="op">=</span><span class="fl">100</span></span>
+<span></span>
+<span><span class="co"># Set number of parameterisations that will be considered</span></span>
+<span><span class="va">S</span><span class="op">=</span><span class="fl">2</span></span>
+<span></span>
+<span><span class="co"># Set period in which shock or shift in an will occur</span></span>
+<span><span class="va">s</span><span class="op">=</span><span class="fl">15</span></span>
+<span></span>
+<span><span class="co"># Set fixed parameter values</span></span>
+<span><span class="va">c1</span><span class="op">=</span><span class="fl">0.8</span></span>
+<span><span class="va">beta</span><span class="op">=</span><span class="fl">0.6</span></span>
+<span></span>
+<span><span class="co"># Construct matrices in which values for different periods will be stored; initialise at 1</span></span>
+<span><span class="va">C</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">I</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Construct matrices for exogenous variable or parameter that will change over time to capture different scenarios</span></span>
+<span><span class="va">G0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">5</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set parameter values for different scenarios</span></span>
+<span><span class="va">G0</span><span class="op">[</span>,<span class="va">s</span><span class="op">:</span><span class="cn">T</span><span class="op">]</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">=</span><span class="fl">6</span>     <span class="co"># scenario: permanent increase in government spending from I0=5 to I0=6 from period s=15 onwards</span></span>
+<span></span>
+<span><span class="co">#Solve this system recursively based on the initialisation</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="cn">T</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">C</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">c1</span><span class="op">*</span><span class="op">(</span><span class="va">C</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">I</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">G0</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span>    <span class="va">I</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">beta</span><span class="op">*</span><span class="op">(</span><span class="va">c1</span><span class="op">*</span><span class="op">(</span><span class="va">C</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">I</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">G0</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">-</span> <span class="va">C</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="co"># close time loop</span></span>
+<span><span class="op">}</span>   <span class="co"># close scenarios loop</span></span>
+<span></span>
+<span><span class="co"># Calculate output</span></span>
+<span><span class="va">Y</span><span class="op">=</span><span class="va">C</span><span class="op">+</span><span class="va">G0</span><span class="op">+</span><span class="va">I</span></span>
+<span></span>
+<span><span class="co"># Display solutions</span></span>
+<span><span class="va">I</span><span class="op">[</span>,<span class="cn">T</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.131628e-15 4.902745e-14</code></pre>
+</div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">C</span><span class="op">[</span>,<span class="cn">T</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20 24</code></pre>
+</div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Y</span><span class="op">[</span>,<span class="cn">T</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25 30</code></pre>
+</div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Verify solutions for Y</span></span>
+<span><span class="op">(</span><span class="va">G0</span><span class="op">[</span>,<span class="cn">T</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">c1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25 30</code></pre>
+</div>
+</div>
+<p>The code solves the recursive system numerically through iteration. Let’s again break down what the code does:</p>
+<ul>
+<li><p>set the number of periods for which we want to simulate the model (here <span class="math inline">\(T=100\)</span>), set the number of scenarios <span class="math inline">\(S\)</span> and the period <span class="math inline">\(s\)</span> in which a change in the scenario should occur</p></li>
+<li><p>set the parameter values and create <span class="math inline">\(s x T\)</span> matrices in which results for endogenous variables will be stored, such that the columns represent time and the rows represent different scenarios, and initialise endogenous variables</p></li>
+<li><p>define changes in exogenous variables or parameters (i.e.&nbsp;construct different scenarios)</p></li>
+<li><p>write down the equations (solved for the endogenous variables such that every endogenous variable of the system appears on the left-hand side of an equation exactly once)</p></li>
+<li><p>place these equations inside a for loop that runs from <span class="math inline">\(t=2\)</span> to <span class="math inline">\(T\)</span></p></li>
+<li><p>the loop says: repeat the segment of code insights the curly brackets, each time with the index number <span class="math inline">\(t\)</span> shifted by <span class="math inline">\(+1\)</span> until <span class="math inline">\(t=T\)</span></p></li>
+<li><p>nest the loop that solves the system in an outer loop that loops through different parameterisations (here for <span class="math inline">\(G_0\)</span>)</p></li>
+</ul>
+<p>Note that due to the exclusive presence of recursive equations, no loop is need that iterates the equations within every period. However, many dynamic models we will present on this website will contain both simultaneous and recursive equations. In this case, a third loop inside the time loop is needed that iterates the equations within each period so as to solve the simultaneous equations. Otherwise, the approach to solving dynamic systems is not fundamentally different from the one for static systems.</p>
+<p>At the end of the simulation run, we can again compare the results from the numerical simulation with the analytical solution. However, what is perhaps more interesting is to trace the dynamic adjustment of the endogenous variables towards equilibrium. The best way to examine this is by plotting the results.</p>
+</section></section></section><section id="how-to-plot-the-results-of-a-model" class="level2"><h2 class="anchored" data-anchor-id="how-to-plot-the-results-of-a-model">How to plot the results of a model</h2>
+<p>We will consider two main ways to plot model outputs: bar charts for static models and time series charts for dynamic models. Bar charts compare the equilibrium values of <span class="math inline">\(Y_t\)</span> for different parameterisations:</p>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Bar chart of different equilibrium solutions of Samuelson (1939) model</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">Y</span><span class="op">[</span>,<span class="cn">T</span><span class="op">]</span>, ylab<span class="op">=</span><span class="st">"Y"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Baseline"</span>, <span class="st">"Increase in G0"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="how_to_simulate_files/figure-html/howto_4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Next, we show a basic version of a time series chart that displays the dynamics of <span class="math inline">\(Y_t\)</span>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Time series chart of output dynamics in Samuelson (1939) model</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Y</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">"Time"</span>, ylab<span class="op">=</span><span class="st">"Y"</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Figure 1: Output"</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="how_to_simulate_files/figure-html/howto_5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>As you can see, there are many settings you can fiddle around with to adjust the appearance of the graph to your liking (run ‘?plot’ to find information about the different options.) If we want to plot the dynamics for the two different parameterisations, we can do the following:</p>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Time series chart of output dynamics for different scenarios in Samuelson (1939) model</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Y</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">"Time"</span>, ylab<span class="op">=</span><span class="st">"Y"</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">Y</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>, <span class="va">Y</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">Y</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>, <span class="va">Y</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Figure 2: Output under different scenarios"</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">Y</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Baseline"</span>, <span class="st">"Increase in G0"</span><span class="op">)</span>,</span>
+<span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="how_to_simulate_files/figure-html/howto_6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Note that we have adjusted the range of the y-axis to make sure the graph captures the minimum and maximum values from both parameterisations.</p>
+<p>Finally, consider a plot for <span class="math inline">\(C_t\)</span> and <span class="math inline">\(I_t\)</span> with two separate axes:</p>
+<div class="cell">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Time series chart of Samuelson (1939) model with separate axes for consumption and investment</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">C</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">"Time"</span>, ylab<span class="op">=</span><span class="st">"Y"</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Figure 3: Consumption and Investment"</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">4</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>new <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">I</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">2</span>, font.main<span class="op">=</span><span class="fl">1</span>, cex.main<span class="op">=</span><span class="fl">1</span>,ylab <span class="op">=</span> <span class="st">''</span>, axes<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">''</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">I</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span><span class="op">)</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">4</span>, at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/pretty.html">pretty</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">I</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>  </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"I"</span>, side <span class="op">=</span> <span class="fl">4</span>, line <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"right"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"C"</span>, <span class="st">"I"</span><span class="op">)</span>,</span>
+<span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="how_to_simulate_files/figure-html/howto_7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section><section id="how-to-create-a-directed-graph-of-a-model" class="level2"><h2 class="anchored" data-anchor-id="how-to-create-a-directed-graph-of-a-model">How to create a directed graph of a model</h2>
+<p>Another perspective on a model’s properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node <span class="math inline">\(x_1\)</span> to node <span class="math inline">\(x_2\)</span> indicates a causal impact of <span class="math inline">\(x_1\)</span> on <span class="math inline">\(x_2\)</span>.</p>
+<p>The directed graph can be derived from the model’s Jacobian matrix. See <span class="citation" data-cites="Fennell2015">Fennell et al. (<a href="#ref-Fennell2015" role="doc-biblioref">2015</a>)</span> for a neat exposition. Let <span class="math inline">\(\mathbf{x}\)</span> be the vector containing the model’s variables and <span class="math inline">\(\mathbf{f(x)}\)</span> the system of equations making up the model. The Jacobian matrix is then given by <span class="math inline">\(\mathbf{J}=\mathbf{\frac{\partial f()}{\partial x}}\)</span>. As we often also want to display exogenous variables in the directed graph, it can be useful to expand the Jacobian matrix by adding rows and columns for those exogenous variables.</p>
+<p>Next, construct an ‘auxiliary’ Jacobian matrix <span class="math inline">\(\mathbf{M}\)</span> in which all the non-zero elements of the Jacobian are replaced by ones, whereas zero elements remain unchanged, i.e.</p>
+<p><span class="math display">\[
+M_{ij} =
+\begin{cases}
+1 &amp; \text{if }  J_{ij} \neq 0, \\
+0 &amp; \text{otherwise.}
+\end{cases}
+\]</span></p>
+<p>Finally, taking the transpose of this `auxiliary’ Jacobian matrix yields the <strong>adjacency matrix</strong> (<span class="math inline">\(\mathbf{M^T}=\mathbf{A}\)</span>), which is a binary matrix whose elements (<span class="math inline">\(A_{ji}\)</span>) indicate whether there is a directed edge from a node <span class="math inline">\(x_j\)</span> to node <span class="math inline">\(x_i\)</span>. From the adjacency matrix, the directed graph is constructed. The code below shows this for the example of the <span class="citation" data-cites="Samuelson1939">Samuelson (<a href="#ref-Samuelson1939" role="doc-biblioref">1939</a>)</span> model.</p>
+<div class="cell">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Create directed graph</span></span>
+<span><span class="co"># Construct auxiliary Jacobian matrix for 4 variables: </span></span>
+<span>  <span class="co"># endogenous: (1) Y, (2) C, (3) I</span></span>
+<span>  <span class="co"># exogenous: (4) G0</span></span>
+<span><span class="co"># where non-zero elements in regular Jacobian are set to 1 and zero elements are unchanged</span></span>
+<span></span>
+<span>              <span class="co">#1 2 3 4</span></span>
+<span><span class="va">M_mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>, <span class="co">#1</span></span>
+<span>               <span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="co">#2</span></span>
+<span>               <span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="co">#3</span></span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, <span class="co">#4 </span></span>
+<span>               <span class="fl">4</span>, <span class="fl">4</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create adjacency matrix from transpose of auxiliary Jacobian and add column names</span></span>
+<span><span class="va">A_mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">M_mat</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create directed graph from adjacency matrix</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></span>
+<span><span class="va">dg</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_adjacency_matrix.html">graph_from_adjacency_matrix</a></span><span class="op">(</span><span class="va">A_mat</span>, mode<span class="op">=</span><span class="st">"directed"</span>, weighted<span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define node labels</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">dg</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Y"</span>, <span class="st">"C"</span>, <span class="st">"I"</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">G</span><span class="op">[</span><span class="fl">0</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot directed graph matrix</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dg</span>, main<span class="op">=</span><span class="st">"Figure 4: Directed graph of Samuelson model"</span>, vertex.size<span class="op">=</span><span class="fl">20</span>, vertex.color<span class="op">=</span><span class="st">"lightblue"</span>, </span>
+<span>     vertex.label.color<span class="op">=</span><span class="st">"black"</span>, edge.arrow.size<span class="op">=</span><span class="fl">0.2</span>, edge.width<span class="op">=</span><span class="fl">1.1</span>, edge.size<span class="op">=</span><span class="fl">1.2</span>,</span>
+<span>     edge.arrow.width<span class="op">=</span><span class="fl">1</span>, edge.color<span class="op">=</span><span class="st">"black"</span>, vertex.label.cex<span class="op">=</span><span class="fl">1.2</span>, </span>
+<span>     vertex.frame.color<span class="op">=</span><span class="st">"NA"</span>, margin<span class="op">=</span><span class="op">-</span><span class="fl">0.05</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="how_to_simulate_files/figure-html/how_to8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Fennell2015" class="csl-entry" role="doc-biblioentry">
+Fennell, Peter G., David J. P. O’Sullivan, Antoine Godin, and Stephen Kinsella. 2015. <span>“Is It Possible to Visualise Any Stock Flow Consistent Model as a Directed Acyclic Graph?”</span> <em>Computational Economics</em> 48 (2): 307–16. <a href="https://doi.org/10.1007/s10614-015-9521-8">https://doi.org/10.1007/s10614-015-9521-8</a>.
+</div>
+<div id="ref-Samuelson1939" class="csl-entry" role="doc-biblioentry">
+Samuelson, Paul A. 1939. <span>“<span class="nocase">Interactions between the Multiplier Analysis and the Principle of Acceleration</span>.”</span> <em>The Review of Economics and Statistics</em> 21 (2): 75–78. <a href="https://doi.org/10.2307/1927758">https://doi.org/10.2307/1927758</a>.
+</div>
+</div>
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./how_to_use.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">How to Use this Site</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./intro_stability_analysis.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to Stability Analysis of Dynamic Models</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">An open-source platform for macroeconomic model simulation.</div>   
+    <div class="nav-footer-right"><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></div>
+  </div>
+</footer>
+
+
+</body></html>
