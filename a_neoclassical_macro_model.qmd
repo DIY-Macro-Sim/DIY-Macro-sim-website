@@ -191,20 +191,20 @@ rn_star[i]=rn
 
 ### Plots
 
-Figures @fig-output-neocl-macro - @fig-employment-neocl-macro depicts the model economy's real activity under different scenarios. Monetary expansions (scenario 2) have no effects on output and employment, capturing the idea of money neutrality (Classical Dichotomy). However, the monetary expansion  raises the price level (see @fig-price_level ), capturing the key idea of the Quantity Theory of Money that inflation is driven by a growing money supply.
+Figures @fig-output-neocl - @fig-employment-neocl depicts the model economy's real activity under different scenarios. Monetary expansions (scenario 2) have no effects on output and employment, capturing the idea of money neutrality (Classical Dichotomy). However, the monetary expansion  raises the price level (see @fig-price_level ), capturing the key idea of the Quantity Theory of Money that inflation is driven by a growing money supply.
 
 ```{r neoclass2}
-#| label: fig-output-neocl-macro
+#| label: fig-output-neocl
 #| fig-cap: Output
 barplot(Y_star, ylab="Y", names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", 
                                            "5: Decrease in Yf", "6: Increase in b1"))
 
 ```
 
-An increase in government spending (by one unit) in scenario 3 does raise employment and real output, but by less than the initial stimulus (i.e. the fiscal multiplier is smaller than one). Looking at Figures @fig-employment-neocl-macro - @fig-investment , it can be seen that government spending crowds out private spending (consumption and investment). The decrease in consumption is a result of Ricardian Equivalence: the household anticipates higher taxes in the future and reduces current consumption to smooth out the impact. The increase in government expenditures also raises demand for loanable funds, which pushes up the real interest rate (see @fig-interest_rate ) and reduces investment (@fig-investment ). There is also an inflationary effect linked to the higher real interest rate, which raises the nominal rate and reduces the demand for money. 
+An increase in government spending (by one unit) in scenario 3 does raise employment and real output, but by less than the initial stimulus (i.e. the fiscal multiplier is smaller than one). Looking at Figures @fig-employment-neocl - @fig-investment , it can be seen that government spending crowds out private spending (consumption and investment). The decrease in consumption is a result of Ricardian Equivalence: the household anticipates higher taxes in the future and reduces current consumption to smooth out the impact. The increase in government expenditures also raises demand for loanable funds, which pushes up the real interest rate (see @fig-interest_rate ) and reduces investment (@fig-investment ). There is also an inflationary effect linked to the higher real interest rate, which raises the nominal rate and reduces the demand for money. 
 
 ```{r neoclass3}
-#| label: fig-employment-neocl-macro
+#| label: fig-employment-neocl
 #| fig-cap: Employment
 barplot(N_star, ylab="N",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", 
                                        "5: Decrease in Yf", "6: Increase in b1"))
