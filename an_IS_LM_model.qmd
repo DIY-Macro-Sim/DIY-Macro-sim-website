@@ -4,7 +4,9 @@
 
 The IS-LM model was developed by John R. Hicks (1937) to formalise some key ideas of John Maynard Keynes' 1936 book [The General Theory of Employment, Interest and Money](https://en.wikipedia.org/wiki/The_General_Theory_of_Employment,_Interest_and_Money). The model contains two equilibrium relationships: a goods market equilibrium between investment and saving (IS) and a money market equilibrium between money demand and money supply (LM). In the goods market, aggregate supply adjusts to the level of aggregate demand given by the expenditure decisions of households, firms, and the government. Households form their consumption demand based on a constant marginal propensity to consume out of income. Firms take investment decisions based on the rate of interest. Money demand is determined by aggregate income (transactions demand) and the interest rate on bonds (speculative demand). The money supply is assumed to be exogenous and under the control of the central bank. The two markets pin down equilibrium output and the interest rate. The goods market equilibrium may well coincide with involuntary unemployment. Adverse shocks to autonomous investment ('animal spirits') or autonomous money demand ('liquidity preference') reduce output and raise unemployment. The government can use monetary policy, fiscal spending, and income taxes to stimulate economic activity and achieve full employment.
 
-In this short-run model, prices and the capital stock are fixed. The focus is thus on goods market equilibrium rather than economic growth. As all endogenous variables adjust instantaneously, the model is static. We consider a version with linear functions, adapted from Blanchard \& Johnson (2013, chap.5).
+In this short-run model, prices and the capital stock are fixed. The focus is thus on goods market equilibrium rather than economic growth. As all endogenous variables adjust instantaneously, the model is static. We consider a version with linear functions, adapted from Blanchard and Johnson [-@Blanchard2013, chap.5].
+
+## The Model 
 
 $$
 Y=C+I+G
@@ -46,9 +48,9 @@ $$
 U=1-\frac{N}{N^{f}}
 $$ {#eq-islmU}
 
-where $Y, C, I, G, T, r, M_{d}, M_{s}, N, U$, and $N^{f}$ are output, consumption, investment, government spending, taxes, the interest rate on bonds, money demand, money supply, employment, the unemployment rate, and the labour force, respectively. The constant price level has been normalised to unity.
+where $Y$, $C$, $I$, $G$, $T$, $r$, $M_{d}$, $M_{s}$, $N$, $U$ and $N^{f}$ are output, consumption, investment, government spending, taxes, the interest rate on bonds, money demand, money supply, employment, the unemployment rate, and the labour force, respectively. The constant price level has been normalised to unity.
 
-Equation (1) is the goods market equilibrium condition. Aggregate supply $(Y)$ accommodates to the level of aggregate demand which is the sum of consumption, investment, and government spending. Equation (2) is the consumption function consisting of autonomous consumption demand $\left(c_{0}\right)$ and a marginal propensity to consume $\left(c_{1}\right)$ out of disposable income $(Y-T)$. Investment demand in equation (3) has an autonomous component $\left(i_{0}\right)$ capturing Keynesian animal spirits and a component that is negatively related to the rate of interest on bonds. By equations (4) and (5), government spending and taxation are exogenous. Similarly, the money supply in equation (6) is assumed to be exogenous. By equation (7), households' money demand is positively related to income (capturing the transaction demand for money) and negatively related to the interest rate on bonds (capturing speculative demand). There is also an autonomous term $\left(m_{0}\right)$ capturing Keynesian liquidity preference. Equation (9) is a fixed-coefficient production function through which employment is determined. In conjunction with an exogenously given labour force $\left(N^{f}\right)$, the level of employment can be used to obtain an unemployment rate in equation (10).
+@eq-islmY is the goods market equilibrium condition. Aggregate supply $(Y)$ accommodates to the level of aggregate demand which is the sum of consumption, investment, and government spending. @eq-islmC is the consumption function consisting of autonomous consumption demand $\left(c_{0}\right)$ and a marginal propensity to consume $\left(c_{1}\right)$ out of disposable income $(Y-T)$. Investment demand in @eq-islmI has an autonomous component $\left(i_{0}\right)$ capturing Keynesian animal spirits and a component that is negatively related to the rate of interest on bonds. By equations @eq-islmG and @eq-islmT, government spending and taxation are exogenous. Similarly, the money supply in @eq-islmMs is assumed to be exogenous. By @eq-islmMd, households' money demand is positively related to income (capturing the transaction demand for money) and negatively related to the interest rate on bonds (capturing speculative demand). There is also an autonomous term $\left(m_{0}\right)$ capturing Keynesian liquidity preference. @eq-islmN is a fixed-coefficient production function through which employment is determined. In conjunction with an exogenously given labour force $\left(N^{f}\right)$, the level of employment can be used to obtain an unemployment rate in @eq-islmU.
 
 ## Simulation
 
@@ -58,14 +60,15 @@ Table 1 reports the parameterisation used in the simulation. Besides a baseline 
 
 **Table 1: Parameterisation**
 
-| Scenario | c_(0) | c_(1) | i_(0) | i_(1) | m_(0) | m_(1) | m_(2) | M_(0) | T_(0) | G_(0) | a | N^(f) |
+| Scenario | $c_{0}$ | $c_{1}$ | $i_{0}$ | $i_{1}$ | $m_{0}$ | $m_{1}$ | $m_{2}$ | $M_{0}$ | $T_{0}$ | $G_{0}$ | $a$ | $N^{f}$ |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1: baseline | 2 | 0.6 | 2 | 0.1 | 6 | 0.2 | 0.4 | 5 | 1 | 1 | 1.5 | 18 |
-| 2: fall in animal spirits (i_(0)) | 2 | 0.6 | 1 | 0.1 | 6 | 0.2 | 0.4 | 5 | 1 | 1 | 1.5 | 18 |
-| 3: increased liquidity preference (m_(0)) | 2 | 0.6 | 2 | 0.1 | 7 | 0.2 | 0.4 | 5 | 1 | 1 | 1.5 | 18 |
-| 4: monetary expansion (M_(0)) | 2 | 0.6 | 2 | 0.1 | 6 | 0.2 | 0.4 | 6 | 1 | 1 | 1.5 | 18 |
-| 5: tax cut (T_(0)) | 2 | 0.6 | 2 | 0.1 | 6 | 0.2 | 0.4 | 5 | 0 | 1 | 1.5 | 18 |
-| 6: fiscal expansion (G_(0)) | 2 | 0.6 | 2 | 0.1 | 6 | 0.2 | 0.4 | 5 | 1 | 2 | 1.5 | 18 |
+| 2: fall in animal spirits ($i_{0}$) | 2 | 0.6 | 1 | 0.1 | 6 | 0.2 | 0.4 | 5 | 1 | 1 | 1.5 | 18 |
+| 3: increased liquidity preference ($m_{0}$) | 2 | 0.6 | 2 | 0.1 | 7 | 0.2 | 0.4 | 5 | 1 | 1 | 1.5 | 18 |
+| 4: monetary expansion ($M_{0}$) | 2 | 0.6 | 2 | 0.1 | 6 | 0.2 | 0.4 | 6 | 1 | 1 | 1.5 | 18 |
+| 5: tax cut ($T_{0}$) | 2 | 0.6 | 2 | 0.1 | 6 | 0.2 | 0.4 | 5 | 0 | 1 | 1.5 | 18 |
+| 6: fiscal expansion ($G_{0}$) | 2 | 0.6 | 2 | 0.1 | 6 | 0.2 | 0.4 | 5 | 1 | 2 | 1.5 | 18 |
+
 
 ### Simulation code
 
@@ -169,50 +172,70 @@ for (i in 1:S){
 
 ### Plots
 
-Figures 1-2 depict the response of the model's key endogenous variables, output and the interest rate, to various shifts. A fall in animal spirits (scenario 2) and an increase in liquidity preference (scenario 3) both have contractionary effects. While the fall in animal spirits directly reduces aggregate demand and thereby output (despite a fall in the interest rate), the rise in liquidity preference depresses output through its positive effect on the interest rate. Both scenarios raise the unemployment rate (Figure 3). Scenarios 4 to 6 assess three different macroeconomic policy tools to stimulate output. It can be seen in Figure 1 that fiscal policy is more effective than monetary policy for the parameterisation in Table 1.^[The appendix shows formally that fiscal policy is more effective than monetary policy if $m_{2}>i_{2}$.] Direct fiscal stimulus is more effective than tax cuts due to the constant marginal propensity to consume. The effect on output is a multiple of the one-unit stimulus thanks to the multiplier effect. However, it can also be seen that fiscal policy raises the interest rate, which crowds out some of the expansionary effect.
+@fig-output and @fig-r depict the response of the model's key endogenous variables, output and the interest rate, to various shifts. A fall in animal spirits (scenario 2) and an increase in liquidity preference (scenario 3) both have contractionary effects. While the fall in animal spirits directly reduces aggregate demand and thereby output (despite a fall in the interest rate), the rise in liquidity preference depresses output through its positive effect on the interest rate. Both scenarios raise the unemployment rate (@fig-U). Scenarios 4 to 6 assess three different macroeconomic policy tools to stimulate output. It can be seen in @fig-output that fiscal policy is more effective than monetary policy for the parameterisation in Table 1.^[The appendix shows formally that fiscal policy is more effective than monetary policy if $m_{2}>i_{2}$.] Direct fiscal stimulus is more effective than tax cuts due to the constant marginal propensity to consume. The effect on output is a multiple of the one-unit stimulus thanks to the multiplier effect. However, it can also be seen that fiscal policy raises the interest rate, which crowds out some of the expansionary effect.
 
 ```{r islm2}
+#| label: fig-output
+#| fig-cap: Output
 barplot(Y_star, ylab="Y", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.",
-                                      "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."))
-
-barplot(r_star, ylab="r", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.",
-                                      "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."))
-
-barplot(I_star, ylab="I", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.",
                                       "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."))
 ```
 
-Figures 4-5 further show that monetary policy mostly stimulates investment, whereas fiscal policy boost consumption.
-
 ```{r islm3}
-
-barplot(C_star, ylab="C", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.",
+#| label: fig-r
+#| fig-cap: Interest rate
+barplot(r_star, ylab="r", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.",
                                       "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."))
+```
 
-barplot(N_star, ylab="N", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.",
-                                      "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."))
-
+```{r islm7}
+#| label: fig-U
+#| fig-cap: Unemployment
 barplot(U_star*100, ylab="U (%)", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.",
                                               "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."))
 
 ```
 
-###  Calculate equilibrium fiscal multiplier
-
+@fig-I and @fig-C further show that monetary policy mostly stimulates investment, whereas fiscal policy boost consumption.
 
 ```{r islm4}
+#| label: fig-I
+#| fig-cap: Investment
+barplot(I_star, ylab="I", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.",
+                                      "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."))
+```
+
+```{r islm5}
+#| label: fig-C
+#| fig-cap: Consumption
+barplot(C_star, ylab="C", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.",
+                                      "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."))
+```
+
+```{r islm6}
+#| label: fig-N
+#| fig-cap: Employment
+# barplot(N_star, ylab="N", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.",
+#                                       "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."))
+```
+
+###  Calculate equilibrium fiscal multiplier
+
+```{r islm8}
 Y_star[6]-Y_star[1] # numerical approach
 
 m2/((1-c1)*m2+i1*m1) # analytical approach
 ```
-
 
 ## Directed graph
 
 Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_{1}$ to node $x_{2}$ indicates a causal impact of $x_{1}$ on $x_{2}$.
 
 
-```{r islm5}
+```{r islm9}
+#| label: fig-DAG
+#| fig-cap: Directed graph of IS-LM model
+#| message: false
 
 # Construct auxiliary Jacobian matrix for 11 variables: Y, C, I, G, T, r, M0, N, i0, m0, Md
 # where non-zero elements in regular Jacobian are set to 1 and zero elements are unchanged
@@ -241,5 +264,55 @@ plot(dg, main="", vertex.size=20, vertex.color="lightblue",
      edge.arrow.width=0.8, edge.color="black", vertex.label.cex=1.5, vertex.frame.color="NA", margin=-0.2)
 ```
 
+## Appendix
 
-Figure 6: Directed graph of IS-LM model
+### Analytical solution
+
+To obtain the IS-curve, substitute @eq-islmC - @eq-islmT into @eq-islmY and solve for $Y$:
+
+$$
+Y=\left(\frac{1}{1-c_1}\right)(c_0 + i_0 + G_0 - i_1r - c_1 T_0).
+$$ {#eq-IS}
+
+To obtain the LM-curve, substitute @eq-islmMs - @eq-islmMd into @eq-islmM and solve for $r$:
+
+$$
+r=\left(\frac{1}{m_2}\right)(m_0 - M_0 + m_1Y).
+$$ {#eq-LM}
+
+Finally, to obtain equilibrium solutions for $Y$ and $r$, substitute @eq-LM into @eq-IS and vice versa:
+
+$$
+Y^*=\left[\frac{m_2}{(1-c_1)m_2+i_1m_1}\right](c_0 + i_0 + G_0 - c_1 T_0) + \left[\frac{i_1}{(1-c_1)m_2+i_1m_1}\right](M_0-m_0)
+$$
+
+$$
+r^*= \left[\frac{1-c_1}{(1-c_1)m_2+i_1m_1}\right](m_0-M_0)+\left[\frac{m_1}{(1-c_1)m_2+i_1m_1}\right](c_0+i_0+G_0-c_1T_0).
+$$
+
+From this, the following results can be obtained:
+
+
+- The equilibrium effects of a change in taxes are smaller than those from a change in government spending (since $c_1$ is smaller than one).
+
+- Government spending is more effective than monetary expansion if $m_2 > i_1$ (which is the case for the parameterisation in Table 1.
+
+- The equilibrium multiplier $\left[\frac{m_2}{(1-c_1)m_2+i_1m_1}\right]$ is smaller than the aggregate demand multiplier $\left(\frac{1}{1-c_1}\right)$ due to the positive effect on the interest rate and the corresponding negative effect investment ($i_1m_1$). This is the crowding out mechanism.
+
+### Construction of directed graph
+
+The directed graph can be derived from the model's Jacobian matrix.^[See \cite{Fennell2015} for a neat exposition.] Let $\mathbf{x}$ be the vector containing the model's variables. The system of equations representing the model can be written as $\mathbf{f(x)=0}$. The Jacobian matrix is then given by $\mathbf{J}=\mathbf{\frac{\partial f}{\partial x}}$.  
+
+Next, construct an "auxiliary" Jacobian matrix $\mathbf{M}$ in which the non-zero elements of the Jacobian are replaced by ones, whereas zero elements remain unchanged, i.e.
+
+$$
+M_{ij} =
+\begin{cases}
+1 & \text{if }  J_{ij} \neq 0, \\
+0 & \text{otherwise.}
+\end{cases}
+$$
+
+Finally, taking the transpose of the "auxiliary" Jacobian matrix yields the adjacency matrix ($\mathbf{M^T}=\mathbf{A}$), which is a binary matrix whose elements ($A_{ji}$) indicate whether there is a directed edge from a node $x_j$ to node $x_i$. From the adjacency matrix, the directed graph is constructed.
+
+## References {-}
