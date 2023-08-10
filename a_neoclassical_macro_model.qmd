@@ -61,7 +61,7 @@ By @eq-Y, output is determined by a Cobb-Douglass production function with const
 
 ### Parameterisation
 
-Table 1 reports the parameterisation used in the simulation. Besides a baseline (labelled as scenario 1), five further scenarios will be considered. Scenarios 2 and 3 are a monetary expansion (increase in the exogenous money supply $M_0$) and fiscal expansion (increase in $G_0$), respectively. Scenario 4 is an improvement in total factor productivity ($A$) and scenario 5 a fall in expected future income ($Y^f$). Finally, scenario 6 is a shift in household preferences towards more leisure ($b_1$).  \\
+Table 1 reports the parameterisation used in the simulation. Besides a baseline (labelled as scenario 1), five further scenarios will be considered. Scenarios 2 and 3 are a monetary expansion (increase in the exogenous money supply $M_0$) and fiscal expansion (increase in $G_0$), respectively. Scenario 4 is an improvement in total factor productivity ($A$) and scenario 5 a fall in expected future income ($Y^f$). Finally, scenario 6 is a shift in household preferences towards more leisure ($b_1$). 
 
 **Table 1: Parameterisation**
 
@@ -78,7 +78,6 @@ Table 1 reports the parameterisation used in the simulation. Besides a baseline 
 ### Simulation code
 
 ```{r neoclass1}
-
 
 # Clear the environment
 rm(list=ls(all=TRUE))
@@ -192,20 +191,20 @@ rn_star[i]=rn
 
 ### Plots
 
-Figures @fig-output - @fig-employment depicts the model economy's real activity under different scenarios. Monetary expansions (scenario 2) have no effects on output and employment, capturing the idea of money neutrality (Classical Dichotomy). However, the monetary expansion  raises the price level (see Figure @fig-price_level ), capturing the key idea of the Quantity Theory of Money that inflation is driven by a growing money supply.
+Figures @fig-output-neocl-macro - @fig-employment-neocl-macro depicts the model economy's real activity under different scenarios. Monetary expansions (scenario 2) have no effects on output and employment, capturing the idea of money neutrality (Classical Dichotomy). However, the monetary expansion  raises the price level (see @fig-price_level ), capturing the key idea of the Quantity Theory of Money that inflation is driven by a growing money supply.
 
 ```{r neoclass2}
-#| label: fig-output
+#| label: fig-output-neocl-macro
 #| fig-cap: Output
 barplot(Y_star, ylab="Y", names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", 
                                            "5: Decrease in Yf", "6: Increase in b1"))
 
 ```
 
-An increase in government spending (by one unit) in scenario 3 does raise employment and real output, but by less than the initial stimulus (i.e. the fiscal multiplier is smaller than one). Looking at Figures @fig-employment - @fig-investment , it can be seen that government spending crowds out private spending (consumption and investment). The decrease in consumption is a result of Ricardian Equivalence: the household anticipates higher taxes in the future and reduces current consumption to smooth out the impact. The increase in government expenditures also raises demand for loanable funds, which pushes up the real interest rate (see Figure @fig-interest_rate ) and reduces investment (Figure @fig-investment ). There is also an inflationary effect linked to the higher real interest rate, which raises the nominal rate and reduces the demand for money. 
+An increase in government spending (by one unit) in scenario 3 does raise employment and real output, but by less than the initial stimulus (i.e. the fiscal multiplier is smaller than one). Looking at Figures @fig-employment-neocl-macro - @fig-investment , it can be seen that government spending crowds out private spending (consumption and investment). The decrease in consumption is a result of Ricardian Equivalence: the household anticipates higher taxes in the future and reduces current consumption to smooth out the impact. The increase in government expenditures also raises demand for loanable funds, which pushes up the real interest rate (see @fig-interest_rate ) and reduces investment (@fig-investment ). There is also an inflationary effect linked to the higher real interest rate, which raises the nominal rate and reduces the demand for money. 
 
 ```{r neoclass3}
-#| label: fig-employment
+#| label: fig-employment-neocl-macro
 #| fig-cap: Employment
 barplot(N_star, ylab="N",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", 
                                        "5: Decrease in Yf", "6: Increase in b1"))
@@ -230,7 +229,7 @@ barplot(I_star, ylab="I",  names.arg=c("1: Baseline", "2: Increase in M0", "3: I
 
 ```
 
-A decrease in expected future income (scenario 5) has a small expansionary effect on aggregate output. This is because households will reduce some of their current consumption (see Figure @fig-consumption ) and supply more labour to smooth their consumption over time. The increase in saving reduces the real interest rate (see Figure @fig-interest_rate ) and is compensated by an increase in investment (see Figure @fig-investment ). 
+A decrease in expected future income (scenario 5) has a small expansionary effect on aggregate output. This is because households will reduce some of their current consumption (see @fig-consumption ) and supply more labour to smooth their consumption over time. The increase in saving reduces the real interest rate (see @fig-interest_rate ) and is compensated by an increase in investment (see @fig-investment ). 
 
 ```{r neoclass5}
 #| label: fig-interest_rate
@@ -292,7 +291,7 @@ plot(dg, main="", vertex.size=20, vertex.color="lightblue",
 
 ```
 
-In Figure @fig-dg , it can be seen that productivity ($A$), future income ($Y^f$), the money supply ($M_0$), and government spending ($G_0$) are the key exogenous variables of the model. All other variables are endogenous, and many of them form a closed loop (or cycle) within the system. The left part of the graph captures the supply side: the labour market simultaneously pins down the real wage and employment, which together with the exogenously level of productivity determine output. The part in the middle embodies the demand side: aggregate demand (consumption, investment, and government spending) together with a given level of output determine the real interest rate. The right part captures the nominal side of the model given by the money market, which determines the price level. Notably, while the real side of the model feeds into the money market via the nominal interest rate ($r_n$), there is not causal effect from the money market to the real side reflecting the Classical Dichotomy. 
+In @fig-dg , it can be seen that productivity ($A$), future income ($Y^f$), the money supply ($M_0$), and government spending ($G_0$) are the key exogenous variables of the model. All other variables are endogenous, and many of them form a closed loop (or cycle) within the system. The left part of the graph captures the supply side: the labour market simultaneously pins down the real wage and employment, which together with the exogenously level of productivity determine output. The part in the middle embodies the demand side: aggregate demand (consumption, investment, and government spending) together with a given level of output determine the real interest rate. The right part captures the nominal side of the model given by the money market, which determines the price level. Notably, while the real side of the model feeds into the money market via the nominal interest rate ($r_n$), there is not causal effect from the money market to the real side reflecting the Classical Dichotomy. 
 
 ## Appendices
 
@@ -326,7 +325,7 @@ $$
 a A K^{a-1} N^{1-a}-r=0 .
 $$ {#eq-FOC_I}
 
-From @eq-FOC_Nd, equation @eq-w for labour demand can be derived. While the capital stock is pre-determined in every period, the firm can adjust the capital stock through investment. We thus use the first-order condition for capital @eq-FOC_I to derive equation @eq-I for investment demand.
+From @eq-FOC_Nd, @eq-w for labour demand can be derived. While the capital stock is pre-determined in every period, the firm can adjust the capital stock through investment. We thus use the first-order condition for capital @eq-FOC_I to derive @eq-I for investment demand.
 
 #### The government's budget constraint: Ricardian Equivalence
 
@@ -351,7 +350,7 @@ $$ {#eq-Gitbc}
 
 Thus, while the government's budget need not be balanced in every period, it will be balanced over time (in a present value sense).^[See @Garin2021[chap. 13] for a more detailed discussion of the government's budget constraints.]
 
-#### The household's problem: intertemporal utility maximisation}		
+#### The household's problem: intertemporal utility maximisation		
 
 The household derives utility from current consumption, leisure ($1-N$), future consumption $C^f$, and from holding real money balances $\left(\frac{M}{P}\right)$. We use the following log utility function:
 
@@ -416,7 +415,7 @@ $$
 M-\frac{b_3 C^f\left(1+r_n\right) P}{b_2(1+r) r_n}=0 .
 $$ {#eq-FOC_M}
 
-Substituting @eq-FOC_C, which is often also called the _Euler equation_, into @eq-FOC_Ns and @eq-FOC_M yields equation @eq-N for labour supply and equation @eq-MD for money demand, respectively. Finally, using @eq-ibc and @eq-FOC_M in the Euler equation @eq-FOC_C yields the consumption function @eq-C.
+Substituting @eq-FOC_C, which is often also called the _Euler equation_, into @eq-FOC_Ns and @eq-FOC_M yields @eq-N for labour supply and @eq-MD for money demand, respectively. Finally, using @eq-ibc and @eq-FOC_M in the Euler @eq-FOC_C yields the consumption function @eq-C.
 
 
 ### Construction of directed graph
@@ -431,3 +430,4 @@ $$
 
 Finally, taking the transpose of the `auxiliary' Jacobian matrix yields the adjacency matrix ($\mathbf{M^T}=\mathbf{A}$), which is a binary matrix whose elements ($A_{ji}$) indicate whether there is a directed edge from a node $x_j$ to node $x_i$. From the adjacency matrix, the directed graph is constructed.
 
+## References {-}
