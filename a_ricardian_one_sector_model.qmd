@@ -247,7 +247,7 @@ plot(dg, main="Figure 5: Directed graph of Ricardian One-Sector Model", vertex.s
 
 In Figure 5, it can be seen that productivity ($A$) and the subsistence wage ($w^S$) are the key exogenous variables that impact income and the marginal product of labour, and population dynamics, respectively. Most other variables are endogenous and form a closed loop (or cycle) within the system. Profits are a residual. The directed graph illustrates the supply-driven nature of the model, where productivity determines employment and distribution, which in turn feed back into income and capital accumulation. At the same time, income distribution has an exogenous element in the form of the subsistence wage, which feeds into the system.
 
-## Analytical Model Solution
+## Analytical discussion
 
 To analyse the dynamics, combine @eq-ricardo1_Y to @eq-ricardo1_P and substitute into @eq-ricardo1_K. Further use @eq-ricardo1_W and @eq-ricardo1_w in @eq-ricardo1_N. This yields the two-dimensional dynamic system in $K_t$ and $w_t$:
 
@@ -337,3 +337,5 @@ print(2-gamma*a[i,T]*(A[i,T]*(wS[i,T]/(a[i,T]*A[i,T]))^((2-a[i,T])/(1-a[i,T]))
 }
 
 ```
+
+## References

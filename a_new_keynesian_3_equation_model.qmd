@@ -183,7 +183,7 @@ plot(dg, main="Figure 4: Directed graph of 3-Equation model", vertex.size=20, ve
 
 In Figure 4, it can be seen that aggregate demand ($A$), equilibrium output ($y_e$), and the inflation target ($\pi^T$) are the key exogenous variables of the model. All other variables are endogenous and form a closed loop (or cycle) within the system. The upper-right side of the graph represents the supply side, given by the equilibrium level of output and its effect on inflation. The upper-left side captures the demand side and its effect on actual output. The key endogenous variables, output, inflation, and the interest rate form the centre of the graph, where they stand in a triangular relationship to each other. Output drives inflation, which in turn impacts the real interest rate. The latter then feeds back into output. Structural changes in the relationship between demand and supply (e.g. excess demand) also impact the system through their effect on the stabilising interest rate ($r_s$).
 
-## Analytical Model Solution {#sec-analytical}
+## Analytical discussion {#sec-analytical}
 
 ### Derivation of core equations
 
@@ -259,3 +259,5 @@ ev=eigen(J)
 det(J)       # determinant
 sum(diag(J)) # trace
 ```
+
+## References

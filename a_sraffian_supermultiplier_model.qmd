@@ -12,7 +12,7 @@ This is a model of long-run steady state growth. In the steady state, all endoge
 
 [^a_sraffian_supermultiplier_model-2]: All variables are normalised by the capital stock and thus rendered stationary.
 
-[^a_sraffian_supermultiplier_model-3]: Section X explains how continuous time models can be solved numerically.
+[^a_sraffian_supermultiplier_model-3]: @sec-sim-continuous explains how continuous time models can be solved numerically.
 
 ## The Model
 
@@ -177,7 +177,7 @@ legend("right", legend=c("Rise autom demand", "Rise profit share", "Rise normal 
 
 Finally, a rise in the normal rate (dotted line) initially has contractionary effects on utilisation and growth but eventually raises utilisation to a permanently higher level. The growth rate returns to its previous value.
 
-## Directed Graph
+## Directed graph
 
 Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.
 
@@ -214,7 +214,7 @@ plot(dg, main="Figure 4: Directed graph of Sraffian Supermultiplier Model", vert
 
 In Figure 4, it can be seen that the growth rate of autonomous demand ($g_z$), the profit share ($\pi$), and the normal rate of capacity utilisation ($u_n$) are the key exogenous variable of the model. The profit rate ($r$), consumption ($c$), the autonomous demand rate ($z$), investment ($g$), the rate of utilisation ($u$), an the expected growth rate ($g_0$) form a closed loop (or cycle) within the system. For example, an increase in the growth rate of autonomous demand increases consumption, which raises the rate of capacity utilisation, growth, and the expected growth rate. In a second-round effect, the increase in the growth rate then feeds back negatively into the autonomous demand rate, which leads to a return of the rate of capacity utilisation to its previous value.
 
-## Analytical Model Solution
+## Analytical discussion
 
 To find the short-run equilibrium solutions for $u$ and $g$, first substitute @eq-ssm_r-@eq-ssm_g into @eq-ssm_u and solve for $u$: $$
 u^* = \frac{g_0+z-g_1u_n}{s_r \pi-g_1}.
@@ -263,3 +263,5 @@ print(sr*pi[i,1]>g1) # Keynesian stability condition
 print(mu<sr*un[i,1]*pi[i,1]-gz[i,1])
 }
 ```
+
+## References

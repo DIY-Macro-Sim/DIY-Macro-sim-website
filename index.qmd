@@ -1,18 +1,11 @@
 # Welcome {.unnumbered}
 
-This project aims to provide an open source code repository and online script for macroeconomic model simulation. Our platform follows a "do-it-yourself" (DIY) approach, empowering users to numerically simulate key macroeconomic models using the open-source programming language R. Whether you are a student, researcher, or an economics enthusiast, our platform offers resources to deepen your understanding of both macroeconomic modeling and coding in R.
+This platform provides an open source code repository and online script for macroeconomic model simulation. It follows a "do-it-yourself" (DIY) approach, empowering users to numerically simulate key macroeconomic models on their own using the open-source programming language *R*. Whether you are a student, researcher, or an economics enthusiast, our platform offers resources to deepen your understanding of both macroeconomic modelling and coding.
 
-Our platform covers an array of macroeconomic models, including canonical textbook models, models from different economic paradigms, and seminal models from the history of economic thought. For each model, we provide three main components to facilitate understanding:
+The platform covers an array of macroeconomic models, including canonical textbook models, models from different economic paradigms, and seminal models from the history of economic thought. It bridges a gap between intermediate and advanced level macroeconomics by providing detailed yet accessible treatments of seminal macroeconomic models. Most intermediate macroeconomics textbooks focus on graphical analysis, while advanced level materials are often more mathematical and less accessible. Our platform offers a hands-on and approachable resource for users to build both a solid foundation in modelling and macroeconomic intuition. 
 
-1. Concise model descriptions: We offer clear and comprehensive descriptions that explain the key ideas, assumptions, and equations of each model. This helps users grasp the underlying concepts and intuition behind the models.
-2. Annotated R code: Our platform includes annotated R code that allows users to numerically simulate the models, examine their results under different scenarios, and produce visualizations to better understand the models' structure and output. This hands-on approach enables users to gain practical coding skills while applying macroeconomic concepts.
-3. Mathematical appendices: For users who are interested in delving deeper into the mathematical properties of the models, we provide appendices that offer a more rigorous treatment of the models' mathematical foundations.
+The platform's DIY-approach aims to foster reproducibility and open-source principles in macroeconomic research and education by providing learning materials that are freely available and modifiable by everyone. The platform’s content will expand over time through new entries added by the project team. A Python extension is planned.
 
-We aim to bridge a gap between intermediate and advanced level macroeconomics by providing detailed yet accessible treatments of seminal macroeconomic models. Most intermediate macroeconomics textbooks focus on graphical analysis, while advanced level materials are often more rigorous and less accessible. Our platform offers a hands-on and approachable resource for users to build a solid foundation in macroeconomic modeling.
+## Project team
 
-We are committed to promoting reproducibility and open-source principles in macroeconomic research and education by providing learning materials that are freely available to everyone. We hope that our platform will be a valuable resource for students and teachers in the field of macroeconomics.
-
-# Overview {.unnumbered}
-
-...
-
+[Franz Prante](https://fprante.me/) (Chemnitz University of Technology) and [Karsten Kohler](https://karstenkohler.com/) (University of Leeds) 

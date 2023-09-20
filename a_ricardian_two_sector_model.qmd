@@ -310,7 +310,7 @@ legend("bottomright", legend=c("1: baseline", "4: productivity boost III", "5: h
 
 ```
 
-# Directed graph
+## Directed graph
 
 Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.[^a_ricardian_two_sector_model-10]
 
@@ -367,7 +367,7 @@ plot(dg, main="Figure 9: Directed Graph of Ricardian Two-Sector Model", vertex.s
 
 In Figure 9, it can be seen that productivity in agriculture ($A$ and $a_1$) are key exogenous variables that impact income in sector 1 and the marginal product of labour. The subsistence wage ($w^S$) is another exogenous variable that impacts the system through its effect on population dynamics. Productivity in the luxuries sector ($a_2$) feeds into the system via employment.ost other variables are endogenous and form a closed loop (or cycle) within the system. Profits are a residual. The directed graph illustrates the supply-driven nature of the agricultural sector, where (marginal) productivity determine employment and distribution. By contrast, the luxury goods sector is demand-determined with employment being the residual. Profits determine capital accumulation, which in turn provides funds that can be used to hire more agricultural workers. A higher subsistence wage reduces capital accumulation as it leaves fewer profits to be reinvested.
 
-## Analytical Model Solution
+## Analytical discussion
 
 To analyse the dynamics, combine @eq-ricardo2_Y to @eq-ricardo2_P and substitute into @eq-ricardo2_K. Further use @eq-ricardo2_W and @eq-ricardo2_w in @eq-ricardo2_N. This yields the two-dimensional dynamic system in $K_t$ and $w_t$:
 
@@ -460,3 +460,5 @@ print(paste0("Scenario ", i, ":"))
 print(2-gamma*((a1[i,T]^a1[i,T])*A[i,T]*(wS[i,T]/(((a1[i,T]^a1[i,T])*A[i,T])))^((2-a1[i,T])/(1-a1[i,T]))) + a1[i,T]*wS[i,T]*(wS[i,T]/(((a1[i,T]^a1[i,T])*A[i,T]))^(1/(1-a1[i,T])))>0)
 }
 ```
+
+## References

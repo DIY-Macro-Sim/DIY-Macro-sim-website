@@ -1,6 +1,8 @@
-# How to Simulate Economic Models
+# How to Simulate Economic Models {#sec-how-to-simulate}
 
 ## Introduction: economic models
+
+Why do we build formal economic models? Because they help us think carefully about the *causal mechanisms* that generate certain economic outcomes (e.g. unemployment). Models are especially useful when the variables of interest are inherently quantitative (e.g. the interest rate and unemployment) and when several of these quantitative variables interact with each other. More specifically, models provide a precise formal representation of a set of *interlinked* causal mechanisms that are often difficult to analyse informally.
 
 Every economic model essentially consist of three things:
 
@@ -10,9 +12,9 @@ Every economic model essentially consist of three things:
 
 3.  a set of exogenous or fixed coefficients ('parameters') and exogenous variables
 
-The solution to the model, its 'equilibrium', will pin down values for the endogenous variables of the model for a given set of parameters and exogenous variables. Thus, the endogenous variables, e.g. consumption, investment, prices etc., are determined within the system, while exogenous variables are determined outside of the system and often reflect policy variables, such as the central bank interest rate or discretionary government spending. The equations connect the variables of the system. They typically express:
+The solution to the model, its 'equilibrium', will pin down values for the endogenous variables of the model for a given set of parameters and exogenous variables. Thus, the endogenous variables, e.g. unemployment, are determined within the system, while exogenous variables are determined outside of the system and often reflect policy variables, such as the central bank interest rate. The equations connect the variables of the system. They typically express:
 
--   economic (accounting) identities (e.g. that in a closed economy without government, saving is income that is not consumed, $S=Y-C$)
+-   economic (accounting) identities (e.g. that in a closed economy without government, saving is income that is not consumed: $S=Y-C$)
 
 -   budget constraints (e.g. that business investment can be financed out of retained profits and new debt, $I=\Pi+\Delta D$)
 
@@ -30,7 +32,7 @@ The endogenous variables are typically interrelated: e.g. $x$ determines $y$, bu
 
 -   recursive: $x$ affects $y$ only in $t+1$ (or vice versa)
 
-Note that dynamic models may contain both simultaneous and recursive relationships.
+Unlike static models, dynamic models describe what happens out of equilibrium.^[That raises the question of whether an equilibrium is stable or unstable, which is discussed in @sec-stab_analysis.] Note that dynamic models may contain both simultaneous and recursive relationships.
 
 Whether the relationships between the variables is simultaneous or recursive has implications for how the model can be solved. In general, simple economic models can often be solved analytically without a computer. If the model contains simultaneous relationships, it needs to be solved as a simultaneous system by solving for the endogenous variables through repeated substitution. This means going from the so-called 'structural form', i.e. the full set of equations, to the so-called 'reduced form', where the right-hand side of the equations only contains exogenous variables and parameters. If the system is linear, techniques from linear algebra such as matrix inversion or Cramer's rule can be used (see @Chiang2005, chaps. 4-5). If the system contains recursive relationships, the equilibrium solution can be found by setting $x_{t+i}=x_{t-i}=x_{t}$ for all $x$ and then solving the resulting simultaneous system (more on this @sec-stab_analysis).
 
@@ -139,7 +141,7 @@ Let's break this code down a little bit:
 
 What happens is the following: in the first iteration, $Y$ and $C$ are calculated based on the initial values and the parameter values. In the second iteration, the values are then overwritten based on the results from the first iteration. This process continues 1000 times. In this way, the correct solution is successively approximated. If you have an analytical solution, you can compare it with the numerical one to double-check your results.
 
-When does the method of iteration fail to provide a solution? In the following code, everything is the same with the only difference that the marginal propensity to consume is now larger than unity ($c_1=1.2$). Now the numerical simulation fails to find the solution. This is because with $c_1>0$, the so-called Keynesian equilibrium condition is violated and the system happens to be unstable. We will discuss in @sec_stab_analysis the issue of stability and how to analyse it formally. At this point, we simply note that the method of iterations requires static models to be stable to yield equilibrium solutions.
+When does the method of iteration fail to provide a solution? In the following code, everything is the same with the only difference that the marginal propensity to consume is now larger than unity ($c_1=1.2$). Now the numerical simulation fails to find the solution. This is because with $c_1>0$, the so-called Keynesian equilibrium condition is violated and the system happens to be unstable. We will discuss in @sec-stab_analysis the issue of stability and how to analyse it formally. At this point, we simply note that the method of iterations requires static models to be stable to yield equilibrium solutions.
 
 ```{r howto_2}
 ### Parameterisation for which method of iteration fails
@@ -378,7 +380,7 @@ Broadly speaking, three types of nodes are possible:
 
 It can thus be seen that the key exogenous variable in the @Samuelson1939 model is government spending $G_0$, which determines aggregate income, which in turn feeds into consumption. Consumption then feeds into investment, which feeds back into income yielding the multiplier-accelerator effect.
 
-## Appendix: How to simulate dynamic model in continuous time
+## Appendix: How to simulate dynamic model in continuous time {#sec-sim-continuous}
 
 Sometimes, dynamic economic models are written in continuous time where the time increment is assumed to be infinitesimally small. Consider, for example, a continuous-time version of the Keynesian goods market model:
 

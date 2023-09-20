@@ -99,23 +99,22 @@ M0[]=5
 G0[]=1   
 T0[]=1
 
-for (i in 1:S){ 
-  if (i==2){ # scenario 2: fall in animal spirits
-    i0[2]=1
-  }
-  if (i==3){ # scenario 3: increase in liquidity preference
-    m0[3]=7
-  }
-  if (i==4){ # scenario 4: monetary expansion 
-    M0[4]=6
-  }
-  if (i==5){# scenario 5: reduction in tax rate
-    T0[5]=0  
-  }
-  if (i==6){# scenario 6: fiscal expansion
-    G0[6]=2  
-  }
-}  
+## Construct scenarios
+# scenario 2: fall in animal spirits
+i0[2]=1
+ 
+#scenario 3: increase in liquidity preference
+m0[3]=7
+
+# scenario 4: monetary expansion 
+M0[4]=6
+
+# scenario 5: reduction in tax rate
+T0[5]=0  
+
+# scenario 6: fiscal expansion
+G0[6]=2 
+
 
 #Set constant parameter values
 c0=2   # Autonomous consumption
@@ -261,12 +260,10 @@ library(igraph)
 dg= graph_from_adjacency_matrix(A_mat, mode="directed", weighted=NULL)
 plot(dg, main="", vertex.size=20, vertex.color="lightblue", 
      vertex.label.color="black", edge.arrow.size=0.2, edge.width=1,
-     edge.arrow.width=0.8, edge.color="black", vertex.label.cex=1.5, vertex.frame.color="NA", margin=-0.2)
+     edge.arrow.width=0.8, edge.color="black", vertex.label.cex=1.5, vertex.frame.color="NA", margin=0)
 ```
 
-## Appendix
-
-### Analytical solution
+## Analytical discussion
 
 To obtain the IS-curve, substitute @eq-islmC - @eq-islmT into @eq-islmY and solve for $Y$:
 
@@ -299,20 +296,5 @@ From this, the following results can be obtained:
 
 - The equilibrium multiplier $\left[\frac{m_2}{(1-c_1)m_2+i_1m_1}\right]$ is smaller than the aggregate demand multiplier $\left(\frac{1}{1-c_1}\right)$ due to the positive effect on the interest rate and the corresponding negative effect investment ($i_1m_1$). This is the crowding out mechanism.
 
-### Construction of directed graph
-
-The directed graph can be derived from the model's Jacobian matrix.^[See \cite{Fennell2015} for a neat exposition.] Let $\mathbf{x}$ be the vector containing the model's variables. The system of equations representing the model can be written as $\mathbf{f(x)=0}$. The Jacobian matrix is then given by $\mathbf{J}=\mathbf{\frac{\partial f}{\partial x}}$.  
-
-Next, construct an "auxiliary" Jacobian matrix $\mathbf{M}$ in which the non-zero elements of the Jacobian are replaced by ones, whereas zero elements remain unchanged, i.e.
-
-$$
-M_{ij} =
-\begin{cases}
-1 & \text{if }  J_{ij} \neq 0, \\
-0 & \text{otherwise.}
-\end{cases}
-$$
-
-Finally, taking the transpose of the "auxiliary" Jacobian matrix yields the adjacency matrix ($\mathbf{M^T}=\mathbf{A}$), which is a binary matrix whose elements ($A_{ji}$) indicate whether there is a directed edge from a node $x_j$ to node $x_i$. From the adjacency matrix, the directed graph is constructed.
 
 ## References {-}

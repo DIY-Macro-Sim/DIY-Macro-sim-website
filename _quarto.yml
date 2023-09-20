@@ -25,10 +25,9 @@ book:
     - how_to_use.qmd
 #    - how_to_contribute.qmd
     - how_to_simulate.qmd
-    - intro_stability_analysis.qmd
 #    - references.qmd
     
-    - part: static_models.qmd
+    - part: "Static Models"
       chapters:
         - a_neoclassical_macro_model.qmd
         - an_IS_LM_model.qmd
@@ -36,8 +35,9 @@ book:
         - a_post_keynesian_macro_model_with_endogenous_money.qmd
         - a_post_kaleckian_distribution_and_growth_model.qmd
         
-    - part: dynamic_models.qmd
+    - part: "Dynamic Models"
       chapters:
+        - intro_stability_analysis.qmd
         - a_new_keynesian_3_equation_model.qmd
         - a_sraffian_supermultiplier_model.qmd
         - a_malthusian_model.qmd

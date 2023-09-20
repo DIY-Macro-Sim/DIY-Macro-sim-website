@@ -109,31 +109,29 @@ G0=vector(length=S) # government spending
 P0=vector(length=S) # expected price level
 A=vector(length=S)  # Exogenous productivity
 
-# Construct different scenarios
+### Construct different scenarios
+# baseline 
 A[]=2  
 i0[]=2
 M0[]=5   
 G0[]=1   
 P0[]=1
 
-for (i in 1:S){ 
-  if (i==2){# scenario 2: fall in animal spirits
-    i0[2]=1.5
-  }
-  if (i==3){# scenario 3: increase in productivity
-    A[3]=3
-  }
-  if (i==4){# scenario 4: increase in expected price level
-  P0[4]=1.5  
-  }
-  if (i==5){# scenario 5: monetary expansion 
-    M0[5]=6
-  }
-  if (i==6){# scenario 6: fiscal expansion
-    G0[6]=2  
-  }
-}  
+# scenario 2: fall in animal spirits
+i0[2]=1.5
 
+# scenario 3: increase in productivity
+A[3]=3
+
+# scenario 4: increase in expected price level
+P0[4]=1.5  
+   
+# scenario 5: monetary expansion 
+M0[5]=6
+
+# scenario 6: fiscal expansion
+G0[6]=2  
+    
 #Set constant parameter values
 c0=2   # Autonomous consumption
 c1=0.6 # Sensitivity of consumption with respect to the income (marginal propensity to consume)
@@ -314,15 +312,13 @@ library(igraph)
 dg= graph_from_adjacency_matrix(A_mat, mode="directed", weighted= NULL)
 plot(dg, main="", vertex.size=15, vertex.color="lightblue", 
      vertex.label.color="black", edge.arrow.size=0.15, edge.width=1,
-     edge.arrow.width=0.4, edge.color="black", vertex.label.cex=1.2, vertex.frame.color="NA", margin=-0.2)
+     edge.arrow.width=0.4, edge.color="black", vertex.label.cex=1.2, vertex.frame.color="NA", margin=0.01)
 
 ```
 
 In @fig-dg-neoclmacro, it can be seen that productivity ($A$), taxes ($T_0$), government spending ($G_0$), animal spirits ($i_0$), the money supply ($M_0$), and the expected price level ($P_0$) are the key exogenous variables of the model. All other variables are endogenous and form a closed loop (or cycle) within the system. The lower-left part of the graph captures the goods market (IS): aggregate demand (consumption, investment, and government spending) determines output. The upper part of the graph contains the labour market, which determines the price level. Finally, the lower-right part of the graph represents the money market (LM), which determines the interest rate. There is a two-way feedback between the goods market and the money market as output impacts the demand for money, and the interest rate affects investment. There is also a feedback from output into the labour market through employment. The labour market feeds into the money market via its effect on prices and thus money demand, which then also feeds into the goods market through the interest rate.  
 
-## Appendix
-
-### Analytical derivation of IS, LM, AS, and AD curves
+## Analytical discussion
 
 In the first step, we will reduce the system to three equations: an IS-curve, an LM-curve, and an AS-curve (or Phillips curve). In the second step, the IS-curve and the LM-curve are combined to yield an AD-curve.
 
@@ -352,17 +348,5 @@ Y&=\left[\frac{m_2(c_0 + i_0 + G_0 - c_1 T_0) + i_1(\frac{M_0}{P}-m_0)}{(1-c_1)m
 \end{align}	
 
 It can readily be seen that the AD-curve is downward-sloping in the $(Y, P)$-space.
-
-### Construction of directed graph
-
-The directed graph can be derived from the model's Jacobian matrix.^[See @Fennell2015 for a neat exposition.] Let $\mathbf{x}$ be the vector containing the model's variables. The system of equations representing the model can be written as $\mathbf{f(x)=0}$. The Jacobian matrix is then given by $\mathbf{J}=\mathbf{\frac{\partial f}{\partial x}}$.  
-
-Next, construct an `auxiliary' Jacobian matrix $\mathbf{M}$ in which the non-zero elements of the Jacobian are replaced by ones, whereas zero elements remain unchanged, i.e.
-
-
-$$
-M_{i j}= \begin{cases}1 & \text { if } J_{i j} \neq 0 \\ 0 & \text { otherwise }\end{cases}
-$$
-Finally, taking the transpose of the `auxiliary' Jacobian matrix yields the adjacency matrix ($\mathbf{M^T}=\mathbf{A}$), which is a binary matrix whose elements ($A_{ji}$) indicate whether there is a directed edge from a node $x_j$ to node $x_i$. From the adjacency matrix, the directed graph is constructed.
 
 ## References {-}

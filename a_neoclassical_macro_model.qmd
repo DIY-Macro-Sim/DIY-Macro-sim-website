@@ -108,23 +108,11 @@ Yf[]=1
 b1[]=0.4
 
 # Set parameter values for different scenarios
-for (i in 1:S){ 
-  if (i==2){ # scenario 2: monetary expansion 
-  M0[2]=6
-  }
-  if (i==3){ # scenario 3: fiscal expansion
-    G0[3]=2
-  }
-  if (i==4){ # scenario 4: productivity boost
-    A[4]=2.5
-    }
-  if (i==5){ # scenario 5: lower expected future income
-    Yf[5]=0.2
-  }
-  if (i==6){ # scenario 6: increased preference for leisure
-    b1[6]=0.8
-  }
-}
+M0[2]=6   # scenario 2: monetary expansion 
+G0[3]=2   # scenario 3: fiscal expansion
+A[4]=2.5  # scenario 4: productivity boost
+Yf[5]=0.2 # scenario 5: lower expected future income
+b1[6]=0.8 # scenario 6: increased preference for leisure
 
 #Set constant parameter values
 a=0.3  # Capital elasticity of output
@@ -287,17 +275,15 @@ library(igraph)
 dg= graph_from_adjacency_matrix(A_mat, mode="directed", weighted= NULL)
 plot(dg, main="", vertex.size=20, vertex.color="lightblue", 
      vertex.label.color="black", edge.arrow.size=0.2, edge.width=1,
-     edge.arrow.width=0.8, edge.color="black", vertex.label.cex=1.5, vertex.frame.color="NA", margin=-0.2)
+     edge.arrow.width=0.8, edge.color="black", vertex.label.cex=1.5, vertex.frame.color="NA", margin=0.01)
 
 ```
 
 In @fig-dg , it can be seen that productivity ($A$), future income ($Y^f$), the money supply ($M_0$), and government spending ($G_0$) are the key exogenous variables of the model. All other variables are endogenous, and many of them form a closed loop (or cycle) within the system. The left part of the graph captures the supply side: the labour market simultaneously pins down the real wage and employment, which together with the exogenously level of productivity determine output. The part in the middle embodies the demand side: aggregate demand (consumption, investment, and government spending) together with a given level of output determine the real interest rate. The right part captures the nominal side of the model given by the money market, which determines the price level. Notably, while the real side of the model feeds into the money market via the nominal interest rate ($r_n$), there is not causal effect from the money market to the real side reflecting the Classical Dichotomy. 
 
-## Appendices
+## Analytical discussion: derivation of behavioural functions
 
-### Derivation of behavioural functions
-
-#### The firm's problem: profit maximisation
+### The firm's problem: profit maximisation
 
 The firm's profit equation is given by:
 
@@ -327,7 +313,7 @@ $$ {#eq-FOC_I}
 
 From @eq-FOC_Nd, @eq-w for labour demand can be derived. While the capital stock is pre-determined in every period, the firm can adjust the capital stock through investment. We thus use the first-order condition for capital @eq-FOC_I to derive @eq-I for investment demand.
 
-#### The government's budget constraint: Ricardian Equivalence
+### The government's budget constraint: Ricardian Equivalence
 
 The government's current and future budget constraints are given by:
 
@@ -350,7 +336,7 @@ $$ {#eq-Gitbc}
 
 Thus, while the government's budget need not be balanced in every period, it will be balanced over time (in a present value sense).^[See @Garin2021[chap. 13] for a more detailed discussion of the government's budget constraints.]
 
-#### The household's problem: intertemporal utility maximisation		
+### The household's problem: intertemporal utility maximisation		
 
 The household derives utility from current consumption, leisure ($1-N$), future consumption $C^f$, and from holding real money balances $\left(\frac{M}{P}\right)$. We use the following log utility function:
 
@@ -417,17 +403,5 @@ $$ {#eq-FOC_M}
 
 Substituting @eq-FOC_C, which is often also called the _Euler equation_, into @eq-FOC_Ns and @eq-FOC_M yields @eq-N for labour supply and @eq-MD for money demand, respectively. Finally, using @eq-ibc and @eq-FOC_M in the Euler @eq-FOC_C yields the consumption function @eq-C.
 
-
-### Construction of directed graph
-
-The directed graph can be derived from the model's Jacobian matrix.^[See @Fennell2015 for a neat exposition.] Let $\mathbf{x}$ be the vector containing the model's variables. The system of equations representing the model can be written as $\mathbf{f(x)=0}$. The Jacobian matrix is then given by $\mathbf{J}=\mathbf{\frac{\partial f}{\partial x}}$.  
-
-Next, construct an `auxiliary' Jacobian matrix $\mathbf{M}$ in which the non-zero elements of the Jacobian are replaced by ones, whereas zero elements remain unchanged, i.e.
-
-$$
-M_{i j}= \begin{cases}1 & \text { if } J_{i j} \neq 0 \\ 0 & \text { otherwise }\end{cases}
-$$
-
-Finally, taking the transpose of the `auxiliary' Jacobian matrix yields the adjacency matrix ($\mathbf{M^T}=\mathbf{A}$), which is a binary matrix whose elements ($A_{ji}$) indicate whether there is a directed edge from a node $x_j$ to node $x_i$. From the adjacency matrix, the directed graph is constructed.
 
 ## References {-}

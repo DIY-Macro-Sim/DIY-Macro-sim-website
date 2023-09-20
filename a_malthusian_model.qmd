@@ -193,7 +193,7 @@ plot(dg, main="Figure 4: Directed graph of Malthusian model", vertex.size=20, ve
 
 In Figure 4, it can be seen that the exogenous birth rate ($b0$) and productivity ($a0$) are exogenous variables that impact births and income, respectively. Births, deaths, employment and income are endogenous and form a closed loop (or cycle) within the system. Births and deaths affect the population size (with simultaneous feedback from population to births and deaths), and the population affects income. Income, in turn, feeds back into population size.
 
-## Analytical Model Solution
+## Analytical discussion
 
 To find the steady state solution for $N$, substitute @eq-malthus_B - @eq-malthus_Y into @eq-malthus_N and collect terms::
 
@@ -246,3 +246,5 @@ print(paste0("Scenario ", i, ":"))
 print(abs(1-b0[i,T]+d0-a0[i,T]*(b1+d1)) < 1)
 }
 ```
+
+## References
