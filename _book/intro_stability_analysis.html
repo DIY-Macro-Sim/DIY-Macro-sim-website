@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.321">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>DIY Macroeconomic Model Simulation - 3&nbsp; An Introduction to Stability Analysis of Dynamic Models</title>
+<title>DIY Macroeconomic Model Simulation - 3&nbsp; An Introduction to the Analysis of Dynamic Models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -14,9 +14,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -43,48 +44,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -98,8 +70,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -139,144 +110,164 @@ div.csl-indent {
     "search-submit-button-title": "Submit"
   }
 }</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to Stability Analysis of Dynamic Models</span>
-</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_stability_analysis.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to the Analysis of Dynamic Models</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">DIY Macroeconomic Model Simulation</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+    <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./how_to_use.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">How to Use this Site</span></a>
+  <a href="./how_to_use.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">How to Use this Site</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./how_to_simulate.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to Simulate Economic Models</span></a>
+  <a href="./how_to_simulate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to Simulate Economic Models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro_stability_analysis.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to Stability Analysis of Dynamic Models</span></a>
+  <a href="./intro_stability_analysis.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to the Analysis of Dynamic Models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./static_models.html" class="sidebar-item-text sidebar-link">Static models</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a href="./static_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Static models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_neoclassical_macro_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></a>
+  <a href="./a_neoclassical_macro_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./an_IS_LM_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></a>
+  <a href="./an_IS_LM_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_neoclassical_synthesis_model_IS_LM_AS_AD.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">A Neoclassical Synthesis Model (IS-LM-AS-AD)</span></a>
+  <a href="./a_neoclassical_synthesis_model_IS_LM_AS_AD.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">A Neoclassical Synthesis Model (IS-LM-AS-AD)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_post_keynesian_macro_model_with_endogenous_money.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">A Post-Keynesian Macro Model with Endogenous Money</span></a>
+  <a href="./a_post_keynesian_macro_model_with_endogenous_money.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">A Post-Keynesian Macro Model with Endogenous Money</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_post_kaleckian_distribution_and_growth_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span></a>
+  <a href="./a_post_kaleckian_distribution_and_growth_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./dynamic_models.html" class="sidebar-item-text sidebar-link">Dynamic models</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a href="./dynamic_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dynamic models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_new_keynesian_3_equation_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></a>
+  <a href="./a_new_keynesian_3_equation_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_sraffian_supermultiplier_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></a>
+  <a href="./a_sraffian_supermultiplier_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_malthusian_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></a>
+  <a href="./a_malthusian_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_ricardian_one_sector_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></a>
+  <a href="./a_ricardian_one_sector_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./a_ricardian_two_sector_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span></a>
+  <a href="./a_ricardian_two_sector_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span></span></a>
   </div>
 </li>
       </ul>
 </li>
     </ul>
 </div>
-</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li><a href="#solution-of-a-single-first-order-linear-difference-equation" id="toc-solution-of-a-single-first-order-linear-difference-equation" class="nav-link active" data-scroll-target="#solution-of-a-single-first-order-linear-difference-equation">Solution of a single first-order linear difference equation</a></li>
   <li><a href="#solution-of-linear-system-of-difference-equations" id="toc-solution-of-linear-system-of-difference-equations" class="nav-link" data-scroll-target="#solution-of-linear-system-of-difference-equations">Solution of linear system of difference equations</a></li>
-  <li><a href="#complex-numbers-and-cycles" id="toc-complex-numbers-and-cycles" class="nav-link" data-scroll-target="#complex-numbers-and-cycles">Complex numbers and cycles</a></li>
+  <li><a href="#complex-eigenvalues-and-cycles" id="toc-complex-eigenvalues-and-cycles" class="nav-link" data-scroll-target="#complex-eigenvalues-and-cycles">Complex eigenvalues and cycles</a></li>
   <li><a href="#nonlinear-systems" id="toc-nonlinear-systems" class="nav-link" data-scroll-target="#nonlinear-systems">Nonlinear systems</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/edit/main/intro_stability_analysis.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title d-none d-lg-block">
-<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to Stability Analysis of Dynamic Models</span>
-</h1>
+<h1 class="title"><span id="sec-stab_analysis" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">An Introduction to the Analysis of Dynamic Models</span></span></h1>
 </div>
 
 
@@ -295,31 +286,51 @@ div.csl-indent {
 y_t = a_0 + a_1y_{t-1}.
 \]</span></p>
 <p>One way to find a solution is through (manual) iteration:</p>
-<p><span class="math inline">\(y_0\)</span>, <span class="math inline">\(y_1 = a_0 + a_1 y_0\)</span>, <span class="math inline">\(y_2 = a_0 + a_1(a_0 + a_1 y_0) = a_0^2y_0 + a_0(a_1+1)\)</span>, …, <span class="math inline">\(y_t = a_1^ty_0 + a_0\sum^{t-1}_{i=0} a_1^t\)</span>.</p>
-<p>Of course, this is the same approach we have used above to solve economic models via simulation. If <span class="math inline">\(|a_1|&lt;1\)</span>, we can make use of the fact that the second term is a geometric series which approaches <span class="math inline">\(\frac{a_0}{1-a}\)</span> as <span class="math inline">\(t\rightarrow \infty\)</span>. Another way of finding this second term in the solution is to set <span class="math inline">\(y_t=y_{t-1}\)</span> and solving for <span class="math inline">\(y\)</span>. Thus, the solution takes the form:</p>
+<p><span class="math display">\[y_0,\]</span> <span class="math display">\[y_1 = a_0 + a_1 y_0,\]</span> <span class="math display">\[y_2 = a_0 + a_1(a_0 + a_1 y_0) = a_0(a_1+1) + a_1^2y_0 ,\]</span> <span class="math display">\[y_3 = a_0 + a_1[a_0 + a_1(a_0 +a_1y_0)]= a_0(a_1^2+a_1+1) + a_1^3y_0\]</span> <span class="math display">\[...,\]</span> <span class="math display">\[y_t = a_0\sum^{t-1}_{i=0} a_1^i + a_1^ty_0 \]</span></p>
+<p>Of course, this is effectively the same approach we have used before to solve economic models via simulation.</p>
+<p>If <span class="math inline">\(a_1\neq1\)</span>, we can make use of the fact that the term <span class="math inline">\(a_0\sum^{t-1}_{i=0} a_1^i\)</span> is the sum of a geometric series which yields <span class="math inline">\(a_0\frac{(1-a_1^t)}{1-a}\)</span>.</p>
+<p>Thus, the solution takes the form:</p>
 <p><span class="math display">\[
-y_t = a_1^ty_0 + \frac{a_0}{1-a_1}.
-\]</span> From iteration, we thus know that the solution to a difference equation has two parts: first, a term that captures the dynamics of <span class="math inline">\(y_t\)</span> (the so-called <em>complementary function</em>) and second, a term that captures the long-run equilibrium <span class="math inline">\(y^*\)</span> (the so-called <em>particular solution</em>). The complementary function tells us about the ‘asymptotic stability’ of the equation: does <span class="math inline">\(y_t\)</span> converge to <span class="math inline">\(y^*\)</span> as <span class="math inline">\(t \rightarrow \infty\)</span>? For the case of a first-order difference equation, we can distinguish the following cases:</p>
+y_t = \frac{a_0(1-a_1^t)}{1-a} + a_1^ty_0 =\frac{a_0}{1-a} + a_1^t\left(y_0 - \frac{a_0}{1-a}\right).
+\]</span></p>
+<p>From iteration, we thus know that the solution to a difference equation has two parts:</p>
+<ol type="1">
+<li>a term that captures the long-run equilibrium <span class="math inline">\(y^*\)</span> (the so-called <em>particular solution</em>),</li>
+<li>a term that captures the dynamics of <span class="math inline">\(y_t\)</span> (the so-called <em>complementary function</em>).</li>
+</ol>
+<p>The complementary function tells us about the ‘asymptotic stability’ of the equation: does <span class="math inline">\(y_t\)</span> converge to <span class="math inline">\(y^*\)</span> as <span class="math inline">\(t \rightarrow \infty\)</span>?</p>
+<p>For the case of a first-order difference equation, we can distinguish the following cases:</p>
 <ul>
-<li><p>if <span class="math inline">\(|a_1|&lt;1\)</span>, then the complementary function <span class="math inline">\(a_1^ty_0\)</span> will converge to zero and <span class="math inline">\(y_t\)</span> will approach the particular solution <span class="math inline">\(y^*=\frac{a_0}{1-a_1}\)</span></p></li>
-<li><p>if <span class="math inline">\(|a_1|&gt;1\)</span>, then the complementary function <span class="math inline">\(a_1^ty_0\)</span> will grow exponentially or decay and <span class="math inline">\(y_t\)</span> will thus never converge to the particular solution</p></li>
-<li><p>if <span class="math inline">\(a_1=1\)</span> and <span class="math inline">\(a_0 \neq\)</span>, then <span class="math inline">\(y_t\)</span> will grow linearly</p></li>
-<li><p>if <span class="math inline">\(a_1=1\)</span> and <span class="math inline">\(a_0 =0\)</span>, then <span class="math inline">\(y_t\)</span> will not grow o fall forever, but it will also not approach the particular solution.</p></li>
+<li><p>if <span class="math inline">\(|a_1|&lt;1\)</span>, then the complementary function will converge to zero and <span class="math inline">\(y_t\)</span> will approach the particular solution <span class="math inline">\(y^*\)</span></p></li>
+<li><p>if <span class="math inline">\(|a_1|&gt;1\)</span>, then the complementary function will grow exponentially or decay, and <span class="math inline">\(y_t\)</span> will thus never converge to the particular solution <span class="math inline">\(y^*\)</span></p></li>
+<li><p>if <span class="math inline">\(a_1=1\)</span> and <span class="math inline">\(a_0 \neq0\)</span>, then <span class="math inline">\(y_t\)</span> will grow linearly</p></li>
+<li><p>if <span class="math inline">\(a_1=1\)</span> and <span class="math inline">\(a_0 =0\)</span>, then <span class="math inline">\(y_t\)</span> will not grow or fall forever, but it will also not approach a unique equilibrium</p></li>
 </ul>
-<p>To better understand the last two cases, note that if <span class="math inline">\(a_1=1\)</span>, a different (more general) approach to finding the particular solution is required: the so-called method of undetermined coefficients. This method consists of substituting a trial solution into the difference equation that contains undetermined coefficients and then attempting to solve for those coefficients. If the trial solution allows to pin down unique values for the coefficients, it constitute a valid particular solution. In the case where <span class="math inline">\(a_1=1\)</span> and <span class="math inline">\(a_0 \neq 0\)</span>, use the trial solution <span class="math inline">\(y^*=kt\)</span>, i.e.&nbsp;consider a growing equilibrium. This yields <span class="math inline">\(y_t = k(t-1) + a_0\)</span>, which solves for <span class="math inline">\(k=a_0\)</span>, so that we can conclude <span class="math inline">\(y^*=a_0t\)</span>. This explains why we obtain linear growth.</p>
+<p>To better understand the last two cases, note that if <span class="math inline">\(a_1=1\)</span>, a different (more general) approach to finding the particular solution is required: the so-called <em>method of undetermined coefficients</em>. This method consists of substituting a trial solution that contains undetermined coefficients into the difference equation and then attempting to solve for those coefficients. If the trial solution allows to pin down unique values for the coefficients, it constitute a valid particular solution.</p>
+<p>In the case above where <span class="math inline">\(a_1 \neq 1\)</span>, we could have used the trial solution <span class="math inline">\(y_t=y_{t-1}=y^*\)</span> and then solve for <span class="math inline">\(y\)</span> to obtain <span class="math inline">\(\frac{a_0}{1-a}\)</span> as the particular solution. In the case where <span class="math inline">\(a_1=1\)</span> and <span class="math inline">\(a_0 \neq 0\)</span>, we can use the trial solution <span class="math inline">\(y^*=kt\)</span>, which is a growing equilibrium. This yields <span class="math inline">\(y_t = k(t-1) + a_0\)</span>, which solves for <span class="math inline">\(k=a_0\)</span>, so that we can conclude <span class="math inline">\(y^*=a_0t\)</span>. This explains why we obtain linear growth. If <span class="math inline">\(a_1=1\)</span> and <span class="math inline">\(a_0 =0\)</span>, we have <span class="math inline">\(y_t=y_{t-1}\)</span>, so that the equilibrium is given by the initial condition <span class="math inline">\(y_0\)</span>.</p>
 </section><section id="solution-of-linear-system-of-difference-equations" class="level2"><h2 class="anchored" data-anchor-id="solution-of-linear-system-of-difference-equations">Solution of linear system of difference equations</h2>
-<p>The solution approach just introduced can be extended to linear systems of difference equations of the form:</p>
+<p>The solution approach just introduced can be extended to <span class="math inline">\(N\)</span>-dimensional systems of linear difference equations of the form:</p>
 <p><span class="math display">\[
-\mathbf{y_t}=\mathbf{a_0} + \mathbf{Ay_{t-1}}.  
+y_t=a_0 + Ay_{t-1},  
 \]</span></p>
-<p>The solution will be of the form:</p>
+<p>where <span class="math inline">\(y_t\)</span> is a <span class="math inline">\(1 \times N\)</span> column vector and <span class="math inline">\(A\)</span> an <span class="math inline">\(N \times N\)</span> square matrix.</p>
+<p>If the inverse <span class="math inline">\((I-A)^{-1}\)</span> exists, which requires <span class="math inline">\(det(I-A) \neq 0\)</span>, the solution will be of the form:</p>
 <p><span class="math display">\[
-\mathbf{y_t}=\mathbf{A^t}\mathbf{y_0} + (\mathbf{I}-\mathbf{A})^{-1}\mathbf{a_0}.
+y_t=A^t[y_0- (I-A)^{-1}a_0] + (I-A)^{-1}a_0.
 \]</span></p>
-<p>The problem with this generic solution is that it is difficult to assess what is going on: the dynamics of any variable in <span class="math inline">\(\mathbf{y_t}\)</span> will depend on the initial values of the other variables and a lengthy combination of the parameters in <span class="math inline">\(A\)</span> that result from repeated matrix multiplication. In addition, it is impossible to assess whether the system converges to the particular solution. To address this problem, we can use a tool from linear algebra called matrix diagonalisation. Under certain conditions, a matrix <span class="math inline">\(A\)</span> can be decomposed into the product of three matrices in which the matrix in the middle is diagonal. As we will see, this trick has a useful application for our problem.</p>
-<p>A matrix <span class="math inline">\(A\)</span> is diagonalisable if there is a diagonal matrix <span class="math inline">\(D\)</span> and an invertible matrix <span class="math inline">\(P\)</span> such that <span class="math inline">\(A=PDP^{-1}\)</span>. A major advantage of this decomposition is the following property: <span class="math inline">\(A^n = (PDP^{-1})^n = PD^nP^{-1}\)</span>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Thus, the <span class="math inline">\(n-th\)</span> power of the matrix <span class="math inline">\(A\)</span>, which typically yields very cumbersome expressions, simplifies to <span class="math inline">\(PD^nP^{-1}\)</span>, where the <span class="math inline">\(n-th\)</span> power of <span class="math inline">\(D\)</span> are simply applied to each individual element on the main diagonal thanks to <span class="math inline">\(D\)</span> being a diagonal matrix. As a result, diagonalisation allows us to write the complementary function in the solution to a system of difference equations as: <span class="math inline">\(PD^tP^{-1}y_0\)</span>. We can further define a vector of arbitrary constants <span class="math inline">\(c=P^{-1}y_0\)</span> so that the complementary function becomes <span class="math inline">\(PD^tc\)</span>. For the first variable in the system, the solution would be of the form: <span class="math inline">\(y_{1t}=v_11c_1\lambda_1^t+v_12c_2\lambda_2^t + ...+ y^*\)</span>. From this representation of the solution, the nature of the dynamics can easily be determined by looking at the eigenvalue <span class="math inline">\(\lambda\)</span> that is largest in absolute terms or ‘dominant’. Only if the dominant eigenvalue is <span class="math inline">\(|\lambda|&lt;1\)</span> will the system converge to <span class="math inline">\(y^*\)</span>. The elements <span class="math inline">\(v_{ij}\)</span> of the eigenvectors act as multipliers on the eigenvalues and can thus switch off certain eigenvalues of they happen to be zero or amplify their dynamics both into the positive and negative domain, depending on their algebraic sign.</p>
-<p>How can the diagonal matrix <span class="math inline">\(D\)</span> be found? Notice that <span class="math inline">\(AP=PD\)</span> can also be written as <span class="math inline">\(Av_i=\lambda_iv_i\)</span>, where <span class="math inline">\(v_i\)</span> are the column vectors of <span class="math inline">\(P\)</span> and <span class="math inline">\(\lambda_i\)</span> are the elements on the main diagonal of <span class="math inline">\(D\)</span>. The <span class="math inline">\(v_i\)</span> are called the eigenvectors of the matrix <span class="math inline">\(A\)</span> and the <span class="math inline">\(\lambda_i\)</span> are its eigenvalues.Wen can then write <span class="math inline">\(v_i(A-\lambda_iI)=0\)</span>. We want to find the solutions of this linear system other than <span class="math inline">\(v_i \neq 0\)</span>. This requires the determinant of the matrix <span class="math inline">\(A-\lambda_iI\)</span> to become zero, i.e.&nbsp;<span class="math inline">\(det(A-\lambda_iI)=0\)</span>. Note there will be an infinite number of solutions for the eigenvectors. In fact, any scalar multiple of the eigenvectors (other than zero) is admissible. It is thus common to normalise the eigenvectors by dividing through one of its elements.</p>
-<p>Consider the matrix <span class="math inline">\(A=\begin{bmatrix}7 &amp; -15 \\ 2 &amp; -4 \end{bmatrix}\)</span>. For simplicity, let <span class="math inline">\(\mathbf{a_0}=\mathbf{0}\)</span>. Then <span class="math inline">\(A-\lambda_iI =\begin{bmatrix}7 - \lambda &amp; -15 \\ 2 &amp; -4 - \lambda \end{bmatrix}\)</span> and <span class="math inline">\(det(A-\lambda_iI)=(7-\lambda)(-4-\lambda)+30=\lambda^2 - 3\lambda +2=0\)</span>. This second-order polynomial solves for <span class="math inline">\(\lambda_1=2\)</span> and <span class="math inline">\(\lambda_2=1\)</span>, which will be the elements on the diagonal of <span class="math inline">\(D\)</span>. To find <span class="math inline">\(v_i\)</span>, substitute <span class="math inline">\(\lambda_i\)</span> into <span class="math inline">\(A-\lambda_iI=0\)</span>. For <span class="math inline">\(\lambda_1=2\)</span>, we get <span class="math inline">\(5v_{21}- 15v_{22}=0\)</span> and <span class="math inline">\(2v_{21}- 6v_{22}=0\)</span>, yielding the eigenvector <span class="math inline">\(v_1=\begin{bmatrix} 3 \\ 1\end{bmatrix}\)</span>. Dividing through by the first element yields the normalised eigenvector <span class="math inline">\(v_1=\begin{bmatrix} 1 \\ \frac{1}{3} \end{bmatrix}\)</span>. For <span class="math inline">\(\lambda_2=1\)</span>, this yields <span class="math inline">\(6v_{11}- 15v_{12}=0\)</span> and <span class="math inline">\(2v_{11}-5v_{12}=0\)</span> from which we can deduce that <span class="math inline">\(v_2=\begin{bmatrix} 5 \\ 2\end{bmatrix}\)</span>. The normalised eigenvector is <span class="math inline">\(v_2=\begin{bmatrix} 1 \\ 0.4 \end{bmatrix}\)</span>.</p>
+<p>The problem with this generic solution is that it is difficult to assess what is going on: the dynamics of any variable in <span class="math inline">\(y_t\)</span> will depend on a lengthy combination of the parameters in <span class="math inline">\(A\)</span> that result from repeated matrix multiplication. This makes it is impossible to assess whether the system converges to the particular solution. To address this problem, we can use a tool from linear algebra called <em>matrix diagonalisation</em>. Under certain conditions, a matrix <span class="math inline">\(A\)</span> can be decomposed into the product of three matrices in which the matrix in the middle is diagonal. As we will see, this trick has a useful application to our problem.</p>
+<p>A matrix <span class="math inline">\(A\)</span> is diagonalisable if there is a diagonal matrix <span class="math inline">\(D\)</span> and an invertible matrix <span class="math inline">\(P\)</span> such that <span class="math inline">\(A=PDP^{-1}\)</span>. A major advantage of this decomposition is the following property: <span class="math inline">\(A^n = (PDP^{-1})^n = PD^nP^{-1}\)</span>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Thus, the <span class="math inline">\(nth\)</span> power of the matrix <span class="math inline">\(A\)</span>, which typically yields very cumbersome expressions, simplifies to <span class="math inline">\(PD^nP^{-1}\)</span>, where the <span class="math inline">\(nth\)</span> power of <span class="math inline">\(D\)</span> is simply applied to each individual element on the main diagonal thanks to <span class="math inline">\(D\)</span> being a diagonal matrix. As a result, diagonalisation allows us to write the complementary function in the solution to a system of difference equations as: <span class="math inline">\(PD^tP^{-1}y_0\)</span>. We can further define a vector of arbitrary constants <span class="math inline">\(c=P^{-1}y_0\)</span> so that the complementary function becomes <span class="math inline">\(PD^tc\)</span>. For the first variable in the system, the solution would then take the form:</p>
+<p><span class="math display">\[y_{1t}=v_{11}c_1\lambda_1^t+v_{12}c_2\lambda_2^t + ...+ y_1^*,\]</span></p>
+<p>where <span class="math inline">\(v_j\)</span> are the column vectors of <span class="math inline">\(P\)</span> and <span class="math inline">\(\lambda_i\)</span> are the elements on the main diagonal of <span class="math inline">\(D\)</span>. The <span class="math inline">\(v_j\)</span> are called the eigenvectors of the matrix <span class="math inline">\(A\)</span> and the <span class="math inline">\(\lambda_i\)</span> are its eigenvalues (more about them in a second). From this representation of the solution, the nature of the dynamics can easily be determined by looking at the eigenvalue <span class="math inline">\(\lambda\)</span> that is largest in absolute terms. This is also called the ‘dominant eigenvalue’. Only if the dominant eigenvalue is <span class="math inline">\(|\lambda|&lt;1\)</span> will the system converge to <span class="math inline">\(y^*\)</span>. The elements <span class="math inline">\(v_{ij}\)</span> of the eigenvectors act as multipliers on the eigenvalues and can thus switch off certain eigenvalues (if they happen to be zero) or amplify their dynamics both into the positive and negative domain (depending on their algebraic sign).</p>
+<p>How can the diagonal matrix <span class="math inline">\(D\)</span> be found? Notice that <span class="math inline">\(AP=PD\)</span> can also be written as <span class="math inline">\(Av_j=\lambda_iv_j\)</span>. We can then write <span class="math inline">\(v_j(A-\lambda_iI)=0\)</span>. We want to find the solutions of this linear system other than <span class="math inline">\(v_j = 0\)</span> (we don’t want the eigenvectors to be zero vectors, otherwise the solution to the dynamic system presented above wouldn’t work). This requires the determinant of the matrix <span class="math inline">\(A-\lambda_iI\)</span> to become zero, i.e.&nbsp;<span class="math inline">\(det(A-\lambda_iI)=0\)</span>. Note that then there will be an infinite number of solutions for the eigenvectors.</p>
+<p>Let’s consider an example. Let <span class="math inline">\(a_0=0\)</span> for simplicity, so that the dynamic system is <span class="math inline">\(y_t = Ay_{t-1}\)</span>. Let the matrix <span class="math inline">\(A\)</span> be given by: <span class="math display">\[A=\begin{bmatrix}7 &amp; -15 \\ 2 &amp; -4 \end{bmatrix}.\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[A-\lambda_iI =\begin{bmatrix}7 - \lambda &amp; -15 \\ 2 &amp; -4 - \lambda \end{bmatrix}\]</span></p>
+<p>and</p>
+<p><span class="math display">\[det(A-\lambda_iI)=(7-\lambda)(-4-\lambda)+30=\lambda^2 - 3\lambda +2=0.\]</span></p>
+<p>This second-order polynomial solves for <span class="math inline">\(\lambda_1=2\)</span> and <span class="math inline">\(\lambda_2=1\)</span>, which will be the elements on the diagonal of <span class="math inline">\(D\)</span>.</p>
+<p>To find <span class="math inline">\(v_j\)</span>, substitute <span class="math inline">\(\lambda_i\)</span> into <span class="math inline">\(v_j(A-\lambda_iI)=0\)</span>. For <span class="math inline">\(\lambda_1=2\)</span>, we get <span class="math inline">\(5v_{11}- 15v_{21}=0\)</span> and <span class="math inline">\(2v_{11}- 6v_{21}=0\)</span>, yielding the eigenvector <span class="math inline">\(v_1=\begin{bmatrix} 3 \\ 1\end{bmatrix}\)</span>. However, any scalar multiple of this eigenvector (other than zero) is admissible. It is thus common to normalise the eigenvectors by dividing through one of its elements. Dividing through by the first element yields the normalised eigenvector <span class="math inline">\(v_1=\begin{bmatrix} 1 \\ \frac{1}{3} \end{bmatrix}\)</span>.</p>
+<p>For <span class="math inline">\(\lambda_2=1\)</span>, this yields <span class="math inline">\(6v_{12}- 15v_{22}=0\)</span> and <span class="math inline">\(2v_{12}-5v_{22}=0\)</span> from which we can deduce that <span class="math inline">\(v_2=\begin{bmatrix} 5 \\ 2\end{bmatrix}\)</span>. The normalised eigenvector is <span class="math inline">\(v_2=\begin{bmatrix} 1 \\ 0.4 \end{bmatrix}\)</span>.</p>
 <p>Of course, you can also perform these calculations in R:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment </span></span>
@@ -356,25 +367,25 @@ y_t = a_1^ty_0 + \frac{a_0}{1-a_1}.
 </div>
 <p>We can now use this solution for the eigenvectors and eigenvalues to write the solution of the dynamic system as:</p>
 <p><span class="math display">\[
-\begin{bmatrix} y_{1t} \\ y_{2t} \end{bmatrix}=\begin{bmatrix} 1 &amp; 1 \\ \frac{1}{3} &amp; 0.4 \end{bmatrix} \begin{bmatrix} 2 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}^t \begin{bmatrix} c_{1} \\ c_{2} \end{bmatrix}.
-\]</span> Multiplying the matrices out yields:</p>
+\begin{bmatrix} y_{1t} \\ y_{2t} \end{bmatrix}= \begin{bmatrix} 1 &amp; 1 \\ \frac{1}{3} &amp; 0.4 \end{bmatrix} \begin{bmatrix} 2 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}^t \begin{bmatrix} 1 &amp; 1 \\ \frac{1}{3} &amp; 0.4 \end{bmatrix}^{-1} \begin{bmatrix} y_{10} \\ y_{20} \end{bmatrix} = \begin{bmatrix} 1 &amp; 1 \\ \frac{1}{3} &amp; 0.4 \end{bmatrix} \begin{bmatrix} 2 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}^t \begin{bmatrix} c_{1} \\ c_{2} \end{bmatrix}.
+\]</span></p>
+<p>Multiplying the matrices out yields:</p>
 <p><span class="math display">\[
-y_{1t} = c_{1}2^t + c_{2}1^t \\
-y_{2t} = \frac{1}{3}c_{1}2^t + 0.4c_{2}1^t
+y_{1t} = c_{1}2^t + c_{2}1^t
+\]</span> <span class="math display">\[
+y_{2t} = \frac{1}{3}c_{1}2^t + 0.4c_{2}1^t.
 \]</span></p>
 <p>Before comparing these analytical results with those from a numerical simulation, let’s summarise the information we gain from the eigenvalues, eigenvectors, and arbitrary constants about the dynamics of the system:</p>
 <ul>
 <li><p>since the dominant eigenvalue <span class="math inline">\(\lambda_1=2\)</span> is larger than one, we know that the system is unstable</p></li>
-<li><p>since both elements in the dominant eigenvector <span class="math inline">\(v_1=\begin{bmatrix} 1 \\ \frac{1}{3} \end{bmatrix}\)</span> are non-zero, both variable in the system will be driven by that dominant eigenvalue</p></li>
-<li><p>since both elements in the dominant eigenvector are positive but the arbitrary constant <span class="math inline">\(c_1\)</span> is negative, both variables will exhibit negative growth</p></li>
+<li><p>since both elements in the dominant eigenvector <span class="math inline">\(v_1=\begin{bmatrix} 1 \\ \frac{1}{3} \end{bmatrix}\)</span> are non-zero, both variables in the system will be driven by that dominant eigenvalue</p></li>
+<li><p>since both elements in the dominant eigenvector are positive but the arbitrary constant <span class="math inline">\(c_1\)</span> is negative for positive initial conditions (see below), both variables will decay</p></li>
 <li><p>since both variables will decay at the same rate, their ratio will be constant as <span class="math inline">\(t \rightarrow \infty\)</span> and will approach a value that is given by the ratio of the elements in the dominant eigenvector</p></li>
 </ul>
-<p>To see the last point, observe that in <span class="math inline">\(\frac{y_{2t}}{y_{1t}}=\frac{\frac{1}{3}c_{1}2^t + 0.4c_{2}1^t}{c_{1}2^t + c_{2}1^t}\)</span>, the terms first term in the numerator and denominator quickly dominates the second term as <span class="math inline">\(t \rightarrow \infty\)</span>. Thus, <span class="math inline">\(\frac{y_{2t}}{y_{1t}}\)</span> will approach <span class="math inline">\(\frac{1}{3}\)</span> as <span class="math inline">\(t \rightarrow \infty\)</span>.</p>
-<p>Let us simulate the system and compare the results for, say, <span class="math inline">\(t=20\)</span> with the analytical solution:</p>
+<p>To see the last point, observe that in <span class="math inline">\(\frac{y_{2t}}{y_{1t}}=\frac{\frac{1}{3}c_{1}2^t + 0.4c_{2}1^t}{c_{1}2^t + c_{2}1^t}\)</span> the first terms in the numerator and denominator, respectively, quickly dominate the second terms as <span class="math inline">\(t \rightarrow \infty\)</span>. Thus, <span class="math inline">\(\frac{y_{2t}}{y_{1t}}\)</span> will approach <span class="math inline">\(\frac{1}{3}\)</span> as <span class="math inline">\(t \rightarrow \infty\)</span>.</p>
+<p>Let us simulate the system and compare the results for, say, <span class="math inline">\(t=10\)</span> with the analytical solution:</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/friendly/matlib">matlib</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Set number of periods for which you want to simulate</span></span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set number of periods for which you want to simulate</span></span>
 <span><span class="cn">T</span><span class="op">=</span><span class="fl">100</span></span>
 <span></span>
 <span><span class="co"># Construct matrices in which values for different periods will be stored; initialise at 1</span></span>
@@ -387,14 +398,14 @@ y_{2t} = \frac{1}{3}c_{1}2^t + 0.4c_{2}1^t
 <span>    <span class="va">y2</span><span class="op">[</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">J</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">y1</span><span class="op">[</span>, <span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">J</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">]</span><span class="op">*</span><span class="va">y2</span><span class="op">[</span>, <span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
 <span><span class="op">}</span> <span class="co"># close time loop</span></span>
 <span></span>
-<span></span>
 <span><span class="co"># Plot dynamics of y1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">y1</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">15</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">"Time"</span>, ylab<span class="op">=</span><span class="st">"y1"</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">""</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="intro_stability_analysis_files/figure-html/how_to10-1.png" class="img-fluid" width="672"></p>
+<p><img src="intro_stability_analysis_files/figure-html/stab_analysis2-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Find arbitrary constants: c=(P^-1)*y0</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/friendly/matlib">matlib</a></span><span class="op">)</span></span>
 <span><span class="va">y0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">y1</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span>,<span class="va">y2</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>  <span class="co"># create vector with initial conditions y0</span></span>
 <span><span class="va">c</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/matlib/man/Inverse.html">inv</a></span><span class="op">(</span><span class="va">evecs_norm</span><span class="op">)</span><span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span><span class="va">y0</span></span>
 <span><span class="va">c</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -403,8 +414,10 @@ y_{2t} = \frac{1}{3}c_{1}2^t + 0.4c_{2}1^t
 [1,]   -9
 [2,]   10</code></pre>
 </div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Compute solution manually for t=20 and compare with simulated solution</span></span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Compute solution manually for t=10 and compare with simulated solution</span></span>
 <span><span class="va">t</span><span class="op">=</span><span class="fl">10</span></span>
+<span></span>
+<span><span class="co"># for y1</span></span>
 <span><span class="va">c</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">evals</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="va">t</span> <span class="op">+</span> <span class="va">c</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">evals</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">^</span><span class="va">t</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -9206</code></pre>
@@ -413,7 +426,8 @@ y_{2t} = \frac{1}{3}c_{1}2^t + 0.4c_{2}1^t
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -9206</code></pre>
 </div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">evecs_norm</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">c</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">evals</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="va">t</span> <span class="op">+</span> <span class="va">evecs_norm</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">c</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">evals</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">^</span><span class="va">t</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># for y2</span></span>
+<span><span class="va">evecs_norm</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">c</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">evals</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="va">t</span> <span class="op">+</span> <span class="va">evecs_norm</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">c</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">evals</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">^</span><span class="va">t</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -3068.667</code></pre>
 </div>
@@ -426,7 +440,7 @@ y_{2t} = \frac{1}{3}c_{1}2^t + 0.4c_{2}1^t
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">y2_y1</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">50</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">"Time"</span>, ylab<span class="op">=</span><span class="st">"y2/y1"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">""</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="intro_stability_analysis_files/figure-html/how_to10-2.png" class="img-fluid" width="672"></p>
+<p><img src="intro_stability_analysis_files/figure-html/stab_analysis2-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Compare y2/y1 with normalised dominant eigenvector</span></span>
 <span><span class="va">y2_y1</span><span class="op">[</span>,<span class="cn">T</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -438,28 +452,199 @@ y_{2t} = \frac{1}{3}c_{1}2^t + 0.4c_{2}1^t
 <pre><code>[1] 0.3333333</code></pre>
 </div>
 </div>
-<p>It can be seen that the simulated results are equivalent to the results we obtain mathematically. The key insight is that by deriving information about the eigenvalues (and possibly eigenvectors) of the Jacobian matrix of the system, we are able to deduce knowledge of the dynamic properties of the system even without numerical simulation. However, the more complex the dynamic system, the more difficult this will be, thereby rendering numerical simulation a key tool to supplement formal analysis.</p>
-</section><section id="complex-numbers-and-cycles" class="level2"><h2 class="anchored" data-anchor-id="complex-numbers-and-cycles">Complex numbers and cycles</h2>
+<p>It can be seen that the simulated results are equivalent to the results we obtained analytically. The key takeaway is that by deriving information about the eigenvalues (and possibly eigenvectors) of the Jacobian matrix of the system, we are able to deduce knowledge of the dynamic properties of the system even without numerical simulation. However, the more complex the dynamic system, the more difficult this will be, thereby rendering numerical simulation a key tool to supplement formal analysis.</p>
+</section><section id="complex-eigenvalues-and-cycles" class="level2"><h2 class="anchored" data-anchor-id="complex-eigenvalues-and-cycles">Complex eigenvalues and cycles</h2>
+<p>So far, we have discussed the case where the eigenvalues <span class="math inline">\(\lambda_i\)</span> are real numbers. However, what if the polynomial <span class="math inline">\(det(A-\lambda_iI)=0\)</span> does not yield real numbers? Recall that in the case of a second-order polynomial <span class="math inline">\(\lambda^2+b\lambda+c=0\)</span>, the two roots are given by <span class="math inline">\(\lambda_{1,2} = \frac{-b \pm \sqrt{b^2-4c}}{2}\)</span>. If the term under the root <span class="math inline">\(\Delta=b^2-4c\)</span>, also called discriminant, becomes negative, the solution will be a <em>complex number</em>. More specifically, we can write:</p>
+<p><span class="math display">\[
+\lambda_{1,2} = \frac{-b \pm \sqrt{b^2-4c}}{2}=\frac{-b \pm \sqrt{4c-b^2}\sqrt{-1}}{2} =\frac{-b \pm \sqrt{4c-b^2}i}{2},
+\]</span></p>
+<p>where <span class="math inline">\(i=\sqrt{-1}\)</span> is the imaginary number. The expression can also be written as:</p>
+<p><span class="math display">\[
+\lambda_{1,2} = h \pm mi,
+\]</span></p>
+<p>which is a pair of conjugate complex numbers containing a real part given by <span class="math inline">\(h\)</span> and an imaginary part given by <span class="math inline">\(m\)</span>.</p>
+<p>Consider the model by <span class="citation" data-cites="Samuelson1939">Samuelson (<a href="#ref-Samuelson1939" role="doc-biblioref">1939</a>)</span> discussed previously: <span class="math display">\[
+C_t= c_1(C_{t-1} + I_{t-1} + G_0)
+\]</span></p>
+<p><span class="math display">\[
+I_t= \beta[c_1(C_{t-1} + I_{t-1} + G_0) - C_{t-1}]
+\]</span></p>
+<p>The Jacobian matrix of this model is given by:</p>
+<p><span class="math display">\[
+J=\begin{bmatrix} c_1 &amp; c_1 \\ \beta(c_1-1) &amp; \beta c_1 \end{bmatrix}
+\]</span></p>
+<p>The characteristic polynomial yielding the eigenvalues of the Jacobian is</p>
+<p><span class="math display">\[\lambda^2-\lambda c_1(1+\beta)+\beta c_1=0.\]</span></p>
+<p>Thus we have</p>
+<p><span class="math display">\[
+\lambda_{1,2} = \frac{c_1(1+\beta) \pm \sqrt{[c_1(1+\beta)]^2-4\beta c_1}}{2}.
+\]</span></p>
+<p>Thus, the two eigenvalues will be a pair of complex conjugates if <span class="math inline">\([c_1(1+\beta)]^2+4\beta c_1 &lt;0\)</span>. Suppose we have <span class="math inline">\(c_1=0.4\)</span> and <span class="math inline">\(\beta=2\)</span>. Then the discriminant will be negative and the eigenvalues will be complex:</p>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set parameter values</span></span>
+<span><span class="va">c1</span><span class="op">=</span><span class="fl">0.4</span></span>
+<span><span class="va">beta</span><span class="op">=</span><span class="fl">2</span></span>
+<span></span>
+<span><span class="co"># Check if discriminant is negative</span></span>
+<span><span class="op">(</span><span class="va">c1</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">beta</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">-</span><span class="fl">4</span><span class="op">*</span><span class="va">c1</span><span class="op">*</span><span class="va">beta</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.76</code></pre>
+</div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Find eigenvalues and eigenvectors of matrix</span></span>
+<span><span class="co"># Define matrix</span></span>
+<span><span class="va">J</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">c1</span>, <span class="va">c1</span>,</span>
+<span>           <span class="va">beta</span><span class="op">*</span><span class="op">(</span><span class="va">c1</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>, <span class="va">beta</span><span class="op">*</span><span class="va">c1</span><span class="op">)</span>, </span>
+<span>           <span class="fl">2</span>, <span class="fl">2</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Obtain eigenvalues and eigenvectors</span></span>
+<span><span class="va">ev</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="va">evals</span> <span class="op">=</span> <span class="va">ev</span><span class="op">$</span><span class="va">values</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6+0.663325i 0.6-0.663325i</code></pre>
+</div>
+</div>
+<p>Another way of understanding the logic behind complex numbers is through a so-called <em>Argand diagram</em> that plots the real part of the eigenvalue on the horizontal and the imaginary part on the vertical axis. By Pythagoras’s theorem, the distance of the eigenvalue from the origin will then be given by <span class="math inline">\(R=\sqrt{h^2+m^2}\)</span>. The value of <span class="math inline">\(R\)</span> (which is always real-valued and positive) is called the <em>modulus</em> (or absolute value) of the complex eigenvalue and will contain important information about the dynamic stability of economic models that exhibit complex eigenvalues.</p>
+<div class="cell">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Draw Argand diagram</span></span>
+<span></span>
+<span><span class="co"># Save real and imaginary part of complex eigenvalue</span></span>
+<span><span class="va">re</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html">Re</a></span><span class="op">(</span><span class="va">evals</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">im</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html">Im</a></span><span class="op">(</span><span class="va">evals</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot complex eigenvalue</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>bty<span class="op">=</span><span class="st">"l"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">re</span>,<span class="va">im</span>, type<span class="op">=</span><span class="st">"o"</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, lwd<span class="op">=</span><span class="fl">2</span>, xlab<span class="op">=</span><span class="st">"h"</span>, ylab<span class="op">=</span><span class="st">"m"</span>, main<span class="op">=</span><span class="st">"Argand diagram of complex eigenvalue"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot unit circle</span></span>
+<span><span class="va">X</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, by<span class="op">=</span><span class="fl">0.001</span><span class="op">)</span></span>
+<span><span class="va">Y</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">X</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">X</span>,<span class="va">Y</span>, type<span class="op">=</span><span class="st">"l"</span>, lty<span class="op">=</span><span class="st">"dotted"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot a ray from the origin to eigenvalue</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/segments.html">segments</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="va">re</span>,<span class="va">im</span>, lty<span class="op">=</span><span class="st">'solid'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Add labels</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.025</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">theta</span><span class="op">)</span>, cex<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.25</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">R</span><span class="op">==</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">h</span><span class="op">^</span><span class="fl">2</span><span class="op">+</span><span class="va">m</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>, cex<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="va">re</span>, <span class="va">im</span><span class="op">+</span><span class="fl">0.05</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">lambda</span><span class="op">==</span><span class="va">h</span><span class="op">+</span><span class="va">mi</span><span class="op">)</span>, cex<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="intro_stability_analysis_files/figure-html/stab_analysis4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The angle <span class="math inline">\(\theta\)</span> of the line that connects the origin and the complex eigenvalue and the x-axis of the Argand diagram also contains information about the dynamics. To see this, note that the geometry of the complex number represented in the Argand diagram can also be expressed in trigonometric form: <span class="math display">\[
+\sin\theta=\frac{m}{R}
+\]</span> <span class="math display">\[
+\cos\theta=\frac{h}{R},
+\]</span></p>
+<p>where <span class="math inline">\(\theta=\arcsin (\frac{m}{R}) =\arccos (\frac{h}{R})=\arctan(\frac{m}{h})\)</span></p>
+<p>Thus, we can write the complex eigenvalue also as: <span class="math display">\[
+\lambda_{1,2}=R(\cos\theta \pm \sin\theta \times i).
+\]</span></p>
+<p>By De Moivre’s theorem, we have <span class="math inline">\(R(\cos\theta \pm \sin\theta \times i)^t=R^t(\cos\theta t \pm \sin\theta t \times i)\)</span>. Thus, the solution to a dynamic system that exhibits complex eigenvalues will be of the form: <span class="math display">\[
+y_{1t}=v_{11}c_1 R_1^t(\cos\theta_1 t \pm \sin\theta_1 t \times i) +...+ y^*_1.
+\]</span></p>
+<p>From this solution we can again deduce key information about the dynamics of the system based on the (complex) eigenvalues:</p>
+<ul>
+<li>stability will depend on the modulus: for <span class="math inline">\(R&lt;\)</span> the system will be stable, for <span class="math inline">\(R&gt;1\)</span> it will be unstable</li>
+<li>from the nature of the trigonometric functions <span class="math inline">\(\sin(\theta t)\)</span> and <span class="math inline">\(\cos(\theta t)\)</span>, we know that system will exhibit periodic cyclical dynamics as <span class="math inline">\(t\)</span> increases</li>
+<li>the length of the cycles will be given by <span class="math inline">\(L=\frac{2\pi}{\theta}\)</span> and the frequency by <span class="math inline">\(F=1/L=\frac{\theta}{2\pi}\)</span>
+</li>
+<li>the amplitude of the cycles will depend on the elements of the eigenvectors, the initial conditions, and <span class="math inline">\(R\)</span>.</li>
+</ul>
+<p>Let us simulate the Samuelson model with the parameterisation that yields complex eigenvalues to illustrate these results:</p>
+<div class="cell">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate modulus</span></span>
+<span><span class="va">mod</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html">Mod</a></span><span class="op">(</span><span class="va">evals</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">mod</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8944272</code></pre>
+</div>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate cycle length</span></span>
+<span><span class="va">L</span><span class="op">=</span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="va">pi</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">acos</a></span><span class="op">(</span><span class="va">re</span><span class="op">/</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">L</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.520433</code></pre>
+</div>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set number of periods for which you want to simulate</span></span>
+<span><span class="cn">T</span><span class="op">=</span><span class="fl">100</span></span>
+<span></span>
+<span><span class="co"># Set number of parameterisations that will be considered</span></span>
+<span><span class="va">S</span><span class="op">=</span><span class="fl">1</span></span>
+<span></span>
+<span><span class="co"># Construct matrices in which values for different periods will be stored; initialise at 1</span></span>
+<span><span class="va">C</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">I</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Construct matrices for exogenous variable</span></span>
+<span><span class="va">G0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">5</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Solve this system recursively based on the initialisation</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="cn">T</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">C</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">c1</span><span class="op">*</span><span class="op">(</span><span class="va">C</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">I</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">G0</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span>    <span class="va">I</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">beta</span><span class="op">*</span><span class="op">(</span><span class="va">c1</span><span class="op">*</span><span class="op">(</span><span class="va">C</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">I</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">G0</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">-</span> <span class="va">C</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="co"># close t1me loop</span></span>
+<span></span>
+<span><span class="co"># Calculate output</span></span>
+<span><span class="va">Y</span><span class="op">=</span><span class="va">C</span><span class="op">+</span><span class="va">G0</span><span class="op">+</span><span class="va">I</span></span>
+<span></span>
+<span><span class="co"># Time series chart of output dynamics in Samuelson (1939) model</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Y</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">"Time"</span>, ylab<span class="op">=</span><span class="st">"Y"</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Figure 1: Output"</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="intro_stability_analysis_files/figure-html/stab_analysis5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>You can see that the model generates cycles with a length (from peak/trough to peak/trough) of around 7.5 periods. Since the modulus is <span class="math inline">\(R&lt;1\)</span>, the system is stable and eventually converges to the equilibrium.</p>
 </section><section id="nonlinear-systems" class="level2"><h2 class="anchored" data-anchor-id="nonlinear-systems">Nonlinear systems</h2>
+<p>So far, we have analysed dynamic systems that are linear. However, in the more general case, a dynamic system may be nonlinear and of the form:</p>
+<p><span class="math display">\[
+y_t=f(y_{t-1}).
+\]</span></p>
+<p>An <span class="math inline">\(n\)</span>-dimensional nonlinear system may have multiple equilibria <span class="math inline">\(y^*\)</span>. To analyse the dynamic properties of such a system, we normally conduct a linear approximation in the neighbourhood of one of the equilibria. In that sense, the stability analysis of a nonlinear system has only local as opposed to global validity.</p>
+<p>Mathematically, linearisation around an equilibrium point can be done by conducting a first-order Taylor expansion around that equilibrium:</p>
+<p><span class="math display">\[
+y_t=f^i(y^*) + \sum_{j=1}^{n}\frac{\partial f^i(y^*)}{\partial y_{jt-1}}(y_{jt-1}-y_j^*),
+\]</span></p>
+<p>where <span class="math inline">\(i=1,2,...,n\)</span>.</p>
+<p>This yields a linear version of the system that can be written as:</p>
+<p><span class="math display">\[
+y_{t}=Ay_{t-1}+B,
+\]</span></p>
+<p>where <span class="math inline">\(A_{11}=\frac{\partial f^1(y^*)}{y_{1t-1}}\)</span> and so forth. Thus, <span class="math inline">\(A\)</span> is simply the Jacobian matrix of <span class="math inline">\(f(y_{t-1})\)</span> evaluated at <span class="math inline">\(y^*\)</span>.</p>
+<p>In practice, this means that to analyse the local stability of a nonlinear system, one needs to:</p>
+<ul>
+<li>find the equilibrium solution <span class="math inline">\(y^*\)</span> whose neighbourhood you want to analyse</li>
+<li>compute the Jacobian matrix of <span class="math inline">\(f(y_{t-1})\)</span>
+</li>
+<li>substitute <span class="math inline">\(y^*\)</span> into <span class="math inline">\(f(y_{t-1})\)</span> and analyse the resulting matrix.</li>
+</ul>
+<p>An example for the stability analysis of a simple nonlinear system can be found in <a href="a_malthusian_model.html"><span>Chapter&nbsp;11</span></a>.</p>
+</section><section id="references" class="level2"><h2 class="anchored" data-anchor-id="references">References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-Anthony2012" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Anthony2012" class="csl-entry" role="listitem">
 Anthony, Martin, and Michele Harvey. 2012. <em><span class="nocase">Linear Algebra: Concepts and Methods</span></em>. Cambridge UK: <span>Cambridge University Press</span>.
 </div>
-<div id="ref-Chiang2005" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Chiang2005" class="csl-entry" role="listitem">
 Chiang, Alpha C, and Kevin Wainwright. 2005. <em>Fundamental <span>Methods</span> of <span>Mathematical Economics</span></em>. 4th ed. New York: <span>McGraw-Hill Education</span>.
 </div>
-<div id="ref-Gandolfo2009" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Gandolfo2009" class="csl-entry" role="listitem">
 Gandolfo, Giancarlo. 2009. <em>Economic Dynamics. Study Edition. 4th Edition.</em> Springer.
 </div>
-<div id="ref-Sayama2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Samuelson1939" class="csl-entry" role="listitem">
+Samuelson, Paul A. 1939. <span>“<span class="nocase">Interactions between the Multiplier Analysis and the Principle of Acceleration</span>.”</span> <em>The Review of Economics and Statistics</em> 21 (2): 75–78. <a href="https://doi.org/10.2307/1927758">https://doi.org/10.2307/1927758</a>.
+</div>
+<div id="ref-Sayama2015" class="csl-entry" role="listitem">
 Sayama, Hiroki. 2015. <em>Introduction to the Modeling and Analysis of Complex Systems</em>. Open SUNY Textbooks, Milne Library.
 </div>
 </div>
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
-<li id="fn1"><p>We will focus here on difference instead of differential equations, i.e.&nbsp;on dynamics in discrete as opposed to continuous time. Most of the continuous-time counterpart is analogous to the material covered here. <span class="citation" data-cites="Sayama2015">Sayama (<a href="#ref-Sayama2015" role="doc-biblioref">2015</a>)</span> provides a very accessible and applied introduction to dynamic systems with Python code. An introductory treatment of the underlying mathematics is <span class="citation" data-cites="Chiang2005">Chiang and Wainwright (<a href="#ref-Chiang2005" role="doc-biblioref">2005</a>)</span>, chaps. X. <span class="citation" data-cites="Gandolfo2009">Gandolfo (<a href="#ref-Gandolfo2009" role="doc-biblioref">2009</a>)</span> provides a more advanced treatment of the mathematics as well as many economic examples. A great introduction to linear algebra is <span class="citation" data-cites="Anthony2012">Anthony and Harvey (<a href="#ref-Anthony2012" role="doc-biblioref">2012</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>We will focus here on difference instead of differential equations, i.e.&nbsp;on dynamics in discrete as opposed to continuous time. Most of the continuous-time counterpart is analogous to the material covered here. <span class="citation" data-cites="Sayama2015">Sayama (<a href="#ref-Sayama2015" role="doc-biblioref">2015</a>)</span> provides a very accessible and applied introduction to dynamic systems with Python code. An introductory treatment of the underlying mathematics is <span class="citation" data-cites="Chiang2005">Chiang and Wainwright (<a href="#ref-Chiang2005" role="doc-biblioref">2005</a>)</span>, chaps. 15-19. <span class="citation" data-cites="Gandolfo2009">Gandolfo (<a href="#ref-Gandolfo2009" role="doc-biblioref">2009</a>)</span> provides a more advanced treatment of the mathematics as well as many economic examples. A great introduction to linear algebra is <span class="citation" data-cites="Anthony2012">Anthony and Harvey (<a href="#ref-Anthony2012" role="doc-biblioref">2012</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>This is because in the product <span class="math inline">\((PDP^{-1})(PDP^{-1})(PDP^{-1})...\)</span>, each <span class="math inline">\(P\)</span> cancels a <span class="math inline">\(P^{-1}\)</span>, except for the first <span class="math inline">\(P\)</span> and last <span class="math inline">\(P^{-1}\)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -603,9 +788,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -670,6 +869,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -722,6 +1007,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">An open-source platform for macroeconomic model simulation.</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
     <div class="nav-footer-right"><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></div>
   </div>
 </footer>
