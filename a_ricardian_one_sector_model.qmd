@@ -41,7 +41,7 @@ K_t = K_{t-1} + \beta P_{t-1}
 $$ {#eq-ricardo1_K}
 
 $$
-N_t = N_{t-1} - \gamma (w_{t-1} - w^S)
+N_t = N_{t-1} + \gamma (w_{t-1} - w^S)
 $$ {#eq-ricardo1_N}
 
 where $Y_t$, $A$, $N_t$, $W_t$, $K_t$,$w_t$, $Y_t$, $MPL_t$, $R_t$, $P_t$, and $w^S$ are real output (measured in units of corn), productivity, employment, the real wage bill (or wage fund), the capital stock, the real wage rate, the marginal product of labour, rents, profits, and the subsistence wage, respectively.

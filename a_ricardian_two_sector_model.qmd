@@ -65,7 +65,7 @@ K_t = K_{t-1} + g\left(\frac{P_{t-1}}{p_{1t-1}}\right)
 $$ {#eq-ricardo2_K}
 
 $$
-N_t = N_{t-1} - \gamma (w_{t-1} - w^S)
+N_t = N_{t-1} + \gamma (w_{t-1} - w^S)
 $$ {#eq-ricardo2_N}
 
 where $Y_t$, $A$, $N_t$, $W_t$, $K_t$,$w_t$, $Y_t$, $MPL_t$, $R_t$, $P_t$, $p$, and $w^S$ are real output, productivity, employment, the real wage bill (or wage fund), the capital stock (in terms of corn), the real wage rate (in terms of corn), the marginal product of labour (in the corn sector), rents, profits, prices, and the subsistence wage, respectively. The subscripts 1 and 2 denote the corn, i.e. agricultural, sector and the luxury goods sectors, respectively.

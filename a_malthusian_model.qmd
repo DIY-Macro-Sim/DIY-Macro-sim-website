@@ -1,4 +1,4 @@
-# A Malthusian Model
+# A Malthusian Model {#sec-malthus}
 
 ## Overview
 
@@ -39,7 +39,7 @@ Table reports the parameterisation and initial values used in the simulation. Be
 **Table 1: Parameterisation**
 
 | Scenario                                 | $b_0$ | $b_1$ | $d_0$ | $d_1$ | $a_0$ | $a_1$ |
-|------|------|------|------|------|------|-------|
+|------------------------------------------|-------|-------|-------|-------|-------|-------|
 | 1: baseline                              | 0.5   | 0.5   | 2.5   | 0.5   | 2.5   | 0.05  |
 | 2: fall in exog birth rate ($b_0$)       | 0.4   | 0.5   | 2.5   | 0.5   | 2.5   | 0.05  |
 | 3: rise in sensitivity of income ($a_1$) | 0.5   | 0.5   | 2.5   | 0.5   | 2.5   | 0.07  |
