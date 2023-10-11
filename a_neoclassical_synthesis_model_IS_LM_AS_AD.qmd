@@ -1,8 +1,8 @@
-# A Neoclassical Synthesis Model (IS-LM-AS-AD)
+# A Neoclassical Synthesis Model (IS-LM-AS-AD) {#sec-neoclassical-synthesis}
 
 ## Overview
 
-The Neoclassical Synthesis was developed in the 1940s and 1950s by Franco Modigliani, Paul Samuelson and others. It introduced neoclassical components into the Keynesian IS-LM model that had been proposed by John R. @Hicks1937 to formalise some key ideas of John Maynard Keynes' 1936 book [The General Theory of Employment, Interest and Money](https://en.wikipedia.org/wiki/The_General_Theory_of_Employment,_Interest_and_Money). The IS-LM model, which is analysed in detail in @an_IS_LM_model, contains two equilibrium relationships: a goods market equilibrium between investment and saving (IS) and a money market equilibrium between money demand and money supply (LM). In the goods market, aggregate supply adjusts to the level of aggregate demand given by the expenditure decisions of households, firms, and the government. Money demand is determined by aggregate income and the interest rate on bonds. The money supply is assumed to be exogenous. The two markets pin down equilibrium output and the interest rate. 
+The Neoclassical Synthesis was developed in the 1940s and 1950s by Franco Modigliani, Paul Samuelson and others. It introduced neoclassical components into the Keynesian IS-LM model that had been proposed by John R. @Hicks1937 to formalise some key ideas of John Maynard Keynes' 1936 book [The General Theory of Employment, Interest and Money](https://en.wikipedia.org/wiki/The_General_Theory_of_Employment,_Interest_and_Money). The IS-LM model, which is analysed in detail in @sec-islm-model, contains two equilibrium relationships: a goods market equilibrium between investment and saving (IS) and a money market equilibrium between money demand and money supply (LM). In the goods market, aggregate supply adjusts to the level of aggregate demand given by the expenditure decisions of households, firms, and the government. Money demand is determined by aggregate income and the interest rate on bonds. The money supply is assumed to be exogenous. The two markets pin down equilibrium output and the interest rate. 
 
 The Neoclassical Synthesis adds a neoclassical labour market with Keynesian frictions to the IS-LM model. Following the discussion in @Froyen2005, chap. 9, we consider a labour market in which firms have perfect information about the real wage, whereas workers need to form expectations about the price level. Price expectations are assumed to be exogenous in the short run. Workers thus suffer from `money illusion': an increase in the actual price levels reduces the real wage but leaves their labour supply unchanged. This gives rise to an upward-sloping aggregate supply (AS) (or Phillips) curve. By contrast, the aggregate demand (AD) curve is downward-sloping as a higher price level increases the demand for real money balances, which pushes up the interest rate. 
 
@@ -265,15 +265,6 @@ barplot(w_star, ylab="w", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:
                                       "4:Rise exp. price", "5:Monetary expan.", "6:Fiscal expan."))
 
 ```
-
-###  Calculate equilibrium fiscal multiplier
-
-```{r neoclmacro8}
-Y_star[6]-Y_star[1] # numerical approach
-
-m2/((1-c1)*m2+i1*m1) # analytical approach
-```
-
 
 ## Directed graph
 

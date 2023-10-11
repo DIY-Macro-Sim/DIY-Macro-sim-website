@@ -1,4 +1,4 @@
-# An IS-LM Model
+# An IS-LM Model {#sec-islm-model}
 
 ## Overview
 
@@ -171,7 +171,7 @@ for (i in 1:S){
 
 ### Plots
 
-@fig-output and @fig-r depict the response of the model's key endogenous variables, output and the interest rate, to various shifts. A fall in animal spirits (scenario 2) and an increase in liquidity preference (scenario 3) both have contractionary effects. While the fall in animal spirits directly reduces aggregate demand and thereby output (despite a fall in the interest rate), the rise in liquidity preference depresses output through its positive effect on the interest rate. Both scenarios raise the unemployment rate (@fig-U). Scenarios 4 to 6 assess three different macroeconomic policy tools to stimulate output. It can be seen in @fig-output that fiscal policy is more effective than monetary policy for the parameterisation in Table 1.^[The appendix shows formally that fiscal policy is more effective than monetary policy if $m_{2}>i_{2}$.] Direct fiscal stimulus is more effective than tax cuts due to the constant marginal propensity to consume. The effect on output is a multiple of the one-unit stimulus thanks to the multiplier effect. However, it can also be seen that fiscal policy raises the interest rate, which crowds out some of the expansionary effect.
+@fig-output and @fig-r depict the response of the model's key endogenous variables, output and the interest rate, to various shifts. A fall in animal spirits (scenario 2) and an increase in liquidity preference (scenario 3) both have contractionary effects. While the fall in animal spirits directly reduces aggregate demand and thereby output (despite a fall in the interest rate), the rise in liquidity preference depresses output through its positive effect on the interest rate. Both scenarios raise the unemployment rate (@fig-U). Scenarios 4 to 6 assess three different macroeconomic policy tools to stimulate output. It can be seen in @fig-output that fiscal policy is more effective than monetary policy for the parameterisation in Table 1.^[The analytical discussion below shows formally that fiscal policy is more effective than monetary policy if $m_{2}>i_{2}$.] Direct fiscal stimulus is more effective than tax cuts due to the constant marginal propensity to consume. The effect on output is a multiple of the one-unit stimulus thanks to the multiplier effect. However, it can also be seen that fiscal policy raises the interest rate, which crowds out some of the expansionary effect.
 
 ```{r islm2}
 #| label: fig-output

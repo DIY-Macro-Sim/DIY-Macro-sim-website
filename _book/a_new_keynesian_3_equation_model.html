@@ -268,11 +268,18 @@ div.csl-indent {
   <li><a href="#plots" id="toc-plots" class="nav-link" data-scroll-target="#plots">Plots</a></li>
   </ul>
 </li>
-  <li><a href="#directed-graph" id="toc-directed-graph" class="nav-link" data-scroll-target="#directed-graph">Directed Graph</a></li>
+  <li><a href="#directed-graph" id="toc-directed-graph" class="nav-link" data-scroll-target="#directed-graph">Directed graph</a></li>
   <li>
 <a href="#sec-analytical" id="toc-sec-analytical" class="nav-link" data-scroll-target="#sec-analytical">Analytical discussion</a>
   <ul>
-<li><a href="#derivation-of-core-equations" id="toc-derivation-of-core-equations" class="nav-link" data-scroll-target="#derivation-of-core-equations">Derivation of core equations</a></li>
+<li>
+<a href="#derivation-of-core-equations" id="toc-derivation-of-core-equations" class="nav-link" data-scroll-target="#derivation-of-core-equations">Derivation of core equations</a>
+  <ul>
+<li><a href="#is-curve" id="toc-is-curve" class="nav-link" data-scroll-target="#is-curve">IS curve</a></li>
+  <li><a href="#pc-curve" id="toc-pc-curve" class="nav-link" data-scroll-target="#pc-curve">PC curve</a></li>
+  <li><a href="#monetary-policy-rule" id="toc-monetary-policy-rule" class="nav-link" data-scroll-target="#monetary-policy-rule">Monetary policy rule</a></li>
+  </ul>
+</li>
   <li><a href="#equilibrium-solutions-and-stability-analysis" id="toc-equilibrium-solutions-and-stability-analysis" class="nav-link" data-scroll-target="#equilibrium-solutions-and-stability-analysis">Equilibrium solutions and stability analysis</a></li>
   </ul>
 </li>
@@ -467,7 +474,7 @@ r_t = r_s + a_3(\pi_t-\pi^T)
 </div>
 <p>An increase in the central bank’s inflation target (scenario 2) gradually raises the inflation rate to a new level. During the adjustment period, the interest rate falls, which temporarily allows for a higher level of output. However, there is no permanent expansionary effect.</p>
 <p>By contrast, an increase in potential or equilibrium output (scenario 3) allows for a permanently higher level of output and a lower real interest rate.</p>
-</section></section><section id="directed-graph" class="level2"><h2 class="anchored" data-anchor-id="directed-graph">Directed Graph</h2>
+</section></section><section id="directed-graph" class="level2"><h2 class="anchored" data-anchor-id="directed-graph">Directed graph</h2>
 <p>Another perspective on the model’s properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node <span class="math inline">\(x_1\)</span> to node <span class="math inline">\(x_2\)</span> indicates a causal impact of <span class="math inline">\(x_1\)</span> on <span class="math inline">\(x_2\)</span>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Construct auxiliary Jacobian matrix for 7 variables: y, p, r, A, ye, rs, pt</span></span>
@@ -489,7 +496,7 @@ r_t = r_s + a_3(\pi_t-\pi^T)
 <span><span class="va">dg</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_adjacency_matrix.html">graph_from_adjacency_matrix</a></span><span class="op">(</span><span class="va">A_mat</span>, mode<span class="op">=</span><span class="st">"directed"</span>, weighted<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Define node labels</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">dg</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="st">"p"</span>, <span class="st">"r"</span>, <span class="st">"A"</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">y</span><span class="op">[</span><span class="va">e</span><span class="op">]</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="va">s</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">p</span><span class="op">^</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">dg</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">pi</span><span class="op">)</span>, <span class="st">"r"</span>, <span class="st">"A"</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">y</span><span class="op">[</span><span class="va">e</span><span class="op">]</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="va">s</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">pi</span><span class="op">^</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Plot directed graph</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dg</span>, main<span class="op">=</span><span class="st">"Figure 4: Directed graph of 3-Equation model"</span>, vertex.size<span class="op">=</span><span class="fl">20</span>, vertex.color<span class="op">=</span><span class="st">"lightblue"</span>, </span>
@@ -503,21 +510,24 @@ r_t = r_s + a_3(\pi_t-\pi^T)
 <p>In Figure 4, it can be seen that aggregate demand (<span class="math inline">\(A\)</span>), equilibrium output (<span class="math inline">\(y_e\)</span>), and the inflation target (<span class="math inline">\(\pi^T\)</span>) are the key exogenous variables of the model. All other variables are endogenous and form a closed loop (or cycle) within the system. The upper-right side of the graph represents the supply side, given by the equilibrium level of output and its effect on inflation. The upper-left side captures the demand side and its effect on actual output. The key endogenous variables, output, inflation, and the interest rate form the centre of the graph, where they stand in a triangular relationship to each other. Output drives inflation, which in turn impacts the real interest rate. The latter then feeds back into output. Structural changes in the relationship between demand and supply (e.g.&nbsp;excess demand) also impact the system through their effect on the stabilising interest rate (<span class="math inline">\(r_s\)</span>).</p>
 </section><section id="sec-analytical" class="level2"><h2 class="anchored" data-anchor-id="sec-analytical">Analytical discussion</h2>
 <section id="derivation-of-core-equations" class="level3"><h3 class="anchored" data-anchor-id="derivation-of-core-equations">Derivation of core equations</h3>
-<p>The IS-curve in <a href="#eq-nk_y">Equation&nbsp;<span>9.1</span></a> is loosely based on the consumption Euler equation. Suppose there are two periods and the household’s utility function is <span class="math inline">\(U=\ln(C_t) + \beta \ln(C_{t+1})\)</span> subject to the intertemporal budget constraint <span class="math inline">\(C_t+\frac{C_{t+1}}{1+r}=Y_t + \frac{Y_{t+1}}{1+r}\)</span>. Substituting the constraint into the objective function and differentiating with respect to <span class="math inline">\(C_t\)</span> yields the first-order condition:</p>
+<section id="is-curve" class="level4"><h4 class="anchored" data-anchor-id="is-curve">IS curve</h4>
+<p>The IS curve in <a href="#eq-nk_y">Equation&nbsp;<span>9.1</span></a> is loosely based on the consumption Euler equation introduced in <a href="a_neoclassical_macro_model.html"><span>Chapter&nbsp;3</span></a>. Suppose there are two periods and the household maximises its utility function <span class="math inline">\(U=\ln(C_t) + \beta \ln(C_{t+1})\)</span> subject to the intertemporal budget constraint <span class="math inline">\(C_t+\frac{C_{t+1}}{1+r}=Y_t + \frac{Y_{t+1}}{1+r}\)</span>. Substituting the constraint into the objective function and differentiating with respect to <span class="math inline">\(C_t\)</span> yields the first-order condition:</p>
 <p><span class="math display">\[
 C_t = \frac{C_{t+1}}{\beta(1+r)}.
 \]</span></p>
 <p>This consumption Euler equation establishes the negative relationship between the real interest rate and expenditures in <a href="#eq-nk_y">Equation&nbsp;<span>9.1</span></a>.</p>
+</section><section id="pc-curve" class="level4"><h4 class="anchored" data-anchor-id="pc-curve">PC curve</h4>
 <p>The Phillips curve <a href="#eq-nk_pi">Equation&nbsp;<span>9.2</span></a> is derived from wage- and price-setting in imperfect labour markets.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Consider the following wage- and price-setting functions: <span class="math display">\[
 \frac{W}{P^E} = B + \alpha(y_t - y_e) + z_w
 \]</span> <span id="eq-nk_P"><span class="math display">\[
 P=(1+\mu)\frac{W}{\lambda},
 \tag{9.5}\]</span></span></p>
 <p>i.e.&nbsp;the nominal wage <span class="math inline">\(W\)</span>, adjusted for the expected price level, is increasing in the output gap, a factor <span class="math inline">\(B\)</span> capturing unemployment benefits and the disutility of work as well as a vector <span class="math inline">\(z_w\)</span> of wage-push factors. Prices are set based on a constant mark-up (<span class="math inline">\(\mu\)</span>) on unit labour cost (<span class="math inline">\(\frac{W}{\lambda}\)</span>).</p>
-<p>In equilibrium, the real wage is given by: <span class="math inline">\(w_e = B + z_w\)</span>. In a dynamic setting, wage setters will raise the expected real wage by <span class="math inline">\(\widehat{\left(\frac{W}{P^E}\right)} =\hat{W_t}-\hat{P_t^E}=\frac{W}{P^E} - w_e =\alpha(y_t - y_e)\)</span>. Together with adaptive expectations for prices <span class="math inline">\(\hat{P_t^E} = \hat{P}_{t-1}\)</span>, this yields the following equation for wage inflation: <span id="eq-nk_W"><span class="math display">\[
+<p>In equilibrium, the real wage is given by: <span class="math inline">\(w_e = B + z_w\)</span>. In a dynamic setting, wage setters will raise the expected real wage by <span class="math inline">\(\left(\frac{W_t}{P_{t}^E}\right) - \left(\frac{W_{t-1}}{P_{t-1}}\right)=\alpha(y_t - y_e)\)</span>. Together with adaptive expectations for prices <span class="math inline">\(\hat{P_t^E} = \hat{P}_{t-1}\)</span> and the approximation <span class="math inline">\(\hat{W_t} - \hat{P_{t-1}} \approx \left(\frac{W_t}{P_{t}^E}\right) - \left(\frac{W_{t-1}}{P_{t-1}}\right)\)</span>, this yields the following equation for wage inflation: <span id="eq-nk_W"><span class="math display">\[
 \hat{W_t} = \hat{P}_{t-1} +\alpha(y_t - y_e).
 \tag{9.6}\]</span></span></p>
 <p>Transforming equation <a href="#eq-nk_P">Equation&nbsp;<span>9.5</span></a> into growth rates (<span class="math inline">\(\hat{P}=\hat{W}\)</span>) and combining it with the wage-inflation equation <a href="#eq-nk_W">Equation&nbsp;<span>9.6</span></a> yields the Phillips curve <a href="#eq-nk_pi">Equation&nbsp;<span>9.2</span></a>.</p>
+</section><section id="monetary-policy-rule" class="level4"><h4 class="anchored" data-anchor-id="monetary-policy-rule">Monetary policy rule</h4>
 <p>Finally, to derive the interest rate rule, start from the following central bank loss function:<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <p><span class="math display">\[
 L=(y_t-y_e)^2 + b(\pi_t - \pi^T)^2.
@@ -526,7 +536,7 @@ L=(y_t-y_e)^2 + b(\pi_t - \pi^T)^2.
 y_t-y_e = -a_2b(\pi-\pi^T),
 \]</span></p>
 <p>which can also be regarded as a monetary policy rule. Next, substitute the Phillips curve (<a href="#eq-nk_pi">Equation&nbsp;<span>9.2</span></a>), the IS-curve (<a href="#eq-nk_y">Equation&nbsp;<span>9.1</span></a>), and the stabilising interest rate (<a href="#eq-nk_rs">Equation&nbsp;<span>9.3</span></a>) into the monetary policy rule and define <span class="math inline">\(a_3 = \frac{1}{a_1(\frac{1}{a_2b} + a_2)}\)</span>, which yields the interest rate rule (<a href="#eq-nk_r">Equation&nbsp;<span>9.4</span></a>).</p>
-</section><section id="equilibrium-solutions-and-stability-analysis" class="level3"><h3 class="anchored" data-anchor-id="equilibrium-solutions-and-stability-analysis">Equilibrium solutions and stability analysis</h3>
+</section></section><section id="equilibrium-solutions-and-stability-analysis" class="level3"><h3 class="anchored" data-anchor-id="equilibrium-solutions-and-stability-analysis">Equilibrium solutions and stability analysis</h3>
 <p>By definition, in the steady state we have <span class="math inline">\(y^*=y_e\)</span>. This implies that <span class="math inline">\(r^*=r_s\)</span>. From this, it follows that <span class="math inline">\(\pi^* = \pi^T\)</span>.</p>
 <p>To analyse the dynamic stability of the model, we rewrite it as a system of first-order difference equations. To this end, substitute <a href="#eq-nk_y">Equation&nbsp;<span>9.1</span></a> into <a href="#eq-nk_pi">Equation&nbsp;<span>9.2</span></a>, which yields: <span id="eq-nk_pi_reduc"><span class="math display">\[
 \pi_t = \pi_{t-1} + a_2(A - a_1r_{t-1}-y_e)

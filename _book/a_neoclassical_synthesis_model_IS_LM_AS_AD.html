@@ -266,7 +266,6 @@ div.csl-indent {
 <li><a href="#parameterisation" id="toc-parameterisation" class="nav-link" data-scroll-target="#parameterisation">Parameterisation</a></li>
   <li><a href="#simulation-code" id="toc-simulation-code" class="nav-link" data-scroll-target="#simulation-code">Simulation code</a></li>
   <li><a href="#plots" id="toc-plots" class="nav-link" data-scroll-target="#plots">Plots</a></li>
-  <li><a href="#calculate-equilibrium-fiscal-multiplier" id="toc-calculate-equilibrium-fiscal-multiplier" class="nav-link" data-scroll-target="#calculate-equilibrium-fiscal-multiplier">Calculate equilibrium fiscal multiplier</a></li>
   </ul>
 </li>
   <li><a href="#directed-graph" id="toc-directed-graph" class="nav-link" data-scroll-target="#directed-graph">Directed graph</a></li>
@@ -276,9 +275,7 @@ div.csl-indent {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">
-<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Neoclassical Synthesis Model (IS-LM-AS-AD)</span>
-</h1>
+<h1 class="title"><span id="sec-neoclassical-synthesis" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Neoclassical Synthesis Model (IS-LM-AS-AD)</span></span></h1>
 </div>
 
 
@@ -292,7 +289,7 @@ div.csl-indent {
   
 
 </header><section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>The Neoclassical Synthesis was developed in the 1940s and 1950s by Franco Modigliani, Paul Samuelson and others. It introduced neoclassical components into the Keynesian IS-LM model that had been proposed by John R. <span class="citation" data-cites="Hicks1937">Hicks (<a href="#ref-Hicks1937" role="doc-biblioref">1937</a>)</span> to formalise some key ideas of John Maynard Keynes’ 1936 book <a href="https://en.wikipedia.org/wiki/The_General_Theory_of_Employment,_Interest_and_Money">The General Theory of Employment, Interest and Money</a>. The IS-LM model, which is analysed in detail in <span class="citation" data-cites="an_IS_LM_model">(<a href="#ref-an_IS_LM_model" role="doc-biblioref"><strong>an_IS_LM_model?</strong></a>)</span>, contains two equilibrium relationships: a goods market equilibrium between investment and saving (IS) and a money market equilibrium between money demand and money supply (LM). In the goods market, aggregate supply adjusts to the level of aggregate demand given by the expenditure decisions of households, firms, and the government. Money demand is determined by aggregate income and the interest rate on bonds. The money supply is assumed to be exogenous. The two markets pin down equilibrium output and the interest rate.</p>
+<p>The Neoclassical Synthesis was developed in the 1940s and 1950s by Franco Modigliani, Paul Samuelson and others. It introduced neoclassical components into the Keynesian IS-LM model that had been proposed by John R. <span class="citation" data-cites="Hicks1937">Hicks (<a href="#ref-Hicks1937" role="doc-biblioref">1937</a>)</span> to formalise some key ideas of John Maynard Keynes’ 1936 book <a href="https://en.wikipedia.org/wiki/The_General_Theory_of_Employment,_Interest_and_Money">The General Theory of Employment, Interest and Money</a>. The IS-LM model, which is analysed in detail in <a href="an_IS_LM_model.html"><span>Chapter&nbsp;4</span></a>, contains two equilibrium relationships: a goods market equilibrium between investment and saving (IS) and a money market equilibrium between money demand and money supply (LM). In the goods market, aggregate supply adjusts to the level of aggregate demand given by the expenditure decisions of households, firms, and the government. Money demand is determined by aggregate income and the interest rate on bonds. The money supply is assumed to be exogenous. The two markets pin down equilibrium output and the interest rate.</p>
 <p>The Neoclassical Synthesis adds a neoclassical labour market with Keynesian frictions to the IS-LM model. Following the discussion in <span class="citation" data-cites="Froyen2005">Froyen (<a href="#ref-Froyen2005" role="doc-biblioref">2005</a>)</span>, chap.&nbsp;9, we consider a labour market in which firms have perfect information about the real wage, whereas workers need to form expectations about the price level. Price expectations are assumed to be exogenous in the short run. Workers thus suffer from `money illusion’: an increase in the actual price levels reduces the real wage but leaves their labour supply unchanged. This gives rise to an upward-sloping aggregate supply (AS) (or Phillips) curve. By contrast, the aggregate demand (AD) curve is downward-sloping as a higher price level increases the demand for real money balances, which pushes up the interest rate.</p>
 <p>In this short-run model, prices are flexible but the capital stock is fixed. The focus is thus on goods market equilibrium rather than economic growth. As all endogenous variables adjust instantaneously, the model is static. We consider a version with a Cobb-Douglass production function and otherwise linear behavioural functions, based on the graphical analysis in <span class="citation" data-cites="Froyen2005">Froyen (<a href="#ref-Froyen2005" role="doc-biblioref">2005</a>)</span>, chap.&nbsp;9.</p>
 </section><section id="the-model" class="level2"><h2 class="anchored" data-anchor-id="the-model">The Model</h2>
@@ -675,21 +672,10 @@ U=1-\frac{N}{N^f}
 </div>
 </div>
 </div>
-</section><section id="calculate-equilibrium-fiscal-multiplier" class="level3"><h3 class="anchored" data-anchor-id="calculate-equilibrium-fiscal-multiplier">Calculate equilibrium fiscal multiplier</h3>
-<div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Y_star</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span><span class="op">-</span><span class="va">Y_star</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="co"># numerical approach</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.736165</code></pre>
-</div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m2</span><span class="op">/</span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">c1</span><span class="op">)</span><span class="op">*</span><span class="va">m2</span><span class="op">+</span><span class="va">i1</span><span class="op">*</span><span class="va">m1</span><span class="op">)</span> <span class="co"># analytical approach</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.222222</code></pre>
-</div>
-</div>
 </section></section><section id="directed-graph" class="level2"><h2 class="anchored" data-anchor-id="directed-graph">Directed graph</h2>
 <p>Another perspective on the model’s properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node <span class="math inline">\(x_1\)</span> to node <span class="math inline">\(x_2\)</span> indicates a causal impact of <span class="math inline">\(x_1\)</span> on <span class="math inline">\(x_2\)</span>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Create directed graph</span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Create directed graph</span></span>
 <span><span class="co"># Construct auxiliary Jacobian matrix for 15 variables: Y, C, I, G, T, r, w, W, P, M0, N, i0, A, P0, Md</span></span>
 <span></span>
 <span><span class="va">M_mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>

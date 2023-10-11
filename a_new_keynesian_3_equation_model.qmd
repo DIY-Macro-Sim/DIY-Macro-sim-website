@@ -148,7 +148,7 @@ An increase in the central bank's inflation target (scenario 2) gradually raises
 
 By contrast, an increase in potential or equilibrium output (scenario 3) allows for a permanently higher level of output and a lower real interest rate.
 
-## Directed Graph
+## Directed graph
 
 Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.
 
@@ -172,7 +172,7 @@ library(igraph)
 dg=graph_from_adjacency_matrix(A_mat, mode="directed", weighted=NULL)
 
 # Define node labels
-V(dg)$name=c("y", "p", "r", "A", expression(y[e]),expression(r[s]), expression(p^T))
+V(dg)$name=c("y", expression(pi), "r", "A", expression(y[e]),expression(r[s]), expression(pi^T))
 
 # Plot directed graph
 plot(dg, main="Figure 4: Directed graph of 3-Equation model", vertex.size=20, vertex.color="lightblue", 
@@ -187,13 +187,17 @@ In Figure 4, it can be seen that aggregate demand ($A$), equilibrium output ($y_
 
 ### Derivation of core equations
 
-The IS-curve in @eq-nk_y is loosely based on the consumption Euler equation. Suppose there are two periods and the household's utility function is $U=\ln(C_t) + \beta \ln(C_{t+1})$ subject to the intertemporal budget constraint $C_t+\frac{C_{t+1}}{1+r}=Y_t + \frac{Y_{t+1}}{1+r}$. Substituting the constraint into the objective function and differentiating with respect to $C_t$ yields the first-order condition:
+#### IS curve
+
+The IS curve in @eq-nk_y is loosely based on the consumption Euler equation introduced in @sec-neoclassical-model. Suppose there are two periods and the household maximises its utility function $U=\ln(C_t) + \beta \ln(C_{t+1})$ subject to the intertemporal budget constraint $C_t+\frac{C_{t+1}}{1+r}=Y_t + \frac{Y_{t+1}}{1+r}$. Substituting the constraint into the objective function and differentiating with respect to $C_t$ yields the first-order condition:
 
 $$
 C_t = \frac{C_{t+1}}{\beta(1+r)}.
 $$
 
 This consumption Euler equation establishes the negative relationship between the real interest rate and expenditures in @eq-nk_y.
+
+#### PC curve
 
 The Phillips curve @eq-nk_pi is derived from wage- and price-setting in imperfect labour markets.[^a_new_keynesian_3_equation_model-3] Consider the following wage- and price-setting functions: $$
 \frac{W}{P^E} = B + \alpha(y_t - y_e) + z_w 
@@ -205,11 +209,13 @@ $$ {#eq-nk_P}
 
 i.e. the nominal wage $W$, adjusted for the expected price level, is increasing in the output gap, a factor $B$ capturing unemployment benefits and the disutility of work as well as a vector $z_w$ of wage-push factors. Prices are set based on a constant mark-up ($\mu$) on unit labour cost ($\frac{W}{\lambda}$).
 
-In equilibrium, the real wage is given by: $w_e = B + z_w$. In a dynamic setting, wage setters will raise the expected real wage by $\widehat{\left(\frac{W}{P^E}\right)} =\hat{W_t}-\hat{P_t^E}=\frac{W}{P^E} - w_e =\alpha(y_t - y_e)$. Together with adaptive expectations for prices $\hat{P_t^E} = \hat{P}_{t-1}$, this yields the following equation for wage inflation: $$
+In equilibrium, the real wage is given by: $w_e = B + z_w$. In a dynamic setting, wage setters will raise the expected real wage by $\left(\frac{W_t}{P_{t}^E}\right) - \left(\frac{W_{t-1}}{P_{t-1}}\right)=\alpha(y_t - y_e)$. Together with adaptive expectations for prices $\hat{P_t^E} = \hat{P}_{t-1}$ and the approximation $\hat{W_t} - \hat{P_{t-1}} \approx \left(\frac{W_t}{P_{t}^E}\right) - \left(\frac{W_{t-1}}{P_{t-1}}\right)$, this yields the following equation for wage inflation: $$
 \hat{W_t} = \hat{P}_{t-1} +\alpha(y_t - y_e).
 $$ {#eq-nk_W}
 
 Transforming equation @eq-nk_P into growth rates ($\hat{P}=\hat{W}$) and combining it with the wage-inflation equation @eq-nk_W yields the Phillips curve @eq-nk_pi.
+
+#### Monetary policy rule
 
 Finally, to derive the interest rate rule, start from the following central bank loss function:[^a_new_keynesian_3_equation_model-4]
 
