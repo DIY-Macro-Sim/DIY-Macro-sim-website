@@ -17,11 +17,11 @@ w=(1-a)AK^aN^{-a}
 $$ {#eq-w}
 
 $$
-N= 1-\frac{b_1}{w}, \quad b_1>0
+N= 1-\frac{b_1C}{w}, \quad b_1>0
 $$ {#eq-N} 
 
 $$
-C=\left(\frac{1}{1+b_2+b_3}\right)\left[Y- G +\frac{Y^f-G^f}{1+r} -b_1(b_2+b_3)\ln\left(\frac{b_1}{w}\right)\right], \quad b_2\in (0,1), b_3>0 
+C=\left(\frac{1}{1+b_2+b_3}\right)\left(Y- G +\frac{Y^f-G^f}{1+r}\right), \quad b_2\in (0,1), b_3>0 
 $$ {#eq-C}  
 
 $$
@@ -55,7 +55,7 @@ $$ {#eq-M_eq}
 
 where $Y$, $K$, $N$, $w$, $C$, $G$, $r$, $I$, $r_n$, $\pi$, $M_s$, $M_d$, and $P_t$ are real output, the capital stock, employment, the real wage, consumption, government expenditures, the real interest rate, investment, the nominal interest rate, inflation, the money supply, money demand, and the price level, respectively. The $f$-superscript denotes (expected) future values. For simplicity, expected future variables will be treated as exogenous.
 
-By @eq-Y, output is determined by a Cobb-Douglass production function with constant returns to scale and diminishing marginal returns to each factor (capital and labour). @eq-w is the labour demand of firms solved for the real wage. Profit maximising firms will hire workers until the real wage is equal to the marginal product of labour ($\frac{\partial Y}{\partial N}=(1-a)AK^aN^{-a}$).^[See the analytical discussion below for a derivation of equations @eq-w -@eq-I and @eq-MD from optimising microfoundations.] @eq-N specifies households' labour supply, which is positively related to the real wage. By @eq-C , consumption is positively related to current and (expected) future income,^[Households are assumed to form rational expectations. In a deterministic setting, this implies perfect foresight so that expected and actual future income coincide.] and negatively related to the real interest rate. This implies that for a higher real interest rate, households increase their saving (the supply of loanable funds). Furthermore, consumption is negatively related to current and future government expenditures. This is an implication of consumption smoothing: as households know that governments will have to repay its debts in the future through higher taxes, an increase in government expenditures today is perceived as an increase in taxes (regardless of whether the government finances its current expenditures through taxes or debt, a result that is also called 'Ricardian Equivalence').^[See the analytical discussion below for more details on Ricardian Equivalence.] @eq-I specifies investment as a negative function of the real interest rate and a positive function of productivity. By @eq-G, government expenditures are exogenous. @eq-Y_eq is the goods market equilibrium condition, which pins down the equilibrium real interest rate through the market for loanable funds. @eq-rn specifies the nominal interest rate using the well-known Fisher equation. @eq-MS says that the money supply is exogenous. By @eq-MD, households' money demand is negatively related to the nominal interest rate and positively related to consumption (capturing the transaction demand for money). Finally, @eq-M_eq is the equilibrium condition for the money market, which pins down the price level.
+By @eq-Y, output is determined by a Cobb-Douglass production function with constant returns to scale and diminishing marginal returns to each factor (capital and labour). @eq-w is the labour demand of firms solved for the real wage. Profit maximising firms will hire workers until the real wage is equal to the marginal product of labour ($\frac{\partial Y}{\partial N}=(1-a)AK^aN^{-a}$).^[See the analytical discussion below for a derivation of equations @eq-w -@eq-I and @eq-MD from optimising microfoundations.] @eq-N specifies households' labour supply, which is positively related to the real wage. By @eq-C , consumption is positively related to current and (expected) future income,^[Households are assumed to form rational expectations. In a deterministic setting, this implies perfect foresight so that expected and actual future income coincide.] and negatively related to the real interest rate. This implies that for a higher real interest rate, households increase their saving (the supply of loanable funds). Furthermore, consumption is negatively related to current and future government expenditures. This is an implication of Ricardian Equivalence: as households know that governments will have to repay its debts in the future through higher taxes, an increase in government expenditures today is perceived as an increase in taxes (regardless of whether the government finances its current expenditures through taxes or debt).^[See the analytical discussion below for more details on Ricardian Equivalence.] @eq-I specifies investment as a negative function of the real interest rate and a positive function of productivity. By @eq-G, government expenditures are exogenous. @eq-Y_eq is the goods market equilibrium condition, which pins down the equilibrium real interest rate through the market for loanable funds. @eq-rn specifies the nominal interest rate using the well-known Fisher equation. @eq-MS says that the money supply is exogenous. By @eq-MD, households' money demand is negatively related to the nominal interest rate and positively related to consumption (capturing the transaction demand for money). Finally, @eq-M_eq is the equilibrium condition for the money market, which pins down the price level.
 
 ## Simulation
 
@@ -145,10 +145,10 @@ for (iterations in 1:1000){
   w = A[i]*(1-a)*(K^a)*N^(-a) 
   
   #(3) Labour supply
-  N = 1 - (b1[i])/w
+  N = 1 - (b1[i]*C)/w
   
   #(4) Consumption demand
-  C = (1/(1+b2+b3))*(Y - G0[i] + (Yf[i]-Gf)/(1+r) -b1[i]*(b2+b3)*log(b1[i]/w))
+  C = (1/(1+b2+b3))*(Y - G0[i] + (Yf[i]-Gf)/(1+r)) 
    
   #(5) Investment demand, solved for r
   r=(I^(a-1))*a*A[i]*N^(1-a) 
@@ -179,28 +179,23 @@ rn_star[i]=rn
 
 ### Plots
 
-Figures @fig-output-neocl - @fig-employment-neocl depicts the model economy's real activity under different scenarios. Monetary expansions (scenario 2) have no effects on output and employment, capturing the idea of money neutrality (Classical Dichotomy). However, the monetary expansion does  raise the price level (see @fig-price_level ), capturing the key idea of the Quantity Theory of Money that inflation is driven by a growing money supply.
+Figures @fig-output-neocl - @fig-employment-neocl depicts the model economy's real activity under different scenarios. Monetary expansions (scenario 2) have no effects on output and employment, capturing the idea of money neutrality (Classical Dichotomy). However, the monetary expansion  raises the price level (see @fig-price_level ), capturing the key idea of the Quantity Theory of Money that inflation is driven by a growing money supply.
 
 ```{r neoclass2}
 #| label: fig-output-neocl
 #| fig-cap: Output
-barplot(Y_star, ylab="Y", names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", "5: Decrease in Yf", "6: Increase in b1"), cex.names = 0.6)
+barplot(Y_star, ylab="Y", names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", 
+                                           "5: Decrease in Yf", "6: Increase in b1"))
 
 ```
 
-```{r neoclass6}
-#| label: fig-price_level
-#| fig-cap: Price level
-barplot(P_star, ylab="P",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", "5: Decrease in Yf", "6: Increase in b1"), cex.names = 0.6)
-
-```
-
-An increase in government spending (by one unit) in scenario 3 does **not** raise employment and real output as these are fully determined by the supply side rather than aggregate demand.^[This result is partly driven by the use of a non-separable utility function, see analytical discussion below. With a separable utility function, the increase in government spending would increase labour supply and thereby have effects on employment and output.] Looking at Figures @fig-consumption and @fig-investment, it can be seen that government spending crowds out private spending (consumption and investment). The decrease in consumption is a result of consumption smoothing via the Euler equation: the household anticipates higher taxes in the future and reduces current consumption somewhat to smooth out the impact. The increase in government expenditures also raises demand for loanable funds, which pushes up the real interest rate (see @fig-interest_rate) and reduces investment (@fig-investment) and consumption. There is also an inflationary effect linked to the higher real interest rate, which raises the nominal interest rate and reduces the demand for money. 
+An increase in government spending (by one unit) in scenario 3 does raise employment and real output,^[The increase in output and employment arises because as households reduce consumption, they increase the labour supply. This result stems from the use of a separable utility function (see analytical discussion below). With a non-separable utility function, this effect would disappear (see @Garin2021, pp.284-289).] but by less than the initial stimulus (i.e. the fiscal multiplier is smaller than one). Looking at Figures @fig-employment-neocl - @fig-investment , it can be seen that government spending crowds out private spending (consumption and investment). The decrease in consumption is a result of Ricardian Equivalence: the household anticipates higher taxes in the future and reduces current consumption to smooth out the impact. The increase in government expenditures also raises demand for loanable funds, which pushes up the real interest rate (see @fig-interest_rate) and reduces investment (@fig-investment). There is also an inflationary effect linked to the higher real interest rate, which raises the nominal rate and reduces the demand for money. 
 
 ```{r neoclass3}
 #| label: fig-employment-neocl
 #| fig-cap: Employment
-barplot(N_star, ylab="N",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", "5: Decrease in Yf", "6: Increase in b1"), cex.names = 0.6)
+barplot(N_star, ylab="N",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", 
+                                       "5: Decrease in Yf", "6: Increase in b1"))
 
 ```
 
@@ -209,14 +204,16 @@ Improvements to the supply-side are captured by an increase in productivity (sce
 ```{r neoclass4}
 #| label: fig-consumption
 #| fig-cap: Consumption
-barplot(C_star, ylab="C",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", "5: Decrease in Yf", "6: Increase in b1"), cex.names = 0.6)
+barplot(C_star, ylab="C",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", 
+                                       "5: Decrease in Yf", "6: Increase in b1"))
 
 ```
 
 ```{r neoclass41}
 #| label: fig-investment
 #| fig-cap: Investment
-barplot(I_star, ylab="I",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", "5: Decrease in Yf", "6: Increase in b1"), cex.names = 0.6)
+barplot(I_star, ylab="I",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", 
+                                       "5: Decrease in Yf", "6: Increase in b1"))
 
 ```
 
@@ -225,11 +222,21 @@ A decrease in expected future income (scenario 5) has a small expansionary effec
 ```{r neoclass5}
 #| label: fig-interest_rate
 #| fig-cap: Interest rate
-barplot(r_star, ylab="r", names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", "5: Decrease in Yf", "6: Increase in b1"), cex.names = 0.6)
+barplot(r_star, ylab="r", names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", 
+                                      "5: Decrease in Yf", "6: Increase in b1"))
 
 ```
 
 Finally, an increase in the preference for leisure (scenario 6) reduces labour supply and thereby output.
+
+```{r neoclass6}
+#| label: fig-price_level
+#| fig-cap: Price level
+barplot(P_star, ylab="P",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", 
+                                       "5: Decrease in Yf", "6: Increase in b1"))
+
+
+```
 
 
 ## Directed graph
@@ -306,7 +313,7 @@ $$ {#eq-FOC_I}
 
 From @eq-FOC_Nd, @eq-w for labour demand can be derived. While the capital stock is pre-determined in every period, the firm can adjust the capital stock through investment. We thus use the first-order condition for capital @eq-FOC_I to derive @eq-I for investment demand.
 
-### The government's budget constraint
+### The government's budget constraint: Ricardian Equivalence
 
 The government's current and future budget constraints are given by:
 
@@ -329,12 +336,12 @@ $$ {#eq-Gitbc}
 
 Thus, while the government's budget need not be balanced in every period, it will be balanced over time (in a present value sense).^[See @Garin2021[chap. 13] for a more detailed discussion of the government's budget constraints.]
 
-### The household's problem: intertemporal utility maximisation	and Ricardian Equivalence	
+### The household's problem: intertemporal utility maximisation		
 
-The household derives utility from current consumption, leisure ($1-N$), future consumption $C^f$, and from holding real money balances $\left(\frac{M}{P}\right)$. We use the following log utility function that is non-separable in consumption and leisure:^[See @Garin2021, pp.280-289), on the difference between a separable and a non-separable preference specification].]
+The household derives utility from current consumption, leisure ($1-N$), future consumption $C^f$, and from holding real money balances $\left(\frac{M}{P}\right)$. We use the following log utility function:
 
 $$
-U=\ln (C+ b_1 \ln (1-N))+b_2 \ln \left(C^f\right)+b_3 \ln \left(\frac{M}{P}\right)
+U=\ln (C)+b_1 \ln (1-N)+b_2 \ln \left(C^f\right)+b_3 \ln \left(\frac{M}{P}\right)
 $$ {#eq-U}
 
 The household's current budget constraint is given by:^[See @Garin2021[chap. 14] for a more detailed discussion of the household's budget constraints.]
@@ -375,7 +382,7 @@ With these ingredients, the household's optimisation problem can be written as:
 
 $$
 \begin{array}{ll}
-\max _{C, N, M} & U=\ln (C+b_1 \ln (1-N))+b_2 \ln \left(C^f\right)+b_3 \ln \left(\frac{M}{P}\right), \\
+\max _{C, N, M} & U=\ln (C)+b_1 \ln (1-N)+b_2 \ln \left(C^f\right)+b_3 \ln \left(\frac{M}{P}\right), \\
 \text { s.t. } & C^f= (Y-C-G)(1+r)+Y^f -G^f - (1+r)\frac{r_nM}{(1+r_n)P} .
 \end{array}
 $$
@@ -383,15 +390,15 @@ $$
 Substituting the constraint @eq-ibc for $C^f$ in the utility function, and making use of the identity $Y=\Pi+rK+Nw$, allows to obtain the following first-order conditions:
 
 $$
-C=\frac{C^f}{b_2(1+r)} - b_1\ln(1-N)
+\frac{1}{C}-\frac{b_2(1+r)}{C^f}=0
 $$ {#eq-FOC_C}
 
 $$
-\left(\frac{b_1}{1-N}\right)\left(\frac{1}{C+b_1\ln(1-N)} \right)=\frac{b_2(1+r)w}{C^f}
+-\frac{b_1}{1-N}+\frac{b_2(1+r)w}{C^f}=0
 $$ {#eq-FOC_Ns}
 
 $$
-M=\frac{b_3PC^f(1+r_n)}{b_2(1+r)r_n} .
+\frac{b_3}{M}-\frac{b_2(1+r)r_n}{PC^f(1+r_n)}=0 .
 $$ {#eq-FOC_M}
 
 Substituting @eq-FOC_C, which is often also called the _Euler equation_, into @eq-FOC_Ns and @eq-FOC_M yields @eq-N for labour supply and @eq-MD for money demand, respectively. Finally, using @eq-ibc and @eq-FOC_M in the Euler @eq-FOC_C yields the consumption function @eq-C.
