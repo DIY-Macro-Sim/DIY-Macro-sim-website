@@ -87,11 +87,11 @@ div.csl-indent {
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -250,6 +250,12 @@ div.csl-indent {
 </li>
       </ul>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./additional_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Additional Online Resources</span></a>
+  </div>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
@@ -275,7 +281,7 @@ div.csl-indent {
   <li><a href="#how-to-create-a-directed-graph-of-a-model" id="toc-how-to-create-a-directed-graph-of-a-model" class="nav-link" data-scroll-target="#how-to-create-a-directed-graph-of-a-model">How to create a directed graph of a model</a></li>
   <li><a href="#sec-sim-continuous" id="toc-sec-sim-continuous" class="nav-link" data-scroll-target="#sec-sim-continuous">Appendix: How to simulate dynamic model in continuous time</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/edit/main/how_to_simulate.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -480,7 +486,7 @@ I_t= \beta[c_1(C_{t-1} + I_{t-1} + G_0) - C_{t-1}]
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Set number of periods for which you want to simulate</span></span>
-<span><span class="cn">T</span><span class="op">=</span><span class="fl">100</span></span>
+<span><span class="va">Q</span><span class="op">=</span><span class="fl">100</span></span>
 <span></span>
 <span><span class="co"># Set number of parameterisations that will be considered</span></span>
 <span><span class="va">S</span><span class="op">=</span><span class="fl">2</span></span>
@@ -492,19 +498,19 @@ I_t= \beta[c_1(C_{t-1} + I_{t-1} + G_0) - C_{t-1}]
 <span><span class="va">c1</span><span class="op">=</span><span class="fl">0.8</span></span>
 <span><span class="va">beta</span><span class="op">=</span><span class="fl">0.6</span></span>
 <span></span>
-<span><span class="co"># Construct matrices in which values for different periods will be stored; initialise at 1</span></span>
-<span><span class="va">C</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
-<span><span class="va">I</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="co"># Construct (S x Q) matrices in which values for different periods will be stored; initialise at 1</span></span>
+<span><span class="va">C</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span></span>
+<span><span class="va">I</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#Construct matrices for exogenous variable or parameter that will change over time to capture different scenarios</span></span>
-<span><span class="va">G0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">5</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">G0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">5</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Set parameter values for different scenarios</span></span>
-<span><span class="va">G0</span><span class="op">[</span><span class="fl">2</span>,<span class="va">s</span><span class="op">:</span><span class="cn">T</span><span class="op">]</span><span class="op">=</span><span class="fl">6</span>     <span class="co"># scenario: permanent increase in government spending from I0=5 to I0=6 from period s=15 onwards</span></span>
+<span><span class="va">G0</span><span class="op">[</span><span class="fl">2</span>,<span class="va">s</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">6</span>     <span class="co"># scenario: permanent increase in government spending from I0=5 to I0=6 from period s=15 onwards</span></span>
 <span></span>
 <span><span class="co">#Solve this system recursively based on the initialisation</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="cn">T</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="va">Q</span><span class="op">)</span><span class="op">{</span></span>
 <span>    <span class="va">C</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">c1</span><span class="op">*</span><span class="op">(</span><span class="va">C</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">I</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">G0</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span>    <span class="va">I</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">beta</span><span class="op">*</span><span class="op">(</span><span class="va">c1</span><span class="op">*</span><span class="op">(</span><span class="va">C</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">I</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">G0</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">-</span> <span class="va">C</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span>  <span class="op">}</span> <span class="co"># close time loop</span></span>
@@ -514,26 +520,26 @@ I_t= \beta[c_1(C_{t-1} + I_{t-1} + G_0) - C_{t-1}]
 <span><span class="va">Y</span><span class="op">=</span><span class="va">C</span><span class="op">+</span><span class="va">G0</span><span class="op">+</span><span class="va">I</span></span>
 <span></span>
 <span><span class="co"># Display solution</span></span>
-<span><span class="va">Y</span><span class="op">[</span>,<span class="cn">T</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">Y</span><span class="op">[</span>,<span class="va">Q</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 25 30</code></pre>
 </div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Verify solutions for Y</span></span>
-<span><span class="op">(</span><span class="va">G0</span><span class="op">[</span>,<span class="cn">T</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">c1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">(</span><span class="va">G0</span><span class="op">[</span>,<span class="va">Q</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">c1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 25 30</code></pre>
 </div>
 </div>
 <p>The code solves the recursive system numerically through iteration. Let’s again break down what the code does:</p>
 <ul>
-<li><p>set the number of periods for which we want to simulate the model (here <span class="math inline">\(T=100\)</span>), set the number of scenarios <span class="math inline">\(S\)</span> and the period <span class="math inline">\(s\)</span> in which a change in the scenario should occur</p></li>
-<li><p>set the parameter values and create <span class="math inline">\((s \times T)\)</span> matrices in which results for endogenous variables will be stored, such that the columns represent time and the rows represent different scenarios; initialise the endogenous variables</p></li>
+<li><p>set the number of periods for which we want to simulate the model (here <span class="math inline">\(Q=100\)</span>), set the number of scenarios <span class="math inline">\(S\)</span> and the period <span class="math inline">\(s\)</span> in which a change in the scenario should occur</p></li>
+<li><p>set the parameter values and create <span class="math inline">\((S \times Q)\)</span> matrices in which results for endogenous variables will be stored, such that the columns represent time and the rows represent different scenarios; initialise the endogenous variables</p></li>
 <li><p>define changes in exogenous variables or parameters (i.e.&nbsp;construct different scenarios)</p></li>
 <li><p>write down the equations (solved for the endogenous variables such that every endogenous variable of the system appears on the left-hand side of an equation exactly once)</p></li>
 <li>
-<p>place these equations inside a for loop that runs from <span class="math inline">\(t=2\)</span> to <span class="math inline">\(T\)</span></p>
+<p>place these equations inside a for loop that runs from <span class="math inline">\(t=2\)</span> to <span class="math inline">\(Q\)</span></p>
 <ul>
-<li>the loop says: repeat the segment of code insights the curly brackets, each time with the index number <span class="math inline">\(t\)</span> shifted by <span class="math inline">\(+1\)</span> until <span class="math inline">\(t=T\)</span>
+<li>the loop says: repeat the segment of code insights the curly brackets, each time with the index number <span class="math inline">\(t\)</span> shifted by <span class="math inline">\(+1\)</span> until <span class="math inline">\(t=Q\)</span>
 </li>
 </ul>
 </li>
@@ -545,7 +551,7 @@ I_t= \beta[c_1(C_{t-1} + I_{t-1} + G_0) - C_{t-1}]
 <p>We will consider two main ways to plot model outputs: bar charts for static models and time series charts for dynamic models. Bar charts compare the equilibrium values of <span class="math inline">\(Y_t\)</span> for different parameterisations:</p>
 <div class="cell">
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Bar chart of different equilibrium solutions of Samuelson (1939) model</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">Y</span><span class="op">[</span>,<span class="cn">T</span><span class="op">]</span>, ylab<span class="op">=</span><span class="st">"Y"</span>, main<span class="op">=</span><span class="st">"Figure 1: Output"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Baseline"</span>, <span class="st">"Increase in G0"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">Y</span><span class="op">[</span>,<span class="va">Q</span><span class="op">]</span>, ylab<span class="op">=</span><span class="st">"Y"</span>, main<span class="op">=</span><span class="st">"Figure 1: Output"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Baseline"</span>, <span class="st">"Increase in G0"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="how_to_simulate_files/figure-html/howto_4-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -652,7 +658,7 @@ C = c_0 + c_1Y,
 \]</span> where <span class="math inline">\(\dot{Y}=\frac{dY}{dt}\)</span>. To simulate this model, we have to approximate the differential equation for <span class="math inline">\(\dot{Y}\)</span> by a difference equation for <span class="math inline">\(Y_t\)</span> and let the time increment <span class="math inline">\(\Delta t\)</span> become very small. More specifically, we write:</p>
 <p><span class="math display">\[
 Y(t+\Delta t)=Y_t + \dot{Y} \Delta t =Y_t + [k(C + I_0 - Y)]\Delta t.
-\]</span> This approach is also called the <em>Euler forward method</em>. The code below shows to implement that method. We use <span class="math inline">\(\Delta t = 0.01\)</span>. Note that we need to raise the time horizon <span class="math inline">\(T\)</span> and set the adjustment speed <span class="math inline">\(k\)</span> relatively high to make sure that the system has effectively converged to the equilibrium by <span class="math inline">\(T\)</span>.</p>
+\]</span> This approach is also called the <em>Euler forward method</em>. The code below shows to implement that method. We use <span class="math inline">\(\Delta t = 0.01\)</span>. Note that we need to raise the time horizon <span class="math inline">\(Q\)</span> and set the adjustment speed <span class="math inline">\(k\)</span> relatively high to make sure that the system has effectively converged to the equilibrium by <span class="math inline">\(Q\)</span>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Simulate continuous time version of Keynesian goods market model</span></span>
 <span></span>
@@ -660,7 +666,7 @@ Y(t+\Delta t)=Y_t + \dot{Y} \Delta t =Y_t + [k(C + I_0 - Y)]\Delta t.
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Set number of periods for which you want to simulate</span></span>
-<span><span class="cn">T</span><span class="op">=</span><span class="fl">800</span></span>
+<span><span class="va">Q</span><span class="op">=</span><span class="fl">800</span></span>
 <span></span>
 <span><span class="co"># Set number of parameterisations that will be considered</span></span>
 <span><span class="va">S</span><span class="op">=</span><span class="fl">1</span></span>
@@ -672,14 +678,14 @@ Y(t+\Delta t)=Y_t + \dot{Y} \Delta t =Y_t + [k(C + I_0 - Y)]\Delta t.
 <span><span class="va">delta</span><span class="op">=</span><span class="fl">0.01</span></span>
 <span></span>
 <span><span class="co"># Construct matrices in which values for different periods will be stored; initialise at 1</span></span>
-<span><span class="va">Y</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
-<span><span class="va">C</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">Y</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span></span>
+<span><span class="va">C</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#Construct matrices for exogenous variable </span></span>
-<span><span class="va">I0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">5</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">I0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">5</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#Solve this system recursively based on the initialisation</span></span>
-<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="cn">T</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="va">Q</span><span class="op">)</span><span class="op">{</span></span>
 <span>    <span class="kw">for</span> <span class="op">(</span><span class="va">iterations</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span><span class="op">{</span></span>
 <span>    <span class="va">Y</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">Y</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">delta</span><span class="op">*</span><span class="op">(</span><span class="va">k</span><span class="op">*</span><span class="op">(</span><span class="va">C</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">I0</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">Y</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span>    <span class="va">C</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">c0</span> <span class="op">+</span> <span class="va">c1</span><span class="op">*</span><span class="va">Y</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">]</span></span>
@@ -688,11 +694,11 @@ Y(t+\Delta t)=Y_t + \dot{Y} \Delta t =Y_t + [k(C + I_0 - Y)]\Delta t.
 <span></span>
 <span></span>
 <span><span class="co"># Verify solutions for Y</span></span>
-<span><span class="op">(</span><span class="va">c0</span><span class="op">+</span><span class="va">I0</span><span class="op">[</span><span class="fl">1</span>,<span class="cn">T</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">c1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">(</span><span class="va">c0</span><span class="op">+</span><span class="va">I0</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">c1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 40</code></pre>
 </div>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Y</span><span class="op">[</span><span class="fl">1</span>,<span class="cn">T</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Y</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 39.9999</code></pre>
 </div>
@@ -824,7 +830,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  let localAlternateSentinel = 'alternate';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 

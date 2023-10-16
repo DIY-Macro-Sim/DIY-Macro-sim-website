@@ -87,11 +87,11 @@ div.csl-indent {
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -250,6 +250,12 @@ div.csl-indent {
 </li>
       </ul>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./additional_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Additional Online Resources</span></a>
+  </div>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
@@ -271,7 +277,7 @@ div.csl-indent {
   <li><a href="#directed-graph" id="toc-directed-graph" class="nav-link" data-scroll-target="#directed-graph">Directed graph</a></li>
   <li><a href="#analytical-discussion" id="toc-analytical-discussion" class="nav-link" data-scroll-target="#analytical-discussion">Analytical discussion</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/edit/main/a_post_keynesian_macro_model_with_endogenous_money.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -620,7 +626,7 @@ U=1-\frac{N}{N^f}
 <p>Figures <a href="#fig-output-pkmacro">Figure&nbsp;<span>6.1</span></a> - <a href="#fig-real-wage-pkmacro">Figure&nbsp;<span>6.7</span></a> depict the response of the model’s key endogenous variables to various shifts.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">Y_star</span>, ylab<span class="op">=</span><span class="st">"Y"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:baseline"</span>, <span class="st">"2:rise credit rat."</span>, <span class="st">"3:rise AD"</span>,</span>
-<span>                                      <span class="st">"4:rise bank markup"</span>,<span class="st">"5:rise firm markup"</span>, <span class="st">"6:rise product."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                      <span class="st">"4:rise bank markup"</span>,<span class="st">"5:rise firm markup"</span>, <span class="st">"6:rise product."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-output-pkmacro" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="a_post_keynesian_macro_model_with_endogenous_money_files/figure-html/fig-output-pkmacro-1.png" class="img-fluid figure-img" width="672"></p>
@@ -632,7 +638,7 @@ U=1-\frac{N}{N^f}
 <p>An increase in credit rationing (scenario 2) reduces deposit money creation as well as actual (as opposed to desired) aggregate demand. This drags down output and employment. The rise in unemployment reduces workers’ nominal wage demands and thus the price level. The lending rate falls as the central bank reduces the policy rate.</p>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">P_star</span>, ylab<span class="op">=</span><span class="st">"P"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:baseline"</span>, <span class="st">"2:rise credit rat."</span>, <span class="st">"3:rise AD"</span>,</span>
-<span>                                      <span class="st">"4:rise bank markup"</span>,<span class="st">"5:rise firm markup"</span>, <span class="st">"6:rise product."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                      <span class="st">"4:rise bank markup"</span>,<span class="st">"5:rise firm markup"</span>, <span class="st">"6:rise product."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-price-level-pkmacro" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="a_post_keynesian_macro_model_with_endogenous_money_files/figure-html/fig-price-level-pkmacro-1.png" class="img-fluid figure-img" width="672"></p>
@@ -644,7 +650,7 @@ U=1-\frac{N}{N^f}
 <p>An increase in (debt-financed) autonomous demand (scenario 3) has expansionary effects on output and employment. The money stock accommodates through increased loan creation. The increase in workers’ bargaining power leads to higher nominal wages and prices. The central bank reacts by raising the policy rate but this does not completely offset the expansionary effect.</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">r_star</span>, ylab<span class="op">=</span><span class="st">"r"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:baseline"</span>, <span class="st">"2:rise credit rat."</span>, <span class="st">"3:rise AD"</span>,</span>
-<span>                                      <span class="st">"4:rise bank markup"</span>,<span class="st">"5:rise firm markup"</span>, <span class="st">"6:rise product."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                      <span class="st">"4:rise bank markup"</span>,<span class="st">"5:rise firm markup"</span>, <span class="st">"6:rise product."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-lending-rate-pkmacro" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="a_post_keynesian_macro_model_with_endogenous_money_files/figure-html/fig-lending-rate-pkmacro-1.png" class="img-fluid figure-img" width="672"></p>
@@ -655,7 +661,7 @@ U=1-\frac{N}{N^f}
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">dM_star</span>, ylab<span class="op">=</span><span class="st">"dM"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:baseline"</span>, <span class="st">"2:rise credit rat."</span>, <span class="st">"3:rise AD"</span>,</span>
-<span>                                        <span class="st">"4:rise bank markup"</span>,<span class="st">"5:rise firm markup"</span>, <span class="st">"6:rise product."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                        <span class="st">"4:rise bank markup"</span>,<span class="st">"5:rise firm markup"</span>, <span class="st">"6:rise product."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-money-pkmacro" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="a_post_keynesian_macro_model_with_endogenous_money_files/figure-html/fig-money-pkmacro-1.png" class="img-fluid figure-img" width="672"></p>
@@ -667,7 +673,7 @@ U=1-\frac{N}{N^f}
 <p>In scenarios 4 and 5, the interest rate (or bank) mark-up and the price (or firm) mark-up increase, respectively. The increase in the bank mark-up raises the lending rate, which has a contractionary effect. The increase in the firm mark-up raises the price level, which has a contractionary effect through the monetary policy response. Notably, the rise in the price mark-up reduces the real wage.</p>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">U_star</span><span class="op">*</span><span class="fl">100</span>, ylab<span class="op">=</span><span class="st">"U (%)"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:baseline"</span>, <span class="st">"2:rise credit rat."</span>, <span class="st">"3:rise AD"</span>,</span>
-<span>                                              <span class="st">"4:rise bank markup"</span>,<span class="st">"5:rise firm markup"</span>, <span class="st">"6:rise product."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                              <span class="st">"4:rise bank markup"</span>,<span class="st">"5:rise firm markup"</span>, <span class="st">"6:rise product."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-unemployment-pkmacro" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="a_post_keynesian_macro_model_with_endogenous_money_files/figure-html/fig-unemployment-pkmacro-1.png" class="img-fluid figure-img" width="672"></p>
@@ -678,7 +684,7 @@ U=1-\frac{N}{N^f}
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">W_star</span>, ylab<span class="op">=</span><span class="st">"W"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:baseline"</span>, <span class="st">"2:rise credit rat."</span>, <span class="st">"3:rise AD"</span>,</span>
-<span>                                      <span class="st">"4:rise bank markup"</span>,<span class="st">"5:rise firm markup"</span>, <span class="st">"6:rise product."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                      <span class="st">"4:rise bank markup"</span>,<span class="st">"5:rise firm markup"</span>, <span class="st">"6:rise product."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-nominal-wage-pkmacro" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="a_post_keynesian_macro_model_with_endogenous_money_files/figure-html/fig-nominal-wage-pkmacro-1.png" class="img-fluid figure-img" width="672"></p>
@@ -690,7 +696,7 @@ U=1-\frac{N}{N^f}
 <p>Finally, an increase in productivity (scenario 6) reduces the price level, which induces a lower policy rate, leading to a small expansionary effect. However, it increases the unemployment rate as fewer workers are needed to produce the same level of output. This reduces the nominal wage, but raises the real wage.</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">w_star</span>, ylab<span class="op">=</span><span class="st">"w"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:baseline"</span>, <span class="st">"2:rise credit rat."</span>, <span class="st">"3:rise AD"</span>,</span>
-<span>                                      <span class="st">"4:rise bank markup"</span>,<span class="st">"5:rise firm markup"</span>, <span class="st">"6:rise product."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                      <span class="st">"4:rise bank markup"</span>,<span class="st">"5:rise firm markup"</span>, <span class="st">"6:rise product."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-real-wage-pkmacro" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="a_post_keynesian_macro_model_with_endogenous_money_files/figure-html/fig-real-wage-pkmacro-1.png" class="img-fluid figure-img" width="672"></p>
@@ -899,7 +905,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  let localAlternateSentinel = 'alternate';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 

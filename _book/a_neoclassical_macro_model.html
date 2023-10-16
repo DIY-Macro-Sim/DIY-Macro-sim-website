@@ -87,11 +87,11 @@ div.csl-indent {
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -250,6 +250,12 @@ div.csl-indent {
 </li>
       </ul>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./additional_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Additional Online Resources</span></a>
+  </div>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
@@ -278,7 +284,7 @@ div.csl-indent {
   </ul>
 </li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/edit/main/a_neoclassical_macro_model.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -565,7 +571,7 @@ M = M_d(P)= M_s
 </div>
 </div>
 </div>
-<p>An increase in government spending (by one unit) in scenario 3 does <strong>not</strong> raise employment and real output as these are fully determined by the supply side rather than aggregate demand.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Looking at Figures <a href="#fig-consumption">Figure&nbsp;<span>3.4</span></a> and <a href="#fig-investment">Figure&nbsp;<span>3.5</span></a>, it can be seen that government spending crowds out private spending (consumption and investment). The decrease in consumption is a result of consumption smoothing via the Euler equation: the household anticipates higher taxes in the future and reduces current consumption somewhat to smooth out the impact. The increase in government expenditures also raises demand for loanable funds, which pushes up the real interest rate (see <a href="#fig-interest_rate">Figure&nbsp;<span>3.6</span></a>) and reduces investment (<a href="#fig-investment">Figure&nbsp;<span>3.5</span></a>) and consumption. There is also an inflationary effect linked to the higher real interest rate, which raises the nominal interest rate and reduces the demand for money.</p>
+<p>An increase in government spending (by one unit) in scenario 3 does <em>not</em> raise employment and real output as these are fully determined by the supply side rather than aggregate demand.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Looking at Figures <a href="#fig-consumption">Figure&nbsp;<span>3.4</span></a> and <a href="#fig-investment">Figure&nbsp;<span>3.5</span></a>, it can be seen that government spending crowds out private spending (consumption and investment). The decrease in consumption is a result of consumption smoothing via the Euler equation: the household anticipates higher taxes in the future and reduces current consumption somewhat to smooth out the impact. The increase in government expenditures also raises demand for loanable funds, which pushes up the real interest rate (see <a href="#fig-interest_rate">Figure&nbsp;<span>3.6</span></a>) and reduces investment (<a href="#fig-investment">Figure&nbsp;<span>3.5</span></a>) and consumption. There is also an inflationary effect linked to the higher real interest rate, which raises the nominal interest rate and reduces the demand for money.</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">N_star</span>, ylab<span class="op">=</span><span class="st">"N"</span>,  names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: Baseline"</span>, <span class="st">"2: Increase in M0"</span>, <span class="st">"3: Increase in G0"</span>,<span class="st">"4: Increase in A"</span>, <span class="st">"5: Decrease in Yf"</span>, <span class="st">"6: Increase in b1"</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -685,7 +691,7 @@ G+\frac{G^f}{1+r}=T+\frac{T^f}{1+r}
 \tag{3.19}\]</span></span></p>
 <p>Thus, while the government’s budget need not be balanced in every period, it will be balanced over time (in a present value sense).<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
 </section><section id="the-households-problem-intertemporal-utility-maximisation-and-ricardian-equivalence" class="level3"><h3 class="anchored" data-anchor-id="the-households-problem-intertemporal-utility-maximisation-and-ricardian-equivalence">The household’s problem: intertemporal utility maximisation and Ricardian Equivalence</h3>
-<p>The household derives utility from current consumption, leisure (<span class="math inline">\(1-N\)</span>), future consumption <span class="math inline">\(C^f\)</span>, and from holding real money balances <span class="math inline">\(\left(\frac{M}{P}\right)\)</span>. We use the following log utility function that is non-separable in consumption and leisure:<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>.]</p>
+<p>The household derives utility from current consumption, leisure (<span class="math inline">\(1-N\)</span>), future consumption <span class="math inline">\(C^f\)</span>, and from holding real money balances <span class="math inline">\(\left(\frac{M}{P}\right)\)</span>. We use the following log utility function that is non-separable in consumption and leisure:<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. Note also that for simplicity, the utility function omits the utility from future leisure.]</p>
 <p><span id="eq-U"><span class="math display">\[
 U=\ln (C+ b_1 \ln (1-N))+b_2 \ln \left(C^f\right)+b_3 \ln \left(\frac{M}{P}\right)
 \tag{3.20}\]</span></span></p>
@@ -734,7 +740,7 @@ M=\frac{b_3PC^f(1+r_n)}{b_2(1+r)r_n} .
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Garin2021" class="csl-entry" role="listitem">
-Garín, Julio, Robert Lester, and Eric Sims. 2021. <em>Intermediate Macroeconomics</em>. Draft Version 3.0.1. <a href="https://www3.nd.edu/~esims1/gls_textbook.html">https://www3.nd.edu/~esims1/gls_textbook.html</a>.
+Garín, Julio, Robert Lester, and Eric Sims. 2021. <em>Intermediate Macroeconomics</em>. Draft Version 3.0.1. <a href="https://juliogarin.com/files/textbook/GLS_Intermediate_Macro.pdf">https://juliogarin.com/files/textbook/GLS_Intermediate_Macro.pdf</a>.
 </div>
 </div>
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
@@ -856,7 +862,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  let localAlternateSentinel = 'alternate';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 

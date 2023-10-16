@@ -242,7 +242,7 @@ Figures @fig-output-pkmacro - @fig-real-wage-pkmacro depict the response of the 
 #| fig-cap: Output
 
 barplot(Y_star, ylab="Y", names.arg=c("1:baseline", "2:rise credit rat.", "3:rise AD",
-                                      "4:rise bank markup","5:rise firm markup", "6:rise product."))
+                                      "4:rise bank markup","5:rise firm markup", "6:rise product."), cex.names = 0.6)
 
 ```
 
@@ -253,7 +253,7 @@ An increase in credit rationing (scenario 2) reduces deposit money creation as w
 #| fig-cap: Price level
 
 barplot(P_star, ylab="P", names.arg=c("1:baseline", "2:rise credit rat.", "3:rise AD",
-                                      "4:rise bank markup","5:rise firm markup", "6:rise product."))
+                                      "4:rise bank markup","5:rise firm markup", "6:rise product."), cex.names = 0.6)
 
 ```
 
@@ -264,7 +264,7 @@ An increase in (debt-financed) autonomous demand (scenario 3) has expansionary e
 #| fig-cap: Lending rate
 
 barplot(r_star, ylab="r", names.arg=c("1:baseline", "2:rise credit rat.", "3:rise AD",
-                                      "4:rise bank markup","5:rise firm markup", "6:rise product."))
+                                      "4:rise bank markup","5:rise firm markup", "6:rise product."), cex.names = 0.6)
 
 ```
 
@@ -273,7 +273,7 @@ barplot(r_star, ylab="r", names.arg=c("1:baseline", "2:rise credit rat.", "3:ris
 #| fig-cap: Deposit money creation
 
 barplot(dM_star, ylab="dM", names.arg=c("1:baseline", "2:rise credit rat.", "3:rise AD",
-                                        "4:rise bank markup","5:rise firm markup", "6:rise product."))
+                                        "4:rise bank markup","5:rise firm markup", "6:rise product."), cex.names = 0.6)
 
 ```
 
@@ -284,7 +284,7 @@ In scenarios 4 and 5, the interest rate (or bank) mark-up and the price (or firm
 #| fig-cap: Unemployment rate
 
 barplot(U_star*100, ylab="U (%)", names.arg=c("1:baseline", "2:rise credit rat.", "3:rise AD",
-                                              "4:rise bank markup","5:rise firm markup", "6:rise product."))
+                                              "4:rise bank markup","5:rise firm markup", "6:rise product."), cex.names = 0.6)
 
 ```
 
@@ -293,7 +293,7 @@ barplot(U_star*100, ylab="U (%)", names.arg=c("1:baseline", "2:rise credit rat."
 #| fig-cap: Nominal wage
 
 barplot(W_star, ylab="W", names.arg=c("1:baseline", "2:rise credit rat.", "3:rise AD",
-                                      "4:rise bank markup","5:rise firm markup", "6:rise product."))
+                                      "4:rise bank markup","5:rise firm markup", "6:rise product."), cex.names = 0.6)
 
 ```
 
@@ -304,7 +304,7 @@ Finally, an increase in productivity (scenario 6) reduces the price level, which
 #| fig-cap: Real wage
 
 barplot(w_star, ylab="w", names.arg=c("1:baseline", "2:rise credit rat.", "3:rise AD",
-                                      "4:rise bank markup","5:rise firm markup", "6:rise product."))
+                                      "4:rise bank markup","5:rise firm markup", "6:rise product."), cex.names = 0.6)
 
 ```
 

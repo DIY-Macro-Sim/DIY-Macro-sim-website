@@ -4,7 +4,7 @@ project:
 
 book:
   title: "DIY Macroeconomic Model Simulation"
-  author: "<a href='https://github.com/DIY-Macro-Sim'>DIY-Macro-Sim<a/>"
+  #author: "<a href='https://github.com/DIY-Macro-Sim'>DIY-Macro-Sim<a/>"
   reader-mode: false
   # description: |
   #   Do it yourself open-source codes for seminal macroeconomic models.
@@ -18,7 +18,7 @@ book:
   site-url: https://github.com/DIY-Macro-Sim
   repo-url: https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website
   repo-branch: main
-  repo-actions: [edit, issue]
+  repo-actions: issue
   
   chapters:
     - index.qmd
@@ -43,7 +43,7 @@ book:
         - a_malthusian_model.qmd
         - a_ricardian_one_sector_model.qmd
         - a_ricardian_two_sector_model.qmd
-    
+    - additional_resources.qmd
     
 bibliography: references.bib
 
@@ -53,8 +53,8 @@ format:
     toc-depth: 5
     number-depth: 1
     theme:
-      light: cosmo
       dark: darkly
+      light: cosmo
     code-link: true
     code-copy: true
   pdf:

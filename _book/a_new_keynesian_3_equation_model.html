@@ -87,11 +87,11 @@ div.csl-indent {
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -250,6 +250,12 @@ div.csl-indent {
 </li>
       </ul>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./additional_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Additional Online Resources</span></a>
+  </div>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
@@ -284,7 +290,7 @@ div.csl-indent {
   </ul>
 </li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/edit/main/a_new_keynesian_3_equation_model.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -380,7 +386,7 @@ r_t = r_s + a_3(\pi_t-\pi^T)
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Set number of periods</span></span>
-<span><span class="cn">T</span><span class="op">=</span><span class="fl">50</span></span>
+<span><span class="va">Q</span><span class="op">=</span><span class="fl">50</span></span>
 <span></span>
 <span><span class="co"># Set number of scenarios</span></span>
 <span><span class="va">S</span><span class="op">=</span><span class="fl">3</span></span>
@@ -388,11 +394,11 @@ r_t = r_s + a_3(\pi_t-\pi^T)
 <span><span class="co"># Set period in which shock/shift will occur</span></span>
 <span><span class="va">s</span><span class="op">=</span><span class="fl">5</span></span>
 <span></span>
-<span><span class="co"># Create (S x T)-matrices that will contain the simulated data</span></span>
-<span><span class="va">y</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># Income/output</span></span>
-<span><span class="va">p</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># Inflation rate</span></span>
-<span><span class="va">r</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># Real interest rate</span></span>
-<span><span class="va">rs</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># Stabilising interest rate</span></span>
+<span><span class="co"># Create (S x Q)-matrices that will contain the simulated data</span></span>
+<span><span class="va">y</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># Income/output</span></span>
+<span><span class="va">p</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># Inflation rate</span></span>
+<span><span class="va">r</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># Real interest rate</span></span>
+<span><span class="va">rs</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># Stabilising interest rate</span></span>
 <span></span>
 <span><span class="co"># Set constant parameter values</span></span>
 <span><span class="va">a1</span><span class="op">=</span><span class="fl">0.3</span>  <span class="co"># Sensitivity of inflation with respect to output gap </span></span>
@@ -401,13 +407,13 @@ r_t = r_s + a_3(\pi_t-\pi^T)
 <span><span class="va">a3</span><span class="op">=</span><span class="op">(</span><span class="va">a1</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="va">b</span><span class="op">*</span><span class="va">a2</span><span class="op">)</span> <span class="op">+</span> <span class="va">a2</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Set parameter values for different scenarios</span></span>
-<span><span class="va">A</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">10</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># autonomous spending</span></span>
-<span><span class="va">pt</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">2</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># Inflation target</span></span>
-<span><span class="va">ye</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">5</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># Potential output</span></span>
+<span><span class="va">A</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">10</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># autonomous spending</span></span>
+<span><span class="va">pt</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">2</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># Inflation target</span></span>
+<span><span class="va">ye</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">5</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># Potential output</span></span>
 <span></span>
-<span><span class="va">A</span><span class="op">[</span><span class="fl">1</span>,<span class="va">s</span><span class="op">:</span><span class="cn">T</span><span class="op">]</span><span class="op">=</span><span class="fl">12</span>  <span class="co"># scenario 1: AD boost  </span></span>
-<span><span class="va">pt</span><span class="op">[</span><span class="fl">2</span>,<span class="va">s</span><span class="op">:</span><span class="cn">T</span><span class="op">]</span><span class="op">=</span><span class="fl">3</span>  <span class="co"># scenario 2: higher inflation target</span></span>
-<span><span class="va">ye</span><span class="op">[</span><span class="fl">3</span>,<span class="va">s</span><span class="op">:</span><span class="cn">T</span><span class="op">]</span><span class="op">=</span><span class="fl">7</span>  <span class="co"># scenario 3: higher potential output</span></span>
+<span><span class="va">A</span><span class="op">[</span><span class="fl">1</span>,<span class="va">s</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">12</span>  <span class="co"># scenario 1: AD boost  </span></span>
+<span><span class="va">pt</span><span class="op">[</span><span class="fl">2</span>,<span class="va">s</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">3</span>  <span class="co"># scenario 2: higher inflation target</span></span>
+<span><span class="va">ye</span><span class="op">[</span><span class="fl">3</span>,<span class="va">s</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">7</span>  <span class="co"># scenario 3: higher potential output</span></span>
 <span></span>
 <span><span class="co"># Initialise endogenous variables at equilibrium values</span></span>
 <span><span class="va">y</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">ye</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
@@ -415,10 +421,10 @@ r_t = r_s + a_3(\pi_t-\pi^T)
 <span><span class="va">rs</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="op">(</span><span class="va">A</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">ye</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="va">a1</span> </span>
 <span><span class="va">r</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">rs</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
 <span></span>
-<span><span class="co"># Simulate the model by looping over T time periods for S different scenarios</span></span>
+<span><span class="co"># Simulate the model by looping over Q time periods for S different scenarios</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
 <span>  </span>
-<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="cn">T</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="va">Q</span><span class="op">)</span><span class="op">{</span></span>
 <span>    </span>
 <span>    <span class="co">#(1) IS curve</span></span>
 <span>    <span class="va">y</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">A</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">-</span> <span class="va">a1</span><span class="op">*</span><span class="va">r</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
@@ -697,7 +703,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  let localAlternateSentinel = 'alternate';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 

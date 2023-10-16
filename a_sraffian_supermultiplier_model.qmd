@@ -61,7 +61,7 @@ Table 1 reports the parameterisation used in the simulation. Besides a baseline 
 rm(list=ls(all=TRUE))
 
 #Set number of periods
-T = 1000
+Q = 1000
 
 # Set number of scenarios (including baselines)
 S=4
@@ -69,14 +69,14 @@ S=4
 # Set period in which exogenous shift will occur
 q=50
 
-#Create vector in which equilibrium solutions from different parameterisations will be stored
-u=matrix(data=0,nrow=S,ncol=T) # rate of capacity utilisation
-g=matrix(data=0,nrow=S,ncol=T) # growth rate of capital stock
-s=matrix(data=0,nrow=S,ncol=T) # saving rate
-c=matrix(data=0,nrow=S,ncol=T) # consumption rate
-r=matrix(data=0,nrow=S,ncol=T) # profit rate
-g0=matrix(data=0,nrow=S,ncol=T)# expected growth rate of capital stock
-z=matrix(data=0,nrow=S,ncol=T) # autonomous demand rate
+#Create (S x Q) matrices in which equilibrium solutions from different parameterisations will be stored
+u=matrix(data=0,nrow=S,ncol=Q) # rate of capacity utilisation
+g=matrix(data=0,nrow=S,ncol=Q) # growth rate of capital stock
+s=matrix(data=0,nrow=S,ncol=Q) # saving rate
+c=matrix(data=0,nrow=S,ncol=Q) # consumption rate
+r=matrix(data=0,nrow=S,ncol=Q) # profit rate
+g0=matrix(data=0,nrow=S,ncol=Q)# expected growth rate of capital stock
+z=matrix(data=0,nrow=S,ncol=Q) # autonomous demand rate
 
 #Set constant parameter values
 g1=0.2  # Sensitivity of investment with respect to utilisation
@@ -85,14 +85,14 @@ mu=0.08 # adjustment speed of expected growth rate
 d=0.1   # time increment
 
 # Set and initialise exogenous variables/parameters that will be shifted
-pi=matrix(data=0.35,nrow=S,ncol=T) # profit share
-gz=matrix(data=0.02,nrow=S,ncol=T) # growth rate of autonomous demand
-un=matrix(data=0.75,nrow=S,ncol=T)  # normal rate of capacity utilisation
+pi=matrix(data=0.35,nrow=S,ncol=Q) # profit share
+gz=matrix(data=0.02,nrow=S,ncol=Q) # growth rate of autonomous demand
+un=matrix(data=0.75,nrow=S,ncol=Q)  # normal rate of capacity utilisation
 
 # Set parameter values for different scenarios
-gz[2,q:T]=0.03 # scenario 2: rise in autonomous demand growth
-pi[3,q:T]=0.4 # scenario 3: rise in profit share
-un[4,q:T]=0.8 # scenario 4: rise in normal rate of utilisation
+gz[2,q:Q]=0.03 # scenario 2: rise in autonomous demand growth
+pi[3,q:Q]=0.4 # scenario 3: rise in profit share
+un[4,q:Q]=0.8 # scenario 4: rise in normal rate of utilisation
 
 # Initialise endogenous variables at equilibrium values
 u[,1]=un[,1]
@@ -103,10 +103,10 @@ g0[,1]=gz[,1]
 z[,1]=sr*pi[,1]*un[,1]-gz[,1]
 r[,1]=pi[,1]*un[,1]
 
-# Simulate the model by looping over T time periods for S different scenarios
+# Simulate the model by looping over Q time periods for S different scenarios
 for (i in 1:S){
     
-  for (t in 2:T){
+  for (t in 2:Q){
     
     for (iterations in 1:1000){ # iterate the model 1000-times in each period
     
@@ -244,8 +244,8 @@ We can verify these analytical solutions by comparing them with the results from
 
 # Construct Jacobian matrix at the equilibrium 
 
-J=matrix(c((mu*g1)/(sr*pi[1,T]-g1), (mu*g1)/(sr*pi[1,T]-g1),
-           -z[1,T]*(sr*pi[1,T]/(sr*pi[1,T]-g1)), -z[1,T]*(g1/(sr*pi[1,T]-g1))), 2, 2, byrow=TRUE)
+J=matrix(c((mu*g1)/(sr*pi[1,Q]-g1), (mu*g1)/(sr*pi[1,Q]-g1),
+           -z[1,Q]*(sr*pi[1,Q]/(sr*pi[1,Q]-g1)), -z[1,Q]*(g1/(sr*pi[1,Q]-g1))), 2, 2, byrow=TRUE)
 J
 
 # Obtain eigenvalues

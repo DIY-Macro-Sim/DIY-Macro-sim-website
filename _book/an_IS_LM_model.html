@@ -87,11 +87,11 @@ div.csl-indent {
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -250,6 +250,12 @@ div.csl-indent {
 </li>
       </ul>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./additional_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Additional Online Resources</span></a>
+  </div>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
@@ -272,7 +278,7 @@ div.csl-indent {
   <li><a href="#directed-graph" id="toc-directed-graph" class="nav-link" data-scroll-target="#directed-graph">Directed graph</a></li>
   <li><a href="#analytical-discussion" id="toc-analytical-discussion" class="nav-link" data-scroll-target="#analytical-discussion">Analytical discussion</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/edit/main/an_IS_LM_model.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -552,7 +558,7 @@ U=1-\frac{N}{N^{f}}
 <p><a href="#fig-output">Figure&nbsp;<span>4.1</span></a> and <a href="#fig-r">Figure&nbsp;<span>4.2</span></a> depict the response of the model’s key endogenous variables, output and the interest rate, to various shifts. A fall in animal spirits (scenario 2) and an increase in liquidity preference (scenario 3) both have contractionary effects. While the fall in animal spirits directly reduces aggregate demand and thereby output (despite a fall in the interest rate), the rise in liquidity preference depresses output through its positive effect on the interest rate. Both scenarios raise the unemployment rate (<a href="#fig-U">Figure&nbsp;<span>4.3</span></a>). Scenarios 4 to 6 assess three different macroeconomic policy tools to stimulate output. It can be seen in <a href="#fig-output">Figure&nbsp;<span>4.1</span></a> that fiscal policy is more effective than monetary policy for the parameterisation in Table 1.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Direct fiscal stimulus is more effective than tax cuts due to the constant marginal propensity to consume. The effect on output is a multiple of the one-unit stimulus thanks to the multiplier effect. However, it can also be seen that fiscal policy raises the interest rate, which crowds out some of the expansionary effect.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">Y_star</span>, ylab<span class="op">=</span><span class="st">"Y"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Fall animal spirits"</span>, <span class="st">"3:Rise liq. pref."</span>,</span>
-<span>                                      <span class="st">"4:Monetary exp."</span>, <span class="st">"5:Tax cut"</span>, <span class="st">"6:Fiscal exp."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                      <span class="st">"4:Monetary exp."</span>, <span class="st">"5:Tax cut"</span>, <span class="st">"6:Fiscal exp."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-output" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="an_IS_LM_model_files/figure-html/fig-output-1.png" class="img-fluid figure-img" width="672"></p>
@@ -563,7 +569,7 @@ U=1-\frac{N}{N^{f}}
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">r_star</span>, ylab<span class="op">=</span><span class="st">"r"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Fall animal spirits"</span>, <span class="st">"3:Rise liq. pref."</span>,</span>
-<span>                                      <span class="st">"4:Monetary exp."</span>, <span class="st">"5:Tax cut"</span>, <span class="st">"6:Fiscal exp."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                      <span class="st">"4:Monetary exp."</span>, <span class="st">"5:Tax cut"</span>, <span class="st">"6:Fiscal exp."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-r" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="an_IS_LM_model_files/figure-html/fig-r-1.png" class="img-fluid figure-img" width="672"></p>
@@ -574,7 +580,7 @@ U=1-\frac{N}{N^{f}}
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">U_star</span><span class="op">*</span><span class="fl">100</span>, ylab<span class="op">=</span><span class="st">"U (%)"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Fall animal spirits"</span>, <span class="st">"3:Rise liq. pref."</span>,</span>
-<span>                                              <span class="st">"4:Monetary exp."</span>, <span class="st">"5:Tax cut"</span>, <span class="st">"6:Fiscal exp."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                              <span class="st">"4:Monetary exp."</span>, <span class="st">"5:Tax cut"</span>, <span class="st">"6:Fiscal exp."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-U" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="an_IS_LM_model_files/figure-html/fig-U-1.png" class="img-fluid figure-img" width="672"></p>
@@ -586,7 +592,7 @@ U=1-\frac{N}{N^{f}}
 <p><a href="#fig-I">Figure&nbsp;<span>4.4</span></a> and <a href="#fig-C">Figure&nbsp;<span>4.5</span></a> further show that monetary policy mostly stimulates investment, whereas fiscal policy boost consumption.</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">I_star</span>, ylab<span class="op">=</span><span class="st">"I"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Fall animal spirits"</span>, <span class="st">"3:Rise liq. pref."</span>,</span>
-<span>                                      <span class="st">"4:Monetary exp."</span>, <span class="st">"5:Tax cut"</span>, <span class="st">"6:Fiscal exp."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                      <span class="st">"4:Monetary exp."</span>, <span class="st">"5:Tax cut"</span>, <span class="st">"6:Fiscal exp."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-I" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="an_IS_LM_model_files/figure-html/fig-I-1.png" class="img-fluid figure-img" width="672"></p>
@@ -597,7 +603,7 @@ U=1-\frac{N}{N^{f}}
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">C_star</span>, ylab<span class="op">=</span><span class="st">"C"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Fall animal spirits"</span>, <span class="st">"3:Rise liq. pref."</span>,</span>
-<span>                                      <span class="st">"4:Monetary exp."</span>, <span class="st">"5:Tax cut"</span>, <span class="st">"6:Fiscal exp."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                      <span class="st">"4:Monetary exp."</span>, <span class="st">"5:Tax cut"</span>, <span class="st">"6:Fiscal exp."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-C" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="an_IS_LM_model_files/figure-html/fig-C-1.png" class="img-fluid figure-img" width="672"></p>
@@ -798,7 +804,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  let localAlternateSentinel = 'alternate';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 

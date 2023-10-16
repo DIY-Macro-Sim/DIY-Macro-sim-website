@@ -215,7 +215,7 @@ Figures @fig-output - @fig-nominal-wage-neocl-macro depict the response of the m
 #| label: fig-output-neocl-macro
 #| fig-cap: Output
 barplot(Y_star, ylab="Y", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise product.",
-                                      "4:Rise exp. price", "5:Monetary expan.", "6:Fiscal expan."))
+                                      "4:Rise exp. price", "5:Monetary expan.", "6:Fiscal expan."), cex.names = 0.6)
 
 ```
 
@@ -223,7 +223,7 @@ barplot(Y_star, ylab="Y", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:
 #| label: fig-price-level-neocl-macro
 #| fig-cap: Price level
 barplot(P_star, ylab="P", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise product.",
-                                      "4:Rise exp. price", "5:Monetary expan.", "6:Fiscal expan."))
+                                      "4:Rise exp. price", "5:Monetary expan.", "6:Fiscal expan."), cex.names = 0.6)
 
 ```
 
@@ -232,7 +232,7 @@ barplot(P_star, ylab="P", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:
 #| label: fig-interest_rate-neocl-macro
 #| fig-cap: Interest rate
 barplot(r_star, ylab="r", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise product.",
-                                      "4:Rise exp. price", "5:Monetary expan.", "6:Fiscal expan."))
+                                      "4:Rise exp. price", "5:Monetary expan.", "6:Fiscal expan."), cex.names = 0.6)
 
 ```
 
@@ -243,7 +243,7 @@ A rise in the expected price level (scenario 4) raises nominal wages and thereby
 #| label: fig-unemployment-neocl-macro
 #| fig-cap: Unemployment rate
 barplot(U_star*100, ylab="U (%)", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise product.",
-                                              "4:Rise exp. price", "5:Monetary expan.", "6:Fiscal expan."))
+                                              "4:Rise exp. price", "5:Monetary expan.", "6:Fiscal expan."), cex.names = 0.6)
 
 ```
 
@@ -253,7 +253,7 @@ barplot(U_star*100, ylab="U (%)", names.arg=c("1:Baseline", "2:Fall animal spiri
 #| fig-cap: Nominal wage
 
 barplot(W_star, ylab="W", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise product.",
-                                      "4:Rise exp. price", "5:Monetary expan.", "6:Fiscal expan."))
+                                      "4:Rise exp. price", "5:Monetary expan.", "6:Fiscal expan."), cex.names = 0.6)
 ```
 
 
@@ -262,7 +262,7 @@ barplot(W_star, ylab="W", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:
 #| fig-cap: Real wage
 
 barplot(w_star, ylab="w", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise product.",
-                                      "4:Rise exp. price", "5:Monetary expan.", "6:Fiscal expan."))
+                                      "4:Rise exp. price", "5:Monetary expan.", "6:Fiscal expan."), cex.names = 0.6)
 
 ```
 

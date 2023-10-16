@@ -87,11 +87,11 @@ div.csl-indent {
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -250,6 +250,12 @@ div.csl-indent {
 </li>
       </ul>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./additional_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Additional Online Resources</span></a>
+  </div>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
@@ -271,7 +277,7 @@ div.csl-indent {
   <li><a href="#directed-graph" id="toc-directed-graph" class="nav-link" data-scroll-target="#directed-graph">Directed graph</a></li>
   <li><a href="#analytical-discussion" id="toc-analytical-discussion" class="nav-link" data-scroll-target="#analytical-discussion">Analytical discussion</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/edit/main/a_neoclassical_synthesis_model_IS_LM_AS_AD.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -607,7 +613,7 @@ U=1-\frac{N}{N^f}
 <p>Figures <a href="an_IS_LM_model.html#fig-output">Figure&nbsp;<span>4.1</span></a> - <a href="#fig-nominal-wage-neocl-macro">Figure&nbsp;<span>5.5</span></a> depict the response of the model’s key endogenous variables to various shifts. A fall in animal spirits (scenario 2) reduces aggregate demand and thereby output and employment (despite a fall in the interest rate). This reduces workers’ nominal wage demands and thus the price level. An increase in productivity (scenario 3) has expansionary effects on output but adverse effects on employment. Higher productivity means that fewer workers need to be hired to produce the same level of output. However, the corresponding reduction in employment also reduces the price level, which lowers the (real) demand for money and thus lowers the interest rate. This has expansionary effects on output.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">Y_star</span>, ylab<span class="op">=</span><span class="st">"Y"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Fall animal spirits"</span>, <span class="st">"3:Rise product."</span>,</span>
-<span>                                      <span class="st">"4:Rise exp. price"</span>, <span class="st">"5:Monetary expan."</span>, <span class="st">"6:Fiscal expan."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                      <span class="st">"4:Rise exp. price"</span>, <span class="st">"5:Monetary expan."</span>, <span class="st">"6:Fiscal expan."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-output-neocl-macro" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-html/fig-output-neocl-macro-1.png" class="img-fluid figure-img" width="672"></p>
@@ -618,7 +624,7 @@ U=1-\frac{N}{N^f}
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">P_star</span>, ylab<span class="op">=</span><span class="st">"P"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Fall animal spirits"</span>, <span class="st">"3:Rise product."</span>,</span>
-<span>                                      <span class="st">"4:Rise exp. price"</span>, <span class="st">"5:Monetary expan."</span>, <span class="st">"6:Fiscal expan."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                      <span class="st">"4:Rise exp. price"</span>, <span class="st">"5:Monetary expan."</span>, <span class="st">"6:Fiscal expan."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-price-level-neocl-macro" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-html/fig-price-level-neocl-macro-1.png" class="img-fluid figure-img" width="672"></p>
@@ -629,7 +635,7 @@ U=1-\frac{N}{N^f}
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">r_star</span>, ylab<span class="op">=</span><span class="st">"r"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Fall animal spirits"</span>, <span class="st">"3:Rise product."</span>,</span>
-<span>                                      <span class="st">"4:Rise exp. price"</span>, <span class="st">"5:Monetary expan."</span>, <span class="st">"6:Fiscal expan."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                      <span class="st">"4:Rise exp. price"</span>, <span class="st">"5:Monetary expan."</span>, <span class="st">"6:Fiscal expan."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-interest_rate-neocl-macro" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-html/fig-interest_rate-neocl-macro-1.png" class="img-fluid figure-img" width="672"></p>
@@ -641,7 +647,7 @@ U=1-\frac{N}{N^f}
 <p>A rise in the expected price level (scenario 4) raises nominal wages and thereby the actual price level. This raises the interest rate, which exerts a (small) contractionary effect on output and employment. Scenarios 5 and 6 assess two different macroeconomic policy tools to stimulate output. A monetary expansion lowers the interest rate and increases output but also the price level. Similar results arise for a fiscal expansion. The main difference is that the monetary expansion lowers the interest rate, whereas the fiscal expansion increases it. \</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">U_star</span><span class="op">*</span><span class="fl">100</span>, ylab<span class="op">=</span><span class="st">"U (%)"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Fall animal spirits"</span>, <span class="st">"3:Rise product."</span>,</span>
-<span>                                              <span class="st">"4:Rise exp. price"</span>, <span class="st">"5:Monetary expan."</span>, <span class="st">"6:Fiscal expan."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                              <span class="st">"4:Rise exp. price"</span>, <span class="st">"5:Monetary expan."</span>, <span class="st">"6:Fiscal expan."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-unemployment-neocl-macro" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-html/fig-unemployment-neocl-macro-1.png" class="img-fluid figure-img" width="672"></p>
@@ -652,7 +658,7 @@ U=1-\frac{N}{N^f}
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">W_star</span>, ylab<span class="op">=</span><span class="st">"W"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Fall animal spirits"</span>, <span class="st">"3:Rise product."</span>,</span>
-<span>                                      <span class="st">"4:Rise exp. price"</span>, <span class="st">"5:Monetary expan."</span>, <span class="st">"6:Fiscal expan."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                      <span class="st">"4:Rise exp. price"</span>, <span class="st">"5:Monetary expan."</span>, <span class="st">"6:Fiscal expan."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-nominal-wage-neocl-macro" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-html/fig-nominal-wage-neocl-macro-1.png" class="img-fluid figure-img" width="672"></p>
@@ -663,7 +669,7 @@ U=1-\frac{N}{N^f}
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">w_star</span>, ylab<span class="op">=</span><span class="st">"w"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Fall animal spirits"</span>, <span class="st">"3:Rise product."</span>,</span>
-<span>                                      <span class="st">"4:Rise exp. price"</span>, <span class="st">"5:Monetary expan."</span>, <span class="st">"6:Fiscal expan."</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                      <span class="st">"4:Rise exp. price"</span>, <span class="st">"5:Monetary expan."</span>, <span class="st">"6:Fiscal expan."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-real-wage-neocl-macro" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-html/fig-real-wage-neocl-macro-1.png" class="img-fluid figure-img" width="672"></p>
@@ -855,7 +861,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  let localAlternateSentinel = 'alternate';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 

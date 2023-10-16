@@ -55,7 +55,7 @@ Table 1 reports the parameterisation used in the simulation. For all parameteris
 rm(list=ls(all=TRUE))
 
 # Set number of periods
-T=50
+Q=50
 
 # Set number of scenarios
 S=3
@@ -63,11 +63,11 @@ S=3
 # Set period in which shock/shift will occur
 s=5
 
-# Create (S x T)-matrices that will contain the simulated data
-y=matrix(data=0,nrow=S,ncol=T) # Income/output
-p=matrix(data=0,nrow=S,ncol=T) # Inflation rate
-r=matrix(data=0,nrow=S,ncol=T) # Real interest rate
-rs=matrix(data=0,nrow=S,ncol=T) # Stabilising interest rate
+# Create (S x Q)-matrices that will contain the simulated data
+y=matrix(data=0,nrow=S,ncol=Q) # Income/output
+p=matrix(data=0,nrow=S,ncol=Q) # Inflation rate
+r=matrix(data=0,nrow=S,ncol=Q) # Real interest rate
+rs=matrix(data=0,nrow=S,ncol=Q) # Stabilising interest rate
 
 # Set constant parameter values
 a1=0.3  # Sensitivity of inflation with respect to output gap 
@@ -76,13 +76,13 @@ b=1     # Sensitivity of central bank to inflation gap
 a3=(a1*(1/(b*a2) + a2))^(-1)
 
 # Set parameter values for different scenarios
-A=matrix(data=10,nrow=S,ncol=T) # autonomous spending
-pt=matrix(data=2,nrow=S,ncol=T) # Inflation target
-ye=matrix(data=5,nrow=S,ncol=T) # Potential output
+A=matrix(data=10,nrow=S,ncol=Q) # autonomous spending
+pt=matrix(data=2,nrow=S,ncol=Q) # Inflation target
+ye=matrix(data=5,nrow=S,ncol=Q) # Potential output
 
-A[1,s:T]=12  # scenario 1: AD boost  
-pt[2,s:T]=3  # scenario 2: higher inflation target
-ye[3,s:T]=7  # scenario 3: higher potential output
+A[1,s:Q]=12  # scenario 1: AD boost  
+pt[2,s:Q]=3  # scenario 2: higher inflation target
+ye[3,s:Q]=7  # scenario 3: higher potential output
 
 # Initialise endogenous variables at equilibrium values
 y[,1]=ye[,1]
@@ -90,10 +90,10 @@ p[,1]=pt[,1]
 rs[,1]=(A[,1] - ye[,1])/a1 
 r[,1]=rs[,1]
 
-# Simulate the model by looping over T time periods for S different scenarios
+# Simulate the model by looping over Q time periods for S different scenarios
 for (i in 1:S){
   
-  for (t in 2:T){
+  for (t in 2:Q){
     
     #(1) IS curve
     y[i,t] = A[i,t] - a1*r[i,t-1]

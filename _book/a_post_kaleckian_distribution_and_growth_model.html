@@ -87,11 +87,11 @@ div.csl-indent {
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -250,6 +250,12 @@ div.csl-indent {
 </li>
       </ul>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./additional_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Additional Online Resources</span></a>
+  </div>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
@@ -272,7 +278,7 @@ div.csl-indent {
   <li><a href="#calculate-analytical-solutions" id="toc-calculate-analytical-solutions" class="nav-link" data-scroll-target="#calculate-analytical-solutions">Calculate analytical solutions</a></li>
   <li><a href="#analytical-discussion" id="toc-analytical-discussion" class="nav-link" data-scroll-target="#analytical-discussion">Analytical discussion</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/edit/main/a_post_kaleckian_distribution_and_growth_model.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -535,7 +541,7 @@ u=v(c+g)
 </section><section id="plots" class="level3"><h3 class="anchored" data-anchor-id="plots">Plots</h3>
 <p>Figures <a href="#fig-utilisation-pkdg">Figure&nbsp;<span>7.1</span></a> - <a href="#fig-profit-rate-pkdg">Figure&nbsp;<span>7.4</span></a> depict the response of the model’s key endogenous variables to changes in the profit share. In the first case of a wage-led demand and growth regime (WLD/WLG), investment is equally sensitive to a change in the rate of capacity utilisation (<span class="math inline">\(g_1\)</span>) and a change in the profit share (<span class="math inline">\(g_2\)</span>). A rise in the profit share reduces consumption, which reduces the rate of capacity utilisation and the rate of growth. This is despite a positive effect on the profit rate.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">u_star</span>, ylab<span class="op">=</span><span class="st">"u"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1a:baseline WLD/WLG"</span>, <span class="st">"1b:rise prof share"</span>, <span class="st">"2a:baseline WLD/PLG"</span>, <span class="st">"2b:rise prof share"</span>, <span class="st">"3a:baseline PLD/PLG"</span>, <span class="st">"3b: rise prof share"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">u_star</span>, ylab<span class="op">=</span><span class="st">"u"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1a:baseline WLD/WLG"</span>, <span class="st">"1b:rise prof share"</span>, <span class="st">"2a:baseline WLD/PLG"</span>, <span class="st">"2b:rise prof share"</span>, <span class="st">"3a:baseline PLD/PLG"</span>, <span class="st">"3b: rise prof share"</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-utilisation-pkdg" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-utilisation-pkdg-1.png" class="img-fluid figure-img" width="672"></p>
@@ -548,7 +554,7 @@ u=v(c+g)
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">g_star</span>, ylab<span class="op">=</span><span class="st">"g"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:baseline WLD/WLG"</span>, <span class="st">"2:rise prof share"</span>, <span class="st">"3:baseline WLD/PLG"</span>,</span>
 <span>                                      <span class="st">"4:rise prof share"</span>, </span>
-<span>                                      <span class="st">"5:baseline PLD/PLG"</span>, <span class="st">"6: rise prof share"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                      <span class="st">"5:baseline PLD/PLG"</span>, <span class="st">"6: rise prof share"</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-growth-pkdg" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-growth-pkdg-1.png" class="img-fluid figure-img" width="672"></p>
@@ -561,7 +567,7 @@ u=v(c+g)
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">c_star</span>, ylab<span class="op">=</span><span class="st">"c"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:baseline WLD/WLG"</span>, <span class="st">"2:rise prof share"</span>, <span class="st">"3:baseline WLD/PLG"</span>,</span>
 <span>                                      <span class="st">"4:rise prof share"</span>, </span>
-<span>                                      <span class="st">"5:baseline PLD/PLG"</span>, <span class="st">"6: rise prof share"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                      <span class="st">"5:baseline PLD/PLG"</span>, <span class="st">"6: rise prof share"</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-consumption-pkdg" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-consumption-pkdg-1.png" class="img-fluid figure-img" width="672"></p>
@@ -573,7 +579,7 @@ u=v(c+g)
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">r_star</span>, ylab<span class="op">=</span><span class="st">"r"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:baseline WLD/WLG"</span>, <span class="st">"2:rise prof share"</span>, <span class="st">"3:baseline WLD/PLG"</span>,</span>
 <span>                                     <span class="st">"4:rise prof share"</span>, </span>
-<span>                                     <span class="st">"5:baseline PLD/PLG"</span>, <span class="st">"6: rise prof share"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                                     <span class="st">"5:baseline PLD/PLG"</span>, <span class="st">"6: rise prof share"</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-profit-rate-pkdg" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-profit-rate-pkdg-1.png" class="img-fluid figure-img" width="672"></p>
@@ -808,7 +814,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  let localAlternateSentinel = 'alternate';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 

@@ -111,7 +111,7 @@ Table 1 reports the parameterisation and initial values used in the simulation. 
 rm(list=ls(all=TRUE))
 
 # Set number of periods
-T=600
+Q=600
 
 # Set number of scenarios (including baseline)
 S=5
@@ -119,42 +119,42 @@ S=5
 # Set period in which shock/shift will occur
 s=15
 
-# Create (S x T)-matrices that will contain the simulated data
-Y1=matrix(data=1,nrow=S,ncol=T) # Output in sector 1
-Y2=matrix(data=1,nrow=S,ncol=T) # Output in sector 2
-R=matrix(data=1,nrow=S,ncol=T) # Rent
-P=matrix(data=1,nrow=S,ncol=T) # Total profits
-P1=matrix(data=1,nrow=S,ncol=T) # Profits in sector 1
-P2=matrix(data=1,nrow=S,ncol=T) # Profits in sector 2
-N=matrix(data=1,nrow=S,ncol=T) # total employment
-N1=matrix(data=1,nrow=S,ncol=T) # employment in sector 1
-N2=matrix(data=1,nrow=S,ncol=T) # employment in sector 2
-w=matrix(data=1,nrow=S,ncol=T) # real wage
-wn=matrix(data=1,nrow=S,ncol=T) # nominal wage
-K=matrix(data=1,nrow=S,ncol=T) # capital stock
-MPL=matrix(data=1,nrow=S,ncol=T) # marginal product of labour (in sector 1)
-r=matrix(data=1,nrow=S,ncol=T) # profit rate
-p1=matrix(data=1,nrow=S,ncol=T) # price of good from sector 1
-p2=matrix(data=1,nrow=S,ncol=T) # price of good from sector 2
+# Create (S x Q)-matrices that will contain the simulated data
+Y1=matrix(data=1,nrow=S,ncol=Q) # Output in sector 1
+Y2=matrix(data=1,nrow=S,ncol=Q) # Output in sector 2
+R=matrix(data=1,nrow=S,ncol=Q) # Rent
+P=matrix(data=1,nrow=S,ncol=Q) # Qotal profits
+P1=matrix(data=1,nrow=S,ncol=Q) # Profits in sector 1
+P2=matrix(data=1,nrow=S,ncol=Q) # Profits in sector 2
+N=matrix(data=1,nrow=S,ncol=Q) # total employment
+N1=matrix(data=1,nrow=S,ncol=Q) # employment in sector 1
+N2=matrix(data=1,nrow=S,ncol=Q) # employment in sector 2
+w=matrix(data=1,nrow=S,ncol=Q) # real wage
+wn=matrix(data=1,nrow=S,ncol=Q) # nominal wage
+K=matrix(data=1,nrow=S,ncol=Q) # capital stock
+MPL=matrix(data=1,nrow=S,ncol=Q) # marginal product of labour (in sector 1)
+r=matrix(data=1,nrow=S,ncol=Q) # profit rate
+p1=matrix(data=1,nrow=S,ncol=Q) # price of good from sector 1
+p2=matrix(data=1,nrow=S,ncol=Q) # price of good from sector 2
 N_eq=vector(length=S)          # equilibrium population
 K_eq=vector(length=S)          # equilibrium capital
 
-test=matrix(data=1,nrow=S,ncol=T) # price of good from sector 2
+test=matrix(data=1,nrow=S,ncol=Q) # price of good from sector 2
 
 
 # Set baseline parameter values
-A=matrix(data=2,nrow=S,ncol=T) # productivity
-a1=matrix(data=0.7,nrow=S,ncol=T) # labour elasticity of output, sector 1
-a2=matrix(data=0.5,nrow=S,ncol=T) # labour coefficient, sector 2
+A=matrix(data=2,nrow=S,ncol=Q) # productivity
+a1=matrix(data=0.7,nrow=S,ncol=Q) # labour elasticity of output, sector 1
+a2=matrix(data=0.5,nrow=S,ncol=Q) # labour coefficient, sector 2
 gamma=5 # adjustment speed of population 
 beta=1 # Sensitivity of investment with respect to profits
-wS=matrix(data=0.5,nrow=S,ncol=T) # natural wage rate
+wS=matrix(data=0.5,nrow=S,ncol=Q) # natural wage rate
 
 # Set parameter values for different scenarios
-A[2,s:T]=3     # scenario 2: productivity boost I
-a1[3,s:T]=0.75 # scenario 3: productivity boost II
-a2[4,s:T]=0.55 # scenario 4: productivity boost III
-wS[5,s:T]=0.6  # scenario 5: higher subsistence wage
+A[2,s:Q]=3     # scenario 2: productivity boost I
+a1[3,s:Q]=0.75 # scenario 3: productivity boost II
+a2[4,s:Q]=0.55 # scenario 4: productivity boost III
+wS[5,s:Q]=0.6  # scenario 5: higher subsistence wage
 
 # Initialise variables such that employment and the capital stock are below the equilibrium
 N1[,1]=1
@@ -165,10 +165,10 @@ w[,1]=wS[,1]
 Y1[,1]=A[,1]*N1[,1]^(a1[,1])
 MPL[,1]=a1[,1]*A[,1]*(N1[,1]^(a1[,1]-1))
 
-# Simulate the model by looping over T time periods for S different scenarios
+# Simulate the model by looping over Q time periods for S different scenarios
 for (i in 1:S){
 
-  for (t in 2:T){
+  for (t in 2:Q){
     
     for (iterations in 1:1000){ # run the model 1000-times in each period
       
@@ -423,23 +423,23 @@ We can check the analytical solutions and stability conditions numerically:
 ```{r ricardo2_6}
 # Calculate equilibrium solutions
 for (i in 1:S){
-  N_eq[i]=(wS[i,T]/((a1[i,T]^a1[i,T])*A[i,T]))^(-1/(1-a1[i,T]))
-  K_eq[i]=(a1[i,T]^a1[i,T])*A[i,T]*(wS[i,T]/((a1[i,T]^a1[i,T])*A[i,T]))^(-a1[i,T]/(1-a1[i,T]))
+  N_eq[i]=(wS[i,Q]/((a1[i,Q]^a1[i,Q])*A[i,Q]))^(-1/(1-a1[i,Q]))
+  K_eq[i]=(a1[i,Q]^a1[i,Q])*A[i,Q]*(wS[i,Q]/((a1[i,Q]^a1[i,Q])*A[i,Q]))^(-a1[i,Q]/(1-a1[i,Q]))
 }
 
 # Compare with numerical solutions (here for the example of Y, baseline)
 N_eq[1]
-N[1,T]
+N[1,Q]
 
 K_eq[1]
-K[1,T]
+K[1,Q]
 
 ### Examine model properties (here for the baseline scenario only)
 # Construct Jacobian matrix at the equilibrium 
 J=matrix(c(1-beta, 
-           beta*a1[1,T]*wS[1,T],
-           gamma*(wS[1,T]/((a1[i,T]^a1[i,T])*A[1,T]))^(1/(1-a1[1,T])),
-           1-gamma*(a1[i,T]^a1[i,T])*A[1,T]*(wS[1,T]/((a1[i,T]^a1[i,T])*A[1,T]))^((2-a1[1,T])/(1-a1[1,T]))), 2, 2, byrow=TRUE)
+           beta*a1[1,Q]*wS[1,Q],
+           gamma*(wS[1,Q]/((a1[i,Q]^a1[i,Q])*A[1,Q]))^(1/(1-a1[1,Q])),
+           1-gamma*(a1[i,Q]^a1[i,Q])*A[1,Q]*(wS[1,Q]/((a1[i,Q]^a1[i,Q])*A[1,Q]))^((2-a1[1,Q])/(1-a1[1,Q]))), 2, 2, byrow=TRUE)
 
 # Obtain eigenvalues
 ev=eigen(J)
@@ -457,7 +457,7 @@ print(1-det>0)
 # Check specific stability condition for the case beta=1
 for (i in 1:S){
 print(paste0("Scenario ", i, ":"))
-print(2-gamma*((a1[i,T]^a1[i,T])*A[i,T]*(wS[i,T]/(((a1[i,T]^a1[i,T])*A[i,T])))^((2-a1[i,T])/(1-a1[i,T]))) + a1[i,T]*wS[i,T]*(wS[i,T]/(((a1[i,T]^a1[i,T])*A[i,T]))^(1/(1-a1[i,T])))>0)
+print(2-gamma*((a1[i,Q]^a1[i,Q])*A[i,Q]*(wS[i,Q]/(((a1[i,Q]^a1[i,Q])*A[i,Q])))^((2-a1[i,Q])/(1-a1[i,Q]))) + a1[i,Q]*wS[i,Q]*(wS[i,Q]/(((a1[i,Q]^a1[i,Q])*A[i,Q]))^(1/(1-a1[i,Q])))>0)
 }
 ```
 

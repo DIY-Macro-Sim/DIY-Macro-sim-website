@@ -1,0 +1,8 @@
+# Additional Online Resources {.unnumbered}
+
+Below you can find some related free online resources for macroeconomic model simulation.
+
+- [Marco Veronese Passarella's website](https://www.marcopassarella.it/en/teaching-2/) provides *R* codes for most chapters of [Monetary Economics: An Integrated Approach to Credit, Money, Income, Production and Wealth](https://link.springer.com/book/10.1057/9780230626546) by Wynne Godley and Marc Lavoie, and more
+- [SFC Models](https://sfc-models.net/) provides further resources on stock-flow consistent modelling
+- [Coding for Economists](https://aeturrell.github.io/coding-for-economists/intro.html) provides a guide for coding for economists (in Python)
+- [Sayama (2015)](https://open.umn.edu/opentextbooks/textbooks/233) is a free textbook for the modelling and simulation of complex systems (in Python)

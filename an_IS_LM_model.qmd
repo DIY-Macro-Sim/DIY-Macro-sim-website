@@ -177,21 +177,21 @@ for (i in 1:S){
 #| label: fig-output
 #| fig-cap: Output
 barplot(Y_star, ylab="Y", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.",
-                                      "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."))
+                                      "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."), cex.names = 0.6)
 ```
 
 ```{r islm3}
 #| label: fig-r
 #| fig-cap: Interest rate
 barplot(r_star, ylab="r", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.",
-                                      "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."))
+                                      "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."), cex.names = 0.6)
 ```
 
 ```{r islm7}
 #| label: fig-U
 #| fig-cap: Unemployment
 barplot(U_star*100, ylab="U (%)", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.",
-                                              "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."))
+                                              "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."), cex.names = 0.6)
 
 ```
 
@@ -201,14 +201,14 @@ barplot(U_star*100, ylab="U (%)", names.arg=c("1:Baseline", "2:Fall animal spiri
 #| label: fig-I
 #| fig-cap: Investment
 barplot(I_star, ylab="I", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.",
-                                      "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."))
+                                      "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."), cex.names = 0.6)
 ```
 
 ```{r islm5}
 #| label: fig-C
 #| fig-cap: Consumption
 barplot(C_star, ylab="C", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.",
-                                      "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."))
+                                      "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."), cex.names = 0.6)
 ```
 
 ```{r islm6}

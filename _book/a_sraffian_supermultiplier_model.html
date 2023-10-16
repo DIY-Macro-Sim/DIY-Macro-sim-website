@@ -87,11 +87,11 @@ div.csl-indent {
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -250,6 +250,12 @@ div.csl-indent {
 </li>
       </ul>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./additional_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Additional Online Resources</span></a>
+  </div>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
@@ -271,7 +277,7 @@ div.csl-indent {
   <li><a href="#directed-graph" id="toc-directed-graph" class="nav-link" data-scroll-target="#directed-graph">Directed graph</a></li>
   <li><a href="#analytical-discussion" id="toc-analytical-discussion" class="nav-link" data-scroll-target="#analytical-discussion">Analytical discussion</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/edit/main/a_sraffian_supermultiplier_model.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -379,7 +385,7 @@ u_t=c_t+g_t
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#Set number of periods</span></span>
-<span><span class="cn">T</span> <span class="op">=</span> <span class="fl">1000</span></span>
+<span><span class="va">Q</span> <span class="op">=</span> <span class="fl">1000</span></span>
 <span></span>
 <span><span class="co"># Set number of scenarios (including baselines)</span></span>
 <span><span class="va">S</span><span class="op">=</span><span class="fl">4</span></span>
@@ -387,14 +393,14 @@ u_t=c_t+g_t
 <span><span class="co"># Set period in which exogenous shift will occur</span></span>
 <span><span class="va">q</span><span class="op">=</span><span class="fl">50</span></span>
 <span></span>
-<span><span class="co">#Create vector in which equilibrium solutions from different parameterisations will be stored</span></span>
-<span><span class="va">u</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># rate of capacity utilisation</span></span>
-<span><span class="va">g</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># growth rate of capital stock</span></span>
-<span><span class="va">s</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># saving rate</span></span>
-<span><span class="va">c</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># consumption rate</span></span>
-<span><span class="va">r</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># profit rate</span></span>
-<span><span class="va">g0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="co"># expected growth rate of capital stock</span></span>
-<span><span class="va">z</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># autonomous demand rate</span></span>
+<span><span class="co">#Create (S x Q) matrices in which equilibrium solutions from different parameterisations will be stored</span></span>
+<span><span class="va">u</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># rate of capacity utilisation</span></span>
+<span><span class="va">g</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># growth rate of capital stock</span></span>
+<span><span class="va">s</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># saving rate</span></span>
+<span><span class="va">c</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># consumption rate</span></span>
+<span><span class="va">r</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># profit rate</span></span>
+<span><span class="va">g0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span><span class="co"># expected growth rate of capital stock</span></span>
+<span><span class="va">z</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># autonomous demand rate</span></span>
 <span></span>
 <span><span class="co">#Set constant parameter values</span></span>
 <span><span class="va">g1</span><span class="op">=</span><span class="fl">0.2</span>  <span class="co"># Sensitivity of investment with respect to utilisation</span></span>
@@ -403,14 +409,14 @@ u_t=c_t+g_t
 <span><span class="va">d</span><span class="op">=</span><span class="fl">0.1</span>   <span class="co"># time increment</span></span>
 <span></span>
 <span><span class="co"># Set and initialise exogenous variables/parameters that will be shifted</span></span>
-<span><span class="va">pi</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.35</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># profit share</span></span>
-<span><span class="va">gz</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.02</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># growth rate of autonomous demand</span></span>
-<span><span class="va">un</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.75</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="cn">T</span><span class="op">)</span>  <span class="co"># normal rate of capacity utilisation</span></span>
+<span><span class="va">pi</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.35</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># profit share</span></span>
+<span><span class="va">gz</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.02</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># growth rate of autonomous demand</span></span>
+<span><span class="va">un</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.75</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>  <span class="co"># normal rate of capacity utilisation</span></span>
 <span></span>
 <span><span class="co"># Set parameter values for different scenarios</span></span>
-<span><span class="va">gz</span><span class="op">[</span><span class="fl">2</span>,<span class="va">q</span><span class="op">:</span><span class="cn">T</span><span class="op">]</span><span class="op">=</span><span class="fl">0.03</span> <span class="co"># scenario 2: rise in autonomous demand growth</span></span>
-<span><span class="va">pi</span><span class="op">[</span><span class="fl">3</span>,<span class="va">q</span><span class="op">:</span><span class="cn">T</span><span class="op">]</span><span class="op">=</span><span class="fl">0.4</span> <span class="co"># scenario 3: rise in profit share</span></span>
-<span><span class="va">un</span><span class="op">[</span><span class="fl">4</span>,<span class="va">q</span><span class="op">:</span><span class="cn">T</span><span class="op">]</span><span class="op">=</span><span class="fl">0.8</span> <span class="co"># scenario 4: rise in normal rate of utilisation</span></span>
+<span><span class="va">gz</span><span class="op">[</span><span class="fl">2</span>,<span class="va">q</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">0.03</span> <span class="co"># scenario 2: rise in autonomous demand growth</span></span>
+<span><span class="va">pi</span><span class="op">[</span><span class="fl">3</span>,<span class="va">q</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">0.4</span> <span class="co"># scenario 3: rise in profit share</span></span>
+<span><span class="va">un</span><span class="op">[</span><span class="fl">4</span>,<span class="va">q</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">0.8</span> <span class="co"># scenario 4: rise in normal rate of utilisation</span></span>
 <span></span>
 <span><span class="co"># Initialise endogenous variables at equilibrium values</span></span>
 <span><span class="va">u</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">un</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
@@ -421,10 +427,10 @@ u_t=c_t+g_t
 <span><span class="va">z</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">un</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="va">gz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
 <span><span class="va">r</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">pi</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">un</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
 <span></span>
-<span><span class="co"># Simulate the model by looping over T time periods for S different scenarios</span></span>
+<span><span class="co"># Simulate the model by looping over Q time periods for S different scenarios</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
 <span>    </span>
-<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="cn">T</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="va">Q</span><span class="op">)</span><span class="op">{</span></span>
 <span>    </span>
 <span>    <span class="kw">for</span> <span class="op">(</span><span class="va">iterations</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span><span class="op">{</span> <span class="co"># iterate the model 1000-times in each period</span></span>
 <span>    </span>
@@ -552,8 +558,8 @@ tr(J^*) = \frac{g_1(\mu-u_n s_r \pi + g_z)}{s_r\pi-g_1}.
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Construct Jacobian matrix at the equilibrium </span></span>
 <span></span>
-<span><span class="va">J</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">(</span><span class="va">mu</span><span class="op">*</span><span class="va">g1</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span><span class="fl">1</span>,<span class="cn">T</span><span class="op">]</span><span class="op">-</span><span class="va">g1</span><span class="op">)</span>, <span class="op">(</span><span class="va">mu</span><span class="op">*</span><span class="va">g1</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span><span class="fl">1</span>,<span class="cn">T</span><span class="op">]</span><span class="op">-</span><span class="va">g1</span><span class="op">)</span>,</span>
-<span>           <span class="op">-</span><span class="va">z</span><span class="op">[</span><span class="fl">1</span>,<span class="cn">T</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span><span class="fl">1</span>,<span class="cn">T</span><span class="op">]</span><span class="op">/</span><span class="op">(</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span><span class="fl">1</span>,<span class="cn">T</span><span class="op">]</span><span class="op">-</span><span class="va">g1</span><span class="op">)</span><span class="op">)</span>, <span class="op">-</span><span class="va">z</span><span class="op">[</span><span class="fl">1</span>,<span class="cn">T</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="va">g1</span><span class="op">/</span><span class="op">(</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span><span class="fl">1</span>,<span class="cn">T</span><span class="op">]</span><span class="op">-</span><span class="va">g1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">J</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">(</span><span class="va">mu</span><span class="op">*</span><span class="va">g1</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">-</span><span class="va">g1</span><span class="op">)</span>, <span class="op">(</span><span class="va">mu</span><span class="op">*</span><span class="va">g1</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">-</span><span class="va">g1</span><span class="op">)</span>,</span>
+<span>           <span class="op">-</span><span class="va">z</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">/</span><span class="op">(</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">-</span><span class="va">g1</span><span class="op">)</span><span class="op">)</span>, <span class="op">-</span><span class="va">z</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="va">g1</span><span class="op">/</span><span class="op">(</span><span class="va">sr</span><span class="op">*</span><span class="va">pi</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">-</span><span class="va">g1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">2</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">J</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       [,1]   [,2]
@@ -728,7 +734,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  let localAlternateSentinel = 'alternate';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
