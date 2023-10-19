@@ -1,0 +1,242 @@
+# A Kaldor-Robinson Distribution and Growth Model
+
+## Overview
+In the 1950s and 1960s in Cambridge UK, Nicholas Kaldor and Joan Robinson developed a theory of growth that aimed to apply John Maynard Keynes' principle of effective demand to the long run.^[See @hein_distribution_2014, chap. 4 for a detailed treatment.] The main Keynesian assumption retained by Kaldor and Robinson was that investment and saving are independent, and that a change in investment may lead to an adjustment in saving. However, unlike Keynes, Kaldor and Robinson assumed a fixed level of capacity utilisation, which they considered a key feature of a long-run equilibrium. As a result, goods market clearing cannot be established via output adjustment. Instead, Kaldor and Robinson assumed price adjustment, which would translate into a change in income distribution. Changes in the distribution of income then affect consumption (and saving), as workers tend to have a higher marginal propensity to consume than capital owners. For example, an increase in investment demand due to improved animal spirits would then lead to excess demand, which raises the price level. For a given level of nominal wages, the rise in the price level lowers real wages, leading to a redistribution of income towards profits. The resulting rise in the profit share increases aggregate saving, thereby leading to an adjustment of saving to investment. Taken together, the Kaldor-Robinson approach highlights the relevance of supply constraints in the long run that can lead to inflationary outcomes of demand shocks.
+
+We consider a simple version of the model proposed in @hein_distribution_2014, chap. 4.4. This is a model of long-run steady state growth. In the steady state, all endogenous variables grow at the same rate.^[All variables are normalised by the capital stock and thus rendered stationary.] Changes in parameters or exogenous variables lead to an instantaneous adjustment of the model's variables, so that the model can be analysed like a static one. The key question addressed by this model is a how changes in aggregate demand affects income distribution and the rate of growth. 
+
+## The Model
+
+
+$$
+r=h \frac{u_n}{v}
+$$ {#eq-r-kr}
+
+$$
+s=s_\Pi r,  \quad  s_\Pi \in (0,1)
+$$ {#eq-s-kr}
+
+$$
+c= \frac{u_n}{v}-s
+$$ {#eq-c-kr}
+
+$$
+g=g_0+g_1r, \quad g_1 > 0
+$$ {#eq-g-kr}
+
+$$
+h=\frac{vg_0}{u_n(s_\Pi-g_1)}
+$$ {#eq-h-kr}
+
+where $r$, $s$, $c$, $g$, and $h$ are the profit rate, the saving rate, the consumption rate, the investment rate, and the profit share, respectively.
+
+@eq-r-kr decomposes the profit rate into the product of the profit share $h$ (total profits over total output), the normal rate of capacity utilisation ($u_n$), and the inverse of $v$ (the capital-potential output ratio). Let $Y$ be output, $K$ be the capital stock, and $Y^P$ be potential output, then the decomposition can also be written as $r=\frac{\Pi}{K}=\frac{\Pi}{Y}\frac{Y}{Y^P}\frac{Y^P}{K}$. The normal rate of capacity utilisation and the capital-potential output ratio are taken to be exogenous in this model. Note also that the wage share is given by $1-h$. By @eq-s-kr, the economy-wide saving rate is given by saving out of profits ($s_\Pi r$). It is assumed that workers don't save, i.e. have a higher marginal propensity to consume than capital owners. @eq-c-kr simply states that consumption is income not saved. According to @eq-c-kr, investment is determined by an autonomous component $g_0$ that may capture Keynesian 'animal spirits' and by the profit rate. The profit rate may stimulate investment if firms use adaptive expectations and predict higher future profits in response to an increase in the current profit rate. Finally, @eq-h-kr is the goods market equilibrium condition $g=s$ solved for the profit share, reflecting the fact that prices are assumed to clear the goods market which translates into an adjustment of the profit share.
+
+
+## Simulation
+
+### Parameterisation
+
+Table 1 reports the parameterisation used in the simulation. We will consider three different parameterisations. Besides a baseline scenario (labelled as scenario 1), we will consider an increase in animal spirits ($g_0$) and an increase in the propensity to save out of profits ($s_\Pi$).  
+
+**Table 1: Parameterisation**
+
+| Scenario                           | $v$  |$s_\Pi$ | $g_0$ | $g_1$ | $u_n$ |
+|----------------------------------- |:----- |:------  |:------ |:------ |:-------|
+| 1: baseline                        |  3   | 0.6    |  0.02 |  0.3  |  0.9  | 
+| 2: rise in animal spirits ($g_0$)  |  3   | 0.6    |  0.04 |  0.3  |  0.9  | 
+| 3: rise in saving propensity ($s_\Pi$)       |  3   | 0.9    |  0.02 |  0.3  |  0.9  | 
+
+
+### Simulation code
+
+```{r kaldor-robinson}
+
+#Clear the environment
+rm(list=ls(all=TRUE))
+
+# Set number of scenarios (including baselines)
+S=3
+
+#Create vector in which equilibrium solutions from different parameterisations will be stored
+h_star=vector(length=S) # profit share
+g_star=vector(length=S) # growth rate of capital stock
+s_star=vector(length=S) # saving rate
+c_star=vector(length=S) # consumption rate
+r_star=vector(length=S) # profit rate
+
+# Set constant parameter values
+v=3    # capital-to-potential output ratio
+g1=0.3 # sensitivity of investment with respect to profit rate 
+un=0.9 # normal rate of capacity utilisation
+
+# Set exogenous variables whose parameterisation changes across regimes 
+g0=vector(length=S) # animal spirits
+sp=vector(length=S) # propensity to save out of profits
+
+### Construct different scenarios 
+
+# scenario 1: baseline 
+g0[]=0.02
+sp[]=0.6
+
+#scenario 2: increase in animal spirits
+g0[2]=0.04
+
+# scenario 3: increase in propensity to save out of profits
+sp[3]=0.9
+
+#Check  stability condition for all scenarios
+for (i in 1:S){
+  print(sp[i]>g1)
+}
+
+# Initialise endogenous variables at some arbitrary positive value 
+g=1
+r=1
+c=1
+h=1
+s=1
+
+#Solve this system numerically through 1000 iterations based on the initialisation
+for (i in 1:S){
+  
+  for (iterations in 1:1000){
+    
+    #(1) Profit rate
+    r=(h*un)/v
+    
+    #(2) Saving
+    s = sp[i]*r
+    
+    #(3) Consumption
+    c= un/v - s
+    
+    #(4) Investment
+    g = g0[i]+g1*r
+    
+    #(5) Goods market equilibrium profit share
+    h=(v/un)*(g0[i]/(sp[i]-g1))
+    
+  }
+  
+  #Save results for different parameterisations in vector
+  h_star[i]=h
+  g_star[i]=g
+  r_star[i]=r
+  s_star[i]=s
+  c_star[i]=c
+}
+
+
+```
+
+### Plots
+
+Figures @fig-profshare-kaldor-robinson - @fig-growth-kaldor-robinson depict the response of the model's key endogenous variables to changes in aggregate demand. A rise in animal spirits (scenario 2) raises the profit share. This reduces consumption. However, the effect on capital accumulation and thus growth is positive. In that sense, long-run growth is demand-driven, despite the fixed rate of capacity utilisation. 
+
+```{r kaldor-robinson2}
+#| label: fig-profshare-kaldor-robinson
+#| fig-cap: Profit share
+
+barplot(h_star, ylab="h", names.arg=c("1: baseline", "2: rise animal spirits", "3:rise savings propensity"), cex.names = 0.6)
+
+```
+
+In the second scenario, the saving propensity of capital owners increases. This constitutes a reduction in aggregate demand, leading to a fall in the profit share, and a fall in the growth rate. Since $g=s$, the effect reflects the Keynesian 'paradox of saving': a rise in the saving propensity leads to a fall in the aggregate saving rate.
+
+
+```{r kaldor-robinson3}
+#| label: fig-consumption-kaldor-robinson
+#| fig-cap: Rate of consumption
+
+barplot(c_star, ylab="c", names.arg=c("1: baseline", "2: rise animal spirits", "3:rise savings propensity"), cex.names = 0.6)
+
+```
+
+```{r kaldor-robinson4}
+#| label: fig-growth-kaldor-robinson
+#| fig-cap: Rate of growth
+
+barplot(g_star, ylab="g", names.arg=c("1: baseline", "2: rise animal spirits", "3:rise savings propensity"), cex.names = 0.6)
+
+```
+
+## Directed graph
+
+Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$. 
+
+```{r kaldor-robinsonDAG}
+#| message: false
+#| label: fig-dg-kaldor-robinson
+#| fig-cap: Directed graph of Kaldor-Robinson growth model
+
+## Create directed graph 
+# Construct auxiliary Jacobian matrix for 7 variables: 
+             # r,h,s,g,g0,sp,un
+M_mat=matrix(c(0,1,0,0,0, 0, 1,
+               0,0,1,1,0, 0, 1,
+               1,0,0,0,0, 1, 0,
+               1,0,0,0,1, 0, 0,
+               0,0,0,0,0, 0, 0,
+               0,0,0,0,0, 0, 0,
+               0,0,0,0,0, 0, 0), 7, 7, byrow=TRUE)
+
+# Create adjacency matrix from transpose of auxiliary Jacobian 
+A_mat=t(M_mat)
+
+# Create directed graph from adjacency matrix
+library(igraph)
+dg= graph_from_adjacency_matrix(A_mat, mode="directed", weighted= NULL)
+
+# Define node labels
+V(dg)$name=c("r", "h", "s", "g", expression(g[0]), expression(s[Pi]), expression(u[n]))
+
+# Plot directed graph
+plot(dg, main="", vertex.size=14, vertex.color="lightblue", 
+     vertex.label.color="black", edge.arrow.size=0.12, edge.width=1.1, edge.size=1.2,
+     edge.arrow.width=0.9, edge.color="black", vertex.label.cex=1, 
+     vertex.frame.color="NA", margin=-0.02)
+
+```
+
+In Figure @fig-dg-kaldor-robinson, it can be seen that animal spirits ($g_0$), the propensity to save out of profits ($s_\Pi$), and the normal rate of capacity utilisation ($u_n$) are the key exogenous variable of the model. Saving ($s$), investment ($g$), the rate of profit ($r$), and the profit share ($h$) are endogenous and form a closed loop (or cycle) within the system. 
+
+## Analytical discussion
+
+To find the equilibrium solution for the profit share (@eq-h-kr), substitute @eq-r-kr, @eq-g-kr and @eq-s-kr and into $g=s$ and solve for $h$.
+
+The equilibrium solution for $h$ can then be substituted into @eq-r-kr to find:
+\begin{align}
+r^* = \frac{g_0}{s_\Pi-g_1}
+\end{align}
+
+Similarly, substituting the equilibrium solution for $r$ into @eq-g-kr yields:
+\begin{align}
+g^* = \frac{s_\Pi g_0}{s_\Pi-g_1}.
+\end{align}
+
+The Kaldor-Robinson stability condition requires $s_\Pi-g_1>0$, i.e. saving needs to react more strongly to the profit rate than investment.
+
+Further analytical results can be found in @hein_distribution_2014, chap. 4.4.
+
+
+### Calculate analytical solutions numerically
+
+```{r kaldor-robinsonsolution}
+
+# Profit rate
+for (i in 1:S){
+  print((g0[i])/(sp[i]-g1))
+}
+
+# Growth rate
+for (i in 1:S){
+  print((sp[i]*g0[i])/(sp[i]-g1))
+}
+
+```
+
+
+
+## References {-}

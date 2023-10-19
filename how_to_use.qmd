@@ -27,7 +27,7 @@ Besides being free, a key advantage of *R* is its huge and growing functionality
 Once you have installed *R* and *RStudio*, you can play with the codes on this platform yourself by copy and pasting them into the script panel of your local *RStudio* and hitting CTRL + Enter to execute them. Don't forget to always comment your code using the "#" symbol and to save your *RScript* to make sure your future self can seamlessness continue working on it.
 
 
-The following code covers some basic *R* operations.^[Some of the material below is taken from [here](https://www.w3schools.com/r/default.asp).]. If you are new to *R* and are keen to get started, do the following:
+The following code covers some basic *R* operations.^[We are grateful to Rafael Wildauer for permission to reproduce a slightly modified version of his learning materials. In addition, some of the material below is taken from [here](https://www.w3schools.com/r/default.asp).]. If you are new to *R* and are keen to get started, do the following:
 
 - copy the code above into the script panel of RStudio on your machine
 - adjust the working directory to your personal folder
@@ -188,6 +188,8 @@ If you further want to practice your coding skills, attempt the following exerci
 
 If your code is correct, you should get the solution:
 
+::: {.callout-tip collapse="true" title="Solution"}
+
 ```{r}
 #| echo: false
 #| output: true
@@ -214,12 +216,14 @@ x
 
 ```
 
+:::
 
 2. Write a loop which calculates the running sums of $x_i=\frac{1}{i^2}$ (as in exercise 1) and in addition also $y_i=\frac{1}{i^3}$. Combine the results in a matrix.
 
 
 If your code is correct, you should get the solution:
 
+::: {.callout-tip collapse="true" title="Solution"}
 
 ```{r}
 #| echo: false
@@ -249,6 +253,7 @@ mat=cbind(x,y)
 mat
 ```
 
+:::
 
 
  

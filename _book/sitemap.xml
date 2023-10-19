@@ -2,66 +2,70 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://github.com/DIY-Macro-Sim/index.html</loc>
-    <lastmod>2023-10-16T13:28:24.835Z</lastmod>
+    <lastmod>2023-10-19T07:28:02.075Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/DIY-Macro-Sim/how_to_use.html</loc>
-    <lastmod>2023-10-16T13:28:32.539Z</lastmod>
+    <lastmod>2023-10-19T07:44:59.157Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/DIY-Macro-Sim/how_to_simulate.html</loc>
-    <lastmod>2023-10-16T13:28:24.924Z</lastmod>
+    <lastmod>2023-10-19T07:28:02.160Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/DIY-Macro-Sim/a_neoclassical_macro_model.html</loc>
-    <lastmod>2023-10-16T13:28:25.006Z</lastmod>
+    <lastmod>2023-10-19T07:28:02.213Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/DIY-Macro-Sim/an_IS_LM_model.html</loc>
-    <lastmod>2023-10-16T13:28:25.051Z</lastmod>
+    <lastmod>2023-10-19T07:28:02.260Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/DIY-Macro-Sim/a_neoclassical_synthesis_model_IS_LM_AS_AD.html</loc>
-    <lastmod>2023-10-16T13:28:25.119Z</lastmod>
+    <lastmod>2023-10-19T07:28:02.313Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/DIY-Macro-Sim/a_post_keynesian_macro_model_with_endogenous_money.html</loc>
-    <lastmod>2023-10-16T13:28:25.195Z</lastmod>
+    <lastmod>2023-10-19T07:28:02.375Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/DIY-Macro-Sim/a_Kaldor-Robinson_model.html</loc>
+    <lastmod>2023-10-19T07:28:02.408Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/DIY-Macro-Sim/a_post_kaleckian_distribution_and_growth_model.html</loc>
-    <lastmod>2023-10-16T13:28:25.235Z</lastmod>
+    <lastmod>2023-10-19T07:59:50.426Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/DIY-Macro-Sim/intro_stability_analysis.html</loc>
-    <lastmod>2023-10-16T13:28:25.343Z</lastmod>
+    <lastmod>2023-10-19T07:59:58.486Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/DIY-Macro-Sim/a_new_keynesian_3_equation_model.html</loc>
-    <lastmod>2023-10-16T13:28:25.431Z</lastmod>
+    <lastmod>2023-10-19T07:28:02.561Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/DIY-Macro-Sim/a_sraffian_supermultiplier_model.html</loc>
-    <lastmod>2023-10-16T13:28:25.518Z</lastmod>
+    <lastmod>2023-10-19T07:28:02.614Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/DIY-Macro-Sim/a_malthusian_model.html</loc>
-    <lastmod>2023-10-16T13:28:25.609Z</lastmod>
+    <lastmod>2023-10-19T07:28:02.661Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/DIY-Macro-Sim/a_ricardian_one_sector_model.html</loc>
-    <lastmod>2023-10-16T13:28:25.695Z</lastmod>
+    <lastmod>2023-10-19T07:28:02.730Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/DIY-Macro-Sim/a_ricardian_two_sector_model.html</loc>
-    <lastmod>2023-10-16T13:28:25.841Z</lastmod>
+    <lastmod>2023-10-19T07:28:02.846Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/DIY-Macro-Sim/a_Lewis_model.html</loc>
+    <lastmod>2023-10-19T07:28:02.900Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/DIY-Macro-Sim/additional_resources.html</loc>
-    <lastmod>2023-10-16T13:28:25.847Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/DIY-Macro-Sim/DIY-Macroeconomic-Model-Simulation.pdf</loc>
-    <lastmod>2023-10-16T13:28:24.364Z</lastmod>
+    <lastmod>2023-10-19T07:28:02.915Z</lastmod>
   </url>
 </urlset>

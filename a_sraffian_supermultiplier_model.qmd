@@ -232,7 +232,9 @@ $$
 
 which is positive provided $s_r\pi-g_1$, i.e. if the Keynesian stability condition holds.
 
-The trace is: $$
+The trace is: 
+
+$$
 tr(J^*) = \frac{g_1(\mu-u_n s_r \pi + g_z)}{s_r\pi-g_1}.
 $$
 

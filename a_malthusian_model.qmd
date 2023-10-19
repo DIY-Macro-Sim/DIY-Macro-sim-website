@@ -28,7 +28,7 @@ $$ {#eq-malthus_Y}
 
 where $N_t$, $B_t$, $D_t$, and $Y_t$ represent population, number of births, number of deaths, and real income, respectively.
 
-Equation @eq-malthus_N describes population dynamics as driven by births and deaths. Equations @eq-malthus_B and @eq-malthus_D the Malthusian hypothesis that birth rates are positively and death rates negatively related to income. Equation @eq-malthus_Y makes real income a negative function of the population, which captures the idea of supply constraints in agriculture.
+@eq-malthus_N describes population dynamics as driven by births and deaths.  @eq-malthus_B and @eq-malthus_D the Malthusian hypothesis that birth rates are positively and death rates negatively related to income.  @eq-malthus_Y makes real income a negative function of the population, which captures the idea of supply constraints in agriculture.
 
 ## Simulation
 

@@ -369,7 +369,7 @@ In Figure 9, it can be seen that productivity in agriculture ($A$ and $a_1$) are
 
 ## Analytical discussion
 
-To analyse the dynamics, combine @eq-ricardo2_Y to @eq-ricardo2_P and substitute into @eq-ricardo2_K. Further use @eq-ricardo2_W and @eq-ricardo2_w in @eq-ricardo2_N. This yields the two-dimensional dynamic system in $K_t$ and $w_t$:
+To analyse the dynamics, combine @eq-ricardo2_Y to @eq-ricardo2_P and substitute into @eq-ricardo2_K. Further use @eq-ricardo2_W and @eq-ricardo2_w in @eq-ricardo2_N. This yields the two-dimensional dynamic system in $K_t$ and $N_t$:
 
 $$
 K_t = (1-\beta)K_{t-1}+\beta(a_1^{a_1}A N_{t-1}^{a_1} )

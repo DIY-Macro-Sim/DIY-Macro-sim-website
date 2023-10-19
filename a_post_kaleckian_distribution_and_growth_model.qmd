@@ -254,27 +254,6 @@ plot(dg, main="", vertex.size=15, vertex.color="lightblue",
 
 In Figure @fig-dg-pkdg, it can be seen that the profit share ($h$) is the key exogenous variable of the model.^[Other important exogenous variables or parameters that may shift but are not depicted here are animal spirits ($g_0$) or the saving propensities ($s_W, s_\Pi$). See @hein_distribution_2014, chap. 7.2.2, for a detailed discussion of their effects.] Consumption ($c$), saving ($s$), investment ($g$), and the rate of utilisation ($u$) form a closed loop (or cycle) within the system. The profit share affects both saving and investment, which in turn affect consumption and the rate of capacity utilisation. The profit rate is a residual variable (also called a `sink') in this model.
 
-## Calculate analytical solutions
-
-```{r pkdgsolution}
-
-# Utilisation rate
-for (i in 1:S){
-print((g0[i]+g2*h[i])/((sw+(sp-sw)*h[i])/v-g1[i]))
-}
-
-# Growth rate
-for (i in 1:S){
-  print(((g0[i]+g2*h[i])*(sw+(sp-sw)*h[i])/v)/((sw+(sp-sw)*h[i])/v-g1[i]))
-}
-
-# Profit rate
-for (i in 1:S){
-  print((g0[i]+g2*h[i])*(h[i]/v)/((sw+(sp-sw)*h[i])/v-g1[i]))
-}
-
-```
-
 
 ## Analytical discussion
 
@@ -315,5 +294,27 @@ Finally, the effect on the profit rate will depend on the sign of the derivative
 \end{align}
 
 which is likely to be positive but can become negative if the demand regime is strongly wage-led.
+
+
+### Calculate analytical solutions numerically
+
+```{r pkdgsolution}
+
+# Utilisation rate
+for (i in 1:S){
+print((g0[i]+g2*h[i])/((sw+(sp-sw)*h[i])/v-g1[i]))
+}
+
+# Growth rate
+for (i in 1:S){
+  print(((g0[i]+g2*h[i])*(sw+(sp-sw)*h[i])/v)/((sw+(sp-sw)*h[i])/v-g1[i]))
+}
+
+# Profit rate
+for (i in 1:S){
+  print((g0[i]+g2*h[i])*(h[i]/v)/((sw+(sp-sw)*h[i])/v-g1[i]))
+}
+
+```
 
 ## References {-}

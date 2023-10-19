@@ -36,5 +36,8 @@ We welcome any feedback. If you encounter any issues, find typos or mistakes, or
 1. If you are Github user, you can [report an issue](https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new) in our repository
 2. You can also email us directly: `franz.prante@wiwi.tu.chemnitz.de` and `k.kohler@leeds.ac.uk`
 
+## License
+The material on this page is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1), thus feel free to use the material for non-commercial purposes but please give credit. 
+
 ## Acknowledgements
 We are grateful for helpful comments from Chandni Dwarkasing, Giuseppe Fontana, Alex Guschanski, Eckhard Hein, and Rafael Wildauer on various sections of this website. All errors are ours.

@@ -33,6 +33,7 @@ book:
         - an_IS_LM_model.qmd
         - a_neoclassical_synthesis_model_IS_LM_AS_AD.qmd
         - a_post_keynesian_macro_model_with_endogenous_money.qmd
+        - a_Kaldor-Robinson_model.qmd
         - a_post_kaleckian_distribution_and_growth_model.qmd
         
     - part: "Dynamic Models"
@@ -43,6 +44,7 @@ book:
         - a_malthusian_model.qmd
         - a_ricardian_one_sector_model.qmd
         - a_ricardian_two_sector_model.qmd
+        - a_Lewis_model.qmd
     - additional_resources.qmd
     
 bibliography: references.bib

@@ -178,8 +178,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./a_Kaldor-Robinson_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">A Kaldor-Robinson Distribution and Growth Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./a_post_kaleckian_distribution_and_growth_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span></span></a>
   </div>
 </li>
       </ul>
@@ -196,37 +202,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_stability_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">An Introduction to the Analysis of Dynamic Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">An Introduction to the Analysis of Dynamic Models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a_new_keynesian_3_equation_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a_sraffian_supermultiplier_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a_malthusian_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a_ricardian_one_sector_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a_ricardian_two_sector_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_Lewis_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">A Lewis Model of Economic Development</span></span></a>
   </div>
 </li>
       </ul>
@@ -277,7 +289,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>
 <strong>Analytical discussions</strong> for users who are interested in delving deeper into the mathematical properties of the models.</li>
 </ol>
-<p>To further facilitate the understanding of dynamic models, <a href="intro_stability_analysis.html"><span>Chapter&nbsp;8</span></a> of the section on dynamic models begins with a general introduction into the mathematical analysis of dynamic models (this is mostly relevant for the analytical discussions of dynamic models).</p>
+<p>To further facilitate the understanding of dynamic models, <a href="intro_stability_analysis.html"><span>Chapter&nbsp;9</span></a> of the section on dynamic models begins with a general introduction into the mathematical analysis of dynamic models (this is mostly relevant for the analytical discussions of dynamic models).</p>
 </section><section id="access-and-introduction-to-r" class="level2"><h2 class="anchored" data-anchor-id="access-and-introduction-to-r">Access and introduction to <em>R</em>
 </h2>
 <p>All simulation codes are written in the open-source programming language <em>R</em> (a Python extension is planned). To be able to manipulate the codes on this platform on your own machine, you first need to <a href="https://rstudio-education.github.io/hopr/starting.html">download and install <em>R</em> and <em>RStudio</em></a>.</p>
@@ -446,16 +458,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Write a loop which calculates the running sum of <span class="math inline">\(x_i=\frac{1}{i^2}\)</span> by saving each element <span class="math inline">\(\sum_{i=1}^{j}x_i\)</span> in a vector (where <span class="math inline">\(j=1,2,..,10\)</span>).</li>
 </ol>
 <p>If your code is correct, you should get the solution:</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 1.000000 1.250000 1.361111 1.423611 1.463611 1.491389 1.511797 1.527422
  [9] 1.539768 1.549768</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Write a loop which calculates the running sums of <span class="math inline">\(x_i=\frac{1}{i^2}\)</span> (as in exercise 1) and in addition also <span class="math inline">\(y_i=\frac{1}{i^3}\)</span>. Combine the results in a matrix.</li>
 </ol>
 <p>If your code is correct, you should get the solution:</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>             x        y
@@ -471,11 +510,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [10,] 1.549768 1.197532</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
 
 
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
-<li id="fn1"><p>Some of the material below is taken from <a href="https://www.w3schools.com/r/default.asp">here</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>We are grateful to Rafael Wildauer for permission to reproduce a slightly modified version of his learning materials. In addition, some of the material below is taken from <a href="https://www.w3schools.com/r/default.asp">here</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
