@@ -369,7 +369,7 @@ V(dg)$name=c("Y", "C", "I", expression(G[0]))
 plot(dg, main="Figure 4: Directed graph of Samuelson model", vertex.size=20, vertex.color="lightblue", 
      vertex.label.color="black", edge.arrow.size=0.3, edge.width=1.1, edge.size=1.2,
      edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
-     vertex.frame.color="NA", margin=-0.05)
+     vertex.frame.color="NA", margin=-0.08)
 ```
 
 Broadly speaking, three types of nodes are possible:

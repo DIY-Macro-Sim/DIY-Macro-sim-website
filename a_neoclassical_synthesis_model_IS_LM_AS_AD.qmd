@@ -294,16 +294,21 @@ M_mat=matrix(c(0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                1,0,0,0,0,1,0,0,1,0,0,0,0,0,0), 15, 15, byrow=TRUE)
 
-# Create adjacency matrix from transpose of auxiliary Jacobian and add column names
+# Create adjacency matrix from transpose of auxiliary Jacobian 
 A_mat=t(M_mat)
-colnames(A_mat) = c("Y", "C", "I", "G0", "T0", "r", "w", "W", "P", "M0", "N", "i0", "A", "P0", "Md")
 
-# Create and plot directed graph from adjacency matrix
+# Create directed graph from adjacency matrix
 library(igraph)
 dg= graph_from_adjacency_matrix(A_mat, mode="directed", weighted= NULL)
-plot(dg, main="", vertex.size=15, vertex.color="lightblue", 
-     vertex.label.color="black", edge.arrow.size=0.15, edge.width=1,
-     edge.arrow.width=0.4, edge.color="black", vertex.label.cex=1.2, vertex.frame.color="NA", margin=0.01)
+
+# Define node labels
+V(dg)$name=c("Y", "C", "I", expression(G[0]), expression(T[0]), "r", "w", "W", "P", expression(M[0]), "N", expression(i[0]), "A", expression(P[0]), expression(M[d]))
+
+# Plot directed graph
+plot(dg, main="", vertex.size=20, vertex.color="lightblue", 
+     vertex.label.color="black", edge.arrow.size=0.3, edge.width=1.1, edge.size=1.2,
+     edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
+     vertex.frame.color="NA", margin=-0.08)
 
 ```
 

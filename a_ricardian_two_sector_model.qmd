@@ -1,10 +1,10 @@
-# A Ricardian Two-Sector Model
+# A Ricardian Two-Sector Model {#sec-ricardo_2}
 
 This model captures some key feature of David Ricardo's theory of growth and distribution as developed in his 1817 book [On the Principles of Political Economy and Taxation](https://en.wikipedia.org/wiki/On_the_Principles_of_Political_Economy_and_Taxation). The model revolves around the determination of real wages, rents, and profits, and how profitability in turn drives capital accumulation.[^a_ricardian_two_sector_model-1] It assumes an economy with two sectors: an agricultural sector producing corn subject to diminishing marginal returns and a luxury good sector with constant marginal returns.[^a_ricardian_two_sector_model-2] Prices are determined by the quantity of labour required for production. Rent on the land used for agricultural production is a differential surplus landowners gain based on the fertility of their land relative to the marginal plot of land (the plot of land where fertility is lowest and no rent is earned). Real wages are determined by the subsistence level in the long run. Profits in agriculture are a residual and set the economy-wide profit rate. As employment increases and more land is utilised, marginal productivity in agriculture falls and differential rents increase. As a result, profits are driven down to zero and capital accumulation comes to a halt. A 'stationary state' is reached. Landowners are the main beneficiaries of this process. The model is adapted from @Pasinetti1960.
 
 [^a_ricardian_two_sector_model-1]: See chapter 2 of @Foley2006 for an excellent introduction.
 
-[^a_ricardian_two_sector_model-2]: A simpler one-sector version of the model can be found here XXX.
+[^a_ricardian_two_sector_model-2]: See @sec-ricardo_1 for a simpler one-sector version of the model, 
 
 ## The Model
 
@@ -358,11 +358,11 @@ V(dg)$name=c(expression(Y[1]), expression(N[1]), "MPL", "R", expression(P[1]),
              expression(a[1]), expression(a[2]), expression(w^S))
 
 # Plot directed graph
-plot(dg, main="Figure 9: Directed Graph of Ricardian Two-Sector Model", vertex.size=14, vertex.color="lightblue", 
-     vertex.label.color="black", edge.arrow.size=0.15, edge.width=1.1, edge.size=1.2,
-     edge.arrow.width=0.9, edge.color="black", vertex.label.cex=1, 
-     vertex.frame.color="NA", margin=-0.05)
-
+# Plot directed graph
+plot(dg, main="Figure 9: Directed graph", vertex.size=20, vertex.color="lightblue", 
+     vertex.label.color="black", edge.arrow.size=0.3, edge.width=1.1, edge.size=1.2,
+     edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
+     vertex.frame.color="NA", margin=0.08)
 ```
 
 In Figure 9, it can be seen that productivity in agriculture ($A$ and $a_1$) are key exogenous variables that impact income in sector 1 and the marginal product of labour. The subsistence wage ($w^S$) is another exogenous variable that impacts the system through its effect on population dynamics. Productivity in the luxuries sector ($a_2$) feeds into the system via employment.ost other variables are endogenous and form a closed loop (or cycle) within the system. Profits are a residual. The directed graph illustrates the supply-driven nature of the agricultural sector, where (marginal) productivity determine employment and distribution. By contrast, the luxury goods sector is demand-determined with employment being the residual. Profits determine capital accumulation, which in turn provides funds that can be used to hire more agricultural workers. A higher subsistence wage reduces capital accumulation as it leaves fewer profits to be reinvested.

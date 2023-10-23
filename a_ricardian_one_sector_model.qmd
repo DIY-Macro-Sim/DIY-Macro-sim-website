@@ -1,4 +1,4 @@
-# A Ricardian One-Sector Model
+# A Ricardian One-Sector Model {#sec-ricardo_1}
 
 ## Overview
 
@@ -6,7 +6,7 @@ This model captures some key feature of David Ricardo's theory of growth and dis
 
 [^a_ricardian_one_sector_model-1]: See chapter 2 of @Foley2006 for an excellent introduction.
 
-[^a_ricardian_one_sector_model-2]: A two-sector extension of the model can be found here XXX.
+[^a_ricardian_one_sector_model-2]: See @sec-ricardo_2 for a two-sector extension of the model.
 
 ## The Model
 
@@ -240,9 +240,9 @@ V(dg)$name=c("Y", "W", "w", "MPL", "R", "P", "K", "N", "A", expression(w^S))
 
 # Plot directed graph
 plot(dg, main="Figure 5: Directed graph of Ricardian One-Sector Model", vertex.size=20, vertex.color="lightblue", 
-     vertex.label.color="black", edge.arrow.size=0.2, edge.width=1.1, edge.size=1.2,
-     edge.arrow.width=1, edge.color="black", vertex.label.cex=1.2, 
-     vertex.frame.color="NA", margin=-0.05)
+     vertex.label.color="black", edge.arrow.size=0.3, edge.width=1.1, edge.size=1.2,
+     edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
+     vertex.frame.color="NA", margin=-0.08)
 ```
 
 In Figure 5, it can be seen that productivity ($A$) and the subsistence wage ($w^S$) are the key exogenous variables that impact income and the marginal product of labour, and population dynamics, respectively. Most other variables are endogenous and form a closed loop (or cycle) within the system. Profits are a residual. The directed graph illustrates the supply-driven nature of the model, where productivity determines employment and distribution, which in turn feed back into income and capital accumulation. At the same time, income distribution has an exogenous element in the form of the subsistence wage, which feeds into the system.

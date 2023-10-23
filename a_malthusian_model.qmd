@@ -186,9 +186,9 @@ V(dg)$name=c("N", "B", "D", "Y", expression(b[0]), expression(a[0]))
 
 # Plot directed graph matrix
 plot(dg, main="Figure 4: Directed graph of Malthusian model", vertex.size=20, vertex.color="lightblue", 
-     vertex.label.color="black", edge.arrow.size=0.2, edge.width=1.1, edge.size=1.2,
-     edge.arrow.width=1, edge.color="black", vertex.label.cex=1.2, 
-     vertex.frame.color="NA", margin=-0.05)
+     vertex.label.color="black", edge.arrow.size=0.3, edge.width=1.1, edge.size=1.2,
+     edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
+     vertex.frame.color="NA", margin=-0.08)
 ```
 
 In Figure 4, it can be seen that the exogenous birth rate ($b0$) and productivity ($a0$) are exogenous variables that impact births and income, respectively. Births, deaths, employment and income are endogenous and form a closed loop (or cycle) within the system. Births and deaths affect the population size (with simultaneous feedback from population to births and deaths), and the population affects income. Income, in turn, feeds back into population size.

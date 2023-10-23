@@ -207,9 +207,9 @@ V(dg)$name=c("r", "c", "g", "u", expression(g^0), "z", expression(pi), expressio
 
 # Plot directed graph
 plot(dg, main="Figure 4: Directed graph of Sraffian Supermultiplier Model", vertex.size=20, vertex.color="lightblue", 
-     vertex.label.color="black", edge.arrow.size=0.2, edge.width=1.1, edge.size=1.2,
-     edge.arrow.width=1, edge.color="black", vertex.label.cex=1.2, 
-     vertex.frame.color="NA", margin=-0.05)
+     vertex.label.color="black", edge.arrow.size=0.3, edge.width=1.1, edge.size=1.2,
+     edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
+     vertex.frame.color="NA", margin=-0.08)
 ```
 
 In Figure 4, it can be seen that the growth rate of autonomous demand ($g_z$), the profit share ($\pi$), and the normal rate of capacity utilisation ($u_n$) are the key exogenous variable of the model. The profit rate ($r$), consumption ($c$), the autonomous demand rate ($z$), investment ($g$), the rate of utilisation ($u$), an the expected growth rate ($g_0$) form a closed loop (or cycle) within the system. For example, an increase in the growth rate of autonomous demand increases consumption, which raises the rate of capacity utilisation, growth, and the expected growth rate. In a second-round effect, the increase in the growth rate then feeds back negatively into the autonomous demand rate, which leads to a return of the rate of capacity utilisation to its previous value.

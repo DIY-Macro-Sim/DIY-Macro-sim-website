@@ -292,9 +292,7 @@ div.csl-indent {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">
-<span class="chapter-number">14</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span>
-</h1>
+<h1 class="title"><span id="sec-ricardo_2" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span></span></h1>
 </div>
 
 
@@ -664,10 +662,11 @@ N_t = N_{t-1} + \gamma (w_{t-1} - w^S)
 <span>             <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">a</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">a</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">w</span><span class="op">^</span><span class="va">S</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Plot directed graph</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dg</span>, main<span class="op">=</span><span class="st">"Figure 9: Directed Graph of Ricardian Two-Sector Model"</span>, vertex.size<span class="op">=</span><span class="fl">14</span>, vertex.color<span class="op">=</span><span class="st">"lightblue"</span>, </span>
-<span>     vertex.label.color<span class="op">=</span><span class="st">"black"</span>, edge.arrow.size<span class="op">=</span><span class="fl">0.15</span>, edge.width<span class="op">=</span><span class="fl">1.1</span>, edge.size<span class="op">=</span><span class="fl">1.2</span>,</span>
-<span>     edge.arrow.width<span class="op">=</span><span class="fl">0.9</span>, edge.color<span class="op">=</span><span class="st">"black"</span>, vertex.label.cex<span class="op">=</span><span class="fl">1</span>, </span>
-<span>     vertex.frame.color<span class="op">=</span><span class="st">"NA"</span>, margin<span class="op">=</span><span class="op">-</span><span class="fl">0.05</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co"># Plot directed graph</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dg</span>, main<span class="op">=</span><span class="st">"Figure 9: Directed graph"</span>, vertex.size<span class="op">=</span><span class="fl">20</span>, vertex.color<span class="op">=</span><span class="st">"lightblue"</span>, </span>
+<span>     vertex.label.color<span class="op">=</span><span class="st">"black"</span>, edge.arrow.size<span class="op">=</span><span class="fl">0.3</span>, edge.width<span class="op">=</span><span class="fl">1.1</span>, edge.size<span class="op">=</span><span class="fl">1.2</span>,</span>
+<span>     edge.arrow.width<span class="op">=</span><span class="fl">1.2</span>, edge.color<span class="op">=</span><span class="st">"black"</span>, vertex.label.cex<span class="op">=</span><span class="fl">1.2</span>, </span>
+<span>     vertex.frame.color<span class="op">=</span><span class="st">"NA"</span>, margin<span class="op">=</span><span class="fl">0.08</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="a_ricardian_two_sector_model_files/figure-html/ricardo2_5-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -799,7 +798,7 @@ Pasinetti, Luigi L. 1960. <span>“<span class="nocase">A Mathematical Formulati
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>See chapter 2 of <span class="citation" data-cites="Foley2006">Foley (<a href="#ref-Foley2006" role="doc-biblioref">2006</a>)</span> for an excellent introduction.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>A simpler one-sector version of the model can be found here XXX.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>See <a href="a_ricardian_one_sector_model.html"><span>Chapter&nbsp;13</span></a> for a simpler one-sector version of the model,<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p><span class="citation" data-cites="Pasinetti1960">Pasinetti (<a href="#ref-Pasinetti1960" role="doc-biblioref">1960</a>)</span> specifies a generic function <span class="math inline">\(f(N_t)\)</span> with <span class="math inline">\(f(0) \geq\)</span> 0, <span class="math inline">\(f'(0) &gt; w^*\)</span>, and <span class="math inline">\(f''(N_t) &lt; 0\)</span>. <a href="#eq-ricardo2_Y">Equation&nbsp;<span>14.1</span></a> satisfies these conditions.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p><a href="#eq-ricardo2_R">Equation&nbsp;<span>14.6</span></a> is based on the definition of total rent as the sum of the net gains of the non-marginal landowners. See <span class="citation" data-cites="Pasinetti1960">Pasinetti (<a href="#ref-Pasinetti1960" role="doc-biblioref">1960</a>)</span> for a formal derivation. Note that by using <a href="#eq-ricardo2_MPL">Equation&nbsp;<span>14.2</span></a>, <a href="#eq-ricardo2_R">Equation&nbsp;<span>14.6</span></a> can also be written as <span class="math inline">\(R_t = Y_{1t}(1-a_1)\)</span>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>To see this, notice that equation <a href="#eq-ricardo2_p1">Equation&nbsp;<span>14.8</span></a> can be derived from <span class="math inline">\(p_{t1}Y_{t1}-p_{t1}R_{t}=N_{t1}\)</span> if combined with equation <a href="#eq-ricardo2_R">Equation&nbsp;<span>14.6</span></a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>

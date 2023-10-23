@@ -193,10 +193,10 @@ dg= graph_from_adjacency_matrix(A_mat, mode="directed", weighted= NULL)
 V(dg)$name=c("r", "h", "s", "g", expression(g[0]), expression(s[Pi]), expression(u[n]))
 
 # Plot directed graph
-plot(dg, main="", vertex.size=14, vertex.color="lightblue", 
-     vertex.label.color="black", edge.arrow.size=0.12, edge.width=1.1, edge.size=1.2,
-     edge.arrow.width=0.9, edge.color="black", vertex.label.cex=1, 
-     vertex.frame.color="NA", margin=-0.02)
+plot(dg, main="", vertex.size=20, vertex.color="lightblue", 
+     vertex.label.color="black", edge.arrow.size=0.3, edge.width=1.1, edge.size=1.2,
+     edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
+     vertex.frame.color="NA", margin=-0.08)
 
 ```
 
