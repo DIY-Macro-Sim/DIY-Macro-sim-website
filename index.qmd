@@ -8,16 +8,16 @@ This platform provides an open source code repository and online script for macr
 
 The platform covers an array of macroeconomic models, including canonical textbook models, models from different economic paradigms, and seminal models from the history of economic thought. It bridges a gap between intermediate and advanced level macroeconomics by providing detailed yet accessible treatments of seminal macroeconomic models. Most intermediate macroeconomics textbooks focus on graphical analysis, while advanced level materials are often more mathematical and less accessible. Our platform offers a hands-on and approachable resource for users to build both a solid foundation in modelling and macroeconomic intuition. 
 
-The platform's DIY-approach aims to foster reproducibility and open-source principles in macroeconomic research and education by providing learning materials that are freely available and modifiable by everyone. The platform’s content will expand over time through new entries added by the project team. A Python extension is planned.
+The platform's DIY-approach aims to foster reproducibility and open-source principles in macroeconomic research and education by providing learning materials that are freely available and modifiable by everyone. The platform’s content will expand over time through new entries added by the project team. A Python extension is under construction (currently available for chapters 1, 2, and 8).
 
 ## Project team
 
 :::  {layout-ncol=2}
 
-![Franz Prante](franz.jpeg){width=81%}
+![Franz Prante](franz.jpeg){width=50%}
 
 
-![Karsten Kohler](karsten.png){width=100%}
+![Karsten Kohler](karsten.png){width=61%}
 
 :::
 

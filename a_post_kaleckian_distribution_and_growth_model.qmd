@@ -179,7 +179,7 @@ Figures @fig-utilisation-pkdg - @fig-profit-rate-pkdg depict the response of the
 #| label: fig-utilisation-pkdg
 #| fig-cap: Rate of capacity utilisation
 
-barplot(u_star, ylab="u", names.arg=c("1a:baseline WLD/WLG", "1b:rise prof share", "2a:baseline WLD/PLG", "2b:rise prof share", "3a:baseline PLD/PLG", "3b: rise prof share"), cex.names = 0.6)
+barplot(u_star, ylab="u", names.arg=c("1a:baseline WLD/WLG", "1b:rise prof share", "2a:baseline WLD/PLG", "2b:rise prof share", "3a:baseline PLD/PLG", "3b: rise prof share"), cex.names = 0.5)
 
 ```
 
@@ -191,7 +191,7 @@ In the second case where the demand regime is wage-led but the growth regime is 
 
 barplot(g_star, ylab="g", names.arg=c("1:baseline WLD/WLG", "2:rise prof share", "3:baseline WLD/PLG",
                                       "4:rise prof share", 
-                                      "5:baseline PLD/PLG", "6: rise prof share"), cex.names = 0.6)
+                                      "5:baseline PLD/PLG", "6: rise prof share"), cex.names = 0.5)
 
 ```
 
@@ -203,7 +203,7 @@ Finally, in the third case where the demand regime and the growth regime are pro
 
 barplot(c_star, ylab="c", names.arg=c("1:baseline WLD/WLG", "2:rise prof share", "3:baseline WLD/PLG",
                                       "4:rise prof share", 
-                                      "5:baseline PLD/PLG", "6: rise prof share"), cex.names = 0.6)
+                                      "5:baseline PLD/PLG", "6: rise prof share"), cex.names = 0.5)
 
 ```
 
@@ -214,7 +214,7 @@ barplot(c_star, ylab="c", names.arg=c("1:baseline WLD/WLG", "2:rise prof share",
 
 barplot(r_star, ylab="r", names.arg=c("1:baseline WLD/WLG", "2:rise prof share", "3:baseline WLD/PLG",
                                      "4:rise prof share", 
-                                     "5:baseline PLD/PLG", "6: rise prof share"), cex.names = 0.6)
+                                     "5:baseline PLD/PLG", "6: rise prof share"), cex.names = 0.5)
 
 ```
 

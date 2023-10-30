@@ -258,8 +258,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
 <li><a href="#structure-of-platform" id="toc-structure-of-platform" class="nav-link active" data-scroll-target="#structure-of-platform">Structure of platform</a></li>
-  <li><a href="#access-and-introduction-to-r" id="toc-access-and-introduction-to-r" class="nav-link" data-scroll-target="#access-and-introduction-to-r">Access and introduction to <em>R</em></a></li>
-  <li><a href="#simple-r-exercise" id="toc-simple-r-exercise" class="nav-link" data-scroll-target="#simple-r-exercise">Simple <em>R</em> exercise</a></li>
+  <li><a href="#access-and-introduction-to-r-and-python" id="toc-access-and-introduction-to-r-and-python" class="nav-link" data-scroll-target="#access-and-introduction-to-r-and-python">Access and introduction to <em>R</em> and <em>Python</em></a></li>
+  <li><a href="#simple-exercise" id="toc-simple-exercise" class="nav-link" data-scroll-target="#simple-exercise">Simple exercise</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -280,7 +280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header><section id="structure-of-platform" class="level2"><h2 class="anchored" data-anchor-id="structure-of-platform">Structure of platform</h2>
 <p>The platform starts off with a general introduction the numerical simulation of economic models (<a href="how_to_simulate.html"><span>Chapter&nbsp;2</span></a>).</p>
 <p>After that, it jumps right into a series of macroeconomic models. These models are grouped into static and dynamic models. In static models, time plays no role and all variables adjust instantaneously. By contrast, dynamic models characterise the adjustment of variables over time.</p>
-<p>For each model, the chapters provide three main components:</p>
+<p>The model entries are largely self-contained and can be read independently of each other. For each model, the chapters provide three main components:</p>
 <ol type="1">
 <li>
 <strong>Model descriptions</strong> that concisely explain the key ideas, assumptions, and equations of each model. This helps users grasp the underlying concepts and intuition behind the models.</li>
@@ -290,19 +290,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <strong>Analytical discussions</strong> for users who are interested in delving deeper into the mathematical properties of the models.</li>
 </ol>
 <p>To further facilitate the understanding of dynamic models, <a href="intro_stability_analysis.html"><span>Chapter&nbsp;9</span></a> of the section on dynamic models begins with a general introduction into the mathematical analysis of dynamic models (this is mostly relevant for the analytical discussions of dynamic models).</p>
-</section><section id="access-and-introduction-to-r" class="level2"><h2 class="anchored" data-anchor-id="access-and-introduction-to-r">Access and introduction to <em>R</em>
+</section><section id="access-and-introduction-to-r-and-python" class="level2"><h2 class="anchored" data-anchor-id="access-and-introduction-to-r-and-python">Access and introduction to <em>R</em> and <em>Python</em>
 </h2>
-<p>All simulation codes are written in the open-source programming language <em>R</em> (a Python extension is planned). To be able to manipulate the codes on this platform on your own machine, you first need to <a href="https://rstudio-education.github.io/hopr/starting.html">download and install <em>R</em> and <em>RStudio</em></a>.</p>
-<p>Besides being free, a key advantage of <em>R</em> is its huge and growing functionality due to new user-written packages continuously being added. In addition, a large amount of learning material is freely available on the web, e.g.&nbsp;<a href="https://education.rstudio.com/learn/beginner/">here</a> and <a href="https://www.w3schools.com/r/default.asp">here</a>. However, to get started in can be best to directly delve into some of the codes on this platform and learn by doing. To this end, the following “cheatsheets” that provide a concise overview of key functions are useful:</p>
+<p>All simulation codes are written in the open-source programming language <em>R</em> (a Python extension is under construction and currently available for chapters 1, 2 and 8). To be able to manipulate the codes on this platform on your own machine, you first need to <a href="https://rstudio-education.github.io/hopr/starting.html">download and install <em>R</em> and <em>RStudio</em></a>. For Python, there are different options. One of them is to download and install <em>Spyder</em> via the <a href="https://www.anaconda.com/download">Anaconda Python distribution</a>. <em>Spyder</em> provides an interface for <em>Python</em> (like <em>RStudio</em> for <em>R</em>). If you install it via <em>Anaconda</em>, it will install <em>Python</em> automatically.</p>
+<p>Besides being free, a key advantage of both <em>R</em> and <em>Python</em> is their huge and growing functionality due to new user-written libraries and packages continuously being added. In addition, a large amount of learning material is freely available on the web, e.g.&nbsp;<a href="https://education.rstudio.com/learn/beginner/">here</a> and <a href="https://www.w3schools.com/r/default.asp">here</a> for <em>R</em> and <a href="https://www.python.org/about/gettingstarted/">here</a>, and <a href="https://www.w3schools.com/python/python_intro.asp">here</a> for <em>Python</em>. However, to get started in can be best to directly delve into some of the codes on this platform and learn by doing. To this end, the following “cheatsheets” that provide a concise overview of key functions are useful:</p>
 <ul>
 <li><p><a href="https://posit.co/wp-content/uploads/2022/10/rstudio-ide-1.pdf">R Studio Cheatsheet</a></p></li>
 <li><p><a href="https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf">Base R Cheatsheet</a></p></li>
-<li><p><a href="https://posit.co/resources/cheatsheets/">more cheatsheets here</a></p></li>
+<li><p><a href="https://posit.co/resources/cheatsheets/">more R cheatsheets here</a></p></li>
+<li><p><a href="https://res.cloudinary.com/dyd911kmh/image/upload/v1694526244/Marketing/Blog/Python_Basics_Cheat_Sheet-updated.pdf">Python Basics Cheatsheet</a></p></li>
+<li><p><a href="https://s3.amazonaws.com/assets.datacamp.com/blog_assets/PythonForDataScience.pdf">Python for Data Science Cheatsheet</a></p></li>
+<li><p><a href="https://assets.datacamp.com/blog_assets/Numpy_Python_Cheat_Sheet.pdf">Python Cheatsheet for NumPy library</a></p></li>
 </ul>
-<p>Once you have installed <em>R</em> and <em>RStudio</em>, you can play with the codes on this platform yourself by copy and pasting them into the script panel of your local <em>RStudio</em> and hitting CTRL + Enter to execute them. Don’t forget to always comment your code using the “#” symbol and to save your <em>RScript</em> to make sure your future self can seamlessness continue working on it.</p>
-<p>The following code covers some basic <em>R</em> operations.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. If you are new to <em>R</em> and are keen to get started, do the following:</p>
+<p>Once you have installed <em>R</em> or <em>Python</em>, you can play with the codes on this platform yourself by copy and pasting them into the script panel of your local interface (IDE) and hitting CTRL + Enter to execute them. Don’t forget to always comment your code using the “#” symbol and to save your scripts to make sure your future self can seamlessness continue working on it.</p>
+<p>The codes below covers some basic operations.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. If you are new to <em>R</em> or <em>Python</em> and keen to get started, do the following:</p>
 <ul>
-<li>copy the code above into the script panel of RStudio on your machine</li>
+<li>copy the codes below into the script panel of <em>RStudio</em> or <em>Spyder</em> on your machine</li>
 <li>adjust the working directory to your personal folder</li>
 <li>then run the code</li>
 <li>make sure you understand what it does</li>
@@ -452,14 +455,175 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="va">mat4</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">vec1</span>, <span class="va">vec2</span><span class="op">)</span></span>
 <span><span class="va">mat4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="simple-r-exercise" class="level2"><h2 class="anchored" data-anchor-id="simple-r-exercise">Simple <em>R</em> exercise</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">################################### Python Basics ###########################</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#In the Python script you write code and comments</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#any line starting with # is a comment and it is NOT executed</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">## First things first: set the working directory to the the folder </span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># in which your Python files are stored using: </span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># import os</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># os.setcwd("C:/yourworkingdirectory")</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># note that you need to separate folders by slashes /</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Most of what we will do relies on the library NumPy</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's load NumPy and call its commands by the prefix .np</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Load relevant libraries</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#Let's define some variables</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">#We can also assign several variables the same value at once</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> I <span class="op">=</span> R <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">#For displaying them we simply call the name of the object and </span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># execute the relevant line</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>Y</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>C</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co">#We can define new variables using existing ones</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>W <span class="op">=</span> Y <span class="op">-</span> R</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>W</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co">#Python/Numpy has a vast amount of built in functions, for example</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="bu">max</span>(<span class="dv">10</span>, <span class="dv">2</span>, <span class="dv">100</span>, <span class="op">-</span><span class="dv">3</span>)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>np.sqrt(<span class="dv">9</span>)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="bu">abs</span>(<span class="op">-</span><span class="dv">13</span>)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="co">#you can find out more about these by using the help function, </span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="co">#e.g.: help(max)</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="co">#How can you delete stuff? Use the del function</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="co">#for individual objects</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> Y, C, I, R</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="co">#You can also assign text (a string) to a variable</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>text1 <span class="op">=</span> <span class="st">'Reggaeton'</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>text2 <span class="op">=</span> <span class="st">"Bad Bunny"</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text1 <span class="op">+</span> <span class="st">' '</span> <span class="op">+</span> text2)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="co">#Python uses standard operators like +, -, *</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="co">#for exponents use **</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="op">**</span><span class="dv">2</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="co">########################### if statements and loops ######################</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="co">#sometimes we need to introduce if conditions into our code</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="co">#The syntax is</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="co">#if condition xxx:</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    <span class="co">#do something    </span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">13</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> b <span class="op">&gt;</span> a:</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"b is bigger"</span>)</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="co">#we can also define what to do in case the condition is not fulfilled</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> b <span class="op">&gt;</span> a:</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"b is bigger"</span>)</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"b not bigger"</span>)</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="co">#Next we will look at loops which are a key tool to repeat tasks such as solving</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="co">#a theoretical model to find its equilibrium.</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="co">#The basic structure is:</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">6</span>):</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i)</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Note the key role played by indentation!</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a><span class="co">#Let's use it to solve a simple Keynesian cross model of the form</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="co">#Y=C+I</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="co">#C=c0+c1Y</span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="co">#Define exogenous parameters and initialise endogenous variables</span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>c0 <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>c1 <span class="op">=</span> <span class="fl">0.8</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> C <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a><span class="co">#Use a for loop that iterates the equations 100 times to solve them</span></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">100</span>):</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>    Y <span class="op">=</span> C <span class="op">+</span> I</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>    C <span class="op">=</span> c0 <span class="op">+</span> c1 <span class="op">*</span> Y</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>Y</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a><span class="co">#correct solution is Y=(I+c0)/(1-c1)=60</span></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a><span class="co">#The loop uses the values from the previous iteration</span></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a><span class="co">#to calculate the values of the next, because it starts with assigning a value </span></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a><span class="co">#to Y and then uses that value to assign a new value to C, and in the next</span></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a><span class="co"># iteration it uses this new value for C to define a new value for Y etc.</span></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="co">########################### Data structures ##########################</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="co">#In most applications we produce outputs which do not consist of a single number.</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a><span class="co">#Often we have an entire stream of results, or we want to analyse data and have </span></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a><span class="co"># to store larger amounts of data. </span></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="co"># Python/Numpy has a variety of data structures for this purpose.</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a><span class="co">### Vectors</span></span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a><span class="co">#We can create an vector of size 3 with only zeros and fill it later </span></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a><span class="co"># (with results of our model for example). Importantly, unlike R, Python starts</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a><span class="co"># counting the elements in vector at 0 rather than 1</span></span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>vec1 <span class="op">=</span> np.zeros((<span class="dv">3</span>)) </span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a><span class="co">#we can define vectors explicitly </span></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>vec2 <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>vec3 <span class="op">=</span> np.array([<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>])</span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a><span class="co">#we can also use the sequence operator</span></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>vec4 <span class="op">=</span> np.arange(<span class="dv">1</span>, <span class="dv">11</span>)</span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a><span class="co">#and we can define the step size</span></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>vec5 <span class="op">=</span> np.arange(<span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">0.1</span>)</span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a><span class="co">#we can call specific entries using square brackets -- note how Python starts </span></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a><span class="co"># counting at 0</span></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>vec2[<span class="dv">2</span>]</span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a><span class="co">#if we want to access more elements at once</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>vec2[<span class="dv">0</span>:<span class="dv">3</span>]</span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a><span class="co">### Matrices</span></span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a><span class="co">#define a matrix: 3 rows and 2 columns, all elements equal to 0</span></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>mat1 <span class="op">=</span> np.zeros((<span class="dv">3</span>, <span class="dv">2</span>))</span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a><span class="co">#we can also fill it with specific values</span></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>mat2 <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">5</span>, <span class="dv">6</span>]])</span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a><span class="co">#access specific elements (columns,rows)</span></span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>mat2[<span class="dv">2</span>, <span class="dv">0</span>]</span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a><span class="co">#access entire rows or columns</span></span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>mat2[:, <span class="dv">0</span>]</span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a><span class="co">## Combine two column vectors in a matrix</span></span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a>mat3 <span class="op">=</span> np.column_stack((vec1, vec2))</span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a><span class="co">## Combine two row vectors in a matrix</span></span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a>mat4 <span class="op">=</span> np.row_stack((vec1, vec2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="simple-exercise" class="level2"><h2 class="anchored" data-anchor-id="simple-exercise">Simple exercise</h2>
 <p>If you further want to practice your coding skills, attempt the following exercises:</p>
 <ol type="1">
 <li>Write a loop which calculates the running sum of <span class="math inline">\(x_i=\frac{1}{i^2}\)</span> by saving each element <span class="math inline">\(\sum_{i=1}^{j}x_i\)</span> in a vector (where <span class="math inline">\(j=1,2,..,10\)</span>).</li>
 </ol>
 <p>If your code is correct, you should get the solution:</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -468,7 +632,7 @@ Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -484,7 +648,7 @@ Solution
 </ol>
 <p>If your code is correct, you should get the solution:</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -493,7 +657,7 @@ Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output cell-output-stdout">

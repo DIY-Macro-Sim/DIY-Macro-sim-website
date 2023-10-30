@@ -121,6 +121,67 @@ C_eq
 (c0+I0[])/(1-c1)
 ```
 
+```{r}
+#| echo: false
+#| output: false
+#| collapse: true
+
+library(reticulate)
+#py_install("numpy")
+
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+### Simulate Keynesian goods market model via iteration
+
+# Load NumPy library
+import numpy as np
+
+# Set the number of parameterisations that will be considered
+S = 2
+
+# Set fixed parameter values
+c0 = 3
+c1 = 0.8
+
+# Create numpy arrays in which equilibrium solutions from different parameterisations will be stored
+Y_eq = np.zeros(S)
+C_eq = np.zeros(S)
+
+# Create a numpy array with the parameter that will change
+I0 = np.zeros(S)
+I0[0] = 5
+I0[1] = 6
+
+# Initialize endogenous variables at an arbitrary positive value
+Y = C = 1
+
+# Solve this system numerically through 1000 iterations based on the initialization
+for i in range(S):
+    for iteration in range(1000):
+        Y = C + I0[i]
+        C = c0 + c1 * Y
+
+    # Save results for different parameterisations in the numpy arrays
+    Y_eq[i] = Y
+    C_eq[i] = C
+
+# Display solutions
+Y_eq
+C_eq
+
+# Verify solutions for Y
+(c0+I0)/(1-c1)
+```
+
+:::
+
 Let's break this code down a little bit:
 
 -   set the number of scenarios $S$, define parameter values, and create vectors of length $S$ in which results for endogenous variables will be stored
@@ -187,6 +248,39 @@ Y_eq
 (c0+I0[])/(1-c1)
 ```
 
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+### Parameterisation for which method of iteration fails
+c1 = 1.2  
+
+# Initialize endogenous variables at an arbitrary positive value
+Y = C = 1
+
+# Solve this system numerically through 1000 iterations based on the initialization
+for i in range(S):
+    for iteration in range(1000):
+        Y = C + I0[i]
+        C = c0 + c1 * Y
+
+    # Save results for different parameterisations in the numpy arrays
+    Y_eq[i] = Y
+    C_eq[i] = C
+
+# Display solutions for Y_eq
+Y_eq
+
+# Verify solutions for Y
+(c0+I0)/(1-c1)
+
+```
+
+:::
+
 #### A dynamic model (in discrete time)
 
 Consider now a dynamic version of the Keynesian goods market model that was proposed by Paul @Samuelson1939. In this model, investment ($I$) becomes endogenous and reacts to the change in consumption. Aggregate demand now also contains government spending ($G$), which is assumed to be exogenous. Consumption ($C$) responds to changes in income ($Y$) with a lag:
@@ -251,6 +345,59 @@ Y[,Q]
 # Verify solutions for Y
 (G0[,Q])/(1-c1)
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+### Simulate Samuelson 1939
+
+# Set the number of periods for which you want to simulate
+Q = 100
+
+# Set the number of parameterisations that will be considered
+S = 2
+
+# Set the period in which a shock or shift in 'an' will occur
+s = 15
+
+# Set fixed parameter values
+c1 = 0.8
+beta = 0.6
+
+# Construct (S x Q) matrices in which values for different periods will be stored; initialize at 1
+C = np.ones((S, Q))
+I = np.ones((S, Q))
+
+# Construct matrices for exogenous variables or parameters that will change 
+# over time to capture different scenarios, initialise at 5
+G0 = np.ones((S, Q))*5 
+
+# Set parameter values for different scenarios
+G0[1, s:Q] = 6  # scenario: permanent increase in government spending from I0=5 to I0=6 from period s=15 onwards
+
+# Solve this system recursively based on the initialization
+for i in range(S):
+    for t in range(1, Q):
+        C[i, t] = c1 * (C[i, t - 1] + I[i, t - 1] + G0[i, t - 1])
+        I[i, t] = beta * (c1 * (C[i, t - 1] + I[i, t - 1] + G0[i, t - 1]) - 
+                          C[i, t - 1])
+
+# Calculate output
+Y = C + G0 + I
+
+# Display the solutions at time Q
+Y[:, Q - 1]
+
+# Verify solutions for Y
+(G0[:,Q - 1])/(1-c1)
+
+```
+
+:::
 
 The code solves the recursive system numerically through iteration. Let's again break down what the code does:
 
@@ -319,6 +466,66 @@ legend("right", legend=c("C", "I"),
        lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
 ```
 
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+#### Plots
+
+# Load matplot library
+import matplotlib.pyplot as plt
+
+# Bar chart of different equilibrium solutions of Samuelson (1939) model
+scenario_labels = ["Baseline", "Increase in G0"]
+plt.bar(scenario_labels, Y[:, Q - 1])
+plt.xlabel("Scenario")
+plt.ylabel("Y")
+plt.title("Figure 1: Output")
+plt.show()
+
+# Time series chart of output dynamics in Samuelson (1939) model
+plt.plot(range(1, Q), Y[0, 0:Q - 1], color='black', linewidth=2, linestyle='-')
+plt.xlabel("Time")
+plt.ylabel("Y")
+plt.title("Figure 2: Output", fontsize=10)
+plt.show()
+
+# Time series chart of output dynamics for different scenarios in Samuelson 
+#(1939) model
+plt.plot(range(1, Q), Y[0, 0:Q - 1], color='black', linewidth=1, linestyle='-')
+plt.plot(range(1, Q), Y[1, 0:Q - 1], color='black', linewidth=1, linestyle='--')
+plt.xlabel("Time")
+plt.ylabel("Y")
+plt.title("Figure 3: Output under different scenarios", fontsize=10)
+plt.legend(["Baseline", "Increase in G0"], loc='lower right')
+plt.show()
+
+# Time series chart of Samuelson (1939) model with separate axes for consumption 
+# and investment
+fig, ax1 = plt.subplots()
+ax1.plot(range(1, Q), C[0, 0:Q - 1], color='black', linewidth=2, linestyle='-', 
+         label='C')
+ax1.set_xlabel("Time")
+ax1.set_ylabel("C", color='black')
+ax1.tick_params(axis='y', labelcolor='black')
+ax2 = ax1.twinx()
+ax2.plot(range(1, Q), I[0, 0:Q - 1], color='black', linewidth=2, linestyle='--',
+         label='I')
+ax2.set_ylabel("I", color='black')
+ax2.tick_params(axis='y', labelcolor='black')
+plt.title("Figure 4: Consumption and Investment", fontsize=10)
+lines, labels = ax1.get_legend_handles_labels()
+lines2, labels2 = ax2.get_legend_handles_labels()
+ax2.legend(lines + lines2, labels + labels2, loc='right')
+plt.show()
+
+```
+
+:::
+
 ## How to create a directed graph of a model
 
 Another perspective on a model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.
@@ -371,6 +578,50 @@ plot(dg, main="Figure 4: Directed graph of Samuelson model", vertex.size=20, ver
      edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
      vertex.frame.color="NA", margin=-0.08)
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+#Load relevant libraries
+import networkx as nx
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Construct auxiliary Jacobian matrix for 4 variables
+  # endogenous: (1) Y, (2) C, (3) I
+  # exogenous: (4) G0
+# where non-zero elements in regular Jacobian are set to 1 and zero elements are
+# unchanged
+M_mat = np.array([[0, 1, 1, 1],
+         [1, 0, 0, 0],
+         [0, 1, 0, 0],
+         [0, 0, 0, 0]])
+
+# Create adjacency matrix from transpose of auxiliary Jacobian and add column names
+A_mat = M_mat.transpose()
+
+# Create the graph from the adjacency matrix
+G = nx.DiGraph(A_mat)
+
+# Define node labels
+nodelabs = {0: "Y", 1: "C", 2: "I", 3: "$G_0$"}
+
+# Plot the directed graph
+pos = nx.spring_layout(G, seed=42)  
+nx.draw(G, pos, with_labels=True, labels=nodelabs, node_size=500, node_color='lightblue', font_size=10)
+edge_labels = {(u, v): '' for u, v in G.edges}
+nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_color='black')
+plt.title("Figure 5: Directed graph of Samuelson model", fontsize=12)
+plt.axis('off')
+plt.show()
+
+```
+
+:::
 
 Broadly speaking, three types of nodes are possible:
 
@@ -434,5 +685,52 @@ I0=matrix(data=5, nrow=S, ncol=Q)
 (c0+I0[1,Q])/(1-c1)
 Y[1,Q]
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+### Simulate continuous time version of Keynesian goods market model
+
+# Load NumPy
+import numpy as np
+
+# Set number of periods for which you want to simulate
+Q = 800
+
+# Set number of parameterizations that will be considered
+S = 1
+
+# Set fixed parameter values
+c0 = 3
+c1 = 0.8
+k = 8
+delta = 0.01
+
+# Initialize matrices to store values for different periods
+Y = np.ones((S, Q))
+C = np.ones((S, Q))
+
+# Initialize the matrix for the exogenous variable
+I0 = np.full((S, Q), 5)
+
+# Solve this system recursively based on the initialization
+for t in range(1, Q):
+    for iterations in range(1000):
+        Y[0, t] = Y[0, t - 1] + delta * (k * (C[0, t - 1] + I0[0, t - 1] - Y[0, t - 1]))
+        C[0, t] = c0 + c1 * Y[0, t]
+
+# Verify the solution for Y at time Q
+(c0 + I0[0, Q - 1]) / (1 - c1)
+
+Y[0,Q - 1]
+
+```
+
+:::
+
 
 ## References
