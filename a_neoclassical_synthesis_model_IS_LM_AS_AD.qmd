@@ -146,14 +146,7 @@ T0=1   # tax revenues
 m0=6   # liquidity preference
 
 # Initialise endogenous variables at some arbitrary positive value 
-Y=1
-C=1
-I=1
-r=1
-P=1
-w=1
-N=1
-W=1
+Y = C = I = r = P = w = N = W = 1
 
 #Solve this system numerically through 1000 iterations based on the initialisation
 
@@ -206,6 +199,115 @@ for (i in 1:S){
 }
 
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+import numpy as np
+
+# Set the number of scenarios (including baseline)
+S = 6
+
+# Create arrays to store equilibrium solutions from different parameterizations
+Y_star = np.empty(S)  # Income/output
+C_star = np.empty(S)  # Consumption
+I_star = np.empty(S)  # Investment
+r_star = np.empty(S)  # Real interest rate
+N_star = np.empty(S)  # Employment
+U_star = np.empty(S)  # Unemployment rate
+P_star = np.empty(S)  # Price level
+w_star = np.empty(S)  # Real wage
+W_star = np.empty(S)  # Nominal wage
+
+# Set exogenous variables that will be shifted
+i0 = np.zeros(S)  # Autonomous investment (animal spirits)
+M0 = np.zeros(S)  # Money supply
+G0 = np.zeros(S)  # Government spending
+P0 = np.zeros(S)  # Expected price level
+A = np.empty(S)  # Exogenous productivity
+
+# Construct different scenarios
+# baseline
+A[:] = 2
+i0[:] = 2
+M0[:] = 5
+G0[:] = 1
+P0[:] = 1
+
+# scenario 2: fall in animal spirits
+i0[1] = 1.5
+
+# scenario 3: increase in productivity
+A[2] = 3
+
+# scenario 4: increase in expected price level
+P0[3] = 1.5
+
+# scenario 5: monetary expansion
+M0[4] = 6
+
+# scenario 6: fiscal expansion
+G0[5] = 2
+
+# Set constant parameter values
+c0 = 2  # Autonomous consumption
+c1 = 0.6  # Sensitivity of consumption with respect to income (marginal propensity to consume)
+i1 = 0.1  # Sensitivity of investment with respect to the interest rate
+m1 = 0.2  # Sensitivity of money demand with respect to income
+m2 = 0.4  # Sensitivity of money demand with respect to interest rate
+Nf = 5  # Full employment/labor force
+K = 4  # Exogenous capital stock
+a = 0.3  # Capital elasticity of output
+b = 0.4  # Household preference for leisure
+T0 = 1  # Tax revenues
+m0 = 6  # Liquidity preference
+
+# Initialize endogenous variables at some arbitrary positive value
+Y = C = I = r = P = w = N = W = 1
+
+# Solve this system numerically through 1000 iterations based on the initialization
+for i in range(S):
+    for iterations in range(1000):
+        # Model equations
+
+        # Goods market equilibrium
+        Y = C + I + G0[i]
+
+        # Consumption demand
+        C = c0 + c1 * (Y - T0)
+
+        # Investment demand
+        I = i0[i] - i1 * r
+
+        # Money market, solved for interest rate
+        r = (m0 - (M0[i] / P)) / m2 + m1 * Y / m2
+
+        # Unemployment rate
+        U = 1 - N / Nf
+
+        # Real wage
+        w = A[i] * (1 - a) * (K ** a) * (N ** (-a))
+
+        # Nominal wage
+        W = (P0[i] * b * C) / (1 - (N / Nf))
+
+        # Price level
+        P = W / w
+
+        # Employment
+        N = (Y / (A[i] * (K ** a))) ** (1 / (1 - a))
+
+    # Save results for different parameterizations in the arrays
+    Y_star[i] = Y
+    C_star[i] = C
+    I_star[i] = I
+```
+
+::: 
 
 ### Plots
 
@@ -266,6 +368,27 @@ barplot(w_star, ylab="w", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:
 
 ```
 
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Plot results (here only for output) 
+import matplotlib.pyplot as plt
+   
+scenario_names = ["1:Baseline", "2:Fall animal spirits", "3:Rise product.",
+                  "4:Rise exp. price", "5:Monetary expan.", "6:Fiscal expan."]
+
+plt.bar(scenario_names, Y_star)
+plt.ylabel('Y')
+plt.xticks(scenario_names, rotation=45, fontsize=6)
+plt.show()
+```
+
+::: 
+
 ## Directed graph
 
 Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$. 
@@ -311,6 +434,76 @@ plot(dg, main="", vertex.size=20, vertex.color="lightblue",
      vertex.frame.color="NA", margin=-0.08)
 
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+    
+# Load relevant libraries
+import networkx as nx
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+# Define the Jacobian matrix
+M_mat = np.array([
+    [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
+    [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+])
+
+# Create adjacency matrix from transpose of auxiliary Jacobian and add column names
+A_mat = M_mat.transpose()
+
+# Create the graph from the adjacency matrix
+G = nx.DiGraph(A_mat)
+
+
+# Define node labels
+nodelabs = {
+    0: "Y",
+    1: "C",
+    2: "I",
+    3: r"$G_0$",
+    4: r"$T_0$",
+    5: "r",
+    6: "w",
+    7: "W",
+    8: "P",
+    9: r"$M_0$",
+    10: "N",
+    11: r"$i_0$",
+    12: "A",
+    13: r"$P_0$",
+    14: r"$M_d$",
+}
+
+# Plot the directed graph
+pos = nx.spring_layout(G, seed=43)  
+nx.draw(G, pos, with_labels=True, labels=nodelabs, node_size=300, node_color='lightblue', 
+        font_size=10)
+edge_labels = {(u, v): '' for u, v in G.edges}
+nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_color='black')
+plt.axis('off')
+plt.show()
+```
+
+:::
 
 In @fig-dg-neoclmacro, it can be seen that productivity ($A$), taxes ($T_0$), government spending ($G_0$), animal spirits ($i_0$), the money supply ($M_0$), and the expected price level ($P_0$) are the key exogenous variables of the model. All other variables are endogenous and form a closed loop (or cycle) within the system. The lower-left part of the graph captures the goods market (IS): aggregate demand (consumption, investment, and government spending) determines output. The upper part of the graph contains the labour market, which determines the price level. Finally, the lower-right part of the graph represents the money market (LM), which determines the interest rate. There is a two-way feedback between the goods market and the money market as output impacts the demand for money, and the interest rate affects investment. There is also a feedback from output into the labour market through employment. The labour market feeds into the money market via its effect on prices and thus money demand, which then also feeds into the goods market through the interest rate.  
 

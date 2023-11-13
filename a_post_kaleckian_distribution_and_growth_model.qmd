@@ -171,6 +171,119 @@ for (i in 1:S){
 
 ```
 
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+import numpy as np
+
+# Set number of scenarios (including baselines)
+S = 6
+
+# Create arrays to store equilibrium solutions for different parameterizations
+u_star = np.zeros(S)
+g_star = np.zeros(S)
+s_star = np.zeros(S)
+c_star = np.zeros(S)
+r_star = np.zeros(S)
+
+# Set exogenous variables whose parameterization changes across regimes
+g0 = np.zeros(S)
+sw = np.zeros(S)
+h = np.zeros(S)
+g1 = np.zeros(S)
+
+# Construct different scenarios across 3 regimes
+# Regime 1: WLD/WLG
+g0[0] = 0.02
+g1[0] = 0.1
+h[0] = 0.2
+
+# Regime 2: Increase in profit share in WLD/WLG regime
+g0[1] = 0.02
+g1[1] = 0.1
+h[1] = 0.3
+
+# Regime 3: WLD/PLG
+g0[2] = 0.02
+g1[2] = 0.08
+h[2] = 0.2
+
+# Regime 4: Increase in profit share in WLD/PLG regime
+g0[3] = 0.02
+g1[3] = 0.08
+h[3] = 0.3
+
+# Regime 5: PLD/PLG
+g0[4] = -0.01
+g1[4] = 0.1
+h[4] = 0.2
+
+# Regime 6: Increase in profit share in PLD/PLG regime
+g0[5] = -0.01
+g1[5] = 0.1
+h[5] = 0.3
+
+# Set constant parameter values
+v = 3    # capital-to-potential output ratio
+g2 = 0.1 # sensitivity of investment with respect to profit share
+sp = 0.9 # propensity to save out of profits
+sw = 0.3 # propensity to save out of wages
+
+# Check Keynesian stability condition for all scenarios
+for i in range(S):
+    print(((sw + (sp - sw) * h[i]) * (1 / v) - g1[i]) > 0)
+    
+# Check demand and growth regime for 3 baseline scenarios
+for i in [0, 2, 4]:
+    print(f"Parameterization {i+1} yields:")
+    
+    # Check demand regime
+    if g2 * (sw / v - g1[i]) - g0[i] * (sp - sw) / v < 0:
+        print("Wage-led demand regime")
+    else:
+        print("Profit-led demand regime")
+    
+    # Check growth regime
+    if g1[i] * (g2 * (sw / v - g1[i]) - g0[i] * (sp - sw) / v) + g2 * (((sw + (sp - sw) * h[i]) * v**(-1) - g1[i])**2) < 0:
+        print("Wage-led growth regime")
+    else:
+        print("Profit-led growth regime")
+
+# Initialize endogenous variables at an arbitrary positive value
+g = r = c = u = s = 1
+
+# Solve the system numerically through 1000 iterations based on the initialization
+for i in range(S):
+    for iterations in range(1000):
+        # (1) Profit rate
+        r = (h[i] * u) / v
+
+        # (2) Saving
+        s = (sw + (sp - sw) * h[i]) * (u / v)
+
+        # (3) Consumption
+        c = u / v - s
+
+        # (4) Investment
+        g = g0[i] + g1[i] * u + g2 * h[i]
+
+        # (5) Rate of capacity utilization
+        u = v * (c + g)
+
+    # Save results for different parameterizations in vectors
+    u_star[i] = u
+    g_star[i] = g
+    r_star[i] = r
+    s_star[i] = s
+    c_star[i] = c
+```
+
+:::
+
 ### Plots
 
 Figures @fig-utilisation-pkdg - @fig-profit-rate-pkdg depict the response of the model's key endogenous variables to changes in the profit share. In the first case of a wage-led demand and growth regime (WLD/WLG), investment is equally sensitive to a change in the rate of capacity utilisation ($g_1$) and a change in the profit share ($g_2$). A rise in the profit share reduces consumption, which reduces the rate of capacity utilisation and the rate of growth. This is despite a positive effect on the profit rate.^[If the negative effect on the rate of capacity utilisation was stronger, the profit rate could fall as well. See the analytical discussion for a formal derivation of the condition under which this may happen.] 
@@ -218,6 +331,30 @@ barplot(r_star, ylab="r", names.arg=c("1:baseline WLD/WLG", "2:rise prof share",
 
 ```
 
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Plot results (here only for rate of capacity utilisation) 
+import matplotlib.pyplot as plt    
+
+# Scenario labels
+scenario_names = ["1a: baseline WLD/WLG", "1b: rise prof share", "2a: baseline WLD/PLG", "2b: rise prof share", "3a: baseline PLD/PLG", "3b: rise prof share"]
+
+# Bar plot for u_star
+plt.bar(scenario_names, u_star)
+plt.ylabel('u')
+plt.xticks(scenario_names, rotation=45, fontsize=6)
+plt.show()
+
+```
+
+:::
+
 ## Directed graph
 
 Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$. 
@@ -255,6 +392,50 @@ plot(dg, main="", vertex.size=20, vertex.color="lightblue",
      vertex.frame.color="NA", margin=-0.08)
 
 ```
+
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Load relevant libraries
+import networkx as nx
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Define the Jacobian matrix
+M_mat = np.array([[0,1,1,0,0,0],
+                  [0,0,0,0,0,0],
+                  [0,0,0,0,1,1],
+                  [0,1,1,0,0,0],
+                  [0,0,1,1,0,0],
+                  [0,1,1,0,0,0],
+                 ])
+
+# Create adjacency matrix from transpose of auxiliary Jacobian and add column names
+A_mat = M_mat.transpose()
+
+# Create the graph from the adjacency matrix
+G = nx.DiGraph(A_mat)
+
+# Define node labels
+nodelabs = {0: "r", 1: "h", 2: "u", 3: "s", 4: "c", 5: "g"}
+
+# Plot the directed graph
+pos = nx.spring_layout(G, seed=43)  
+nx.draw(G, pos, with_labels=True, labels=nodelabs, node_size=300, node_color='lightblue', 
+        font_size=10)
+edge_labels = {(u, v): '' for u, v in G.edges}
+nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_color='black')
+plt.axis('off')
+plt.show()
+
+```
+
+:::
 
 In Figure @fig-dg-pkdg, it can be seen that the profit share ($h$) is the key exogenous variable of the model.^[Other important exogenous variables or parameters that may shift but are not depicted here are animal spirits ($g_0$) or the saving propensities ($s_W, s_\Pi$). See @hein_distribution_2014, chap. 7.2.2, for a detailed discussion of their effects.] Consumption ($c$), saving ($s$), investment ($g$), and the rate of utilisation ($u$) form a closed loop (or cycle) within the system. The profit share affects both saving and investment, which in turn affect consumption and the rate of capacity utilisation. The profit rate is a residual variable (also called a `sink') in this model.
 
@@ -320,5 +501,28 @@ for (i in 1:S){
 }
 
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Utilisation rate
+for i in range(S):
+    print((g0[i]+g2*h[i])/((sw+(sp-sw)*h[i])/v-g1[i]))
+
+# Growth rate
+for i in range(S):
+    print(((g0[i]+g2*h[i])*(sw+(sp-sw)*h[i])/v)/((sw+(sp-sw)*h[i])/v-g1[i]))
+    
+# Profit rate
+for i in range(S):
+    print((g0[i]+g2*h[i])*(h[i]/v)/((sw+(sp-sw)*h[i])/v-g1[i]))
+
+```
+
+:::
 
 ## References {-}

@@ -115,7 +115,6 @@ T0[5]=0
 # scenario 6: fiscal expansion
 G0[6]=2 
 
-
 #Set constant parameter values
 c0=2   # Autonomous consumption
 c1=0.6 # Sensitivity of consumption with respect to the income (marginal propensity to consume)
@@ -126,10 +125,7 @@ a=1.5  # labour coefficient
 Nf=18  # Full employment/labour force
 
 # Initialise endogenous variables at some arbitrary positive value 
-Y=1
-C=1
-I=1
-r=1
+Y = C = I =r = N = U = 1
 
 #Solve this system numerically through 1000 iterations based on the initialisation
 
@@ -168,6 +164,104 @@ for (i in 1:S){
 }
 
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+import numpy as np
+
+# Set the number of scenarios (including baseline)
+S = 6
+
+# Create arrays to store equilibrium solutions from different parameterizations
+Y_star = np.empty(S)  # Income/output
+C_star = np.empty(S)  # Consumption
+I_star = np.empty(S)  # Investment
+r_star = np.empty(S)  # Real interest rate
+N_star = np.empty(S)  # Employment
+U_star = np.empty(S)  # Unemployment rate
+
+# Set exogenous variables that will be shifted
+i0 = np.zeros(S)  # Autonomous investment
+m0 = np.zeros(S)  # Autonomous demand for money
+M0 = np.zeros(S)  # Money supply
+G0 = np.zeros(S)  # Government spending
+T0 = np.zeros(S)  # Taxes
+
+# Baseline parameterisation
+i0[:] = 2
+m0[:] = 6
+M0[:] = 5
+G0[:] = 1
+T0[:] = 1
+
+# Construct scenarios
+# scenario 2: fall in animal spirits
+i0[1] = 1
+
+# scenario 3: increase in liquidity preference
+m0[2] = 7
+
+# scenario 4: monetary expansion
+M0[3] = 6
+
+# scenario 5: reduction in tax rate
+T0[4] = 0
+
+# scenario 6: fiscal expansion
+G0[5] = 2
+
+# Set constant parameter values
+c0 = 2  # Autonomous consumption
+c1 = 0.6  # Sensitivity of consumption with respect to income (marginal propensity to consume)
+i1 = 0.1  # Sensitivity of investment with respect to the interest rate
+m1 = 0.2  # Sensitivity of money demand with respect to income
+m2 = 0.4  # Sensitivity of money demand with respect to the interest rate
+a = 1.5  # labor coefficient
+Nf = 18  # Full employment/labor force
+
+# Initialize endogenous variables at some arbitrary positive value
+Y = C = I =r = N = U = 1
+
+# Solve this system numerically through 1000 iterations based on the initialization
+for i in range(S):
+    for iterations in range(1000):
+        # Model equations
+
+        # Goods market equilibrium
+        Y = C + I + G0[i]
+
+        # Consumption demand
+        C = c0 + c1 * (Y - T0[i])
+
+        # Investment demand
+        I = i0[i] - i1 * r
+
+        # Money market, solved for interest rate
+        r = (m0[i] - M0[i]) / m2 + m1 * Y / m2
+
+        # Employment
+        N = a * Y
+
+        # Unemployment rate
+        U = 1 - N / Nf
+
+    # Save results for different parameterizations in the arrays
+    Y_star[i] = Y
+    C_star[i] = C
+    I_star[i] = I
+    r_star[i] = r
+    N_star[i] = N
+    U_star[i] = U
+    
+
+```
+
+::: 
 
 ### Plots
 
@@ -214,17 +308,29 @@ barplot(C_star, ylab="C", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:
 ```{r islm6}
 #| label: fig-N
 #| fig-cap: Employment
-# barplot(N_star, ylab="N", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.",
-#                                       "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."))
+barplot(N_star, ylab="N", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.", "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."), cex.names = 0.6)
 ```
 
-###  Calculate equilibrium fiscal multiplier
+::: {.callout-note collapse="true" title="Python code"}
 
-```{r islm8}
-Y_star[6]-Y_star[1] # numerical approach
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
 
-m2/((1-c1)*m2+i1*m1) # analytical approach
+# Plot results (here only for output)    
+import matplotlib.pyplot as plt
+
+scenario_names = ["1:Baseline", "2:Fall animal spirits", "3:Rise liq. pref.",
+                  "4:Monetary exp.", "5:Tax cut", "6:Fiscal exp."]
+
+plt.bar(scenario_names, Y_star)
+plt.ylabel('Y')
+plt.xticks( scenario_names, rotation=45, fontsize=6)
+plt.show()
 ```
+
+::: 
 
 ## Directed graph
 
@@ -268,6 +374,68 @@ plot(dg, main="", vertex.size=20, vertex.color="lightblue",
      vertex.frame.color="NA", margin=-0.08)
 ```
 
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+    
+# Load relevant libraries
+import networkx as nx
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+# Define the auxiliary Jacobian matrix
+M_mat = np.array([
+    [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0]
+])
+
+# Create adjacency matrix from transpose of auxiliary Jacobian and add column names
+A_mat = M_mat.transpose()
+
+# Create the graph from the adjacency matrix
+G = nx.DiGraph(A_mat)
+
+
+# Define node labels
+nodelabs = {
+    0: "Y",
+    1: "C",
+    2: "I",
+    3: r"$G_0$",
+    4: r"$T_0$",
+    5: "r",
+    6: r"$M_0$",
+    7: "N",
+    8: r"$i_0$",
+    9: r"$m_0$",
+    10: r"$M_d$"
+}
+
+# Plot the directed graph
+pos = nx.spring_layout(G, seed=43)  
+nx.draw(G, pos, with_labels=True, labels=nodelabs, node_size=300, node_color='lightblue', 
+        font_size=10)
+edge_labels = {(u, v): '' for u, v in G.edges}
+nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_color='black')
+plt.axis('off')
+plt.show()
+```
+
+:::
+
 ## Analytical discussion
 
 To obtain the IS-curve, substitute @eq-islmC - @eq-islmT into @eq-islmY and solve for $Y$:
@@ -301,5 +469,28 @@ From this, the following results can be obtained:
 
 - The equilibrium multiplier $\left[\frac{m_2}{(1-c_1)m_2+i_1m_1}\right]$ is smaller than the aggregate demand multiplier $\left(\frac{1}{1-c_1}\right)$ due to the positive effect on the interest rate and the corresponding negative effect investment ($i_1m_1$). This is the crowding out mechanism.
 
+
+###  Calculate equilibrium fiscal multiplier
+
+```{r islm8}
+Y_star[6]-Y_star[1] # numerical approach
+
+m2/((1-c1)*m2+i1*m1) # analytical approach
+```
+
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+    
+Y_star[5]-Y_star[0] # numerical approach
+
+m2/((1-c1)*m2+i1*m1) # analytical approach
+```
+
+:::
 
 ## References {-}

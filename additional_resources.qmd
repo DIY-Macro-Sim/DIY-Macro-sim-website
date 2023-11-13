@@ -10,5 +10,8 @@ Below you can find some related free online resources for macroeconomic model si
 - [Marco Veronese Passarella's website](https://www.marcopassarella.it/en/teaching-2/) provides *R* codes for most chapters of [Monetary Economics: An Integrated Approach to Credit, Money, Income, Production and Wealth](https://link.springer.com/book/10.1057/9780230626546) by Wynne Godley and Marc Lavoie, and more
 - [SFC Models](https://sfc-models.net/) provides resources on stock-flow consistent modelling
 
+## Agent-Based Modelling
+- [Alessandro Caiani's website](https://sites.google.com/view/alessandro-caiani/teaching?authuser=0) provides *R* codes for simple agent-based models, including those in the introductory book [Economics with Heterogeneous Interacting Agents: A Practical Guide to Agent-Based Modeling](https://link.springer.com/book/10.1007/978-3-319-44058-3) by Alessandro Caiani, Alberto Russo, Antonio Palestrini and Mauro Gallegati
+
 ## Coding
 - [Coding for Economists](https://aeturrell.github.io/coding-for-economists/intro.html) provides a guide for coding in *Python*

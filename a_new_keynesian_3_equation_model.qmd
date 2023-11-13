@@ -32,7 +32,7 @@ $$ {#eq-nk_r}
 
 where $y$, $A$, $r$, $\pi$, $y_e$, $r_s$, and $\pi^T$ are real output, autonomous demand (times the multiplier), the real interest rate, inflation, equilibrium output, the stabilising real interest rate, and the inflation target, respectively.
 
-@eq-nk_y is the IS curve or goods market equilibrium condition. Aggregate output adjusts to the level of aggregate demand, which is given by autonomous demand (times the multiplier) and a component that is negatively related to the (lagged) real interest rate via households' saving ($a_1>0$). @eq-nk_pi is the Phillips curve. It is assumed that inflation is driven by adaptive expectations ($E[\pi_{t+1}]=\pi_{t-1}$) and positively related to the output gap $(y_t-y_e)$, i.e. $a_2>0$. By @eq-nk_rs, the stabilising real interest rate is that real interest rate that is consistent with equilibrium output ($y_e=A -a_1r_s$). Finally, the interest rate rule in @eq-nk_r specifies the real interest rate the central bank needs to set to minimise its loss function (see @sec-analytical below for a derivation). The parameter $a_3$ is a composite one given by $a_3 = \frac{1}{a_1(\frac{1}{a_2 b} + a_2)} >0$. Although the central bank only sets the nominal interest rate \$i = r + E\[\pi\_{t+1}\]\$\$ directly, the fact that expected inflation is predetermined in every period allows it to indirectly control the real interest rate.
+@eq-nk_y is the IS curve or goods market equilibrium condition. Aggregate output adjusts to the level of aggregate demand, which is given by autonomous demand (times the multiplier) and a component that is negatively related to the (lagged) real interest rate via households' saving ($a_1>0$). @eq-nk_pi is the Phillips curve. It is assumed that inflation is driven by adaptive expectations ($E[\pi_{t+1}]=\pi_{t-1}$) and positively related to the output gap $(y_t-y_e)$, i.e. $a_2>0$. By @eq-nk_rs, the stabilising real interest rate is that real interest rate that is consistent with equilibrium output ($y_e=A -a_1r_s$). Finally, the interest rate rule in @eq-nk_r specifies the real interest rate the central bank needs to set to minimise its loss function (see @sec-analytical below for a derivation). The parameter $a_3$ is a composite one given by $a_3 = \frac{1}{a_1(\frac{1}{a_2 b} + a_2)} >0$. Although the central bank only sets the nominal interest rate $i = r + E[\pi_{t+1}]$ directly, the fact that expected inflation is predetermined in every period allows it to indirectly control the real interest rate.
 
 ## Simulation
 
@@ -111,6 +111,67 @@ for (i in 1:S){
 }   # close scenarios loop
 ```
 
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+import numpy as np
+
+# Set number of periods
+Q = 50
+
+# Set number of scenarios
+S = 3
+
+# Set period in which shock/shift will occur
+s = 5
+
+# Create (S x Q) arrays to store simulated data
+y = np.zeros((S, Q))  # Income/output
+p = np.zeros((S, Q))  # Inflation rate
+r = np.zeros((S, Q))  # Real interest rate
+rs = np.zeros((S, Q))  # Stabilizing interest rate
+
+# Set constant parameter values
+a1 = 0.3  # Sensitivity of inflation with respect to output gap
+a2 = 0.7  # Sensitivity of output with respect to interest rate
+b = 1     # Sensitivity of the central bank to inflation gap
+a3 = (a1 * (1 / (b * a2) + a2)) ** (-1)
+
+# Set parameter values for different scenarios
+A = np.full((S, Q), 10)  # Autonomous spending
+pt = np.full((S, Q), 2)  # Inflation target
+ye = np.full((S, Q), 5)  # Potential output
+
+A[0, s:Q] = 12  # Scenario 1: AD boost
+pt[1, s:Q] = 3  # Scenario 2: Higher inflation target
+ye[2, s:Q] = 7  # Scenario 3: Higher potential output
+
+# Initialize endogenous variables at equilibrium values
+y[:, 0] = ye[:, 0]
+p[:, 0] = pt[:, 0]
+rs[:, 0] = (A[:, 0] - ye[:, 0]) / a1
+r[:, 0] = rs[:, 0]
+
+# Simulate the model by looping over Q time periods for S different scenarios
+for i in range(S):
+    for t in range(1, Q):
+        # (1) IS curve
+        y[i, t] = A[i, t] - a1 * r[i, t - 1]
+        # (2) Phillips Curve
+        p[i, t] = p[i, t - 1] + a2 * (y[i, t] - ye[i, t])
+        # (3) Stabilizing interest rate
+        rs[i, t] = (A[i, t] - ye[i, t]) / a1
+        # (4) Monetary policy rule, solved for r
+        r[i, t] = rs[i, t] + a3 * (p[i, t] - pt[i, t])
+
+```
+
+:::
+
 ### Plots
 
 Figures 1-3 depict the response of the model's key endogenous variables to various shifts. A permanent rise in aggregate demand (scenario 1) has an instantaneous expansionary effect on output, but also pushes inflation above the target. This induces the central bank to raise the interest rate, which brings down output below equilibrium in the next period. The central bank then gradually lowers the policy rate towards its new higher equilibrium value, where inflation is again stabilised at its target level.
@@ -143,6 +204,39 @@ lines(r[2, 2:(Tmax+1)],lty=2, lwd=2)
 lines(r[3, 2:(Tmax+1)],lty=3, lwd=2)
 legend("topleft", legend=c("1: aggregate demand boost", "2: rise inflation target", "3: rise potential output"), lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+import matplotlib.pyplot as plt
+
+# Set maximum period for plots
+Tmax = 15
+
+# Plot output under different scenarios
+plt.figure(figsize=(8, 6))
+plt.plot(y[0, :Tmax + 1], label="Scenario 1: aggregate demand boost",
+         color='k', linestyle='solid', linewidth=2)
+plt.plot(y[1, :Tmax + 1], label="Scenario 2: Rise inflation target",
+         color='k', linestyle='dashed', linewidth=2)
+plt.plot(y[2, :Tmax + 1], label="Scenario 3: Rise potential output",
+         color='k', linestyle='dotted', linewidth=2)
+
+plt.title("Output under Different Scenarios")
+plt.xlabel("Time")
+plt.ylabel("y")
+plt.xlim(1, Tmax)
+plt.ylim(np.min(y), np.max(y))
+plt.legend()
+plt.show()
+
+```
+
+:::
 
 An increase in the central bank's inflation target (scenario 2) gradually raises the inflation rate to a new level. During the adjustment period, the interest rate falls, which temporarily allows for a higher level of output. However, there is no permanent expansionary effect.
 
@@ -180,6 +274,59 @@ plot(dg, main="Figure 4: Directed graph of 3-Equation model", vertex.size=20, ve
      edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
      vertex.frame.color="NA", margin=-0.08)
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Directed graph
+import networkx as nx
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+# Define the Jacobian matrix
+M_mat = np.array([[0, 0, 1, 1, 0, 0, 0],
+                  [1, 0, 0, 0, 1, 0, 0],
+                  [0, 1, 0, 0, 0, 1, 1],
+                  [0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 1, 1, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0],
+                 ])
+
+# Create adjacency matrix from transpose of auxiliary Jacobian and add column names
+A_mat = M_mat.transpose()
+
+# Create the graph from the adjacency matrix
+G = nx.DiGraph(A_mat)
+
+# Define node labels
+nodelabs = {
+    0: "y",
+    1: "π",
+    2: "r",
+    3: "A",
+    4: "yₑ",
+    5: "rₛ",
+    6: "πᵀ"
+}
+
+# Plot the directed graph
+pos = nx.spring_layout(G, seed=43)  
+nx.draw(G, pos, with_labels=True, labels=nodelabs, node_size=300, node_color='lightblue', 
+        font_size=10)
+edge_labels = {(u, v): '' for u, v in G.edges}
+nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_color='black')
+plt.axis('off')
+plt.show()
+
+```
+
+:::
 
 In Figure 4, it can be seen that aggregate demand ($A$), equilibrium output ($y_e$), and the inflation target ($\pi^T$) are the key exogenous variables of the model. All other variables are endogenous and form a closed loop (or cycle) within the system. The upper-right side of the graph represents the supply side, given by the equilibrium level of output and its effect on inflation. The upper-left side captures the demand side and its effect on actual output. The key endogenous variables, output, inflation, and the interest rate form the centre of the graph, where they stand in a triangular relationship to each other. Output drives inflation, which in turn impacts the real interest rate. The latter then feeds back into output. Structural changes in the relationship between demand and supply (e.g. excess demand) also impact the system through their effect on the stabilising interest rate ($r_s$).
 
@@ -265,5 +412,35 @@ ev=eigen(J)
 det(J)       # determinant
 sum(diag(J)) # trace
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+import numpy as np
+
+# Construct Jacobian matrix 
+J = np.array([[0, 0, -a1],
+          [0, 1, -a1 * a2],
+          [0, a3, -a1 * a2 * a3],])
+
+# Calculate eigenvalues
+eigenvalues = np.linalg.eigvals(J)
+
+# Print the resulting eigenvalues
+print(eigenvalues)
+
+# Calculate the determinant and trace of the Jacobian matrix
+determinant = np.linalg.det(J)
+trace = np.trace(J)
+print(determinant)
+print(trace)
+
+```
+
+:::
 
 ## References

@@ -357,7 +357,7 @@ y_{1t}=v_{11}c_1\lambda_1^t+v_{12}c_2\lambda_2^t + ...+ y_1^*,
 <p>This second-order polynomial solves for <span class="math inline">\(\lambda_1=2\)</span> and <span class="math inline">\(\lambda_2=1\)</span>, which will be the elements on the diagonal of <span class="math inline">\(D\)</span>.</p>
 <p>To find <span class="math inline">\(v_j\)</span>, substitute the <span class="math inline">\(\lambda_i\)</span> into <span class="math inline">\(v_j(A-\lambda_iI)=0\)</span>. For <span class="math inline">\(\lambda_1=2\)</span>, we get <span class="math inline">\(5v_{11}- 15v_{21}=0\)</span> and <span class="math inline">\(2v_{11}- 6v_{21}=0\)</span>, yielding the eigenvector <span class="math inline">\(v_1=\begin{bmatrix} 3 \\ 1\end{bmatrix}\)</span>. However, any scalar multiple of this eigenvector (other than zero) is admissible. It is thus common to normalise the eigenvectors by dividing through one of its elements. Dividing through by the first element yields the normalised eigenvector <span class="math inline">\(v_1=\begin{bmatrix} 1 \\ \frac{1}{3} \end{bmatrix}\)</span>.</p>
 <p>For <span class="math inline">\(\lambda_2=1\)</span>, this yields <span class="math inline">\(6v_{12}- 15v_{22}=0\)</span> and <span class="math inline">\(2v_{12}-5v_{22}=0\)</span> from which we can deduce that <span class="math inline">\(v_2=\begin{bmatrix} 5 \\ 2\end{bmatrix}\)</span>. The normalised eigenvector is <span class="math inline">\(v_2=\begin{bmatrix} 1 \\ 0.4 \end{bmatrix}\)</span>.</p>
-<p>Of course, you can also perform these calculations in <em>R</em>:</p>
+<p>Of course, you can also perform these calculations in <em>R</em> or <em>Python</em>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
@@ -391,6 +391,45 @@ y_{1t}=v_{11}c_1\lambda_1^t+v_{12}c_2\lambda_2^t + ...+ y_1^*,
 [2,] 0.3333333  0.4</code></pre>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define matrix</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> np.array([[<span class="dv">7</span>, <span class="op">-</span><span class="dv">15</span>],</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">2</span>, <span class="op">-</span><span class="dv">4</span>]])</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain eigenvalues and eigenvectors</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>evals, evecs <span class="op">=</span> np.linalg.eig(J)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Print eigenvalues and eigenvectors</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(evals)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(evecs)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize an array to store the normalized eigenvectors</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>evecs_norm <span class="op">=</span> np.copy(evecs)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize the eigenvectors</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>):</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    evecs_norm[:, i] <span class="op">=</span> evecs[:, i] <span class="op">/</span> evecs[<span class="dv">0</span>, i]</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Print normalized eigenvectors</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(evecs_norm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
 <p>We can now use this solution for the eigenvectors and eigenvalues to write the solution of the dynamic system as:</p>
 <p><span class="math display">\[
 \begin{bmatrix} y_{1t} \\ y_{2t} \end{bmatrix}= \begin{bmatrix} 1 &amp; 1 \\ \frac{1}{3} &amp; 0.4 \end{bmatrix} \begin{bmatrix} 2 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}^t \begin{bmatrix} 1 &amp; 1 \\ \frac{1}{3} &amp; 0.4 \end{bmatrix}^{-1} \begin{bmatrix} y_{10} \\ y_{20} \end{bmatrix} = \begin{bmatrix} 1 &amp; 1 \\ \frac{1}{3} &amp; 0.4 \end{bmatrix} \begin{bmatrix} 2 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}^t \begin{bmatrix} c_{1} \\ c_{2} \end{bmatrix}.
@@ -412,7 +451,7 @@ y_{2t} = \frac{1}{3}c_{1}2^t + 0.4c_{2}1^t.
 <p>To see the last point, observe that in <span class="math inline">\(\frac{y_{2t}}{y_{1t}}=\frac{\frac{1}{3}c_{1}2^t + 0.4c_{2}1^t}{c_{1}2^t + c_{2}1^t}\)</span> the first terms in the numerator and denominator, respectively, quickly dominate the second terms as <span class="math inline">\(t \rightarrow \infty\)</span> (you can show this formally using <a href="https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule">L’Hopital’s rule</a>). Thus, <span class="math inline">\(\frac{y_{2t}}{y_{1t}}\)</span> will approach <span class="math inline">\(\frac{1}{3}\)</span> as <span class="math inline">\(t \rightarrow \infty\)</span>.</p>
 <p>Let us simulate the system and compare the results for, say, <span class="math inline">\(t=10\)</span> with the analytical solution:</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set number of periods for which you want to simulate</span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set number of periods for which you want to simulate</span></span>
 <span><span class="va">Q</span><span class="op">=</span><span class="fl">100</span></span>
 <span></span>
 <span><span class="co"># Construct matrices in which values for different periods will be stored; initialise at 1</span></span>
@@ -431,7 +470,7 @@ y_{2t} = \frac{1}{3}c_{1}2^t + 0.4c_{2}1^t.
 <div class="cell-output-display">
 <p><img src="intro_stability_analysis_files/figure-html/stab_analysis2-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Find arbitrary constants: c=(P^-1)*y0</span></span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Find arbitrary constants: c=(P^-1)*y0</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/friendly/matlib">matlib</a></span><span class="op">)</span></span>
 <span><span class="va">y0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">y1</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span>,<span class="va">y2</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>  <span class="co"># create vector with initial conditions y0</span></span>
 <span><span class="va">c</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/matlib/man/Inverse.html">inv</a></span><span class="op">(</span><span class="va">evecs_norm</span><span class="op">)</span><span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span><span class="va">y0</span></span>
@@ -441,31 +480,95 @@ y_{2t} = \frac{1}{3}c_{1}2^t + 0.4c_{2}1^t.
 [1,]   -9
 [2,]   10</code></pre>
 </div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Compute solution manually for y2 at t=10 and compare with simulated solution</span></span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Compute solution manually for y2 at t=10 and compare with simulated solution</span></span>
 <span><span class="va">t</span><span class="op">=</span><span class="fl">10</span></span>
 <span><span class="va">evecs_norm</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">c</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">evals</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="va">t</span> <span class="op">+</span> <span class="va">evecs_norm</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">c</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">evals</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">^</span><span class="va">t</span> <span class="co"># analytical solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -3068.667</code></pre>
 </div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">y2</span><span class="op">[</span>,<span class="va">t</span><span class="op">+</span><span class="fl">1</span><span class="op">]</span> <span class="co"># simulated solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">y2</span><span class="op">[</span>,<span class="va">t</span><span class="op">+</span><span class="fl">1</span><span class="op">]</span> <span class="co"># simulated solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -3068</code></pre>
 </div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Plot dynamics of y2/y1</span></span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Plot dynamics of y2/y1</span></span>
 <span><span class="va">y2_y1</span><span class="op">=</span><span class="va">y2</span><span class="op">/</span><span class="va">y1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">y2_y1</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">50</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">"Time"</span>, ylab<span class="op">=</span><span class="st">"y2/y1"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">""</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="intro_stability_analysis_files/figure-html/stab_analysis2-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Compare y2/y1 with normalised dominant eigenvector</span></span>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Compare y2/y1 with normalised dominant eigenvector</span></span>
 <span><span class="va">y2_y1</span><span class="op">[</span>,<span class="va">Q</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3333333</code></pre>
 </div>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">evecs_norm</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">evecs_norm</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3333333</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the number of periods for simulation</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize arrays to store values for different periods</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>y1 <span class="op">=</span> np.ones(Q)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>y2 <span class="op">=</span> np.ones(Q)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve the system recursively based on the initialization</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, Q):</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    y1[t] <span class="op">=</span> J[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">*</span> y1[t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> J[<span class="dv">0</span>, <span class="dv">1</span>] <span class="op">*</span> y2[t <span class="op">-</span> <span class="dv">1</span>]</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    y2[t] <span class="op">=</span> J[<span class="dv">1</span>, <span class="dv">0</span>] <span class="op">*</span> y1[t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> J[<span class="dv">1</span>, <span class="dv">1</span>] <span class="op">*</span> y2[t <span class="op">-</span> <span class="dv">1</span>]</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot dynamics of y1</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>plt.plot(<span class="bu">range</span>(Q), y1, color<span class="op">=</span><span class="st">'b'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'y1'</span>)</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Dynamics of y1'</span>)</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the initial conditions y0</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>y0 <span class="op">=</span> np.array([y1[<span class="dv">0</span>], y2[<span class="dv">0</span>]])</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the arbitrary constants c using the normalized eigenvectors</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.linalg.inv(evecs_norm).dot(y0)</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>c</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="co">## Compute solution manually for y2 at t=10 and compare with simulated solution</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">10</span> <span class="op">+</span><span class="dv">1</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>evecs_norm[<span class="dv">1</span>, <span class="dv">1</span>] <span class="op">*</span> c[<span class="dv">0</span>] <span class="op">*</span> evals[<span class="dv">0</span>] <span class="op">**</span> t <span class="op">+</span> evecs_norm[<span class="dv">1</span>, <span class="dv">1</span>] <span class="op">*</span> c[<span class="dv">1</span>] <span class="op">*</span> evals[<span class="dv">1</span>] <span class="op">**</span> t</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>y2[t<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the ratio y2/y1</span></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>y2_y1 <span class="op">=</span> y2 <span class="op">/</span> y1</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot dynamics of y2/y1 for the first 50 periods</span></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>plt.plot(y2_y1[:<span class="dv">50</span>], color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, linestyle<span class="op">=</span><span class="st">'-'</span>)</span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'y2/y1'</span>)</span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare y2/y1 with normalised dominant eigenvector</span></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>y2_y1[Q<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>evecs_norm[<span class="dv">1</span>,<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </div>
 </div>
 <p>It can be seen that the simulated results are equivalent to the results we obtained analytically. The key takeaway is that by deriving information about the eigenvalues (and possibly eigenvectors) of the Jacobian matrix of the system, we are able to deduce knowledge of the dynamic properties of the system even without numerical simulation. However, the more complex the dynamic system, the more difficult this will be, thereby rendering numerical simulation a key tool to supplement formal analysis.</p>
@@ -497,7 +600,7 @@ J=\begin{bmatrix} c_1 &amp; c_1 \\ \beta(c_1-1) &amp; \beta c_1 \end{bmatrix}
 \]</span></p>
 <p>Thus, the two eigenvalues will be a pair of complex conjugates if <span class="math inline">\([c_1(1+\beta)]^2+4\beta c_1 &lt;0\)</span>. Suppose we have <span class="math inline">\(c_1=0.4\)</span> and <span class="math inline">\(\beta=2\)</span>. Then the discriminant will be negative and the eigenvalues will be complex:</p>
 <div class="cell">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment </span></span>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Set parameter values</span></span>
@@ -509,7 +612,7 @@ J=\begin{bmatrix} c_1 &amp; c_1 \\ \beta(c_1-1) &amp; \beta c_1 \end{bmatrix}
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1.76</code></pre>
 </div>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Find eigenvalues and eigenvectors of matrix</span></span>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Find eigenvalues and eigenvectors of matrix</span></span>
 <span><span class="co"># Define matrix</span></span>
 <span><span class="va">J</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">c1</span>, <span class="va">c1</span>,</span>
 <span>           <span class="va">beta</span><span class="op">*</span><span class="op">(</span><span class="va">c1</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>, <span class="va">beta</span><span class="op">*</span><span class="va">c1</span><span class="op">)</span>, </span>
@@ -522,9 +625,42 @@ J=\begin{bmatrix} c_1 &amp; c_1 \\ \beta(c_1-1) &amp; \beta c_1 \end{bmatrix}
 <pre><code>[1] 0.6+0.663325i 0.6-0.663325i</code></pre>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameter values</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>c1 <span class="op">=</span> <span class="fl">0.4</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if discriminant is negative</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>(c1 <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> beta))<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">4</span> <span class="op">*</span> c1 <span class="op">*</span> beta</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the matrix</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> np.array([[c1, c1],</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>              [beta <span class="op">*</span> (c1 <span class="op">-</span> <span class="dv">1</span>), beta <span class="op">*</span> c1]])</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate eigenvalues and eigenvectors</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>evals, evecs <span class="op">=</span> np.linalg.eig(J)</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(evals)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(evals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
 <p>Another way of understanding the logic behind complex numbers is through a so-called <em>Argand diagram</em> that plots the real part of the eigenvalue on the horizontal and the imaginary part on the vertical axis. By Pythagoras’ theorem, the distance of the eigenvalue from the origin will then be given by <span class="math inline">\(R=\sqrt{h^2+m^2}\)</span>. The value of <span class="math inline">\(R\)</span> (which is always real-valued and positive) is called the <em>modulus</em> (or absolute value) of the complex eigenvalue and will contain important information about the dynamic stability of economic models that exhibit complex eigenvalues.</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Draw Argand diagram</span></span>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Draw Argand diagram</span></span>
 <span></span>
 <span><span class="co"># Save real and imaginary part of complex eigenvalue</span></span>
 <span><span class="va">re</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html">Re</a></span><span class="op">(</span><span class="va">evals</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
@@ -548,6 +684,54 @@ J=\begin{bmatrix} c_1 &amp; c_1 \\ \beta(c_1-1) &amp; \beta c_1 \end{bmatrix}
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="va">re</span>, <span class="va">im</span><span class="op">+</span><span class="fl">0.05</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">lambda</span><span class="op">==</span><span class="va">h</span><span class="op">+</span><span class="va">mi</span><span class="op">)</span>, cex<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="intro_stability_analysis_files/figure-html/stab_analysis4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Draw Argand diagram</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Save real and imaginary part of complex eigenvalue</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>re <span class="op">=</span> evals[<span class="dv">0</span>].real</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>im <span class="op">=</span> evals[<span class="dv">0</span>].imag</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'h'</span>)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'m'</span>)</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Argand diagram of complex eigenvalue'</span>)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot complex eigenvalue</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>ax.plot(re, im, <span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">8</span>, color<span class="op">=</span><span class="st">'k'</span>)</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot unit circle</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>)</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>Y<span class="op">=</span> np.sqrt(<span class="dv">1</span><span class="op">-</span>X<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>ax.plot(X, Y, <span class="st">'k--'</span>)</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a ray from the origin to the eigenvalue</span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="dv">0</span>, re], [<span class="dv">0</span>, im], <span class="st">'k-'</span>)</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Add labels</span></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.1</span>, <span class="fl">0.025</span>, <span class="vs">r'$\theta$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.001</span>, <span class="fl">0.25</span>, <span class="vs">r'$R=\sqrt{h^2+m^2}$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>ax.text(re, im <span class="op">-</span> <span class="fl">0.1</span>, <span class="vs">r'$\lambda=h+mi$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </div>
 </div>
 <p>The angle <span class="math inline">\(\theta\)</span> of the line that connects the origin and the complex eigenvalue and the x-axis of the Argand diagram also contains information about the dynamics. To see this, note that the geometry of the complex number represented in the Argand diagram can also be expressed in trigonometric form: <span class="math display">\[
@@ -574,19 +758,19 @@ y_{1t}=v_{11}c_1 R_1^t(\cos\theta_1 t \pm \sin\theta_1 t \times i) +...+ y^*_1.
 </ul>
 <p>Let us simulate the Samuelson model with the parameterisation that yields complex eigenvalues to illustrate these results:</p>
 <div class="cell">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate modulus</span></span>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate modulus</span></span>
 <span><span class="va">mod</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html">Mod</a></span><span class="op">(</span><span class="va">evals</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">mod</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8944272</code></pre>
 </div>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate cycle length</span></span>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate cycle length</span></span>
 <span><span class="va">L</span><span class="op">=</span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="va">pi</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">acos</a></span><span class="op">(</span><span class="va">re</span><span class="op">/</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">L</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.520433</code></pre>
 </div>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set number of periods for which you want to simulate</span></span>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set number of periods for which you want to simulate</span></span>
 <span><span class="va">Q</span><span class="op">=</span><span class="fl">100</span></span>
 <span></span>
 <span><span class="co"># Set number of parameterisations that will be considered</span></span>
@@ -612,7 +796,56 @@ y_{1t}=v_{11}c_1 R_1^t(\cos\theta_1 t \pm \sin\theta_1 t \times i) +...+ y^*_1.
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Y</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">"Time"</span>, ylab<span class="op">=</span><span class="st">"Y"</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Figure 1: Output"</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="intro_stability_analysis_files/figure-html/stab_analysis5-1.png" class="img-fluid" width="672"></p>
+<p><img src="intro_stability_analysis_files/figure-html/stab_analysis5-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate modulus</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>mod <span class="op">=</span> <span class="bu">abs</span>(evals[<span class="dv">0</span>])</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mod)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate cycle length</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> (<span class="dv">2</span> <span class="op">*</span> math.pi) <span class="op">/</span> math.acos(re <span class="op">/</span> mod)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(L)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the number of periods and parameterizations</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize matrices for consumption, investment, and exogenous government spending</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> np.ones((S, Q))</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> np.ones((S, Q))</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>G0 <span class="op">=</span> np.full((S, Q), <span class="dv">5</span>)</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve the system recursively based on the initialization</span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, Q):</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    C[<span class="dv">0</span>, t] <span class="op">=</span> c1 <span class="op">*</span> (C[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> I[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> G0[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    I[<span class="dv">0</span>, t] <span class="op">=</span> beta <span class="op">*</span> (c1 <span class="op">*</span> (C[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> I[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> G0[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>]) <span class="op">-</span> C[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate output</span></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> C <span class="op">+</span> G0 <span class="op">+</span> I</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the time series chart of output dynamics</span></span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>plt.plot(Y[<span class="dv">0</span>, :<span class="dv">30</span>], color<span class="op">=</span><span class="st">'k'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, linestyle<span class="op">=</span><span class="st">'-'</span>)</span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time"</span>)</span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Y"</span>)</span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Figure 1: Output"</span>)</span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </div>
 </div>
 <p>You can see that the model generates cycles with a length (from peak/trough to peak/trough) of around 7.5 periods. Since the modulus is <span class="math inline">\(R&lt;1\)</span>, the system is stable and eventually converges to the equilibrium.</p>

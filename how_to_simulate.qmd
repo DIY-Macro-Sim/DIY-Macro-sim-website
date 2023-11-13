@@ -546,7 +546,8 @@ $$
 
 Finally, taking the transpose of this \`auxiliary' Jacobian matrix yields the *adjacency matrix* $A=M^T$, which is a binary matrix whose elements ($A_{ji}$) indicate whether there is a directed edge from a node $x_j$ to node $x_i$. From the adjacency matrix, the directed graph is constructed. 
 
-The code below shows this for the example of the @Samuelson1939 model.
+The code below shows this for the example of the @Samuelson1939 model.^[To create the directed graph, we rely on external libraries which you may have to install first. In *R*, this can be accomplished with `install.packages("igraph")` and in Python with `pip install networkx`. Once that library is installed, you only need to activate it in each session before you use it. In 
+*R*, you can do this by executing `library(igraph)` and in *Python* through `import networkx`.]
 
 ```{r how_to8, message=FALSE}
 ## Create directed graph

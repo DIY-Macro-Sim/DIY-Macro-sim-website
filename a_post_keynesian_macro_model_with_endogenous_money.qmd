@@ -153,19 +153,7 @@ k=0.3   # desired reserve ratio
 W0=2    # exogenous component of nominal wage
 
 # Initialise endogenous variables at some arbitrary positive value 
-Y=1 
-D=1
-ND=1
-r=1
-N=1
-U=1
-P=1
-w=1
-W=1
-i=1
-dL=1
-dM=1
-dR=1
+Y = D = ND = r = N = U = P = w = W = i = dL = dR = dM = 1
 
 #Solve this system numerically through 1000 iterations based on the initialisation
 for (j in 1:S){
@@ -303,8 +291,6 @@ k = 0.3  # desired reserve ratio
 W0 = 2  # exogenous component of nominal wage
 
 # Initialize endogenous variables at some arbitrary positive value
-#Y = D = ND = r = N = U = P = w = W = i = dL = dR = dM = np.ones(S)
-
 Y = D = ND = r = N = U = P = w = W = i = dL = dR = dM = 1
 
 # Iterate through the system
@@ -432,7 +418,6 @@ scenario_names = ["1:baseline", "2:rise credit rat.", "3:rise AD", "4:rise bank 
 
 # Create a bar plot
 plt.bar(scenario_names, Y_star)
-plt.xlabel("Scenarios")
 plt.ylabel("Y")
 plt.xticks(rotation=45, ha="right")  # Rotate x-axis labels for better readability
 plt.tight_layout()  # Ensure the labels fit within the plot area

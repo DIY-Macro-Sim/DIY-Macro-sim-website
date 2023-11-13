@@ -99,7 +99,7 @@ To find $v_j$, substitute the $\lambda_i$ into $v_j(A-\lambda_iI)=0$. For $\lamb
 
 For $\lambda_2=1$, this yields $6v_{12}- 15v_{22}=0$ and $2v_{12}-5v_{22}=0$ from which we can deduce that $v_2=\begin{bmatrix} 5 \\ 2\end{bmatrix}$. The normalised eigenvector is $v_2=\begin{bmatrix} 1 \\ 0.4 \end{bmatrix}$.
 
-Of course, you can also perform these calculations in *R*:
+Of course, you can also perform these calculations in *R* or *Python*:
 
 ```{r stab_analysis1}
 #Clear the environment 
@@ -122,6 +122,39 @@ for (i in 1:2){
 }
 evecs_norm
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+import numpy as np
+
+# Define matrix
+J = np.array([[7, -15],
+              [2, -4]])
+
+# Obtain eigenvalues and eigenvectors
+evals, evecs = np.linalg.eig(J)
+
+# Print eigenvalues and eigenvectors
+print(evals)
+print(evecs)
+
+# Initialize an array to store the normalized eigenvectors
+evecs_norm = np.copy(evecs)
+
+# Normalize the eigenvectors
+for i in range(2):
+    evecs_norm[:, i] = evecs[:, i] / evecs[0, i]
+
+# Print normalized eigenvectors
+print(evecs_norm)
+```
+
+:::
 
 We can now use this solution for the eigenvectors and eigenvalues to write the solution of the dynamic system as:
 
@@ -192,6 +225,64 @@ y2_y1[,Q]
 evecs_norm[2,1]
 ```
 
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+import matplotlib.pyplot as plt
+
+# Set the number of periods for simulation
+Q = 100
+
+# Initialize arrays to store values for different periods
+y1 = np.ones(Q)
+y2 = np.ones(Q)
+
+# Solve the system recursively based on the initialization
+for t in range(1, Q):
+    y1[t] = J[0, 0] * y1[t - 1] + J[0, 1] * y2[t - 1]
+    y2[t] = J[1, 0] * y1[t - 1] + J[1, 1] * y2[t - 1]
+
+# Plot dynamics of y1
+plt.plot(range(Q), y1, color='b', linewidth=2)
+plt.xlabel('Time')
+plt.ylabel('y1')
+plt.title('Dynamics of y1')
+plt.show()
+
+
+# Define the initial conditions y0
+y0 = np.array([y1[0], y2[0]])
+
+# Calculate the arbitrary constants c using the normalized eigenvectors
+c = np.linalg.inv(evecs_norm).dot(y0)
+c
+
+## Compute solution manually for y2 at t=10 and compare with simulated solution
+t = 10 +1
+evecs_norm[1, 1] * c[0] * evals[0] ** t + evecs_norm[1, 1] * c[1] * evals[1] ** t
+y2[t-1]
+
+
+# Calculate the ratio y2/y1
+y2_y1 = y2 / y1
+
+# Plot dynamics of y2/y1 for the first 50 periods
+plt.plot(y2_y1[:50], color='black', linewidth=2, linestyle='-')
+plt.xlabel('Time')
+plt.ylabel('y2/y1')
+plt.show()
+
+# Compare y2/y1 with normalised dominant eigenvector
+y2_y1[Q-1]
+evecs_norm[1,0]
+```
+
+:::
+
 It can be seen that the simulated results are equivalent to the results we obtained analytically. The key takeaway is that by deriving information about the eigenvalues (and possibly eigenvectors) of the Jacobian matrix of the system, we are able to deduce knowledge of the dynamic properties of the system even without numerical simulation. However, the more complex the dynamic system, the more difficult this will be, thereby rendering numerical simulation a key tool to supplement formal analysis.
 
 ## Complex eigenvalues and cycles
@@ -259,6 +350,34 @@ ev=eigen(J)
 (evals = ev$values)
 ```
 
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Set parameter values
+c1 = 0.4
+beta = 2
+
+# Check if discriminant is negative
+(c1 * (1 + beta))**2 - 4 * c1 * beta
+
+# Define the matrix
+J = np.array([[c1, c1],
+              [beta * (c1 - 1), beta * c1]])
+
+# Calculate eigenvalues and eigenvectors
+evals, evecs = np.linalg.eig(J)
+
+print(evals)
+print(evals)
+
+```
+
+:::
+
 Another way of understanding the logic behind complex numbers is through a so-called *Argand diagram* that plots the real part of the eigenvalue on the horizontal and the imaginary part on the vertical axis. By Pythagoras' theorem, the distance of the eigenvalue from the origin will then be given by $R=\sqrt{h^2+m^2}$. The value of $R$ (which is always real-valued and positive) is called the *modulus* (or absolute value) of the complex eigenvalue and will contain important information about the dynamic stability of economic models that exhibit complex eigenvalues.
 
 ```{r stab_analysis4}
@@ -285,6 +404,50 @@ text(0.1, 0.025, expression(theta), cex=1)
 text(0.1, 0.25, expression(R==sqrt(h^2+m^2)), cex=1)
 text(re, im+0.05, expression(lambda==h+mi), cex=1)
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+### Draw Argand diagram
+
+# Save real and imaginary part of complex eigenvalue
+re = evals[0].real
+im = evals[0].imag
+
+# Create a figure
+fig, ax = plt.subplots()
+ax.set_xlim(0, 1)
+ax.set_ylim(0, 1)
+ax.set_xlabel('h')
+ax.set_ylabel('m')
+ax.set_title('Argand diagram of complex eigenvalue')
+
+# Plot complex eigenvalue
+ax.plot(re, im, 'o', markersize=8, color='k')
+
+# Plot unit circle
+X = np.linspace(0, 1, 100)
+Y= np.sqrt(1-X**2)
+ax.plot(X, Y, 'k--')
+
+# Plot a ray from the origin to the eigenvalue
+ax.plot([0, re], [0, im], 'k-')
+
+# Add labels
+ax.text(0.1, 0.025, r'$\theta$', fontsize=12)
+ax.text(0.001, 0.25, r'$R=\sqrt{h^2+m^2}$', fontsize=12)
+ax.text(re, im - 0.1, r'$\lambda=h+mi$', fontsize=12)
+
+plt.show()
+
+
+```
+
+:::
 
 The angle $\theta$ of the line that connects the origin and the complex eigenvalue and the x-axis of the Argand diagram also contains information about the dynamics. To see this, note that the geometry of the complex number represented in the Argand diagram can also be expressed in trigonometric form:
 $$
@@ -353,6 +516,51 @@ plot(Y[1, 1:30],type="l", col=1, lwd=2, lty=1, xlab="Time", ylab="Y")
 title(main="Figure 1: Output", cex=0.8)
 
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Calculate modulus
+mod = abs(evals[0])
+print(mod)
+
+# Calculate cycle length
+import math
+L = (2 * math.pi) / math.acos(re / mod)
+print(L)
+
+# Set the number of periods and parameterizations
+Q = 100
+S = 1
+
+# Initialize matrices for consumption, investment, and exogenous government spending
+C = np.ones((S, Q))
+I = np.ones((S, Q))
+G0 = np.full((S, Q), 5)
+
+# Solve the system recursively based on the initialization
+for t in range(1, Q):
+    C[0, t] = c1 * (C[0, t - 1] + I[0, t - 1] + G0[0, t - 1])
+    I[0, t] = beta * (c1 * (C[0, t - 1] + I[0, t - 1] + G0[0, t - 1]) - C[0, t - 1])
+
+# Calculate output
+Y = C + G0 + I
+
+# Plot the time series chart of output dynamics
+plt.plot(Y[0, :30], color='k', linewidth=2, linestyle='-')
+plt.xlabel("Time")
+plt.ylabel("Y")
+plt.title("Figure 1: Output")
+plt.show()
+
+
+```
+
+:::
 
 You can see that the model generates cycles with a length (from peak/trough to peak/trough) of around 7.5 periods. Since the modulus is $R<1$, the system is stable and eventually converges to the equilibrium.
 

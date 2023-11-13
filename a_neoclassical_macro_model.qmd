@@ -10,52 +10,52 @@ In this short- to medium-run version of the model, prices are flexible but the c
 
 $$
 Y=AK^aN^{1-a}, \quad a\in (0,1)
-$$ {#eq-Y}
+$$ {#eq-Y_NC}
 
 $$
 w=(1-a)AK^aN^{-a}
-$$ {#eq-w}
+$$ {#eq-w_NC}
 
 $$
 N= 1-\frac{b_1}{w}, \quad b_1>0
-$$ {#eq-N} 
+$$ {#eq-N_NC} 
 
 $$
-C=\left(\frac{1}{1+b_2+b_3}\right)\left[Y- G +\frac{Y^f-G^f}{1+r} -b_1(b_2+b_3)\ln\left(\frac{b_1}{w}\right)\right], \quad b_2\in (0,1), b_3>0 
-$$ {#eq-C}  
+C=c_1\left[Y- G +\frac{Y^f-G^f}{1+r} -c_2\ln\left(\frac{b_1}{w}\right)\right]
+$$ {#eq-C_NC}  
 
 $$
 I =\left(\frac{aAN^{1-a}}{r}\right)^{\frac{1}{1-a}}
-$$ {#eq-I}
+$$ {#eq-I_NC}
 
 $$
 G= G_0
-$$ {#eq-G}
+$$ {#eq-G_NC}
 
 $$
 Y= C(r) + I(r) + G
-$$ {#eq-Y_eq}
+$$ {#eq-Y_eq_NC}
 
 $$
 r_n= r + \pi^f
-$$ {#eq-rn}
+$$ {#eq-rn_NC}
 
 $$
 M_s=M_0
-$$ {#eq-MS}
+$$ {#eq-MS_NC}
 
 $$
 M_d=\frac{b_3(1+r_n)PC}{r_n}
-$$ {#eq-MD}
+$$ {#eq-MD_NC}
 
 $$
 M = M_d(P)= M_s
-$$ {#eq-M_eq} 
+$$ {#eq-M_eq_NC} 
 
 
 where $Y$, $K$, $N$, $w$, $C$, $G$, $r$, $I$, $r_n$, $\pi$, $M_s$, $M_d$, and $P_t$ are real output, the capital stock, employment, the real wage, consumption, government expenditures, the real interest rate, investment, the nominal interest rate, inflation, the money supply, money demand, and the price level, respectively. The $f$-superscript denotes (expected) future values. For simplicity, expected future variables will be treated as exogenous.
 
-By @eq-Y, output is determined by a Cobb-Douglass production function with constant returns to scale and diminishing marginal returns to each factor (capital and labour). @eq-w is the labour demand of firms solved for the real wage. Profit maximising firms will hire workers until the real wage is equal to the marginal product of labour ($\frac{\partial Y}{\partial N}=(1-a)AK^aN^{-a}$).^[See the analytical discussion below for a derivation of equations @eq-w -@eq-I and @eq-MD from optimising microfoundations.] @eq-N specifies households' labour supply, which is positively related to the real wage. By @eq-C , consumption is positively related to current and (expected) future income,^[Households are assumed to form rational expectations. In a deterministic setting, this implies perfect foresight so that expected and actual future income coincide.] and negatively related to the real interest rate. This implies that for a higher real interest rate, households increase their saving (the supply of loanable funds). Furthermore, consumption is negatively related to current and future government expenditures. This is an implication of consumption smoothing: as households know that governments will have to repay its debts in the future through higher taxes, an increase in government expenditures today is perceived as an increase in taxes (regardless of whether the government finances its current expenditures through taxes or debt, a result that is also called 'Ricardian Equivalence').^[See the analytical discussion below for more details on Ricardian Equivalence.] @eq-I specifies investment as a negative function of the real interest rate and a positive function of productivity. By @eq-G, government expenditures are exogenous. @eq-Y_eq is the goods market equilibrium condition, which pins down the equilibrium real interest rate through the market for loanable funds. @eq-rn specifies the nominal interest rate using the well-known Fisher equation. @eq-MS says that the money supply is exogenous. By @eq-MD, households' money demand is negatively related to the nominal interest rate and positively related to consumption (capturing the transaction demand for money). Finally, @eq-M_eq is the equilibrium condition for the money market, which pins down the price level.
+By @eq-Y_NC, output is determined by a Cobb-Douglass production function with constant returns to scale and diminishing marginal returns to each factor (capital and labour). @eq-w_NC is the labour demand of firms solved for the real wage. Profit maximising firms will hire workers until the real wage is equal to the marginal product of labour $\left(\frac{\partial Y}{\partial N}=(1-a)AK^aN^{-a}\right)$.^[See the analytical discussion below for a derivation of equations @eq-w_NC -@eq-I_NC and @eq-MD_NC from optimising microfoundations.] @eq-N_NC specifies households' labour supply, which is positively related to the real wage. By @eq-C_NC, consumption is positively related to the real wage, current and (expected) future income,^[Households are assumed to form rational expectations. In a deterministic setting, this implies perfect foresight so that expected and actual future income coincide.] and negatively related to the real interest rate. The composite parameters $c_1= \left(\frac{1}{1+b_2+b_3}\right)$ and $c_2= b_1(b_2+b_3)$ stem from the weights in the household's utility function (see analytical discussion below). The consumption function implies that for a higher real interest rate, households increase their saving (the supply of loanable funds). Furthermore, consumption is negatively related to current and future government expenditures. This is an implication of consumption smoothing: as households know that governments will have to repay its debts in the future through higher taxes, an increase in government expenditures today is perceived as an increase in taxes (regardless of whether the government finances its current expenditures through taxes or debt, a result that is also called 'Ricardian Equivalence').^[See the analytical discussion below for more details on Ricardian Equivalence.] @eq-I_NC specifies investment as a negative function of the real interest rate and a positive function of productivity. By @eq-G_NC, government expenditures are exogenous. @eq-Y_eq_NC is the goods market equilibrium condition, which pins down the equilibrium real interest rate through the market for loanable funds. @eq-rn_NC specifies the nominal interest rate using the well-known Fisher equation. @eq-MS_NC says that the money supply is exogenous. By @eq-MD_NC, households' money demand is negatively related to the nominal interest rate and positively related to consumption (capturing the transaction demand for money). Finally, @eq-M_eq_NC is the equilibrium condition for the money market, which pins down the price level.
 
 ## Simulation
 
@@ -123,13 +123,7 @@ pe=0.02 # Expected rate of inflation
 Gf=1  # Future government spending
 
 # Initialise endogenous variables at arbitrary positive value
-w=1
-C=1
-I=1
-Y=C+I
-r=0.3
-N=1.3
-P=1
+w = C = I = Y = r = N = P = 1 
 
 #Solve this system numerically through 1000 iterations based on the initialisation
 for (i in 1:S){
@@ -176,6 +170,102 @@ rn_star[i]=rn
 }
 
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+import numpy as np
+
+# Set the number of scenarios (including baseline)
+S = 6
+
+# Create arrays to store equilibrium solutions from different parameterizations
+Y_star = np.empty(S)  # Income/output
+w_star = np.empty(S)  # Real wage
+C_star = np.empty(S)  # Consumption
+I_star = np.empty(S)  # Investment
+r_star = np.empty(S)  # Real interest rate
+rn_star = np.empty(S)  # Nominal interest rate
+N_star = np.empty(S)  # Employment
+P_star = np.empty(S)  # Price level
+
+# Create and parameterize exogenous variables/parameters that will be shifted
+M0 = np.zeros(S)  # Money supply
+G0 = np.zeros(S)  # Government expenditures
+A = np.zeros(S)   # Productivity
+Yf = np.zeros(S)  # Expected future income
+b1 = np.zeros(S)  # Household preference for leisure
+
+# Baseline parameterisation
+M0[:] = 5
+G0[:] = 1
+A[:] = 2
+Yf[:] = 1
+b1[:] = 0.4
+
+# Set parameter values for different scenarios
+M0[1] = 6   # Scenario 2: monetary expansion
+G0[2] = 2   # Scenario 3: fiscal expansion
+A[3] = 2.5  # Scenario 4: productivity boost
+Yf[4] = 0.2  # Scenario 5: lower expected future income
+b1[5] = 0.8  # Scenario 6: increased preference for leisure
+
+# Set constant parameter values
+a = 0.3  # Capital elasticity of output
+b2 = 0.9  # Discount rate
+b3 = 0.6  # Household preference for money
+K = 5  # Exogenous capital stock
+pe = 0.02  # Expected rate of inflation
+Gf = 1  # Future government spending
+
+# Initialize endogenous variables at arbitrary positive values
+w = C = I = Y = r = N = P = 1 
+
+# Solve this system numerically through 1000 iterations based on the initialization
+for i in range(S):
+    for iterations in range(1000):
+        # Model equations
+
+        # (1) Cobb-Douglas production function
+        Y = A[i] * (K**a) * N**(1-a)
+
+        # (2) Labour demand
+        w = A[i] * (1-a) * (K**a) * N**(-a)
+
+        # (3) Labour supply
+        N = 1 - (b1[i]) / w
+
+        # (4) Consumption demand
+        C = (1 / (1 + b2 + b3)) * (Y - G0[i] + (Yf[i] - Gf) / (1 + r) - b1[i] * (b2 + b3) * np.log(b1[i] / w))
+
+        # (5) Investment demand, solved for r
+        r = (I**(a-1)) * a * A[i] * N**(1-a)
+
+        # (6) Goods market equilibrium condition, solved for I
+        I = Y - C - G0[i]
+
+        # (7) Nominal interest rate
+        rn = r + pe
+
+        # (8) Price level
+        P = (M0[i] * rn) / ((1 + rn) * b3 * C)
+
+    # Save results for different parameterizations in the arrays
+    Y_star[i] = Y
+    w_star[i] = w
+    C_star[i] = C
+    I_star[i] = I
+    r_star[i] = r
+    N_star[i] = N
+    P_star[i] = P
+    rn_star[i] = rn
+```
+
+:::
 
 ### Plots
 
@@ -231,6 +321,30 @@ barplot(r_star, ylab="r", names.arg=c("1: Baseline", "2: Increase in M0", "3: In
 
 Finally, an increase in the preference for leisure (scenario 6) reduces labour supply and thereby output.
 
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Plot results (here for output only)
+import matplotlib.pyplot as plt
+
+scenario_names = ["1: Baseline", "2: Increase in M0", "3: Increase in G0", 
+                  "4: Increase in A", "5: Decrease in Yf", "6: Increase in b1"]
+
+# Output
+plt.bar(scenario_names , Y_star)
+plt.ylabel('Y')
+plt.xticks(rotation=45, ha="right")  # Rotate x-axis labels for better readability
+plt.tight_layout()  # Ensure the labels fit within the plot area
+plt.show()
+
+```
+
+:::
+
 
 ## Directed graph
 
@@ -242,13 +356,14 @@ Another perspective on the model's properties is provided by its directed graph.
 #| fig-cap: Directed graph
 
 ## Create directed graph
-# Construct auxiliary Jacobian matrix for 13 variables: Y	w	N	C	I	r	P	rn M0	G0 A Yf Md
+# Construct auxiliary Jacobian matrix for 13 variables: 
+# Y	w	N	C	I	r	P	rn M0	G0 A Yf Md
 # where non-zero elements in regular Jacobian are set to 1 and zero elements are unchanged
 
 M_mat=matrix(c(0,0,1,0,0,0,0,0,0,0,1,0,0,
               0,0,1,0,0,0,0,0,0,0,1,0,0,
-              0,1,0,1,0,0,0,0,0,0,0,0,0,
-              1,0,0,0,0,1,0,0,0,1,0,1,0,
+              0,1,0,0,0,0,0,0,0,0,0,0,0,
+              1,1,0,0,0,1,0,0,0,1,0,1,0,
               0,0,1,0,0,1,0,0,0,0,0,0,0,
               1,0,0,1,1,0,0,0,0,1,0,0,0,
               0,0,0,0,0,0,0,0,1,0,0,0,1,
@@ -276,6 +391,72 @@ plot(dg, main="", vertex.size=20, vertex.color="lightblue",
      vertex.frame.color="NA", margin=-0.08)
 
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Load relevant libraries
+import networkx as nx
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Construct the auxiliary Jacobian matrix
+M_mat = np.array([
+    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0],
+    [0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0]
+])
+
+# Create adjacency matrix from transpose of auxiliary Jacobian and add column names
+A_mat = M_mat.transpose()
+
+# Create the graph from the adjacency matrix
+G = nx.DiGraph(A_mat)
+
+# Define node labels
+nodelabs = {
+    0: "Y",
+    1: "w",
+    2: "N",
+    3: "C",
+    4: "I",
+    5: "r",
+    6: "P",
+    7: r"$r_n$",
+    8: r"$M_0$",
+    9: r"$G_0$",
+    10: "A",
+    11: r"$Y^f$",
+    12: r"$M_d$"
+}
+
+# Plot the directed graph
+pos = nx.spring_layout(G, seed=42)  
+nx.draw(G, pos, with_labels=True, labels=nodelabs, node_size=300, node_color='lightblue', 
+        font_size=10)
+edge_labels = {(u, v): '' for u, v in G.edges}
+nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_color='black')
+plt.axis('off')
+plt.show()
+
+
+```
+
+:::
 
 In @fig-dg , it can be seen that productivity ($A$), future income ($Y^f$), the money supply ($M_0$), and government spending ($G_0$) are the key exogenous variables of the model. All other variables are endogenous, and many of them form a closed loop (or cycle) within the system. The left part of the graph captures the supply side: the labour market simultaneously pins down the real wage and employment, which together with the exogenously level of productivity determine output. The part in the middle embodies the demand side: aggregate demand (consumption, investment, and government spending) together with a given level of output determine the real interest rate. The right part captures the nominal side of the model given by the money market, which determines the price level. Notably, while the real side of the model feeds into the money market via the nominal interest rate ($r_n$), there is not causal effect from the money market to the real side reflecting the Classical Dichotomy. 
 
@@ -309,7 +490,7 @@ $$
 a A K^{a-1} N^{1-a}-r=0 .
 $$ {#eq-FOC_I}
 
-From @eq-FOC_Nd, @eq-w for labour demand can be derived. While the capital stock is pre-determined in every period, the firm can adjust the capital stock through investment. We thus use the first-order condition for capital @eq-FOC_I to derive @eq-I for investment demand.
+From @eq-FOC_Nd, @eq-w_NC for labour demand can be derived. While the capital stock is pre-determined in every period, the firm can adjust the capital stock through investment. We thus use the first-order condition for capital @eq-FOC_I to derive @eq-I_NC for investment demand.
 
 ### The government's budget constraint
 
@@ -336,10 +517,10 @@ Thus, while the government's budget need not be balanced in every period, it wil
 
 ### The household's problem: intertemporal utility maximisation	and Ricardian Equivalence	
 
-The household derives utility from current consumption, leisure ($1-N$), future consumption $C^f$, and from holding real money balances $\left(\frac{M}{P}\right)$. We use the following log utility function that is non-separable in consumption and leisure:^[See @Garin2021, pp.280-289), on the difference between a separable and a non-separable preference specification]. Note also that for simplicity, the utility function omits the utility from future leisure.]
+The household derives utility from current consumption, leisure ($1-N$), future consumption $C^f$, and from holding real money balances $\left(\frac{M}{P}\right)$. We use the following log utility function that is non-separable in consumption and leisure:^[See @Garin2021, pp.280-289), on the differences between a separable and a non-separable preference specification. Note also that for simplicity, the utility function omits the utility from future leisure.]
 
 $$
-U=\ln (C+ b_1 \ln (1-N))+b_2 \ln \left(C^f\right)+b_3 \ln \left(\frac{M}{P}\right)
+U=\ln [C+ b_1 \ln (1-N)]+b_2 \ln \left(C^f\right)+b_3 \ln \left(\frac{M}{P}\right), \quad b_2\in (0,1); b_1, b_3>0
 $$ {#eq-U}
 
 The household's current budget constraint is given by:^[See @Garin2021[chap. 14] for a more detailed discussion of the household's budget constraints.]
@@ -399,7 +580,7 @@ $$
 M=\frac{b_3PC^f(1+r_n)}{b_2(1+r)r_n} .
 $$ {#eq-FOC_M}
 
-Substituting @eq-FOC_C, which is often also called the _Euler equation_, into @eq-FOC_Ns and @eq-FOC_M yields @eq-N for labour supply and @eq-MD for money demand, respectively. Finally, using @eq-ibc and @eq-FOC_M in the Euler @eq-FOC_C yields the consumption function @eq-C.
+Substituting @eq-FOC_C, which is often also called the _Euler equation_, into @eq-FOC_Ns and @eq-FOC_M yields @eq-N_NC for labour supply and @eq-MD_NC for money demand, respectively. Finally, using @eq-ibc and @eq-FOC_M in the Euler @eq-FOC_C yields the consumption function @eq-C_NC.
 
 
 ## References {-}
