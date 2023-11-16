@@ -224,6 +224,92 @@ for (i in 1:S){
 } # close scenarios loop
 ```
 
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+#| 
+import numpy as np
+
+# Set number of periods
+Q = 600
+
+# Set number of scenarios (including baseline)
+S = 5
+
+# Set period in which shock/shift will occur
+s = 15
+
+# Create (S x Q)-matrices that will contain the simulated data
+Y1 = np.ones((S, Q))
+Y2 = np.ones((S, Q))
+R = np.ones((S, Q))
+P = np.ones((S, Q))
+P1 = np.ones((S, Q))
+P2 = np.ones((S, Q))
+N = np.ones((S, Q))
+N1 = np.ones((S, Q))
+N2 = np.ones((S, Q))
+w = np.ones((S, Q))
+wn = np.ones((S, Q))
+K = np.ones((S, Q))
+MPL = np.ones((S, Q))
+r = np.ones((S, Q))
+p1 = np.ones((S, Q))
+p2 = np.ones((S, Q))
+N_eq = np.zeros(S)
+K_eq = np.zeros(S)
+test = np.ones((S, Q))
+
+# Set baseline parameter values
+gamma = 5
+beta = 1
+A = np.full((S, Q), 2.0)
+a1 = np.full((S, Q), 0.7)
+a2 = np.full((S, Q), 0.5)
+wS = np.full((S, Q), 0.5)
+
+# Set parameter values for different scenarios
+A[1, s:] = 3     # scenario 2: productivity boost I
+a1[2, s:] = 0.75 # scenario 3: productivity boost II
+a2[3, s:] = 0.55 # scenario 4: productivity boost III
+wS[4, s:] = 0.6  # scenario 5: higher subsistence wage
+
+# Initialize variables
+N1[:, 0] = 1
+N2[:, 0] = 1
+N[:, 0] = N1[:, 0] + N2[:, 0]
+K[:, 0] = 1
+w[:, 0] = wS[:, 0]
+Y1[:, 0] = A[:, 0] * N1[:, 0] ** (a1[:, 0])
+MPL[:, 0] = a1[:, 0] * A[:, 0] * (N1[:, 0] ** (a1[:, 0] - 1))
+
+# Simulate the model by looping over Q time periods for S different scenarios
+for i in range(S):
+    for t in range(1, Q):
+        for iterations in range(1000):
+            # Model equations
+            Y1[i, t] = A[i, t] * (N1[i, t] ** a1[i, t])
+            N1[i, t] = N[i, t] - N2[i, t]
+            MPL[i, t] = a1[i, t] * A[i, t] * (N1[i, t] ** (a1[i, t] - 1))
+            R[i, t] = Y1[i, t] * (1 - a1[i, t])
+            P1[i, t] = Y1[i, t] - R[i, t] - N1[i, t] * w[i, t]
+            p1[i, t] = 1 / MPL[i, t]
+            Y2[i, t] = (p1[i, t] / p2[i, t]) * R[i, t]
+            w[i, t] = K[i, t] / N[i, t]
+            N2[i, t] = Y2[i, t] / a2[i, t]
+            p2[i, t] = 1 / a2[i, t]
+            P2[i, t] = Y2[i, t] - (p1[i, t] / p2[i, t]) * N2[i, t] * w[i, t]
+            P[i, t] = p1[i, t] * Y1[i, t] + p2[i, t] * Y2[i, t] - p1[i, t] * R[i, t] - p1[i, t] * K[i, t]
+            K[i, t] = K[i, t - 1] + beta * (P[i, t - 1] / p1[i, t - 1])
+            N[i, t] = N[i, t - 1] + gamma * (w[i, t - 1] - wS[i, t - 1])
+
+```
+
+:::
+
 ### Plots
 
 Figures 1-4 illustrate the model's dynamics under the baseline parameterisation. Starting from below-equilibrium levels, the economy grows in terms of output, capital, and employment but then approaches what Ricardo famously called a 'stationary state'. Figure 3 shows that during the adjustment phase, the MPL declines, reflecting diminishing marginal returns in agriculture. This captures the idea that a growing economy will have to utilise less fertile lands. The real wage is driven up until it is equal to the MPL. Figure 4 shows that total profits initially increase but are then squeezed to zero as differential rents increase.
@@ -310,6 +396,42 @@ legend("bottomright", legend=c("1: baseline", "4: productivity boost III", "5: h
 
 ```
 
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+#| 
+
+# Plots (here for employment and capital accumulation only)
+
+import matplotlib.pyplot as plt
+
+# Set start and end periods for plots
+Tmax = 100
+Tmin = 6
+
+# Baseline
+# Employment and capital accumulation
+fig, ax1 = plt.subplots()
+ax1.plot(N[0, 2:(Tmax+1)], linestyle='solid', label='N', linewidth=0.8, color="black")
+
+ax1.set_xlabel('Time')
+ax1.set_ylabel('N', rotation=0)
+ax2 = ax1.twinx()
+ax2.plot(K[0, 2:Tmax], linestyle='dashed', label='K', linewidth=0.8, color="black")
+ax2.set_ylabel('K', rotation=0)
+lines, labels = ax1.get_legend_handles_labels() #collect legend in one box
+lines2, labels2 = ax2.get_legend_handles_labels()
+ax2.legend(lines + lines2, labels + labels2, loc=5)
+plt.title("Figure 1: Employment and capital accumulation")
+plt.show()
+
+```
+
+:::
+
 ## Directed graph
 
 Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.[^a_ricardian_two_sector_model-10]
@@ -361,9 +483,73 @@ V(dg)$name=c(expression(Y[1]), expression(N[1]), "MPL", "R", expression(P[1]),
 # Plot directed graph
 plot(dg, main="Figure 9: Directed graph", vertex.size=20, vertex.color="lightblue", 
      vertex.label.color="black", edge.arrow.size=0.3, edge.width=1.1, edge.size=1.2,
-     edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
+     edge.arrow.width=1.2, edge.color="black", vertex.label.cex=0.8, 
      vertex.frame.color="NA", margin=0.08)
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Create directed graph
+
+import networkx as nx
+
+# Construct auxiliary Jacobian matrix for 18 variables: 
+#(1)Y1 (2)N1 (3)MPL (4)R (5)P1 (6)p1 (7)Y2 (8)w (9)N2 (10)p2 (11)P2
+#(12)P (13)K (14)N (15)A (16)a1 (17)a2 (18)wS,
+# where non-zero elements in regular Jacobian are set to 1 and zero elements are unchanged
+
+#                    1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18
+M_mat = np.array([  [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0], #1
+                    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0], #2
+                    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0], #3
+                    [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], #4
+                    [1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], #5
+                    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], #6
+                    [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], #7
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0], #8
+                    [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0], #9
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0], #10
+                    [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], #11
+                    [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0], #12
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0], #13
+                    [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], #14
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], #15
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], #16
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], #17
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])#18
+
+# Create adjacency matrix from transpose of auxiliary Jacobian and add column names
+A_mat = M_mat.transpose()
+
+# Create the graph from the adjacency matrix
+G = nx.DiGraph(A_mat)
+
+# Define node labels
+nodelabs = {
+    0: r'$Y_1$', 1: r'$N_1$', 2: 'MPL', 3: 'R', 4: r'$P_1$', 
+    5: r'$p_1$', 6: r'$Y_2$', 7: 'w', 8: r'$N_2$', 9: r'$p_2$', 
+    10: r'$P_2$', 11: 'P', 12: 'K', 13: 'N', 14: 'A', 
+    15: r'$a_1$', 16: r'$a_2$', 17: r'$w^S$'
+}
+
+# Plot the graph
+pos = nx.spring_layout(G, k=0.9)
+nx.draw_networkx(G, pos, node_size=200, node_color="lightblue", 
+                 edge_color="black", width=1.2, arrowsize=10, 
+                 arrowstyle='->', font_size=8, font_color="black",
+                 with_labels=True, labels=nodelabs)
+plt.axis("off")
+plt.title("Figure: Directed graph of Ricardian Two-Sector Model")
+plt.show()
+
+```
+
+:::
 
 In Figure 9, it can be seen that productivity in agriculture ($A$ and $a_1$) are key exogenous variables that impact income in sector 1 and the marginal product of labour. The subsistence wage ($w^S$) is another exogenous variable that impacts the system through its effect on population dynamics. Productivity in the luxuries sector ($a_2$) feeds into the system via employment.ost other variables are endogenous and form a closed loop (or cycle) within the system. Profits are a residual. The directed graph illustrates the supply-driven nature of the agricultural sector, where (marginal) productivity determine employment and distribution. By contrast, the luxury goods sector is demand-determined with employment being the residual. Profits determine capital accumulation, which in turn provides funds that can be used to hire more agricultural workers. A higher subsistence wage reduces capital accumulation as it leaves fewer profits to be reinvested.
 
@@ -460,5 +646,59 @@ print(paste0("Scenario ", i, ":"))
 print(2-gamma*((a1[i,Q]^a1[i,Q])*A[i,Q]*(wS[i,Q]/(((a1[i,Q]^a1[i,Q])*A[i,Q])))^((2-a1[i,Q])/(1-a1[i,Q]))) + a1[i,Q]*wS[i,Q]*(wS[i,Q]/(((a1[i,Q]^a1[i,Q])*A[i,Q]))^(1/(1-a1[i,Q])))>0)
 }
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Initialize arrays for equilibrium solutions
+N_eq = np.zeros(S)
+K_eq = np.zeros(S)
+
+# Calculate equilibrium solutions
+for i in range(S):
+    N_eq[i] = (wS[i, Q-1] / ((a1[i, Q-1] ** a1[i, Q-1]) * A[i, Q-1])) ** (-1 / (1 - a1[i, Q-1]))
+    K_eq[i] = (a1[i, Q-1] ** a1[i, Q-1]) * A[i, Q-1] * (wS[i, Q-1] / ((a1[i, Q-1] ** a1[i, Q-1]) * A[i, Q-1])) ** (-a1[i, Q-1] / (1 - a1[i, Q-1]))
+
+# Compare with numerical solutions (example for N, baseline)
+N_eq[0]
+N[0,Q-1]
+
+# Construct Jacobian matrix at the equilibrium 
+J = np.array([
+    [1 - beta, beta * a1[0, Q-1] * wS[0, Q-1]],
+    [gamma * (wS[0, Q-1] / ((a1[0, Q-1] ** a1[0, Q-1]) * A[0, Q-1])) ** (1 / (1 - a1[0, Q-1])),
+     1 - gamma * (a1[0, Q-1] ** a1[0, Q-1]) * A[0, Q-1] * (wS[0, Q-1] / ((a1[0, Q-1] ** a1[0, Q-1]) * A[0, Q-1])) ** ((2 - a1[0, Q-1]) / (1 - a1[0, Q-1]))]
+])
+
+# Obtain eigenvalues
+eigenvalues, eigenvectors = np.linalg.eig(J)
+print(eigenvalues)
+
+# Obtain determinant and trace
+det = np.linalg.det(J)
+tr = np.trace(J)
+
+# Check general stability conditions
+print(1+tr+det>0)
+print(1-tr+det>0)
+print(1-det>0)
+
+# Check specific stability condition for the case beta=1
+for i in range(S):
+    print(f"Scenario {i + 1}:")
+    print(2 - gamma * (
+        (a1[i, Q-1] ** a1[i, Q-1]) * A[i, Q-1] * 
+        (wS[i, Q-1] / ((a1[i, Q-1] ** a1[i, Q-1]) * A[i, Q-1])) ** ((2 - a1[i, Q-1]) / (1 - a1[i, Q-1])) +
+        a1[i, Q-1] * wS[i, Q-1] * (wS[i, Q-1] / ((a1[i, Q-1] ** a1[i, Q-1]) * A[i, Q-1])) ** (1 / (1 - a1[i, Q-1]))
+    ) > 0)
+
+
+```
+
+:::
 
 ## References

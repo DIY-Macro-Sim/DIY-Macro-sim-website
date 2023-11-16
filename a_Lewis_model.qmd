@@ -152,6 +152,90 @@ PS=P2[,]/(Y1[,]+Y2[,])
 tp=c(min(which(L1[1,] < lambda)), min(which(L1[2,] < lambda)))
 ```
 
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+import numpy as np
+
+# Set number of periods
+T = 250
+
+# Set number of scenarios (including baseline)
+S = 2
+
+# Set period in which shock/shift will occur
+s = 15
+
+# Create (S x T)-matrices that will contain the simulated data
+Y1 = np.ones((S, T))  # Output in sector 1 (traditional)
+Y2 = np.ones((S, T))  # Output in sector 2 (modern)
+L1 = np.ones((S, T))  # employment in sector 1
+L2 = np.ones((S, T))  # employment in sector 2
+w2 = np.ones((S, T))  # real wage sector 2
+K = np.ones((S, T))   # capital stock (only in sector 2)
+P2 = np.ones((S, T))  # profits in sector 2
+
+# Set fixed parameter values
+alpha = 0.7  # labour elasticity of output, sector 1
+rho = 1      # wage premium
+L = 20       # total labour supply (exogenous)
+gamma = 0.2  # labour supply coefficient, sector 2
+lambda_val = 10  # employment at which MPL in sector 1 becomes zero
+beta = 0.7   # labour elasticity of output, sector 2
+
+# Set baseline parameter values
+w1 = np.ones((S, T))  # subsistence real wage sector 1 (baseline)
+
+# Set parameter values for different scenarios
+w1[1, s:T] = 0.9     # scenario 2: fall in subsistence wage
+
+# Initialise such that there is surplus labour (L1 > lambda)
+L1[:, 0] = 0.9 * L
+L2[:, 0] = L - L1[:, 0]
+
+# Simulate the model by looping over T time periods for S different scenarios
+for i in range(S):
+    for t in range(1, T):
+        for iterations in range(1000):  # note: order matters due to if-else condition
+            # Model equations
+            # Output sector1 and wages sector 2
+            if L1[i, t] < lambda_val:
+                Y1[i, t] = L1[i, t] ** alpha
+                w2[i, t] = gamma * L2[i, t]
+            else:
+                Y1[i, t] = lambda_val ** alpha
+                w2[i, t] = w1[i, t] + rho
+
+            # Output sector 2
+            Y2[i, t] = (L2[i, t] ** beta) * (K[i, t - 1] ** (1 - beta))
+
+            # Profits sector 2
+            P2[i, t] = Y2[i, t] - w2[i, t] * L2[i, t]
+
+            # Capital accumulation sector 2
+            K[i, t] = K[i, t - 1] + P2[i, t - 1]
+
+            # Employment sector 2
+            L2[i, t] = (beta * Y2[i, t]) / w2[i, t]
+
+            # Employment sector 1
+            L1[i, t] = L - L2[i, t]
+
+# Calculate profit share of sector 2
+PS = P2 / (Y1 + Y2)
+
+# Find period in which Lewis turning point occurs
+tp = [np.min(np.where(L1[i, :] < lambda_val)) for i in range(S)]
+
+```
+
+:::
+
 ### Plots
 
 @fig-output - @fig-wage display the model's dynamics under the baseline scenario. The red vertical line marks the 'Lewis turning point', which is the period in which the surplus labour in the traditional sector is depleted $(L_{1t}<\lambda)$. It can be seen that before the Lewis turning point is reached, output in the modern sector grows exponentially. After the turning point, it still grows but at a lower rate. This is because as the surplus labour in the traditional sector is removed, the modern sector faces an upward-sloping labour supply curve. As a result, real wages increase and profits are reduced. This slows down capital accumulation and growth. In the traditional sector, output falls somewhat after the turning point as the sector now faces diminishing marginal return to labour.
@@ -243,6 +327,43 @@ legend("topleft", legend=c("1: baseline", "2: decrease in subsistence wage"),
        lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
 ```
 
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+### Plots (here only for output)
+import matplotlib.pyplot as plt
+
+# Set start and end periods for plots
+Tmax = 240
+Tmin = 2
+
+# Output in the two sectors, baseline
+plt.plot(range(Tmin, Tmax + 1), Y1[0, Tmin:Tmax + 1], 'k-', linewidth=2, label='Y1')
+plt.plot(range(Tmin, Tmax + 1), Y2[0, Tmin:Tmax + 1], 'k--', linewidth=2, label='Y2')
+
+# Highlight Lewis turning point
+plt.axvline(x=tp[0], color='darkred', linestyle='-')
+
+# Set plot labels and title
+plt.title('Output in traditional (Y1) and modern (Y2) sector')
+plt.xlabel('Time')
+plt.ylabel('Y')
+plt.ylim(min(Y1[0, Tmin:Tmax]), max(Y2[0, Tmin:Tmax]))
+
+# Add legend
+plt.legend(loc='upper left')
+
+# Show the plot
+plt.show()
+
+```
+
+:::
+
 ## Directed graph
 
 Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.
@@ -279,6 +400,54 @@ plot(dg, main="Directed Graph of Lewis Model", vertex.size=20, vertex.color="lig
      vertex.frame.color="NA", margin=-0.08)
 ```
 
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Create directed graph
+import networkx as nx
+
+# Construct auxiliary Jacobian matrix for 8 variables: 
+
+#                    Y1,Y2,L1,L2,w1,w2,P2,K                  
+M_mat = np.array([  [0, 0, 1, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 1, 0, 0, 0, 1],
+                    [0, 0, 0, 1, 0, 0, 0, 0],
+                    [0, 1, 0, 0, 0, 1, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 1, 0, 0, 0],
+                    [0, 1, 0, 1, 0, 1, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 1, 0]])
+
+# Create adjacency matrix from transpose of auxiliary Jacobian and add column names
+A_mat = M_mat.transpose()
+
+# Create the graph from the adjacency matrix
+G = nx.DiGraph(A_mat)
+
+# Define node labels
+nodelabs = {0: r'$Y_1$', 1: r'$Y_2$', 2: r'$L_1$', 3: r'$L_2$', 
+            4: r'$w_1$', 5: r'$w_2$', 6: r'$P_2$', 7: 'K'}
+
+
+# Plot the graph
+pos = nx.spring_layout(G, k=0.4)
+nx.draw_networkx(G, pos, node_size=200, node_color="lightblue", 
+                 edge_color="black", width=1.2, arrowsize=10, 
+                 arrowstyle='->', font_size=8, font_color="black",
+                 with_labels=True, labels=nodelabs)
+plt.axis("off")
+plt.title("Directed Graph of Lewis Model")
+plt.show()
+
+```
+
+:::
+
+
 The directed graph illustrates that the subsistence wage in the traditional sector $w_1=w^s$ is the key exogenous variables that impact the dynamics of growth and distribution via its effect on real wages in the modern sector. Employment, output, profits, and capital accumulation in the modern sector form a closed loop (or cycle) within the system. The traditional sector plays a residual role.
 
 ## Analytical discussion
@@ -304,5 +473,23 @@ We can calculate the growth rate of the capital stock using the simulation:
 K[1,s+1]/K[1,s] - 1
 
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Calculate growth rate of capital stock analytically (for baseline)
+1 + (1 - beta) * ((w1[0, s] + rho) / beta) ** (-beta / (1 - beta)) - 1
+
+# Compare with numerical solution (for baseline)
+K[0, s + 1] / K[0, s] - 1
+
+
+```
+
+:::
 
 ## References

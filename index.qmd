@@ -4,7 +4,7 @@
 This website is under construction and will be regularly updated and extended.
 :::
 
-This platform provides an open source code repository and online script for macroeconomic model simulation. It follows a "do-it-yourself" (DIY) approach, empowering users to numerically simulate key macroeconomic models on their own using the open-source programming languages *R* and *Python*. Whether you are a student, researcher, or an economics enthusiast, our platform offers resources to deepen your understanding of both macroeconomic modelling and coding.
+This platform provides an open source code repository and online script for macroeconomic model simulation. It follows a "do-it-yourself" (DIY) approach, empowering users to numerically simulate key macroeconomic models on their own using the open-source programming languages *R* and *Python*. Whether you are a university teacher, student, researcher, or an economics enthusiast, our platform offers resources to deepen your understanding of both macroeconomic modelling and coding.
 
 The platform covers an array of macroeconomic models, including canonical textbook models, models from different economic paradigms, and seminal models from the history of economic thought. It bridges a gap between intermediate and advanced level macroeconomics by providing detailed yet accessible treatments of seminal macroeconomic models. Most intermediate macroeconomics textbooks focus on graphical analysis, while advanced level materials are often more mathematical and less accessible. Our platform offers a hands-on and approachable resource for users to build both a solid foundation in modelling and macroeconomic intuition. 
 

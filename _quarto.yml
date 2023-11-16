@@ -1,7 +1,8 @@
 project:
   type: book
   output-dir: _book
-
+execute:
+  warning: false
 book:
   title: "DIY Macroeconomic Model Simulation"
   #author: "<a href='https://github.com/DIY-Macro-Sim'>DIY-Macro-Sim<a/>"

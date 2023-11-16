@@ -114,6 +114,71 @@ for (i in 1:S){
 
 ```
 
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Load relevant libraries
+import numpy as np
+
+# Set number of periods
+T = 100
+
+# Set number of scenarios (including baseline)
+S = 4
+
+# Set period in which shock/shift will occur
+s = 5
+
+# Create (S x T)-matrices that will contain the simulated data
+N = np.zeros((S, T))  # population
+Y = np.zeros((S, T))  # real income
+B = np.zeros((S, T))  # births
+D = np.zeros((S, T))  # deaths
+N_eq = np.zeros((S))  # equilibrium population
+Y_eq = np.zeros((S))  # equilibrium real income
+B_eq = np.zeros((S))  # equilibrium births
+D_eq = np.zeros((S))  # equilibrium deaths
+
+# Set baseline parameter values
+b0 = np.zeros((S, T)) + 0.5  # Exogenous birth rate
+b1 = 0.5  # Sensitivity of births with respect to real income
+d0 = 2.5  # Exogenous death rate
+d1 = 0.5  # Sensitivity of deaths with respect to real income
+a0 = np.zeros((S, T)) + 2.5  # Exogenous component of real income
+a1 = np.zeros((S, T)) + 0.05  # Sensitivity of the real income with respect to population
+
+# Set parameter values for different scenarios
+b0[1, s:T] = 0.4  # scenario 2: reduction in birth rate
+a1[2, s:T] = 0.07  # scenario 3: increase in sensitivity of real income with respect to population
+a0[3, s:T] = 2.6  # scenario 4: improvement in productivity
+
+# Initialise 
+N[:,0] = 1
+Y[:,0] = Y_eq[0]
+B[:,0] = B_eq[0]
+D[:,0] = D_eq[0]
+
+# Simulate the model by looping over T time periods for S different scenarios
+for i in range(S):  
+  for t in range(1, T):
+    for iterations in range(1000): # run the model 1000-times in each period (to make sure the order of equations doesn't matter)
+      # (1) Population dynamics    
+      N[i,t] = N[i,t-1] + B[i,t-1] - D[i,t-1]
+      # (2) Births
+      B[i,t] = (b0[i,t] + b1*Y[i,t])*N[i,t]
+      # (3) Deaths
+      D[i,t] = (d0 - d1*Y[i,t])*N[i,t]  
+      # (4) Real income
+      Y[i,t] = a0[i,t] - a1[i,t]*N[i,t]   
+
+```
+
+:::
+
 ### Plots
 
 Figure 1 displays population and real income dynamics for the baseline scenario. Starting from a below-equilibrium level of population, the population initially grows rapidly (seemingly exponentially) but then approaches a steady state. During the adjustment phase, real income is driven down to its steady state level (which can be interpreted as the subsistence level). Figure 2 displays the corresponding dynamics of births and deaths.
@@ -158,6 +223,38 @@ legend("bottomright", legend=c("1: baseline","2: fall in exog birth rate", "3: r
 
 ```
 
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+### Plots (here for population and real income only)
+
+import matplotlib.pyplot as plt
+
+# Set maximum period for plots
+Tmax = 20
+
+## Baseline
+# Population and real income
+fig, ax1 = plt.subplots()
+ax1.plot(N[0, 2:(Tmax+1)], linestyle='solid', label='N', linewidth=0.8, color="black")
+ax1.set_xlabel('Time')
+ax1.set_ylabel('N', rotation=0)
+ax2 = ax1.twinx()
+ax2.plot(Y[0, 2:Tmax], linestyle='dashed', label='Y', linewidth=0.8, color="black")
+ax2.set_ylabel('Y', rotation=0)
+lines, labels = ax1.get_legend_handles_labels() #collect legend in one box
+lines2, labels2 = ax2.get_legend_handles_labels()
+ax2.legend(lines + lines2, labels + labels2, loc=5)
+plt.show()  
+
+```
+
+:::
+
 ## Directed graph
 
 Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.
@@ -190,6 +287,47 @@ plot(dg, main="Figure 4: Directed graph of Malthusian model", vertex.size=20, ve
      edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
      vertex.frame.color="NA", margin=-0.08)
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+
+import networkx as nx
+
+#Construct auxiliary Jacobian matrix for 6 variables: N, B, D, Y, b0, a0
+M_mat = np.array([[0,1,1,0,0,0],
+                  [1,0,0,1,1,0],
+                  [1,0,0,1,0,0],
+                  [1,0,0,0,0,1],
+                  [0,0,0,0,0,0],
+                  [0,0,0,0,0,0]])
+
+# Create adjacency matrix from transpose of auxiliary Jacobian and add column names
+A_mat = M_mat.transpose()
+
+# Create the graph from the adjacency matrix
+G = nx.DiGraph(A_mat)
+
+# Define node labels
+nodelabs = {0: "N", 1: "B", 2: "D", 3: "Y", 4: "$b_0$", 5: "$a_0$"}
+
+# Plot the graph
+pos = nx.spring_layout(G)
+nx.draw_networkx(G, pos, node_size=500, node_color="lightblue", 
+                 edge_color="black", width=1.2, arrowsize=10, 
+                 arrowstyle='->', font_size=12, font_color="black",
+                 with_labels=True, labels=nodelabs)
+plt.axis("off")
+plt.title("Figure 4: Directed graph of Malthusian model")
+plt.show()
+
+```
+
+:::
 
 In Figure 4, it can be seen that the exogenous birth rate ($b0$) and productivity ($a0$) are exogenous variables that impact births and income, respectively. Births, deaths, employment and income are endogenous and form a closed loop (or cycle) within the system. Births and deaths affect the population size (with simultaneous feedback from population to births and deaths), and the population affects income. Income, in turn, feeds back into population size.
 
@@ -246,5 +384,33 @@ print(paste0("Scenario ", i, ":"))
 print(abs(1-b0[i,T]+d0-a0[i,T]*(b1+d1)) < 1)
 }
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+
+# Calculate analytical equilibrium solutions 
+for i in range(S):
+  N_eq[i] = (b0[i, T-1] - d0 + a0[i, T-1] * (b1 + d1)) / (a1[i, T-1] * (b1 + d1))
+  Y_eq[i] = (d0 - b0[i, T-1]) / (b1 + d1)
+  B_eq[i] = (b0[i, T-1] + b1 * Y_eq[i]) * N_eq[i]
+  D_eq[i] = (d0 - d1 * Y_eq[i]) * N_eq[i]
+  
+# Compare with numerical solutions (here for the example of Y, scenario1)
+print(Y_eq[0])
+print(Y[0,T-1])
+
+# Check stability condition for all scenarios
+for i in range(S):
+    print(f"Scenario {i + 1}:")
+    print(abs(1 - b0[i, T-1] + d0 - a0[i, T-1] * (b1 + d1)) < 1)
+
+```
+
+:::
 
 ## References
