@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.321">
+<meta name="generator" content="quarto-1.4.550">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>DIY Macroeconomic Model Simulation - 8&nbsp; A Post-Kaleckian Distribution and Growth Model</title>
 <style>
@@ -19,7 +19,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -55,6 +55,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -97,7 +98,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -106,29 +113,56 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./a_neoclassical_macro_model.html">Static Models</a></li><li class="breadcrumb-item"><a href="./a_post_kaleckian_distribution_and_growth_model.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./a_neoclassical_macro_model.html">Static Models</a></li><li class="breadcrumb-item"><a href="./a_post_kaleckian_distribution_and_growth_model.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">DIY Macroeconomic Model Simulation</a> 
         <div class="sidebar-tools-main">
@@ -270,7 +304,7 @@ div.csl-indent {
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
@@ -294,10 +328,10 @@ div.csl-indent {
   </ul>
 </li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./a_neoclassical_macro_model.html">Static Models</a></li><li class="breadcrumb-item"><a href="./a_post_kaleckian_distribution_and_growth_model.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
 <span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span>
 </h1>
@@ -312,6 +346,7 @@ div.csl-indent {
     
   </div>
   
+
 
 </header><section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>The post-Kaleckian growth model was developed by <span class="citation" data-cites="bhaduri_unemployment_1990">Bhaduri and Marglin (<a href="#ref-bhaduri_unemployment_1990" role="doc-biblioref">1990</a>)</span> and others to synthesise Marxian and Keynesian ideas about the effects of income distribution on economic growth.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> According to the Marxian view, capital accumulation is driven by profits. By contrast, Michal Kalecki and post-Keynesians such as Nicholas Kaldor argued that a redistribution of income towards profit-earners is likely to reduce consumption, as workers tend to have a higher marginal propensity to consume than capital owners. The post-Kaleckian growth model integrates these two mechanisms in a Keynesian framework in which aggregate demand and growth are demand-determined. It allows for wage-led as well as profit-led demand and growth regimes. In a wage-led regime, a redistribution of income towards workers has expansionary effects on aggregate demand (and possibly growth) as the expansionary effect on consumption outweighs the negative effect on investment. In a profit-led regime, the effect is contradictory as investment falls by more than consumption rises. Whether a regime is wage- or profit-led depends on the relative size of the propensities to consume and the propensity to invest.</p>
@@ -333,7 +368,7 @@ g=g_0+g_1u+g_2h, \quad g_i &gt; 0
 u=v(c+g)
 \tag{8.5}\]</span></span></p>
 <p>where <span class="math inline">\(r\)</span>, <span class="math inline">\(s\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(g\)</span>, and <span class="math inline">\(u\)</span> are the profit rate, the saving rate, the consumption rate, the investment rate, and the rate of capacity utilisation, respectively.</p>
-<p><a href="#eq-r">Equation&nbsp;<span>8.1</span></a> decomposes the profit rate into the product of the profit share <span class="math inline">\(h\)</span> (total profits over total output), the rate of capacity utilisation (actual output over potential output), and the inverse of <span class="math inline">\(v\)</span> (the capital-potential output ratio). Let <span class="math inline">\(Y\)</span> be output, <span class="math inline">\(K\)</span> be the capital stock, and <span class="math inline">\(Y^P\)</span> be potential output, the decomposition can also be written as <span class="math inline">\(r=\frac{\Pi}{K}=\frac{\Pi}{Y}\frac{Y}{Y^P}\frac{Y^P}{K}\)</span>. The profit share and the capital-potential output ratio are taken to be exogenous in this model. Note also that the wage share is given by <span class="math inline">\(1-h\)</span>. By <a href="#eq-s">Equation&nbsp;<span>8.2</span></a>, the economy-wide saving rate is given by the sum of saving out of wages (<span class="math inline">\(s_W(1-h)\frac{u}{v}\)</span>) and saving out of profits (<span class="math inline">\(s_\Pi h\frac{u}{v}\)</span>). It is assumed that workers have a higher marginal propensity to consume than capital owners (<span class="math inline">\(s_W&gt;s_\Pi\)</span>). <a href="#eq-c">Equation&nbsp;<span>8.3</span></a> simply states that consumption is income not saved. According to <a href="#eq-c">Equation&nbsp;<span>8.3</span></a>, investment is determined by an autonomous component <span class="math inline">\(g_0\)</span> that may capture Keynesian `animal spirits’, by the rate of capacity utilisation, and by the profit share. While the rate of capacity utilisation is a signal of (future) demand, the profit share may stimulate investment as internal funds are typically the cheapest source of finance. Finally, <a href="#eq-u">Equation&nbsp;<span>8.5</span></a> is an equilibrium condition that assumes that the rate of capacity utilisation adjusts to clear the goods market.</p>
+<p><a href="#eq-r" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> decomposes the profit rate into the product of the profit share <span class="math inline">\(h\)</span> (total profits over total output), the rate of capacity utilisation (actual output over potential output), and the inverse of <span class="math inline">\(v\)</span> (the capital-potential output ratio). Let <span class="math inline">\(Y\)</span> be output, <span class="math inline">\(K\)</span> be the capital stock, and <span class="math inline">\(Y^P\)</span> be potential output, the decomposition can also be written as <span class="math inline">\(r=\frac{\Pi}{K}=\frac{\Pi}{Y}\frac{Y}{Y^P}\frac{Y^P}{K}\)</span>. The profit share and the capital-potential output ratio are taken to be exogenous in this model. Note also that the wage share is given by <span class="math inline">\(1-h\)</span>. By <a href="#eq-s" class="quarto-xref">Equation&nbsp;<span>8.2</span></a>, the economy-wide saving rate is given by the sum of saving out of wages (<span class="math inline">\(s_W(1-h)\frac{u}{v}\)</span>) and saving out of profits (<span class="math inline">\(s_\Pi h\frac{u}{v}\)</span>). It is assumed that workers have a higher marginal propensity to consume than capital owners (<span class="math inline">\(s_W&gt;s_\Pi\)</span>). <a href="#eq-c" class="quarto-xref">Equation&nbsp;<span>8.3</span></a> simply states that consumption is income not saved. According to <a href="#eq-c" class="quarto-xref">Equation&nbsp;<span>8.3</span></a>, investment is determined by an autonomous component <span class="math inline">\(g_0\)</span> that may capture Keynesian `animal spirits’, by the rate of capacity utilisation, and by the profit share. While the rate of capacity utilisation is a signal of (future) demand, the profit share may stimulate investment as internal funds are typically the cheapest source of finance. Finally, <a href="#eq-u" class="quarto-xref">Equation&nbsp;<span>8.5</span></a> is an equilibrium condition that assumes that the rate of capacity utilisation adjusts to clear the goods market.</p>
 <p>The key question addressed by this model is a how a change in the profit share affects the rate of capacity utilisation and the rate of growth.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> As shown formally in the analytical discussion below, there is no unambiguous answer to this question as the model encompasses different regimes. Three main regimes can be identified. First, a regime in which both the rate of utilisation and the rate of growth are negatively affected by an increase in the profit share. We will call this a wage-led demand and growth regime (WLD/WLG). Second, a regime in which the rate of utilisation is negatively affected and the rate of growth is positively affected by an increase in the profit share. We will call this a wage-led demand regime and profit-led growth regime (WLD/PLG). Third, a regime in which both the rate of utilisation and the rate of growth are positively affected by an increase in the profit share. We will call this a profit-led demand and growth regime (PLD/PLG).</p>
 </section><section id="simulation" class="level2"><h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
 <section id="parameterisation" class="level3"><h3 class="anchored" data-anchor-id="parameterisation">Parameterisation</h3>
@@ -674,14 +709,17 @@ Python code
 </div>
 </div>
 </section><section id="plots" class="level3"><h3 class="anchored" data-anchor-id="plots">Plots</h3>
-<p>Figures <a href="#fig-utilisation-pkdg">Figure&nbsp;<span>8.1</span></a> - <a href="#fig-profit-rate-pkdg">Figure&nbsp;<span>8.4</span></a> depict the response of the model’s key endogenous variables to changes in the profit share. In the first case of a wage-led demand and growth regime (WLD/WLG), investment is equally sensitive to a change in the rate of capacity utilisation (<span class="math inline">\(g_1\)</span>) and a change in the profit share (<span class="math inline">\(g_2\)</span>). A rise in the profit share reduces consumption, which reduces the rate of capacity utilisation and the rate of growth. This is despite a positive effect on the profit rate.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>Figures <a href="#fig-utilisation-pkdg" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> - <a href="#fig-profit-rate-pkdg" class="quarto-xref">Figure&nbsp;<span>8.4</span></a> depict the response of the model’s key endogenous variables to changes in the profit share. In the first case of a wage-led demand and growth regime (WLD/WLG), investment is equally sensitive to a change in the rate of capacity utilisation (<span class="math inline">\(g_1\)</span>) and a change in the profit share (<span class="math inline">\(g_2\)</span>). A rise in the profit share reduces consumption, which reduces the rate of capacity utilisation and the rate of growth. This is despite a positive effect on the profit rate.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">u_star</span>, ylab<span class="op">=</span><span class="st">"u"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1a:baseline WLD/WLG"</span>, <span class="st">"1b:rise prof share"</span>, <span class="st">"2a:baseline WLD/PLG"</span>, <span class="st">"2b:rise prof share"</span>, <span class="st">"3a:baseline PLD/PLG"</span>, <span class="st">"3b: rise prof share"</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-utilisation-pkdg" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-utilisation-pkdg-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;8.1: Rate of capacity utilisation</figcaption><p></p>
-</figure>
+<div id="fig-utilisation-pkdg" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-utilisation-pkdg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-utilisation-pkdg-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-utilisation-pkdg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.1: Rate of capacity utilisation
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -691,10 +729,13 @@ Python code
 <span>                                      <span class="st">"4:rise prof share"</span>, </span>
 <span>                                      <span class="st">"5:baseline PLD/PLG"</span>, <span class="st">"6: rise prof share"</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-growth-pkdg" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-growth-pkdg-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;8.2: Rate of growth</figcaption><p></p>
-</figure>
+<div id="fig-growth-pkdg" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-growth-pkdg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-growth-pkdg-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-growth-pkdg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.2: Rate of growth
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -704,10 +745,13 @@ Python code
 <span>                                      <span class="st">"4:rise prof share"</span>, </span>
 <span>                                      <span class="st">"5:baseline PLD/PLG"</span>, <span class="st">"6: rise prof share"</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-consumption-pkdg" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-consumption-pkdg-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;8.3: Rate of consumption</figcaption><p></p>
-</figure>
+<div id="fig-consumption-pkdg" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-consumption-pkdg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-consumption-pkdg-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-consumption-pkdg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.3: Rate of consumption
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -716,10 +760,13 @@ Python code
 <span>                                     <span class="st">"4:rise prof share"</span>, </span>
 <span>                                     <span class="st">"5:baseline PLD/PLG"</span>, <span class="st">"6: rise prof share"</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-profit-rate-pkdg" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-profit-rate-pkdg-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;8.4: Rate of profit</figcaption><p></p>
-</figure>
+<div id="fig-profit-rate-pkdg" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-profit-rate-pkdg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-profit-rate-pkdg-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-profit-rate-pkdg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.4: Rate of profit
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -781,10 +828,13 @@ Python code
 <span>     edge.arrow.width<span class="op">=</span><span class="fl">1.2</span>, edge.color<span class="op">=</span><span class="st">"black"</span>, vertex.label.cex<span class="op">=</span><span class="fl">1.2</span>, </span>
 <span>     vertex.frame.color<span class="op">=</span><span class="st">"NA"</span>, margin<span class="op">=</span><span class="op">-</span><span class="fl">0.08</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-dg-pkdg" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-dg-pkdg-2.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;8.5: Directed graph of post-Kaleckian growth model</figcaption><p></p>
-</figure>
+<div id="fig-dg-pkdg" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-dg-pkdg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_post_kaleckian_distribution_and_growth_model_files/figure-html/fig-dg-pkdg-2.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dg-pkdg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.5: Directed graph of post-Kaleckian growth model
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -836,16 +886,16 @@ Python code
 </div>
 </div>
 </div>
-<p>In Figure <a href="#fig-dg-pkdg">Figure&nbsp;<span>8.5</span></a>, it can be seen that the profit share (<span class="math inline">\(h\)</span>) is the key exogenous variable of the model.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Consumption (<span class="math inline">\(c\)</span>), saving (<span class="math inline">\(s\)</span>), investment (<span class="math inline">\(g\)</span>), and the rate of utilisation (<span class="math inline">\(u\)</span>) form a closed loop (or cycle) within the system. The profit share affects both saving and investment, which in turn affect consumption and the rate of capacity utilisation. The profit rate is a residual variable (also called a `sink’) in this model.</p>
+<p>In Figure <a href="#fig-dg-pkdg" class="quarto-xref">Figure&nbsp;<span>8.5</span></a>, it can be seen that the profit share (<span class="math inline">\(h\)</span>) is the key exogenous variable of the model.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Consumption (<span class="math inline">\(c\)</span>), saving (<span class="math inline">\(s\)</span>), investment (<span class="math inline">\(g\)</span>), and the rate of utilisation (<span class="math inline">\(u\)</span>) form a closed loop (or cycle) within the system. The profit share affects both saving and investment, which in turn affect consumption and the rate of capacity utilisation. The profit rate is a residual variable (also called a `sink’) in this model.</p>
 </section><section id="analytical-discussion" class="level2"><h2 class="anchored" data-anchor-id="analytical-discussion">Analytical discussion</h2>
-<p>To find the equilibrium solutions, substitute <a href="#eq-s">Equation&nbsp;<span>8.2</span></a> - <a href="#eq-g">Equation&nbsp;<span>8.4</span></a> into <a href="#eq-u">Equation&nbsp;<span>8.5</span></a> and solve for <span class="math inline">\(u\)</span>: <span class="math display">\[\begin{align}
+<p>To find the equilibrium solutions, substitute <a href="#eq-s" class="quarto-xref">Equation&nbsp;<span>8.2</span></a> - <a href="#eq-g" class="quarto-xref">Equation&nbsp;<span>8.4</span></a> into <a href="#eq-u" class="quarto-xref">Equation&nbsp;<span>8.5</span></a> and solve for <span class="math inline">\(u\)</span>: <span class="math display">\[\begin{align}
 u^* = \frac{g_0+g_2h}{[s_W + (s_\Pi - s_W)h]v^{-1}-g_1}.
 \end{align}\]</span></p>
-<p>The equilibrium solution for <span class="math inline">\(u\)</span> can then be substituted into <a href="#eq-g">Equation&nbsp;<span>8.4</span></a> to find: <span class="math display">\[\begin{align}
+<p>The equilibrium solution for <span class="math inline">\(u\)</span> can then be substituted into <a href="#eq-g" class="quarto-xref">Equation&nbsp;<span>8.4</span></a> to find: <span class="math display">\[\begin{align}
 g^* = \frac{(g_0+g_2h)[s_W + (s_\Pi - s_W)h]v^{-1}}{[s_W + (s_\Pi - s_W)h]v^{-1}-g_1}.
 \end{align}\]</span></p>
 <p>The Keynesian stability condition requires <span class="math inline">\([s_W + (s_\Pi - s_W)h]v^{-1}-g_1&gt;0\)</span>, i.e.&nbsp;saving need to react more strongly to income than investment.</p>
-<p>The equilibrium solution for <span class="math inline">\(r\)</span> can be found by substituting <span class="math inline">\(u^*\)</span> into <a href="#eq-r">Equation&nbsp;<span>8.1</span></a>: <span class="math display">\[\begin{align}
+<p>The equilibrium solution for <span class="math inline">\(r\)</span> can be found by substituting <span class="math inline">\(u^*\)</span> into <a href="#eq-r" class="quarto-xref">Equation&nbsp;<span>8.1</span></a>: <span class="math display">\[\begin{align}
 r^* = \frac{h(g_0+g_2h)}{[s_W + (s_\Pi - s_W)h]-vg_1}.
 \end{align}\]</span></p>
 <p>To assess whether the demand regime is wage- or profit-led, take the derivative of <span class="math inline">\(u^*\)</span> with respect to <span class="math inline">\(h\)</span>: <span class="math display">\[\begin{align}
@@ -930,7 +980,7 @@ Python code
 </section></section><section id="references" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-bhaduri_unemployment_1990" class="csl-entry" role="listitem">
 Bhaduri, Amit, and Stephen Marglin. 1990. <span>“Unemployment and the Real Wage: The Economic Basis for Contesting Political Ideologies.”</span> <em>Cambridge Journal of Economics</em> 14 (4): 375–93.
 </div>
@@ -989,6 +1039,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1057,13 +1134,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'alternate';
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1142,10 +1221,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1155,8 +1233,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1169,6 +1256,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1212,6 +1418,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1237,6 +1444,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1296,23 +1529,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./a_Kaldor-Robinson_model.html" class="pagination-link">
+      <a href="./a_Kaldor-Robinson_model.html" class="pagination-link" aria-label="A Kaldor-Robinson Distribution and Growth Model">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">A Kaldor-Robinson Distribution and Growth Model</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./intro_stability_analysis.html" class="pagination-link">
+      <a href="./intro_stability_analysis.html" class="pagination-link" aria-label="An Introduction to the Analysis of Dynamic Models">
         <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">An Introduction to the Analysis of Dynamic Models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">An open-source platform for macroeconomic model simulation.</div>   
+    <div class="nav-footer-left">
+<p>An open-source platform for macroeconomic model simulation.</p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
-    </div>
-    <div class="nav-footer-right"><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></p>
+</div>
   </div>
 </footer>
 

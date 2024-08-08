@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.321">
+<meta name="generator" content="quarto-1.4.550">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>DIY Macroeconomic Model Simulation - 10&nbsp; A New Keynesian 3-Equation Model</title>
 <style>
@@ -19,7 +19,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -55,6 +55,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -97,7 +98,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -106,29 +113,56 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_stability_analysis.html">Dynamic Models</a></li><li class="breadcrumb-item"><a href="./a_new_keynesian_3_equation_model.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_stability_analysis.html">Dynamic Models</a></li><li class="breadcrumb-item"><a href="./a_new_keynesian_3_equation_model.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">DIY Macroeconomic Model Simulation</a> 
         <div class="sidebar-tools-main">
@@ -270,7 +304,7 @@ div.csl-indent {
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
@@ -302,10 +336,10 @@ div.csl-indent {
   </ul>
 </li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_stability_analysis.html">Dynamic Models</a></li><li class="breadcrumb-item"><a href="./a_new_keynesian_3_equation_model.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
 <span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span>
 </h1>
@@ -320,6 +354,7 @@ div.csl-indent {
     
   </div>
   
+
 
 </header><section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>New Keynesian dynamic general equilibrium models were developed in the 1990s and 2000s to guide monetary policy.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> They build on real business cycle models with rational expectations but introduce Keynesian frictions such as imperfect competition and nominal rigidities. While the structural forms of these models are typically complex as behavioural functions are derived from the intertemporal optimisation, the reduced-form of the benchmark models can be represented by three main equations: (i) an IS curve, (ii) a Phillips curve, (iii) and an interest rate rule.</p>
@@ -339,7 +374,7 @@ r_s=\frac{(A - y_e)}{a_1}
 r_t = r_s + a_3(\pi_t-\pi^T)
 \tag{10.4}\]</span></span></p>
 <p>where <span class="math inline">\(y\)</span>, <span class="math inline">\(A\)</span>, <span class="math inline">\(r\)</span>, <span class="math inline">\(\pi\)</span>, <span class="math inline">\(y_e\)</span>, <span class="math inline">\(r_s\)</span>, and <span class="math inline">\(\pi^T\)</span> are real output, autonomous demand (times the multiplier), the real interest rate, inflation, equilibrium output, the stabilising real interest rate, and the inflation target, respectively.</p>
-<p><a href="#eq-nk_y">Equation&nbsp;<span>10.1</span></a> is the IS curve or goods market equilibrium condition. Aggregate output adjusts to the level of aggregate demand, which is given by autonomous demand (times the multiplier) and a component that is negatively related to the (lagged) real interest rate via households’ saving (<span class="math inline">\(a_1&gt;0\)</span>). <a href="#eq-nk_pi">Equation&nbsp;<span>10.2</span></a> is the Phillips curve. It is assumed that inflation is driven by adaptive expectations (<span class="math inline">\(E[\pi_{t+1}]=\pi_{t-1}\)</span>) and positively related to the output gap <span class="math inline">\((y_t-y_e)\)</span>, i.e.&nbsp;<span class="math inline">\(a_2&gt;0\)</span>. By <a href="#eq-nk_rs">Equation&nbsp;<span>10.3</span></a>, the stabilising real interest rate is that real interest rate that is consistent with equilibrium output (<span class="math inline">\(y_e=A -a_1r_s\)</span>). Finally, the interest rate rule in <a href="#eq-nk_r">Equation&nbsp;<span>10.4</span></a> specifies the real interest rate the central bank needs to set to minimise its loss function (see <a href="#sec-analytical"><span>Section&nbsp;10.5</span></a> below for a derivation). The parameter <span class="math inline">\(a_3\)</span> is a composite one given by <span class="math inline">\(a_3 = \frac{1}{a_1(\frac{1}{a_2 b} + a_2)} &gt;0\)</span>. Although the central bank only sets the nominal interest rate <span class="math inline">\(i = r + E[\pi_{t+1}]\)</span> directly, the fact that expected inflation is predetermined in every period allows it to indirectly control the real interest rate.</p>
+<p><a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a> is the IS curve or goods market equilibrium condition. Aggregate output adjusts to the level of aggregate demand, which is given by autonomous demand (times the multiplier) and a component that is negatively related to the (lagged) real interest rate via households’ saving (<span class="math inline">\(a_1&gt;0\)</span>). <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a> is the Phillips curve. It is assumed that inflation is driven by adaptive expectations (<span class="math inline">\(E[\pi_{t+1}]=\pi_{t-1}\)</span>) and positively related to the output gap <span class="math inline">\((y_t-y_e)\)</span>, i.e.&nbsp;<span class="math inline">\(a_2&gt;0\)</span>. By <a href="#eq-nk_rs" class="quarto-xref">Equation&nbsp;<span>10.3</span></a>, the stabilising real interest rate is that real interest rate that is consistent with equilibrium output (<span class="math inline">\(y_e=A -a_1r_s\)</span>). Finally, the interest rate rule in <a href="#eq-nk_r" class="quarto-xref">Equation&nbsp;<span>10.4</span></a> specifies the real interest rate the central bank needs to set to minimise its loss function (see <a href="#sec-analytical" class="quarto-xref"><span>Section 10.5</span></a> below for a derivation). The parameter <span class="math inline">\(a_3\)</span> is a composite one given by <span class="math inline">\(a_3 = \frac{1}{a_1(\frac{1}{a_2 b} + a_2)} &gt;0\)</span>. Although the central bank only sets the nominal interest rate <span class="math inline">\(i = r + E[\pi_{t+1}]\)</span> directly, the fact that expected inflation is predetermined in every period allows it to indirectly control the real interest rate.</p>
 </section><section id="simulation" class="level2"><h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
 <section id="parameterisation" class="level3"><h3 class="anchored" data-anchor-id="parameterisation">Parameterisation</h3>
 <p>Table 1 reports the parameterisation used in the simulation. For all parameterisations, the system is initialised at the equilibrium <span class="math inline">\((y^*,\pi^*,r^*)=(y_e,\pi^T, r_s)\)</span>. Three scenarios will then be considered. In scenario 1, there is an increase in autonomous aggregate demand (<span class="math inline">\(A\)</span>). In scenario 2, the central bank sets a higher inflation target (<span class="math inline">\(\pi^T\)</span>). Scenario 3 considers a rise in equilibrium output (<span class="math inline">\(y_e\)</span>).</p>
@@ -535,7 +570,10 @@ Python code
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">y</span><span class="op">[</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">3</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: aggregate demand boost"</span>, <span class="st">"2: rise inflation target"</span>, <span class="st">"3: rise potential output"</span><span class="op">)</span>, lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="a_new_keynesian_3_equation_model_files/figure-html/nk2-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="a_new_keynesian_3_equation_model_files/figure-html/nk2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Inflation under different scenarios</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">""</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">)</span>, ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">pi</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,<span class="va">p</span><span class="op">[</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
@@ -544,7 +582,10 @@ Python code
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">3</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: aggregate demand boost"</span>, <span class="st">"2: rise inflation target"</span>, <span class="st">"3: rise potential output"</span><span class="op">)</span>, lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="a_new_keynesian_3_equation_model_files/figure-html/nk2-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="a_new_keynesian_3_equation_model_files/figure-html/nk2-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Policy rate under different scenarios</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">""</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">)</span>, ylab<span class="op">=</span><span class="st">"r"</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,<span class="va">r</span><span class="op">[</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
@@ -553,7 +594,10 @@ Python code
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">3</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: aggregate demand boost"</span>, <span class="st">"2: rise inflation target"</span>, <span class="st">"3: rise potential output"</span><span class="op">)</span>, lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="a_new_keynesian_3_equation_model_files/figure-html/nk2-3.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="a_new_keynesian_3_equation_model_files/figure-html/nk2-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Python code">
@@ -626,7 +670,10 @@ Python code
 <span>     edge.arrow.width<span class="op">=</span><span class="fl">1.2</span>, edge.color<span class="op">=</span><span class="st">"black"</span>, vertex.label.cex<span class="op">=</span><span class="fl">1.2</span>, </span>
 <span>     vertex.frame.color<span class="op">=</span><span class="st">"NA"</span>, margin<span class="op">=</span><span class="op">-</span><span class="fl">0.08</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="a_new_keynesian_3_equation_model_files/figure-html/nk3-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="a_new_keynesian_3_equation_model_files/figure-html/nk3-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Python code">
@@ -691,13 +738,13 @@ Python code
 </section><section id="sec-analytical" class="level2"><h2 class="anchored" data-anchor-id="sec-analytical">Analytical discussion</h2>
 <section id="derivation-of-core-equations" class="level3"><h3 class="anchored" data-anchor-id="derivation-of-core-equations">Derivation of core equations</h3>
 <section id="is-curve" class="level4"><h4 class="anchored" data-anchor-id="is-curve">IS curve</h4>
-<p>The IS curve in <a href="#eq-nk_y">Equation&nbsp;<span>10.1</span></a> is loosely based on the consumption Euler equation introduced in <a href="a_neoclassical_macro_model.html"><span>Chapter&nbsp;3</span></a>. Suppose there are two periods and the household maximises its utility function <span class="math inline">\(U=\ln(C_t) + \beta \ln(C_{t+1})\)</span> subject to the intertemporal budget constraint <span class="math inline">\(C_t+\frac{C_{t+1}}{1+r}=Y_t + \frac{Y_{t+1}}{1+r}\)</span>. Substituting the constraint into the objective function and differentiating with respect to <span class="math inline">\(C_t\)</span> yields the first-order condition:</p>
+<p>The IS curve in <a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a> is loosely based on the consumption Euler equation introduced in <a href="a_neoclassical_macro_model.html" class="quarto-xref"><span>Chapter 3</span></a>. Suppose there are two periods and the household maximises its utility function <span class="math inline">\(U=\ln(C_t) + \beta \ln(C_{t+1})\)</span> subject to the intertemporal budget constraint <span class="math inline">\(C_t+\frac{C_{t+1}}{1+r}=Y_t + \frac{Y_{t+1}}{1+r}\)</span>. Substituting the constraint into the objective function and differentiating with respect to <span class="math inline">\(C_t\)</span> yields the first-order condition:</p>
 <p><span class="math display">\[
 C_t = \frac{C_{t+1}}{\beta(1+r)}.
 \]</span></p>
-<p>This consumption Euler equation establishes the negative relationship between the real interest rate and expenditures in <a href="#eq-nk_y">Equation&nbsp;<span>10.1</span></a>.</p>
+<p>This consumption Euler equation establishes the negative relationship between the real interest rate and expenditures in <a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a>.</p>
 </section><section id="pc-curve" class="level4"><h4 class="anchored" data-anchor-id="pc-curve">PC curve</h4>
-<p>The Phillips curve <a href="#eq-nk_pi">Equation&nbsp;<span>10.2</span></a> is derived from wage- and price-setting in imperfect labour markets.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Consider the following wage- and price-setting functions: <span class="math display">\[
+<p>The Phillips curve <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a> is derived from wage- and price-setting in imperfect labour markets.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Consider the following wage- and price-setting functions: <span class="math display">\[
 \frac{W}{P^E} = B + \alpha(y_t - y_e) + z_w
 \]</span> <span id="eq-nk_P"><span class="math display">\[
 P=(1+\mu)\frac{W}{\lambda},
@@ -706,25 +753,25 @@ P=(1+\mu)\frac{W}{\lambda},
 <p>In equilibrium, the real wage is given by: <span class="math inline">\(w_e = B + z_w\)</span>. In a dynamic setting, wage setters will raise the expected real wage by <span class="math inline">\(\left(\frac{W_t}{P_{t}^E}\right) - \left(\frac{W_{t-1}}{P_{t-1}}\right)=\alpha(y_t - y_e)\)</span>. Together with adaptive expectations for prices <span class="math inline">\(\hat{P_t^E} = \hat{P}_{t-1}\)</span> and the approximation <span class="math inline">\(\hat{W_t} - \hat{P_{t-1}} \approx \left(\frac{W_t}{P_{t}^E}\right) - \left(\frac{W_{t-1}}{P_{t-1}}\right)\)</span>, this yields the following equation for wage inflation: <span id="eq-nk_W"><span class="math display">\[
 \hat{W_t} = \hat{P}_{t-1} +\alpha(y_t - y_e).
 \tag{10.6}\]</span></span></p>
-<p>Transforming equation <a href="#eq-nk_P">Equation&nbsp;<span>10.5</span></a> into growth rates (<span class="math inline">\(\hat{P}=\hat{W}\)</span>) and combining it with the wage-inflation equation <a href="#eq-nk_W">Equation&nbsp;<span>10.6</span></a> yields the Phillips curve <a href="#eq-nk_pi">Equation&nbsp;<span>10.2</span></a>.</p>
+<p>Transforming equation <a href="#eq-nk_P" class="quarto-xref">Equation&nbsp;<span>10.5</span></a> into growth rates (<span class="math inline">\(\hat{P}=\hat{W}\)</span>) and combining it with the wage-inflation equation <a href="#eq-nk_W" class="quarto-xref">Equation&nbsp;<span>10.6</span></a> yields the Phillips curve <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a>.</p>
 </section><section id="monetary-policy-rule" class="level4"><h4 class="anchored" data-anchor-id="monetary-policy-rule">Monetary policy rule</h4>
 <p>Finally, to derive the interest rate rule, start from the following central bank loss function:<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <p><span class="math display">\[
 L=(y_t-y_e)^2 + b(\pi_t - \pi^T)^2.
-\]</span> Substituting the Phillips curve (<a href="#eq-nk_pi">Equation&nbsp;<span>10.2</span></a>) into the loss function, differentiating with respect to <span class="math inline">\(y_t\)</span>, and simplifying yields the first-order condition:</p>
+\]</span> Substituting the Phillips curve (<a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a>) into the loss function, differentiating with respect to <span class="math inline">\(y_t\)</span>, and simplifying yields the first-order condition:</p>
 <p><span class="math display">\[
 y_t-y_e = -a_2b(\pi-\pi^T),
 \]</span></p>
-<p>which can also be regarded as a monetary policy rule. Next, substitute the Phillips curve (<a href="#eq-nk_pi">Equation&nbsp;<span>10.2</span></a>), the IS-curve (<a href="#eq-nk_y">Equation&nbsp;<span>10.1</span></a>), and the stabilising interest rate (<a href="#eq-nk_rs">Equation&nbsp;<span>10.3</span></a>) into the monetary policy rule and define <span class="math inline">\(a_3 = \frac{1}{a_1(\frac{1}{a_2b} + a_2)}\)</span>, which yields the interest rate rule (<a href="#eq-nk_r">Equation&nbsp;<span>10.4</span></a>).</p>
+<p>which can also be regarded as a monetary policy rule. Next, substitute the Phillips curve (<a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a>), the IS-curve (<a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a>), and the stabilising interest rate (<a href="#eq-nk_rs" class="quarto-xref">Equation&nbsp;<span>10.3</span></a>) into the monetary policy rule and define <span class="math inline">\(a_3 = \frac{1}{a_1(\frac{1}{a_2b} + a_2)}\)</span>, which yields the interest rate rule (<a href="#eq-nk_r" class="quarto-xref">Equation&nbsp;<span>10.4</span></a>).</p>
 </section></section><section id="equilibrium-solutions-and-stability-analysis" class="level3"><h3 class="anchored" data-anchor-id="equilibrium-solutions-and-stability-analysis">Equilibrium solutions and stability analysis</h3>
 <p>By definition, in the steady state we have <span class="math inline">\(y^*=y_e\)</span>. This implies that <span class="math inline">\(r^*=r_s\)</span>. From this, it follows that <span class="math inline">\(\pi^* = \pi^T\)</span>.</p>
-<p>To analyse the dynamic stability of the model, we rewrite it as a system of first-order difference equations. To this end, substitute <a href="#eq-nk_y">Equation&nbsp;<span>10.1</span></a> into <a href="#eq-nk_pi">Equation&nbsp;<span>10.2</span></a>, which yields: <span id="eq-nk_pi_reduc"><span class="math display">\[
+<p>To analyse the dynamic stability of the model, we rewrite it as a system of first-order difference equations. To this end, substitute <a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a> into <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a>, which yields: <span id="eq-nk_pi_reduc"><span class="math display">\[
 \pi_t = \pi_{t-1} + a_2(A - a_1r_{t-1}-y_e)
 \tag{10.7}\]</span></span></p>
-<p>Substitute this equation into <a href="#eq-nk_r">Equation&nbsp;<span>10.4</span></a>, which yields: <span id="eq-nk_r_reduc"><span class="math display">\[
+<p>Substitute this equation into <a href="#eq-nk_r" class="quarto-xref">Equation&nbsp;<span>10.4</span></a>, which yields: <span id="eq-nk_r_reduc"><span class="math display">\[
 r_t= r_{s} + a_3[\pi_{t-1} + a_2(A - a_1r_{t-1}-y_e) - \pi^T].
 \tag{10.8}\]</span></span></p>
-<p>The Jacobian matrix of the system in <a href="#eq-nk_y">Equation&nbsp;<span>10.1</span></a>, <a href="#eq-nk_pi_reduc">Equation&nbsp;<span>10.7</span></a>, and <a href="#eq-nk_r_reduc">Equation&nbsp;<span>10.8</span></a> is given by: <span class="math display">\[
+<p>The Jacobian matrix of the system in <a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a>, <a href="#eq-nk_pi_reduc" class="quarto-xref">Equation&nbsp;<span>10.7</span></a>, and <a href="#eq-nk_r_reduc" class="quarto-xref">Equation&nbsp;<span>10.8</span></a> is given by: <span class="math display">\[
 J=\begin{bmatrix} 0&amp; 0 &amp;-a_1 \\0 &amp; 1 &amp; -a_1 a_2 \\ 0 &amp; a_3 &amp; -a_1 a_2 a_3 \end{bmatrix}.
 \]</span> The eigenvalues of the Jacobian can be obtained from the characteristic polynomial <span class="math inline">\(\lambda^3 - Tr(J)\lambda^2 + [Det(J_1) + Det(J_2) + Det(J_3)]\lambda - Det(J) = 0\)</span>, where <span class="math inline">\(Tr(J)\)</span> and <span class="math inline">\(Det(J\)</span>) are the trace and determinant, respectively, and <span class="math inline">\(Det(J_i)\)</span> refers to the <span class="math inline">\(i_{th}\)</span> principal minor of the matrix. As there is a column in the Jacobian that only contains zeros, it follows that the matrix is singular and will have a zero determinant. In addition, all principal minors turn out to be zero. The characteristic polynomial thus reduces to <span class="math inline">\(\lambda^2[\lambda - Tr(J)]=0\)</span>. From this, it is immediate that <span class="math inline">\(\lambda_{1,2}=0\)</span> and <span class="math inline">\(\lambda_{3}=Tr(J)\)</span>, where <span class="math inline">\(Tr(J)=1-a_1a_2a_3=\frac{1}{1+a_2^2b}\)</span>. Stability requires the single real eigenvalue to be smaller than unity (in absolute terms). With <span class="math inline">\(\lambda_3=\frac{1}{1+a_2^2b}\)</span>, stability thus only requires <span class="math inline">\(a_2 \neq 0\)</span> and <span class="math inline">\(b&gt;0\)</span>, i.e.&nbsp;the output gap needs to impact inflation (otherwise the key channel through which interest rate policy brings inflation back on target is blocked) and the central bank needs to assign a (non-negative) loss to deviations of actual inflation from its target.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 <p>We can verify these analytical solutions by comparing them with the results from the numerical solution:</p>
@@ -788,7 +835,7 @@ Python code
 </section></section><section id="references" class="level2"><h2 class="anchored" data-anchor-id="references">References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Carlin2014" class="csl-entry" role="listitem">
 Carlin, Wendy, and David Soskice. 2014. <em>Macroeconomics. Instititions, Instability, and the Financial System</em>. Oxford University Press.
 </div>
@@ -844,6 +891,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -912,13 +986,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'alternate';
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -997,10 +1073,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1010,8 +1085,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1024,6 +1108,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1067,6 +1270,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1092,6 +1296,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1151,23 +1381,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./intro_stability_analysis.html" class="pagination-link">
+      <a href="./intro_stability_analysis.html" class="pagination-link" aria-label="An Introduction to the Analysis of Dynamic Models">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">An Introduction to the Analysis of Dynamic Models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./a_sraffian_supermultiplier_model.html" class="pagination-link">
+      <a href="./a_sraffian_supermultiplier_model.html" class="pagination-link" aria-label="A Sraffian Supermultiplier Model">
         <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">An open-source platform for macroeconomic model simulation.</div>   
+    <div class="nav-footer-left">
+<p>An open-source platform for macroeconomic model simulation.</p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
-    </div>
-    <div class="nav-footer-right"><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></p>
+</div>
   </div>
 </footer>
 

@@ -316,7 +316,7 @@ legend("topleft", legend=c("w", "pshare"),
 
 ```{r lewis6, collapse=TRUE}
 #| label: fig-scen2
-#| fig-cap: Output in  modern sector (baseline vs decrease in subsistence wage)
+#| fig-cap: Output in modern sector (baseline vs decrease in subsistence wage)
 
 plot(Y2[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlim=range(0:(Tmax)), xlab="", ylab="Y2", ylim=range(Y2[1, Tmin:Tmax],Y2[1, Tmin:(Tmax)])) 
 title(main="Output in  modern sector: baseline vs decrease in subsistence wage", xlab = 'Time',cex=0.8 ,line=2)

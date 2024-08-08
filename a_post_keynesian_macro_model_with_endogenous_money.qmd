@@ -12,61 +12,61 @@ In this short-run model, prices are flexible but the capital stock is fixed. The
 
 $$
 Y=ND+cD
-$$ {#eq-Y}
+$$ {#eq-Y-PK}
 
 $$
 ND=bY, \quad b \in (0,1)
-$$ {#eq-ND}
+$$ {#eq-ND-PK}
 
 $$
 D= d_0 - d_1r, \quad d_1 > 0
-$$ {#eq-D}
+$$ {#eq-D-PK}
 
 $$
 i=i_0 + i_1P, \quad i_1 > 0
-$$ {#eq-i}
+$$ {#eq-i-PK}
 
 $$
 r=(1+m)i, \quad m > 0
-$$ {#eq-r}
+$$ {#eq-r-PK}
 
 $$
 dL=cD
-$$ {#eq-dL}
+$$ {#eq-dL-PK}
 
 $$
 dM=dL
-$$ {#eq-dM}
+$$ {#eq-dM-PK}
 
 $$
 dR=kdM, \quad k \in (0,1)
-$$ {#eq-dR}
+$$ {#eq-dR-PK}
 
 $$
 P=(1+n)aW, \quad a,n > 0
-$$ {#eq-P}
+$$ {#eq-P-PK}
 
 $$
 W=W_0 - hU, \quad h > 0
-$$ {#eq-W}
+$$ {#eq-W-PK}
 
 $$
 w=\frac{1}{(1+n)a}
-$$ {#eq-w}
+$$ {#eq-w-PK}
 
 $$
 N=aY
-$$ {#eq-N}
+$$ {#eq-N-PK}
 
 $$
 U=1-\frac{N}{N^f}
-$$ {#eq-U}
+$$ {#eq-U-PK}
 
 where $Y$, $ND$, $D$, $r$, $i$, $P$, $dL$, $dM$, $dR$, $W$, $w$, $N$, $U$, and $N^f$ are output, the not debt-financed component of aggregate demand, the desired debt-financed component of aggregate demand, the lending rate, the policy rate, the price level, the change in loans, the change in money (bank deposits), the change in bank reserves, the nominal wage, the real wage, employment, the unemployment rate, and full employment (or total labour supply), respectively.
 
-@eq-Y is the goods market equilibrium condition. Aggregate supply ($Y$) accommodates to the level of aggregate demand which is the sum of a not debt-financed component ($ND$) and a (desired) debt-financed component ($D$). The coefficient $c$ is the proportion of loan applications that are deemed creditworthy and thus captures credit rationing by banks. By @eq-ND, the not debt-financed component of aggregate demand is a function of current income. In @eq-D, the debt-financed component of aggregate demand has an autonomous component ($d_0$)^[For simplicity, it is assumed that all autonomous demand is debt-financed, i.e. there is no spending out of wealth.] and is otherwise negatively related to the lending rate $r$. @eq-i specifies the monetary policy rule, where it is assumed that the central bank raises the policy rate $i$ when the price level increases.^[This specification is somewhat unrealistic given that most modern central banks target a positive rate of inflation. However, it allows for an AS-AD representation of the model, which facilitates the comparison with the Neoclassical Synthesis model (@sec-neoclassical-synthesis) The lending rate in @eq-r is given by a mark-up $m$ that banks charge on the policy rate (which is the rate at which they can borrow reserves). The change in loans in @eq-dL is equal to the creditworthy demand for loans ($cD$). This captures the demand-driven nature of credit creation. The changes in loans translates one-to-one into a change in money, which are bank deposits in this model (@eq-dM). This reflects the endogenous money creation process where commercial banks create new deposits when they make new loans. By @eq-dR, banks obtain new reserves from the central bank to maintain a constant reserve-to-deposit ratio $k$. Thus, the causality in this model runs from debt-financed demand to loans, to deposits, and finally to reserves. 
+@eq-Y-PK is the goods market equilibrium condition. Aggregate supply ($Y$) accommodates to the level of aggregate demand which is the sum of a not debt-financed component ($ND$) and a (desired) debt-financed component ($D$). The coefficient $c$ is the proportion of loan applications that are deemed creditworthy and thus captures credit rationing by banks. By @eq-ND-PK, the not debt-financed component of aggregate demand is a function of current income. In @eq-D-PK, the debt-financed component of aggregate demand has an autonomous component ($d_0$)^[For simplicity, it is assumed that all autonomous demand is debt-financed, i.e. there is no spending out of wealth.] and is otherwise negatively related to the lending rate $r$. @eq-i-PK specifies the monetary policy rule, where it is assumed that the central bank raises the policy rate $i$ when the price level increases.^[This specification is somewhat unrealistic given that most modern central banks target a positive rate of inflation. However, it allows for an AS-AD representation of the model, which facilitates the comparison with the Neoclassical Synthesis model (@sec-neoclassical-synthesis) The lending rate in @eq-r-PK is given by a mark-up $m$ that banks charge on the policy rate (which is the rate at which they can borrow reserves). The change in loans in @eq-dL-PK is equal to the creditworthy demand for loans ($cD$). This captures the demand-driven nature of credit creation. The changes in loans translates one-to-one into a change in money, which are bank deposits in this model (@eq-dM-PK). This reflects the endogenous money creation process where commercial banks create new deposits when they make new loans. By @eq-dR-PK, banks obtain new reserves from the central bank to maintain a constant reserve-to-deposit ratio $k$. Thus, the causality in this model runs from debt-financed demand to loans, to deposits, and finally to reserves. 
 
-By @eq-P, the price level is set by firms based on a mark-up ($n$) on unit labour cost (which are the product of the nominal wage $W$ and the labour coefficient $a$). Nominal wages are set by workers based on their bargaining power, which is declining in the unemployment rate (@eq-U). The real wage in @eq-w is derived from the pricing @eq-P, i.e. through their price setting power, firms ultimately determine the real wage. The level of employment in @eq-N is determined residually based on economic activity and a constant-coefficient production function $(Y=\frac{N}{a})$. Finally, the level of employment in conjunction with an exogenously given labour force $N^f$ (or total available labour time) can be used to obtain an unemployment rate in @eq-U.
+By @eq-P-PK, the price level is set by firms based on a mark-up ($n$) on unit labour cost (which are the product of the nominal wage $W$ and the labour coefficient $a$). Nominal wages are set by workers based on their bargaining power, which is declining in the unemployment rate (@eq-U-PK). The real wage in @eq-w-PK is derived from the pricing @eq-P-PK, i.e. through their price setting power, firms ultimately determine the real wage. The level of employment in @eq-N-PK is determined residually based on economic activity and a constant-coefficient production function $(Y=\frac{N}{a})$. Finally, the level of employment in conjunction with an exogenously given labour force $N^f$ (or total available labour time) can be used to obtain an unemployment rate in @eq-U-PK.
 
 ## Simulation
 
@@ -544,25 +544,25 @@ In Figure @fig-dg-pkmacro, it can be seen that credit rationing ($c$), productiv
 
 Like the Neoclassical Synthesis model, the post-Keynesian macro model can be represented as an AS-AD model. First, we will derive an IS and an MP curve in the $(Y, r)$-space, the latter representing monetary policy instead of the money market (the conventional LM curve). Then we obtain the AS-AD representation of the model in the $(Y,P)$-space. Finally, we obtain equilibrium solutions for $Y$ and $P$.
 
-To obtain the IS-curve, substitute @eq-ND - @eq-r into @eq-Y and solve for $Y$:
+To obtain the IS-curve, substitute @eq-ND-PK - @eq-r-PK into @eq-Y-PK and solve for $Y$:
 \begin{align}\label{eq:IS}\tag{IS}
 Y&=\left(\frac{1}{1-b}\right)\Bigl[c(d_0 -d_1r)\Bigr].
 \end{align}	
 
-To obtain the MP-curve, substitute @eq-i, @eq-P, @eq-W, @eq-N, and @eq-U into @eq-r :
+To obtain the MP-curve, substitute @eq-i-PK, @eq-P-PK, @eq-W-PK, @eq-N-PK, and @eq-U-PK into @eq-r-PK :
 \begin{align}\label{eq:MP}\tag{MP}
 r&=\left(1+m\right)\Bigl[i_0+i_1(1+n)a[W_0-h\bigl(1-\frac{aY}{N^f}\bigr)]\Bigr].
 \end{align}	
 
 It can readily be seen that the IS-curve is downward-sloping and the MP-curve is upward-sloping in the $(Y, r)$-space
 
-To obtain the AD-curve, substitute @eq-r and @eq-i into the IS-curve:
+To obtain the AD-curve, substitute @eq-r-PK and @eq-i-PK into the IS-curve:
 
 \begin{align}\label{eq:AD}\tag{AD}
 Y&=\left(\frac{1}{1-b}\right)\Bigl[c(d_0 -d_1(1+m)(i_0+i_1P))\Bigr].
 \end{align}	
 
-Finally, to obtain the AS-curve, substitute @eq-W and @eq-U into @eq-P:
+Finally, to obtain the AS-curve, substitute @eq-W-PK and @eq-U-PK into @eq-P-PK:
 
 \begin{align}\label{eq:AS}\tag{AS}
 P&=\left(1+n\right)a\Bigl[W_0-h\bigl(1-\frac{aY}{N^f}\bigr)\Bigr].

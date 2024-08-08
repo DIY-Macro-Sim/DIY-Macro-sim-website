@@ -184,7 +184,7 @@ C_eq
 
 Let's break this code down a little bit:
 
--   set the number of scenarios $S$, define parameter values, and create vectors of length $S$ in which results for endogenous variables will be stored
+-   set the number of scenarios $S$, define parameter values, and create vectors of length $S$ in which the results for the endogenous variables will be stored
 
 -   define changes in exogenous variables or parameters (i.e. construct different scenarios)
 
@@ -192,7 +192,7 @@ Let's break this code down a little bit:
 
 -   write down the equations (solved for the endogenous variables such that every endogenous variable of the system appears on the left-hand side of an equation exactly once)
 
--   place these equations inside a for loop
+-   place these equations inside a *for loop*
 
     -   the loop says: repeat the segment of code insights the curly brackets 1000 times
 
@@ -403,13 +403,13 @@ The code solves the recursive system numerically through iteration. Let's again 
 
 -   set the number of periods for which we want to simulate the model (here $Q=100$), set the number of scenarios $S$ and the period $s$ in which a change in the scenario should occur
 
--   set the parameter values and create $(S \times Q)$ matrices in which results for endogenous variables will be stored, such that the columns represent time and the rows represent different scenarios; initialise the endogenous variables
+-   set the parameter values and create $(S \times Q)$ matrices in which the results for the endogenous variables will be stored, such that the columns represent time and the rows represent different scenarios; initialise the endogenous variables
 
 -   define changes in exogenous variables or parameters (i.e. construct different scenarios)
 
 -   write down the equations (solved for the endogenous variables such that every endogenous variable of the system appears on the left-hand side of an equation exactly once)
 
--   place these equations inside a for loop that runs from $t=2$ to $Q$
+-   place these equations inside a *for loop* that runs from $t=2$ to $Q$
 
     -   the loop says: repeat the segment of code insights the curly brackets, each time with the index number $t$ shifted by $+1$ until $t=Q$
 

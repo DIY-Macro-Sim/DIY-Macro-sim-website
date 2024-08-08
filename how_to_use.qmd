@@ -32,7 +32,7 @@ Besides being free, a key advantage of both *R* and *Python* is their huge and g
 
 Once you have installed *R* or *Python*, you can play with the codes on this platform yourself by copy and pasting them into the script panel of your local interface (IDE) and hitting CTRL + Enter to execute them. Don't forget to always comment your code using the "#" symbol and to save your scripts to make sure your future self can seamlessness continue working on it.
 
-The codes below covers some basic operations.^[We are grateful to Rafael Wildauer for permission to reproduce a slightly modified version of his learning materials. In addition, some of the material below is taken from [here](https://www.w3schools.com/r/default.asp).]. If you are new to *R* or *Python* and keen to get started, do the following:
+The codes below covers some basic operations.^[We are grateful to Rafael Wildauer for permission to reproduce a slightly modified version of his learning materials. In addition, some of the material below is taken from [here](https://www.w3schools.com/r/default.asp).] If you are new to *R* or *Python* and keen to get started, do the following:
 
 - copy the codes below into the script panel of *RStudio* or *Spyder* on your machine
 - adjust the working directory to your personal folder

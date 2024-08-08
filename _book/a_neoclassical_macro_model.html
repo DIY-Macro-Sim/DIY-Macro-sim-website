@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.321">
+<meta name="generator" content="quarto-1.4.550">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>DIY Macroeconomic Model Simulation - 3&nbsp; A Neoclassical Macro Model</title>
 <style>
@@ -19,7 +19,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -55,6 +55,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -97,7 +98,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -106,29 +113,56 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./a_neoclassical_macro_model.html">Static Models</a></li><li class="breadcrumb-item"><a href="./a_neoclassical_macro_model.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./a_neoclassical_macro_model.html">Static Models</a></li><li class="breadcrumb-item"><a href="./a_neoclassical_macro_model.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">DIY Macroeconomic Model Simulation</a> 
         <div class="sidebar-tools-main">
@@ -270,7 +304,7 @@ div.csl-indent {
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
@@ -296,10 +330,10 @@ div.csl-indent {
   </ul>
 </li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./a_neoclassical_macro_model.html">Static Models</a></li><li class="breadcrumb-item"><a href="./a_neoclassical_macro_model.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title"><span id="sec-neoclassical-model" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></span></h1>
 </div>
 
@@ -312,6 +346,7 @@ div.csl-indent {
     
   </div>
   
+
 
 </header><section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>This model captures some key features of neoclassical macroeconomics. The model is based on the optimising behaviour of firms and households that interact in perfect markets. Households choose between labour and leisure as well as current and future consumption. They form (rational) expectations about their future income that impact their consumption decisions today. Firms are owned by households and maximise profits using a constant returns to scale technology (with diminishing marginal returns to factors of production). Markets are competitive and clear instantaneously through flexible prices. The most important market is the labour market, in which the equilibrium between firms’ demand and households’ supply of labour is established by a flexible real wage. The level of employment established on the labour market then determines aggregate supply via the production function. Aggregate demand always accommodates to aggregate supply via a flexible real interest rate that establishes an equilibrium between investment and saving (often interpreted as the market for loanable funds). The money supply is exogenous in this model and only impacts the price level but not the real economy – the so-called <em>Classical Dichotomy</em> (or neutrality of money). Government expenditures do influence the real economy but they crowd out private expenditures (through a mechanism called <em>Ricardian Equivalence</em>).</p>
@@ -351,7 +386,7 @@ M_d=\frac{b_3(1+r_n)PC}{r_n}
 M = M_d(P)= M_s
 \tag{3.11}\]</span></span></p>
 <p>where <span class="math inline">\(Y\)</span>, <span class="math inline">\(K\)</span>, <span class="math inline">\(N\)</span>, <span class="math inline">\(w\)</span>, <span class="math inline">\(C\)</span>, <span class="math inline">\(G\)</span>, <span class="math inline">\(r\)</span>, <span class="math inline">\(I\)</span>, <span class="math inline">\(r_n\)</span>, <span class="math inline">\(\pi\)</span>, <span class="math inline">\(M_s\)</span>, <span class="math inline">\(M_d\)</span>, and <span class="math inline">\(P_t\)</span> are real output, the capital stock, employment, the real wage, consumption, government expenditures, the real interest rate, investment, the nominal interest rate, inflation, the money supply, money demand, and the price level, respectively. The <span class="math inline">\(f\)</span>-superscript denotes (expected) future values. For simplicity, expected future variables will be treated as exogenous.</p>
-<p>By <a href="#eq-Y_NC">Equation&nbsp;<span>3.1</span></a>, output is determined by a Cobb-Douglass production function with constant returns to scale and diminishing marginal returns to each factor (capital and labour). <a href="#eq-w_NC">Equation&nbsp;<span>3.2</span></a> is the labour demand of firms solved for the real wage. Profit maximising firms will hire workers until the real wage is equal to the marginal product of labour <span class="math inline">\(\left(\frac{\partial Y}{\partial N}=(1-a)AK^aN^{-a}\right)\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <a href="#eq-N_NC">Equation&nbsp;<span>3.3</span></a> specifies households’ labour supply, which is positively related to the real wage. By <a href="#eq-C_NC">Equation&nbsp;<span>3.4</span></a>, consumption is positively related to the real wage, current and (expected) future income,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and negatively related to the real interest rate. The composite parameters <span class="math inline">\(c_1= \left(\frac{1}{1+b_2+b_3}\right)\)</span> and <span class="math inline">\(c_2= b_1(b_2+b_3)\)</span> stem from the weights in the household’s utility function (see analytical discussion below). The consumption function implies that for a higher real interest rate, households increase their saving (the supply of loanable funds). Furthermore, consumption is negatively related to current and future government expenditures. This is an implication of consumption smoothing: as households know that governments will have to repay its debts in the future through higher taxes, an increase in government expenditures today is perceived as an increase in taxes (regardless of whether the government finances its current expenditures through taxes or debt, a result that is also called ‘Ricardian Equivalence’).<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <a href="#eq-I_NC">Equation&nbsp;<span>3.5</span></a> specifies investment as a negative function of the real interest rate and a positive function of productivity. By <a href="#eq-G_NC">Equation&nbsp;<span>3.6</span></a>, government expenditures are exogenous. <a href="#eq-Y_eq_NC">Equation&nbsp;<span>3.7</span></a> is the goods market equilibrium condition, which pins down the equilibrium real interest rate through the market for loanable funds. <a href="#eq-rn_NC">Equation&nbsp;<span>3.8</span></a> specifies the nominal interest rate using the well-known Fisher equation. <a href="#eq-MS_NC">Equation&nbsp;<span>3.9</span></a> says that the money supply is exogenous. By <a href="#eq-MD_NC">Equation&nbsp;<span>3.10</span></a>, households’ money demand is negatively related to the nominal interest rate and positively related to consumption (capturing the transaction demand for money). Finally, <a href="#eq-M_eq_NC">Equation&nbsp;<span>3.11</span></a> is the equilibrium condition for the money market, which pins down the price level.</p>
+<p>By <a href="#eq-Y_NC" class="quarto-xref">Equation&nbsp;<span>3.1</span></a>, output is determined by a Cobb-Douglass production function with constant returns to scale and diminishing marginal returns to each factor (capital and labour). <a href="#eq-w_NC" class="quarto-xref">Equation&nbsp;<span>3.2</span></a> is the labour demand of firms solved for the real wage. Profit maximising firms will hire workers until the real wage is equal to the marginal product of labour <span class="math inline">\(\left(\frac{\partial Y}{\partial N}=(1-a)AK^aN^{-a}\right)\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <a href="#eq-N_NC" class="quarto-xref">Equation&nbsp;<span>3.3</span></a> specifies households’ labour supply, which is positively related to the real wage. By <a href="#eq-C_NC" class="quarto-xref">Equation&nbsp;<span>3.4</span></a>, consumption is positively related to the real wage, current and (expected) future income,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and negatively related to the real interest rate. The composite parameters <span class="math inline">\(c_1= \left(\frac{1}{1+b_2+b_3}\right)\)</span> and <span class="math inline">\(c_2= b_1(b_2+b_3)\)</span> stem from the weights in the household’s utility function (see analytical discussion below). The consumption function implies that for a higher real interest rate, households increase their saving (the supply of loanable funds). Furthermore, consumption is negatively related to current and future government expenditures. This is an implication of consumption smoothing: as households know that governments will have to repay its debts in the future through higher taxes, an increase in government expenditures today is perceived as an increase in taxes (regardless of whether the government finances its current expenditures through taxes or debt, a result that is also called ‘Ricardian Equivalence’).<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <a href="#eq-I_NC" class="quarto-xref">Equation&nbsp;<span>3.5</span></a> specifies investment as a negative function of the real interest rate and a positive function of productivity. By <a href="#eq-G_NC" class="quarto-xref">Equation&nbsp;<span>3.6</span></a>, government expenditures are exogenous. <a href="#eq-Y_eq_NC" class="quarto-xref">Equation&nbsp;<span>3.7</span></a> is the goods market equilibrium condition, which pins down the equilibrium real interest rate through the market for loanable funds. <a href="#eq-rn_NC" class="quarto-xref">Equation&nbsp;<span>3.8</span></a> specifies the nominal interest rate using the well-known Fisher equation. <a href="#eq-MS_NC" class="quarto-xref">Equation&nbsp;<span>3.9</span></a> says that the money supply is exogenous. By <a href="#eq-MD_NC" class="quarto-xref">Equation&nbsp;<span>3.10</span></a>, households’ money demand is negatively related to the nominal interest rate and positively related to consumption (capturing the transaction demand for money). Finally, <a href="#eq-M_eq_NC" class="quarto-xref">Equation&nbsp;<span>3.11</span></a> is the equilibrium condition for the money market, which pins down the price level.</p>
 </section><section id="simulation" class="level2"><h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
 <section id="parameterisation" class="level3"><h3 class="anchored" data-anchor-id="parameterisation">Parameterisation</h3>
 <p>Table 1 reports the parameterisation used in the simulation. Besides a baseline (labelled as scenario 1), five further scenarios will be considered. Scenarios 2 and 3 are a monetary expansion (increase in the exogenous money supply <span class="math inline">\(M_0\)</span>) and fiscal expansion (increase in <span class="math inline">\(G_0\)</span>), respectively. Scenario 4 is an improvement in total factor productivity (<span class="math inline">\(A\)</span>) and scenario 5 a fall in expected future income (<span class="math inline">\(Y^f\)</span>). Finally, scenario 6 is a shift in household preferences towards more leisure (<span class="math inline">\(b_1\)</span>).</p>
@@ -658,35 +693,44 @@ Python code
 </div>
 </div>
 </section><section id="plots" class="level3"><h3 class="anchored" data-anchor-id="plots">Plots</h3>
-<p>Figures <a href="#fig-output-neocl">Figure&nbsp;<span>3.1</span></a> - <a href="#fig-employment-neocl">Figure&nbsp;<span>3.3</span></a> depicts the model economy’s real activity under different scenarios. Monetary expansions (scenario 2) have no effects on output and employment, capturing the idea of money neutrality (Classical Dichotomy). However, the monetary expansion does raise the price level (see <a href="#fig-price_level">Figure&nbsp;<span>3.2</span></a> ), capturing the key idea of the Quantity Theory of Money that inflation is driven by a growing money supply.</p>
+<p>Figures <a href="#fig-output-neocl" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> - <a href="#fig-employment-neocl" class="quarto-xref">Figure&nbsp;<span>3.3</span></a> depicts the model economy’s real activity under different scenarios. Monetary expansions (scenario 2) have no effects on output and employment, capturing the idea of money neutrality (Classical Dichotomy). However, the monetary expansion does raise the price level (see <a href="#fig-price_level" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> ), capturing the key idea of the Quantity Theory of Money that inflation is driven by a growing money supply.</p>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">Y_star</span>, ylab<span class="op">=</span><span class="st">"Y"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: Baseline"</span>, <span class="st">"2: Increase in M0"</span>, <span class="st">"3: Increase in G0"</span>,<span class="st">"4: Increase in A"</span>, <span class="st">"5: Decrease in Yf"</span>, <span class="st">"6: Increase in b1"</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-output-neocl" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="a_neoclassical_macro_model_files/figure-html/fig-output-neocl-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.1: Output</figcaption><p></p>
-</figure>
+<div id="fig-output-neocl" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-output-neocl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_neoclassical_macro_model_files/figure-html/fig-output-neocl-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-output-neocl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: Output
+</figcaption></figure>
 </div>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">P_star</span>, ylab<span class="op">=</span><span class="st">"P"</span>,  names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: Baseline"</span>, <span class="st">"2: Increase in M0"</span>, <span class="st">"3: Increase in G0"</span>,<span class="st">"4: Increase in A"</span>, <span class="st">"5: Decrease in Yf"</span>, <span class="st">"6: Increase in b1"</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-price_level" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="a_neoclassical_macro_model_files/figure-html/fig-price_level-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.2: Price level</figcaption><p></p>
-</figure>
+<div id="fig-price_level" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-price_level-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_neoclassical_macro_model_files/figure-html/fig-price_level-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-price_level-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2: Price level
+</figcaption></figure>
 </div>
 </div>
 </div>
-<p>An increase in government spending (by one unit) in scenario 3 does <em>not</em> raise employment and real output as these are fully determined by the supply side rather than aggregate demand.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Looking at Figures <a href="#fig-consumption">Figure&nbsp;<span>3.4</span></a> and <a href="#fig-investment">Figure&nbsp;<span>3.5</span></a>, it can be seen that government spending crowds out private spending (consumption and investment). The decrease in consumption is a result of consumption smoothing via the Euler equation: the household anticipates higher taxes in the future and reduces current consumption somewhat to smooth out the impact. The increase in government expenditures also raises demand for loanable funds, which pushes up the real interest rate (see <a href="#fig-interest_rate">Figure&nbsp;<span>3.6</span></a>) and reduces investment (<a href="#fig-investment">Figure&nbsp;<span>3.5</span></a>) and consumption. There is also an inflationary effect linked to the higher real interest rate, which raises the nominal interest rate and reduces the demand for money.</p>
+<p>An increase in government spending (by one unit) in scenario 3 does <em>not</em> raise employment and real output as these are fully determined by the supply side rather than aggregate demand.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Looking at Figures <a href="#fig-consumption" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> and <a href="#fig-investment" class="quarto-xref">Figure&nbsp;<span>3.5</span></a>, it can be seen that government spending crowds out private spending (consumption and investment). The decrease in consumption is a result of consumption smoothing via the Euler equation: the household anticipates higher taxes in the future and reduces current consumption somewhat to smooth out the impact. The increase in government expenditures also raises demand for loanable funds, which pushes up the real interest rate (see <a href="#fig-interest_rate" class="quarto-xref">Figure&nbsp;<span>3.6</span></a>) and reduces investment (<a href="#fig-investment" class="quarto-xref">Figure&nbsp;<span>3.5</span></a>) and consumption. There is also an inflationary effect linked to the higher real interest rate, which raises the nominal interest rate and reduces the demand for money.</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">N_star</span>, ylab<span class="op">=</span><span class="st">"N"</span>,  names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: Baseline"</span>, <span class="st">"2: Increase in M0"</span>, <span class="st">"3: Increase in G0"</span>,<span class="st">"4: Increase in A"</span>, <span class="st">"5: Decrease in Yf"</span>, <span class="st">"6: Increase in b1"</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-employment-neocl" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="a_neoclassical_macro_model_files/figure-html/fig-employment-neocl-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.3: Employment</figcaption><p></p>
-</figure>
+<div id="fig-employment-neocl" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-employment-neocl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_neoclassical_macro_model_files/figure-html/fig-employment-neocl-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-employment-neocl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.3: Employment
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -694,31 +738,40 @@ Python code
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">C_star</span>, ylab<span class="op">=</span><span class="st">"C"</span>,  names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: Baseline"</span>, <span class="st">"2: Increase in M0"</span>, <span class="st">"3: Increase in G0"</span>,<span class="st">"4: Increase in A"</span>, <span class="st">"5: Decrease in Yf"</span>, <span class="st">"6: Increase in b1"</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-consumption" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="a_neoclassical_macro_model_files/figure-html/fig-consumption-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.4: Consumption</figcaption><p></p>
-</figure>
+<div id="fig-consumption" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-consumption-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_neoclassical_macro_model_files/figure-html/fig-consumption-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-consumption-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.4: Consumption
+</figcaption></figure>
 </div>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">I_star</span>, ylab<span class="op">=</span><span class="st">"I"</span>,  names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: Baseline"</span>, <span class="st">"2: Increase in M0"</span>, <span class="st">"3: Increase in G0"</span>,<span class="st">"4: Increase in A"</span>, <span class="st">"5: Decrease in Yf"</span>, <span class="st">"6: Increase in b1"</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-investment" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="a_neoclassical_macro_model_files/figure-html/fig-investment-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.5: Investment</figcaption><p></p>
-</figure>
+<div id="fig-investment" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-investment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_neoclassical_macro_model_files/figure-html/fig-investment-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-investment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.5: Investment
+</figcaption></figure>
 </div>
 </div>
 </div>
-<p>A decrease in expected future income (scenario 5) has a small expansionary effect on aggregate output. This is because households will reduce some of their current consumption (see <a href="#fig-consumption">Figure&nbsp;<span>3.4</span></a> ) and supply more labour to smooth their consumption over time. The increase in saving reduces the real interest rate (see <a href="#fig-interest_rate">Figure&nbsp;<span>3.6</span></a> ) and is compensated by an increase in investment (see <a href="#fig-investment">Figure&nbsp;<span>3.5</span></a> ).</p>
+<p>A decrease in expected future income (scenario 5) has a small expansionary effect on aggregate output. This is because households will reduce some of their current consumption (see <a href="#fig-consumption" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> ) and supply more labour to smooth their consumption over time. The increase in saving reduces the real interest rate (see <a href="#fig-interest_rate" class="quarto-xref">Figure&nbsp;<span>3.6</span></a> ) and is compensated by an increase in investment (see <a href="#fig-investment" class="quarto-xref">Figure&nbsp;<span>3.5</span></a> ).</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">r_star</span>, ylab<span class="op">=</span><span class="st">"r"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: Baseline"</span>, <span class="st">"2: Increase in M0"</span>, <span class="st">"3: Increase in G0"</span>,<span class="st">"4: Increase in A"</span>, <span class="st">"5: Decrease in Yf"</span>, <span class="st">"6: Increase in b1"</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-interest_rate" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="a_neoclassical_macro_model_files/figure-html/fig-interest_rate-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.6: Interest rate</figcaption><p></p>
-</figure>
+<div id="fig-interest_rate" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-interest_rate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_neoclassical_macro_model_files/figure-html/fig-interest_rate-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-interest_rate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.6: Interest rate
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -790,10 +843,13 @@ Python code
 <span>     edge.arrow.width<span class="op">=</span><span class="fl">1.2</span>, edge.color<span class="op">=</span><span class="st">"black"</span>, vertex.label.cex<span class="op">=</span><span class="fl">1.2</span>, </span>
 <span>     vertex.frame.color<span class="op">=</span><span class="st">"NA"</span>, margin<span class="op">=</span><span class="op">-</span><span class="fl">0.08</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-dg" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="a_neoclassical_macro_model_files/figure-html/fig-dg-2.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.7: Directed graph</figcaption><p></p>
-</figure>
+<div id="fig-dg" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-dg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_neoclassical_macro_model_files/figure-html/fig-dg-2.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.7: Directed graph
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -867,7 +923,7 @@ Python code
 </div>
 </div>
 </div>
-<p>In <a href="#fig-dg">Figure&nbsp;<span>3.7</span></a> , it can be seen that productivity (<span class="math inline">\(A\)</span>), future income (<span class="math inline">\(Y^f\)</span>), the money supply (<span class="math inline">\(M_0\)</span>), and government spending (<span class="math inline">\(G_0\)</span>) are the key exogenous variables of the model. All other variables are endogenous, and many of them form a closed loop (or cycle) within the system. The left part of the graph captures the supply side: the labour market simultaneously pins down the real wage and employment, which together with the exogenously level of productivity determine output. The part in the middle embodies the demand side: aggregate demand (consumption, investment, and government spending) together with a given level of output determine the real interest rate. The right part captures the nominal side of the model given by the money market, which determines the price level. Notably, while the real side of the model feeds into the money market via the nominal interest rate (<span class="math inline">\(r_n\)</span>), there is not causal effect from the money market to the real side reflecting the Classical Dichotomy.</p>
+<p>In <a href="#fig-dg" class="quarto-xref">Figure&nbsp;<span>3.7</span></a> , it can be seen that productivity (<span class="math inline">\(A\)</span>), future income (<span class="math inline">\(Y^f\)</span>), the money supply (<span class="math inline">\(M_0\)</span>), and government spending (<span class="math inline">\(G_0\)</span>) are the key exogenous variables of the model. All other variables are endogenous, and many of them form a closed loop (or cycle) within the system. The left part of the graph captures the supply side: the labour market simultaneously pins down the real wage and employment, which together with the exogenously level of productivity determine output. The part in the middle embodies the demand side: aggregate demand (consumption, investment, and government spending) together with a given level of output determine the real interest rate. The right part captures the nominal side of the model given by the money market, which determines the price level. Notably, while the real side of the model feeds into the money market via the nominal interest rate (<span class="math inline">\(r_n\)</span>), there is not causal effect from the money market to the real side reflecting the Classical Dichotomy.</p>
 </section><section id="analytical-discussion-derivation-of-behavioural-functions" class="level2"><h2 class="anchored" data-anchor-id="analytical-discussion-derivation-of-behavioural-functions">Analytical discussion: derivation of behavioural functions</h2>
 <section id="the-firms-problem-profit-maximisation" class="level3"><h3 class="anchored" data-anchor-id="the-firms-problem-profit-maximisation">The firm’s problem: profit maximisation</h3>
 <p>The firm’s profit equation is given by:</p>
@@ -888,7 +944,7 @@ Python code
 <p><span id="eq-FOC_I"><span class="math display">\[
 a A K^{a-1} N^{1-a}-r=0 .
 \tag{3.16}\]</span></span></p>
-<p>From <a href="#eq-FOC_Nd">Equation&nbsp;<span>3.15</span></a>, <a href="#eq-w_NC">Equation&nbsp;<span>3.2</span></a> for labour demand can be derived. While the capital stock is pre-determined in every period, the firm can adjust the capital stock through investment. We thus use the first-order condition for capital <a href="#eq-FOC_I">Equation&nbsp;<span>3.16</span></a> to derive <a href="#eq-I_NC">Equation&nbsp;<span>3.5</span></a> for investment demand.</p>
+<p>From <a href="#eq-FOC_Nd" class="quarto-xref">Equation&nbsp;<span>3.15</span></a>, <a href="#eq-w_NC" class="quarto-xref">Equation&nbsp;<span>3.2</span></a> for labour demand can be derived. While the capital stock is pre-determined in every period, the firm can adjust the capital stock through investment. We thus use the first-order condition for capital <a href="#eq-FOC_I" class="quarto-xref">Equation&nbsp;<span>3.16</span></a> to derive <a href="#eq-I_NC" class="quarto-xref">Equation&nbsp;<span>3.5</span></a> for investment demand.</p>
 </section><section id="the-governments-budget-constraint" class="level3"><h3 class="anchored" data-anchor-id="the-governments-budget-constraint">The government’s budget constraint</h3>
 <p>The government’s current and future budget constraints are given by:</p>
 <p><span id="eq-Gbc"><span class="math display">\[
@@ -937,7 +993,7 @@ C^f = (Y-C-G)(1+r)+Y^f -G^f - (1+r)\frac{r_nM}{(1+r_n)P}
 \text { s.t. } &amp; C^f= (Y-C-G)(1+r)+Y^f -G^f - (1+r)\frac{r_nM}{(1+r_n)P} .
 \end{array}
 \]</span></p>
-<p>Substituting the constraint <a href="#eq-ibc">Equation&nbsp;<span>3.25</span></a> for <span class="math inline">\(C^f\)</span> in the utility function, and making use of the identity <span class="math inline">\(Y=\Pi+rK+Nw\)</span>, allows to obtain the following first-order conditions:</p>
+<p>Substituting the constraint <a href="#eq-ibc" class="quarto-xref">Equation&nbsp;<span>3.25</span></a> for <span class="math inline">\(C^f\)</span> in the utility function, and making use of the identity <span class="math inline">\(Y=\Pi+rK+Nw\)</span>, allows to obtain the following first-order conditions:</p>
 <p><span id="eq-FOC_C"><span class="math display">\[
 C=\frac{C^f}{b_2(1+r)} - b_1\ln(1-N)
 \tag{3.26}\]</span></span></p>
@@ -947,18 +1003,18 @@ C=\frac{C^f}{b_2(1+r)} - b_1\ln(1-N)
 <p><span id="eq-FOC_M"><span class="math display">\[
 M=\frac{b_3PC^f(1+r_n)}{b_2(1+r)r_n} .
 \tag{3.28}\]</span></span></p>
-<p>Substituting <a href="#eq-FOC_C">Equation&nbsp;<span>3.26</span></a>, which is often also called the <em>Euler equation</em>, into <a href="#eq-FOC_Ns">Equation&nbsp;<span>3.27</span></a> and <a href="#eq-FOC_M">Equation&nbsp;<span>3.28</span></a> yields <a href="#eq-N_NC">Equation&nbsp;<span>3.3</span></a> for labour supply and <a href="#eq-MD_NC">Equation&nbsp;<span>3.10</span></a> for money demand, respectively. Finally, using <a href="#eq-ibc">Equation&nbsp;<span>3.25</span></a> and <a href="#eq-FOC_M">Equation&nbsp;<span>3.28</span></a> in the Euler <a href="#eq-FOC_C">Equation&nbsp;<span>3.26</span></a> yields the consumption function <a href="#eq-C_NC">Equation&nbsp;<span>3.4</span></a>.</p>
+<p>Substituting <a href="#eq-FOC_C" class="quarto-xref">Equation&nbsp;<span>3.26</span></a>, which is often also called the <em>Euler equation</em>, into <a href="#eq-FOC_Ns" class="quarto-xref">Equation&nbsp;<span>3.27</span></a> and <a href="#eq-FOC_M" class="quarto-xref">Equation&nbsp;<span>3.28</span></a> yields <a href="#eq-N_NC" class="quarto-xref">Equation&nbsp;<span>3.3</span></a> for labour supply and <a href="#eq-MD_NC" class="quarto-xref">Equation&nbsp;<span>3.10</span></a> for money demand, respectively. Finally, using <a href="#eq-ibc" class="quarto-xref">Equation&nbsp;<span>3.25</span></a> and <a href="#eq-FOC_M" class="quarto-xref">Equation&nbsp;<span>3.28</span></a> in the Euler <a href="#eq-FOC_C" class="quarto-xref">Equation&nbsp;<span>3.26</span></a> yields the consumption function <a href="#eq-C_NC" class="quarto-xref">Equation&nbsp;<span>3.4</span></a>.</p>
 </section></section><section id="references" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Garin2021" class="csl-entry" role="listitem">
 Garín, Julio, Robert Lester, and Eric Sims. 2021. <em>Intermediate Macroeconomics</em>. Draft Version 3.0.1. <a href="https://juliogarin.com/files/textbook/GLS_Intermediate_Macro.pdf">https://juliogarin.com/files/textbook/GLS_Intermediate_Macro.pdf</a>.
 </div>
 </div>
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
-<li id="fn1"><p>See the analytical discussion below for a derivation of equations <a href="#eq-w_NC">Equation&nbsp;<span>3.2</span></a> -<a href="#eq-I_NC">Equation&nbsp;<span>3.5</span></a> and <a href="#eq-MD_NC">Equation&nbsp;<span>3.10</span></a> from optimising microfoundations.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>See the analytical discussion below for a derivation of equations <a href="#eq-w_NC" class="quarto-xref">Equation&nbsp;<span>3.2</span></a> -<a href="#eq-I_NC" class="quarto-xref">Equation&nbsp;<span>3.5</span></a> and <a href="#eq-MD_NC" class="quarto-xref">Equation&nbsp;<span>3.10</span></a> from optimising microfoundations.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Households are assumed to form rational expectations. In a deterministic setting, this implies perfect foresight so that expected and actual future income coincide.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>See the analytical discussion below for more details on Ricardian Equivalence.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>This result is partly driven by the use of a non-separable utility function, see analytical discussion below. With a separable utility function, the increase in government spending would increase labour supply and thereby have effects on employment and output.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -1007,6 +1063,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1075,13 +1158,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'alternate';
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1160,10 +1245,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1173,8 +1257,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1187,6 +1280,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1230,6 +1442,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1255,6 +1468,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1314,23 +1553,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./how_to_simulate.html" class="pagination-link">
+      <a href="./how_to_simulate.html" class="pagination-link" aria-label="How to Simulate Economic Models">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to Simulate Economic Models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./an_IS_LM_model.html" class="pagination-link">
+      <a href="./an_IS_LM_model.html" class="pagination-link" aria-label="An IS-LM Model">
         <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">An open-source platform for macroeconomic model simulation.</div>   
+    <div class="nav-footer-left">
+<p>An open-source platform for macroeconomic model simulation.</p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
-    </div>
-    <div class="nav-footer-right"><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></p>
+</div>
   </div>
 </footer>
 

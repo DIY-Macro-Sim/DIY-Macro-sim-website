@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.321">
+<meta name="generator" content="quarto-1.4.550">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>DIY Macroeconomic Model Simulation - 13&nbsp; A Ricardian One-Sector Model</title>
 <style>
@@ -19,7 +19,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -55,6 +55,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -97,7 +98,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -106,29 +113,56 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_stability_analysis.html">Dynamic Models</a></li><li class="breadcrumb-item"><a href="./a_ricardian_one_sector_model.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_stability_analysis.html">Dynamic Models</a></li><li class="breadcrumb-item"><a href="./a_ricardian_one_sector_model.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">DIY Macroeconomic Model Simulation</a> 
         <div class="sidebar-tools-main">
@@ -270,7 +304,7 @@ div.csl-indent {
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
@@ -289,10 +323,10 @@ div.csl-indent {
   <li><a href="#directed-graph" id="toc-directed-graph" class="nav-link" data-scroll-target="#directed-graph">Directed graph</a></li>
   <li><a href="#analytical-discussion" id="toc-analytical-discussion" class="nav-link" data-scroll-target="#analytical-discussion">Analytical discussion</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_stability_analysis.html">Dynamic Models</a></li><li class="breadcrumb-item"><a href="./a_ricardian_one_sector_model.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title"><span id="sec-ricardo_1" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></span></h1>
 </div>
 
@@ -305,6 +339,7 @@ div.csl-indent {
     
   </div>
   
+
 
 </header><section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>This model captures some key feature of David Ricardo’s theory of growth and distribution as developed in his 1817 book <a href="https://en.wikipedia.org/wiki/On_the_Principles_of_Political_Economy_and_Taxation">On the Principles of Political Economy and Taxation</a>. The model revolves around the determination of real wages, rents, and profits, and how profitability in turn drives capital accumulation.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> It assumes a corn economy with a single good (corn) that serves both as an investment and consumption good.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Corn production is subject to diminishing marginal returns. Real wages are driven down to a subsistence level and rent is a differential surplus landowners gain based on the fertility of their land relative to the marginal plot of land (the plot of land where fertility is lowest and no rent is earned). Profits are a residual. As employment increases and more land is utilised, marginal productivity falls and differential rents increase. As a result, profits are driven down and capital accumulation comes to a halt. A stationary state is reached. Landowners are the main beneficiaries of this process. The model is adapted from <span class="citation" data-cites="Pasinetti1960">Pasinetti (<a href="#ref-Pasinetti1960" role="doc-biblioref">1960</a>)</span>.</p>
@@ -335,7 +370,7 @@ K_t = K_{t-1} + \beta P_{t-1}
 N_t = N_{t-1} + \gamma (w_{t-1} - w^S)
 \tag{13.8}\]</span></span></p>
 <p>where <span class="math inline">\(Y_t\)</span>, <span class="math inline">\(A\)</span>, <span class="math inline">\(N_t\)</span>, <span class="math inline">\(W_t\)</span>, <span class="math inline">\(K_t\)</span>,<span class="math inline">\(w_t\)</span>, <span class="math inline">\(Y_t\)</span>, <span class="math inline">\(MPL_t\)</span>, <span class="math inline">\(R_t\)</span>, <span class="math inline">\(P_t\)</span>, and <span class="math inline">\(w^S\)</span> are real output (measured in units of corn), productivity, employment, the real wage bill (or wage fund), the capital stock, the real wage rate, the marginal product of labour, rents, profits, and the subsistence wage, respectively.</p>
-<p><a href="#eq-ricardo1_Y">Equation&nbsp;<span>13.1</span></a> is the production function with <span class="math inline">\(\alpha \in (0,1)\)</span>, i.e.&nbsp;exhibiting diminishing marginal returns to labour.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> By <a href="#eq-ricardo1_W">Equation&nbsp;<span>13.2</span></a>, the wage fund is defined as the capital stock of this model (reflecting the fact that the production of corn only involves labour). <a href="#eq-ricardo1_w">Equation&nbsp;<span>13.3</span></a> defines the real wage rate. <a href="#eq-ricardo1_w">Equation&nbsp;<span>13.3</span></a> specifies the marginal product of labour. <a href="#eq-ricardo1_R">Equation&nbsp;<span>13.5</span></a> captures the determination of (differential) rents as a negative function of the marginal product of labour.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Thus, the lower the productivity on the marginal land, the higher the rents. In <a href="#eq-ricardo1_P">Equation&nbsp;<span>13.6</span></a>, profits are determined residually. Capital accumulation in <a href="#eq-ricardo1_K">Equation&nbsp;<span>13.7</span></a> is driven by the reinvestment of profits (with <span class="math inline">\(\beta\)</span> determining the proportion of profits that are reinvested). Finally, <a href="#eq-ricardo1_N">Equation&nbsp;<span>13.8</span></a> specifies population dynamics, whereby the population increases whenever the actual real wage is above the subsistence wage, echoing the Malthusian population mechanism.</p>
+<p><a href="#eq-ricardo1_Y" class="quarto-xref">Equation&nbsp;<span>13.1</span></a> is the production function with <span class="math inline">\(\alpha \in (0,1)\)</span>, i.e.&nbsp;exhibiting diminishing marginal returns to labour.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> By <a href="#eq-ricardo1_W" class="quarto-xref">Equation&nbsp;<span>13.2</span></a>, the wage fund is defined as the capital stock of this model (reflecting the fact that the production of corn only involves labour). <a href="#eq-ricardo1_w" class="quarto-xref">Equation&nbsp;<span>13.3</span></a> defines the real wage rate. <a href="#eq-ricardo1_w" class="quarto-xref">Equation&nbsp;<span>13.3</span></a> specifies the marginal product of labour. <a href="#eq-ricardo1_R" class="quarto-xref">Equation&nbsp;<span>13.5</span></a> captures the determination of (differential) rents as a negative function of the marginal product of labour.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Thus, the lower the productivity on the marginal land, the higher the rents. In <a href="#eq-ricardo1_P" class="quarto-xref">Equation&nbsp;<span>13.6</span></a>, profits are determined residually. Capital accumulation in <a href="#eq-ricardo1_K" class="quarto-xref">Equation&nbsp;<span>13.7</span></a> is driven by the reinvestment of profits (with <span class="math inline">\(\beta\)</span> determining the proportion of profits that are reinvested). Finally, <a href="#eq-ricardo1_N" class="quarto-xref">Equation&nbsp;<span>13.8</span></a> specifies population dynamics, whereby the population increases whenever the actual real wage is above the subsistence wage, echoing the Malthusian population mechanism.</p>
 </section><section id="simulation" class="level2"><h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
 <section id="parameterisation" class="level3"><h3 class="anchored" data-anchor-id="parameterisation">Parameterisation</h3>
 <p>Table 1 reports the parameterisation and initial values used in the simulation. In line with the Classical tradition, it will be assumed that all profits are reinvested, i.e.&nbsp;<span class="math inline">\(\beta=1\)</span>. Besides a baseline (labelled as scenario 1), three further scenarios will be considered. Scenarios 2 and 3 model two different forms of technological change: an increase in the productivity parameter <span class="math inline">\(A\)</span> and an increase in the elasticity of output with respect to labour (<span class="math inline">\(a\)</span>). Scenario 4 considers a higher subsistence wage (<span class="math inline">\(w^S\)</span>). In all scenarios the population/employment is initialised below its equilibrium value.</p>
@@ -554,7 +589,10 @@ Python code
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"N"</span>, <span class="st">"K"</span>, <span class="st">"Y"</span><span class="op">)</span>,</span>
 <span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="a_ricardian_one_sector_model_files/figure-html/ricardo1_2-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="a_ricardian_one_sector_model_files/figure-html/ricardo1_2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Real wage, subsistence wage, and MPL</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">w</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">)</span>, xlab<span class="op">=</span><span class="st">""</span>, ylab<span class="op">=</span><span class="st">""</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">wS</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,<span class="va">w</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
@@ -564,7 +602,10 @@ Python code
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"w"</span>, <span class="st">"MPL"</span>, <span class="st">"wS"</span><span class="op">)</span>,</span>
 <span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="a_ricardian_one_sector_model_files/figure-html/ricardo1_2-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="a_ricardian_one_sector_model_files/figure-html/ricardo1_2-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Profits and Rents</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">P</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">)</span>, xlab<span class="op">=</span><span class="st">""</span>, ylab<span class="op">=</span><span class="st">""</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">P</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
@@ -577,7 +618,10 @@ Python code
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"R"</span>, side <span class="op">=</span> <span class="fl">4</span>, line <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"right"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"P"</span>, <span class="st">"R"</span><span class="op">)</span>, lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="a_ricardian_one_sector_model_files/figure-html/ricardo1_2-3.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="a_ricardian_one_sector_model_files/figure-html/ricardo1_2-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Figure 4 displays capital accumulation under the different scenarios described in Table 1. As expected, both forms of technical change boost both the speed of capital accumulation and the equilibrium level of capital. An increase in the subsistence wage reduces the pace of capital accumulation and leads to a lower equilibrium level of capital.</p>
@@ -591,7 +635,10 @@ Python code
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">K</span><span class="op">[</span><span class="fl">4</span>, <span class="va">Tmin</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">4</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: baseline"</span>,<span class="st">"2: product. boost I"</span>, <span class="st">"3: product. boost II"</span>, <span class="st">"4: higher subs. wage"</span><span class="op">)</span>, lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="a_ricardian_one_sector_model_files/figure-html/ricardo1_3-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="a_ricardian_one_sector_model_files/figure-html/ricardo1_3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Python code">
@@ -668,7 +715,10 @@ Python code
 <span>     edge.arrow.width<span class="op">=</span><span class="fl">1.2</span>, edge.color<span class="op">=</span><span class="st">"black"</span>, vertex.label.cex<span class="op">=</span><span class="fl">1.2</span>, </span>
 <span>     vertex.frame.color<span class="op">=</span><span class="st">"NA"</span>, margin<span class="op">=</span><span class="op">-</span><span class="fl">0.08</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="a_ricardian_one_sector_model_files/figure-html/ricardo1_4-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="a_ricardian_one_sector_model_files/figure-html/ricardo1_4-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Python code">
@@ -727,7 +777,7 @@ Python code
 </div>
 <p>In Figure 5, it can be seen that productivity (<span class="math inline">\(A\)</span>) and the subsistence wage (<span class="math inline">\(w^S\)</span>) are the key exogenous variables that impact income and the marginal product of labour, and population dynamics, respectively. Most other variables are endogenous and form a closed loop (or cycle) within the system. Profits are a residual. The directed graph illustrates the supply-driven nature of the model, where productivity determines employment and distribution, which in turn feed back into income and capital accumulation. At the same time, income distribution has an exogenous element in the form of the subsistence wage, which feeds into the system.</p>
 </section><section id="analytical-discussion" class="level2"><h2 class="anchored" data-anchor-id="analytical-discussion">Analytical discussion</h2>
-<p>To analyse the dynamics, combine <a href="#eq-ricardo1_Y">Equation&nbsp;<span>13.1</span></a> to <a href="#eq-ricardo1_P">Equation&nbsp;<span>13.6</span></a> and substitute into <a href="#eq-ricardo1_K">Equation&nbsp;<span>13.7</span></a>. Further use <a href="#eq-ricardo1_W">Equation&nbsp;<span>13.2</span></a> and <a href="#eq-ricardo1_w">Equation&nbsp;<span>13.3</span></a> in <a href="#eq-ricardo1_N">Equation&nbsp;<span>13.8</span></a>. This yields the two-dimensional dynamic system in <span class="math inline">\(K_t\)</span> and <span class="math inline">\(N_t\)</span>:</p>
+<p>To analyse the dynamics, combine <a href="#eq-ricardo1_Y" class="quarto-xref">Equation&nbsp;<span>13.1</span></a> to <a href="#eq-ricardo1_P" class="quarto-xref">Equation&nbsp;<span>13.6</span></a> and substitute into <a href="#eq-ricardo1_K" class="quarto-xref">Equation&nbsp;<span>13.7</span></a>. Further use <a href="#eq-ricardo1_W" class="quarto-xref">Equation&nbsp;<span>13.2</span></a> and <a href="#eq-ricardo1_w" class="quarto-xref">Equation&nbsp;<span>13.3</span></a> in <a href="#eq-ricardo1_N" class="quarto-xref">Equation&nbsp;<span>13.8</span></a>. This yields the two-dimensional dynamic system in <span class="math inline">\(K_t\)</span> and <span class="math inline">\(N_t\)</span>:</p>
 <p><span class="math display">\[
 K_t = (1-\beta)K_{t-1}+\beta(aA N_{t-1}^a )
 \]</span> <span class="math display">\[
@@ -735,11 +785,11 @@ N_t = N_{t-1} +\gamma\left(\frac{K_{t-1}}{N_{t-1}} -w^S\right)
 \]</span> The Jacobian matrix is given by: <span class="math display">\[
 J(K, N)=\begin{bmatrix} 1-\beta&amp; \beta a^2AN^{\alpha-1} \\\frac{\gamma}{N} &amp; 1-\frac{\gamma K}{N^2} \end{bmatrix}.
 \]</span></p>
-<p>From equations <a href="#eq-ricardo1_K">Equation&nbsp;<span>13.7</span></a> and <a href="#eq-ricardo1_N">Equation&nbsp;<span>13.8</span></a>, it can readily be seen that an equilibrium is reached when <span class="math display">\[
+<p>From equations <a href="#eq-ricardo1_K" class="quarto-xref">Equation&nbsp;<span>13.7</span></a> and <a href="#eq-ricardo1_N" class="quarto-xref">Equation&nbsp;<span>13.8</span></a>, it can readily be seen that an equilibrium is reached when <span class="math display">\[
 P^*=0
 \]</span> and <span class="math display">\[
 w^*=w^S.
-\]</span> Using <span class="math inline">\(P^*=0\)</span> with <a href="#eq-ricardo1_R">Equation&nbsp;<span>13.5</span></a> and <a href="#eq-ricardo1_P">Equation&nbsp;<span>13.6</span></a>, yields <span class="math inline">\(w^*=w^S=MPL\)</span>. Thus, in equilibrium, profits are zero, and the real wage is equal to the MPL and the subsistence wage. Setting <span class="math inline">\(K_t=K_{t-1}\)</span> and <span class="math inline">\(N_t=N_{t-1}\)</span>, we can further derive:</p>
+\]</span> Using <span class="math inline">\(P^*=0\)</span> with <a href="#eq-ricardo1_R" class="quarto-xref">Equation&nbsp;<span>13.5</span></a> and <a href="#eq-ricardo1_P" class="quarto-xref">Equation&nbsp;<span>13.6</span></a>, yields <span class="math inline">\(w^*=w^S=MPL\)</span>. Thus, in equilibrium, profits are zero, and the real wage is equal to the MPL and the subsistence wage. Setting <span class="math inline">\(K_t=K_{t-1}\)</span> and <span class="math inline">\(N_t=N_{t-1}\)</span>, we can further derive:</p>
 <p><span class="math display">\[
 K^*=aA\left(\frac{w^S}{aA}\right)^{-\frac{a}{1-a}}
 \]</span> and</p>
@@ -894,7 +944,7 @@ Python code
 </section><section id="references" class="level2"><h2 class="anchored" data-anchor-id="references">References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Foley2006" class="csl-entry" role="listitem">
 Foley, Duncan K. 2006. <em>Adam’s Fallacy. A Guide to Economic Theology</em>. Cambridge, MA / London: Harvard University Press.
 </div>
@@ -905,9 +955,9 @@ Pasinetti, Luigi L. 1960. <span>“<span class="nocase">A Mathematical Formulati
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>See chapter 2 of <span class="citation" data-cites="Foley2006">Foley (<a href="#ref-Foley2006" role="doc-biblioref">2006</a>)</span> for an excellent introduction.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>See <a href="a_ricardian_two_sector_model.html"><span>Chapter&nbsp;14</span></a> for a two-sector extension of the model.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p><span class="citation" data-cites="Pasinetti1960">Pasinetti (<a href="#ref-Pasinetti1960" role="doc-biblioref">1960</a>)</span> specifies a generic function <span class="math inline">\(f(N_t)\)</span> with <span class="math inline">\(f(0) \geq\)</span> 0, <span class="math inline">\(f'(0) &gt; w^*\)</span>, and <span class="math inline">\(f''(N_t) &lt; 0\)</span>. <a href="#eq-ricardo1_Y">Equation&nbsp;<span>13.1</span></a> satisfies these conditions.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p><a href="#eq-ricardo1_R">Equation&nbsp;<span>13.5</span></a> is based on the definition of total rent as the sum of the net gains of the non-marginal landowners. See <span class="citation" data-cites="Pasinetti1960">Pasinetti (<a href="#ref-Pasinetti1960" role="doc-biblioref">1960</a>)</span> for a formal derivation.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>See <a href="a_ricardian_two_sector_model.html" class="quarto-xref"><span>Chapter 14</span></a> for a two-sector extension of the model.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><span class="citation" data-cites="Pasinetti1960">Pasinetti (<a href="#ref-Pasinetti1960" role="doc-biblioref">1960</a>)</span> specifies a generic function <span class="math inline">\(f(N_t)\)</span> with <span class="math inline">\(f(0) \geq\)</span> 0, <span class="math inline">\(f'(0) &gt; w^*\)</span>, and <span class="math inline">\(f''(N_t) &lt; 0\)</span>. <a href="#eq-ricardo1_Y" class="quarto-xref">Equation&nbsp;<span>13.1</span></a> satisfies these conditions.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><a href="#eq-ricardo1_R" class="quarto-xref">Equation&nbsp;<span>13.5</span></a> is based on the definition of total rent as the sum of the net gains of the non-marginal landowners. See <span class="citation" data-cites="Pasinetti1960">Pasinetti (<a href="#ref-Pasinetti1960" role="doc-biblioref">1960</a>)</span> for a formal derivation.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -949,6 +999,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1017,13 +1094,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'alternate';
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1102,10 +1181,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1115,8 +1193,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1129,6 +1216,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1172,6 +1378,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1197,6 +1404,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1256,23 +1489,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./a_malthusian_model.html" class="pagination-link">
+      <a href="./a_malthusian_model.html" class="pagination-link" aria-label="A Malthusian Model">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./a_ricardian_two_sector_model.html" class="pagination-link">
+      <a href="./a_ricardian_two_sector_model.html" class="pagination-link" aria-label="A Ricardian Two-Sector Model">
         <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">An open-source platform for macroeconomic model simulation.</div>   
+    <div class="nav-footer-left">
+<p>An open-source platform for macroeconomic model simulation.</p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
-    </div>
-    <div class="nav-footer-right"><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></p>
+</div>
   </div>
 </footer>
 

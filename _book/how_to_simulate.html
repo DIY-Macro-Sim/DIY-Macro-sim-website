@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.321">
+<meta name="generator" content="quarto-1.4.550">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>DIY Macroeconomic Model Simulation - 2&nbsp; How to Simulate Economic Models</title>
 <style>
@@ -19,7 +19,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -55,6 +55,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -97,7 +98,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -106,29 +113,56 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./how_to_simulate.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to Simulate Economic Models</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./how_to_simulate.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to Simulate Economic Models</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">DIY Macroeconomic Model Simulation</a> 
         <div class="sidebar-tools-main">
@@ -270,7 +304,7 @@ div.csl-indent {
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
@@ -293,7 +327,7 @@ div.csl-indent {
   <li><a href="#how-to-create-a-directed-graph-of-a-model" id="toc-how-to-create-a-directed-graph-of-a-model" class="nav-link" data-scroll-target="#how-to-create-a-directed-graph-of-a-model">How to create a directed graph of a model</a></li>
   <li><a href="#sec-sim-continuous" id="toc-sec-sim-continuous" class="nav-link" data-scroll-target="#sec-sim-continuous">Appendix: How to simulate dynamic model in continuous time</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -309,6 +343,7 @@ div.csl-indent {
     
   </div>
   
+
 
 </header><section id="introduction-economic-models" class="level2"><h2 class="anchored" data-anchor-id="introduction-economic-models">Introduction: economic models</h2>
 <p>Why do we build formal economic models? Because they help us think carefully about the <em>causal mechanisms</em> that generate certain economic outcomes (e.g.&nbsp;unemployment). Models are especially useful when the variables of interest are inherently quantitative (e.g.&nbsp;the interest rate and unemployment) and when several of these quantitative variables interact with each other. More specifically, models provide a precise formal representation of a set of <em>interlinked</em> causal mechanisms that are often difficult to analyse informally.</p>
@@ -333,7 +368,7 @@ div.csl-indent {
 <li><p>recursive: <span class="math inline">\(x\)</span> affects <span class="math inline">\(y\)</span> only in <span class="math inline">\(t+1\)</span> (or vice versa)</p></li>
 </ul>
 <p>Unlike static models, dynamic models describe what happens out of equilibrium.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Note that dynamic models may contain both simultaneous and recursive relationships.</p>
-<p>Whether the relationships between the variables is simultaneous or recursive has implications for how the model can be solved. In general, simple economic models can often be solved analytically without a computer. If the model contains simultaneous relationships, it needs to be solved as a simultaneous system by solving for the endogenous variables through repeated substitution. This means going from the so-called ‘structural form’, i.e.&nbsp;the full set of equations, to the so-called ‘reduced form’, where the right-hand side of the equations only contains exogenous variables and parameters. If the system is linear, techniques from linear algebra such as matrix inversion or Cramer’s rule can be used (see <span class="citation" data-cites="Chiang2005">Chiang and Wainwright (<a href="#ref-Chiang2005" role="doc-biblioref">2005</a>)</span>, chaps. 4-5). If the system contains recursive relationships, the equilibrium solution can be found by setting <span class="math inline">\(x_{t+i}=x_{t-i}=x_{t}\)</span> for all <span class="math inline">\(x\)</span> and then solving the resulting simultaneous system (more on this <a href="intro_stability_analysis.html"><span>Chapter&nbsp;9</span></a>).</p>
+<p>Whether the relationships between the variables is simultaneous or recursive has implications for how the model can be solved. In general, simple economic models can often be solved analytically without a computer. If the model contains simultaneous relationships, it needs to be solved as a simultaneous system by solving for the endogenous variables through repeated substitution. This means going from the so-called ‘structural form’, i.e.&nbsp;the full set of equations, to the so-called ‘reduced form’, where the right-hand side of the equations only contains exogenous variables and parameters. If the system is linear, techniques from linear algebra such as matrix inversion or Cramer’s rule can be used (see <span class="citation" data-cites="Chiang2005">Chiang and Wainwright (<a href="#ref-Chiang2005" role="doc-biblioref">2005</a>)</span>, chaps. 4-5). If the system contains recursive relationships, the equilibrium solution can be found by setting <span class="math inline">\(x_{t+i}=x_{t-i}=x_{t}\)</span> for all <span class="math inline">\(x\)</span> and then solving the resulting simultaneous system (more on this <a href="intro_stability_analysis.html" class="quarto-xref"><span>Chapter 9</span></a>).</p>
 <p>However, often a complete analytical solution is difficult to come by. Common challenges are:</p>
 <ul>
 <li><p>a model has more than 3 dimensions (<span class="math inline">\(N&gt;3\)</span>): then it’s very tedious to compute analytical solutions</p></li>
@@ -350,7 +385,7 @@ div.csl-indent {
 <li><p>then solve the system of equations many times using a <em>for loop</em></p></li>
 </ul>
 <p>In this way, the solution gets approximated successively.</p>
-<p>A limitation of the method of iteration is that it will only converge to the solution of the simultaneous component of a model if the equilibrium is stable (more on stability in <a href="intro_stability_analysis.html"><span>Chapter&nbsp;9</span></a>). For most static models, stability is required for the model to be economically meaningful. In that sense, if the iterative approach does not yield a solution, this is a sign that the model and/or parameterisation needs to be reconsidered. In dynamic models, stability is a key question that should be addressed in any case. Therefore, this limitation of the method of iteration may not be too restrictive in practice.</p>
+<p>A limitation of the method of iteration is that it will only converge to the solution of the simultaneous component of a model if the equilibrium is stable (more on stability in <a href="intro_stability_analysis.html" class="quarto-xref"><span>Chapter 9</span></a>). For most static models, stability is required for the model to be economically meaningful. In that sense, if the iterative approach does not yield a solution, this is a sign that the model and/or parameterisation needs to be reconsidered. In dynamic models, stability is a key question that should be addressed in any case. Therefore, this limitation of the method of iteration may not be too restrictive in practice.</p>
 <section id="solving-economic-models-numerically-examples" class="level3"><h3 class="anchored" data-anchor-id="solving-economic-models-numerically-examples">Solving economic models numerically: examples</h3>
 <section id="a-static-model" class="level4"><h4 class="anchored" data-anchor-id="a-static-model">A static model</h4>
 <p>Consider a two-dimensional simultaneous system represented by a simple Keynesian goods market model:</p>
@@ -471,12 +506,12 @@ Python code
 </div>
 <p>Let’s break this code down a little bit:</p>
 <ul>
-<li><p>set the number of scenarios <span class="math inline">\(S\)</span>, define parameter values, and create vectors of length <span class="math inline">\(S\)</span> in which results for endogenous variables will be stored</p></li>
+<li><p>set the number of scenarios <span class="math inline">\(S\)</span>, define parameter values, and create vectors of length <span class="math inline">\(S\)</span> in which the results for the endogenous variables will be stored</p></li>
 <li><p>define changes in exogenous variables or parameters (i.e.&nbsp;construct different scenarios)</p></li>
 <li><p>initialise the endogenous variables</p></li>
 <li><p>write down the equations (solved for the endogenous variables such that every endogenous variable of the system appears on the left-hand side of an equation exactly once)</p></li>
 <li>
-<p>place these equations inside a for loop</p>
+<p>place these equations inside a <em>for loop</em></p>
 <ul>
 <li>the loop says: repeat the segment of code insights the curly brackets 1000 times</li>
 </ul>
@@ -485,7 +520,7 @@ Python code
 <li><p>after the iterations loop is finished, save the results for the current pameterisation</p></li>
 </ul>
 <p>What happens is the following: in the first iteration, <span class="math inline">\(Y\)</span> and <span class="math inline">\(C\)</span> are calculated based on the initial values and the parameter values. In the second iteration, the values are then overwritten based on the results from the first iteration. This process continues 1000 times. In this way, the correct solution is successively approximated. If you have an analytical solution, you can compare it with the numerical one to double-check your results.</p>
-<p>When does the method of iteration fail to provide a solution? In the following code, everything is the same with the only difference that the marginal propensity to consume is now larger than unity (<span class="math inline">\(c_1=1.2\)</span>). Now the numerical simulation fails to find the solution. This is because with <span class="math inline">\(c_1&gt;0\)</span>, the so-called Keynesian equilibrium condition is violated and the system happens to be unstable. We will discuss in <a href="intro_stability_analysis.html"><span>Chapter&nbsp;9</span></a> the issue of stability and how to analyse it formally. At this point, we simply note that the method of iterations requires static models to be stable to yield equilibrium solutions.</p>
+<p>When does the method of iteration fail to provide a solution? In the following code, everything is the same with the only difference that the marginal propensity to consume is now larger than unity (<span class="math inline">\(c_1=1.2\)</span>). Now the numerical simulation fails to find the solution. This is because with <span class="math inline">\(c_1&gt;0\)</span>, the so-called Keynesian equilibrium condition is violated and the system happens to be unstable. We will discuss in <a href="intro_stability_analysis.html" class="quarto-xref"><span>Chapter 9</span></a> the issue of stability and how to analyse it formally. At this point, we simply note that the method of iterations requires static models to be stable to yield equilibrium solutions.</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Parameterisation for which method of iteration fails</span></span>
 <span></span>
@@ -698,11 +733,11 @@ Python code
 <p>The code solves the recursive system numerically through iteration. Let’s again break down what the code does:</p>
 <ul>
 <li><p>set the number of periods for which we want to simulate the model (here <span class="math inline">\(Q=100\)</span>), set the number of scenarios <span class="math inline">\(S\)</span> and the period <span class="math inline">\(s\)</span> in which a change in the scenario should occur</p></li>
-<li><p>set the parameter values and create <span class="math inline">\((S \times Q)\)</span> matrices in which results for endogenous variables will be stored, such that the columns represent time and the rows represent different scenarios; initialise the endogenous variables</p></li>
+<li><p>set the parameter values and create <span class="math inline">\((S \times Q)\)</span> matrices in which the results for the endogenous variables will be stored, such that the columns represent time and the rows represent different scenarios; initialise the endogenous variables</p></li>
 <li><p>define changes in exogenous variables or parameters (i.e.&nbsp;construct different scenarios)</p></li>
 <li><p>write down the equations (solved for the endogenous variables such that every endogenous variable of the system appears on the left-hand side of an equation exactly once)</p></li>
 <li>
-<p>place these equations inside a for loop that runs from <span class="math inline">\(t=2\)</span> to <span class="math inline">\(Q\)</span></p>
+<p>place these equations inside a <em>for loop</em> that runs from <span class="math inline">\(t=2\)</span> to <span class="math inline">\(Q\)</span></p>
 <ul>
 <li>the loop says: repeat the segment of code insights the curly brackets, each time with the index number <span class="math inline">\(t\)</span> shifted by <span class="math inline">\(+1\)</span> until <span class="math inline">\(t=Q\)</span>
 </li>
@@ -718,7 +753,10 @@ Python code
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Bar chart of different equilibrium solutions of Samuelson (1939) model</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">Y</span><span class="op">[</span>,<span class="va">Q</span><span class="op">]</span>, ylab<span class="op">=</span><span class="st">"Y"</span>, main<span class="op">=</span><span class="st">"Figure 1: Output"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Baseline"</span>, <span class="st">"Increase in G0"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="how_to_simulate_files/figure-html/howto_4-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="how_to_simulate_files/figure-html/howto_4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Next, we show a basic version of a time series chart that displays the dynamics of <span class="math inline">\(Y_t\)</span>:</p>
@@ -727,7 +765,10 @@ Python code
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Y</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">"Time"</span>, ylab<span class="op">=</span><span class="st">"Y"</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Figure 2: Output"</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="how_to_simulate_files/figure-html/howto_5-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="how_to_simulate_files/figure-html/howto_5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>As you can see, there are many settings you can fiddle around with to adjust the appearance of the graph to your liking (run ‘?plot’ to find information about the different options.) If we want to plot the dynamics for the two different parameterisations, we can do the following:</p>
@@ -739,7 +780,10 @@ Python code
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Baseline"</span>, <span class="st">"Increase in G0"</span><span class="op">)</span>,</span>
 <span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="how_to_simulate_files/figure-html/howto_6-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="how_to_simulate_files/figure-html/howto_6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Note that we have adjusted the range of the y-axis to make sure the graph captures the minimum and maximum values from both parameterisations.</p>
@@ -757,7 +801,10 @@ Python code
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"right"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"C"</span>, <span class="st">"I"</span><span class="op">)</span>,</span>
 <span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="how_to_simulate_files/figure-html/howto_7-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="how_to_simulate_files/figure-html/howto_7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Python code">
@@ -868,7 +915,10 @@ M_{ij} =
 <span>     edge.arrow.width<span class="op">=</span><span class="fl">1.2</span>, edge.color<span class="op">=</span><span class="st">"black"</span>, vertex.label.cex<span class="op">=</span><span class="fl">1.2</span>, </span>
 <span>     vertex.frame.color<span class="op">=</span><span class="st">"NA"</span>, margin<span class="op">=</span><span class="op">-</span><span class="fl">0.08</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="how_to_simulate_files/figure-html/how_to8-5.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="how_to_simulate_files/figure-html/how_to8-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Python code">
@@ -1036,7 +1086,7 @@ Python code
 </section><section id="references" class="level2"><h2 class="anchored" data-anchor-id="references">References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Chiang2005" class="csl-entry" role="listitem">
 Chiang, Alpha C, and Kevin Wainwright. 2005. <em>Fundamental <span>Methods</span> of <span>Mathematical Economics</span></em>. 4th ed. New York: <span>McGraw-Hill Education</span>.
 </div>
@@ -1049,7 +1099,7 @@ Samuelson, Paul A. 1939. <span>“<span class="nocase">Interactions between the 
 </div>
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
-<li id="fn1"><p>That raises the question of whether an equilibrium is stable or unstable, which is discussed in <a href="intro_stability_analysis.html"><span>Chapter&nbsp;9</span></a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>That raises the question of whether an equilibrium is stable or unstable, which is discussed in <a href="intro_stability_analysis.html" class="quarto-xref"><span>Chapter 9</span></a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>See <span class="citation" data-cites="Fennell2015">Fennell et al. (<a href="#ref-Fennell2015" role="doc-biblioref">2015</a>)</span> for a neat exposition.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>To create the directed graph, we rely on external libraries which you may have to install first. In <em>R</em>, this can be accomplished with <code>install.packages("igraph")</code> and in Python with <code>pip install networkx</code>. Once that library is installed, you only need to activate it in each session before you use it. In <em>R</em>, you can do this by executing <code><a href="https://r.igraph.org/">library(igraph)</a></code> and in <em>Python</em> through <code>import networkx</code>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1093,6 +1143,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1161,13 +1238,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'alternate';
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1246,10 +1325,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1259,8 +1337,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1273,6 +1360,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1316,6 +1522,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1341,6 +1548,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1400,23 +1633,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./how_to_use.html" class="pagination-link">
+      <a href="./how_to_use.html" class="pagination-link" aria-label="Getting Started">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./a_neoclassical_macro_model.html" class="pagination-link">
+      <a href="./a_neoclassical_macro_model.html" class="pagination-link" aria-label="A Neoclassical Macro Model">
         <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">An open-source platform for macroeconomic model simulation.</div>   
+    <div class="nav-footer-left">
+<p>An open-source platform for macroeconomic model simulation.</p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
-    </div>
-    <div class="nav-footer-right"><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></p>
+</div>
   </div>
 </footer>
 

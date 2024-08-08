@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.321">
+<meta name="generator" content="quarto-1.4.550">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>DIY Macroeconomic Model Simulation - 4&nbsp; An IS-LM Model</title>
 <style>
@@ -19,7 +19,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -55,6 +55,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -97,7 +98,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -106,29 +113,56 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./a_neoclassical_macro_model.html">Static Models</a></li><li class="breadcrumb-item"><a href="./an_IS_LM_model.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./a_neoclassical_macro_model.html">Static Models</a></li><li class="breadcrumb-item"><a href="./an_IS_LM_model.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">DIY Macroeconomic Model Simulation</a> 
         <div class="sidebar-tools-main">
@@ -270,7 +304,7 @@ div.csl-indent {
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
@@ -294,10 +328,10 @@ div.csl-indent {
   </ul>
 </li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./a_neoclassical_macro_model.html">Static Models</a></li><li class="breadcrumb-item"><a href="./an_IS_LM_model.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title"><span id="sec-islm-model" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></span></h1>
 </div>
 
@@ -310,6 +344,7 @@ div.csl-indent {
     
   </div>
   
+
 
 </header><section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>The IS-LM model was developed by John R. Hicks (1937) to formalise some key ideas of John Maynard Keynes’ 1936 book <a href="https://en.wikipedia.org/wiki/The_General_Theory_of_Employment,_Interest_and_Money">The General Theory of Employment, Interest and Money</a>. The model contains two equilibrium relationships: a goods market equilibrium between investment and saving (IS) and a money market equilibrium between money demand and money supply (LM). In the goods market, aggregate supply adjusts to the level of aggregate demand given by the expenditure decisions of households, firms, and the government. Households form their consumption demand based on a constant marginal propensity to consume out of income. Firms take investment decisions based on the rate of interest. Money demand is determined by aggregate income (transactions demand) and the interest rate on bonds (speculative demand). The money supply is assumed to be exogenous and under the control of the central bank. The two markets pin down equilibrium output and the interest rate. The goods market equilibrium may well coincide with involuntary unemployment. Adverse shocks to autonomous investment (‘animal spirits’) or autonomous money demand (‘liquidity preference’) reduce output and raise unemployment. The government can use monetary policy, fiscal spending, and income taxes to stimulate economic activity and achieve full employment.</p>
@@ -346,7 +381,7 @@ N=a Y, \quad a&gt;0
 U=1-\frac{N}{N^{f}}
 \tag{4.10}\]</span></span></p>
 <p>where <span class="math inline">\(Y\)</span>, <span class="math inline">\(C\)</span>, <span class="math inline">\(I\)</span>, <span class="math inline">\(G\)</span>, <span class="math inline">\(T\)</span>, <span class="math inline">\(r\)</span>, <span class="math inline">\(M_{d}\)</span>, <span class="math inline">\(M_{s}\)</span>, <span class="math inline">\(N\)</span>, <span class="math inline">\(U\)</span> and <span class="math inline">\(N^{f}\)</span> are output, consumption, investment, government spending, taxes, the interest rate on bonds, money demand, money supply, employment, the unemployment rate, and the labour force, respectively. The constant price level has been normalised to unity.</p>
-<p><a href="#eq-islmY">Equation&nbsp;<span>4.1</span></a> is the goods market equilibrium condition. Aggregate supply <span class="math inline">\((Y)\)</span> accommodates to the level of aggregate demand which is the sum of consumption, investment, and government spending. <a href="#eq-islmC">Equation&nbsp;<span>4.2</span></a> is the consumption function consisting of autonomous consumption demand <span class="math inline">\(\left(c_{0}\right)\)</span> and a marginal propensity to consume <span class="math inline">\(\left(c_{1}\right)\)</span> out of disposable income <span class="math inline">\((Y-T)\)</span>. Investment demand in <a href="#eq-islmI">Equation&nbsp;<span>4.3</span></a> has an autonomous component <span class="math inline">\(\left(i_{0}\right)\)</span> capturing Keynesian animal spirits and a component that is negatively related to the rate of interest on bonds. By equations <a href="#eq-islmG">Equation&nbsp;<span>4.4</span></a> and <a href="#eq-islmT">Equation&nbsp;<span>4.5</span></a>, government spending and taxation are exogenous. Similarly, the money supply in <a href="#eq-islmMs">Equation&nbsp;<span>4.6</span></a> is assumed to be exogenous. By <a href="#eq-islmMd">Equation&nbsp;<span>4.7</span></a>, households’ money demand is positively related to income (capturing the transaction demand for money) and negatively related to the interest rate on bonds (capturing speculative demand). There is also an autonomous term <span class="math inline">\(\left(m_{0}\right)\)</span> capturing Keynesian liquidity preference. <a href="#eq-islmN">Equation&nbsp;<span>4.9</span></a> is a fixed-coefficient production function through which employment is determined. In conjunction with an exogenously given labour force <span class="math inline">\(\left(N^{f}\right)\)</span>, the level of employment can be used to obtain an unemployment rate in <a href="#eq-islmU">Equation&nbsp;<span>4.10</span></a>.</p>
+<p><a href="#eq-islmY" class="quarto-xref">Equation&nbsp;<span>4.1</span></a> is the goods market equilibrium condition. Aggregate supply <span class="math inline">\((Y)\)</span> accommodates to the level of aggregate demand which is the sum of consumption, investment, and government spending. <a href="#eq-islmC" class="quarto-xref">Equation&nbsp;<span>4.2</span></a> is the consumption function consisting of autonomous consumption demand <span class="math inline">\(\left(c_{0}\right)\)</span> and a marginal propensity to consume <span class="math inline">\(\left(c_{1}\right)\)</span> out of disposable income <span class="math inline">\((Y-T)\)</span>. Investment demand in <a href="#eq-islmI" class="quarto-xref">Equation&nbsp;<span>4.3</span></a> has an autonomous component <span class="math inline">\(\left(i_{0}\right)\)</span> capturing Keynesian animal spirits and a component that is negatively related to the rate of interest on bonds. By equations <a href="#eq-islmG" class="quarto-xref">Equation&nbsp;<span>4.4</span></a> and <a href="#eq-islmT" class="quarto-xref">Equation&nbsp;<span>4.5</span></a>, government spending and taxation are exogenous. Similarly, the money supply in <a href="#eq-islmMs" class="quarto-xref">Equation&nbsp;<span>4.6</span></a> is assumed to be exogenous. By <a href="#eq-islmMd" class="quarto-xref">Equation&nbsp;<span>4.7</span></a>, households’ money demand is positively related to income (capturing the transaction demand for money) and negatively related to the interest rate on bonds (capturing speculative demand). There is also an autonomous term <span class="math inline">\(\left(m_{0}\right)\)</span> capturing Keynesian liquidity preference. <a href="#eq-islmN" class="quarto-xref">Equation&nbsp;<span>4.9</span></a> is a fixed-coefficient production function through which employment is determined. In conjunction with an exogenously given labour force <span class="math inline">\(\left(N^{f}\right)\)</span>, the level of employment can be used to obtain an unemployment rate in <a href="#eq-islmU" class="quarto-xref">Equation&nbsp;<span>4.10</span></a>.</p>
 </section><section id="simulation" class="level2"><h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
 <section id="parameterisation" class="level3"><h3 class="anchored" data-anchor-id="parameterisation">Parameterisation</h3>
 <p>Table 1 reports the parameterisation used in the simulation. Besides a baseline (labelled as scenario 1), five further scenarios will be considered. Scenarios 2 and 3 model a switch towards pessimistic sentiments: a fall in animal spirits <span class="math inline">\(\left(i_{0}\right)\)</span> and an increase in liquidity preference <span class="math inline">\(\left(m_{0}\right)\)</span>. Scenarios 4 to 6 consider three different government policies to stimulate the economy: a monetary expansion <span class="math inline">\(\left(M_{0}\right)\)</span>, a tax cut <span class="math inline">\(\left(T_{0}\right)\)</span>, and a fiscal expansion <span class="math inline">\(\left(G_{0}\right)\)</span>.</p>
@@ -670,15 +705,18 @@ Python code
 </div>
 </div>
 </section><section id="plots" class="level3"><h3 class="anchored" data-anchor-id="plots">Plots</h3>
-<p><a href="a_Lewis_model.html#fig-output">Figure&nbsp;<span>15.1</span></a> and <a href="#fig-r">Figure&nbsp;<span>4.2</span></a> depict the response of the model’s key endogenous variables, output and the interest rate, to various shifts. A fall in animal spirits (scenario 2) and an increase in liquidity preference (scenario 3) both have contractionary effects. While the fall in animal spirits directly reduces aggregate demand and thereby output (despite a fall in the interest rate), the rise in liquidity preference depresses output through its positive effect on the interest rate. Both scenarios raise the unemployment rate (<a href="#fig-U">Figure&nbsp;<span>4.3</span></a>). Scenarios 4 to 6 assess three different macroeconomic policy tools to stimulate output. It can be seen in <a href="a_Lewis_model.html#fig-output">Figure&nbsp;<span>15.1</span></a> that fiscal policy is more effective than monetary policy for the parameterisation in Table 1.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Direct fiscal stimulus is more effective than tax cuts due to the constant marginal propensity to consume. The effect on output is a multiple of the one-unit stimulus thanks to the multiplier effect. However, it can also be seen that fiscal policy raises the interest rate, which crowds out some of the expansionary effect.</p>
+<p><a href="a_Lewis_model.html#fig-output" class="quarto-xref">Figure&nbsp;<span>15.1</span></a> and <a href="#fig-r" class="quarto-xref">Figure&nbsp;<span>4.2</span></a> depict the response of the model’s key endogenous variables, output and the interest rate, to various shifts. A fall in animal spirits (scenario 2) and an increase in liquidity preference (scenario 3) both have contractionary effects. While the fall in animal spirits directly reduces aggregate demand and thereby output (despite a fall in the interest rate), the rise in liquidity preference depresses output through its positive effect on the interest rate. Both scenarios raise the unemployment rate (<a href="#fig-U" class="quarto-xref">Figure&nbsp;<span>4.3</span></a>). Scenarios 4 to 6 assess three different macroeconomic policy tools to stimulate output. It can be seen in <a href="a_Lewis_model.html#fig-output" class="quarto-xref">Figure&nbsp;<span>15.1</span></a> that fiscal policy is more effective than monetary policy for the parameterisation in Table 1.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Direct fiscal stimulus is more effective than tax cuts due to the constant marginal propensity to consume. The effect on output is a multiple of the one-unit stimulus thanks to the multiplier effect. However, it can also be seen that fiscal policy raises the interest rate, which crowds out some of the expansionary effect.</p>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">Y_star</span>, ylab<span class="op">=</span><span class="st">"Y"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Fall animal spirits"</span>, <span class="st">"3:Rise liq. pref."</span>,</span>
 <span>                                      <span class="st">"4:Monetary exp."</span>, <span class="st">"5:Tax cut"</span>, <span class="st">"6:Fiscal exp."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-output" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="an_IS_LM_model_files/figure-html/fig-output-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.1: Output</figcaption><p></p>
-</figure>
+<div id="fig-output" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-output-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="an_IS_LM_model_files/figure-html/fig-output-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-output-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Output
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -686,10 +724,13 @@ Python code
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">r_star</span>, ylab<span class="op">=</span><span class="st">"r"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Fall animal spirits"</span>, <span class="st">"3:Rise liq. pref."</span>,</span>
 <span>                                      <span class="st">"4:Monetary exp."</span>, <span class="st">"5:Tax cut"</span>, <span class="st">"6:Fiscal exp."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-r" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="an_IS_LM_model_files/figure-html/fig-r-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.2: Interest rate</figcaption><p></p>
-</figure>
+<div id="fig-r" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="an_IS_LM_model_files/figure-html/fig-r-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.2: Interest rate
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -697,22 +738,28 @@ Python code
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">U_star</span><span class="op">*</span><span class="fl">100</span>, ylab<span class="op">=</span><span class="st">"U (%)"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Fall animal spirits"</span>, <span class="st">"3:Rise liq. pref."</span>,</span>
 <span>                                              <span class="st">"4:Monetary exp."</span>, <span class="st">"5:Tax cut"</span>, <span class="st">"6:Fiscal exp."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-U" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="an_IS_LM_model_files/figure-html/fig-U-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.3: Unemployment</figcaption><p></p>
-</figure>
+<div id="fig-U" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-U-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="an_IS_LM_model_files/figure-html/fig-U-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-U-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.3: Unemployment
+</figcaption></figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-I">Figure&nbsp;<span>4.4</span></a> and <a href="#fig-C">Figure&nbsp;<span>4.5</span></a> further show that monetary policy mostly stimulates investment, whereas fiscal policy boost consumption.</p>
+<p><a href="#fig-I" class="quarto-xref">Figure&nbsp;<span>4.4</span></a> and <a href="#fig-C" class="quarto-xref">Figure&nbsp;<span>4.5</span></a> further show that monetary policy mostly stimulates investment, whereas fiscal policy boost consumption.</p>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">I_star</span>, ylab<span class="op">=</span><span class="st">"I"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Fall animal spirits"</span>, <span class="st">"3:Rise liq. pref."</span>,</span>
 <span>                                      <span class="st">"4:Monetary exp."</span>, <span class="st">"5:Tax cut"</span>, <span class="st">"6:Fiscal exp."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-I" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="an_IS_LM_model_files/figure-html/fig-I-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.4: Investment</figcaption><p></p>
-</figure>
+<div id="fig-I" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-I-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="an_IS_LM_model_files/figure-html/fig-I-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-I-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.4: Investment
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -720,20 +767,26 @@ Python code
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">C_star</span>, ylab<span class="op">=</span><span class="st">"C"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Fall animal spirits"</span>, <span class="st">"3:Rise liq. pref."</span>,</span>
 <span>                                      <span class="st">"4:Monetary exp."</span>, <span class="st">"5:Tax cut"</span>, <span class="st">"6:Fiscal exp."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-C" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="an_IS_LM_model_files/figure-html/fig-C-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.5: Consumption</figcaption><p></p>
-</figure>
+<div id="fig-C" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="an_IS_LM_model_files/figure-html/fig-C-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.5: Consumption
+</figcaption></figure>
 </div>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">N_star</span>, ylab<span class="op">=</span><span class="st">"N"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Fall animal spirits"</span>, <span class="st">"3:Rise liq. pref."</span>, <span class="st">"4:Monetary exp."</span>, <span class="st">"5:Tax cut"</span>, <span class="st">"6:Fiscal exp."</span><span class="op">)</span>, cex.names <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-N" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="an_IS_LM_model_files/figure-html/fig-N-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.6: Employment</figcaption><p></p>
-</figure>
+<div id="fig-N" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-N-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="an_IS_LM_model_files/figure-html/fig-N-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-N-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.6: Employment
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -798,10 +851,13 @@ Python code
 <span>     edge.arrow.width<span class="op">=</span><span class="fl">1.2</span>, edge.color<span class="op">=</span><span class="st">"black"</span>, vertex.label.cex<span class="op">=</span><span class="fl">1.2</span>, </span>
 <span>     vertex.frame.color<span class="op">=</span><span class="st">"NA"</span>, margin<span class="op">=</span><span class="op">-</span><span class="fl">0.08</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-DAG" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="an_IS_LM_model_files/figure-html/fig-DAG-2.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.7: Directed graph of IS-LM model</figcaption><p></p>
-</figure>
+<div id="fig-DAG" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-DAG-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="an_IS_LM_model_files/figure-html/fig-DAG-2.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-DAG-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.7: Directed graph of IS-LM model
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -874,15 +930,15 @@ Python code
 </div>
 </div>
 </section><section id="analytical-discussion" class="level2"><h2 class="anchored" data-anchor-id="analytical-discussion">Analytical discussion</h2>
-<p>To obtain the IS-curve, substitute <a href="#eq-islmC">Equation&nbsp;<span>4.2</span></a> - <a href="#eq-islmT">Equation&nbsp;<span>4.5</span></a> into <a href="#eq-islmY">Equation&nbsp;<span>4.1</span></a> and solve for <span class="math inline">\(Y\)</span>:</p>
+<p>To obtain the IS-curve, substitute <a href="#eq-islmC" class="quarto-xref">Equation&nbsp;<span>4.2</span></a> - <a href="#eq-islmT" class="quarto-xref">Equation&nbsp;<span>4.5</span></a> into <a href="#eq-islmY" class="quarto-xref">Equation&nbsp;<span>4.1</span></a> and solve for <span class="math inline">\(Y\)</span>:</p>
 <p><span id="eq-IS"><span class="math display">\[
 Y=\left(\frac{1}{1-c_1}\right)(c_0 + i_0 + G_0 - i_1r - c_1 T_0).
 \tag{4.11}\]</span></span></p>
-<p>To obtain the LM-curve, substitute <a href="#eq-islmMs">Equation&nbsp;<span>4.6</span></a> - <a href="#eq-islmMd">Equation&nbsp;<span>4.7</span></a> into <a href="#eq-islmM">Equation&nbsp;<span>4.8</span></a> and solve for <span class="math inline">\(r\)</span>:</p>
+<p>To obtain the LM-curve, substitute <a href="#eq-islmMs" class="quarto-xref">Equation&nbsp;<span>4.6</span></a> - <a href="#eq-islmMd" class="quarto-xref">Equation&nbsp;<span>4.7</span></a> into <a href="#eq-islmM" class="quarto-xref">Equation&nbsp;<span>4.8</span></a> and solve for <span class="math inline">\(r\)</span>:</p>
 <p><span id="eq-LM"><span class="math display">\[
 r=\left(\frac{1}{m_2}\right)(m_0 - M_0 + m_1Y).
 \tag{4.12}\]</span></span></p>
-<p>Finally, to obtain equilibrium solutions for <span class="math inline">\(Y\)</span> and <span class="math inline">\(r\)</span>, substitute <a href="#eq-LM">Equation&nbsp;<span>4.12</span></a> into <a href="#eq-IS">Equation&nbsp;<span>4.11</span></a> and vice versa:</p>
+<p>Finally, to obtain equilibrium solutions for <span class="math inline">\(Y\)</span> and <span class="math inline">\(r\)</span>, substitute <a href="#eq-LM" class="quarto-xref">Equation&nbsp;<span>4.12</span></a> into <a href="#eq-IS" class="quarto-xref">Equation&nbsp;<span>4.11</span></a> and vice versa:</p>
 <p><span class="math display">\[
 Y^*=\left[\frac{m_2}{(1-c_1)m_2+i_1m_1}\right](c_0 + i_0 + G_0 - c_1 T_0) + \left[\frac{i_1}{(1-c_1)m_2+i_1m_1}\right](M_0-m_0)
 \]</span></p>
@@ -929,7 +985,7 @@ Python code
 </section></section><section id="references" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Blanchard2013" class="csl-entry" role="listitem">
 Blanchard, Olivier, and David R. Johnson. 2013. <em>Macroeconomics, 6th Edition</em>. Pearson.
 </div>
@@ -978,6 +1034,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1046,13 +1129,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'alternate';
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1131,10 +1216,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1144,8 +1228,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1158,6 +1251,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1201,6 +1413,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1226,6 +1439,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1285,23 +1524,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./a_neoclassical_macro_model.html" class="pagination-link">
+      <a href="./a_neoclassical_macro_model.html" class="pagination-link" aria-label="A Neoclassical Macro Model">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./a_neoclassical_synthesis_model_IS_LM_AS_AD.html" class="pagination-link">
+      <a href="./a_neoclassical_synthesis_model_IS_LM_AS_AD.html" class="pagination-link" aria-label="A Neoclassical Synthesis Model (IS-LM-AS-AD)">
         <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Neoclassical Synthesis Model (IS-LM-AS-AD)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">An open-source platform for macroeconomic model simulation.</div>   
+    <div class="nav-footer-left">
+<p>An open-source platform for macroeconomic model simulation.</p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
-    </div>
-    <div class="nav-footer-right"><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></p>
+</div>
   </div>
 </footer>
 

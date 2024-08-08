@@ -12,54 +12,54 @@ In this short-run model, prices are flexible but the capital stock is fixed. The
 
 $$
 Y=C+I+G_0
-$$ {#eq-Y}
+$$ {#eq-Y-AS_AD}
 
 $$
 C=c_0+c_1(Y-T_0), \quad c_1 \in (0,1)
-$$ {#eq-C}
+$$ {#eq-C-AS_AD}
 
 $$
 I= i_0 - i_1r,  \quad i_1 > 0
-$$ {#eq-I}
+$$ {#eq-I-AS_AD}
 
 $$
 M_s=M_0
-$$ {#eq-Ms}
+$$ {#eq-Ms-AS_AD}
 
 $$
 \frac{M_d}{P}=m_0 + m_1Y -m_2r, \quad m_1, m_2 > 0
-$$ {#eq-Md}
+$$ {#eq-Md-AS_AD}
 
 $$
 M_d(r)=M_s 
-$$ {#eq-M_eq}
+$$ {#eq-M_eq-AS_AD}
 
 $$
 w=(1-a)AK^aN^{-a} ,\quad a\in (0,1) 
-$$ {#eq-w}
+$$ {#eq-w-AS_AD}
 
 
 $$
 W=\frac{P^ebC}{1-\frac{N}{N^f}},  \quad b \in (0,1)
-$$ {#eq-W}
+$$ {#eq-W-AS_AD}
 
 $$
 P=\frac{W}{w} 
-$$ {#eq-P}
+$$ {#eq-P-AS_AD}
 
 $$
 N=\left( \frac{Y}{AK^{a}}\right)^{\frac{1}{1-a}}
-$$ {#eq-N}
+$$ {#eq-N-AS_AD}
 
 $$
 U=1-\frac{N}{N^f} 
-$$ {#eq-U}
+$$ {#eq-U-AS_AD}
 
 where $Y$, $C$, $I$, $G_0$, $T_0$, $r$, $M_s$, $M_d$, $w$, $A$, $K$, $N$, $W$, $P^e$ $N^f$, $P$, and $U$ are output, consumption, investment, (exogenous) government spending, (exogenous) taxes, the real interest rate on bonds, nominal money supply, nominal money demand, the real wage, productivity, the capital stock, employment, the nominal wage, the price level expected by workers, the labour force (or total available time for work), the actual price level, and the unemployment rate, respectively.
 
-@eq-Y is the goods market equilibrium condition. Aggregate supply ($Y$) accommodates to the level of aggregate demand which is the sum of consumption, investment, and government spending. @eq-C is the consumption function consisting of autonomous consumption demand ($c_0$) and a marginal propensity to consume ($c_1$) out of disposable income ($Y-T_0$). Investment demand in @eq-I has an autonomous component ($i_0$) capturing Keynesian animal spirits and a component that is negatively related to the rate of interest on bonds. Government spending and taxation are exogenous. Similarly, the nominal money supply ($M_0$) in @eq-Ms is assumed to be exogenous. By @eq-Md, households' real money demand is positively related to income (capturing the transaction demand for money) and negatively related to the interest rate on bonds (capturing speculative demand). There is also an autonomous term ($m_0$) capturing Keynesian liquidity preference. Equilibrium in the money market @eq-M_eq yields an equation for the interest rate. 
+@eq-Y-AS_AD is the goods market equilibrium condition. Aggregate supply ($Y$) accommodates to the level of aggregate demand which is the sum of consumption, investment, and government spending. @eq-C-AS_AD is the consumption function consisting of autonomous consumption demand ($c_0$) and a marginal propensity to consume ($c_1$) out of disposable income ($Y-T_0$). Investment demand in @eq-I-AS_AD has an autonomous component ($i_0$) capturing Keynesian animal spirits and a component that is negatively related to the rate of interest on bonds. Government spending and taxation are exogenous. Similarly, the nominal money supply ($M_0$) in @eq-Ms-AS_AD is assumed to be exogenous. By @eq-Md-AS_AD, households' real money demand is positively related to income (capturing the transaction demand for money) and negatively related to the interest rate on bonds (capturing speculative demand). There is also an autonomous term ($m_0$) capturing Keynesian liquidity preference. Equilibrium in the money market @eq-M_eq-AS_AD yields an equation for the interest rate. 
 
-In @eq-w, the real wage is determined by the marginal product of labour implied by a Cobb-Douglass production function ($Y=AK^aN^{1-a}$). This means the real wage is always consistent with firms' demand for labour based on profit-maximisation.^[See the notes on the Classical Model \href{https://karstenkohlercom.files.wordpress.com/2022/03/neoclassical_model.pdf}{(\underline{here})} for a formal derivation of the labour demand and supply curves from optimisation. A minor modification is that here we work with a normalisation of the term for leisure in the household's log-utility function, $\ln(1-\frac{N}{N^f})$, to allow $N$ to be larger than unity.] @eq-W specifies the nominal wage as implied by households' labour supply curve. Optimising households supply labour based on their work-leisure trade-off (with the parameter $b$ capturing their preference for leisure, $1-\frac{N}{N^f}$). Since they don't have knowledge of the current real wage, they base their decisions on the expected price level $P^e$, which is exogenous in the short run. The actual price level is then given by the ratio of the nominal wage to the real wage @eq-P. In other words, firms set prices such that the nominal wage they pay to workers are consistent with their own desired real wage. @eq-N pins down employment as implied by the Cobb-Douglass production function. In conjunction with an exogenously given labour force $N^f$ (or total available labour time), the level of employment can be used to obtain an unemployment rate in @eq-U.
+In @eq-w-AS_AD, the real wage is determined by the marginal product of labour implied by a Cobb-Douglass production function ($Y=AK^aN^{1-a}$). This means the real wage is always consistent with firms' demand for labour based on profit-maximisation.^[See the notes on the Classical Model \href{https://karstenkohlercom.files.wordpress.com/2022/03/neoclassical_model.pdf}{(\underline{here})} for a formal derivation of the labour demand and supply curves from optimisation. A minor modification is that here we work with a normalisation of the term for leisure in the household's log-utility function, $\ln(1-\frac{N}{N^f})$, to allow $N$ to be larger than unity.] @eq-W-AS_AD specifies the nominal wage as implied by households' labour supply curve. Optimising households supply labour based on their work-leisure trade-off (with the parameter $b$ capturing their preference for leisure, $1-\frac{N}{N^f}$). Since they don't have knowledge of the current real wage, they base their decisions on the expected price level $P^e$, which is exogenous in the short run. The actual price level is then given by the ratio of the nominal wage to the real wage @eq-P-AS_AD. In other words, firms set prices such that the nominal wage they pay to workers are consistent with their own desired real wage. @eq-N-AS_AD pins down employment as implied by the Cobb-Douglass production function. In conjunction with an exogenously given labour force $N^f$ (or total available labour time), the level of employment can be used to obtain an unemployment rate in @eq-U-AS_AD.
 
 ## Simulation
 
@@ -511,28 +511,28 @@ In @fig-dg-neoclmacro, it can be seen that productivity ($A$), taxes ($T_0$), go
 
 In the first step, we will reduce the system to three equations: an IS-curve, an LM-curve, and an AS-curve (or Phillips curve). In the second step, the IS-curve and the LM-curve are combined to yield an AD-curve.
 
-To obtain the IS-curve, substitute @eq-C -@eq-I  into @eq-Y and solve for $Y$:
-\begin{align}\label{eq:IS}
+To obtain the IS-curve, substitute @eq-C-AS_AD -@eq-I-AS_AD  into @eq-Y-AS_AD and solve for $Y$:
+\begin{align}\label{eq:IS-AS_AD}\tag{IS}
 Y&=\left(\frac{1}{1-c_1}\right)(c_0 + i_0 + G_0 - i_1r - c_1 T_0).
 \end{align}	
 
-To obtain the LM-curve, substitute @eq-Ms - @eq-Md into @eq-M_eq and solve for $r$:
+To obtain the LM-curve, substitute @eq-Ms-AS_AD - @eq-Md-AS_AD into @eq-M_eq-AS_AD and solve for $r$:
 
-\begin{align}\label{eq:LM}
+\begin{align}\label{eq:LM-AS_AD}\tag{LM}
 r&=\left(\frac{1}{m_2}\right)(m_0 - \frac{M_0}{P} + m_1Y).
 \end{align}	
 
-To obtain the AS-curve, substitute @eq-w, @eq-W, @eq-N, and @eq-C  into @eq-P :
+To obtain the AS-curve, substitute @eq-w-AS_AD, @eq-W-AS_AD, @eq-N-AS_AD, and @eq-C-AS_AD into @eq-P-AS_AD:
 
-\begin{align}\label{eq:AS}
+\begin{align}\label{eq:AS}\tag{AS}
 P&=\frac{b(c_0-c_1T_0)+ P^ebc_1Y}{(1-a)\left[\left(AK^aY^{-a}\right)^{\frac{1}{1-a}} - \frac{Y}{N^f}\right]}.
 \end{align}	
 
 It can readily be seen that the AS-curve is upward-sloping in the $(Y, P)$-space (recall that $a \in (0,1)$).
 
-Finally, to obtain the AD-curve, substitute @eq-LM into @eq-IS :
+Finally, to obtain the AD-curve, substitute the LM-equation into the IS-equation:
 
-\begin{align}
+\begin{align}\tag{AD}
 Y&=\left[\frac{m_2(c_0 + i_0 + G_0 - c_1 T_0) + i_1(\frac{M_0}{P}-m_0)}{(1-c_1)m_2+i_1m_1}\right]
 \end{align}	
 
