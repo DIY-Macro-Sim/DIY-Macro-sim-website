@@ -504,8 +504,8 @@ G0=matrix(data=5, nrow=S, ncol=Q)
 
 #Solve this system recursively based on the initialisation
 for (t in 2:Q){
-    C[1,t] = c1*(C[1,t-1] + I[1,t-1] + G0[1,t-1])
-    I[1,t] = beta*(c1*(C[1,t-1] + I[1,t-1] + G0[1,t-1]) - C[1,t-1])
+    C[1,t] = c1*(C[1,t-1] + I[1,t-1] + G0[1,t])
+    I[1,t] = beta*(c1*(C[1,t-1] + I[1,t-1] + G0[1,t]) - C[1,t-1])
   } # close t1me loop
 
 # Calculate output
@@ -544,8 +544,8 @@ G0 = np.full((S, Q), 5)
 
 # Solve the system recursively based on the initialization
 for t in range(1, Q):
-    C[0, t] = c1 * (C[0, t - 1] + I[0, t - 1] + G0[0, t - 1])
-    I[0, t] = beta * (c1 * (C[0, t - 1] + I[0, t - 1] + G0[0, t - 1]) - C[0, t - 1])
+    C[0, t] = c1 * (C[0, t - 1] + I[0, t - 1] + G0[0, t])
+    I[0, t] = beta * (c1 * (C[0, t - 1] + I[0, t - 1] + G0[0, t]) - C[0, t - 1])
 
 # Calculate output
 Y = C + G0 + I

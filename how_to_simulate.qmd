@@ -331,8 +331,8 @@ G0[2,s:Q]=6     # scenario: permanent increase in government spending from I0=5 
 #Solve this system recursively based on the initialisation
 for (i in 1:S){
   for (t in 2:Q){
-    C[i,t] = c1*(C[i,t-1] + I[i,t-1] + G0[i,t-1])
-    I[i,t] = beta*(c1*(C[i,t-1] + I[i,t-1] + G0[i,t-1]) - C[i,t-1])
+    C[i,t] = c1*(C[i,t-1] + I[i,t-1] + G0[i,t])
+    I[i,t] = beta*(c1*(C[i,t-1] + I[i,t-1] + G0[i,t]) - C[i,t-1])
   } # close time loop
 }   # close scenarios loop
 
@@ -382,8 +382,8 @@ G0[1, s:Q] = 6  # scenario: permanent increase in government spending from I0=5 
 # Solve this system recursively based on the initialization
 for i in range(S):
     for t in range(1, Q):
-        C[i, t] = c1 * (C[i, t - 1] + I[i, t - 1] + G0[i, t - 1])
-        I[i, t] = beta * (c1 * (C[i, t - 1] + I[i, t - 1] + G0[i, t - 1]) - 
+        C[i, t] = c1 * (C[i, t - 1] + I[i, t - 1] + G0[i, t])
+        I[i, t] = beta * (c1 * (C[i, t - 1] + I[i, t - 1] + G0[i, t]) - 
                           C[i, t - 1])
 
 # Calculate output
@@ -425,7 +425,7 @@ We will consider two main ways to plot model outputs: bar charts for static mode
 
 ```{r howto_4}
 # Bar chart of different equilibrium solutions of Samuelson (1939) model
-barplot(Y[,Q], ylab="Y", main="Figure 1: Output", names.arg=c("Baseline", "Increase in G0"))
+barplot(Y[,Q], ylab="Y", main="Output", names.arg=c("Baseline", "Increase in G0"))
 ```
 
 Next, we show a basic version of a time series chart that displays the dynamics of $Y_t$:
@@ -433,7 +433,7 @@ Next, we show a basic version of a time series chart that displays the dynamics 
 ```{r howto_5}
 # Time series chart of output dynamics in Samuelson (1939) model
 plot(Y[1, 1:100],type="l", col=1, lwd=2, lty=1, xlab="Time", ylab="Y") 
-title(main="Figure 2: Output", cex=0.8)
+title(main="Output", cex=0.8)
 ```
 
 As you can see, there are many settings you can fiddle around with to adjust the appearance of the graph to your liking (run '?plot' to find information about the different options.) If we want to plot the dynamics for the two different parameterisations, we can do the following:
@@ -441,7 +441,7 @@ As you can see, there are many settings you can fiddle around with to adjust the
 ```{r howto_6}
 # Time series chart of output dynamics for different scenarios in Samuelson (1939) model
 plot(Y[1, 1:100],type="l", col=1, lwd=2, lty=1, xlab="Time", ylab="Y", ylim=range(min(Y[1,], Y[2,]), max(Y[1,], Y[2,]))) 
-title(main="Figure 3: Output under different scenarios", cex=0.8)
+title(main="Output under different scenarios", cex=0.8)
 lines(Y[2, 1:100],lty=2)
 legend("bottomright", legend=c("Baseline", "Increase in G0"),
        lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
@@ -455,7 +455,7 @@ Finally, consider a plot for $C_t$ and $I_t$ with two separate axes:
 ```{r howto_7}
 # Time series chart of Samuelson (1939) model with separate axes for consumption and investment
 plot(C[1, 1:100], type="l", col=1, lwd=2, lty=1, xlab="Time", ylab="Y") 
-title(main="Figure 3: Consumption and Investment", cex=0.8)
+title(main="Consumption and Investment", cex=0.8)
 par(mar = c(5, 4, 4, 4) + 0.3)
 par(new = TRUE)
 plot(I[1, 1:100], type="l", col=1, lwd=2, lty=2, font.main=1, cex.main=1,ylab = '', axes=FALSE,
@@ -483,14 +483,14 @@ scenario_labels = ["Baseline", "Increase in G0"]
 plt.bar(scenario_labels, Y[:, Q - 1])
 plt.xlabel("Scenario")
 plt.ylabel("Y")
-plt.title("Figure 1: Output")
+plt.title("Output")
 plt.show()
 
 # Time series chart of output dynamics in Samuelson (1939) model
 plt.plot(range(1, Q), Y[0, 0:Q - 1], color='black', linewidth=2, linestyle='-')
 plt.xlabel("Time")
 plt.ylabel("Y")
-plt.title("Figure 2: Output", fontsize=10)
+plt.title("Output", fontsize=10)
 plt.show()
 
 # Time series chart of output dynamics for different scenarios in Samuelson 
@@ -499,7 +499,7 @@ plt.plot(range(1, Q), Y[0, 0:Q - 1], color='black', linewidth=1, linestyle='-')
 plt.plot(range(1, Q), Y[1, 0:Q - 1], color='black', linewidth=1, linestyle='--')
 plt.xlabel("Time")
 plt.ylabel("Y")
-plt.title("Figure 3: Output under different scenarios", fontsize=10)
+plt.title("Output under different scenarios", fontsize=10)
 plt.legend(["Baseline", "Increase in G0"], loc='lower right')
 plt.show()
 
@@ -516,7 +516,7 @@ ax2.plot(range(1, Q), I[0, 0:Q - 1], color='black', linewidth=2, linestyle='--',
          label='I')
 ax2.set_ylabel("I", color='black')
 ax2.tick_params(axis='y', labelcolor='black')
-plt.title("Figure 4: Consumption and Investment", fontsize=10)
+plt.title("Consumption and Investment", fontsize=10)
 lines, labels = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
 ax2.legend(lines + lines2, labels + labels2, loc='right')
@@ -574,7 +574,7 @@ dg=graph_from_adjacency_matrix(A_mat, mode="directed", weighted= NULL)
 V(dg)$name=c("Y", "C", "I", expression(G[0]))
 
 # Plot directed graph matrix
-plot(dg, main="Figure 4: Directed graph of Samuelson model", vertex.size=20, vertex.color="lightblue", 
+plot(dg, main="Directed graph of Samuelson model", vertex.size=20, vertex.color="lightblue", 
      vertex.label.color="black", edge.arrow.size=0.3, edge.width=1.1, edge.size=1.2,
      edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
      vertex.frame.color="NA", margin=-0.08)
@@ -616,7 +616,7 @@ pos = nx.spring_layout(G, seed=42)
 nx.draw(G, pos, with_labels=True, labels=nodelabs, node_size=500, node_color='lightblue', font_size=10)
 edge_labels = {(u, v): '' for u, v in G.edges}
 nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_color='black')
-plt.title("Figure 5: Directed graph of Samuelson model", fontsize=12)
+plt.title("Directed graph of Samuelson model", fontsize=12)
 plt.axis('off')
 plt.show()
 
@@ -626,9 +626,9 @@ plt.show()
 
 Broadly speaking, three types of nodes are possible:
 
-1. nodes from which arrows only point away represent exogenous variables ($G_0$ in Figure 4)
-2. nodes to which arrows point but from which arrows also point away represent endogenous variables that also have a causal impact on other variables ($Y$, $C$, and $I$ in Figure 4)
-3. nodes to arrows only point towards represent endogenous variables that are residuals (not present in Figure 4) 
+1. nodes from which arrows only point away represent exogenous variables ($G_0$)
+2. nodes to which arrows point but from which arrows also point away represent endogenous variables that also have a causal impact on other variables ($Y$, $C$, and $I$)
+3. nodes to arrows only point towards represent endogenous variables that are residuals (not present in this example) 
 
 It can thus be seen that the key exogenous variable in the @Samuelson1939 model is government spending $G_0$, which determines aggregate income, which in turn feeds into consumption. Consumption then feeds into investment, which feeds back into income yielding the multiplier-accelerator effect.
 
