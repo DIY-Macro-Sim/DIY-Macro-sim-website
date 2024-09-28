@@ -587,7 +587,7 @@ $$ For the system to be stable, both eigenvalues of the Jacobian need to be insi
 $$
 1+tr(J)+det(J)>0
 $$ $$
-1+tr(J)-det(J)>0
+1-tr(J)+det(J)>0
 $$ $$
 1-det(J)>0,
 $$ where $tr(J)$ is the trace and $det(J)$ is the determinant of the Jacobian.

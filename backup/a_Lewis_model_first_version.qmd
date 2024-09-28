@@ -1,0 +1,495 @@
+# A Lewis Model of Economic Development {#sec-lewis}
+
+## Overview
+
+This model captures some key features of W. Arthur @Lewis1954' two-sector model of the growth process of a developing country. The model describes the development process as one where a modern urban sector draws labour inputs from a traditional subsistence sector that is characterised by surplus labour, i.e. labour that does not produce any additional output (reflected in a zero marginal product). Workers in the traditional sector are paid a fixed subsistence wage. The presence of surplus labour allows the modern sector to attract workers from the traditional sector for a small wage premium above the subsistence wage. This enables the modern sector to make profits that are reinvested and thus drive  capital accumulation in the modern sector. As a result, the economy undergoes industrialisation. This process of rapid structural change comes to an end when the surplus labour in the traditional sector is depleted. Labour supply then becomes sensitive to the real wage, leading to a fall in profits and a slowdown of capital accumulation.
+
+We present a formal version of the model that is based on the graphical representation in @Todaro2015, pp. 124-127.
+
+## The Model
+
+$$
+    Y_{1t}= 
+\begin{cases}
+    L^\alpha_{1t},& \text{if } L_{1t}\leq \lambda\\
+    \lambda^\alpha, &    \text{if } L_{1t} > \lambda
+\end{cases}
+$$ {#eq-lewis_Y1}
+
+$$
+L_{1t} = L - L_{2t}  
+$$ {#eq-lewis_L1}
+
+$$
+w_{1t} = w^S  
+$$ {#eq-lewis_w1}
+
+$$
+Y_{2t} = L_{2t}^\beta K_{2t}^{1-\beta}  
+$$ {#eq-lewis_Y2}
+
+$$
+    w_{2t}= 
+\begin{cases}
+    \gamma L_{2t},& \text{if } L_{1t}\leq \lambda\\
+    w^S + \rho, &    \text{if } L_{1t} > \lambda
+\end{cases}
+$$ {#eq-lewis_w2}
+
+$$
+L_{2t}=\frac{\beta Y_{2t}}{w_{2t}}
+$$ {#eq-lewis_L2}
+
+$$
+P_{2t}=Y_{2t} - w_{2t}L_{2t}
+$$ {#eq-lewis_P2}
+
+$$
+K_{2t}=K_{2t-1} + P_{2t-1}
+$$ {#eq-lewis_K2}
+
+where the subscripts 1 and 2 refer to the traditional and modern sector, respectively, and $Y_t$, $L_t$, $w_t$ $K_t$, and $P_t$ represent output, employment, the real wage rate, the capital stock, and profits, respectively.
+
+ @eq-lewis_Y1 describes output determination in the traditional sector. The variable $\lambda$ is the employment level beyond which the marginal product of labour (MPL) in sector 1 becomes zero. If actual employment is below this level, the sector faces a production function that is increasing in employment but with diminishing marginal returns $(\alpha \in (0,1))$. If employment is above this threshold, there is surplus labour and output is fixed at the level implied by the level of employment for which the MPL becomes zero. @eq-lewis_L1 says that the level of employment in the traditional sector is residually determined by the total labour supply, which we take to be exogenous, net of employment in the modern sector. By @eq-lewis_w1, the real wage in the traditional sector is an exogenously given subsistence wage $w^S$. @eq-lewis_Y2 is the production function of the modern sector, which exhibits constant returns to scale and diminishing marginal returns to the factors $(\beta\in (0,1))$. @eq-lewis_w2 specifies wage determination in the modern sector. If there is surplus labour in the traditional sector, the modern sector pays a wage premium $\rho$ on the subsistence wage. As soon as surplus labour is depleted, the modern sector faces an upward-sloping labour supply curve, which we model for simplicity as a linear function with slope coefficient $\gamma$. @eq-lewis_L2 is the labour demand curve of the modern sector, which is derived from optimisation. To maximise profits, the firm must equalise the real wage and the MPL: $w_{2t}=MPL_{2t}=\beta L_{2t}^{\beta-1} K_{2t}^{1-\beta} = \beta \frac{Y_{2t}}{L_{2t}}$. Solving this condition for $L_{2t}$ yields $L_{2t}=K_{2t} \left(\frac{w_{2t}}{\beta} \right)^{-\frac{1}{1-\beta}}=\frac{\beta Y_{2t}}{w_{2t}}$. Finally, @eq-lewis_P2 defines profits in the modern sector, and @eq-lewis_K2 describes capital accumulation in that sector, where it is assumed that all profits are invested $(P_{2t}=I_{2t})$.
+
+## Simulation
+
+### Parameterisation
+
+Table reports the parameterisation and initial values used in the simulation. All scenarios are initialised such that there is surplus labour ($L_{10} > \lambda$).
+
+**Table 1: Parameterisation**
+
+|     Scenario                     | $\alpha$ | $\rho$ | $L$ | $\beta$ | $\gamma$ | $\lambda$ | $w^S$|
+|----------------------------------|--------- |--------|-----|-------- |----------|-----------|-------|
+| 1: baseline                      | 0.7      | 1      | 20  | 0.7     | 0.55     | 0.05      | 1     |
+| 2: rise subsistence wage ($w^S$) | 0.7      | 1      | 20  | 0.7     | 0.55     | 0.05      | 1.1   |
+
+
+### Simulation code
+
+```{r lewis1}
+# Clear the environment
+rm(list=ls(all=TRUE))
+
+# Set number of periods
+T=250
+
+# Set number of scenarios (including baseline)
+S=2
+
+# Set period in which shock/shift will occur
+s=15
+
+# Create (S x T)-matrices that will contain the simulated data
+Y1=matrix(data=1,nrow=S,ncol=T) # Output in sector 1 (traditional)
+Y2=matrix(data=1,nrow=S,ncol=T) # Output in sector 2 (modern)
+L1=matrix(data=1,nrow=S,ncol=T) # employment in sector 1
+L2=matrix(data=1,nrow=S,ncol=T) # employment in sector 2
+w2=matrix(data=1,nrow=S,ncol=T) # real wage sector 2
+K=matrix(data=1,nrow=S,ncol=T) # capital stock (only in sector 2)
+P2=matrix(data=1,nrow=S,ncol=T) #  profits in sector 2
+
+# Set fixed parameter values
+alpha=0.7 # labour elasticity of output, sector 1
+rho=1     # wage premium
+L=20      # total labour supply (exogenous)
+gamma=0.2 # labour supply coefficient, sector 2
+lambda=10 # employment at which MPL in sector 1 becomes zero
+beta=0.7  # labour elasticity of output, sector 2
+
+# Set baseline parameter values
+w1=matrix(data=1,nrow=S,ncol=T) # subsistence real wage sector 1
+
+# Set parameter values for different scenarios
+w1[2,s:T]=0.9         # scenario 2: fall in subsistence wage
+
+# Initialise such that there is surplus labour (L1 > lambda)
+L1[,1]= 0.9*L
+L2[,1]= L - L1[,1]
+
+# Simulate the model by looping over T time periods for S different scenarios
+for (i in 1:S){
+  
+  for (t in 2:T){
+    
+   for (iterations in 1:1000){ # note: order matters due to if-else condition
+      
+      ## Model equations
+      # Output sector1 and wages sector 2
+      if(L1[i,t]<lambda){
+      Y1[i,t] = (L1[i,t]^alpha)
+      w2[i,t]= gamma*L2[i,t]
+      }
+      else{
+      Y1[i,t] = lambda^alpha
+      w2[i,t]= w1[i,t] + rho
+      }
+
+      # Output sector 2
+      Y2[i,t]=(L2[i,t]^beta)*(K[i,t]^(1-beta))
+      
+      # Profits sector 2
+      P2[i,t]=Y2[i,t] - w2[i,t]*L2[i,t]
+      
+      # Capital accumulation sector 2
+      K[i,t]= K[i,t-1] + P2[i,t-1]
+
+      # Employment sector 2 
+      L2[i,t] =(beta*Y2[i,t])/w2[i,t]  
+      
+      # Employment sector 1
+      L1[i,t] = L - L2[i,t]
+     
+    } # close iterations loop
+  } # close time loop
+} # close scenarios loop
+
+#Calculate profit share of sector 2
+PS=P2[,]/(Y1[,]+Y2[,])
+
+#Find period in which Lewis turning point occurs
+tp=c(min(which(L1[1,] < lambda)), min(which(L1[2,] < lambda)))
+```
+
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+import numpy as np
+
+# Set number of periods
+T = 250
+
+# Set number of scenarios (including baseline)
+S = 2
+
+# Set period in which shock/shift will occur
+s = 15
+
+# Create (S x T)-matrices that will contain the simulated data
+Y1 = np.ones((S, T))  # Output in sector 1 (traditional)
+Y2 = np.ones((S, T))  # Output in sector 2 (modern)
+L1 = np.ones((S, T))  # employment in sector 1
+L2 = np.ones((S, T))  # employment in sector 2
+w2 = np.ones((S, T))  # real wage sector 2
+K = np.ones((S, T))   # capital stock (only in sector 2)
+P2 = np.ones((S, T))  # profits in sector 2
+
+# Set fixed parameter values
+alpha = 0.7  # labour elasticity of output, sector 1
+rho = 1      # wage premium
+L = 20       # total labour supply (exogenous)
+gamma = 0.2  # labour supply coefficient, sector 2
+lambda_val = 10  # employment at which MPL in sector 1 becomes zero
+beta = 0.7   # labour elasticity of output, sector 2
+
+# Set baseline parameter values
+w1 = np.ones((S, T))  # subsistence real wage sector 1 (baseline)
+
+# Set parameter values for different scenarios
+w1[1, s:T] = 0.9     # scenario 2: fall in subsistence wage
+
+# Initialise such that there is surplus labour (L1 > lambda)
+L1[:, 0] = 0.9 * L
+L2[:, 0] = L - L1[:, 0]
+
+# Simulate the model by looping over T time periods for S different scenarios
+for i in range(S):
+    for t in range(1, T):
+        for iterations in range(1000):  # note: order matters due to if-else condition
+            # Model equations
+            # Output sector1 and wages sector 2
+            if L1[i, t] < lambda_val:
+                Y1[i, t] = L1[i, t] ** alpha
+                w2[i, t] = gamma * L2[i, t]
+            else:
+                Y1[i, t] = lambda_val ** alpha
+                w2[i, t] = w1[i, t] + rho
+
+            # Output sector 2
+            Y2[i, t] = (L2[i, t] ** beta) * (K[i, t - 1] ** (1 - beta))
+
+            # Profits sector 2
+            P2[i, t] = Y2[i, t] - w2[i, t] * L2[i, t]
+
+            # Capital accumulation sector 2
+            K[i, t] = K[i, t - 1] + P2[i, t - 1]
+
+            # Employment sector 2
+            L2[i, t] = (beta * Y2[i, t]) / w2[i, t]
+
+            # Employment sector 1
+            L1[i, t] = L - L2[i, t]
+
+# Calculate profit share of sector 2
+PS = P2 / (Y1 + Y2)
+
+# Find period in which Lewis turning point occurs
+tp = [np.min(np.where(L1[i, :] < lambda_val)) for i in range(S)]
+
+```
+
+:::
+
+### Plots
+
+@fig-output - @fig-wage display the model's dynamics under the baseline scenario. The red vertical line marks the 'Lewis turning point', which is the period in which the surplus labour in the traditional sector is depleted $(L_{1t}<\lambda)$. It can be seen that before the Lewis turning point is reached, output in the modern sector grows exponentially. After the turning point, it still grows but at a lower rate. This is because as the surplus labour in the traditional sector is removed, the modern sector faces an upward-sloping labour supply curve. As a result, real wages increase and profits are reduced. This slows down capital accumulation and growth. In the traditional sector, output falls somewhat after the turning point as the sector now faces diminishing marginal return to labour.
+
+```{r lewis2, collapse=TRUE}
+#| label: fig-output
+#| fig-cap: Output in traditional (Y1) and modern (Y2) sector
+
+# Set start and end periods for plots
+Tmax=240
+Tmin=2
+
+#Output in the two sectors, baseline
+plot(Y1[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlim=range(0:(Tmax)), xlab="", ylab="Y", ylim=range(Y1[1, Tmin:Tmax],Y2[1, Tmin:(Tmax)])) 
+title(main="Output in traditional (Y1) and modern (Y2) sector", xlab = 'Time',cex=0.8 ,line=2)
+lines(Y2[1, Tmin:(Tmax+1)],lty=2)
+abline(v = tp[1], col = "darkred")
+legend("topleft", legend=c("Y1", "Y2"),
+       lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
+
+```
+
+
+```{r lewis3, collapse=TRUE}
+#| label: fig-employment
+#| fig-cap: Employment in traditional (L1) and modern (L2) sector
+
+#Employment in the two sectors, baseline
+plot(L1[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlim=range(0:(Tmax)), xlab="", ylab="L", ylim=range(L1[1, Tmin:Tmax],L2[1, Tmin:(Tmax)])) 
+title(main="Employment in traditional (L1) and modern (L2) sector", xlab = 'Time',cex=0.8 ,line=2)
+lines(L2[1, Tmin:(Tmax+1)],lty=2)
+abline(v = tp[1], col = "darkred")
+legend("bottomright", legend=c("L1", "L2"),
+       lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
+
+```
+
+
+```{r lewis4, collapse=TRUE}
+#| label: fig-capacc
+#| fig-cap: Capital accumulation and profits in modern sector
+
+#Profits and capital accumulation in manufacturing, baseline
+plot(P2[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlim=range(0:(Tmax)), xlab="", ylab="", ylim=range(P2[1, Tmin:Tmax])) 
+title(main="Capital accumulation and profits in modern sector",ylab = 'P', xlab = 'Time', cex=0.8, line=2)
+abline(v = tp[1], col = "darkred")
+par(mar = c(5, 4, 4, 4) + 0.3)
+par(new = TRUE)
+plot(K[1, Tmin:Tmax],type="l", col=1, lwd=2, lty=2, font.main=1,cex.main=1,ylab = '', axes=FALSE,
+     xlab = '',ylim = range(K[1, 2:(Tmax+1)]),cex.axis=1,cex.lab=0.75)
+axis(side = 4, at = pretty(range(K[1, 2:(Tmax+1)])))  
+mtext("K", side = 4, line = 2)
+legend("bottomright", legend=c("P", "K"),
+       lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
+
+```
+
+```{r lewis5, collapse=TRUE}
+#| label: fig-wage
+#| fig-cap: Real wage and profit share in manufacturing sector
+
+# Real wage and profit share in manufacturing
+plot(w2[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlim=range(0:(Tmax)), xlab="", ylab="", ylim=range(w2[1, Tmin:Tmax])) 
+title(main="Real wage and profit share in manufacturing sector",ylab = 'w', xlab = 'Time', cex=0.8, line=2)
+abline(v = tp[1], col = "darkred")
+par(mar = c(5, 4, 4, 4) + 0.3)
+par(new = TRUE)
+plot(PS[1, Tmin:Tmax],type="l", col=1, lwd=2, lty=2, font.main=1,cex.main=1,ylab = '', axes=FALSE,
+     xlab = '',ylim = range(PS[1, 2:(Tmax+1)]),cex.axis=1,cex.lab=0.75)
+axis(side = 4, at = pretty(range(PS[1, 2:(Tmax+1)])))  
+mtext("pshare", side = 4, line = 2)
+legend("topleft", legend=c("w", "pshare"),
+       lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
+
+```
+@fig-scen2 compares output dynamics in the modern sector for the baseline scenario and scenario 2 in which the subsistence wage $w^s$ falls in $t=15$. It can be seen that for a lower subsistence wage, the modern sector grows faster and the Lewis turning point is reached earlier This result illustrates the Classical nature of the model, whereby capital accumulation is driven by profits. Thus, any reduction in profits slows down the growth process.
+
+
+```{r lewis6, collapse=TRUE}
+#| label: fig-scen2
+#| fig-cap: Output in modern sector (baseline vs decrease in subsistence wage)
+
+plot(Y2[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlim=range(0:(Tmax)), xlab="", ylab="Y2", ylim=range(Y2[1, Tmin:Tmax],Y2[1, Tmin:(Tmax)])) 
+title(main="Output in  modern sector: baseline vs decrease in subsistence wage", xlab = 'Time',cex=0.8 ,line=2)
+lines(Y2[2, Tmin:(Tmax+1)],lty=2)
+abline(v = tp[1], col = "darkred")
+abline(v = tp[2], col = "red")
+legend("topleft", legend=c("1: baseline", "2: decrease in subsistence wage"),
+       lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+### Plots (here only for output)
+import matplotlib.pyplot as plt
+
+# Set start and end periods for plots
+Tmax = 240
+Tmin = 2
+
+# Output in the two sectors, baseline
+plt.plot(range(Tmin, Tmax + 1), Y1[0, Tmin:Tmax + 1], 'k-', linewidth=2, label='Y1')
+plt.plot(range(Tmin, Tmax + 1), Y2[0, Tmin:Tmax + 1], 'k--', linewidth=2, label='Y2')
+
+# Highlight Lewis turning point
+plt.axvline(x=tp[0], color='darkred', linestyle='-')
+
+# Set plot labels and title
+plt.title('Output in traditional (Y1) and modern (Y2) sector')
+plt.xlabel('Time')
+plt.ylabel('Y')
+plt.ylim(min(Y1[0, Tmin:Tmax]), max(Y2[0, Tmin:Tmax]))
+
+# Add legend
+plt.legend(loc='upper left')
+
+# Show the plot
+plt.show()
+
+```
+
+:::
+
+## Directed graph
+
+Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.
+
+```{r lewisDAG, message=FALSE}
+## Create directed graph
+# Construct auxiliary Jacobian matrix for 8 variables: 
+
+#              Y1,Y2,L1,L2,w1,w2,P2,K
+M_mat=matrix(c(0, 0, 1, 0, 0, 0, 0, 0,
+               0, 0, 0, 1, 0, 0, 0, 1,
+               0, 0, 0, 1, 0, 0, 0, 0,
+               0, 1, 0, 0, 0, 1, 0, 0,
+               0, 0, 0, 0, 0, 0, 0, 0,
+               0, 0, 0, 0, 1, 0, 0, 0,
+               0, 1, 0, 1, 0, 1, 0, 0,
+               0, 0, 0, 0, 0, 0, 1, 0), 8, 8, byrow=TRUE)
+
+# Create adjacency matrix from transpose of auxiliary Jacobian 
+A_mat=t(M_mat)
+
+# Create directed graph from adjacency matrix
+library(igraph)
+dg= graph_from_adjacency_matrix(A_mat, mode="directed", weighted= NULL)
+
+# Define node labels
+V(dg)$name=c(expression(Y[1]), expression(Y[2]), expression(L[1]), expression(L[2]), 
+             expression(w[1]), expression(w[2]), expression(P[2]), "K")
+
+# Plot directed graph
+plot(dg, main="Directed Graph of Lewis Model", vertex.size=20, vertex.color="lightblue", 
+     vertex.label.color="black", edge.arrow.size=0.3, edge.width=1.1, edge.size=1.2,
+     edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
+     vertex.frame.color="NA", margin=-0.08)
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Create directed graph
+import networkx as nx
+
+# Construct auxiliary Jacobian matrix for 8 variables: 
+
+#                    Y1,Y2,L1,L2,w1,w2,P2,K                  
+M_mat = np.array([  [0, 0, 1, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 1, 0, 0, 0, 1],
+                    [0, 0, 0, 1, 0, 0, 0, 0],
+                    [0, 1, 0, 0, 0, 1, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 1, 0, 0, 0],
+                    [0, 1, 0, 1, 0, 1, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 1, 0]])
+
+# Create adjacency matrix from transpose of auxiliary Jacobian and add column names
+A_mat = M_mat.transpose()
+
+# Create the graph from the adjacency matrix
+G = nx.DiGraph(A_mat)
+
+# Define node labels
+nodelabs = {0: r'$Y_1$', 1: r'$Y_2$', 2: r'$L_1$', 3: r'$L_2$', 
+            4: r'$w_1$', 5: r'$w_2$', 6: r'$P_2$', 7: 'K'}
+
+
+# Plot the graph
+pos = nx.spring_layout(G, k=0.4)
+nx.draw_networkx(G, pos, node_size=200, node_color="lightblue", 
+                 edge_color="black", width=1.2, arrowsize=10, 
+                 arrowstyle='->', font_size=8, font_color="black",
+                 with_labels=True, labels=nodelabs)
+plt.axis("off")
+plt.title("Directed Graph of Lewis Model")
+plt.show()
+
+```
+
+:::
+
+
+The directed graph illustrates that the subsistence wage in the traditional sector $w_1=w^s$ is the key exogenous variables that impact the dynamics of growth and distribution via its effect on real wages in the modern sector. Employment, output, profits, and capital accumulation in the modern sector form a closed loop (or cycle) within the system. The traditional sector plays a residual role.
+
+## Analytical discussion
+To analyse the dynamics of capital accumulation before the Lewis turning point, i.e. for the case where $(L_{1t}>\lambda)$, combine @eq-lewis_Y2, @eq-lewis_P2, and @eq-lewis_L2, and substitute into @eq-lewis_K2. Simplifiying yields a first-order difference equation in $K_t$:
+
+$$
+K_{2t}=\left[ 1 + (1-\beta)\left(\frac{w^s+\rho}{\beta}\right)^{\frac{-\beta}{1-\beta}}\right]K_{2t-1}=\delta K_{2t-1}
+$$
+Since the coefficient on $K_{2t-1}$ is larger than unity $(\delta>1)$, the system is unstable and $K_{2t}$ will grow exponentially. 
+It can further be seen that the subsistence wage $w^S$ is negatively related to the speed of capital accumulation:
+
+$$
+\frac{\partial \delta}{\partial w^s}= -\left(\frac{w^s+\rho}{\beta}\right)^{\frac{-1}{1-\beta}} < 0.
+$$
+
+We can calculate the growth rate of the capital stock using the simulation:
+
+```{r lewis_analytical}
+# Calculate growth rate of capital stock analytically (for baseline)
+1+(1-beta)*((w1[1,s]+rho)/beta)^(-beta/(1-beta)) - 1
+
+# Compare with numerical solution (for baseline)
+K[1,s+1]/K[1,s] - 1
+
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Calculate growth rate of capital stock analytically (for baseline)
+1 + (1 - beta) * ((w1[0, s] + rho) / beta) ** (-beta / (1 - beta)) - 1
+
+# Compare with numerical solution (for baseline)
+K[0, s + 1] / K[0, s] - 1
+
+
+```
+
+:::
+
+## References
