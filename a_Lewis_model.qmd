@@ -566,12 +566,81 @@ $$
 $$ 
 where $tr(J)$ is the trace and $det(J)$ is the determinant of the Jacobian.
 
-It turns out that the second condition $1-tr(J)+det(J)>0$ is the most restrictive one. Plugging in $tr(J)$ and $det(J)$ and simplifying yields:
+With $tr(J)$ clearly positive, let us focus on $1-tr(J)+det(J)>0$. Plugging in $tr(J)$ and $det(J)$ and simplifying yields:
 
 $$
 w_2 - \frac{Y_{2t-1}}{L_{2t-1}}>0.
 $$
 As long as the real wage is below the average product of labour, $\frac{Y_{2}}{L_{2}}$, the condition will be violated, as there are positive profits and thus capital accumulation. With the real wage being lower or equal to the marginal product of labour, this is indeed the case. The system is then dynamically unstable and will generate exponential growth. 
 
+We can check this stability analysis numerically:
+
+```{r lewis_stab}
+### Examine stability before the turning point (here for the baseline scenario only)
+
+# Construct Jacobian matrix before the turning point 
+J=matrix(c(1 + delta*beta*(beta-1)*(L2[1,tp[1]-1]^(beta-2))*(K[1,tp[1]-1]^(1-beta)), 
+           delta*beta*(1-beta)*(L2[1,tp[1]-1]^(beta-1))*(K[1,tp[1]-1]^(-beta)),
+           beta*(L2[1,tp[1]-1]^(beta-1))*(K[1,tp[1]-1]^(1-beta)) - w2[1,tp[1]-1],
+           1 + (1-beta)*(L2[1,tp[1]-1]^(beta))*(K[1,tp[1]-1]^(-beta))), 
+          2, 2, byrow=TRUE)
+
+# Obtain eigenvalues
+ev=eigen(J)
+(values = ev$values)
+
+# Obtain determinant and trace
+(det=det(J))      # determinant
+(tr=sum(diag(J))) # trace
+
+#Check stability conditions
+print(1+tr+det>0)
+print(1-tr+det>0)
+print(1-det>0)
+
+# Check simplified stability condition
+print(w2[1,(tp[1]-1)] - Y2[1,(tp[1]-1)]/L2[1,(tp[1]-1)] >0)
+
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+### Examine stability before the turning point (here for the baseline scenario only)
+
+# Set turning point as integer
+tp = tp.astype(int)  
+
+# Construct Jacobian matrix before the turning point 
+J = np.array([
+    [1 + delta * beta * (beta - 1) * (L2[0, tp[0]-1] ** (beta - 2)) * (K[0, tp[0]-1] ** (1 - beta)),
+     delta * beta * (1 - beta) * (L2[0, tp[0]-1] ** (beta - 1)) * (K[0, tp[0]-1] ** (-beta))],
+    [beta * (L2[0, tp[0]-1] ** (beta - 1)) * (K[0, tp[0]-1] ** (1 - beta)) - w2[0, tp[0]-1],
+     1 + (1 - beta) * (L2[0, tp[0]-1] ** beta) * (K[0, tp[0]-1] ** (-beta))]
+])
+
+# Obtain eigenvalues
+eigenvalues, eigenvectors = np.linalg.eig(J)
+print(eigenvalues)
+
+# Obtain determinant and trace
+det = np.linalg.det(J)
+tr = np.trace(J)
+
+# Check general stability conditions
+print(1+tr+det>0)
+print(1-tr+det>0)
+print(1-det>0)
+
+# Check simplified stability condition
+print(w2[0, tp[0]-1] - Y2[0, tp[0]-1] / L2[0, tp[0]-1] > 0)
+
+```
+
+:::
 
 ## References

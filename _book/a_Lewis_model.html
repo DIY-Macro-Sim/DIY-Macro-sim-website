@@ -957,10 +957,100 @@ J(L_2, K_2)=\begin{bmatrix} 1+ \delta\beta (\beta-1) L_{2t-1}^{\beta-2} K_{2t-1}
 \]</span> <span class="math display">\[
 1-det(J)&gt;0,
 \]</span> where <span class="math inline">\(tr(J)\)</span> is the trace and <span class="math inline">\(det(J)\)</span> is the determinant of the Jacobian.</p>
-<p>It turns out that the second condition <span class="math inline">\(1-tr(J)+det(J)&gt;0\)</span> is the most restrictive one. Plugging in <span class="math inline">\(tr(J)\)</span> and <span class="math inline">\(det(J)\)</span> and simplifying yields:</p>
+<p>With <span class="math inline">\(tr(J)\)</span> clearly positive, let us focus on <span class="math inline">\(1-tr(J)+det(J)&gt;0\)</span>. Plugging in <span class="math inline">\(tr(J)\)</span> and <span class="math inline">\(det(J)\)</span> and simplifying yields:</p>
 <p><span class="math display">\[
 w_2 - \frac{Y_{2t-1}}{L_{2t-1}}&gt;0.
 \]</span> As long as the real wage is below the average product of labour, <span class="math inline">\(\frac{Y_{2}}{L_{2}}\)</span>, the condition will be violated, as there are positive profits and thus capital accumulation. With the real wage being lower or equal to the marginal product of labour, this is indeed the case. The system is then dynamically unstable and will generate exponential growth.</p>
+<p>We can check this stability analysis numerically:</p>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Examine stability before the turning point (here for the baseline scenario only)</span></span>
+<span></span>
+<span><span class="co"># Construct Jacobian matrix before the turning point </span></span>
+<span><span class="va">J</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">delta</span><span class="op">*</span><span class="va">beta</span><span class="op">*</span><span class="op">(</span><span class="va">beta</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="va">L2</span><span class="op">[</span><span class="fl">1</span>,<span class="va">tp</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="op">(</span><span class="va">beta</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="va">K</span><span class="op">[</span><span class="fl">1</span>,<span class="va">tp</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">beta</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>           <span class="va">delta</span><span class="op">*</span><span class="va">beta</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">beta</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="va">L2</span><span class="op">[</span><span class="fl">1</span>,<span class="va">tp</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="op">(</span><span class="va">beta</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="va">K</span><span class="op">[</span><span class="fl">1</span>,<span class="va">tp</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="va">beta</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>           <span class="va">beta</span><span class="op">*</span><span class="op">(</span><span class="va">L2</span><span class="op">[</span><span class="fl">1</span>,<span class="va">tp</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="op">(</span><span class="va">beta</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="va">K</span><span class="op">[</span><span class="fl">1</span>,<span class="va">tp</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">beta</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="va">w2</span><span class="op">[</span><span class="fl">1</span>,<span class="va">tp</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>           <span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">beta</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="va">L2</span><span class="op">[</span><span class="fl">1</span>,<span class="va">tp</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="op">(</span><span class="va">beta</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="va">K</span><span class="op">[</span><span class="fl">1</span>,<span class="va">tp</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="va">beta</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>          <span class="fl">2</span>, <span class="fl">2</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Obtain eigenvalues</span></span>
+<span><span class="va">ev</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="va">values</span> <span class="op">=</span> <span class="va">ev</span><span class="op">$</span><span class="va">values</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.0552484 0.9580697</code></pre>
+</div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Obtain determinant and trace</span></span>
+<span><span class="op">(</span><span class="va">det</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/det.html">det</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span><span class="op">)</span>      <span class="co"># determinant</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.011002</code></pre>
+</div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">tr</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># trace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.013318</code></pre>
+</div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Check stability conditions</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">tr</span><span class="op">+</span><span class="va">det</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">tr</span><span class="op">+</span><span class="va">det</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">det</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Check simplified stability condition</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">w2</span><span class="op">[</span><span class="fl">1</span>,<span class="op">(</span><span class="va">tp</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span> <span class="op">-</span> <span class="va">Y2</span><span class="op">[</span><span class="fl">1</span>,<span class="op">(</span><span class="va">tp</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span><span class="op">/</span><span class="va">L2</span><span class="op">[</span><span class="fl">1</span>,<span class="op">(</span><span class="va">tp</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span> <span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Examine stability before the turning point (here for the baseline scenario only)</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set turning point as integer</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>tp <span class="op">=</span> tp.astype(<span class="bu">int</span>)  </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct Jacobian matrix before the turning point </span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> np.array([</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span> <span class="op">+</span> delta <span class="op">*</span> beta <span class="op">*</span> (beta <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> (L2[<span class="dv">0</span>, tp[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>] <span class="op">**</span> (beta <span class="op">-</span> <span class="dv">2</span>)) <span class="op">*</span> (K[<span class="dv">0</span>, tp[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>] <span class="op">**</span> (<span class="dv">1</span> <span class="op">-</span> beta)),</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>     delta <span class="op">*</span> beta <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> beta) <span class="op">*</span> (L2[<span class="dv">0</span>, tp[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>] <span class="op">**</span> (beta <span class="op">-</span> <span class="dv">1</span>)) <span class="op">*</span> (K[<span class="dv">0</span>, tp[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>] <span class="op">**</span> (<span class="op">-</span>beta))],</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    [beta <span class="op">*</span> (L2[<span class="dv">0</span>, tp[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>] <span class="op">**</span> (beta <span class="op">-</span> <span class="dv">1</span>)) <span class="op">*</span> (K[<span class="dv">0</span>, tp[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>] <span class="op">**</span> (<span class="dv">1</span> <span class="op">-</span> beta)) <span class="op">-</span> w2[<span class="dv">0</span>, tp[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>],</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>     <span class="dv">1</span> <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> beta) <span class="op">*</span> (L2[<span class="dv">0</span>, tp[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>] <span class="op">**</span> beta) <span class="op">*</span> (K[<span class="dv">0</span>, tp[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>] <span class="op">**</span> (<span class="op">-</span>beta))]</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain eigenvalues</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>eigenvalues, eigenvectors <span class="op">=</span> np.linalg.eig(J)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(eigenvalues)</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain determinant and trace</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>det <span class="op">=</span> np.linalg.det(J)</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>tr <span class="op">=</span> np.trace(J)</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Check general stability conditions</span></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span><span class="op">+</span>tr<span class="op">+</span>det<span class="op">&gt;</span><span class="dv">0</span>)</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span><span class="op">-</span>tr<span class="op">+</span>det<span class="op">&gt;</span><span class="dv">0</span>)</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span><span class="op">-</span>det<span class="op">&gt;</span><span class="dv">0</span>)</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Check simplified stability condition</span></span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(w2[<span class="dv">0</span>, tp[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> Y2[<span class="dv">0</span>, tp[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>] <span class="op">/</span> L2[<span class="dv">0</span>, tp[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
 </section><section id="references" class="level2"><h2 class="anchored" data-anchor-id="references">References</h2>
 
 
