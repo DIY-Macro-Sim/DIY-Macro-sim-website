@@ -1,0 +1,110 @@
+# A Hicks Model of Business Cycles {#sec-hicks}
+
+## Overview
+
+This model captures some key features of John R. @Hicks1950' nonlinear model of business cycle fluctuations. BLABLA ... The model describes the development process as one where a modern urban sector draws labour inputs from a traditional subsistence sector that is characterised by surplus labour, i.e. labour that does not produce any additional output (reflected in a zero marginal product). Workers in the traditional sector are paid a fixed subsistence wage. The presence of surplus labour allows the modern sector to attract workers from the traditional sector for a small wage premium above the subsistence wage. This enables the modern sector to make excess profits that are reinvested and thus drive rapid capital accumulation in the modern sector. As a result, the economy undergoes industrialisation. This process of rapid structural change comes to an end when the surplus labour in the traditional sector is depleted. Labour supply then becomes sensitive to the real wage, leading to a slowdown in the growth of profits and capital accumulation.
+
+We present a formal version of the model that is adapted from the graphical representation in @Todaro2015, pp. 124-127.
+
+## The Model
+
+$$
+  Y_{t}=\min[C_t + I_t, Y^C] 
+$$ {#eq-hicks_Y}
+
+$$
+C_{t} = c_0 + c_1 Y_{t-1}  
+$$ {#eq-hicks_C}
+
+$$
+I_{t} = I_0 + \max[\beta(Y_{t-1} - Y_{t-2}), -D]  
+$$ {#eq-hicks_I}
+
+where $Y_t$, $C_t$, $I_t$, $Y^C$, and $D$,represent output, consumption, investment, the (full employment) output ceiling, and depreciation, respectively.
+
+BLABLA.... describes output determination in the traditional sector. The variable $\lambda$ is the employment level beyond which the marginal product of labour (MPL) in sector 1 becomes zero. As long as employment is above this threshold, there is surplus labour and output is fixed at the level implied by the level of employment for which the MPL becomes zero ($\lambda$). If actual employment falls below this level, the sector faces a production function that is increasing in employment but with diminishing marginal returns $(\alpha \in (0,1))$. By @eq-lewis_w1, the real wage in the traditional sector is an exogenously given subsistence wage $w^S$. @eq-lewis_L1 says that the level of employment in the traditional sector is residually determined by the total labour supply net of employment in the modern sector. Total labour is taken to be exogenous. Unlike the traditional sector, the modern sector employs capital. @eq-lewis_Y2 is the production function of the modern sector, which exhibits constant returns to scale and diminishing marginal returns $(\beta\in (0,1))$. @eq-lewis_w2 specifies wage determination in the modern sector. If there is surplus labour in the traditional sector, the modern sector pays a wage premium $\rho$ on the subsistence wage. As soon as surplus labour is depleted, the modern sector faces an upward-sloping labour supply curve, which we model for simplicity as a linear function with slope coefficient $\gamma$. @eq-lewis_MPL specifies the marginal product of labour of the modern sector: $MPL_{2t}=\beta L_{2t}^{\beta-1} K_{2t}^{1-\beta} = \beta \frac{Y_{2t}}{L_{2t}}$. @eq-lewis_L2 is the labour demand curve of the modern sector. To maximise profits, the firm would have to equalise the real wage and the MPL: $w_{2t}=MPL_{2t}$. @eq-lewis_L2 specifies this as a gradual process, where the rate at which the modern firm attracts workers from the traditional sector is increasing in the gap between their marginal product and the fixed wage the firm pays these workers. Finally, @eq-lewis_P2 defines profits in the modern sector, and @eq-lewis_K2 describes capital accumulation in that sector, where it is assumed that all profits are invested $(P_{2t}=I_{2t})$.
+
+
+### Simulation code
+
+```{r hicks_1}
+# Clear the environment
+rm(list=ls(all=TRUE))
+
+# Set number of periods
+Q=150
+
+# Set number of scenarios (including baseline)
+S=3
+
+# Set period in which shock/shift will occur
+s=50
+
+# Create (S x Q)-matrices that will contain the simulated data
+Y=matrix(data=1,nrow=S,ncol=Q) # Income/output
+C=matrix(data=1,nrow=S,ncol=Q) # Consumption
+I=matrix(data=1,nrow=S,ncol=Q) # Investment
+
+# Set fixed parameter values
+c0=0.1
+I0=0.1
+beta=1.25
+c1=0.75
+D=10
+
+# Set baseline parameter values
+Yc=matrix(data=60,nrow=S,ncol=Q) # output ceiling
+
+# Set parameter values for different scenarios
+Yc[2,s:Q]=40 # scenario 2: increase in output ceiling
+
+
+# Simulate the model by looping over Q time periods for S different scenarios
+for (i in 1:S){
+  
+  for (t in 2:Q){
+    
+    for (iterations in 1:500){ # run the model 1000-times in each period
+      
+    #Model equations
+    
+    #(1) Output
+    Y[i,t] = min(C[i,t]+I[i,t], Yc[i,t])
+    
+    #(2) Consumption
+    C[i,t] = c0 + c1*Y[i,t-1]
+    
+    #(3) Investment
+    I[i,t] = I0 + max(beta*(Y[i,t-1] - Y[i,t-2]), -D) 
+    
+    } # close iterations loop
+  }   # close time loop
+}     # close scenario loop
+
+
+```
+
+
+### Plots
+
+```{r ricardo1_2}
+# Set start and end periods for plots
+Tmax=100
+Tmin =10
+
+#Income, consumption, and investment
+plot(Y[1, Tmin:(Tmax)],type="l", col=1, lwd=2, lty=1, xlab="Y, C, I", ylab="", ylim=range(C[1, Tmin:Tmax],Y[1, Tmin:(Tmax)])) 
+title(main="Income, consumption, and investment", xlab = 'Time',cex=0.8,line=2)
+lines(C[1, Tmin:Tmax],lty=2)
+lines(I[1, Tmin:Tmax],lty=3)
+legend("topright", legend=c("Y", "C", "I"),
+       lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
+
+
+# Scenarip 2: reduction in ceiling
+plot(Y[2, Tmin:(Tmax)],type="l", col=1, lwd=2, lty=1, xlab="Y, C, I", ylab="") 
+title(main="Income", xlab = 'Time',cex=0.8,line=2)
+
+
+
+```

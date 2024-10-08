@@ -501,11 +501,11 @@ G=T+B
 $$ {#eq-Gbc}
 
 $$
-G^f=T^f+(1+r) B
+G^f=T^f-(1+r) B
 $$ {#eq-Gf}
 where $T$ is tax revenues and $B$ is government debt. 
 
-A crucial assumption here is that the government must repay its debts in the future (it cannot permanently roll over its debts). The underlying assumption is that the government will eventually `die' and will do so without savings nor debts. 
+A crucial assumption here is that the government must repay its debts in the future (it cannot permanently roll over its debts). The underlying assumption is that the government will eventually 'die' and will do so without savings nor debt. 
 
 Combining the two budget constraints to an intertemporal budget constraint yields:
 
