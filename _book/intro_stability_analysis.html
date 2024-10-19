@@ -294,6 +294,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">A Lewis Model of Economic Development</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_Hicks_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">A Hicksian Business Cycle Model with Floors and Ceilings</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item">
@@ -634,12 +640,13 @@ I_t= \beta[c_1(C_{t-1} + I_{t-1} + G_0) - C_{t-1}]
 J=\begin{bmatrix} c_1 &amp; c_1 \\ \beta(c_1-1) &amp; \beta c_1 \end{bmatrix}
 \]</span></p>
 <p>The characteristic polynomial yielding the eigenvalues of the Jacobian is</p>
-<p><span class="math display">\[\lambda^2-\lambda c_1(1+\beta)+\beta c_1=0.\]</span></p>
+<p><span class="math display">\[\lambda^2-\lambda c_1(1+\beta)+\beta c_1=0,\]</span></p>
+<p>where <span class="math inline">\(c_1(1+\beta) =tr(J)\)</span> and <span class="math inline">\(\beta c_1 = det(J)\)</span>.</p>
 <p>Thus we have</p>
 <p><span class="math display">\[
 \lambda_{1,2} = \frac{c_1(1+\beta) \pm \sqrt{[c_1(1+\beta)]^2-4\beta c_1}}{2}.
 \]</span></p>
-<p>Thus, the two eigenvalues will be a pair of complex conjugates if <span class="math inline">\([c_1(1+\beta)]^2-4\beta c_1 &lt;0\)</span>. Suppose we have <span class="math inline">\(c_1=0.4\)</span> and <span class="math inline">\(\beta=2\)</span>. Then the discriminant will be negative and the eigenvalues will be complex:</p>
+<p>Thus, the two eigenvalues will be a pair of complex conjugates if <span class="math inline">\([c_1(1+\beta)]^2-4\beta c_1 &lt;0\)</span> or <span class="math inline">\(c_1 &lt; \frac{4\beta}{(1+\beta)^2}\)</span>. Suppose we have <span class="math inline">\(c_1=0.4\)</span> and <span class="math inline">\(\beta=2\)</span>. Then the discriminant will be negative and the eigenvalues will be complex:</p>
 <div class="cell">
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
@@ -896,22 +903,23 @@ Python code
 </div>
 </div>
 <p>You can see that the model generates cycles with a length (from peak/trough to peak/trough) of around 7.5 periods. Since the modulus is <span class="math inline">\(R&lt;1\)</span>, the system is stable and eventually converges to the equilibrium.</p>
-<p>We can analyse the properties of the Samuelson model more generally by writing the condition for complex eigenvalues as <span class="math inline">\(c_1 &lt; \frac{4\beta}{(1+\beta)^2}\)</span>. A condition for stability can be derived by making use of the fact that <span class="math inline">\(R=\sqrt{h^2+m^2}= \sqrt{ \left( \frac{-b}{2} \right) ^2 + \left(\frac{\sqrt{4c-b^2}}{2}i \right)^2} = \sqrt{c}\)</span>. Applied to the modulus of the Samuelson model, this yields <span class="math inline">\(R=\sqrt{\beta c_1}\)</span>. Thus, the stability condition is <span class="math inline">\(\beta c_1&lt;1\)</span>.</p>
-<p>The following code generates a plot that displays these two conditions in the <span class="math inline">\((\beta, c_1)\)</span>-space:</p>
+<p>A general condition for stability of 2D systems with complex eigenvalues can be derived by making use of the fact that <span class="math inline">\(R=\sqrt{h^2+m^2}= \sqrt{ \left( \frac{b}{2} \right) ^2 + \left(\frac{\sqrt{4c-b^2}}{2}i \right)^2} = \sqrt{c}\)</span>, where <span class="math inline">\(b=tr(J)\)</span> and <span class="math inline">\(c=det(J)\)</span>. Applied to the modulus of the Samuelson model, this yields <span class="math inline">\(R=\sqrt{det(J)}=\sqrt{\beta c_1}\)</span>. Thus, the stability condition is:</p>
+<p><span class="math display">\[\beta c_1&lt;1.\]</span></p>
+<p>The following code generates a plot that displays the condition for cycles and the stability condition in the <span class="math inline">\((\beta, c_1)\)</span>-space:</p>
 <div class="cell">
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create function for cycle condition using beta as argument</span></span>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create function for cycle condition: c1 &lt; (4*beta)/(1+beta)^2</span></span>
 <span><span class="va">cyc</span><span class="op">=</span> <span class="kw">function</span> <span class="op">(</span><span class="va">beta</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="op">(</span><span class="fl">4</span><span class="op">*</span><span class="va">beta</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">beta</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="co"># Create function for stability condition using beta as argument </span></span>
+<span><span class="co"># Create function for stability condition: c1 &lt; 1/beta</span></span>
 <span><span class="va">stab</span><span class="op">=</span> <span class="kw">function</span> <span class="op">(</span><span class="va">beta</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fl">1</span><span class="op">/</span><span class="va">beta</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># Plot the two functions in (beta, c1)-space</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="va">cyc</span>, from <span class="op">=</span> <span class="fl">0</span>, to <span class="op">=</span> <span class="fl">5</span>, col <span class="op">=</span> <span class="fl">1</span>, xlab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span>, ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">c</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> , main<span class="op">=</span><span class="st">""</span>,</span>
-<span>      lwd<span class="op">=</span><span class="fl">1.5</span>, n<span class="op">=</span><span class="fl">10000</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span>      lwd<span class="op">=</span><span class="fl">1.5</span>, n<span class="op">=</span><span class="fl">10000</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1.5</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="va">stab</span>, from <span class="op">=</span> <span class="fl">0</span>, to <span class="op">=</span> <span class="fl">5</span>, col <span class="op">=</span> <span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">1.5</span>, n<span class="op">=</span><span class="fl">10000</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cycle condition"</span>, <span class="st">"stability condition"</span><span class="op">)</span>, </span>
 <span>       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

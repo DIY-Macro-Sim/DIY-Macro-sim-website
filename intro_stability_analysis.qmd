@@ -318,7 +318,9 @@ $$
 
 The characteristic polynomial yielding the eigenvalues of the Jacobian is
 
-$$\lambda^2-\lambda c_1(1+\beta)+\beta c_1=0.$$
+$$\lambda^2-\lambda c_1(1+\beta)+\beta c_1=0,$$
+
+where $c_1(1+\beta) =tr(J)$ and $\beta c_1 = det(J)$.
 
 Thus we have
 
@@ -326,7 +328,7 @@ $$
 \lambda_{1,2} = \frac{c_1(1+\beta) \pm \sqrt{[c_1(1+\beta)]^2-4\beta c_1}}{2}.
 $$
 
-Thus, the two eigenvalues will be a pair of complex conjugates if $[c_1(1+\beta)]^2-4\beta c_1 <0$. Suppose we have $c_1=0.4$ and $\beta=2$. Then the discriminant will be negative and the eigenvalues will be complex:
+Thus, the two eigenvalues will be a pair of complex conjugates if $[c_1(1+\beta)]^2-4\beta c_1 <0$ or $c_1 < \frac{4\beta}{(1+\beta)^2}$. Suppose we have $c_1=0.4$ and $\beta=2$. Then the discriminant will be negative and the eigenvalues will be complex:
 
 ```{r stab_analysis3}
 #Clear the environment 
@@ -564,25 +566,27 @@ plt.show()
 
 You can see that the model generates cycles with a length (from peak/trough to peak/trough) of around 7.5 periods. Since the modulus is $R<1$, the system is stable and eventually converges to the equilibrium.
 
-We can analyse the properties of the Samuelson model more generally by writing the condition for complex eigenvalues as $c_1 < \frac{4\beta}{(1+\beta)^2}$. A condition for stability can be derived by making use of the fact that $R=\sqrt{h^2+m^2}= \sqrt{ \left( \frac{-b}{2} \right) ^2 + \left(\frac{\sqrt{4c-b^2}}{2}i \right)^2} = \sqrt{c}$. Applied to the modulus of the Samuelson model, this yields $R=\sqrt{\beta c_1}$. Thus, the stability condition is $\beta c_1<1$.
+A general condition for stability of 2D systems with complex eigenvalues can be derived by making use of the fact that $R=\sqrt{h^2+m^2}= \sqrt{ \left( \frac{b}{2} \right) ^2 + \left(\frac{\sqrt{4c-b^2}}{2}i \right)^2} = \sqrt{c}$, where $b=tr(J)$ and $c=det(J)$. Applied to the modulus of the Samuelson model, this yields $R=\sqrt{det(J)}=\sqrt{\beta c_1}$. Thus, the stability condition is:
 
-The following code generates a plot that displays these two conditions in the $(\beta, c_1)$-space:
+$$\beta c_1<1.$$ 
+
+The following code generates a plot that displays the condition for cycles and the stability condition in the $(\beta, c_1)$-space:
 
 ```{r stab_analysis6}
 
-# Create function for cycle condition using beta as argument
+# Create function for cycle condition: c1 < (4*beta)/(1+beta)^2
 cyc= function (beta) {
   (4*beta)/(1+beta)^2
 }
 
-# Create function for stability condition using beta as argument 
+# Create function for stability condition: c1 < 1/beta
 stab= function (beta) {
   1/beta
 }
 
 # Plot the two functions in (beta, c1)-space
 curve(cyc, from = 0, to = 5, col = 1, xlab=expression(beta), ylab=expression(c[1]) , main="",
-      lwd=1.5, n=10000, ylim=range(0,2))
+      lwd=1.5, n=10000, ylim=range(0, 1.5))
 curve(stab, from = 0, to = 5, col = 2, lwd=1.5, n=10000, add = TRUE)
 legend("topright", legend = c("cycle condition", "stability condition"), 
        col = c(1, 2), lwd = 2)

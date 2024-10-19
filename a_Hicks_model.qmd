@@ -1,10 +1,10 @@
-# A Hicks Model of Business Cycles {#sec-hicks}
+# A Hicksian Business Cycle Model with Floors and Ceilings {#sec-hicks}
 
 ## Overview
 
-This model captures some key features of John R. @Hicks1950' nonlinear model of business cycle fluctuations. BLABLA ... The model describes the development process as one where a modern urban sector draws labour inputs from a traditional subsistence sector that is characterised by surplus labour, i.e. labour that does not produce any additional output (reflected in a zero marginal product). Workers in the traditional sector are paid a fixed subsistence wage. The presence of surplus labour allows the modern sector to attract workers from the traditional sector for a small wage premium above the subsistence wage. This enables the modern sector to make excess profits that are reinvested and thus drive rapid capital accumulation in the modern sector. As a result, the economy undergoes industrialisation. This process of rapid structural change comes to an end when the surplus labour in the traditional sector is depleted. Labour supply then becomes sensitive to the real wage, leading to a slowdown in the growth of profits and capital accumulation.
+This model captures some key features of John R. @Hicks1950' nonlinear model of business cycle fluctuations. The model builds on @Samuelson1939's linear multiplier-accelerator model analysed in @sec-how-to-simulate and @sec-stab_analysis, but gives it a different twist. While @Samuelson1939's business cycle model requires repeated external shocks to produce sustained cycles, @Hicks1950's model produces permanent, shock-independent fluctuations that are bounded by a floor and a ceiling. The goods market equilibrium is assumed to be locally unstable due to a strong accelerator effect, i.e. investment reacts strongly to increases in aggregate output, which creates more output and boosts investment even further. However, aggregate output is constrained by a ceiling that may stem from full employment (and a fixed labour supply). On the downward trajectory, output is constrained by a floor that is given by a minimum amount of investment needed to replace the depreciated capital stock.  
 
-We present a formal version of the model that is adapted from the graphical representation in @Todaro2015, pp. 124-127.
+We present a version of the model that is adapted from @Gabisch1989, chapter 2.1.^[Following @Hommes1995, we consider a stationary version of the model that abstracts from the growth path assumed in @Hicks1950.]
 
 ## The Model
 
@@ -13,16 +13,31 @@ $$
 $$ {#eq-hicks_Y}
 
 $$
-C_{t} = c_0 + c_1 Y_{t-1}  
+C_{t} = c_0 + c_1 Y_{t-1},  \quad c_1 \in (0,1)
 $$ {#eq-hicks_C}
 
 $$
-I_{t} = I_0 + \max[\beta(Y_{t-1} - Y_{t-2}), -D]  
+I_{t} = I_0 + \max[\beta(Y_{t-1} - Y_{t-2}), -D],  \quad \beta > 1, D >0 
 $$ {#eq-hicks_I}
 
-where $Y_t$, $C_t$, $I_t$, $Y^C$, and $D$,represent output, consumption, investment, the (full employment) output ceiling, and depreciation, respectively.
+where $Y_t$, $C_t$, $I_t$, $Y^C$, and $D$, represent output, consumption, investment, the (full employment) output ceiling, and depreciation, respectively.
 
-BLABLA.... describes output determination in the traditional sector. The variable $\lambda$ is the employment level beyond which the marginal product of labour (MPL) in sector 1 becomes zero. As long as employment is above this threshold, there is surplus labour and output is fixed at the level implied by the level of employment for which the MPL becomes zero ($\lambda$). If actual employment falls below this level, the sector faces a production function that is increasing in employment but with diminishing marginal returns $(\alpha \in (0,1))$. By @eq-lewis_w1, the real wage in the traditional sector is an exogenously given subsistence wage $w^S$. @eq-lewis_L1 says that the level of employment in the traditional sector is residually determined by the total labour supply net of employment in the modern sector. Total labour is taken to be exogenous. Unlike the traditional sector, the modern sector employs capital. @eq-lewis_Y2 is the production function of the modern sector, which exhibits constant returns to scale and diminishing marginal returns $(\beta\in (0,1))$. @eq-lewis_w2 specifies wage determination in the modern sector. If there is surplus labour in the traditional sector, the modern sector pays a wage premium $\rho$ on the subsistence wage. As soon as surplus labour is depleted, the modern sector faces an upward-sloping labour supply curve, which we model for simplicity as a linear function with slope coefficient $\gamma$. @eq-lewis_MPL specifies the marginal product of labour of the modern sector: $MPL_{2t}=\beta L_{2t}^{\beta-1} K_{2t}^{1-\beta} = \beta \frac{Y_{2t}}{L_{2t}}$. @eq-lewis_L2 is the labour demand curve of the modern sector. To maximise profits, the firm would have to equalise the real wage and the MPL: $w_{2t}=MPL_{2t}$. @eq-lewis_L2 specifies this as a gradual process, where the rate at which the modern firm attracts workers from the traditional sector is increasing in the gap between their marginal product and the fixed wage the firm pays these workers. Finally, @eq-lewis_P2 defines profits in the modern sector, and @eq-lewis_K2 describes capital accumulation in that sector, where it is assumed that all profits are invested $(P_{2t}=I_{2t})$.
+@eq-hicks_Y specifies aggregate income. For values below the ceiling $Y^C$, aggregate income is determined by aggregate demand (consisting only of consumption and net investment). As soon as aggregate demand hits the ceiling, aggregate income is given by the ceiling. @eq-hicks_C is a simple linear Keynesian consumption function. @eq-hicks_I is the investment function. For investment levels above depreciation $D$, net investment is given by an autonomous component $I_0$ and an accelerator component that is responsive to the change in aggregate income.^[ This differs from @Samuelson1939, who assumed that investment reacts to changes in consumption, see @sec-how-to-simulate.] The reaction coefficient $\beta$ is assumed to be sufficiently large to generate explosive dynamics. Once the change in aggregate income has fallen below the negative of the level of depreciation $D$, net investment is given by the floor $I_0 - D$.
+
+## Simulation
+
+### Parameterisation
+
+Table 1 reports the parameterisation used in the simulation. Besides a baseline (scenario 1), we consider a fall in the output ceiling $Y^C$ in scenario 2, an increase in the investment floor $I_0 - D$ in scenario 3, and finally a decrease in the accelerator coefficient $\beta$ (scenario 4).
+
+**Table 1: Parameterisation**
+
+|     Scenario                                    | $c_0$ | $c_1$ | $I_0$ | $\beta$ | $Y^C$ | $D$ |
+|-------------------------------------------------|-----|---------|-------|---------|-------|-----|
+| 1: baseline                                     | 0   | 0.75    | 10    | 1.25    | 80    | 10  | 
+| 2: fall in output ceiling ($Y^C$)               | 0   | 0.75    | 10    | 1.25    | 100   | 10  |
+| 3: increase in investment floor ($I_0 - D$)     | 0   | 0.75    | 10    | 1.25    | 80    | 1   | 
+| 4: decrease in accelerator coefficient ($\beta$)| 0   | 0.75    | 10    | 0.8     | 80    | 10  | 
 
 
 ### Simulation code
@@ -32,10 +47,10 @@ BLABLA.... describes output determination in the traditional sector. The variabl
 rm(list=ls(all=TRUE))
 
 # Set number of periods
-Q=150
+Q=200
 
 # Set number of scenarios (including baseline)
-S=3
+S=4
 
 # Set period in which shock/shift will occur
 s=50
@@ -46,25 +61,26 @@ C=matrix(data=1,nrow=S,ncol=Q) # Consumption
 I=matrix(data=1,nrow=S,ncol=Q) # Investment
 
 # Set fixed parameter values
-c0=0.1
-I0=0.1
-beta=1.25
+c0=0
 c1=0.75
-D=10
+I0=10
 
 # Set baseline parameter values
-Yc=matrix(data=60,nrow=S,ncol=Q) # output ceiling
+Yc=matrix(data=80,nrow=S,ncol=Q)      # output ceiling
+D=matrix(data=10,nrow=S,ncol=Q)       # investment floor (depreciation)
+beta=matrix(data=1.25,nrow=S,ncol=Q)  # accelerator coefficient
 
 # Set parameter values for different scenarios
-Yc[2,s:Q]=40 # scenario 2: increase in output ceiling
-
+Yc[2,s:Q]=100 # scenario 2: increase in output ceiling
+D[3,s:Q]=1    # scenario 3: increase in investment floor
+beta[4,s:Q]=0.8 # scenario 4: reduction in accelerator coefficient
 
 # Simulate the model by looping over Q time periods for S different scenarios
 for (i in 1:S){
   
   for (t in 2:Q){
     
-    for (iterations in 1:500){ # run the model 1000-times in each period
+    for (iterations in 1:500){ # run the model 500-times in each period
       
     #Model equations
     
@@ -75,7 +91,7 @@ for (i in 1:S){
     C[i,t] = c0 + c1*Y[i,t-1]
     
     #(3) Investment
-    I[i,t] = I0 + max(beta*(Y[i,t-1] - Y[i,t-2]), -D) 
+    I[i,t] = I0 + max(beta[i,t]*(Y[i,t-1] - Y[i,t-2]), -D[i,t]) 
     
     } # close iterations loop
   }   # close time loop
@@ -85,26 +101,521 @@ for (i in 1:S){
 ```
 
 
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+import numpy as np
+
+# Set number of periods
+Q = 200
+
+# Set number of scenarios (including baseline)
+S = 4
+
+# Set period in which shock/shift will occur
+s = 50
+
+# Create (S x Q)-arrays that will contain the simulated data
+Y = np.ones((S, Q))  # Income/output
+C = np.ones((S, Q))  # Consumption
+I = np.ones((S, Q))  # Investment
+
+# Set fixed parameter values
+c0 = 0
+c1 = 0.75
+I0 = 10
+
+# Set baseline parameter values
+Yc = np.full((S, Q), 80)      # output ceiling
+D = np.full((S, Q), 10)       # investment floor (depreciation)
+beta = np.full((S, Q), 1.25)  # accelerator coefficient
+
+# Set parameter values for different scenarios
+Yc[1, s:Q] = 100     # scenario 2: increase in output ceiling
+D[2, s:Q] = 1        # scenario 3: increase in investment floor
+beta[3, s:Q] = 0.8   # scenario 4: reduction in accelerator coefficient
+
+# Simulate the model by looping over Q time periods for S different scenarios
+for i in range(S):
+    
+    for t in range(1, Q):
+        
+        for iterations in range(500):  # run the model 500-times in each period
+            
+            # Model equations
+            
+            # (1) Output
+            Y[i, t] = min(C[i, t] + I[i, t], Yc[i, t])
+            
+            # (2) Consumption
+            C[i, t] = c0 + c1 * Y[i, t - 1]
+            
+            # (3) Investment
+            I[i, t] = I0 + max(beta[i, t] * (Y[i, t - 1] - Y[i, t - 2]), -D[i, t])
+            
+        # Close iterations loop
+    # Close time loop
+# Close scenario loop
+
+```
+
+:::
+
+
 ### Plots
 
-```{r ricardo1_2}
+@fig-baseline displays the model's dynamics under the baseline scenario. The model generates cycles in aggregate output, consumption and investment that are constrained by the output ceiling $Y^C=80$ and the investment floor $I_0-D=0$. These cycles are permanent, i.e. they don't require any external shocks, and they are (roughly) periodic, with a cycle length from peak (trough) to peak (trough) of around 13.5 periods. What generates the turning points? Suppose income is on an increasing trajectory. The accelerator effect on investment will amplify this process as firms will increase their investment, which raises aggregate demand and increases income further. When the output ceiling is reached, the change in income becomes zero, and investment demand decreases relative to the boom phase. This decrease in investment lowers aggregate output, and the accelerator effect again amplifies this tendency that now plays out on a downward trajectory until net investment hits the lower bound. Once investment has stopped its downward trajectory, aggregate income stops falling as well, which allows the accelerator effect to turn positive again and thereby induce a new cycle.
+
+```{r hicks_2}
+#| label: fig-baseline
+#| fig-cap: Income, consumption, and investment (baseline)
+
 # Set start and end periods for plots
 Tmax=100
 Tmin =10
 
 #Income, consumption, and investment
-plot(Y[1, Tmin:(Tmax)],type="l", col=1, lwd=2, lty=1, xlab="Y, C, I", ylab="", ylim=range(C[1, Tmin:Tmax],Y[1, Tmin:(Tmax)])) 
-title(main="Income, consumption, and investment", xlab = 'Time',cex=0.8,line=2)
+plot(Y[1, Tmin:(Tmax)],type="l", col=1, lwd=2, lty=1, xlab="", ylab="Y, C, I", ylim=range(I[1, Tmin:Tmax],Y[1, Tmin:(Tmax)]))
+title(main="Income, consumption, and investment (baseline)", xlab = 'Time',cex=0.8,line=2)
 lines(C[1, Tmin:Tmax],lty=2)
 lines(I[1, Tmin:Tmax],lty=3)
+legend("topleft", legend=c("Y", "C", "I"),
+       lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
+```
+
+In @fig-scen2, the output ceiling rises to $Y^C = 100$ in $t=50$. This raises the amplitude of the cycles. Interestingly, the ceiling is no longer binding, but the cycles still do not explode. This illustrates a feature of the model that has been noted before: it actually does not need a ceiling to generate bounded cycles (see, e.g., @Puu2005). The acceleration of income during a boom will become smaller and smaller, and eventually turn negative, thereby lowering investment and inducing a switch from boom to bust. Hence, cycles (and thus turning points) will occur even without floor and ceilings, but to prevent these cycles to become larger and larger, a floor is sufficient. 
+
+```{r hicks_3}
+#| label: fig-scen2
+#| fig-cap: Increase in output ceiling
+
+# Scenario 2: increase in ceiling
+plot(Y[2, Tmin:(Tmax)],type="l", col=1, lwd=2, lty=1, xlab="", ylab="Y, C, I", ylim=range(I[2, Tmin:Tmax],Y[2, Tmin:(Tmax)]))
+title(main="Scenario 2: Increase in output ceiling", xlab = 'Time',cex=0.8,line=2)
+lines(C[2, Tmin:Tmax],lty=2)
+lines(I[2, Tmin:Tmax],lty=3)
+legend("topright", legend=c("Y", "C", "I"),
+       lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
+```
+An increase in the investment floor to $I_0 - D = 9$ in period $t=50$, displayed in @fig-scen3, has the effect of reducing the amplitude of the fluctuations. Intuitively, the milder the bust, the milder the recovery.
+
+```{r hicks_4}
+#| label: fig-scen3
+#| fig-cap: Increase in investment floor
+
+# Scenario 3: increase in investment floor
+plot(Y[3, Tmin:(Tmax)],type="l", col=1, lwd=2, lty=1, xlab="", ylab="Y, C, I", ylim=range(I[3, Tmin:Tmax],Y[3, Tmin:(Tmax)]))
+title(main="Scenario 3: Increase in investment floor", xlab = 'Time',cex=0.8,line=2)
+lines(C[3, Tmin:Tmax],lty=2)
+lines(I[3, Tmin:Tmax],lty=3)
 legend("topright", legend=c("Y", "C", "I"),
        lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
 
+```
+Finally, @fig-scen4 displays the scenario where the accelerator coefficient $\beta$ falls, rendering investment much less sensitive to changes in aggregate income. As a result, the model's regular cycles turn into damped oscillations that eventually converge to a stable equilibrium. 
 
-# Scenarip 2: reduction in ceiling
-plot(Y[2, Tmin:(Tmax)],type="l", col=1, lwd=2, lty=1, xlab="Y, C, I", ylab="") 
-title(main="Income", xlab = 'Time',cex=0.8,line=2)
+```{r hicks_5}
+#| label: fig-scen4
+#| fig-cap: Reduction in accelerator coefficient
 
-
+# Scenario 4: Reduction in accelerator coefficient
+plot(Y[4, Tmin:(Tmax)],type="l", col=1, lwd=2, lty=1, xlab="", ylab="Y, C, I", ylim=range(I[4, Tmin:Tmax],Y[4, Tmin:(Tmax)]))
+title(main="Scenario 4: Reduction in accelerator coefficient", xlab = 'Time',cex=0.8,line=2)
+lines(C[4, Tmin:Tmax],lty=2)
+lines(I[4, Tmin:Tmax],lty=3)
+legend("topright", legend=c("Y", "C", "I"),
+       lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
 
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+### Plots (here only for baseline)
+import matplotlib.pyplot as plt
+
+# Set start and end periods for plots
+Tmax = 100
+Tmin = 10
+
+# Plot income (Y), consumption (C), and investment (I)
+plt.plot(range(Tmin, Tmax), Y[0, Tmin:Tmax], label='Y', color='black', linewidth=2, linestyle='-')
+plt.title("Income, consumption, and investment (baseline)", fontsize=10)
+plt.xlabel('Time')
+plt.ylabel('Y, C, I')
+plt.plot(range(Tmin, Tmax), C[0, Tmin:Tmax], label='C', linestyle='--', color='black',)
+plt.plot(range(Tmin, Tmax), I[0, Tmin:Tmax], label='I', linestyle=':', color='black',)
+
+# Add a legend to the top-left corner
+plt.legend(loc='upper left', fontsize=8, frameon=False)
+
+# Show the plot
+plt.show()
+
+```
+
+:::
+
+## Directed graph
+
+Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.
+
+```{r hicks_6, message=FALSE}
+## Create directed graph
+# Construct auxiliary Jacobian matrix for 5 variables: 
+  # endogenous: (1) Y, (2) C, (3) I
+  # exogenous: (4) I0-D, (5) Yc
+
+              #Y C I I0-D Yc
+M_mat=matrix(c(0,1,1, 0,  1, # Y
+               1,0,0, 0,  0, # C
+               1,0,0, 1,  0, # I
+               0,0,0, 0,  0, # I0-D
+               0,0,0, 0,  0),# Yc
+               5, 5, byrow=TRUE)
+
+# Create adjacency matrix from transpose of auxiliary Jacobian and add column names
+A_mat=t(M_mat)
+
+# Create directed graph from adjacency matrix
+library(igraph)
+dg=graph_from_adjacency_matrix(A_mat, mode="directed", weighted= NULL)
+
+# Define node labels
+V(dg)$name=c("Y", "C", "I", expression(I[0]-D), expression(Y^C))
+
+# Plot directed graph matrix
+plot(dg, main="Directed graph of Hicks model", vertex.size=40, vertex.color="lightblue", 
+     vertex.label.color="black", edge.arrow.size=0.3, edge.width=1.1, edge.size=1.2,
+     edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
+     vertex.frame.color="NA", margin=-0.08)
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+### Directed graph
+import networkx as nx
+
+# Construct auxiliary Jacobian matrix for 5 variables: 
+# endogenous: (1) Y, (2) C, (3) I
+# exogenous: (4) I0-D, (5) Yc
+
+# Create the matrix M_mat
+M_mat = np.array([[0, 1, 1, 0, 1],  # Y
+                  [1, 0, 0, 0, 0],  # C
+                  [1, 0, 0, 1, 0],  # I
+                  [0, 0, 0, 0, 0],  # I0-D
+                  [0, 0, 0, 0, 0]]) # Yc
+
+# Create adjacency matrix from transpose of auxiliary Jacobian
+A_mat = M_mat.T
+
+# Create directed graph from adjacency matrix using networkx
+G = nx.DiGraph(A_mat)
+
+# Define node labels
+nodelabs = {0: "Y", 1: "C", 2: "I", 3: "$I_0 - D$", 4: "$Y^C$"}
+
+# Plot directed graph
+pos = nx.spring_layout(G, k=0.08)
+nx.draw_networkx(G, pos, node_size=200, node_color="lightblue", 
+                 edge_color="black", width=1.2, arrowsize=10, 
+                 arrowstyle='->', font_size=8, font_color="black",
+                 with_labels=True, labels=nodelabs)
+plt.axis("off")
+plt.title("Directed Graph of Lewis Model")
+plt.show()
+
+```
+
+:::
+
+
+It can thus be seen that the key exogenous variables in the @Hicks1950 model are the output ceiling $Y^C$ and the investment floor $I_0 - D$, which constrain the endogenous cycle generated by the interaction between the endogenous variables income $Y$, investment $I$, and consumption $C$. 
+
+## Analytical discussion
+The dynamic properties of the @Hicks1950 model when the floor and ceiling are not binding are similar, but not entirely equivalent to the @Samuelson1939 model analysed in @sec-stab_analysis. 
+
+First, define $X_t = Y_{t-1}$ to re-write the system as:
+
+$$
+  X_{t}=\min[C_{t-1} + I_{t-1}, Y^C] 
+$$  {#eq-hicks_X}
+
+$$
+C_{t} = c_0 + c_1 X_{t}
+$$  {#eq-hicks_C_mod}
+
+$$
+I_{t} = I_0 + \max[\beta(X_{t} - X_{t-1}), -D].
+$$ {#eq-hicks_I_mod}
+
+Then shift @eq-hicks_C_mod one period back and substite into @eq-hicks_X to obtain:
+
+$$
+  X_{t}=\min [c_0 + c_1 X_{t-1} + I_{t-1}, Y^C]. 
+$$  {#eq-hicks_X_mod}
+
+Next, substitute @eq-hicks_X_mod into @eq-hicks_I_mod:
+
+$$
+I_{t} = I_0 + \max[\beta( c_0 + (c_1 -1) X_{t-1} + I_{t-1}), -D].
+$$ {#eq-hicks_I_mod2}
+
+@eq-hicks_X_mod and @eq-hicks_I_mod2 are a two-dimensional dynamic system in $X_t$ and $It$. 
+
+For $Y_t < Y^C$ and $I_t > I_0 - D$, the system's Jacobian matrix is given by:
+
+$$
+J=\begin{bmatrix} c_1 & 1 \\ \beta(c_1-1) & \beta  \end{bmatrix}.
+$$
+
+The characteristic polynomial yielding the eigenvalues of the Jacobian is:
+
+$$\lambda^2-\lambda(c_1+\beta)+\beta=0,$$
+
+where $c_1+\beta =tr(J)$ and $\beta = det(J)$.
+
+Thus, we have:
+
+$$
+\lambda_{1,2} = \frac{(c_1+\beta) \pm \sqrt{(c_1+\beta)^2-4\beta}}{2},
+$$
+
+and two eigenvalues will be a pair of complex conjugates if $(c_1+\beta)^2-4\beta <0$ or $\left( \frac{c_1+\beta}{2} \right)^2 < \beta$.
+
+To assess stability, we need to check whether the modulus of the complex eigenvalue $R$ is inside the unit circle, i.e. $R \in (-1,1)$. For a two-dimensional system with complex eigenvalues, we have $R=\sqrt{det(J)}$. Thus, the stability condition for the Hicks model is $\beta <1$.
+
+The following code generates a plot that displays the condition for cycles, $\left( \frac{c_1+\beta}{2} \right)^2 < \beta$, and the stability condition, $\beta <1$, in the $(\beta, c_1)$-space:^[To create the function for the cycle condition, we set $\left( \frac{c_1+\beta}{2} \right)^2 = \beta$ and solve for $c_1$, where we only consider positive values for $c_1$ and $\beta$.]
+
+
+```{r hicks_7}
+# Create function for cycle condition using beta as argument
+cyc= function (beta) {
+  2*sqrt(beta)-beta
+}
+
+# Plot the two conditions in (beta, c1)-space
+curve(cyc, from = 0, to = 4.5, col = 1, xlab=expression(beta), ylab=expression(c[1]) , main="",
+      lwd=1.5, n=10000, ylim=range(0,1.5))
+abline(v=1, col=2)
+legend("topright", legend = c("cycle condition", "stability condition"), 
+       col = c(1, 2), lwd = 2)
+
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Create function for cycle condition using beta as an argument
+def cyc(beta):
+    return 2 * np.sqrt(beta) - beta
+
+# Define the range for beta 
+beta_values = np.linspace(0, 4.5, 10000)
+
+# Compute the corresponding c1 values using the cyc function
+c1_values = cyc(beta_values)
+
+# Plot the cycle condition in (beta, c1)-space
+plt.plot(beta_values, c1_values, color='black', linewidth=1.5, label='cycle condition')
+
+# Plot the stability condition as a vertical line at beta = 1
+plt.axvline(x=1, color='red', linewidth=2, label='stability condition')
+
+# Set labels and title
+plt.xlabel(r'$\beta$', fontsize=12)
+plt.ylabel(r'$c_1$', fontsize=12)
+plt.title('')
+
+# Set y-axis limit 
+plt.ylim(0, 1.5)
+
+# Add legend
+plt.legend(loc='upper right')
+
+# Show the plot
+plt.show()
+
+```
+
+:::
+
+
+The Hicks model requires combinations of $c_1$ and $\beta$ below the cycle condition and to the right of the stability condition to yield cycles that would be explosive without the floor.
+
+We can also compute the eigenvalues and check the general stability conditions numerically.
+
+```{r hicks_8}
+### Stability analysis
+## Baseline
+
+# Construct Jacobian matrix 
+J_base=matrix(c(c1, 1,
+           beta[1,1]*(c1-1), beta[1,1]),
+          2, 2, byrow=TRUE)
+
+# Obtain eigenvalues
+ev_base=eigen(J_base)
+(evals_base = ev_base$values)
+
+# Obtain determinant and trace
+(det=det(J_base))      # determinant
+tr=sum(diag(J_base)) # trace
+
+# Calculate modulus
+(mod_base=Mod(evals_base[1]))
+
+#Check general stability conditions
+print(1+tr+det>0)
+print(1-tr+det>0)
+print(1-det>0)
+
+# Check analytical stability condition
+beta[1,1] < 1
+
+
+## Compare with scenario 4
+J_scen4=matrix(c(c1, 1,
+           beta[4,s]*(c1-1), beta[4,s]),
+          2, 2, byrow=TRUE)
+
+# Obtain eigenvalues
+ev_scen4=eigen(J_scen4)
+(evals_scen4 = ev_scen4$values)
+
+# Obtain determinant and trace
+(det=det(J_scen4))      # determinant
+tr=sum(diag(J_scen4)) # trace
+
+# Calculate modulus
+(mod_scen4=Mod(evals_scen4[1]))
+
+#Check general stability conditions
+print(1+tr+det>0)
+print(1-tr+det>0)
+print(1-det>0)
+
+# Check analytical stability condition
+beta[4,s] < 1
+```
+
+For the baseline, the modulus of the complex eigenvalue is indeed larger than unity and the system thus unstable. This is due to the accelerator coefficient $\beta$ being larger than unity. By contrast, in scenario 4, we have $\beta < 1$ and the system is thus stable. 
+
+```{r hicks_9}
+### Check cycle condition and compute cycle length (baseline)
+
+# Check analytical cycle condition
+(c1+beta[1,1])^2 - 4*beta[1,1] < 0
+
+# Save real and imaginary part of complex eigenvalue
+re=Re(evals_base[1])
+im=Im(evals_base[1])
+
+# Calculate cycle length
+L=(2*pi)/(acos(re/mod_base))
+L
+
+```
+
+The analytical cycle condition confirms that the eigenvalues of the system will be complex and thus generate cycles. The implied cycle length is around 13.5 periods.
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+### Stability Analysis - Baseline
+# Construct the Jacobian matrix for the baseline scenario
+J_base = np.array([[c1, 1],
+                   [beta[0, 0] * (c1 - 1), beta[0, 0]]])
+
+# Obtain eigenvalues
+evals_base, _ = np.linalg.eig(J_base)
+print("Eigenvalues (Baseline):", evals_base)
+
+# Obtain determinant and trace
+det_base = np.linalg.det(J_base)  # determinant
+tr_base = np.trace(J_base)  # trace
+
+# Calculate modulus of the first eigenvalue
+mod_base = np.abs(evals_base[0])
+print("Modulus (Baseline):", mod_base)
+
+# Check general stability conditions
+print("Stability conditions (Baseline):")
+print(1 + tr_base + det_base > 0)
+print(1 - tr_base + det_base > 0)
+print(1 - det_base > 0)
+
+# Check analytical stability condition
+print("Analytical stability condition (Baseline):", beta[0, 0] < 1)
+
+
+### Compare with Scenario 4
+# Construct the Jacobian matrix for scenario 4
+J_scen4 = np.array([[c1, 1],
+                    [beta[3, s] * (c1 - 1), beta[3, s]]])
+
+# Obtain eigenvalues
+evals_scen4, _ = np.linalg.eig(J_scen4)
+
+# Print eigenvalues
+print("Eigenvalues (Scenario 4):", evals_scen4)
+
+# Obtain determinant and trace
+det_scen4 = np.linalg.det(J_scen4)  # determinant
+tr_scen4 = np.trace(J_scen4)  # trace
+
+# Calculate modulus of the first eigenvalue
+mod_scen4 = np.abs(evals_scen4[0])
+print("Modulus (Scenario 4):", mod_scen4)
+
+# Check general stability conditions
+print("Stability conditions (Scenario 4):")
+print(1 + tr_scen4 + det_scen4 > 0)
+print(1 - tr_scen4 + det_scen4 > 0)
+print(1 - det_scen4 > 0)
+
+# Check analytical stability condition
+print("Analytical stability condition (Scenario 4):", beta[3, s] < 1)
+
+### Check cycle condition (baseline)
+cycle_condition = (c1 + beta[0, 0])**2 - 4 * beta[0, 0] < 0
+print("Cycle condition (Baseline):", cycle_condition)
+
+# Save real and imaginary parts of the complex eigenvalue
+re = np.real(evals_base[0])
+im = np.imag(evals_base[0])
+
+# Calculate cycle length (L)
+L = (2 * np.pi) / np.arccos(re / mod_base)
+print("Cycle length (Baseline):", L)
+
+```
+
+:::
+
+
+## References
+
+

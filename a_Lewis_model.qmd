@@ -60,7 +60,7 @@ where the subscripts 1 and 2 refer to the traditional and modern sector, respect
 
 ### Parameterisation
 
-Table reports the parameterisation and initial values used in the simulation. All scenarios are initialised such that there is surplus labour ($L_{10} > \lambda$).
+Table reports the parameterisation used in the simulation. All scenarios are initialised such that there is surplus labour ($L_{10} > \lambda$).
 
 **Table 1: Parameterisation**
 
