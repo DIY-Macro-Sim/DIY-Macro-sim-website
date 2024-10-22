@@ -542,19 +542,19 @@ In Figure @fig-dg-pkmacro, it can be seen that credit rationing ($c$), productiv
 
 ## Analytical discussion
 
-Like the Neoclassical Synthesis model, the post-Keynesian macro model can be represented as an AS-AD model. First, we will derive an IS and an MP curve in the $(Y, r)$-space, the latter representing monetary policy instead of the money market (the conventional LM curve). Then we obtain the AS-AD representation of the model in the $(Y,P)$-space. Finally, we obtain equilibrium solutions for $Y$ and $P$.
+Like the Neoclassical Synthesis model, the post-Keynesian macro model can be represented as an AS-AD model. First, we will derive an IS and an interest-rate (IR) curve in the $(Y, r)$-space, the latter representing monetary policy and bank lending instead of the money market (the conventional LM curve). Then we obtain the AS-AD representation of the model in the $(Y,P)$-space. Finally, we obtain equilibrium solutions for $Y$ and $P$.
 
-To obtain the IS-curve, substitute @eq-ND-PK - @eq-r-PK into @eq-Y-PK and solve for $Y$:
+To obtain the IS-curve, substitute @eq-ND-PK and @eq-D-PK into @eq-Y-PK and solve for $Y$:
 \begin{align}\label{eq:IS}\tag{IS}
 Y&=\left(\frac{1}{1-b}\right)\Bigl[c(d_0 -d_1r)\Bigr].
 \end{align}	
 
-To obtain the MP-curve, substitute @eq-i-PK, @eq-P-PK, @eq-W-PK, @eq-N-PK, and @eq-U-PK into @eq-r-PK :
-\begin{align}\label{eq:MP}\tag{MP}
+To obtain the IR-curve, substitute @eq-i-PK, @eq-P-PK, @eq-W-PK, @eq-N-PK, and @eq-U-PK into @eq-r-PK :
+\begin{align}\label{eq:IR}\tag{IR}
 r&=\left(1+m\right)\Bigl[i_0+i_1(1+n)a[W_0-h\bigl(1-\frac{aY}{N^f}\bigr)]\Bigr].
 \end{align}	
 
-It can readily be seen that the IS-curve is downward-sloping and the MP-curve is upward-sloping in the $(Y, r)$-space
+It can readily be seen that the IS-curve is downward-sloping and the IR-curve is upward-sloping in the $(Y, r)$-space
 
 To obtain the AD-curve, substitute @eq-r-PK and @eq-i-PK into the IS-curve:
 
@@ -570,11 +570,33 @@ P&=\left(1+n\right)a\Bigl[W_0-h\bigl(1-\frac{aY}{N^f}\bigr)\Bigr].
 
 It can readily be seen that the AD-curve is downward-sloping in the $(Y, P)$-space, whereas the AS-curve is upward-sloping.
 
-Finally, by substituting the AS and AD curve into each other, we obtain the following equilibrium solutions for output and the price level:
+Finally, by substituting the AS and AD curves into each other, we obtain the following equilibrium solutions for output and the price level:
 
 \begin{align*}
-Y^*&=\frac{c[d_0-d_1(1+m)(i_1(1+n)a(W_0-h))]}{1-b+cd_1(1+m)i_1(1+n)a^2h(N^f)^{-1}} \\
+Y^*&=\frac{c\{d_0-d_1(1+m)[i_0+i_1(1+n)a(W_0-h)]\}}{1-b+cd_1(1+m)i_1(1+n)a^2h(N^f)^{-1}} \\
 P^*&=\frac{(1+n)a[(1-b)(W_0-h)+ha(N^f)^{-1}c(d_0-d_1(1+m)i_0)]}{1-b+cd_1(1+m)i_1(1+n)a^2h(N^f)^{-1}}.
 \end{align*}
+
+
+### Confirm analytical solutions numerically
+
+```{r pkmacro9}
+
+### Confirm equilibrium solution for Y*  (baseline)
+# Analytical solution
+(c[1]*(d0[1] -d1*(1+m[1])*(i0+i1*(1+n[1])*a[1]*(W0-h))))/(1-b +c[1]*d1*(1+m[1])*i1*(1+n[1])*(a[1]^2)*h*(Nf^-1))
+
+# Numerical solution
+Y_star[1]
+
+### Confirm equilibrium solution for P*  (baseline)
+# Analytical solution
+((1+n[1])*a[1]*((W0-h)*(1-b)+(Nf^-1)*h*a[1]*c[1]*(d0[1]-d1*(1+m[1])*i0[1])))/(1-b +c[1]*d1*(1+m[1])*i1*(1+n[1])*(a[1]^2)*h*(Nf^-1))
+
+# Numerical solution
+P_star[1]
+
+```
+
 
 ## References {-}
