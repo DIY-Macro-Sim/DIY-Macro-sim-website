@@ -1,0 +1,3482 @@
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2024.11.13)  13 NOV 2024 18:32
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./index.tex
+(index.tex
+LaTeX2e <2024-11-01>
+L3 programming layer <2024-11-02>
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/koma-script\scrreprt.
+cls
+Document Class: scrreprt 2024/10/24 v3.43 KOMA-Script document class (report)
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/koma-script\scrkbase.
+sty
+Package: scrkbase 2024/10/24 v3.43 KOMA-Script package (KOMA-Script-dependent b
+asics and keyval usage)
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/koma-script\scrbase.s
+ty
+Package: scrbase 2024/10/24 v3.43 KOMA-Script package (KOMA-Script-independent 
+basics and keyval usage)
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/koma-script\scrlfile.
+sty
+Package: scrlfile 2024/10/24 v3.43 KOMA-Script package (file load hooks)
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/koma-script\scrlfile-
+hook.sty
+Package: scrlfile-hook 2024/10/24 v3.43 KOMA-Script package (using LaTeX hooks)
+
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/koma-script\scrlogo.s
+ty
+Package: scrlogo 2024/10/24 v3.43 KOMA-Script package (logo)
+))) (C:\Program Files\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+Applying: [2021/05/01] Usage of raw or classic option list on input line 254.
+Already applied: [0000/00/00] Usage of raw or classic option list on input line
+ 370.
+))
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/koma-script\tocbasic.
+sty
+Package: tocbasic 2024/10/24 v3.43 KOMA-Script package (handling toc-files)
+\scr@dte@tocline@numberwidth=\skip49
+\scr@dte@tocline@numbox=\box52
+)
+Package tocbasic Info: omitting babel extension for `toc'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `toc' on input line 137.
+Class scrreprt Info: File `scrsize11pt.clo' used instead of
+(scrreprt)           file `scrsize11.clo' to setup font sizes on input line 271
+3.
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/koma-script\scrsize11
+pt.clo
+File: scrsize11pt.clo 2024/10/24 v3.43 KOMA-Script font size class option (11pt
+)
+)
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/koma-script\typearea.
+sty
+Package: typearea 2024/10/24 v3.43 KOMA-Script package (type area)
+\ta@bcor=\skip50
+\ta@div=\count192
+Package typearea Info: You've used standard option `letterpaper'.
+(typearea)             This is correct!
+(typearea)             Internally I'm using `paper=letter'.
+(typearea)             If you'd like to set the option with \KOMAoptions,
+(typearea)             you'd have to use `paper=letter' there
+(typearea)             instead of `letterpaper', too.
+\ta@hblk=\skip51
+\ta@vblk=\skip52
+\ta@temp=\skip53
+\footheight=\skip54
+Package typearea Info: These are the values describing the layout:
+(typearea)             DIV  = 11
+(typearea)             BCOR = 0.0pt
+(typearea)             \paperwidth      = 614.295pt
+(typearea)              \textwidth      = 446.76004pt
+(typearea)              DIV departure   = -14%
+(typearea)              \evensidemargin = 11.49748pt
+(typearea)              \oddsidemargin  = 11.49748pt
+(typearea)             \paperheight     = 794.96999pt
+(typearea)              \textheight     = 582.20026pt
+(typearea)              \topmargin      = -37.40001pt
+(typearea)              \headheight     = 17.0pt
+(typearea)              \headsep        = 20.40001pt
+(typearea)              \topskip        = 11.0pt
+(typearea)              \footskip       = 47.6pt
+(typearea)              \baselineskip   = 13.6pt
+(typearea)              on input line 1802.
+)
+\c@part=\count193
+\c@chapter=\count194
+\c@section=\count195
+\c@subsection=\count196
+\c@subsubsection=\count197
+\c@paragraph=\count198
+\c@subparagraph=\count199
+\scr@dte@chapter@maxnumwidth=\skip55
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\chapter on input line 6020.
+\scr@dte@section@maxnumwidth=\skip56
+Class scrreprt Info: using compatibility default `runin=bysign'
+(scrreprt)           for `\section on input line 6031.
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\section on input line 6031.
+\scr@dte@part@maxnumwidth=\skip57
+Class scrreprt Info: using compatibility default `afterindent=true'
+(scrreprt)           for `\part on input line 6040.
+\scr@dte@subsection@maxnumwidth=\skip58
+Class scrreprt Info: using compatibility default `runin=bysign'
+(scrreprt)           for `\subsection on input line 6050.
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\subsection on input line 6050.
+\scr@dte@subsubsection@maxnumwidth=\skip59
+Class scrreprt Info: using compatibility default `runin=bysign'
+(scrreprt)           for `\subsubsection on input line 6060.
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\subsubsection on input line 6060.
+\scr@dte@paragraph@maxnumwidth=\skip60
+Class scrreprt Info: using compatibility default `runin=bysign'
+(scrreprt)           for `\paragraph on input line 6071.
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\paragraph on input line 6071.
+\scr@dte@subparagraph@maxnumwidth=\skip61
+Class scrreprt Info: using compatibility default `runin=bysign'
+(scrreprt)           for `\subparagraph on input line 6081.
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\subparagraph on input line 6081.
+\abovecaptionskip=\skip62
+\belowcaptionskip=\skip63
+\c@pti@nb@sid@b@x=\box53
+Package tocbasic Info: omitting babel extension for `lof'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lof' on input line 7269.
+\scr@dte@figure@maxnumwidth=\skip64
+\c@figure=\count266
+Package tocbasic Info: omitting babel extension for `lot'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lot' on input line 7286.
+\scr@dte@table@maxnumwidth=\skip65
+\c@table=\count267
+Class scrreprt Info: Redefining `\numberline' on input line 7457.
+\bibindent=\dimen141
+) (C:\Program Files\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2024/11/05 v2.17t AMS math features
+\@mathmargin=\skip66
+For additional information on amsmath, use the `?' option.
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks18
+\ex@=\dimen142
+)) (C:\Program Files\MiKTeX\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen143
+) (C:\Program Files\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count268
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count269
+\leftroot@=\count270
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count271
+\DOTSCASE@=\count272
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box54
+\strutbox@=\box55
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen144
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count273
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count274
+\dotsspace@=\muskip17
+\c@parentequation=\count275
+\dspbrk@lvl=\count276
+\tag@help=\toks19
+\row@=\count277
+\column@=\count278
+\maxfields@=\count279
+\andhelp@=\toks20
+\eqnshift@=\dimen145
+\alignsep@=\dimen146
+\tagshift@=\dimen147
+\tagwidth@=\dimen148
+\totwidth@=\dimen149
+\lineht@=\dimen150
+\@envbody=\toks21
+\multlinegap=\skip67
+\multlinetaggap=\skip68
+\mathdisplay@stack=\toks22
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+) (C:\Program Files\MiKTeX\tex/latex/amsfonts\amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (C:\Program Files\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+)
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/unicode-math\unicode-
+math.sty (C:\Program Files\MiKTeX\tex/latex/l3kernel\expl3.sty
+Package: expl3 2024-11-02 L3 programming layer (loader) 
+(C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-xetex.def
+File: l3backend-xetex.def 2024-05-08 L3 backend support: XeTeX
+\g__graphics_track_int=\count280
+\l__pdf_internal_box=\box56
+\g__pdf_backend_annotation_int=\count281
+\g__pdf_backend_link_int=\count282
+))
+Package: unicode-math 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/unicode-math\unicode-
+math-xetex.sty
+Package: unicode-math-xetex 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLa
+TeX
+(C:\Program Files\MiKTeX\tex/latex/l3packages/xparse\xparse.sty
+Package: xparse 2024-08-16 L3 Experimental document command parser
+) (C:\Program Files\MiKTeX\tex/latex/l3packages/l3keys2e\l3keys2e.sty
+Package: l3keys2e 2024-08-16 LaTeX2e option processing using LaTeX3 keys
+) (C:\Program Files\MiKTeX\tex/latex/fontspec\fontspec.sty
+Package: fontspec 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTeX
+(C:\Program Files\MiKTeX\tex/latex/fontspec\fontspec-xetex.sty
+Package: fontspec-xetex 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTe
+X
+\l__fontspec_script_int=\count283
+\l__fontspec_language_int=\count284
+\l__fontspec_strnum_int=\count285
+\l__fontspec_tmp_int=\count286
+\l__fontspec_tmpa_int=\count287
+\l__fontspec_tmpb_int=\count288
+\l__fontspec_tmpc_int=\count289
+\l__fontspec_em_int=\count290
+\l__fontspec_emdef_int=\count291
+\l__fontspec_strong_int=\count292
+\l__fontspec_strongdef_int=\count293
+\l__fontspec_tmpa_dim=\dimen151
+\l__fontspec_tmpb_dim=\dimen152
+\l__fontspec_tmpc_dim=\dimen153
+(C:\Program Files\MiKTeX\tex/latex/base\fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+) (C:\Program Files\MiKTeX\tex/latex/fontspec\fontspec.cfg))) (C:\Program Files
+\MiKTeX\tex/latex/base\fix-cm.sty
+Package: fix-cm 2020/11/24 v1.1t fixes to LaTeX
+(C:\Program Files\MiKTeX\tex/latex/base\ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
+))
+\g__um_fam_int=\count294
+\g__um_fonts_used_int=\count295
+\l__um_primecount_int=\count296
+\g__um_primekern_muskip=\muskip18
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/unicode-math\unicode-
+math-table.tex))) (C:\Program Files\MiKTeX\tex/latex/lm\lmodern.sty
+Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+) (C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/upquote\upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+(C:\Program Files\MiKTeX\tex/latex/base\textcomp.sty
+Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
+))
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/microtype\microtype.s
+ty
+Package: microtype 2024/03/29 v3.1b Micro-typographical refinements (RS)
+(C:\Program Files\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count297
+)
+\MT@toks=\toks23
+\MT@tempbox=\box57
+\MT@count=\count298
+LaTeX Info: Redefining \noprotrusionifhmode on input line 1061.
+LaTeX Info: Redefining \leftprotrusion on input line 1062.
+\MT@prot@toks=\toks24
+LaTeX Info: Redefining \rightprotrusion on input line 1081.
+LaTeX Info: Redefining \textls on input line 1392.
+\MT@outer@kern=\dimen154
+LaTeX Info: Redefining \textmicrotypecontext on input line 2013.
+\MT@listname@count=\count299
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/microtype\microtype-x
+etex.def
+File: microtype-xetex.def 2024/03/29 v3.1b Definitions specific to xetex (RS)
+LaTeX Info: Redefining \lsstyle on input line 238.
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/microtype\microtype.c
+fg
+File: microtype.cfg 2024/03/29 v3.1b microtype main configuration file (RS)
+)) (C:\Program Files\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+(C:\Program Files\MiKTeX\tex/latex/graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: xetex.def on input line 274.
+(C:\Program Files\MiKTeX\tex/latex/graphics-def\xetex.def
+File: xetex.def 2022/09/22 v5.0n Graphics/color driver for xetex
+) (C:\Program Files\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+) (C:\Program Files\MiKTeX\tex/latex/graphics\dvipsnam.def
+File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
+) (C:\Program Files\MiKTeX\tex/latex/xcolor\svgnam.def
+File: svgnam.def 2024/09/29 v3.02 Predefined colors according to SVG 1.1 (UK)
+) (C:\Program Files\MiKTeX\tex/latex/xcolor\x11nam.def
+File: x11nam.def 2024/09/29 v3.02 Predefined colors according to Unix/X11 (UK)
+)
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/fancyvrb\fancyvrb.sty
+Package: fancyvrb 2024/01/20 4.5c verbatim text (tvz,hv)
+\FV@CodeLineNo=\count300
+\FV@InFile=\read2
+\FV@TabBox=\box58
+\c@FancyVerbLine=\count301
+\FV@StepNumber=\count302
+\FV@OutFile=\write3
+) (C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/framed\framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip69
+\fb@frw=\dimen155
+\fb@frh=\dimen156
+\FrameRule=\dimen157
+\FrameSep=\dimen158
+) (C:\Program Files\MiKTeX\tex/latex/tools\longtable.sty
+Package: longtable 2024-10-27 v4.22 Multi-page Table package (DPC)
+\LTleft=\skip70
+\LTright=\skip71
+\LTpre=\skip72
+\LTpost=\skip73
+\LTchunksize=\count303
+\LTcapwidth=\dimen159
+\LT@head=\box59
+\LT@firsthead=\box60
+\LT@foot=\box61
+\LT@lastfoot=\box62
+\LT@gbox=\box63
+\LT@cols=\count304
+\LT@rows=\count305
+\c@LT@tables=\count306
+\c@LT@chunks=\count307
+\LT@p@ftn=\toks25
+)
+Class scrreprt Info: longtable captions redefined on input line 98.
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/booktabs\booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen160
+\lightrulewidth=\dimen161
+\cmidrulewidth=\dimen162
+\belowrulesep=\dimen163
+\belowbottomsep=\dimen164
+\aboverulesep=\dimen165
+\abovetopsep=\dimen166
+\cmidrulesep=\dimen167
+\cmidrulekern=\dimen168
+\defaultaddspace=\dimen169
+\@cmidla=\count308
+\@cmidlb=\count309
+\@aboverulesep=\dimen170
+\@belowrulesep=\dimen171
+\@thisruleclass=\count310
+\@lastruleclass=\count311
+\@thisrulewidth=\dimen172
+) (C:\Program Files\MiKTeX\tex/latex/tools\array.sty
+Package: array 2024/10/17 v2.6g Tabular extension package (FMi)
+\col@sep=\dimen173
+\ar@mcellbox=\box64
+\extrarowheight=\dimen174
+\NC@list=\toks26
+\extratabsurround=\skip74
+\backup@length=\skip75
+\ar@cellbox=\box65
+) (C:\Program Files\MiKTeX\tex/latex/tools\calc.sty
+Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count312
+\calc@Bcount=\count313
+\calc@Adimen=\dimen175
+\calc@Bdimen=\dimen176
+\calc@Askip=\skip76
+\calc@Bskip=\skip77
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count314
+\calc@Cskip=\skip78
+)
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/footnotehyper\footnot
+ehyper.sty
+Package: footnotehyper 2021/08/13 v1.1e hyperref aware footnote.sty (JFB)
+\FNH@notes=\box66
+\FNH@width=\dimen177
+\FNH@toks=\toks27
+) (C:\Program Files\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+(C:\Program Files\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+(C:\Program Files\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+) (C:\Program Files\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: xetex.def on input line 106.
+)
+\Gin@req@height=\dimen178
+\Gin@req@width=\dimen179
+)
+\cslhangindent=\skip79
+\csllabelwidth=\skip80
+(C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcolorbox.sty
+Package: tcolorbox 2024/10/22 version 6.4.1 text color boxes
+(C:\Program Files\MiKTeX\tex/latex/pgf/frontendlayer\tikz.sty (C:\Program Files
+\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty (C:\Program Files\MiKTeX\tex/latex/pgf
+/utilities\pgfrcs.sty (C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfuti
+l-common.tex
+\pgfutil@everybye=\toks28
+\pgfutil@tempdima=\dimen180
+\pgfutil@tempdimb=\dimen181
+) (C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfutil-latex.def
+\pgfutil@abb=\box67
+) (C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfrcs.code.tex (C:\Progra
+m Files\MiKTeX\tex/generic/pgf\pgf.revision.tex)
+Package: pgfrcs 2023-01-15 v3.1.10 (3.1.10)
+))
+Package: pgf 2023-01-15 v3.1.10 (3.1.10)
+(C:\Program Files\MiKTeX\tex/latex/pgf/basiclayer\pgfcore.sty (C:\Program Files
+\MiKTeX\tex/latex/pgf/systemlayer\pgfsys.sty (C:\Program Files\MiKTeX\tex/gener
+ic/pgf/systemlayer\pgfsys.code.tex
+Package: pgfsys 2023-01-15 v3.1.10 (3.1.10)
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks29
+\pgfkeys@temptoks=\toks30
+
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfkeyslibraryfiltered.code.
+tex
+\pgfkeys@tmptoks=\toks31
+))
+\pgf@x=\dimen182
+\pgf@y=\dimen183
+\pgf@xa=\dimen184
+\pgf@ya=\dimen185
+\pgf@xb=\dimen186
+\pgf@yb=\dimen187
+\pgf@xc=\dimen188
+\pgf@yc=\dimen189
+\pgf@xd=\dimen190
+\pgf@yd=\dimen191
+\w@pgf@writea=\write4
+\r@pgf@reada=\read3
+\c@pgf@counta=\count315
+\c@pgf@countb=\count316
+\c@pgf@countc=\count317
+\c@pgf@countd=\count318
+\t@pgf@toka=\toks32
+\t@pgf@tokb=\toks33
+\t@pgf@tokc=\toks34
+\pgf@sys@id@count=\count319
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgf.cfg
+File: pgf.cfg 2023-01-15 v3.1.10 (3.1.10)
+)
+Driver file for pgf: pgfsys-xetex.def
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-xetex.def
+File: pgfsys-xetex.def 2023-01-15 v3.1.10 (3.1.10)
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-dvipdfmx.def
+File: pgfsys-dvipdfmx.def 2023-01-15 v3.1.10 (3.1.10)
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2023-01-15 v3.1.10 (3.1.10)
+)
+\pgfsys@objnum=\count320
+))) (C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsyssoftpath.code.te
+x
+File: pgfsyssoftpath.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfsyssoftpath@smallbuffer@items=\count321
+\pgfsyssoftpath@bigbuffer@items=\count322
+) (C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcore.code.tex
+Package: pgfcore 2023-01-15 v3.1.10 (3.1.10)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex (C:\Program File
+s\MiKTeX\tex/generic/pgf/math\pgfmathutil.code.tex) (C:\Program Files\MiKTeX\te
+x/generic/pgf/math\pgfmathparser.code.tex
+\pgfmath@dimen=\dimen192
+\pgfmath@count=\count323
+\pgfmath@box=\box68
+\pgfmath@toks=\toks35
+\pgfmath@stack@operand=\toks36
+\pgfmath@stack@operation=\toks37
+) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.code.tex) (C:\
+Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.basic.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.trigonometric.co
+de.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.random.c
+ode.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.comparison.code.
+tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.base.code.t
+ex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.round.code.t
+ex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.misc.code.te
+x)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.integerarithmeti
+cs.code.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathcalc.code.tex
+) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count324
+)) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfint.code.tex) (C:\Program F
+iles\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@picminx=\dimen193
+\pgf@picmaxx=\dimen194
+\pgf@picminy=\dimen195
+\pgf@picmaxy=\dimen196
+\pgf@pathminx=\dimen197
+\pgf@pathmaxx=\dimen198
+\pgf@pathminy=\dimen199
+\pgf@pathmaxy=\dimen256
+\pgf@xx=\dimen257
+\pgf@xy=\dimen258
+\pgf@yx=\dimen259
+\pgf@yy=\dimen260
+\pgf@zx=\dimen261
+\pgf@zy=\dimen262
+)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathconstruct.code.t
+ex
+File: pgfcorepathconstruct.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@path@lastx=\dimen263
+\pgf@path@lasty=\dimen264
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@shorten@end@additional=\dimen265
+\pgf@shorten@start@additional=\dimen266
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfpic=\box69
+\pgf@hbox=\box70
+\pgf@layerbox@main=\box71
+\pgf@picture@serial@count=\count325
+)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoregraphicstate.code.te
+x
+File: pgfcoregraphicstate.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgflinewidth=\dimen267
+)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransformations.code
+.tex
+File: pgfcoretransformations.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@pt@x=\dimen268
+\pgf@pt@y=\dimen269
+\pgf@pt@temp=\dimen270
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathprocessing.code.
+tex
+File: pgfcorepathprocessing.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfarrowsep=\dimen271
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@max=\dimen272
+\pgf@sys@shading@range@num=\count326
+\pgf@shadingcount=\count327
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfexternal@startupbox=\box72
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransparency.code.te
+x
+File: pgfcoretransparency.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfnodeparttextbox=\box73
+) (C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (C:\Program Files\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2023-01-15 v3.1.10 (3.1.10)
+\pgf@nodesepstart=\dimen273
+\pgf@nodesepend=\dimen274
+) (C:\Program Files\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2023-01-15 v3.1.10 (3.1.10)
+)) (C:\Program Files\MiKTeX\tex/latex/pgf/utilities\pgffor.sty (C:\Program File
+s\MiKTeX\tex/latex/pgf/utilities\pgfkeys.sty (C:\Program Files\MiKTeX\tex/gener
+ic/pgf/utilities\pgfkeys.code.tex)) (C:\Program Files\MiKTeX\tex/latex/pgf/math
+\pgfmath.sty (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex)) (
+C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgffor.code.tex
+Package: pgffor 2023-01-15 v3.1.10 (3.1.10)
+\pgffor@iter=\dimen275
+\pgffor@skip=\dimen276
+\pgffor@stack=\toks38
+\pgffor@toks=\toks39
+)) (C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz\tikz.code.tex
+Package: tikz 2023-01-15 v3.1.10 (3.1.10)
+
+(C:\Program Files\MiKTeX\tex/generic/pgf/libraries\pgflibraryplothandlers.code.
+tex
+File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@plot@mark@count=\count328
+\pgfplotmarksize=\dimen277
+)
+\tikz@lastx=\dimen278
+\tikz@lasty=\dimen279
+\tikz@lastxsaved=\dimen280
+\tikz@lastysaved=\dimen281
+\tikz@lastmovetox=\dimen282
+\tikz@lastmovetoy=\dimen283
+\tikzleveldistance=\dimen284
+\tikzsiblingdistance=\dimen285
+\tikz@figbox=\box74
+\tikz@figbox@bg=\box75
+\tikz@tempbox=\box76
+\tikz@tempbox@bg=\box77
+\tikztreelevel=\count329
+\tikznumberofchildren=\count330
+\tikznumberofcurrentchild=\count331
+\tikz@fig@count=\count332
+(C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfmatrixcurrentrow=\count333
+\pgfmatrixcurrentcolumn=\count334
+\pgf@matrix@numberofcolumns=\count335
+)
+\tikz@expandcount=\count336
+
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+rytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (C:\Program Files\MiKTeX\tex/latex/tools\verbatim.sty
+Package: verbatim 2024-01-22 v1.5x LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks40
+\verbatim@line=\toks41
+\verbatim@in@stream=\read4
+) (C:\Program Files\MiKTeX\tex/latex/environ\environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+(C:\Program Files\MiKTeX\tex/latex/trimspaces\trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+))
+\tcb@titlebox=\box78
+\tcb@upperbox=\box79
+\tcb@lowerbox=\box80
+\tcb@phantombox=\box81
+\c@tcbbreakpart=\count337
+\c@tcblayer=\count338
+\c@tcolorbox@number=\count339
+\l__tcobox_tmpa_box=\box82
+\l__tcobox_tmpa_dim=\dimen286
+\tcb@temp=\box83
+\tcb@temp=\box84
+\tcb@temp=\box85
+\tcb@temp=\box86
+(C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbskins.code.tex
+Library (tcolorbox): 'tcbskins.code.tex' version '6.4.1'
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/tikzfill\tikzfill.ima
+ge.sty
+Package: tikzfill.image 2023/08/08 v1.0.1 Image filling library for TikZ
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/tikzfill\tikzfill-com
+mon.sty
+Package: tikzfill-common 2023/08/08 v1.0.1 Auxiliary code for tikzfill
+)
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/tikzfill\tikzlibraryf
+ill.image.code.tex
+File: tikzlibraryfill.image.code.tex 2023/08/08 v1.0.1 Image filling library
+\l__tikzfill_img_box=\box87
+)) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbskinsjigsaw.code.tex
+Library (tcolorbox): 'tcbskinsjigsaw.code.tex' version '6.4.1'
+)) (C:\Program Files\MiKTeX\tex/latex/tcolorbox\tcbbreakable.code.tex
+Library (tcolorbox): 'tcbbreakable.code.tex' version '6.4.1'
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/pdfcol\pdfcol.sty
+Package: pdfcol 2022-09-21 v1.7 Handle new color stacks for pdfTeX (HO)
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/generic/infwarerr\infwarerr
+.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdfcol Info: Interface disabled because of missing PDF mode of pdfTeX.
+)
+Package pdfcol Info: pdfTeX's color stacks are not available.
+\tcb@testbox=\box88
+\tcb@totalupperbox=\box89
+\tcb@totallowerbox=\box90
+))
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/fontawesome5\fontawes
+ome5.sty
+Package: fontawesome5 2022/05/02 v5.15.4 Font Awesome 5
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/fontawesome5\fontawes
+ome5-utex-helper.sty
+Package: fontawesome5-utex-helper 2022/05/02 v5.15.4 uTeX helper for fontawesom
+e5
+LaTeX Font Info:    Trying to load font information for TU+fontawesomefree on i
+nput line 69.
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/fontawesome5\tufontaw
+esomefree.fd)
+LaTeX Font Info:    Trying to load font information for TU+fontawesomebrands on
+ input line 70.
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/fontawesome5\tufontaw
+esomebrands.fd)))
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/bookmark\bookmark.sty
+Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
+(C:\Program Files\MiKTeX\tex/latex/hyperref\hyperref.sty
+Package: hyperref 2024-11-05 v7.01l Hypertext links for LaTeX
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.s
+ty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/generic/kvdefinekeys\kvdefi
+nekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/generic/pdfescape\pdfescape
+.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+(C:\Program Files\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode not found.
+)) (C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/hycolor\hycolor.st
+y
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+) (C:\Program Files\MiKTeX\tex/latex/hyperref\nameref.sty
+Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/refcount\refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/generic/gettitlestring\gett
+itlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/kvoptions\kvoptions.s
+ty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count340
+)
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/generic/stringenc\stringenc
+.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
+)
+)
+\@linkdim=\dimen287
+\Hy@linkcounter=\count341
+\Hy@pagecounter=\count342
+(C:\Program Files\MiKTeX\tex/latex/hyperref\pd1enc.def
+File: pd1enc.def 2024-11-05 v7.01l Hyperref: PDFDocEncoding definition (HO)
+)
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/generic/intcalc\intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count343
+(C:\Program Files\MiKTeX\tex/latex/hyperref\puenc.def
+File: puenc.def 2024-11-05 v7.01l Hyperref: PDF Unicode definition (HO)
+)
+Package hyperref Info: Option `unicode' set `true' on input line 4040.
+Package hyperref Info: Hyper figures OFF on input line 4157.
+Package hyperref Info: Link nesting OFF on input line 4162.
+Package hyperref Info: Hyper index ON on input line 4165.
+Package hyperref Info: Plain pages OFF on input line 4172.
+Package hyperref Info: Backreferencing OFF on input line 4177.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4424.
+\c@Hy@tempcnt=\count344
+(C:\Program Files\MiKTeX\tex/latex/url\url.sty
+\Urlmuskip=\muskip19
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4763.
+\XeTeXLinkMargin=\dimen288
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/generic/bitset\bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/generic/bigintcalc\bigintca
+lc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count345
+\Field@Width=\dimen289
+\Fld@charsize=\dimen290
+Package hyperref Info: Hyper figures OFF on input line 6042.
+Package hyperref Info: Link nesting OFF on input line 6047.
+Package hyperref Info: Hyper index ON on input line 6050.
+Package hyperref Info: backreferencing OFF on input line 6057.
+Package hyperref Info: Link coloring OFF on input line 6062.
+Package hyperref Info: Link coloring with OCG OFF on input line 6067.
+Package hyperref Info: PDF/A mode OFF on input line 6072.
+(C:\Program Files\MiKTeX\tex/latex/base\atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count346
+\c@Item=\count347
+\c@Hfootnote=\count348
+)
+Package hyperref Info: Driver (autodetected): hxetex.
+(C:\Program Files\MiKTeX\tex/latex/hyperref\hxetex.def
+File: hxetex.def 2024-11-05 v7.01l Hyperref driver for XeTeX
+\pdfm@box=\box91
+\c@Hy@AnnotLevel=\count349
+\HyField@AnnotCount=\count350
+\Fld@listcount=\count351
+\c@bookmark@seq@number=\count352
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/rerunfilecheck\rerunf
+ilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+(C:\Program Files\MiKTeX\tex/latex/base\atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
+kage
+with kernel methods
+)
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/generic/uniquecounter\uniqu
+ecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+85.
+)
+\Hy@SectionHShift=\skip81
+)
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/bookmark\bkm-dvipdfm.
+def
+File: bkm-dvipdfm.def 2023-12-10 v1.31 bookmark driver for dvipdfm (HO)
+\BKM@id=\count353
+)) (C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/caption\caption.st
+y
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen291
+\captionmargin=\dimen292
+\caption@leftmargin=\dimen293
+\caption@rightmargin=\dimen294
+\caption@width=\dimen295
+\caption@indent=\dimen296
+\caption@parindent=\dimen297
+\caption@hangindent=\dimen298
+Package caption Info: KOMA-Script document class detected.
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/caption\caption-koma.
+sto
+File: caption-koma.sto 2023/09/08 v2.0e Adaption of the caption package to the 
+KOMA-Script document classes (AR)
+))
+\c@caption@flags=\count354
+\c@continuedfloat=\count355
+Package caption Info: hyperref package is loaded.
+Package caption Info: longtable package is loaded.
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/caption\ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)
+Package caption Info: KOMA-Script scrextend package detected.
+\caption@addmargin@hsize=\dimen299
+\caption@addmargin@linewidth=\dimen300
+) (C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count356
+\float@exts=\toks42
+\float@box=\box92
+\@float@everytoks=\toks43
+\@floatcapt=\box93
+)
+\@float@every@codelisting=\toks44
+\c@codelisting=\count357
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/caption\subcaption.st
+y
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count358
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count359
+) (C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/xurl\xurl.sty
+Package: xurl 2022/01/09 v 0.10 modify URL breaks
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 229.
+No file index.aux.
+\openout1 = `index.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 235.
+LaTeX Font Info:    ... okay on input line 235.
+Package scrbase Info: activating english \abstractname on input line 235.
+Package scrbase Info: activating english \partname on input line 235.
+Package scrbase Info: activating english \chaptername on input line 235.
+Package scrbase Info: activating english \appendixname on input line 235.
+Package scrbase Info: activating english \figurename on input line 235.
+Package scrbase Info: activating english \tablename on input line 235.
+Package scrbase Info: activating english \contentsname on input line 235.
+Package scrbase Info: activating english \listfigurename on input line 235.
+Package scrbase Info: activating english \listtablename on input line 235.
+Package scrbase Info: activating english \bibname on input line 235.
+Package scrbase Info: activating english \indexname on input line 235.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
+(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 235.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 235.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 235.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 235.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/lmss/bx/n --> TU/lmss/bx/n on input line 235.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 235.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 235.
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'latinmodern-math.otf(0)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},Sm
+allCapsFont={},Script=Math,BoldFont={latinmodern-math.otf}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999967668407183]"[latinmodern-math.otf]/OT:scri
+pt=math;language=dflt;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999967668407183]"[latinmodern-math.otf]/OT:scri
+pt=math;language=dflt;"
+
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
+(Font)              scaled to size 10.95pt on input line 235.
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'latinmodern-math.otf(1)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},Sm
+allCapsFont={},Script=Math,SizeFeatures={{Size=9.3075-},{Size=6.57-9.3075,Font=
+latinmodern-math.otf,Style=MathScript},{Size=-6.57,Font=latinmodern-math.otf,St
+yle=MathScriptScript}},BoldFont={latinmodern-math.otf}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <9.3075->s*[0.9999967668407183]"[latinmodern-math.otf]/O
+T:script=math;language=dflt;"<6.57-9.3075>s*[0.9999967668407183]"[latinmodern-m
+ath.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[0.9999967668407183]"[l
+atinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999967668407183]"[latinmodern-math.otf]/OT:scri
+pt=math;language=dflt;"
+
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 10.95pt on input line 235.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `normal' on input line 235.
+
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input
+ line 235.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `bold' on input line 235.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on inpu
+t line 235.
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.000096766517402.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.000096766517402.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.000096766517402.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.000096766517402.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.000096766517402.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'latinmodern-math.otf(2)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},Sm
+allCapsFont={},Script=Math,SizeFeatures={{Size=9.3075-},{Size=6.57-9.3075,Font=
+latinmodern-math.otf,Style=MathScript},{Size=-6.57,Font=latinmodern-math.otf,St
+yle=MathScriptScript}},BoldFont={latinmodern-math.otf},ScaleAgain=1.0001,FontAd
+justment={\fontdimen
+(fontspec)             8\font =7.41315pt\relax \fontdimen 9\font
+(fontspec)             =4.3143pt\relax \fontdimen 10\font =4.8618pt\relax
+(fontspec)             \fontdimen 11\font =7.5117pt\relax \fontdimen 12\font
+(fontspec)             =3.77776pt\relax \fontdimen 13\font =3.97485pt\relax
+(fontspec)             \fontdimen 14\font =3.97485pt\relax \fontdimen 15\font
+(fontspec)             =3.16455pt\relax \fontdimen 16\font =2.70465pt\relax
+(fontspec)             \fontdimen 17\font =2.70465pt\relax \fontdimen 18\font
+(fontspec)             =2.7375pt\relax \fontdimen 19\font =2.19pt\relax
+(fontspec)             \fontdimen 22\font =2.7375pt\relax \fontdimen 20\font
+(fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax }].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <9.3075->s*[1.000096766517402]"[latinmodern-math.otf]/OT
+:script=math;language=dflt;"<6.57-9.3075>s*[1.000096766517402]"[latinmodern-mat
+h.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[1.000096766517402]"[lati
+nmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[1.000096766517402]"[latinmodern-math.otf]/OT:scrip
+t=math;language=dflt;"
+
+LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
+(Font)              `symbols' in the math version `normal' on input line 235.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on inpu
+t line 235.
+LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
+(Font)              `symbols' in the math version `bold' on input line 235.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on inpu
+t line 235.
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9998967671640342.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9998967671640342.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9998967671640342.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9998967671640342.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 0.9998967671640342.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'latinmodern-math.otf(3)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},Sm
+allCapsFont={},Script=Math,SizeFeatures={{Size=9.3075-},{Size=6.57-9.3075,Font=
+latinmodern-math.otf,Style=MathScript},{Size=-6.57,Font=latinmodern-math.otf,St
+yle=MathScriptScript}},BoldFont={latinmodern-math.otf},ScaleAgain=0.9999,FontAd
+justment={\fontdimen
+(fontspec)             8\font =0.438pt\relax \fontdimen 9\font =2.19pt\relax
+(fontspec)             \fontdimen 10\font =1.82864pt\relax \fontdimen 11\font
+(fontspec)             =1.21545pt\relax \fontdimen 12\font =6.56999pt\relax
+(fontspec)             \fontdimen 13\font =0pt\relax }].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <9.3075->s*[0.9998967671640342]"[latinmodern-math.otf]/O
+T:script=math;language=dflt;"<6.57-9.3075>s*[0.9998967671640342]"[latinmodern-m
+ath.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[0.9998967671640342]"[l
+atinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9998967671640342]"[latinmodern-math.otf]/OT:scri
+pt=math;language=dflt;"
+
+LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
+(Font)              `largesymbols' in the math version `normal' on input line 2
+35.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on inpu
+t line 235.
+LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
+(Font)              `largesymbols' in the math version `bold' on input line 235
+.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on inpu
+t line 235.
+LaTeX Info: Redefining \microtypecontext on input line 235.
+Package microtype Info: Applying patch `item' on input line 235.
+Package microtype Info: Applying patch `toc' on input line 235.
+Package microtype Info: Applying patch `eqnum' on input line 235.
+Package microtype Info: Applying patch `footnote' on input line 235.
+Package microtype Info: Applying patch `verbatim' on input line 235.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using protrusion set `basicmath'.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of spacing.
+Package microtype Info: No adjustment of kerning.
+
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/microtype\mt-LatinMod
+ernRoman.cfg
+File: mt-LatinModernRoman.cfg 2021/02/21 v1.1 microtype config. file: Latin Mod
+ern Roman (RS)
+)
+Package hyperref Info: Link coloring ON on input line 235.
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
+
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: End \AtBeginDocument code.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmss' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 14.4pt on input line 237.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 10.0pt on input line 237.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.0pt on input line 237.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
+37.
+(C:\Program Files\MiKTeX\tex/latex/lm\omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 14.4013pt on input line 237.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 10.00092pt on input line 237.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.00064pt on input line 237.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 14.39845pt on input line 237.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 9.99893pt on input line 237.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.99925pt on input line 237.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 237
+.
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+) (C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/microtype\mt-msa.cf
+g
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 237
+.
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) (C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/microtype\mt-msb.cf
+g
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+
+[1
+
+
+
+]
+Package tocbasic Info: character protrusion at toc deactivated on input line 24
+2.
+No file index.toc.
+\tf@toc=\write5
+\openout5 = `index.toc'.
+
+
+
+[2
+
+]
+(C:\Users\Karsten Kohler\AppData\Roaming\MiKTeX\tex/latex/microtype\mt-TU-empty
+.cfg
+File: mt-TU-empty.cfg 2021/06/22 v1.1 microtype config. file: fonts with nonsta
+ndard glyph set (RS)
+)
+File: franz.jpeg Graphic file (type bmp)
+<franz.jpeg>
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.665pt on input line 296.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.475pt on input line 296.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 10.95099pt on input line 296.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.66568pt on input line 296.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.4755pt on input line 296.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 10.94882pt on input line 296.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 7.66417pt on input line 296.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.47441pt on input line 296.
+File: karsten.png Graphic file (type bmp)
+<karsten.png>
+
+Overfull \hbox (46.89328pt too wide) in paragraph at lines 341--344
+[]\TU/lmr/m/n/10.95 You can also email us directly: \TU/lmtt/m/n/10.95 franz.pr
+ante@wiwi.tu.chemnitz.de \TU/lmr/m/n/10.95 and \TU/lmtt/m/n/10.95 k.kohler@leed
+s.ac.uk 
+ []
+
+
+
+[3
+
+]
+
+[4]
+chapter 1.
+
+LaTeX Warning: Reference `sec-how-to-simulate' on page 5 undefined on input lin
+e 372.
+
+
+LaTeX Warning: Reference `sec-stab_analysis' on page 5 undefined on input line 
+401.
+
+LaTeX Font Info:    Font shape `TU/lmss/bx/it' in size <14.4> not available
+(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 414.
+
+
+
+[5
+
+]
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 9.0pt on input line 471.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.0pt on input line 471.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.0pt on input line 471.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 9.00082pt on input line 471.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.00055pt on input line 471.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.00046pt on input line 471.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 8.99904pt on input line 471.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.99936pt on input line 471.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 4.99947pt on input line 471.
+
+
+[6]
+Underfull \vbox (badness 10000) detected at line 633
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 633
+ []
+
+
+
+[7]
+Underfull \vbox (badness 10000) detected at line 633
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 633
+ []
+
+
+
+[8]
+Underfull \vbox (badness 10000) detected at line 633
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 633
+ []
+
+
+
+[9]
+
+[10]
+
+[11]
+
+Package tcolorbox Warning: The upper box part has become overfull on input line
+ 786.
+
+
+Overfull \vbox (224.55612pt too high) has occurred while \output is active []
+
+
+
+[12]
+Overfull \hbox (15.46773pt too wide) in paragraph at lines 807--807
+[] \TU/lmtt/m/n/10.95 [1] 1.000000 1.250000 1.361111 1.423611 1.463611 1.491389
+ 1.511797 1.527422[] 
+ []
+
+
+
+[13
+
+]
+chapter 2.
+
+
+[14
+
+]
+
+LaTeX Warning: Reference `sec-stab_analysis' on page 15 undefined on input line
+ 920.
+
+
+LaTeX Warning: Reference `sec-stab_analysis' on page 15 undefined on input line
+ 937.
+
+
+
+[15]
+
+LaTeX Warning: Reference `sec-stab_analysis' on page 16 undefined on input line
+ 996.
+
+
+
+[16]
+
+[17]
+
+[18]
+
+[19]
+
+[20]
+
+LaTeX Warning: Reference `sec-stab_analysis' on page 21 undefined on input line
+ 1194.
+
+
+
+[21]
+
+[22]
+
+[23]
+
+[24]
+
+[25]
+
+[26]
+
+[27]
+File: how_to_simulate_files/figure-pdf/howto_4-1.pdf Graphic file (type pdf)
+<use how_to_simulate_files/figure-pdf/howto_4-1.pdf>
+
+
+[28]
+File: how_to_simulate_files/figure-pdf/howto_5-1.pdf Graphic file (type pdf)
+<use how_to_simulate_files/figure-pdf/howto_5-1.pdf>
+
+
+[29]
+File: how_to_simulate_files/figure-pdf/howto_6-1.pdf Graphic file (type pdf)
+<use how_to_simulate_files/figure-pdf/howto_6-1.pdf>
+File: how_to_simulate_files/figure-pdf/howto_7-1.pdf Graphic file (type pdf)
+<use how_to_simulate_files/figure-pdf/howto_7-1.pdf>
+
+
+[30]
+
+[31]
+
+[32]
+
+Package tcolorbox Warning: The upper box part has become overfull on input line
+ 1609.
+
+
+
+[33]
+
+[34
+
+]
+File: how_to_simulate_files/figure-pdf/how_to8-5.pdf Graphic file (type pdf)
+<use how_to_simulate_files/figure-pdf/how_to8-5.pdf>
+
+
+[35]
+
+[36]
+
+[37]
+
+[38]
+
+[39]
+part I.
+Package scrkbase Info: You've told me to use the font selection of the element
+(scrkbase)             `partprefix' that is an alias of element `partnumber'
+(scrkbase)              on input line 1880.
+
+
+[40
+
+]
+chapter 3.
+
+
+[41
+
+]
+
+LaTeX Warning: Reference `eq-Y_NC' on page 42 undefined on input line 1970.
+
+
+LaTeX Warning: Reference `eq-w_NC' on page 42 undefined on input line 1973.
+
+
+LaTeX Warning: Reference `eq-w_NC' on page 42 undefined on input line 1979.
+
+
+LaTeX Warning: Reference `eq-I_NC' on page 42 undefined on input line 1979.
+
+
+LaTeX Warning: Reference `eq-MD_NC' on page 42 undefined on input line 1979.
+
+
+LaTeX Warning: Reference `eq-N_NC' on page 42 undefined on input line 1980.
+
+
+LaTeX Warning: Reference `eq-C_NC' on page 42 undefined on input line 1981.
+
+
+LaTeX Warning: Reference `eq-I_NC' on page 42 undefined on input line 1999.
+
+
+LaTeX Warning: Reference `eq-G_NC' on page 42 undefined on input line 2001.
+
+
+LaTeX Warning: Reference `eq-Y_eq_NC' on page 42 undefined on input line 2002.
+
+
+LaTeX Warning: Reference `eq-rn_NC' on page 42 undefined on input line 2005.
+
+
+LaTeX Warning: Reference `eq-MS_NC' on page 42 undefined on input line 2006.
+
+
+LaTeX Warning: Reference `eq-MD_NC' on page 42 undefined on input line 2007.
+
+
+LaTeX Warning: Reference `eq-M_eq_NC' on page 42 undefined on input line 2010.
+
+
+
+[42]
+Overfull \hbox (10.48512pt too wide) in paragraph at lines 2042--2043
+[]\TU/lmr/m/n/10.95 Scenario  
+ []
+
+
+Overfull \hbox (1.62657pt too wide) in paragraph at lines 2075--2075
+\TU/lmr/m/n/10.95 pected 
+ []
+
+
+Overfull \hbox (5.05392pt too wide) in paragraph at lines 2077--2077
+\TU/lmr/m/n/10.95 creased 
+ []
+
+
+Overfull \hbox (0.80533pt too wide) in paragraph at lines 2077--2077
+\TU/lmr/m/n/10.95 leisure 
+ []
+
+[43]
+
+[44]
+Overfull \vbox (0.12044pt too high) detected at line 2175
+ []
+
+
+
+[45]
+Overfull \vbox (1.82863pt too high) detected at line 2175
+ []
+
+
+
+[46]
+
+[47]
+
+[48]
+
+Package tcolorbox Warning: The upper box part has become overfull on input line
+ 2269.
+
+
+
+[49]
+
+LaTeX Warning: Reference `fig-output-neocl' on page 50 undefined on input line 
+2273.
+
+
+LaTeX Warning: Reference `fig-employment-neocl' on page 50 undefined on input l
+ine 2274.
+
+
+LaTeX Warning: Reference `fig-price_level' on page 50 undefined on input line 2
+278.
+
+File: a_neoclassical_macro_model_files/figure-pdf/fig-output-neocl-1.pdf Graphi
+c file (type pdf)
+<use a_neoclassical_macro_model_files/figure-pdf/fig-output-neocl-1.pdf>
+File: a_neoclassical_macro_model_files/figure-pdf/fig-price_level-1.pdf Graphic
+ file (type pdf)
+<use a_neoclassical_macro_model_files/figure-pdf/fig-price_level-1.pdf>
+
+LaTeX Warning: Reference `fig-consumption' on page 50 undefined on input line 2
+325.
+
+
+LaTeX Warning: Reference `fig-investment' on page 50 undefined on input line 23
+25.
+
+
+LaTeX Warning: Reference `fig-interest_rate' on page 50 undefined on input line
+ 2332.
+
+
+LaTeX Warning: Reference `fig-investment' on page 50 undefined on input line 23
+33.
+
+
+
+[50
+
+]
+File: a_neoclassical_macro_model_files/figure-pdf/fig-employment-neocl-1.pdf Gr
+aphic file (type pdf)
+<use a_neoclassical_macro_model_files/figure-pdf/fig-employment-neocl-1.pdf>
+File: a_neoclassical_macro_model_files/figure-pdf/fig-consumption-1.pdf Graphic
+ file (type pdf)
+<use a_neoclassical_macro_model_files/figure-pdf/fig-consumption-1.pdf>
+
+
+[51]
+File: a_neoclassical_macro_model_files/figure-pdf/fig-investment-1.pdf Graphic 
+file (type pdf)
+<use a_neoclassical_macro_model_files/figure-pdf/fig-investment-1.pdf>
+
+LaTeX Warning: Reference `fig-consumption' on page 52 undefined on input line 2
+399.
+
+
+LaTeX Warning: Reference `fig-interest_rate' on page 52 undefined on input line
+ 2401.
+
+
+LaTeX Warning: Reference `fig-investment' on page 52 undefined on input line 24
+02.
+
+File: a_neoclassical_macro_model_files/figure-pdf/fig-interest_rate-1.pdf Graph
+ic file (type pdf)
+<use a_neoclassical_macro_model_files/figure-pdf/fig-interest_rate-1.pdf>
+
+
+[52]
+
+[53]
+File: a_neoclassical_macro_model_files/figure-pdf/fig-dg-2.pdf Graphic file (ty
+pe pdf)
+<use a_neoclassical_macro_model_files/figure-pdf/fig-dg-2.pdf>
+
+
+[54]
+
+[55]
+
+[56]
+
+Package tcolorbox Warning: The upper box part has become overfull on input line
+ 2565.
+
+
+
+[57]
+
+LaTeX Warning: Reference `fig-dg' on page 58 undefined on input line 2567.
+
+
+LaTeX Warning: Reference `eq-FOC_Nd' on page 58 undefined on input line 2618.
+
+
+LaTeX Warning: Reference `eq-w_NC' on page 58 undefined on input line 2618.
+
+
+LaTeX Warning: Reference `eq-FOC_I' on page 58 undefined on input line 2621.
+
+
+LaTeX Warning: Reference `eq-I_NC' on page 58 undefined on input line 2622.
+
+
+
+[58
+
+]
+
+[59]
+
+[60]
+
+LaTeX Warning: Reference `eq-ibc' on page 61 undefined on input line 2730.
+
+
+LaTeX Warning: Reference `eq-FOC_C' on page 61 undefined on input line 2746.
+
+
+LaTeX Warning: Reference `eq-FOC_Ns' on page 61 undefined on input line 2747.
+
+
+LaTeX Warning: Reference `eq-FOC_M' on page 61 undefined on input line 2748.
+
+
+LaTeX Warning: Reference `eq-N_NC' on page 61 undefined on input line 2748.
+
+
+LaTeX Warning: Reference `eq-MD_NC' on page 61 undefined on input line 2749.
+
+
+LaTeX Warning: Reference `eq-ibc' on page 61 undefined on input line 2750.
+
+
+LaTeX Warning: Reference `eq-FOC_M' on page 61 undefined on input line 2750.
+
+
+LaTeX Warning: Reference `eq-FOC_C' on page 61 undefined on input line 2751.
+
+
+LaTeX Warning: Reference `eq-C_NC' on page 61 undefined on input line 2752.
+
+
+
+[61]
+chapter 4.
+
+
+[62
+
+]
+
+LaTeX Warning: Reference `eq-islmY' on page 63 undefined on input line 2839.
+
+
+LaTeX Warning: Reference `eq-islmC' on page 63 undefined on input line 2842.
+
+
+LaTeX Warning: Reference `eq-islmI' on page 63 undefined on input line 2845.
+
+
+LaTeX Warning: Reference `eq-islmG' on page 63 undefined on input line 2848.
+
+
+LaTeX Warning: Reference `eq-islmT' on page 63 undefined on input line 2849.
+
+
+LaTeX Warning: Reference `eq-islmMs' on page 63 undefined on input line 2850.
+
+
+LaTeX Warning: Reference `eq-islmMd' on page 63 undefined on input line 2851.
+
+
+LaTeX Warning: Reference `eq-islmN' on page 63 undefined on input line 2856.
+
+
+LaTeX Warning: Reference `eq-islmU' on page 63 undefined on input line 2860.
+
+
+
+[63]
+Overfull \hbox (16.90295pt too wide) in paragraph at lines 2893--2894
+[]\TU/lmr/m/n/10.95 Scenario  
+ []
+
+
+Overfull \hbox (11.47176pt too wide) in paragraph at lines 2927--2927
+\TU/lmr/m/n/10.95 creased 
+ []
+
+[64]
+
+[65]
+
+[66]
+
+[67]
+
+[68]
+
+Package tcolorbox Warning: The upper box part has become overfull on input line
+ 3126.
+
+
+
+[69]
+
+LaTeX Warning: Reference `fig-output' on page 70 undefined on input line 3130.
+
+
+LaTeX Warning: Reference `fig-r' on page 70 undefined on input line 3130.
+
+
+LaTeX Warning: Reference `fig-U' on page 70 undefined on input line 3138.
+
+
+LaTeX Warning: Reference `fig-output' on page 70 undefined on input line 3140.
+
+File: an_IS_LM_model_files/figure-pdf/fig-output-1.pdf Graphic file (type pdf)
+<use an_IS_LM_model_files/figure-pdf/fig-output-1.pdf>
+File: an_IS_LM_model_files/figure-pdf/fig-r-1.pdf Graphic file (type pdf)
+<use an_IS_LM_model_files/figure-pdf/fig-r-1.pdf>
+
+
+[70
+
+]
+File: an_IS_LM_model_files/figure-pdf/fig-U-1.pdf Graphic file (type pdf)
+<use an_IS_LM_model_files/figure-pdf/fig-U-1.pdf>
+
+LaTeX Warning: Reference `fig-I' on page 71 undefined on input line 3207.
+
+
+LaTeX Warning: Reference `fig-C' on page 71 undefined on input line 3207.
+
+File: an_IS_LM_model_files/figure-pdf/fig-I-1.pdf Graphic file (type pdf)
+<use an_IS_LM_model_files/figure-pdf/fig-I-1.pdf>
+
+
+[71]
+File: an_IS_LM_model_files/figure-pdf/fig-C-1.pdf Graphic file (type pdf)
+<use an_IS_LM_model_files/figure-pdf/fig-C-1.pdf>
+File: an_IS_LM_model_files/figure-pdf/fig-N-1.pdf Graphic file (type pdf)
+<use an_IS_LM_model_files/figure-pdf/fig-N-1.pdf>
+
+
+[72]
+
+[73]
+File: an_IS_LM_model_files/figure-pdf/fig-DAG-2.pdf Graphic file (type pdf)
+<use an_IS_LM_model_files/figure-pdf/fig-DAG-2.pdf>
+
+
+[74]
+
+[75]
+
+Package tcolorbox Warning: The upper box part has become overfull on input line
+ 3399.
+
+
+
+[76]
+
+LaTeX Warning: Reference `eq-islmC' on page 77 undefined on input line 3403.
+
+
+LaTeX Warning: Reference `eq-islmT' on page 77 undefined on input line 3404.
+
+
+LaTeX Warning: Reference `eq-islmY' on page 77 undefined on input line 3404.
+
+
+LaTeX Warning: Reference `eq-islmMs' on page 77 undefined on input line 3411.
+
+
+LaTeX Warning: Reference `eq-islmMd' on page 77 undefined on input line 3412.
+
+
+LaTeX Warning: Reference `eq-islmM' on page 77 undefined on input line 3412.
+
+
+LaTeX Warning: Reference `eq-LM' on page 77 undefined on input line 3420.
+
+
+LaTeX Warning: Reference `eq-IS' on page 77 undefined on input line 3420.
+
+
+
+[77
+
+]
+
+[78]
+chapter 5.
+
+LaTeX Warning: Reference `sec-islm-model' on page 79 undefined on input line 35
+01.
+
+
+
+[79
+
+]
+
+LaTeX Warning: Reference `eq-Y-AS_AD' on page 80 undefined on input line 3585.
+
+
+LaTeX Warning: Reference `eq-C-AS_AD' on page 80 undefined on input line 3588.
+
+
+LaTeX Warning: Reference `eq-I-AS_AD' on page 80 undefined on input line 3591.
+
+
+LaTeX Warning: Reference `eq-Ms-AS_AD' on page 80 undefined on input line 3595.
+
+
+
+LaTeX Warning: Reference `eq-Md-AS_AD' on page 80 undefined on input line 3596.
+
+
+
+LaTeX Warning: Reference `eq-M_eq-AS_AD' on page 80 undefined on input line 360
+1.
+
+
+
+[80]
+
+LaTeX Warning: Reference `eq-w-AS_AD' on page 81 undefined on input line 3603.
+
+
+LaTeX Warning: Reference `eq-W-AS_AD' on page 81 undefined on input line 3613.
+
+
+LaTeX Warning: Reference `eq-P-AS_AD' on page 81 undefined on input line 3620.
+
+
+LaTeX Warning: Reference `eq-N-AS_AD' on page 81 undefined on input line 3622.
+
+
+LaTeX Warning: Reference `eq-U-AS_AD' on page 81 undefined on input line 3626.
+
+
+
+[81]
+Overfull \hbox (1.24252pt too wide) in paragraph at lines 3678--3679
+[]$[][]$  
+ []
+
+
+Overfull \hbox (1.24252pt too wide) in paragraph at lines 3680--3681
+[]$[][]$  
+ []
+
+
+Overfull \hbox (1.24252pt too wide) in paragraph at lines 3682--3683
+[]$[][]$  
+ []
+
+
+Overfull \hbox (2.24991pt too wide) in paragraph at lines 3684--3685
+[]$[][]$  
+ []
+
+
+Overfull \hbox (2.06487pt too wide) in paragraph at lines 3690--3691
+[]$[][]$  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3700--3700
+[]|\TU/lmr/m/n/10.95 0.6|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3700--3700
+[]|\TU/lmr/m/n/10.95 0.1|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3700--3700
+[]|\TU/lmr/m/n/10.95 0.2|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3700--3700
+[]|\TU/lmr/m/n/10.95 0.4|  
+ []
+
+
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3701--3701
+[]|\TU/lmr/m/n/10.95 0.3|  
+ []
+
+
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3701--3702
+[]|\TU/lmr/m/n/10.95 0.4|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3702--3702
+[]|\TU/lmr/m/n/10.95 0.6|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3702--3702
+[]|\TU/lmr/m/n/10.95 1.5|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3702--3702
+[]|\TU/lmr/m/n/10.95 0.1|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3703--3703
+[]|\TU/lmr/m/n/10.95 0.2|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3703--3703
+[]|\TU/lmr/m/n/10.95 0.4|  
+ []
+
+
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3703--3703
+[]|\TU/lmr/m/n/10.95 0.3|  
+ []
+
+
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3703--3704
+[]|\TU/lmr/m/n/10.95 0.4|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3704--3704
+[]|\TU/lmr/m/n/10.95 0.6|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3704--3704
+[]|\TU/lmr/m/n/10.95 0.1|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3704--3704
+[]|\TU/lmr/m/n/10.95 0.2|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3705--3705
+[]|\TU/lmr/m/n/10.95 0.4|  
+ []
+
+
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3705--3705
+[]|\TU/lmr/m/n/10.95 0.3|  
+ []
+
+
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3705--3706
+[]|\TU/lmr/m/n/10.95 0.4|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3706--3706
+[]|\TU/lmr/m/n/10.95 0.6|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3706--3706
+[]|\TU/lmr/m/n/10.95 0.1|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3706--3707
+[]|\TU/lmr/m/n/10.95 1.5|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3707--3707
+[]|\TU/lmr/m/n/10.95 0.2|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3707--3707
+[]|\TU/lmr/m/n/10.95 0.4|  
+ []
+
+
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3707--3707
+[]|\TU/lmr/m/n/10.95 0.3|  
+ []
+
+
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3707--3708
+[]|\TU/lmr/m/n/10.95 0.4|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3708--3708
+[]|\TU/lmr/m/n/10.95 0.6|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3708--3708
+[]|\TU/lmr/m/n/10.95 0.1|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3708--3708
+[]|\TU/lmr/m/n/10.95 0.2|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3709--3709
+[]|\TU/lmr/m/n/10.95 0.4|  
+ []
+
+
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3709--3709
+[]|\TU/lmr/m/n/10.95 0.3|  
+ []
+
+
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3709--3710
+[]|\TU/lmr/m/n/10.95 0.4|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3710--3710
+[]|\TU/lmr/m/n/10.95 0.6|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3710--3710
+[]|\TU/lmr/m/n/10.95 0.1|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3710--3710
+[]|\TU/lmr/m/n/10.95 0.2|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3711--3711
+[]|\TU/lmr/m/n/10.95 0.4|  
+ []
+
+
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3711--3711
+[]|\TU/lmr/m/n/10.95 0.3|  
+ []
+
+
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3711--3712
+[]|\TU/lmr/m/n/10.95 0.4|  
+ []
+
+
+
+[82]
+Underfull \vbox (badness 10000) detected at line 3831
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3831
+ []
+
+
+
+[83]
+Underfull \vbox (badness 10000) detected at line 3831
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3831
+ []
+
+
+
+[84]
+
+[85]
+
+[86]
+
+Package tcolorbox Warning: The upper box part has become overfull on input line
+ 3938.
+
+
+
+[87]
+
+LaTeX Warning: Reference `fig-output' on page 88 undefined on input line 3942.
+
+
+LaTeX Warning: Reference `fig-nominal-wage-neocl-macro' on page 88 undefined on
+ input line 3943.
+
+File: a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-pdf/fig-output-ne
+ocl-macro-1.pdf Graphic file (type pdf)
+<use a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-pdf/fig-output-neo
+cl-macro-1.pdf>
+File: a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-pdf/fig-price-lev
+el-neocl-macro-1.pdf Graphic file (type pdf)
+<use a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-pdf/fig-price-leve
+l-neocl-macro-1.pdf>
+
+
+[88
+
+]
+File: a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-pdf/fig-interest_
+rate-neocl-macro-1.pdf Graphic file (type pdf)
+<use a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-pdf/fig-interest_r
+ate-neocl-macro-1.pdf>
+File: a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-pdf/fig-unemploym
+ent-neocl-macro-1.pdf Graphic file (type pdf)
+<use a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-pdf/fig-unemployme
+nt-neocl-macro-1.pdf>
+
+
+[89]
+File: a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-pdf/fig-nominal-w
+age-neocl-macro-1.pdf Graphic file (type pdf)
+<use a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-pdf/fig-nominal-wa
+ge-neocl-macro-1.pdf>
+File: a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-pdf/fig-real-wage
+-neocl-macro-1.pdf Graphic file (type pdf)
+<use a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-pdf/fig-real-wage-
+neocl-macro-1.pdf>
+
+
+[90]
+
+[91]
+File: a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-pdf/fig-dg-neoclm
+acro-2.pdf Graphic file (type pdf)
+<use a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-pdf/fig-dg-neoclma
+cro-2.pdf>
+
+
+[92]
+
+[93]
+
+Package tcolorbox Warning: The upper box part has become overfull on input line
+ 4224.
+
+
+
+[94]
+
+LaTeX Warning: Reference `fig-dg-neoclmacro' on page 95 undefined on input line
+ 4226.
+
+
+LaTeX Warning: Reference `eq-C-AS_AD' on page 95 undefined on input line 4250.
+
+
+LaTeX Warning: Reference `eq-I-AS_AD' on page 95 undefined on input line 4251.
+
+
+LaTeX Warning: Reference `eq-Y-AS_AD' on page 95 undefined on input line 4251.
+
+
+LaTeX Warning: Reference `eq-Ms-AS_AD' on page 95 undefined on input line 4256.
+
+
+
+LaTeX Warning: Reference `eq-Md-AS_AD' on page 95 undefined on input line 4257.
+
+
+
+LaTeX Warning: Reference `eq-M_eq-AS_AD' on page 95 undefined on input line 425
+7.
+
+
+LaTeX Warning: Reference `eq-w-AS_AD' on page 95 undefined on input line 4264.
+
+
+LaTeX Warning: Reference `eq-W-AS_AD' on page 95 undefined on input line 4265.
+
+
+LaTeX Warning: Reference `eq-N-AS_AD' on page 95 undefined on input line 4265.
+
+
+LaTeX Warning: Reference `eq-C-AS_AD' on page 95 undefined on input line 4266.
+
+
+LaTeX Warning: Reference `eq-P-AS_AD' on page 95 undefined on input line 4266.
+
+
+
+[95
+
+]
+
+[96]
+chapter 6.
+
+
+[97
+
+]
+
+LaTeX Warning: Reference `eq-Y-PK' on page 98 undefined on input line 4395.
+
+
+LaTeX Warning: Reference `eq-ND-PK' on page 98 undefined on input line 4400.
+
+
+LaTeX Warning: Reference `eq-D-PK' on page 98 undefined on input line 4402.
+
+
+LaTeX Warning: Reference `eq-i-PK' on page 98 undefined on input line 4406.
+
+
+LaTeX Warning: Reference `sec-neoclassical-synthesis' on page 98 undefined on i
+nput line 4413.
+
+
+LaTeX Warning: Reference `eq-r-PK' on page 98 undefined on input line 4414.
+
+
+LaTeX Warning: Reference `eq-dL-PK' on page 98 undefined on input line 4416.
+
+
+LaTeX Warning: Reference `eq-dM-PK' on page 98 undefined on input line 4420.
+
+
+LaTeX Warning: Reference `eq-dR-PK' on page 98 undefined on input line 4422.
+
+
+
+[98]
+
+LaTeX Warning: Reference `eq-P-PK' on page 99 undefined on input line 4427.
+
+
+LaTeX Warning: Reference `eq-U-PK' on page 99 undefined on input line 4431.
+
+
+LaTeX Warning: Reference `eq-w-PK' on page 99 undefined on input line 4432.
+
+
+LaTeX Warning: Reference `eq-P-PK' on page 99 undefined on input line 4433.
+
+
+LaTeX Warning: Reference `eq-N-PK' on page 99 undefined on input line 4435.
+
+
+LaTeX Warning: Reference `eq-U-PK' on page 99 undefined on input line 4440.
+
+
+
+[99]
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4506--4506
+ []|\TU/lmr/m/n/10.95 0.5| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4506--4506
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (2.0819pt too wide) in paragraph at lines 4506--4506
+ []|\TU/lmr/m/n/10.95 0.01| 
+ []
+
+
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4506--4506
+ []|\TU/lmr/m/n/10.95 0.15| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4506--4506
+ []|\TU/lmr/m/n/10.95 0.3| 
+ []
+
+
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4506--4506
+ []|\TU/lmr/m/n/10.95 0.15| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4507--4507
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4507--4507
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4508--4508
+ []|\TU/lmr/m/n/10.95 0.5| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4508--4508
+ []|\TU/lmr/m/n/10.95 0.4| 
+ []
+
+
+Overfull \hbox (2.0819pt too wide) in paragraph at lines 4508--4508
+ []|\TU/lmr/m/n/10.95 0.01| 
+ []
+
+
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4509--4509
+ []|\TU/lmr/m/n/10.95 0.15| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4509--4509
+ []|\TU/lmr/m/n/10.95 0.3| 
+ []
+
+
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4509--4509
+ []|\TU/lmr/m/n/10.95 0.15| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4509--4509
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4509--4509
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4510--4510
+ []|\TU/lmr/m/n/10.95 0.5| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4510--4510
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (2.0819pt too wide) in paragraph at lines 4510--4510
+ []|\TU/lmr/m/n/10.95 0.01| 
+ []
+
+
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4511--4511
+ []|\TU/lmr/m/n/10.95 0.15| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4511--4511
+ []|\TU/lmr/m/n/10.95 0.3| 
+ []
+
+
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4511--4511
+ []|\TU/lmr/m/n/10.95 0.15| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4511--4511
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4511--4511
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4512--4512
+ []|\TU/lmr/m/n/10.95 0.5| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4512--4512
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (2.0819pt too wide) in paragraph at lines 4512--4512
+ []|\TU/lmr/m/n/10.95 0.01| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4512--4513
+ []|\TU/lmr/m/n/10.95 0.3| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4513--4513
+ []|\TU/lmr/m/n/10.95 0.3| 
+ []
+
+
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4513--4513
+ []|\TU/lmr/m/n/10.95 0.15| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4513--4513
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4513--4513
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4514--4514
+ []|\TU/lmr/m/n/10.95 0.5| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4514--4514
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (2.0819pt too wide) in paragraph at lines 4514--4514
+ []|\TU/lmr/m/n/10.95 0.01| 
+ []
+
+
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4515--4515
+ []|\TU/lmr/m/n/10.95 0.15| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4515--4515
+ []|\TU/lmr/m/n/10.95 0.3| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4515--4515
+ []|\TU/lmr/m/n/10.95 0.3| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4515--4515
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4515--4515
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4516--4516
+ []|\TU/lmr/m/n/10.95 0.5| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4516--4516
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (2.0819pt too wide) in paragraph at lines 4516--4516
+ []|\TU/lmr/m/n/10.95 0.01| 
+ []
+
+
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4517--4517
+ []|\TU/lmr/m/n/10.95 0.15| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4517--4517
+ []|\TU/lmr/m/n/10.95 0.3| 
+ []
+
+
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4517--4517
+ []|\TU/lmr/m/n/10.95 0.15| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4517--4517
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4517--4517
+ []|\TU/lmr/m/n/10.95 0.4| 
+ []
+
+
+
+[100]
+Underfull \vbox (badness 10000) detected at line 4654
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4654
+ []
+
+
+
+[101]
+Underfull \vbox (badness 10000) detected at line 4654
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4654
+ []
+
+
+
+[102]
+
+[103]
+
+[104]
+
+Package tcolorbox Warning: The upper box part has become overfull on input line
+ 4759.
+
+
+
+[105]
+
+LaTeX Warning: Reference `fig-output-pkmacro' on page 106 undefined on input li
+ne 4763.
+
+
+LaTeX Warning: Reference `fig-real-wage-pkmacro' on page 106 undefined on input
+ line 4764.
+
+File: a_post_keynesian_macro_model_with_endogenous_money_files/figure-pdf/fig-o
+utput-pkmacro-1.pdf Graphic file (type pdf)
+<use a_post_keynesian_macro_model_with_endogenous_money_files/figure-pdf/fig-ou
+tput-pkmacro-1.pdf>
+File: a_post_keynesian_macro_model_with_endogenous_money_files/figure-pdf/fig-p
+rice-level-pkmacro-1.pdf Graphic file (type pdf)
+<use a_post_keynesian_macro_model_with_endogenous_money_files/figure-pdf/fig-pr
+ice-level-pkmacro-1.pdf>
+
+
+[106
+
+]
+File: a_post_keynesian_macro_model_with_endogenous_money_files/figure-pdf/fig-l
+ending-rate-pkmacro-1.pdf Graphic file (type pdf)
+<use a_post_keynesian_macro_model_with_endogenous_money_files/figure-pdf/fig-le
+nding-rate-pkmacro-1.pdf>
+File: a_post_keynesian_macro_model_with_endogenous_money_files/figure-pdf/fig-m
+oney-pkmacro-1.pdf Graphic file (type pdf)
+<use a_post_keynesian_macro_model_with_endogenous_money_files/figure-pdf/fig-mo
+ney-pkmacro-1.pdf>
+
+
+[107]
+File: a_post_keynesian_macro_model_with_endogenous_money_files/figure-pdf/fig-u
+nemployment-pkmacro-1.pdf Graphic file (type pdf)
+<use a_post_keynesian_macro_model_with_endogenous_money_files/figure-pdf/fig-un
+employment-pkmacro-1.pdf>
+File: a_post_keynesian_macro_model_with_endogenous_money_files/figure-pdf/fig-n
+ominal-wage-pkmacro-1.pdf Graphic file (type pdf)
+<use a_post_keynesian_macro_model_with_endogenous_money_files/figure-pdf/fig-no
+minal-wage-pkmacro-1.pdf>
+
+
+[108]
+File: a_post_keynesian_macro_model_with_endogenous_money_files/figure-pdf/fig-r
+eal-wage-pkmacro-1.pdf Graphic file (type pdf)
+<use a_post_keynesian_macro_model_with_endogenous_money_files/figure-pdf/fig-re
+al-wage-pkmacro-1.pdf>
+
+
+[109]
+File: a_post_keynesian_macro_model_with_endogenous_money_files/figure-pdf/fig-d
+g-pkmacro-2.pdf Graphic file (type pdf)
+<use a_post_keynesian_macro_model_with_endogenous_money_files/figure-pdf/fig-dg
+-pkmacro-2.pdf>
+
+
+[110]
+
+[111]
+
+[112]
+
+Package tcolorbox Warning: The upper box part has become overfull on input line
+ 5066.
+
+
+
+[113]
+
+LaTeX Warning: Reference `fig-dg-pkmacro' on page 114 undefined on input line 5
+068.
+
+
+LaTeX Warning: Reference `eq-ND-PK' on page 114 undefined on input line 5095.
+
+
+LaTeX Warning: Reference `eq-D-PK' on page 114 undefined on input line 5096.
+
+
+LaTeX Warning: Reference `eq-Y-PK' on page 114 undefined on input line 5096.
+
+
+LaTeX Warning: Reference `eq-i-PK' on page 114 undefined on input line 5101.
+
+
+LaTeX Warning: Reference `eq-P-PK' on page 114 undefined on input line 5102.
+
+
+LaTeX Warning: Reference `eq-W-PK' on page 114 undefined on input line 5102.
+
+
+LaTeX Warning: Reference `eq-N-PK' on page 114 undefined on input line 5102.
+
+
+LaTeX Warning: Reference `eq-U-PK' on page 114 undefined on input line 5103.
+
+
+LaTeX Warning: Reference `eq-r-PK' on page 114 undefined on input line 5103.
+
+
+LaTeX Warning: Reference `eq-r-PK' on page 114 undefined on input line 5111.
+
+
+LaTeX Warning: Reference `eq-i-PK' on page 114 undefined on input line 5112.
+
+
+LaTeX Warning: Reference `eq-W-PK' on page 114 undefined on input line 5118.
+
+
+LaTeX Warning: Reference `eq-U-PK' on page 114 undefined on input line 5119.
+
+
+LaTeX Warning: Reference `eq-P-PK' on page 114 undefined on input line 5119.
+
+
+
+[114
+
+]
+
+[115]
+
+[116]
+chapter 7.
+
+
+[117
+
+]
+
+LaTeX Warning: Reference `eq-r-kr' on page 118 undefined on input line 5254.
+
+
+LaTeX Warning: Reference `eq-s-kr' on page 118 undefined on input line 5263.
+
+
+LaTeX Warning: Reference `eq-c-kr' on page 118 undefined on input line 5266.
+
+
+LaTeX Warning: Reference `eq-c-kr' on page 118 undefined on input line 5267.
+
+
+LaTeX Warning: Reference `eq-h-kr' on page 118 undefined on input line 5272.
+
+
+
+[118]
+
+[119]
+
+[120]
+
+[121]
+
+Package tcolorbox Warning: The upper box part has become overfull on input line
+ 5480.
+
+
+
+[122]
+
+LaTeX Warning: Reference `fig-profshare-kaldor-robinson' on page 123 undefined 
+on input line 5484.
+
+
+LaTeX Warning: Reference `fig-growth-kaldor-robinson' on page 123 undefined on 
+input line 5485.
+
+File: a_Kaldor-Robinson_model_files/figure-pdf/fig-profshare-kaldor-robinson-1.
+pdf Graphic file (type pdf)
+<use a_Kaldor-Robinson_model_files/figure-pdf/fig-profshare-kaldor-robinson-1.p
+df>
+File: a_Kaldor-Robinson_model_files/figure-pdf/fig-consumption-kaldor-robinson-
+1.pdf Graphic file (type pdf)
+<use a_Kaldor-Robinson_model_files/figure-pdf/fig-consumption-kaldor-robinson-1
+.pdf>
+
+
+[123
+
+]
+File: a_Kaldor-Robinson_model_files/figure-pdf/fig-growth-kaldor-robinson-1.pdf
+ Graphic file (type pdf)
+<use a_Kaldor-Robinson_model_files/figure-pdf/fig-growth-kaldor-robinson-1.pdf>
+
+
+
+[124]
+
+[125]
+File: a_Kaldor-Robinson_model_files/figure-pdf/fig-dg-kaldor-robinson-2.pdf Gra
+phic file (type pdf)
+<use a_Kaldor-Robinson_model_files/figure-pdf/fig-dg-kaldor-robinson-2.pdf>
+
+
+[126]
+
+LaTeX Warning: Reference `fig-dg-kaldor-robinson' on page 127 undefined on inpu
+t line 5665.
+
+
+LaTeX Warning: Reference `eq-h-kr' on page 127 undefined on input line 5675.
+
+
+LaTeX Warning: Reference `eq-r-kr' on page 127 undefined on input line 5675.
+
+
+LaTeX Warning: Reference `eq-g-kr' on page 127 undefined on input line 5676.
+
+
+LaTeX Warning: Reference `eq-s-kr' on page 127 undefined on input line 5676.
+
+
+
+[127]
+
+LaTeX Warning: Reference `eq-r-kr' on page 128 undefined on input line 5680.
+
+
+LaTeX Warning: Reference `eq-g-kr' on page 128 undefined on input line 5685.
+
+
+
+[128]
+
+[129]
+chapter 8.
+
+
+[130
+
+]
+
+LaTeX Warning: Reference `eq-r' on page 131 undefined on input line 5808.
+
+
+LaTeX Warning: Reference `eq-s' on page 131 undefined on input line 5817.
+
+
+LaTeX Warning: Reference `eq-c' on page 131 undefined on input line 5821.
+
+
+LaTeX Warning: Reference `eq-c' on page 131 undefined on input line 5822.
+
+
+LaTeX Warning: Reference `eq-u' on page 131 undefined on input line 5827.
+
+
+
+[131]
+
+[132]
+
+[133]
+
+[134]
+
+[135]
+
+[136]
+
+Package tcolorbox Warning: The upper box part has become overfull on input line
+ 6160.
+
+
+
+[137]
+
+LaTeX Warning: Reference `fig-utilisation-pkdg' on page 138 undefined on input 
+line 6164.
+
+
+LaTeX Warning: Reference `fig-profit-rate-pkdg' on page 138 undefined on input 
+line 6165.
+
+File: a_post_kaleckian_distribution_and_growth_model_files/figure-pdf/fig-utili
+sation-pkdg-1.pdf Graphic file (type pdf)
+<use a_post_kaleckian_distribution_and_growth_model_files/figure-pdf/fig-utilis
+ation-pkdg-1.pdf>
+File: a_post_kaleckian_distribution_and_growth_model_files/figure-pdf/fig-growt
+h-pkdg-1.pdf Graphic file (type pdf)
+<use a_post_kaleckian_distribution_and_growth_model_files/figure-pdf/fig-growth
+-pkdg-1.pdf>
+
+
+[138
+
+]
+File: a_post_kaleckian_distribution_and_growth_model_files/figure-pdf/fig-consu
+mption-pkdg-1.pdf Graphic file (type pdf)
+<use a_post_kaleckian_distribution_and_growth_model_files/figure-pdf/fig-consum
+ption-pkdg-1.pdf>
+File: a_post_kaleckian_distribution_and_growth_model_files/figure-pdf/fig-profi
+t-rate-pkdg-1.pdf Graphic file (type pdf)
+<use a_post_kaleckian_distribution_and_growth_model_files/figure-pdf/fig-profit
+-rate-pkdg-1.pdf>
+
+
+[139]
+
+[140]
+File: a_post_kaleckian_distribution_and_growth_model_files/figure-pdf/fig-dg-pk
+dg-2.pdf Graphic file (type pdf)
+<use a_post_kaleckian_distribution_and_growth_model_files/figure-pdf/fig-dg-pkd
+g-2.pdf>
+
+
+[141]
+
+LaTeX Warning: Reference `fig-dg-pkdg' on page 142 undefined on input line 6382
+.
+
+
+LaTeX Warning: Reference `eq-s' on page 142 undefined on input line 6396.
+
+
+LaTeX Warning: Reference `eq-g' on page 142 undefined on input line 6397.
+
+
+LaTeX Warning: Reference `eq-u' on page 142 undefined on input line 6397.
+
+
+
+[142]
+
+LaTeX Warning: Reference `eq-g' on page 143 undefined on input line 6403.
+
+
+LaTeX Warning: Reference `eq-r' on page 143 undefined on input line 6412.
+
+
+
+[143]
+
+[144]
+
+[145]
+part II.
+Package scrkbase Info: You've told me to use the font selection of the element
+(scrkbase)             `partprefix' that is an alias of element `partnumber'
+(scrkbase)              on input line 6524.
+
+
+[146
+
+]
+chapter 9.
+
+LaTeX Warning: Reference `sec-how-to-simulate' on page 147 undefined on input l
+ine 6534.
+
+
+
+[147
+
+]
+
+[148]
+
+[149]
+
+[150]
+
+[151]
+
+[152]
+File: intro_stability_analysis_files/figure-pdf/stab_analysis2-1.pdf Graphic fi
+le (type pdf)
+<use intro_stability_analysis_files/figure-pdf/stab_analysis2-1.pdf>
+
+
+[153]
+File: intro_stability_analysis_files/figure-pdf/stab_analysis2-2.pdf Graphic fi
+le (type pdf)
+<use intro_stability_analysis_files/figure-pdf/stab_analysis2-2.pdf>
+
+
+[154]
+
+[155]
+
+[156]
+
+Package tcolorbox Warning: The upper box part has become overfull on input line
+ 7025.
+
+
+
+[157]
+
+LaTeX Warning: Reference `sec-how-to-simulate' on page 158 undefined on input l
+ine 7063.
+
+
+
+[158
+
+]
+
+[159]
+
+[160]
+File: intro_stability_analysis_files/figure-pdf/stab_analysis4-1.pdf Graphic fi
+le (type pdf)
+<use intro_stability_analysis_files/figure-pdf/stab_analysis4-1.pdf>
+
+
+[161]
+
+[162]
+
+[163]
+File: intro_stability_analysis_files/figure-pdf/stab_analysis5-2.pdf Graphic fi
+le (type pdf)
+<use intro_stability_analysis_files/figure-pdf/stab_analysis5-2.pdf>
+
+
+[164]
+
+[165]
+File: intro_stability_analysis_files/figure-pdf/stab_analysis6-2.pdf Graphic fi
+le (type pdf)
+<use intro_stability_analysis_files/figure-pdf/stab_analysis6-2.pdf>
+
+
+[166]
+
+[167]
+
+LaTeX Warning: Reference `sec-malthus' on page 168 undefined on input line 7514
+.
+
+
+
+[168]
+
+[169]
+chapter 10.
+
+
+[170
+
+]
+
+LaTeX Warning: Reference `eq-nk_y' on page 171 undefined on input line 7607.
+
+
+LaTeX Warning: Reference `eq-nk_pi' on page 171 undefined on input line 7611.
+
+
+LaTeX Warning: Reference `eq-nk_rs' on page 171 undefined on input line 7614.
+
+
+LaTeX Warning: Reference `eq-nk_r' on page 171 undefined on input line 7617.
+
+
+LaTeX Warning: Reference `sec-analytical' on page 171 undefined on input line 7
+619.
+
+
+Overfull \hbox (0.10857pt too wide) in alignment at lines 7647--7665
+ [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (0.10857pt too wide) in alignment at lines 7665--7667
+ [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (0.10857pt too wide) in alignment at lines 7667--7671
+ [] [] [] [] [] [] [] 
+ []
+
+[171]
+
+[172]
+
+[173]
+
+[174]
+
+Package tcolorbox Warning: The upper box part has become overfull on input line
+ 7794.
+
+
+
+[175]
+File: a_new_keynesian_3_equation_model_files/figure-pdf/nk2-1.pdf Graphic file 
+(type pdf)
+<use a_new_keynesian_3_equation_model_files/figure-pdf/nk2-1.pdf>
+
+
+[176
+
+]
+File: a_new_keynesian_3_equation_model_files/figure-pdf/nk2-2.pdf Graphic file 
+(type pdf)
+<use a_new_keynesian_3_equation_model_files/figure-pdf/nk2-2.pdf>
+File: a_new_keynesian_3_equation_model_files/figure-pdf/nk2-3.pdf Graphic file 
+(type pdf)
+<use a_new_keynesian_3_equation_model_files/figure-pdf/nk2-3.pdf>
+
+
+[177]
+
+[178]
+File: a_new_keynesian_3_equation_model_files/figure-pdf/nk3-2.pdf Graphic file 
+(type pdf)
+<use a_new_keynesian_3_equation_model_files/figure-pdf/nk3-2.pdf>
+Missing character: There is no π in font [lmmono10-regular]:!
+Missing character: There is no ₑ in font [lmmono10-regular]:!
+Missing character: There is no ₛ in font [lmmono10-regular]:!
+Missing character: There is no π in font [lmmono10-regular]:!
+Missing character: There is no ᵀ in font [lmmono10-regular]:!
+
+
+[179]
+
+[180]
+
+[181]
+
+LaTeX Warning: Reference `eq-nk_y' on page 182 undefined on input line 8005.
+
+
+LaTeX Warning: Reference `sec-neoclassical-model' on page 182 undefined on inpu
+t line 8007.
+
+
+LaTeX Warning: Reference `eq-nk_y' on page 182 undefined on input line 8021.
+
+
+LaTeX Warning: Reference `eq-nk_pi' on page 182 undefined on input line 8025.
+
+
+
+[182]
+
+LaTeX Warning: Reference `eq-nk_P' on page 183 undefined on input line 8051.
+
+
+LaTeX Warning: Reference `eq-nk_W' on page 183 undefined on input line 8053.
+
+
+LaTeX Warning: Reference `eq-nk_pi' on page 183 undefined on input line 8054.
+
+
+LaTeX Warning: Reference `eq-nk_pi' on page 183 undefined on input line 8064.
+
+
+LaTeX Warning: Reference `eq-nk_pi' on page 183 undefined on input line 8073.
+
+
+LaTeX Warning: Reference `eq-nk_y' on page 183 undefined on input line 8074.
+
+
+LaTeX Warning: Reference `eq-nk_rs' on page 183 undefined on input line 8075.
+
+
+LaTeX Warning: Reference `eq-nk_r' on page 183 undefined on input line 8077.
+
+
+LaTeX Warning: Reference `eq-nk_y' on page 183 undefined on input line 8087.
+
+
+LaTeX Warning: Reference `eq-nk_pi' on page 183 undefined on input line 8087.
+
+
+LaTeX Warning: Reference `eq-nk_r' on page 183 undefined on input line 8092.
+
+
+
+[183]
+
+LaTeX Warning: Reference `eq-nk_y' on page 184 undefined on input line 8097.
+
+
+LaTeX Warning: Reference `eq-nk_pi_reduc' on page 184 undefined on input line 8
+098.
+
+
+LaTeX Warning: Reference `eq-nk_r_reduc' on page 184 undefined on input line 80
+98.
+
+
+
+[184]
+
+[185]
+chapter 11.
+
+
+[186
+
+]
+
+LaTeX Warning: Reference `eq-conflict_omega' on page 187 undefined on input lin
+e 8282.
+
+
+LaTeX Warning: Reference `eq-conflict_w' on page 187 undefined on input line 82
+83.
+
+
+LaTeX Warning: Reference `eq-conflict_p' on page 187 undefined on input line 82
+89.
+
+
+LaTeX Warning: Reference `eq-conflict_pf' on page 187 undefined on input line 8
+292.
+
+
+LaTeX Warning: Reference `eq-conflict_rf' on page 187 undefined on input line 8
+303.
+
+
+LaTeX Warning: Reference `eq-conflict_r' on page 187 undefined on input line 83
+08.
+
+
+LaTeX Warning: Reference `eq-conflict_p_E' on page 187 undefined on input line 
+8309.
+
+
+
+[187]
+
+[188]
+Underfull \vbox (badness 10000) detected at line 8447
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 8447
+ []
+
+
+
+[189]
+
+[190]
+
+[191]
+
+Package tcolorbox Warning: The upper box part has become overfull on input line
+ 8529.
+
+
+
+[192]
+
+LaTeX Warning: Reference `fig-baseline-prices' on page 193 undefined on input l
+ine 8533.
+
+
+LaTeX Warning: Reference `fig-baseline-inflation' on page 193 undefined on inpu
+t line 8535.
+
+File: a_conflict_inflation_model_files/figure-pdf/fig-baseline-prices-1.pdf Gra
+phic file (type pdf)
+<use a_conflict_inflation_model_files/figure-pdf/fig-baseline-prices-1.pdf>
+
+
+[193
+
+]
+File: a_conflict_inflation_model_files/figure-pdf/fig-baseline-inflation-1.pdf 
+Graphic file (type pdf)
+<use a_conflict_inflation_model_files/figure-pdf/fig-baseline-inflation-1.pdf>
+
+LaTeX Warning: Reference `fig-energy' on page 194 undefined on input line 8595.
+
+
+
+
+[194]
+File: a_conflict_inflation_model_files/figure-pdf/fig-energy-1.pdf Graphic file
+ (type pdf)
+<use a_conflict_inflation_model_files/figure-pdf/fig-energy-1.pdf>
+
+LaTeX Warning: Reference `fig-markup' on page 195 undefined on input line 8644.
+
+
+
+
+[195]
+File: a_conflict_inflation_model_files/figure-pdf/fig-markup-1.pdf Graphic file
+ (type pdf)
+<use a_conflict_inflation_model_files/figure-pdf/fig-markup-1.pdf>
+
+LaTeX Warning: Reference `fig-targetrealwage' on page 196 undefined on input li
+ne 8686.
+
+
+
+[196]
+File: a_conflict_inflation_model_files/figure-pdf/fig-targetrealwage-1.pdf Grap
+hic file (type pdf)
+<use a_conflict_inflation_model_files/figure-pdf/fig-targetrealwage-1.pdf>
+
+
+[197]
+
+[198]
+
+LaTeX Warning: Reference `fig-energy-prof' on page 199 undefined on input line 
+8837.
+
+
+
+[199]
+File: a_conflict_inflation_model_files/figure-pdf/fig-energy-prof-2.pdf Graphic
+ file (type pdf)
+<use a_conflict_inflation_model_files/figure-pdf/fig-energy-prof-2.pdf>
+
+
+[200]
+File: a_conflict_inflation_model_files/figure-pdf/conflict_8-1.pdf Graphic file
+ (type pdf)
+<use a_conflict_inflation_model_files/figure-pdf/conflict_8-1.pdf>
+
+
+[201]
+
+[202]
+
+[203]
+
+LaTeX Warning: Reference `eq-conflict_omega' on page 204 undefined on input lin
+e 8998.
+
+
+LaTeX Warning: Reference `eq-conflict_w' on page 204 undefined on input line 89
+98.
+
+
+LaTeX Warning: Reference `eq-conflict_r' on page 204 undefined on input line 90
+00.
+
+
+LaTeX Warning: Reference `eq-conflict_rf' on page 204 undefined on input line 9
+000.
+
+
+LaTeX Warning: Reference `eq-conflict_omega' on page 204 undefined on input lin
+e 9001.
+
+
+LaTeX Warning: Reference `eq-conflict_p' on page 204 undefined on input line 90
+01.
+
+
+LaTeX Warning: Reference `eq-conflict_w_reduc' on page 204 undefined on input l
+ine 9018.
+
+
+LaTeX Warning: Reference `eq-conflict_p_reduc' on page 204 undefined on input l
+ine 9019.
+
+
+
+[204]
+
+LaTeX Warning: Reference `eq-conflict_w_reduc' on page 205 undefined on input l
+ine 9082.
+
+
+LaTeX Warning: Reference `eq-conflict_p_reduc' on page 205 undefined on input l
+ine 9083.
+
+
+
+[205]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.9120 
+        
+Here is how much of TeX's memory you used:
+ 40044 strings out of 408788
+ 832754 string characters out of 5753002
+ 1544598 words of memory out of 5000000
+ 62347 multiletter control sequences out of 15000+600000
+ 567509 words of font info for 118 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 108i,15n,123p,10902b,1072s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+Output written on index.pdf (205 pages).

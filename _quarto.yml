@@ -41,6 +41,7 @@ book:
       chapters:
         - intro_stability_analysis.qmd
         - a_new_keynesian_3_equation_model.qmd
+        - a_conflict_inflation_model.qmd
         - a_sraffian_supermultiplier_model.qmd
         - a_malthusian_model.qmd
         - a_ricardian_one_sector_model.qmd

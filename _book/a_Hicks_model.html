@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.550">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>DIY Macroeconomic Model Simulation - 16&nbsp; A Hicksian Business Cycle Model with Floors and Ceilings</title>
+<title>DIY Macroeconomic Model Simulation - 17&nbsp; A Hicksian Business Cycle Model with Floors and Ceilings</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -153,7 +153,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_stability_analysis.html">Dynamic Models</a></li><li class="breadcrumb-item"><a href="./a_Hicks_model.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">A Hicksian Business Cycle Model with Floors and Ceilings</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_stability_analysis.html">Dynamic Models</a></li><li class="breadcrumb-item"><a href="./a_Hicks_model.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">A Hicksian Business Cycle Model with Floors and Ceilings</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -266,38 +266,44 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./a_conflict_inflation_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Conflict Inflation Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./a_sraffian_supermultiplier_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a_malthusian_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a_ricardian_one_sector_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a_ricardian_two_sector_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a_Lewis_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">A Lewis Model of Economic Development</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">A Lewis Model of Economic Development</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./a_Hicks_model.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">A Hicksian Business Cycle Model with Floors and Ceilings</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">A Hicksian Business Cycle Model with Floors and Ceilings</span></span></a>
   </div>
 </li>
       </ul>
@@ -332,8 +338,8 @@ window.Quarto = {
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_stability_analysis.html">Dynamic Models</a></li><li class="breadcrumb-item"><a href="./a_Hicks_model.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">A Hicksian Business Cycle Model with Floors and Ceilings</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-hicks" class="quarto-section-identifier"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">A Hicksian Business Cycle Model with Floors and Ceilings</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_stability_analysis.html">Dynamic Models</a></li><li class="breadcrumb-item"><a href="./a_Hicks_model.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">A Hicksian Business Cycle Model with Floors and Ceilings</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-hicks" class="quarto-section-identifier"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">A Hicksian Business Cycle Model with Floors and Ceilings</span></span></h1>
 </div>
 
 
@@ -353,15 +359,15 @@ window.Quarto = {
 </section><section id="the-model" class="level2"><h2 class="anchored" data-anchor-id="the-model">The Model</h2>
 <p><span id="eq-hicks_Y"><span class="math display">\[
   Y_{t}=\min[C_t + I_t, Y^C]
-\tag{16.1}\]</span></span></p>
+\tag{17.1}\]</span></span></p>
 <p><span id="eq-hicks_C"><span class="math display">\[
 C_{t} = c_0 + c_1 Y_{t-1},  \quad c_1 \in (0,1)
-\tag{16.2}\]</span></span></p>
+\tag{17.2}\]</span></span></p>
 <p><span id="eq-hicks_I"><span class="math display">\[
 I_{t} = I_0 + \max[\beta(Y_{t-1} - Y_{t-2}), -D],  \quad \beta &gt; 1, D &gt;0
-\tag{16.3}\]</span></span></p>
+\tag{17.3}\]</span></span></p>
 <p>where <span class="math inline">\(Y_t\)</span>, <span class="math inline">\(C_t\)</span>, <span class="math inline">\(I_t\)</span>, <span class="math inline">\(Y^C\)</span>, and <span class="math inline">\(D\)</span>, represent output, consumption, investment, the (full employment) output ceiling, and depreciation, respectively.</p>
-<p><a href="#eq-hicks_Y" class="quarto-xref">Equation&nbsp;<span>16.1</span></a> specifies aggregate income. For values below the ceiling <span class="math inline">\(Y^C\)</span>, aggregate income is determined by aggregate demand (consisting only of consumption and net investment). As soon as aggregate demand hits the ceiling, aggregate income is given by the ceiling. <a href="#eq-hicks_C" class="quarto-xref">Equation&nbsp;<span>16.2</span></a> is a simple linear Keynesian consumption function. <a href="#eq-hicks_I" class="quarto-xref">Equation&nbsp;<span>16.3</span></a> is the investment function. For investment levels above depreciation <span class="math inline">\(D\)</span>, net investment is given by an autonomous component <span class="math inline">\(I_0\)</span> and an accelerator component that is responsive to the change in aggregate income.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> The reaction coefficient <span class="math inline">\(\beta\)</span> is assumed to be sufficiently large to generate explosive dynamics. Once the change in aggregate income has fallen below the negative of the level of depreciation <span class="math inline">\(D\)</span>, net investment is given by the floor <span class="math inline">\(I_0 - D\)</span>.</p>
+<p><a href="#eq-hicks_Y" class="quarto-xref">Equation&nbsp;<span>17.1</span></a> specifies aggregate income. For values below the ceiling <span class="math inline">\(Y^C\)</span>, aggregate income is determined by aggregate demand (consisting only of consumption and net investment). As soon as aggregate demand hits the ceiling, aggregate income is given by the ceiling. <a href="#eq-hicks_C" class="quarto-xref">Equation&nbsp;<span>17.2</span></a> is a simple linear Keynesian consumption function. <a href="#eq-hicks_I" class="quarto-xref">Equation&nbsp;<span>17.3</span></a> is the investment function. For investment levels above depreciation <span class="math inline">\(D\)</span>, net investment is given by an autonomous component <span class="math inline">\(I_0\)</span> and an accelerator component that is responsive to the change in aggregate income.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> The reaction coefficient <span class="math inline">\(\beta\)</span> is assumed to be sufficiently large to generate explosive dynamics. Once the change in aggregate income has fallen below the negative of the level of depreciation <span class="math inline">\(D\)</span>, net investment is given by the floor <span class="math inline">\(I_0 - D\)</span>.</p>
 </section><section id="simulation" class="level2"><h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
 <section id="parameterisation" class="level3"><h3 class="anchored" data-anchor-id="parameterisation">Parameterisation</h3>
 <p>Table 1 reports the parameterisation used in the simulation. Besides a baseline (scenario 1), we consider a fall in the output ceiling <span class="math inline">\(Y^C\)</span> in scenario 2, an increase in the investment floor <span class="math inline">\(I_0 - D\)</span> in scenario 3, and finally a decrease in the accelerator coefficient <span class="math inline">\(\beta\)</span> (scenario 4).</p>
@@ -549,7 +555,7 @@ Python code
 </div>
 </div>
 </section><section id="plots" class="level3"><h3 class="anchored" data-anchor-id="plots">Plots</h3>
-<p><a href="#fig-baseline" class="quarto-xref">Figure&nbsp;<span>16.1</span></a> displays the model’s dynamics under the baseline scenario. The model generates cycles in aggregate output, consumption and investment that are constrained by the output ceiling <span class="math inline">\(Y^C=80\)</span> and the investment floor <span class="math inline">\(I_0-D=0\)</span>. These cycles are permanent, i.e.&nbsp;they don’t require any external shocks, and they are (roughly) periodic, with a cycle length from peak (trough) to peak (trough) of around 13.5 periods. What generates the turning points? Suppose income is on an increasing trajectory. The accelerator effect on investment will amplify this process as firms will increase their investment, which raises aggregate demand and increases income further. When the output ceiling is reached, the change in income becomes zero, and investment demand decreases relative to the boom phase. This decrease in investment lowers aggregate output, and the accelerator effect again amplifies this tendency that now plays out on a downward trajectory until net investment hits the lower bound. Once investment has stopped its downward trajectory, aggregate income stops falling as well, which allows the accelerator effect to turn positive again and thereby induce a new cycle.</p>
+<p><a href="#fig-baseline" class="quarto-xref">Figure&nbsp;<span>17.1</span></a> displays the model’s dynamics under the baseline scenario. The model generates cycles in aggregate output, consumption and investment that are constrained by the output ceiling <span class="math inline">\(Y^C=80\)</span> and the investment floor <span class="math inline">\(I_0-D=0\)</span>. These cycles are permanent, i.e.&nbsp;they don’t require any external shocks, and they are (roughly) periodic, with a cycle length from peak (trough) to peak (trough) of around 13.5 periods. What generates the turning points? Suppose income is on an increasing trajectory. The accelerator effect on investment will amplify this process as firms will increase their investment, which raises aggregate demand and increases income further. When the output ceiling is reached, the change in income becomes zero, and investment demand decreases relative to the boom phase. This decrease in investment lowers aggregate output, and the accelerator effect again amplifies this tendency that now plays out on a downward trajectory until net investment hits the lower bound. Once investment has stopped its downward trajectory, aggregate income stops falling as well, which allows the accelerator effect to turn positive again and thereby induce a new cycle.</p>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set start and end periods for plots</span></span>
 <span><span class="va">Tmax</span><span class="op">=</span><span class="fl">100</span></span>
@@ -568,12 +574,12 @@ Python code
 <img src="a_Hicks_model_files/figure-html/fig-baseline-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-baseline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;16.1: Income, consumption, and investment (baseline)
+Figure&nbsp;17.1: Income, consumption, and investment (baseline)
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p>In <a href="#fig-scen2" class="quarto-xref">Figure&nbsp;<span>16.2</span></a>, the output ceiling rises to <span class="math inline">\(Y^C = 100\)</span> in <span class="math inline">\(t=50\)</span>. This raises the amplitude of the cycles. Interestingly, the ceiling is no longer binding, but the cycles still do not explode. This illustrates a feature of the model that has been noted before: it actually does not need a ceiling to generate bounded cycles (see, e.g., <span class="citation" data-cites="Puu2005">Puu, Gardini, and Sushko (<a href="#ref-Puu2005" role="doc-biblioref">2005</a>)</span>). The acceleration of income during a boom will become smaller and smaller, and eventually turn negative, thereby lowering investment and inducing a switch from boom to bust. Hence, cycles (and thus turning points) will occur even without floor and ceilings, but to prevent these cycles to become larger and larger, a floor is sufficient.</p>
+<p>In <a href="#fig-scen2" class="quarto-xref">Figure&nbsp;<span>17.2</span></a>, the output ceiling rises to <span class="math inline">\(Y^C = 100\)</span> in <span class="math inline">\(t=50\)</span>. This raises the amplitude of the cycles. Interestingly, the ceiling is no longer binding, but the cycles still do not explode. This illustrates a feature of the model that has been noted before: it actually does not need a ceiling to generate bounded cycles (see, e.g., <span class="citation" data-cites="Puu2005">Puu, Gardini, and Sushko (<a href="#ref-Puu2005" role="doc-biblioref">2005</a>)</span>). The acceleration of income during a boom will become smaller and smaller, and eventually turn negative, thereby lowering investment and inducing a switch from boom to bust. Hence, cycles (and thus turning points) will occur even without floor and ceilings, but to prevent these cycles to become larger and larger, a floor is sufficient.</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Scenario 2: increase in ceiling</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Y</span><span class="op">[</span><span class="fl">2</span>, <span class="va">Tmin</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">""</span>, ylab<span class="op">=</span><span class="st">"Y, C, I"</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">I</span><span class="op">[</span><span class="fl">2</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,<span class="va">Y</span><span class="op">[</span><span class="fl">2</span>, <span class="va">Tmin</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
@@ -588,12 +594,12 @@ Figure&nbsp;16.1: Income, consumption, and investment (baseline)
 <img src="a_Hicks_model_files/figure-html/fig-scen2-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scen2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;16.2: Increase in output ceiling
+Figure&nbsp;17.2: Increase in output ceiling
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p>An increase in the investment floor to <span class="math inline">\(I_0 - D = 9\)</span> in period <span class="math inline">\(t=50\)</span>, displayed in <a href="#fig-scen3" class="quarto-xref">Figure&nbsp;<span>16.3</span></a>, has the effect of reducing the amplitude of the fluctuations. Intuitively, the milder the bust, the milder the recovery.</p>
+<p>An increase in the investment floor to <span class="math inline">\(I_0 - D = 9\)</span> in period <span class="math inline">\(t=50\)</span>, displayed in <a href="#fig-scen3" class="quarto-xref">Figure&nbsp;<span>17.3</span></a>, has the effect of reducing the amplitude of the fluctuations. Intuitively, the milder the bust, the milder the recovery.</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Scenario 3: increase in investment floor</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Y</span><span class="op">[</span><span class="fl">3</span>, <span class="va">Tmin</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">""</span>, ylab<span class="op">=</span><span class="st">"Y, C, I"</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">I</span><span class="op">[</span><span class="fl">3</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,<span class="va">Y</span><span class="op">[</span><span class="fl">3</span>, <span class="va">Tmin</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
@@ -608,12 +614,12 @@ Figure&nbsp;16.2: Increase in output ceiling
 <img src="a_Hicks_model_files/figure-html/fig-scen3-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scen3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;16.3: Increase in investment floor
+Figure&nbsp;17.3: Increase in investment floor
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p>Finally, <a href="#fig-scen4" class="quarto-xref">Figure&nbsp;<span>16.4</span></a> displays the scenario where the accelerator coefficient <span class="math inline">\(\beta\)</span> falls, rendering investment much less sensitive to changes in aggregate income. As a result, the model’s regular cycles turn into damped oscillations that eventually converge to a stable equilibrium.</p>
+<p>Finally, <a href="#fig-scen4" class="quarto-xref">Figure&nbsp;<span>17.4</span></a> displays the scenario where the accelerator coefficient <span class="math inline">\(\beta\)</span> falls, rendering investment much less sensitive to changes in aggregate income. As a result, the model’s regular cycles turn into damped oscillations that eventually converge to a stable equilibrium.</p>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Scenario 4: Reduction in accelerator coefficient</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Y</span><span class="op">[</span><span class="fl">4</span>, <span class="va">Tmin</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">""</span>, ylab<span class="op">=</span><span class="st">"Y, C, I"</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">I</span><span class="op">[</span><span class="fl">4</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,<span class="va">Y</span><span class="op">[</span><span class="fl">4</span>, <span class="va">Tmin</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
@@ -628,7 +634,7 @@ Figure&nbsp;16.3: Increase in investment floor
 <img src="a_Hicks_model_files/figure-html/fig-scen4-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scen4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;16.4: Reduction in accelerator coefficient
+Figure&nbsp;17.4: Reduction in accelerator coefficient
 </figcaption></figure>
 </div>
 </div>
@@ -763,22 +769,22 @@ Python code
 <p>First, define <span class="math inline">\(X_t = Y_{t-1}\)</span> to re-write the system as:</p>
 <p><span id="eq-hicks_X"><span class="math display">\[
   X_{t}=\min[C_{t-1} + I_{t-1}, Y^C]
-\tag{16.4}\]</span></span></p>
+\tag{17.4}\]</span></span></p>
 <p><span id="eq-hicks_C_mod"><span class="math display">\[
 C_{t} = c_0 + c_1 X_{t}
-\tag{16.5}\]</span></span></p>
+\tag{17.5}\]</span></span></p>
 <p><span id="eq-hicks_I_mod"><span class="math display">\[
 I_{t} = I_0 + \max[\beta(X_{t} - X_{t-1}), -D].
-\tag{16.6}\]</span></span></p>
-<p>Then shift <a href="#eq-hicks_C_mod" class="quarto-xref">Equation&nbsp;<span>16.5</span></a> one period back and substite into <a href="#eq-hicks_X" class="quarto-xref">Equation&nbsp;<span>16.4</span></a> to obtain:</p>
+\tag{17.6}\]</span></span></p>
+<p>Then shift <a href="#eq-hicks_C_mod" class="quarto-xref">Equation&nbsp;<span>17.5</span></a> one period back and substite into <a href="#eq-hicks_X" class="quarto-xref">Equation&nbsp;<span>17.4</span></a> to obtain:</p>
 <p><span id="eq-hicks_X_mod"><span class="math display">\[
   X_{t}=\min [c_0 + c_1 X_{t-1} + I_{t-1}, Y^C].
-\tag{16.7}\]</span></span></p>
-<p>Next, substitute <a href="#eq-hicks_X_mod" class="quarto-xref">Equation&nbsp;<span>16.7</span></a> into <a href="#eq-hicks_I_mod" class="quarto-xref">Equation&nbsp;<span>16.6</span></a>:</p>
+\tag{17.7}\]</span></span></p>
+<p>Next, substitute <a href="#eq-hicks_X_mod" class="quarto-xref">Equation&nbsp;<span>17.7</span></a> into <a href="#eq-hicks_I_mod" class="quarto-xref">Equation&nbsp;<span>17.6</span></a>:</p>
 <p><span id="eq-hicks_I_mod2"><span class="math display">\[
 I_{t} = I_0 + \max[\beta( c_0 + (c_1 -1) X_{t-1} + I_{t-1}), -D].
-\tag{16.8}\]</span></span></p>
-<p><a href="#eq-hicks_X_mod" class="quarto-xref">Equation&nbsp;<span>16.7</span></a> and <a href="#eq-hicks_I_mod2" class="quarto-xref">Equation&nbsp;<span>16.8</span></a> are a two-dimensional dynamic system in <span class="math inline">\(X_t\)</span> and <span class="math inline">\(It\)</span>.</p>
+\tag{17.8}\]</span></span></p>
+<p><a href="#eq-hicks_X_mod" class="quarto-xref">Equation&nbsp;<span>17.7</span></a> and <a href="#eq-hicks_I_mod2" class="quarto-xref">Equation&nbsp;<span>17.8</span></a> are a two-dimensional dynamic system in <span class="math inline">\(X_t\)</span> and <span class="math inline">\(It\)</span>.</p>
 <p>For <span class="math inline">\(Y_t &lt; Y^C\)</span> and <span class="math inline">\(I_t &gt; I_0 - D\)</span>, the system’s Jacobian matrix is given by:</p>
 <p><span class="math display">\[
 J=\begin{bmatrix} c_1 &amp; 1 \\ \beta(c_1-1) &amp; \beta  \end{bmatrix}.
@@ -1608,7 +1614,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./a_Lewis_model.html" class="pagination-link" aria-label="A Lewis Model of Economic Development">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">A Lewis Model of Economic Development</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">A Lewis Model of Economic Development</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

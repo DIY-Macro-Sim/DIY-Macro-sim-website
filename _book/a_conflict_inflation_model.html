@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.550">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>DIY Macroeconomic Model Simulation - 11&nbsp; A Conflict Inflation Model</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./a_sraffian_supermultiplier_model.html" rel="next">
+<link href="./a_new_keynesian_3_equation_model.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_stability_analysis.html">Dynamic Models</a></li><li class="breadcrumb-item"><a href="./a_conflict_inflation_model.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Conflict Inflation Model</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">DIY Macroeconomic Model Simulation</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./how_to_use.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./how_to_simulate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to Simulate Economic Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Static Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_neoclassical_macro_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./an_IS_LM_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_neoclassical_synthesis_model_IS_LM_AS_AD.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Neoclassical Synthesis Model (IS-LM-AS-AD)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_post_keynesian_macro_model_with_endogenous_money.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">A Post-Keynesian Macro Model with Endogenous Money</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_Kaldor-Robinson_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">A Kaldor-Robinson Distribution and Growth Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_post_kaleckian_distribution_and_growth_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Dynamic Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_stability_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">An Introduction to the Analysis of Dynamic Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_new_keynesian_3_equation_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_conflict_inflation_model.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Conflict Inflation Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_sraffian_supermultiplier_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_malthusian_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_ricardian_one_sector_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_ricardian_two_sector_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_Lewis_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">A Lewis Model of Economic Development</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_Hicks_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">A Hicksian Business Cycle Model with Floors and Ceilings</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./additional_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Additional Online Resources</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#the-model" id="toc-the-model" class="nav-link" data-scroll-target="#the-model">The Model</a></li>
+  <li>
+<a href="#simulation" id="toc-simulation" class="nav-link" data-scroll-target="#simulation">Simulation</a>
+  <ul>
+<li><a href="#parameterisation" id="toc-parameterisation" class="nav-link" data-scroll-target="#parameterisation">Parameterisation</a></li>
+  <li><a href="#simulation-code" id="toc-simulation-code" class="nav-link" data-scroll-target="#simulation-code">Simulation code</a></li>
+  <li><a href="#plots" id="toc-plots" class="nav-link" data-scroll-target="#plots">Plots</a></li>
+  </ul>
+</li>
+  <li><a href="#a-closer-look-at-the-effect-of-energy-price-shocks-on-profits" id="toc-a-closer-look-at-the-effect-of-energy-price-shocks-on-profits" class="nav-link" data-scroll-target="#a-closer-look-at-the-effect-of-energy-price-shocks-on-profits">A closer look at the effect of energy price shocks on profits</a></li>
+  <li><a href="#directed-graph" id="toc-directed-graph" class="nav-link" data-scroll-target="#directed-graph">Directed graph</a></li>
+  <li><a href="#analytical-discussion" id="toc-analytical-discussion" class="nav-link" data-scroll-target="#analytical-discussion">Analytical discussion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_stability_analysis.html">Dynamic Models</a></li><li class="breadcrumb-item"><a href="./a_conflict_inflation_model.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Conflict Inflation Model</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Conflict Inflation Model</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This model is a version of the conflicting-claims approach to inflation that has been developed in the Marxian and post-Keynesian tradition (<span class="citation" data-cites="Rowthorn1977">Rowthorn (<a href="#ref-Rowthorn1977" role="doc-biblioref">1977</a>)</span>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The conflict inflation approach argues that inflation is driven by distributional conflict between price-setting firms and wage-setting workers. Each social class aspires a share of real income that is inconsistent with the claims of the other class. Workers gradually adjust nominal wages to reach a real wage target. Firms, by contrast, gradually adjust prices to achieve an implicit real wage target. The (implicit) real wage target of firms may stem from an (explicit) profitability target. Profitability, in turn, depends on the unit cost of firms. With nominal wages being a key component of those unit cost, any attempt by workers to raise real wages through higher nominal wages will eat into firms’ profitability, which will respond by raising prices. Equally, any attempt by firms to raise profitability by setting higher prices will undermine real wages and evoke a response by workers. This interplay between mutually inconsistent claims drives the inflationary process and the equilibrium real wage. Distributional outcomes in this model depend on the distributional targets of workers and firms as well as their ability to adjust wages and prices, which in turn may be affected by their relative bargaining power and labour market institutions.</p>
+<p>We present a simplified version of the <a href="https://blogs.lse.ac.uk/businessreview/2023/11/29/how-to-reduce-inflation-without-increasing-unemployment-and-income-inequality/">three-sector conflict inflation model</a> in <span class="citation" data-cites="Wildauer2023">Wildauer et al. (<a href="#ref-Wildauer2023" role="doc-biblioref">2023</a>)</span> that examines the inflationary and distributional effects of energy price shocks.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> A final output sector uses energy as an intermediate input. Exogenous shocks to the prices of energy inputs can trigger temporary ‘price-wage spirals’, where firms raise prices to defend their profit margins, which in turn induces workers to raise nominal wages, which prolongs the inflationary shocks. While real wages fall, the economy-wide profit share rises.</p>
+</section><section id="the-model" class="level2"><h2 class="anchored" data-anchor-id="the-model">The Model</h2>
+<p>The model is given by the following equations:</p>
+<p><span id="eq-conflict_omega"><span class="math display">\[
+\Omega_t = \frac{w_t}{p_t}
+\tag{11.1}\]</span></span> <span id="eq-conflict_w"><span class="math display">\[
+w_{t}  = w_{t-1}\left[ 1 + \phi(\Omega^W - \Omega_{t-1}) \right]
+\tag{11.2}\]</span></span></p>
+<p><span id="eq-conflict_p"><span class="math display">\[
+p_t= p_{t-1} \left[ 1 + \psi (r^T - r_{t-1}) \right]
+\tag{11.3}\]</span></span></p>
+<p><span id="eq-conflict_pf"><span class="math display">\[
+p^T_t=(1+\theta^T)\left(w_t + \delta p^E\right)  
+\tag{11.4}\]</span></span></p>
+<p><span id="eq-conflict_rf"><span class="math display">\[
+r^T=\frac{\theta^T}{1+\theta^T}
+\tag{11.5}\]</span></span></p>
+<p><span id="eq-conflict_r"><span class="math display">\[
+r_T=1-\Omega_t - \delta \epsilon
+\tag{11.6}\]</span></span> <span id="eq-conflict_p_E"><span class="math display">\[
+p^E_t = \epsilon p_t
+\tag{11.7}\]</span></span></p>
+<p>where <span class="math inline">\(\Omega\)</span>, <span class="math inline">\(w\)</span>, <span class="math inline">\(p\)</span>, <span class="math inline">\(\Omega^W\)</span>, <span class="math inline">\(r^T\)</span>, <span class="math inline">\(r\)</span>, <span class="math inline">\(p^T\)</span>, and <span class="math inline">\(p^E\)</span> are the real wage, the nominal wage, the price level, workers’ desired real wage, firms’ desired profit margin, the realised profit margin, firms’ desired price level, and the nominal energy price, respectively.</p>
+<p><a href="#eq-conflict_omega" class="quarto-xref">Equation&nbsp;<span>11.1</span></a> defines the real wage <span class="math inline">\(\Omega\)</span>. <a href="#eq-conflict_w" class="quarto-xref">Equation&nbsp;<span>11.2</span></a> specifies the dynamics of wage setting. Workers set the growth rate of nominal wages <span class="math inline">\(w\)</span> proportionally to the gap between their target real wage <span class="math inline">\(\Omega^W\)</span> and the actual real wage <span class="math inline">\(\Omega\)</span>. The target real wage of workers is taken to be exogenous in this version of the model.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> By <a href="#eq-conflict_p" class="quarto-xref">Equation&nbsp;<span>11.3</span></a>, firms set the price inflation rate in a symmetric manner, responding to the deviation of the desired profit margin <span class="math inline">\(r^T\)</span> from the actual profit margin <span class="math inline">\(r\)</span>. <a href="#eq-conflict_pf" class="quarto-xref">Equation&nbsp;<span>11.4</span></a> specifies the desired price level of firms, which charge a desired markup <span class="math inline">\(\theta^T\)</span> on their unit variable cost. Unit costs in this model consist of two components: (i) unit labour cost given by <span class="math inline">\(w_t\)</span> (where we normalise labour productivity to unity for simplicity such that <span class="math inline">\(\frac{Y}{L}=1\)</span>), and (ii) unit energy cost <span class="math inline">\(\delta p^E\)</span>, where <span class="math inline">\(\delta =\frac{E}{Y}\)</span> is the (exogenous) energy intensity and <span class="math inline">\(p^E\)</span> is the nominal energy price. The profit margin is defined as profits over gross output: <span class="math inline">\(r=\frac{\Pi}{pY}=\frac{pY-wL-p^E E}{pY}\)</span>. The <em>target</em> profit margin as implied by the desired price level is then <span class="math inline">\(r^T = \frac{p^T - (w_t + \delta p^E) }{p^T}\)</span>, yielding <a href="#eq-conflict_rf" class="quarto-xref">Equation&nbsp;<span>11.5</span></a>. The desired markup <span class="math inline">\(\theta^T\)</span> is considered exogenous in this version of the model.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> The actual or realised profit margin is given by <a href="#eq-conflict_r" class="quarto-xref">Equation&nbsp;<span>11.6</span></a>, where <span class="math inline">\(\epsilon=\frac{p^E}{p}\)</span> is the real energy price. Finally, by <a href="#eq-conflict_p_E" class="quarto-xref">Equation&nbsp;<span>11.7</span></a>, the real energy price <span class="math inline">\(\epsilon\)</span> is taken to be exogenous (and subject to shocks), implying that the nominal energy price must grow at the same rate as the price level.</p>
+</section><section id="simulation" class="level2"><h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
+<section id="parameterisation" class="level3"><h3 class="anchored" data-anchor-id="parameterisation">Parameterisation</h3>
+<p>Table 1 reports the parameterisation used in the simulation. Besides a baseline (labelled as scenario 1), three further scenarios will be considered. In scenario 2, the real energy price <span class="math inline">\(\epsilon\)</span> increases. In scenario 3, the target markup <span class="math inline">\(\theta^T\)</span> rises. In scenario 4, the target real wage <span class="math inline">\(\Omega^W\)</span> rises.</p>
+<p><strong>Table 1: Parameterisation</strong></p>
+<table class="table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead><tr class="header">
+<th>Scenario</th>
+<th><span class="math inline">\(\phi\)</span></th>
+<th><span class="math inline">\(\psi\)</span></th>
+<th><span class="math inline">\(\delta\)</span></th>
+<th><span class="math inline">\(\epsilon\)</span></th>
+<th><span class="math inline">\(\theta^T\)</span></th>
+<th><span class="math inline">\(\Omega^W\)</span></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>1: baseline</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0.55</td>
+<td>0.4</td>
+<td>0.2</td>
+</tr>
+<tr class="even">
+<td>2: rise in real energy price <span class="math inline">\((\epsilon)\)</span>
+</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0.8</td>
+<td>0.4</td>
+<td>0.2</td>
+</tr>
+<tr class="odd">
+<td>3: rise in target markup <span class="math inline">\((\theta^T)\)</span>
+</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0.55</td>
+<td>0.6</td>
+<td>0.2</td>
+</tr>
+<tr class="even">
+<td>4: rise in target real wage <span class="math inline">\((\Omega^W)\)</span>
+</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0.55</td>
+<td>0.4</td>
+<td>0.3</td>
+</tr>
+</tbody>
+</table></section><section id="simulation-code" class="level3"><h3 class="anchored" data-anchor-id="simulation-code">Simulation code</h3>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Set number of periods</span></span>
+<span><span class="va">Q</span> <span class="op">=</span> <span class="fl">300</span></span>
+<span></span>
+<span><span class="co"># Set number of scenarios (including baselines)</span></span>
+<span><span class="va">S</span><span class="op">=</span><span class="fl">4</span></span>
+<span></span>
+<span><span class="co"># Set period in which exogenous shift will occur</span></span>
+<span><span class="va">q</span><span class="op">=</span><span class="fl">50</span></span>
+<span></span>
+<span><span class="co">#Create (S x Q) matrices in which equilibrium solutions from different parameterisations will be stored</span></span>
+<span><span class="va">omega</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.5</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>   <span class="co"># real wage</span></span>
+<span><span class="va">w</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.1</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>       <span class="co"># nominal wage</span></span>
+<span><span class="va">p</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.5</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>       <span class="co"># price level</span></span>
+<span><span class="va">w_hat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.1</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>   <span class="co"># growth rate of nominal wages</span></span>
+<span><span class="va">p_hat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.1</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>   <span class="co"># growth rate of prices = inflation rate</span></span>
+<span><span class="va">p_T</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.5</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>     <span class="co"># firms' desired price level</span></span>
+<span><span class="va">omega_f</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.5</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># firms' desired real wage </span></span>
+<span><span class="va">p_E</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.5</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>   <span class="co"># nominal energy price</span></span>
+<span><span class="va">r_T</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.5</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>     <span class="co"># target profit margin</span></span>
+<span><span class="va">r</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.5</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>       <span class="co"># realised profit margin</span></span>
+<span></span>
+<span><span class="co"># Set constant parameter values</span></span>
+<span><span class="va">phi</span><span class="op">=</span><span class="fl">1</span>     <span class="co"># adjustment speed of nominal wages</span></span>
+<span><span class="va">psi</span><span class="op">=</span><span class="fl">1</span>   <span class="co"># adjustment speed of prices</span></span>
+<span><span class="va">delta</span><span class="op">=</span><span class="fl">1</span>   <span class="co"># energy intensity</span></span>
+<span></span>
+<span><span class="co"># Set and initialise exogenous variables/parameters that will be shifted</span></span>
+<span><span class="va">epsilon</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.55</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>  <span class="co"># real energy price</span></span>
+<span><span class="va">theta_T</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.4</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>       <span class="co"># target markup</span></span>
+<span><span class="va">omega_w</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.2</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>   <span class="co"># target real wage of workers</span></span>
+<span></span>
+<span><span class="co"># Set parameter values for different scenarios</span></span>
+<span><span class="va">epsilon</span><span class="op">[</span><span class="fl">2</span>,<span class="va">q</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">0.8</span> <span class="co"># scenario 2: rise in real energy price</span></span>
+<span><span class="va">theta_T</span><span class="op">[</span><span class="fl">3</span>,<span class="va">q</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">0.6</span>     <span class="co"># scenario 3: rise in target markup</span></span>
+<span><span class="va">omega_w</span><span class="op">[</span><span class="fl">4</span>,<span class="va">q</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">0.3</span> <span class="co"># scenario 4: rise in target real wage of workers</span></span>
+<span></span>
+<span><span class="co"># Simulate the model by looping over Q time periods for S different scenarios</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
+<span>    </span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="va">Q</span><span class="op">)</span><span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="kw">for</span> <span class="op">(</span><span class="va">iterations</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span><span class="op">{</span> <span class="co"># iterate the model 1000-times in each period</span></span>
+<span>    </span>
+<span>    <span class="co">#(1) Real wage</span></span>
+<span>    <span class="va">omega</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span><span class="va">w</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">/</span><span class="va">p</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span></span>
+<span>      </span>
+<span>    <span class="co">#(2) Nominal wage</span></span>
+<span>    <span class="va">w</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">w</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">phi</span><span class="op">*</span><span class="op">(</span><span class="va">omega_w</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">omega</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co">#(3) Price level</span></span>
+<span>    <span class="va">p</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">p</span><span class="op">[</span><span class="va">i</span>, <span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">psi</span><span class="op">*</span><span class="op">(</span><span class="va">r_T</span><span class="op">[</span><span class="va">i</span>, <span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">r</span><span class="op">[</span><span class="va">i</span>, <span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co">#(4) Firms' desired real wage</span></span>
+<span>    <span class="va">omega_f</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">w</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">/</span><span class="va">p_T</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span></span>
+<span>    </span>
+<span>    <span class="co">#(5) Firms' desired price level</span></span>
+<span>    <span class="va">p_T</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">theta_T</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="va">w</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">+</span> <span class="va">delta</span> <span class="op">*</span> <span class="va">p_E</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co">#(6) Nominal energy price</span></span>
+<span>    <span class="va">p_E</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">=</span><span class="va">epsilon</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">*</span><span class="va">p</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span></span>
+<span>    </span>
+<span>    <span class="co"># Target profit margin</span></span>
+<span>    <span class="va">r_T</span><span class="op">[</span><span class="va">i</span>, <span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="va">theta_T</span><span class="op">[</span><span class="va">i</span>, <span class="va">t</span><span class="op">]</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">theta_T</span><span class="op">[</span><span class="va">i</span>, <span class="va">t</span><span class="op">]</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># Realised profit margin</span></span>
+<span>    <span class="va">r</span><span class="op">[</span><span class="va">i</span>, <span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">omega</span><span class="op">[</span><span class="va">i</span>, <span class="va">t</span><span class="op">]</span> <span class="op">-</span> <span class="va">epsilon</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">*</span><span class="va">delta</span></span>
+<span>    </span>
+<span>    <span class="co"># Growth rate of nominal wages</span></span>
+<span>    <span class="va">w_hat</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">=</span> <span class="op">(</span><span class="va">w</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">-</span> <span class="va">w</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="va">w</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
+<span>    </span>
+<span>    <span class="co"># Growth rate of prices = inflation rate</span></span>
+<span>    <span class="va">p_hat</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">=</span> <span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">-</span> <span class="va">p</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="va">p</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
+<span></span>
+<span>  <span class="op">}</span> <span class="co"># close iterations loop</span></span>
+<span> <span class="op">}</span>  <span class="co"># close time loop</span></span>
+<span><span class="op">}</span>   <span class="co"># close scenarios loop</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set number of periods</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> <span class="dv">300</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Set number of scenarios (including baseline)</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Set period in which exogenous shift will occur</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create (S x Q) matrices in which equilibrium solutions from different parameterizations will be stored</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>omega <span class="op">=</span> np.full((S, Q), <span class="fl">0.5</span>)  <span class="co"># real wage</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.full((S, Q), <span class="fl">0.1</span>)      <span class="co"># nominal wage</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.full((S, Q), <span class="fl">0.5</span>)      <span class="co"># price level</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>w_hat <span class="op">=</span> np.full((S, Q), <span class="fl">0.1</span>)  <span class="co"># growth rate of nominal wages</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> np.full((S, Q), <span class="fl">0.1</span>)  <span class="co"># growth rate of prices = inflation rate</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>p_T <span class="op">=</span> np.full((S, Q), <span class="fl">0.5</span>)    <span class="co"># firms' desired price level</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>omega_f <span class="op">=</span> np.full((S, Q), <span class="fl">0.5</span>) <span class="co"># firms' desired real wage </span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>p_E <span class="op">=</span> np.full((S, Q), <span class="fl">0.5</span>)  <span class="co"># nominal energy price</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>r_T <span class="op">=</span> np.full((S, Q), <span class="fl">0.5</span>)    <span class="co"># target profit margin</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.full((S, Q), <span class="fl">0.5</span>)      <span class="co"># realised profit margin</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Set constant parameter values</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>phi <span class="op">=</span> <span class="dv">1</span>     <span class="co"># adjustment speed of nominal wages</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>psi <span class="op">=</span> <span class="dv">1</span>   <span class="co"># adjustment speed of prices</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>delta <span class="op">=</span> <span class="dv">1</span>   <span class="co"># energy intensity</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Set and initialize exogenous variables/parameters that will be shifted</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> np.full((S, Q), <span class="fl">0.55</span>)  <span class="co"># real energy price</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>theta_T <span class="op">=</span> np.full((S, Q), <span class="fl">0.4</span>)       <span class="co"># target markup</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>omega_w <span class="op">=</span> np.full((S, Q), <span class="fl">0.2</span>)   <span class="co"># target real wage of workers</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameter values for different scenarios</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>epsilon[<span class="dv">1</span>, q:Q] <span class="op">=</span> <span class="fl">0.8</span>  <span class="co"># scenario 2: rise in real energy price</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>theta_T[<span class="dv">2</span>, q:Q] <span class="op">=</span> <span class="fl">0.6</span>      <span class="co"># scenario 3: rise in target markup</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>omega_w[<span class="dv">3</span>, q:Q] <span class="op">=</span> <span class="fl">0.3</span>  <span class="co"># scenario 4: rise in target real wage of workers</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate the model by looping over Q time periods for S different scenarios</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(S):</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, Q):</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):  <span class="co"># iterate the model 1000-times in each period</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>            <span class="co"># (1) Real wage</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>            omega[i, t] <span class="op">=</span> w[i, t] <span class="op">/</span> p[i, t]</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>            <span class="co"># (2) Nominal wage</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>            w[i, t] <span class="op">=</span> w[i, t<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> phi <span class="op">*</span> (omega_w[i, t<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> omega[i, t<span class="op">-</span><span class="dv">1</span>]))</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>            <span class="co"># (3) Price level</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>            p[i, t] <span class="op">=</span> p[i, t<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> psi <span class="op">*</span> (r_T[i, t<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> r[i, t<span class="op">-</span><span class="dv">1</span>]))</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>            <span class="co"># (4) Firms' desired real wage</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>            omega_f[i, t] <span class="op">=</span> w[i, t] <span class="op">/</span> p_T[i, t]</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>            <span class="co"># (5) Firms' desired price level</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>            p_T[i, t] <span class="op">=</span> (<span class="dv">1</span> <span class="op">+</span> theta_T[i, t]) <span class="op">*</span> (w[i, t] <span class="op">+</span> delta <span class="op">*</span> p_E[i, t])</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>            <span class="co"># (6) Nominal energy price</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>            p_E[i, t] <span class="op">=</span> epsilon[i, t] <span class="op">*</span> p[i, t]</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Target profit margin</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>            r_T[i, t<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> theta_T[i, t] <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> theta_T[i, t])</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Realised profit margin</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>            r[i, t] <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> omega[i, t] <span class="op">-</span> epsilon[i, t] <span class="op">*</span> delta</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Growth rate of nominal wages</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>            w_hat[i, t] <span class="op">=</span> (w[i, t] <span class="op">-</span> w[i, t<span class="op">-</span><span class="dv">1</span>]) <span class="op">/</span> w[i, t<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Growth rate of prices = inflation rate</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>            p_hat[i, t] <span class="op">=</span> (p[i, t] <span class="op">-</span> p[i, t<span class="op">-</span><span class="dv">1</span>]) <span class="op">/</span> p[i, t<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>            </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="plots" class="level3"><h3 class="anchored" data-anchor-id="plots">Plots</h3>
+<p><a href="#fig-baseline-prices" class="quarto-xref">Figure&nbsp;<span>11.1</span></a> displays the dynamics of nominal wages and prices (in levels), both of which exhibit exponential growth. <a href="#fig-baseline-inflation" class="quarto-xref">Figure&nbsp;<span>11.2</span></a> plots the corresponding growth rates: the price and wage inflation rates. It can be seen that after an initial adjustment period, both rates converge on the same value, implying a constant real wage (and a constant profit margin).</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set start and end periods for plots</span></span>
+<span><span class="va">Tmin</span> <span class="op">=</span><span class="fl">3</span></span>
+<span><span class="va">Tmax</span><span class="op">=</span><span class="fl">300</span></span>
+<span></span>
+<span><span class="co"># Prices and wages (baseline)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">"Time"</span>, ylab<span class="op">=</span><span class="st">"p, w"</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Prices and wages (baseline)"</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">w</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"p"</span>, <span class="st">"w"</span><span class="op">)</span>,</span>
+<span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-baseline-prices" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-baseline-prices-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_conflict_inflation_model_files/figure-html/fig-baseline-prices-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-baseline-prices-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.1: Prices and wages (baseline)
+</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set start and end periods for plots</span></span>
+<span><span class="va">Tmin</span> <span class="op">=</span><span class="fl">3</span></span>
+<span><span class="va">Tmax</span><span class="op">=</span><span class="fl">60</span></span>
+<span></span>
+<span><span class="co"># Price and wage inflation (in %) (baseline)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="va">p_hat</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">"Time"</span>, ylab<span class="op">=</span><span class="st">"%"</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="va">p_hat</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, <span class="fl">100</span><span class="op">*</span><span class="va">w_hat</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Price and wage inflation (baseline)"</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="va">w_hat</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-baseline-inflation" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-baseline-inflation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_conflict_inflation_model_files/figure-html/fig-baseline-inflation-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-baseline-inflation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.2: Price and wage inflation (baseline)
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-energy" class="quarto-xref">Figure&nbsp;<span>11.3</span></a> displays the energy price shock (scenario 2), where the real energy price rises permanently.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> As a result, there is a bout in the inflation rate, followed by an increase in the wage inflation rate. This reaction may be characterised as a (temporary) ‘price-wage spiral’ (<span class="citation" data-cites="Wildauer2023">Wildauer et al. (<a href="#ref-Wildauer2023" role="doc-biblioref">2023</a>)</span>), where firms react to the cost shock by raising prices to protect their profit margins, which trigger a response by workers to defend their real wages, which prolongs the inflationary shock. However, the inflation rate then embarks on a gradual downward convergence towards a new equilibrium that is higher than the one before the shock. Since the price inflation rate exceeds the wage inflation rate during the adjustment process, the real wage falls in response to the increase in the real energy price.</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set start and end periods for plots</span></span>
+<span><span class="va">Tmin</span> <span class="op">=</span><span class="fl">10</span></span>
+<span><span class="va">Tmax</span><span class="op">=</span><span class="fl">100</span></span>
+<span></span>
+<span><span class="co"># Inflation and real wage in energy price shock scenario</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="va">p_hat</span><span class="op">[</span><span class="fl">2</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">"Time"</span>, ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Wage and price inflation and real wage, energy price shock (scen. 2)"</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="va">w_hat</span><span class="op">[</span><span class="fl">2</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span><span class="op">)</span>, side <span class="op">=</span> <span class="fl">2</span>, line <span class="op">=</span> <span class="fl">3</span>, at<span class="op">=</span><span class="fl">12</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">4</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>new <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">omega</span><span class="op">[</span><span class="fl">2</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">3</span>, font.main<span class="op">=</span><span class="fl">1</span>, cex.main<span class="op">=</span><span class="fl">1</span>,ylab <span class="op">=</span> <span class="st">''</span>, axes<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">''</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">omega</span><span class="op">[</span><span class="fl">2</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">4</span>, at<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/pretty.html">pretty</a></span><span class="op">(</span><span class="va">omega</span><span class="op">[</span><span class="fl">2</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>  </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">Omega</span><span class="op">)</span>, side <span class="op">=</span> <span class="fl">4</span>, line <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">Omega</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-energy" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-energy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_conflict_inflation_model_files/figure-html/fig-energy-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-energy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.3: Price and wage inflation and real wage (energy price shock)
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-markup" class="quarto-xref">Figure&nbsp;<span>11.4</span></a> considers the scenario where the target markup of firms rises. The resulting dynamics are very similar to the energy price shock: the inflation rate spikes, triggering a response in nominal wages that is weaker than the increase in inflation. As a result, the real wage falls until a new equilibrium with a higher inflation rate has been reached. In contrast to the energy price shock, both the profit margin and the profit share must increase in this scenario.</p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set start and end periods for plots</span></span>
+<span><span class="va">Tmin</span> <span class="op">=</span><span class="fl">30</span></span>
+<span><span class="va">Tmax</span><span class="op">=</span><span class="fl">80</span></span>
+<span></span>
+<span><span class="co"># Inflation and real wage in scenario 3</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="va">p_hat</span><span class="op">[</span><span class="fl">3</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">"Time"</span>, ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Price and wage inflation and real wage, rise in target markup (scen. 3)"</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="va">w_hat</span><span class="op">[</span><span class="fl">3</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span><span class="op">)</span>, side <span class="op">=</span> <span class="fl">2</span>, line <span class="op">=</span> <span class="fl">3</span>, at<span class="op">=</span><span class="fl">7</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">4</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>new <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">omega</span><span class="op">[</span><span class="fl">3</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">3</span>, font.main<span class="op">=</span><span class="fl">1</span>, cex.main<span class="op">=</span><span class="fl">1</span>,ylab <span class="op">=</span> <span class="st">''</span>, axes<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">''</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">omega</span><span class="op">[</span><span class="fl">3</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">4</span>, at<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/pretty.html">pretty</a></span><span class="op">(</span><span class="va">omega</span><span class="op">[</span><span class="fl">3</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>  </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">Omega</span><span class="op">)</span>, side <span class="op">=</span> <span class="fl">4</span>, line <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">Omega</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-markup" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-markup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_conflict_inflation_model_files/figure-html/fig-markup-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-markup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.4: Increase in target markup
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-targetrealwage" class="quarto-xref">Figure&nbsp;<span>11.5</span></a> displays scenario 4, where the target real wage of workers rises. The wage inflation rate shoots up, which is followed by an increase in price inflation. As nominal wages temporarily grow faster than prices, the real wage increases. By implication, both profit share and margin will fall.</p>
+<p>Taken together, scenarios 3 and 4 illustrate that besides cost shocks, exogeneous changes in the price- and wage-setting behaviour of firm and workers, respectively, will change the equilibrium inflation rate as well as income distribution. Such changes could stem from increases in market power (scenario 3) or fiercer industrial action by workers (scenario 4). An increase of the claim of either party on total real output will result in elevated social conflict, reflected in an increase in the inflation rate. The resulting distributional effect will depend on which party initiates the conflict.</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Inflation and real wage in scenario 4</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="va">p_hat</span><span class="op">[</span><span class="fl">4</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">"Time"</span>, ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="va">p_hat</span><span class="op">[</span><span class="fl">4</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, <span class="fl">100</span><span class="op">*</span><span class="va">w_hat</span><span class="op">[</span><span class="fl">4</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Price and wage inflation real wage, rise in target real wage (scen. 4)"</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fl">100</span><span class="op">*</span><span class="va">w_hat</span><span class="op">[</span><span class="fl">4</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span><span class="op">)</span>, side <span class="op">=</span> <span class="fl">2</span>, line <span class="op">=</span> <span class="fl">3</span>, at<span class="op">=</span><span class="fl">7.5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">4</span><span class="op">)</span> <span class="op">+</span> <span class="fl">0.3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>new <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">omega</span><span class="op">[</span><span class="fl">4</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">3</span>, font.main<span class="op">=</span><span class="fl">1</span>, cex.main<span class="op">=</span><span class="fl">1</span>,ylab <span class="op">=</span> <span class="st">''</span>, axes<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">''</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">omega</span><span class="op">[</span><span class="fl">4</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span>side <span class="op">=</span> <span class="fl">4</span>, at<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/pretty.html">pretty</a></span><span class="op">(</span><span class="va">omega</span><span class="op">[</span><span class="fl">4</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>  </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">Omega</span><span class="op">)</span>, side <span class="op">=</span> <span class="fl">4</span>, line <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">Omega</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-targetrealwage" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-targetrealwage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_conflict_inflation_model_files/figure-html/fig-targetrealwage-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-targetrealwage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.5: Increase in target real wage of workers
+</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Plot (here only inflation in scenario 2)            </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set start and end periods for plots</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>Tmin <span class="op">=</span> <span class="dv">9</span>   <span class="co"># Zero-based index (equivalent to Tmin=10 in R)</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>Tmax <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up the main plot</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots()</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot inflation rates (price and wage growth rates) on the primary y-axis</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>ax1.plot(<span class="dv">100</span> <span class="op">*</span> p_hat[<span class="dv">1</span>, Tmin:Tmax], label<span class="op">=</span><span class="vs">r'$\hat</span><span class="sc">{p}</span><span class="vs">$'</span>, color<span class="op">=</span><span class="st">"black"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, linestyle<span class="op">=</span><span class="st">"-"</span>)  <span class="co"># price inflation</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>ax1.plot(<span class="dv">100</span> <span class="op">*</span> w_hat[<span class="dv">1</span>, Tmin:Tmax], label<span class="op">=</span><span class="vs">r'$\hat</span><span class="sc">{w}</span><span class="vs">$'</span>, color<span class="op">=</span><span class="st">"black"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)  <span class="co"># wage inflation</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">"Time"</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="vs">r'$\hat</span><span class="sc">{p}</span><span class="vs">$, $\hat</span><span class="sc">{w}</span><span class="vs">$'</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>ax1.set_ylim(<span class="dv">0</span>, <span class="dv">30</span>)  <span class="co"># Adjust this limit as needed based on your data</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Add secondary y-axis for real wage</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> ax1.twinx()</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>ax2.plot(omega[<span class="dv">1</span>, Tmin:Tmax], label<span class="op">=</span><span class="vs">r'$\Omega$'</span>, color<span class="op">=</span><span class="st">"black"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, linestyle<span class="op">=</span><span class="st">":"</span>)  <span class="co"># real wage</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="vs">r'$\Omega$'</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>ax2.set_ylim(<span class="dv">0</span>, <span class="fl">0.2</span>)  <span class="co"># Set range based on omega values</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Titles and legends</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Wage and price inflation and real wage, energy price shock (scenario 2)"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>ax1.legend(loc<span class="op">=</span><span class="st">"upper left"</span>, frameon<span class="op">=</span><span class="va">False</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>ax2.legend(loc<span class="op">=</span><span class="st">"upper right"</span>, frameon<span class="op">=</span><span class="va">False</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section></section><section id="a-closer-look-at-the-effect-of-energy-price-shocks-on-profits" class="level2"><h2 class="anchored" data-anchor-id="a-closer-look-at-the-effect-of-energy-price-shocks-on-profits">A closer look at the effect of energy price shocks on profits</h2>
+<p>The model can be used to study the effects of an energy price shock on different measures of profitability and income distribution. Table 2 provides an overview of these measures.</p>
+<p><strong>Table 2: Measures of profits</strong></p>
+<table class="table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 26%">
+<col style="width: 24%">
+</colgroup>
+<thead><tr class="header">
+<th></th>
+<th>Definition</th>
+<th>Model equation</th>
+<th>Effect of energy price shock<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> <span class="math inline">\((\uparrow \epsilon)\)</span>
+</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Profit margin = profit share of energy sector</td>
+<td><span class="math display">\[ r^E = \pi^E = \frac{\Pi^E}{p^E E} \]</span></td>
+<td><span class="math display">\[ r^E = \frac{p^E E - w^E L^E}{p^E E} = 1 - \frac{\Omega^E}{\epsilon} \]</span></td>
+<td>Positive</td>
+</tr>
+<tr class="even">
+<td>Profit margin of final output sector</td>
+<td><span class="math display">\[ r = \frac{\Pi}{pY} \]</span></td>
+<td><span class="math display">\[ r = \frac{pY - wL - p^E E}{pY} = 1 - \Omega - \delta \epsilon \]</span></td>
+<td>Negative</td>
+</tr>
+<tr class="odd">
+<td>Profit share of final output sector</td>
+<td><span class="math display">\[ \pi = \frac{\Pi}{pVA} \]</span></td>
+<td><span class="math display">\[ \pi = \frac{pY - wL - p^E E}{pY - p^E E} = 1 - \frac{\Omega}{1 - p^E \epsilon} \]</span></td>
+<td>Ambiguous</td>
+</tr>
+<tr class="even">
+<td>Total profit share</td>
+<td><span class="math display">\[ \pi^{Total} = \frac{\Pi + \Pi^E}{pY} \]</span></td>
+<td><span class="math display">\[ \pi^{Total} = \frac{pY - w^E L^E - wL}{pY} = 1 - \delta \Omega^E - \Omega \]</span></td>
+<td>Positive</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> <span class="math inline">\(\Pi\)</span> represents nominal profits, <span class="math inline">\(E\)</span> is the output of the energy sector, which is an input to the final output <span class="math inline">\(Y\)</span>. The real wage of the energy sector <span class="math inline">\(\Omega^E = w^E/p\)</span> is exogenous. Labour productivity in both sectors is normalised to unity: <span class="math inline">\(L^E / E = L / Y = 1\)</span>. <span class="math inline">\(VA\)</span> is value added.</p>
+<p>The profit <em>margin</em> <span class="math inline">\(r\)</span> is defined as the share of profits in <em>gross</em> output. By contrast, the profit <em>share</em> <span class="math inline">\(\pi\)</span> is defined as the share of profits in <em>value added</em>, i.e.&nbsp;output net of intermediate inputs. For the energy sector, which in this model does not use any intermediate inputs, the profit margin and profit share coincide. With the real wage in the energy sector assumed exogenous, a real energy price increase will unambiguously raise the profits of the energy sector. For the final output sector that uses energy as an input, an energy price shock will lower the profit margin due to the increase in energy cost. However, the effect on the final output sector’s profit share are ambiguous and will depend on the relative ability of workers and firms to defend their income targets in response to the shock. Finally, the total profit share incorporates the profits of the energy input sector and the final output sector (this assumes that the energy sector is domestic). An increase in the real energy price has an unambiguously positive effect on the economy-wide profit share.</p>
+<p>In <a href="#fig-energy-prof" class="quarto-xref">Figure&nbsp;<span>11.6</span></a>, it can be seen how the energy price shock affects the profit margin and profit share of the final output sector in the simulations. While the profit margin <em>falls</em> due to the increase in energy cost, the profit share <em>rises</em>. This is because for the chosen parameterisation, we have <span class="math inline">\(\psi r^T-\phi\Omega^W&gt;0\)</span>, for which <span class="math inline">\(\frac{\partial \pi}{\partial \epsilon} &gt; 0\)</span>.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> Thus, if the price-setting power of firms and their target profit margins <span class="math inline">\(\psi r^T\)</span> are sufficiently large relative to wage-setting power and real wage target of workers <span class="math inline">\(\phi\Omega^W\)</span>, profit shares of domestic non-energy sectors may rise in response to an energy cost shock.</p>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate final output profit share</span></span>
+<span><span class="va">pi</span><span class="op">=</span><span class="op">(</span><span class="va">p</span><span class="op">-</span><span class="va">w</span><span class="op">-</span><span class="va">p_E</span><span class="op">*</span><span class="va">delta</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">p</span><span class="op">-</span><span class="va">p_E</span><span class="op">*</span><span class="va">delta</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Check if psi*r_T &gt; phi*omega_w, implying that the effect of an energy price increase on the profit share of the final output sector is positive</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">psi</span><span class="op">*</span><span class="va">r_T</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">phi</span><span class="op">*</span><span class="va">omega_w</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Plot profit margin and profit share in energy price shock scenario</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="fl">2</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">"Time"</span>, ylab<span class="op">=</span><span class="st">"r,"</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="fl">2</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, <span class="va">pi</span><span class="op">[</span><span class="fl">2</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Profit margin vs profit share, energy price shock (scenario 2)"</span>, cex<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">pi</span><span class="op">[</span><span class="fl">2</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">pi</span><span class="op">)</span>, side <span class="op">=</span> <span class="fl">2</span>, line <span class="op">=</span> <span class="fl">3</span>, at<span class="op">=</span><span class="fl">0.4</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"right"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"r"</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">pi</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-energy-prof" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-energy-prof-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_conflict_inflation_model_files/figure-html/fig-energy-prof-2.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-energy-prof-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.6: Profit margin and profit share (energy price shock)
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="directed-graph" class="level2"><h2 class="anchored" data-anchor-id="directed-graph">Directed graph</h2>
+<p>Another perspective on the model’s properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node <span class="math inline">\(x_1\)</span> to node <span class="math inline">\(x_2\)</span> indicates a causal impact of <span class="math inline">\(x_1\)</span> on <span class="math inline">\(x_2\)</span>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Create directed graph</span></span>
+<span><span class="co"># Construct auxiliary Jacobian matrix for 9 variables: </span></span>
+<span>  <span class="co"># endogenous: (1) Omega, (2) w, (3) p, (4) r^T, (5) r, (6) p_E</span></span>
+<span>  <span class="co"># exogenous: (7) epsilon, (8) \theta^T, (9) Omega^W</span></span>
+<span></span>
+<span>              <span class="co">#O w p rF r g e mF OW</span></span>
+<span><span class="va">M_mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>, <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>,  <span class="co"># Omega</span></span>
+<span>               <span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span>,  <span class="co"># w</span></span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>,  <span class="co"># p</span></span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span>,  <span class="co"># rf</span></span>
+<span>               <span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>,  <span class="co"># r</span></span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>, <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>,  <span class="co"># p_E</span></span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>,  <span class="co"># epsilon</span></span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>,  <span class="co"># \theta^T</span></span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,  <span class="co"># Omega^W</span></span>
+<span>               <span class="fl">9</span>, <span class="fl">9</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create adjacency matrix from transpose of auxiliary Jacobian and add column names</span></span>
+<span><span class="va">A_mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">M_mat</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create directed graph from adjacency matrix</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
+<span><span class="va">dg</span><span class="op">=</span><span class="fu"><a href="https://r.igraph.org/reference/graph_from_adjacency_matrix.html">graph_from_adjacency_matrix</a></span><span class="op">(</span><span class="va">A_mat</span>, mode<span class="op">=</span><span class="st">"directed"</span>, weighted<span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define node labels</span></span>
+<span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">dg</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">Omega</span><span class="op">)</span>, <span class="st">"w"</span>, <span class="st">"p"</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">r</span><span class="op">^</span><span class="cn">T</span><span class="op">)</span>, <span class="st">"r"</span>,</span>
+<span>             <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">p_E</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">epsilon</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">theta</span><span class="op">^</span><span class="cn">T</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">Omega</span><span class="op">^</span><span class="va">W</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># Plot directed graph matrix</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dg</span>, main<span class="op">=</span><span class="st">"Directed graph of conflict inflation model"</span>, vertex.size<span class="op">=</span><span class="fl">25</span>, vertex.color<span class="op">=</span><span class="st">"lightblue"</span>, </span>
+<span>     vertex.label.color<span class="op">=</span><span class="st">"black"</span>, edge.arrow.size<span class="op">=</span><span class="fl">0.4</span>, edge.width<span class="op">=</span><span class="fl">1.1</span>, edge.size<span class="op">=</span><span class="fl">2</span>,</span>
+<span>     edge.arrow.width<span class="op">=</span><span class="fl">1.2</span>, edge.color<span class="op">=</span><span class="st">"black"</span>, vertex.label.cex<span class="op">=</span><span class="fl">1</span>, </span>
+<span>     vertex.frame.color<span class="op">=</span><span class="st">"NA"</span>, margin<span class="op">=</span><span class="op">-</span><span class="fl">0.08</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="a_conflict_inflation_model_files/figure-html/conflict_8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Directed graph</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct auxiliary Jacobian matrix for 9 variables</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># endogenous: (1) Omega, (2) w, (3) p, (4) r^T, (5) r, (6) p_E</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># exogenous: (7) epsilon, (8) \theta^T, (9) Omega^W</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>M_mat <span class="op">=</span> np.array([</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],  <span class="co"># Omega</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>],  <span class="co"># w</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],  <span class="co"># p</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>],  <span class="co"># r^T</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>],  <span class="co"># r</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>],  <span class="co"># p_E</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],  <span class="co"># epsilon</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],  <span class="co"># \theta^T</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>]   <span class="co"># Omega^W</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create adjacency matrix by transposing the auxiliary Jacobian matrix</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>A_mat <span class="op">=</span> M_mat.T</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a directed graph from the adjacency matrix using networkx</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.DiGraph(A_mat)</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Define node labels</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>nodelabs <span class="op">=</span> {<span class="dv">0</span>: <span class="vs">r'$\Omega$'</span>, <span class="dv">1</span>: <span class="st">"w"</span>, <span class="dv">2</span>: <span class="st">"p"</span>, <span class="dv">3</span>: <span class="vs">r'$r^T$'</span>, <span class="dv">4</span>: <span class="st">"r"</span>, <span class="dv">5</span>: <span class="vs">r'$p^E$'</span>,</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>            <span class="dv">6</span>: <span class="vs">r'$\epsilon$'</span>, <span class="dv">7</span>: <span class="vs">r'$\theta^T$'</span>, <span class="dv">8</span>: <span class="vs">r'$\Omega^W$'</span>}</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the graph</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> nx.spring_layout(G, k<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx(G, pos, node_size<span class="op">=</span><span class="dv">200</span>, node_color<span class="op">=</span><span class="st">"lightblue"</span>, </span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>                 edge_color<span class="op">=</span><span class="st">"black"</span>, width<span class="op">=</span><span class="fl">1.2</span>, arrowsize<span class="op">=</span><span class="dv">10</span>, </span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>                 arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, font_size<span class="op">=</span><span class="dv">8</span>, font_color<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>                 with_labels<span class="op">=</span><span class="va">True</span>, labels<span class="op">=</span>nodelabs)</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Directed graph of conflict inflation model"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p>The key exogenous variables in this version of the conflict inflation model are the real energy price <span class="math inline">\(\epsilon\)</span>, the target markup <span class="math inline">\(\theta^T\)</span>, and the target real wage of workers <span class="math inline">\(\Omega^W\)</span>. The first two exogenous variables feed into the endogenous conflict inflation process via their impact on the realised profit margin <span class="math inline">\(r\)</span> and the desired profit margin <span class="math inline">\(r^T\)</span>, respectively. The gap between desired and realised profit margins, in turn, impact price setting, the real wage, and then wage setting. By contrast, the target real wage of workers enters the inflationary process via its direct impact on nominal wages, which then impacts real wages, the realised profit margin, and then price setting. The directed graph thus highlights the joint determination and endogenous interaction of prices, wages, and income distribution.</p>
+</section><section id="analytical-discussion" class="level2"><h2 class="anchored" data-anchor-id="analytical-discussion">Analytical discussion</h2>
+<p>To study the properties of the model, we reduce it to a first-order dynamic system in <span class="math inline">\(w_t\)</span> and <span class="math inline">\(p_t\)</span>. To this end, substitute <a href="#eq-conflict_omega" class="quarto-xref">Equation&nbsp;<span>11.1</span></a> into <a href="#eq-conflict_w" class="quarto-xref">Equation&nbsp;<span>11.2</span></a> to obtain the equation for <span class="math inline">\(w_t\)</span>. Next, substitute <a href="#eq-conflict_r" class="quarto-xref">Equation&nbsp;<span>11.6</span></a>, <a href="#eq-conflict_rf" class="quarto-xref">Equation&nbsp;<span>11.5</span></a> and <a href="#eq-conflict_omega" class="quarto-xref">Equation&nbsp;<span>11.1</span></a> into <a href="#eq-conflict_p" class="quarto-xref">Equation&nbsp;<span>11.3</span></a>. This gives the system:</p>
+<p><span id="eq-conflict_w_reduc"><span class="math display">\[
+w_{t+1} = w_{t}\left[1+ \phi\left(\Omega^W - \frac{w_t}{p_t}\right)\right] \\
+\tag{11.8}\]</span></span> <span id="eq-conflict_p_reduc"><span class="math display">\[
+p_{t+1} = p_{t} \left[1+\psi\left(\frac{w_t}{p_t} - \frac{1}{1+\theta^T} + \delta \epsilon \right) \right].
+\tag{11.9}\]</span></span></p>
+<p>Next, let’s introduce the definitions <span class="math inline">\(\frac{w_{t+1} -w_{t}}{w_{t}} = \hat{w_t}\)</span> and <span class="math inline">\(\frac{p_{t+1} -p_{t}}{p_{t}} = \hat{p_t}\)</span> for the growth rates of wages and prices, respectively. The equilibrium in this model is given by a real wage and inflation rate <span class="math inline">\((\Omega^*, \hat{p}^*)\)</span> for which <span class="math inline">\(\hat{w_t}=\hat{p_t}\)</span>, i.e.&nbsp;wages and prices grow at the same rate, such that the real wage is constant. Imposing this equilibrium condition using <a href="#eq-conflict_w_reduc" class="quarto-xref">Equation&nbsp;<span>11.8</span></a> and <a href="#eq-conflict_p_reduc" class="quarto-xref">Equation&nbsp;<span>11.9</span></a> yields:</p>
+<p><span id="eq-conflict_omega_eq"><span class="math display">\[\Omega^* = \frac{\phi \Omega^W+ \psi \left(\frac{1}{1+\theta^T}- \delta \epsilon \right)}{\phi + \psi}
+\tag{11.10}\]</span></span></p>
+<p>and</p>
+<p><span id="eq-conflict_infl_eq"><span class="math display">\[
+\hat{p}^* = \phi \psi \left[\frac{ \Omega^W - \left(\frac{1}{1+\theta^T}- \delta \epsilon \right)}{\phi + \psi}\right],
+\tag{11.11}\]</span></span></p>
+<p>where the term <span class="math inline">\(\left(\frac{1}{1+\theta^T}- \delta \epsilon\right)\)</span> can also be interpreted as firms’ implicit real wage target <span class="math inline">\(\Omega^F\)</span>, such that for a positive equilibrium inflation rate <span class="math inline">\(\hat{p}^* &gt;0\)</span> , we need <span class="math inline">\(\Omega^W &gt; \Omega^F = \frac{1}{1+\theta^T}- \delta \epsilon\)</span>. Thus, workers’ and firms’ real wage targets need to be mutually inconsistent for inflation to emerge in equilibrium.</p>
+<p>With these equilibrium solutions, we can show that increases in <span class="math inline">\(\theta^T\)</span> and <span class="math inline">\(\epsilon\)</span> reduce the equilibrium real wage and raise the equilibrium inflation rate, whereas increases in <span class="math inline">\(\Omega^W\)</span> raise the equilibrium real wage and raise the inflation rate:</p>
+<p><span class="math display">\[
+\frac{\partial \Omega^*} {\partial \theta^T} = -\frac{\psi}{(\psi + \phi)(1+\theta^T)^2} &lt; 0,
+\]</span> <span class="math display">\[
+\frac{\partial \hat{p}^*}{\partial \theta^T} = \frac{\phi\psi}{(\psi + \phi)(1+\theta^T)^2} &gt; 0,
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial \Omega^*}{\partial \epsilon} = -\frac{\psi \delta}{\psi + \phi} &lt; 0,
+\]</span> <span class="math display">\[
+\frac{\partial \hat{p}^*}{\partial \epsilon} = \frac{\psi \phi \delta}{\psi + \phi} &gt; 0,
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial \Omega^*} {\partial \Omega^W} = \frac{\phi}{\psi + \phi} &gt; 0,
+\]</span> <span class="math display">\[
+\frac{\partial \hat{p}^*}{\partial \Omega^W} = \frac{\phi\psi}{\psi + \phi} &gt; 0.
+\]</span></p>
+<p>Using the result for <span class="math inline">\(\frac{\partial \Omega^*}{\partial \epsilon}\)</span>, we can easily work out the effects on the different measure of profitability listed in Table 2:</p>
+<p><span class="math display">\[
+\frac{\partial r^E}{\partial \epsilon} = \frac{\Omega^E}{\epsilon^2} &gt; 0,
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial r}{\partial \epsilon} =  -\frac{\delta \phi}{\psi + \phi} &lt; 0,
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial \pi}{\partial \epsilon} =   \frac{\delta(\psi r^T-\phi\Omega^W)}{(\psi + \phi)(1-\epsilon\delta)^2} \lesseqgtr 0,
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial \pi^{Total}}{\partial \epsilon} =  \frac{\delta \psi }{\psi + \phi} &gt; 0.
+\]</span></p>
+<p>Next, to analyse dynamics of the model, we write down the Jacobian matrix of the system in <a href="#eq-conflict_w_reduc" class="quarto-xref">Equation&nbsp;<span>11.8</span></a> and <a href="#eq-conflict_p_reduc" class="quarto-xref">Equation&nbsp;<span>11.9</span></a>:</p>
+<p><span class="math display">\[
+J(w,p)=\begin{bmatrix}
+            1 + \hat{w} - \phi \Omega &amp; \phi {\Omega}^2   \\
+            \psi &amp; 1 + \hat{p} - \psi \Omega   \\
+        \end{bmatrix},
+\]</span> where we used <span class="math inline">\(\hat{w}=\phi\left(\Omega^W - \frac{w_t}{p_t}\right)\)</span> and <span class="math inline">\(\hat{p}=\psi\left(\frac{w_t}{p_t} - \frac{1}{1+\theta^T} + \delta \epsilon \right)\)</span> to simplify the expressions inside the Jacobian.</p>
+<p>The stability conditions for two-dimensional systems in discrete time are:</p>
+<p><span class="math display">\[
+1+tr(J)+det(J)&gt;0,
+\]</span> <span class="math display">\[
+1-tr(J)+det(J)&gt;0,
+\]</span> <span class="math display">\[
+1-det(J)&gt;0,
+\]</span> where <span class="math inline">\(tr(J)\)</span> is the trace and <span class="math inline">\(det(J)\)</span> is the determinant of the Jacobian.</p>
+<p>We know that this system will be unstable, because prices and wages will grow exponentially in equilibrium. We thus want to derive the condition under which the system becomes unstable and generates conflict inflation.</p>
+<p>Imposing <span class="math inline">\(\hat{w_t}=\hat{p_t}\)</span>, the trace and determinant of the Jacobian matrix in equilibrium are given by:</p>
+<p><span class="math display">\[
+tr(J)=2(1+\hat{w}) - \Omega(\phi+\psi),
+\]</span></p>
+<span class="math display">\[\begin{equation}
+
+\det(J)=1-\Omega(\phi+\psi)+\hat{w}[2+\hat{w} - \Omega(\phi+\psi)].
+
+\end{equation}
+\]</span>
+<p>Let’s focus on the second stability condition, which is:</p>
+<p><span class="math display">\[
+1-tr(J)+det(J)= \hat{w}[\hat{w} - \Omega(\phi+\psi)]&gt;0.
+\]</span></p>
+<p>Substituting the equilibrium solutions for <span class="math inline">\(\hat{w}^*\)</span> and <span class="math inline">\(\omega^*\)</span> into the term insight the square brackets yields:</p>
+<p><span class="math display">\[
+-\hat{w}^*\left(\frac{\omega^W\phi^2+(2\phi+\psi)\psi \Omega^F}{\phi+\psi}\right)&lt;0.
+\]</span></p>
+<p>The term inside the brackets will be positive for meaningful economic values. The term outside the brackets will be negative if <span class="math inline">\(\hat{w}^*=\hat{p^*}&gt;0\)</span>, i.e.&nbsp;there is positive inflation, which in turn requires <span class="math inline">\(\Omega^W &gt; \Omega^F\)</span>, i.e.&nbsp;workers’ real wage target needs to exceed firms’ real wage target.</p>
+<p>We can confirm these analytical results numerically. First, let’s confirm the solutions for the equilibrium real and the equilibrium inflation rate as well as the ‘instability condition’ that the target real wage of workers needs to exceed the target real wage of firms.</p>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Check solution for equilibrium real wage</span></span>
+<span><span class="co"># Analytical</span></span>
+<span><span class="op">(</span><span class="va">omega_eq</span><span class="op">=</span> <span class="op">(</span><span class="va">phi</span><span class="op">*</span><span class="va">omega_w</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">+</span><span class="va">psi</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">theta_T</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">-</span><span class="va">delta</span><span class="op">*</span><span class="va">epsilon</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">phi</span><span class="op">+</span><span class="va">psi</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1821429</code></pre>
+</div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Numerical</span></span>
+<span><span class="va">omega</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1821429</code></pre>
+</div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Check solution for equilibrium inflation rate</span></span>
+<span><span class="co"># Analytical</span></span>
+<span><span class="va">phi</span><span class="op">*</span><span class="va">psi</span><span class="op">*</span><span class="op">(</span><span class="va">omega_w</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">theta_T</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">-</span><span class="va">delta</span><span class="op">*</span><span class="va">epsilon</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">phi</span><span class="op">+</span><span class="va">psi</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01785714</code></pre>
+</div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Numerical</span></span>
+<span><span class="va">p_hat</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01785714</code></pre>
+</div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Check condition for instability: Omega^W &gt; Omega^F</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">omega_w</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">theta_T</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">-</span><span class="va">delta</span><span class="op">*</span><span class="va">epsilon</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>Next, we compute the Jacobian matrix of the simulated model (for the baseline), obtain the eigenvalues, eigenvectors, trace, and determinant. We then check the stability conditions. We find that the second stability condition is indeed violated.</p>
+<div class="cell">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Check eigenvalues of Jacobian matrix</span></span>
+<span><span class="co"># Define matrix</span></span>
+<span><span class="va">J</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">p_hat</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">-</span><span class="va">phi</span><span class="op">*</span><span class="va">omega</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span>, <span class="va">phi</span><span class="op">*</span><span class="va">omega</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span>,</span>
+<span>           <span class="va">psi</span>, <span class="fl">1</span><span class="op">+</span><span class="va">p_hat</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">-</span><span class="va">psi</span><span class="op">*</span><span class="va">omega</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">)</span>, </span>
+<span>           <span class="fl">2</span>, <span class="fl">2</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Obtain eigenvalues </span></span>
+<span><span class="va">ev</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="va">evals</span> <span class="op">=</span> <span class="va">ev</span><span class="op">$</span><span class="va">values</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.0178571 0.6535714</code></pre>
+</div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">evecs</span> <span class="op">=</span> <span class="va">ev</span><span class="op">$</span><span class="va">vectors</span></span>
+<span></span>
+<span><span class="co"># Obtain determinant and trace</span></span>
+<span><span class="va">det</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/det.html">det</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span>      <span class="co"># determinant</span></span>
+<span><span class="va">tr</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span><span class="op">)</span> <span class="co"># trace</span></span>
+<span></span>
+<span><span class="co">#Check stability conditions</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">tr</span><span class="op">+</span><span class="va">det</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">tr</span><span class="op">+</span><span class="va">det</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">det</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>Finally, following the approach presented in <a href="intro_stability_analysis.html" class="quarto-xref"><span>Chapter 9</span></a>, we can check whether the ratio of the two unstable state variables <span class="math inline">\(w_t\)</span> and <span class="math inline">\(p_t\)</span>, which is the real wage <span class="math inline">\(\Omega\)</span>, approaches a value that is given by the ratios of the elements in the dominant eigenvector. To do this, we first normalise the eigenvectors by dividing through by the second element (which corresponds to the second state variable in our system, <span class="math inline">\(p_t\)</span>). The first element in the normalised eigenvector should then correspond to the equilibrium real wage. This is indeed the case.</p>
+<div class="cell">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Normalise eigenvectors by dividing through by the second element</span></span>
+<span><span class="va">evecs_norm</span><span class="op">=</span><span class="va">evecs</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">evecs_norm</span><span class="op">[</span>,<span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">evecs</span><span class="op">[</span>,<span class="va">i</span><span class="op">]</span><span class="op">/</span><span class="va">evecs</span><span class="op">[</span><span class="fl">2</span>,<span class="va">i</span><span class="op">]</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Compare first element of normalised eigenvector with real wage Omega=w/p</span></span>
+<span><span class="va">evecs_norm</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1821429</code></pre>
+</div>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">omega</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1821429</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">### Analytical solutions</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Analytical solution for equilibrium real wage</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((phi <span class="op">*</span> omega_w[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">+</span> psi <span class="op">*</span> (<span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> theta_T[<span class="dv">0</span>, <span class="dv">0</span>]) <span class="op">-</span> delta <span class="op">*</span> epsilon[<span class="dv">0</span>, <span class="dv">0</span>])) <span class="op">/</span> (phi <span class="op">+</span> psi))</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Numerical solution for equilibrium real wage</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(omega[<span class="dv">0</span>, Q<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Analytical solution for equilibrium inflation rate</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(phi <span class="op">*</span> psi <span class="op">*</span> (omega_w[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">-</span> (<span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> theta_T[<span class="dv">0</span>, <span class="dv">0</span>]) <span class="op">-</span> delta <span class="op">*</span> epsilon[<span class="dv">0</span>, <span class="dv">0</span>])) <span class="op">/</span> (phi <span class="op">+</span> psi))</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Numerical solution for equilibrium inflation rate</span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(p_hat[<span class="dv">0</span>, Q<span class="op">-</span><span class="dv">1</span>]) </span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Check condition for instability: Omega^W &gt; Omega*</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( omega_w[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">&gt;</span> (<span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> theta_T[<span class="dv">0</span>, <span class="dv">0</span>]) <span class="op">-</span> delta <span class="op">*</span> epsilon[<span class="dv">0</span>, <span class="dv">0</span>]))</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the Jacobian matrix J</span></span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> np.array([</span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span> <span class="op">+</span> p_hat[<span class="dv">0</span>, Q<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> phi <span class="op">*</span> omega[<span class="dv">0</span>, Q<span class="op">-</span><span class="dv">1</span>], phi <span class="op">*</span> omega[<span class="dv">0</span>, Q<span class="op">-</span><span class="dv">1</span>]<span class="op">**</span><span class="dv">2</span>],</span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>    [psi, <span class="dv">1</span> <span class="op">+</span> p_hat[<span class="dv">0</span>, Q<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> psi <span class="op">*</span> omega[<span class="dv">0</span>, Q<span class="op">-</span><span class="dv">1</span>]]</span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain eigenvalues and eigenvectors</span></span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>ev <span class="op">=</span> np.linalg.eig(J)</span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>evals <span class="op">=</span> ev[<span class="dv">0</span>]  <span class="co"># eigenvalues</span></span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>evecs <span class="op">=</span> ev[<span class="dv">1</span>]  <span class="co"># eigenvectors</span></span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(evals)</span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(evecs)</span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain determinant and trace</span></span>
+<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a>det <span class="op">=</span> np.linalg.det(J)</span>
+<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a>tr <span class="op">=</span> np.trace(J)</span>
+<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(det)</span>
+<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tr)</span>
+<span id="cb36-36"><a href="#cb36-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-37"><a href="#cb36-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Check stability conditions</span></span>
+<span id="cb36-38"><a href="#cb36-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span> <span class="op">+</span> tr <span class="op">+</span> det <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb36-39"><a href="#cb36-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span> <span class="op">-</span> tr <span class="op">+</span> det <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb36-40"><a href="#cb36-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span> <span class="op">-</span> det <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb36-41"><a href="#cb36-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-42"><a href="#cb36-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalise eigenvectors by dividing through by the second element</span></span>
+<span id="cb36-43"><a href="#cb36-43" aria-hidden="true" tabindex="-1"></a>evecs_norm <span class="op">=</span> evecs.copy()  <span class="co"># Make a copy to modify</span></span>
+<span id="cb36-44"><a href="#cb36-44" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>):</span>
+<span id="cb36-45"><a href="#cb36-45" aria-hidden="true" tabindex="-1"></a>    evecs_norm[:, i] <span class="op">=</span> evecs[:, i] <span class="op">/</span> evecs[<span class="dv">1</span>, i]  <span class="co"># Normalize by the second element</span></span>
+<span id="cb36-46"><a href="#cb36-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-47"><a href="#cb36-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare first element of normalized eigenvector with real wage Omega = w/p</span></span>
+<span id="cb36-48"><a href="#cb36-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(evecs_norm[<span class="dv">0</span>, <span class="dv">0</span>])</span>
+<span id="cb36-49"><a href="#cb36-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(omega[<span class="dv">0</span>, Q<span class="op">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="references" class="level2"><h2 class="anchored" data-anchor-id="references">References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Blecker2019" class="csl-entry" role="listitem">
+Blecker, Robert A., and Mark Setterfield. 2019. <em>Heterodox Macroeconomics. Models of Demand, Distribution and Growth</em>. Edward Elgar.
+</div>
+<div id="ref-Hein2023" class="csl-entry" role="listitem">
+Hein, Eckhard. 2023. <em>Macroeconmics After Kalecki and Keynes. Post-Keynesian Foundations</em>. Edward Elgar.
+</div>
+<div id="ref-Lavoie2022" class="csl-entry" role="listitem">
+Lavoie, Marc. 2022. <em>Post-Keynesian Economics. New Foundations</em>. 2nd ed. Edward Elgar.
+</div>
+<div id="ref-Rowthorn1977" class="csl-entry" role="listitem">
+Rowthorn, R. E. 1977. <span>“<span class="nocase">Conflict, inflation and money</span>.”</span> <em>Cambridge Journal of Economics</em> 1 (3). <a href="https://doi.org/10.1093/oxfordjournals.cje.a035360">https://doi.org/10.1093/oxfordjournals.cje.a035360</a>.
+</div>
+<div id="ref-Wildauer2023" class="csl-entry" role="listitem">
+Wildauer, Rafael, Karsten Kohler, Adam Aboobaker, and Alexander Guschanski. 2023. <span>“<span class="nocase">Energy price shocks, conflict inflation, and income distribution in a three-sector model</span>.”</span> <em>Energy Economics</em> 127B. <a href="https://doi.org/10.1016/j.eneco.2023.106982">https://doi.org/10.1016/j.eneco.2023.106982</a>.
+</div>
+</div>
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>With textbook treatments in <span class="citation" data-cites="Blecker2019">Blecker and Setterfield (<a href="#ref-Blecker2019" role="doc-biblioref">2019</a>)</span>, chap.&nbsp;5, <span class="citation" data-cites="Hein2023">Hein (<a href="#ref-Hein2023" role="doc-biblioref">2023</a>)</span>, chap.&nbsp;5, and <span class="citation" data-cites="Lavoie2022">Lavoie (<a href="#ref-Lavoie2022" role="doc-biblioref">2022</a>)</span>, chap.&nbsp;8.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><span class="citation" data-cites="Wildauer2023">Wildauer et al. (<a href="#ref-Wildauer2023" role="doc-biblioref">2023</a>)</span> use this model to study the 2021-23 inflationary episode in the US. Besides an energy sector providing intermediate inputs, they consider a final goods and a final services sector. In addition to the energy price shock, there is a positive demand shift towards goods and a negative supply shock due to lockdowns, creating a rise in the rate of capacity utilisation of the final goods sector. These additional shocks allow the final goods sector to raise its markup. The present simplified version of the model only considers the energy sector and a final output sector, and treats the markup of the final output sector as constant.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><span class="citation" data-cites="Blecker2019">Blecker and Setterfield (<a href="#ref-Blecker2019" role="doc-biblioref">2019</a>)</span>, chap.&nbsp;5 and <span class="citation" data-cites="Lavoie2022">Lavoie (<a href="#ref-Lavoie2022" role="doc-biblioref">2022</a>)</span>, chap.&nbsp;8 analyse extensions which endogenise the real wage target of workers.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>In <span class="citation" data-cites="Wildauer2023">Wildauer et al. (<a href="#ref-Wildauer2023" role="doc-biblioref">2023</a>)</span>, the target markup of the final goods sector is endogenous with respect to the rate of capacity utilisation.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>More accurately this is an energy price ‘shift’.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>We derive the exact effects in the analytical discussion below.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>See analytical discussion below.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./a_new_keynesian_3_equation_model.html" class="pagination-link" aria-label="A New Keynesian 3-Equation Model">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./a_sraffian_supermultiplier_model.html" class="pagination-link" aria-label="A Sraffian Supermultiplier Model">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>An open-source platform for macroeconomic model simulation.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></p>
+</div>
+  </div>
+</footer>
+
+
+</body></html>
