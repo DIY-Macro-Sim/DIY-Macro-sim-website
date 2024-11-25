@@ -176,7 +176,7 @@ for (i in 1:S){
         end[i] = t # record when L1 becomes non-positive, which terminates the simulation
       }
     
-    # Update tine index  
+    # Update time index  
      t = t + 1
 
   } # close time loop
@@ -317,7 +317,7 @@ PS2 = P2 / Y2
 #| fig-cap: Output in traditional (Y1) and modern (Y2) sector
 
 # Set start and end periods for plots
-Tmax=end[1]-2
+Tmax=50
 Tmin=2
 
 #Output in the two sectors, baseline
@@ -325,7 +325,7 @@ plot(Y1[1, Tmin:Tmax],type="l", col=1, lwd=2, lty=1, xlab="", ylab="Y", ylim=ran
 title(main="Output in traditional (Y1) and modern (Y2) sector", xlab = 'Time',cex=0.8 ,line=2)
 lines(Y2[1, Tmin:Tmax],lty=2)
 abline(v = tp[1], col = "darkred")
-legend("topleft", legend=c("Y1", "Y2"),
+legend("topleft", legend=c(expression(Y[1]), expression(Y[2])),
        lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
 
 ```
@@ -340,7 +340,7 @@ plot(L1[1, Tmin:Tmax],type="l", col=1, lwd=2, lty=1, xlab="", ylab="L", ylim=ran
 title(main="Employment in traditional (L1) and modern (L2) sector", xlab = 'Time',cex=0.8 ,line=2)
 lines(L2[1, Tmin:Tmax],lty=2)
 abline(v = tp[1], col = "darkred")
-legend("right", legend=c("L1", "L2"),
+legend("right", legend=c(expression(L[1]), expression(L[2])),
        lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
 
 ```
@@ -352,15 +352,15 @@ legend("right", legend=c("L1", "L2"),
 
 #Profits and capital accumulation in manufacturing, baseline
 plot(P2[1, Tmin:Tmax],type="l", col=1, lwd=2, lty=1, xlab="", ylab="", ylim=range(P2[1, Tmin:Tmax])) 
-title(main="Capital accumulation and profits in modern sector", ylab = 'P', xlab = 'Time', cex=0.8, line=2)
+title(main="Capital accumulation and profits in modern sector", ylab = expression(P[2]), xlab = 'Time', cex=0.8, line=2)
 abline(v = tp[1], col = "darkred")
 par(mar = c(5, 4, 4, 4) + 0.3)
 par(new = TRUE)
 plot(K[1, Tmin:Tmax],type="l", col=1, lwd=2, lty=2, font.main=1,cex.main=1,ylab = '', axes=FALSE,
      xlab = '',ylim = range(K[1, Tmin:Tmax]),cex.axis=1,cex.lab=0.75)
 axis(side = 4, at = pretty(range(K[1, Tmin:Tmax])))  
-mtext("K", side = 4, line = 2)
-legend("bottomright", legend=c("P", "K"),
+mtext(expression(K[2]), side = 4, line = 2)
+legend("bottomright", legend=c(expression(P[2]), expression(K[2])),
        lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
 
 ```
@@ -373,15 +373,15 @@ legend("bottomright", legend=c("P", "K"),
 
 # Real wage and profit share in manufacturing
 plot(PS2[1, Tmin:Tmax],type="l", col=1, lwd=2, lty=1, xlab="", ylab="", xlim=range(Tmin:Tmax), ylim=range(PS2[1, Tmin:Tmax])) 
-title(main="Profit share and real wage in modern sector",ylab = 'pshare2', xlab = 'Time', cex=0.8, line=2)
+title(main="Profit share and real wage in modern sector",ylab = expression(pi[2]), xlab = 'Time', cex=0.8, line=2)
 abline(v = tp[1], col = "darkred")
 par(mar = c(5, 4, 4, 4) + 0.3)
 par(new = TRUE)
 plot(w2[1, Tmin:Tmax],type="l", col=1, lwd=2, lty=2, font.main=1,cex.main=1,ylab = '', axes=FALSE, xlim=range(0:Tmax),
      xlab = '', ylim = range(w2[1, Tmin:Tmax]), cex.axis=1,cex.lab=0.75)
 axis(side = 4, at = pretty(range(w2[1, Tmin:Tmax])))  
-mtext("w2", side = 4, line = 2)
-legend("topleft", legend=c("pshare2", "w2"),
+mtext(expression(w[2]), side = 4, line = 2)
+legend("topleft", legend=c(expression(pi[2]), expression(w[2])),
        lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
 
 ```
@@ -391,7 +391,7 @@ legend("topleft", legend=c("pshare2", "w2"),
 #| fig-cap: Aggregate profit share
 
 # Aggregate profit share
-plot(PS[1, Tmin:Tmax],type="l", col=1, lwd=2, lty=1, xlab="", ylab="", xlim=range(Tmin:Tmax), ylim=range(PS[1, Tmin:Tmax])) 
+plot(PS[1, Tmin:Tmax],type="l", col=1, lwd=2, lty=1, xlab="", ylab=expression(pi), xlim=range(Tmin:Tmax), ylim=range(PS[1, Tmin:Tmax])) 
 title(main="Aggregate profit share",ylab = '', xlab = 'Time', cex=0.8, line=2)
 abline(v = tp[1], col = "darkred")
 
@@ -404,8 +404,8 @@ abline(v = tp[1], col = "darkred")
 #| label: fig-scen2
 #| fig-cap: Output in modern sector under different scenarios
 
-Tmax=end[2]-2
-plot(Y2[1, Tmin:Tmax],type="l", col=1, lwd=2, lty=1, xlim=range(Tmin:Tmax), xlab="", ylab="Y2", ylim=range(Y2[1, Tmin:Tmax],Y2[2, Tmin:Tmax])) 
+Tmax=60
+plot(Y2[1, Tmin:Tmax],type="l", col=1, lwd=2, lty=1, xlim=range(Tmin:Tmax), xlab="", ylab=expression(Y[2]), ylim=range(Y2[1, Tmin:Tmax],Y2[2, Tmin:Tmax])) 
 title(main="Output in  modern sector", xlab = 'Time',cex=0.8 ,line=2)
 lines(Y2[2, Tmin:Tmax],lty=2)
 lines(Y2[3, Tmin:Tmax],lty=3)

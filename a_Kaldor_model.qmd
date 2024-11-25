@@ -1,0 +1,123 @@
+# A Kaldorian Business Cycle Model {#sec-kaldor}
+
+## Overview
+Unlike Samuelson
+(1939),Kaldor (1940) assumed an unstable goods market due to a strong
+accelerator eect. However, rather than discrete bounds, he introduced (smooth)
+nonlinear saving and investment functions that prevent explosive oscillations. Investment
+and saving are assumed to be very sensitive to income for normal levels of
+income but insensitive for extreme values of income, giving rise to sigmoid-shaped
+functions.7 As a result, the goods market equilibrium becomes locally unstable due
+to a strong multiplier-accelerator eect, but then turns into an attractor once the
+economy has suciently moved away from equilibrium. In addition, Kaldor (1940)
+assumed that the capital stock exerts a negative eect on investment due to a decreasing
+marginal eciency of capital.
+We consider a discrete time version of the Kaldor model due to Bischi et al. (2001)
+(henceforth: BDRS01) who specify the sigmoid shaped investment function described
+in Kaldor (1940) as an arctangent-function.
+
+## The Model
+
+$$
+  Y_{t}=Y_{t-1} + \alpha(I_{t} - s_{t}),  \quad \alpha > 0
+$$ {#eq-kaldor_Y}
+
+$$
+K_{t} = (1-\delta)K_{t-1} + I_{t-1},  \quad \delta \in (0,1)
+$$ {#eq-kaldor_K}
+
+
+$$
+S_{t} = \sigma Y_t,  \quad \sigma \in (0,1)
+$$ {#eq-kaldor_S}
+
+
+$$
+I_{t} = \sigma Y^E + \gamma \left(\frac{\sigma Y^E}{\delta} - K_t \right) + \arctan(Y_{t-1}- Y^E),  \quad \gamma, Y^E > 0 
+$$ {#eq-hicks_I}
+
+where $Y_t$, $K_t$, $S_t$, and $I_t$ represent output, the capital stock, saving, and investment, respectively.
+
+
+## Simulation
+
+### Parameterisation
+
+### Simulation code
+
+```{r kaldor_1}
+# Clear the environment
+rm(list=ls(all=TRUE))
+
+# Set number of periods
+Q=200
+
+# Set number of scenarios (including baseline)
+Scen=2
+
+# Set period in which shock/shift will occur
+s=50
+
+# Create (S x Q)-matrices that will contain the simulated data
+Y=matrix(data=1,nrow=Scen,ncol=Q) # Income/output
+K=matrix(data=1,nrow=Scen,ncol=Q) # capital stock
+S=matrix(data=1,nrow=Scen,ncol=Q) # saving
+I=matrix(data=1,nrow=Scen,ncol=Q) # Investment
+
+# Set fixed parameter values
+gamma=0.6 # sensitivity of investment to deviations of actual from normal cap stock
+delta=0.2 # depreciation rate
+Y_E=10    # normal level of output
+sigma=0.4 # propensity to save
+
+# Set baseline parameter values
+alpha=matrix(data=0.8,nrow=Scen,ncol=Q) # adjustment speed to excess demand
+
+# Set parameter values for different scenarios
+alpha[2,s:Q]=1.2 # scenario 2: limit cycle
+
+# Simulate the model by looping over Q time periods for S different scenarios
+for (i in 1:Scen){
+  
+  for (t in 2:Q){
+    
+    for (iterations in 1:500){ # run the model 500-times in each period
+      
+    #Model equations
+    
+    #(1) Output
+    Y[i,t] = Y[i,t-1] + alpha[i,t]*(I[i,t-1] - S[i,t-1])
+    
+    #(2) Capital stock
+    K[i,t] = (1-delta)*K[i,t-1] + I[i,t-1]
+    
+    #(3) Saving
+    S[i,t] = sigma*Y[i,t] 
+    
+    #(4) Investment
+    I[i,t] = sigma*Y_E + gamma*(sigma*Y_E/delta - K[i,t]) + atan(Y[i,t] - Y_E)
+    
+    } # close iterations loop
+  }   # close time loop
+}     # close scenario loop
+
+
+```
+### Plots
+
+```{r kaldor_2}
+#| label: fig-baseline
+#| fig-cap: Income, consumption, and investment (baseline)
+
+# Set start and end periods for plots
+Tmax=100
+Tmin =10
+
+#Income, consumption, and investment
+plot(Y[1, Tmin:(Tmax)],type="l", col=1, lwd=2, lty=1, xlab="", ylab="Y, C, I", ylim=range(I[1, Tmin:Tmax],Y[1, Tmin:(Tmax)]))
+title(main="Income, consumption, and investment (baseline)", xlab = 'Time',cex=0.8,line=2)
+lines(S[1, Tmin:Tmax],lty=2)
+lines(I[1, Tmin:Tmax],lty=3)
+legend("topleft", legend=c("Y", "C", "I"),
+       lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
+```
