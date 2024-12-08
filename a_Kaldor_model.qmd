@@ -1,25 +1,15 @@
-# A Kaldorian Business Cycle Model {#sec-kaldor}
+# A Kaldorian Endogenous Business Cycle Model {#sec-kaldor}
 
 ## Overview
-Unlike Samuelson
-(1939),Kaldor (1940) assumed an unstable goods market due to a strong
-accelerator eect. However, rather than discrete bounds, he introduced (smooth)
-nonlinear saving and investment functions that prevent explosive oscillations. Investment
-and saving are assumed to be very sensitive to income for normal levels of
-income but insensitive for extreme values of income, giving rise to sigmoid-shaped
-functions.7 As a result, the goods market equilibrium becomes locally unstable due
-to a strong multiplier-accelerator eect, but then turns into an attractor once the
-economy has suciently moved away from equilibrium. In addition, Kaldor (1940)
-assumed that the capital stock exerts a negative eect on investment due to a decreasing
-marginal eciency of capital.
-We consider a discrete time version of the Kaldor model due to Bischi et al. (2001)
-(henceforth: BDRS01) who specify the sigmoid shaped investment function described
-in Kaldor (1940) as an arctangent-function.
+
+This model captures some key features of Nicholas @Kaldor1940's nonlinear model of endogenous business cycle fluctuations. Unlike @Samuelson1939's linear multiplier-accelerator model (see @sec-how-to-simulate and @sec-stab_analysis), which requires repeated external shocks to produce sustained cycles, @Kaldor1940 outlined a model that would produces endogenous, i.e. shock-independent, fluctuations. @Kaldor1940 assumed that investment and saving were very sensitive to income for normal levels of income, but relatively insensitive for extreme values of income. Graphically, these assumptions give rise to sigmoid-shaped investment and saving functions. As a result, the goods market equilibrium becomes locally unstable due to strong positive feedback effects, but then becomes stable once the economy has sufficiently moved away from equilibrium during booms or busts. Similar to  @Hicks1950 (see @sec-hicks), @Kaldor1940 also assumed a locally unstable goods market, but unlike Hicks who postulated discrete bounds that would prevent fluctuations from exploding, @Kaldor1940 considered smooth bounds that stemmed from the investment and saving behaviour of firms and households. For instance, at high levels of output, investment may become insensitive to output due to rising costs of construction or surging financing cost. Similarly, for low levels of output profit opportunities may be missing, thereby rending investment insensitive to changes in output. It is then the interaction between output and the capital stock that turns these bounded output dynamics into a cycle: @Kaldor1940 assumed that the capital stock exerts a negative effect on investment as an increasing capital stock lowers the marginal efficiency of capital, whereas output pushes up the dynamics of the capital stock due to the accelerator effect.
+
+@Kaldor1940's initial paper mostly relied on graphical analysis. A continuous-time version formalisation of his graphical was subsequently presented in @Chang1971. Textbook treatments can be found in @Gabisch1989, chapter 4. We present a discrete time version of the Kaldor model due to @Bischi2001.
 
 ## The Model
 
 $$
-  Y_{t}=Y_{t-1} + \alpha(I_{t} - s_{t}),  \quad \alpha > 0
+  Y_{t}=Y_{t-1} + \alpha(I_{t} - S_{t}),  \quad \alpha > 0
 $$ {#eq-kaldor_Y}
 
 $$
@@ -33,50 +23,125 @@ $$ {#eq-kaldor_S}
 
 
 $$
-I_{t} = \sigma Y^E + \gamma \left(\frac{\sigma Y^E}{\delta} - K_t \right) + \arctan(Y_{t-1}- Y^E),  \quad \gamma, Y^E > 0 
-$$ {#eq-hicks_I}
+I_{t} = \sigma Y^E + \gamma \left(\frac{\sigma Y^E}{\delta} - K_t \right) + \arctan(Y_{t}- Y^E),  \quad \gamma, Y^E > 0 
+$$ {#eq-kaldor_I}
 
-where $Y_t$, $K_t$, $S_t$, and $I_t$ represent output, the capital stock, saving, and investment, respectively.
+where $Y_t$, $K_t$, $S_t$, and $I_t$ represent aggregate output, the capital stock, saving, and investment, respectively.
 
+@eq-kaldor_Y specifies that output reacts slugglishly to excess demand $(I_t > S_t)$ and excess supply $(I_t < S_t)$, with the speed of adjustment given by $\alpha$. A high value of $\alpha$ means that firms respond strongly to disequilibria in the goods market. @eq-kaldor_K is the law of motion of the capital stock, with $\delta$ representing the rate of depreciation. @eq-kaldor_S is th saving function. While @Kaldor1940 assumed a non-linear (sigmoid-shaped) Keynesian saving function, @Bischi2001 (for simplicity) use a linear saving function with a constant marginal propensity to save out of income $(\sigma)$. The key nonlinearity in this version of the Kaldor model lies in the investment function @eq-kaldor_I. The first term in the investment function, $\sigma Y^E$, is a normal level of saving that prevails for a normal or expected level of output, $Y^E$. The second term, $\gamma \left(\frac{\sigma Y^E}{\delta} - K_t \right)$, incorporates a negative feedback effect of the level of the capital stock on investment, where $\frac{\sigma Y^E}{\delta}$ is the normal level of the capital stock. The third term, $\arctan(Y_{t}- Y^E)$, introduces the sigmoid relationship between investment and output, modelled by means of the arctangent function. Investment is increasing in aggregate output; and this effect is stronger for smaller deviations of actual investment from normal output. @fig-inv plots an example of this sigmoid-shaped investment function for a normal level of output of $Y^E=10$.
+
+```{r kaldor_1}
+#| label: fig-inv
+#| fig-cap: Kaldor's sigmoid investment function
+
+#### Plot investment function 
+# Set  parameter values
+alpha=1.2 # adjustment speed of output
+delta=0.2 # depreciation rate
+sigma=0.4 # propensity to save
+Y_E=10    # normal level of output
+gamma=0.6 # sensitivity of investment to deviations of actual from normal cap stock
+K=sigma*Y_E/delta # set capital stock to normal level
+
+# Create investment function using Y as argument
+inv= function(Y){
+  sigma*Y_E + gamma*(sigma*Y_E/delta - K) + atan(Y - Y_E)
+}
+
+# Plot the function in (I,Y) space
+curve(inv, from = 5, to = 15, col = 1, xlab="Y", ylab="I" , main="",
+      lwd=1.5, n=10000, ylim=range(2,6))
+abline(v=Y_E, col=2)
+legend("bottomright", legend = c("I", expression(Y^E)), 
+       col = c(1, 2), lwd = 2, bty = "n")
+
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+#### Plot investment function 
+
+# Import necessary libraries
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Set parameter values
+alpha = 1.2  # adjustment speed of output
+delta = 0.2  # depreciation rate
+sigma = 0.4  # propensity to save
+Y_E = 10     # normal level of output
+gamma = 0.6  # sensitivity of investment to deviations of actual from normal cap stock
+K = sigma * Y_E / delta  # set capital stock to normal level
+
+# Define the investment function using Y as argument
+def inv(Y):
+    return sigma * Y_E + gamma * (sigma * Y_E / delta - K) + np.arctan(Y - Y_E)
+
+# Plot the function in (I,Y) space
+Y_values = np.linspace(5, 15, 10000)
+I_values = inv(Y_values)
+
+plt.figure(figsize=(8,6))
+plt.plot(Y_values, I_values, color='black', linewidth=1.5, label='I')
+plt.axvline(x=Y_E, color='red', linestyle='--', label='$Y^E$')
+
+# Customize the plot
+plt.xlabel("Y")
+plt.ylabel("I")
+plt.title("Investment Function")
+plt.ylim(2, 6)
+plt.legend(loc="lower right", frameon=False)
+plt.grid(True, linestyle='--', alpha=0.6)
+
+plt.show()
+```
+
+:::
 
 ## Simulation
 
 ### Parameterisation
 
+Table 1 reports the parameterisation used in the simulation. We will analyse below how the model's dynamic properties change as $\alpha$ and $\sigma$ vary.
+
+**Table 1: Parameterisation**
+
+| $\alpha$ | $\delta$ | $\sigma$ | $Y^E$ | $\gamma$ |
+|----------|-----------|----------|-------|----------|
+| 1.2      | 0.2       |   0.4    | 10    |  0.6     |
+
+
 ### Simulation code
 
-```{r kaldor_1}
+```{r kaldor_2}
 # Clear the environment
 rm(list=ls(all=TRUE))
 
 # Set number of periods
 Q=200
 
-# Set number of scenarios (including baseline)
-Scen=2
+# Set number of scenarios 
+Scen=1
 
-# Set period in which shock/shift will occur
-s=50
-
-# Create (S x Q)-matrices that will contain the simulated data
+# Create (Scen x Q)-matrices that will contain the simulated data
 Y=matrix(data=1,nrow=Scen,ncol=Q) # Income/output
 K=matrix(data=1,nrow=Scen,ncol=Q) # capital stock
 S=matrix(data=1,nrow=Scen,ncol=Q) # saving
 I=matrix(data=1,nrow=Scen,ncol=Q) # Investment
 
 # Set fixed parameter values
-gamma=0.6 # sensitivity of investment to deviations of actual from normal cap stock
+alpha=1.2 # adjustment speed of output
 delta=0.2 # depreciation rate
-Y_E=10    # normal level of output
 sigma=0.4 # propensity to save
+Y_E=10    # normal level of output
+gamma=0.6 # sensitivity of investment to deviations of actual from normal cap stock
 
-# Set baseline parameter values
-alpha=matrix(data=0.8,nrow=Scen,ncol=Q) # adjustment speed to excess demand
-
-# Set parameter values for different scenarios
-alpha[2,s:Q]=1.2 # scenario 2: limit cycle
-
-# Simulate the model by looping over Q time periods for S different scenarios
+# Simulate the model by looping over Q time periods for Scen different scenarios
 for (i in 1:Scen){
   
   for (t in 2:Q){
@@ -86,7 +151,7 @@ for (i in 1:Scen){
     #Model equations
     
     #(1) Output
-    Y[i,t] = Y[i,t-1] + alpha[i,t]*(I[i,t-1] - S[i,t-1])
+    Y[i,t] = Y[i,t-1] + alpha*(I[i,t-1] - S[i,t-1])
     
     #(2) Capital stock
     K[i,t] = (1-delta)*K[i,t-1] + I[i,t-1]
@@ -101,23 +166,787 @@ for (i in 1:Scen){
   }   # close time loop
 }     # close scenario loop
 
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Import necessary libraries
+import numpy as np
+
+# Set number of periods
+Q = 200
+
+# Set number of scenarios
+Scen = 1
+
+# Create (Scen x Q)-matrices to contain the simulated data
+Y = np.ones((Scen, Q))  # Income/output
+K = np.ones((Scen, Q))  # Capital stock
+S = np.ones((Scen, Q))  # Saving
+I = np.ones((Scen, Q))  # Investment
+
+# Set fixed parameter values
+alpha = 1.2  # Adjustment speed of output
+delta = 0.2  # Depreciation rate
+sigma = 0.4  # Propensity to save
+Y_E = 10     # Normal level of output
+gamma = 0.6  # Sensitivity of investment to deviations of actual from normal capital stock
+
+# Simulate the model by looping over Q time periods for Scen different scenarios
+for i in range(Scen):
+    for t in range(1, Q):
+        for iterations in range(500):  # Run the model 500 times in each period
+            
+            # Model equations
+            
+            # (1) Output
+            Y[i, t] = Y[i, t-1] + alpha * (I[i, t-1] - S[i, t-1])
+            
+            # (2) Capital stock
+            K[i, t] = (1 - delta) * K[i, t-1] + I[i, t-1]
+            
+            # (3) Saving
+            S[i, t] = sigma * Y[i, t]
+            
+            # (4) Investment
+            I[i, t] = sigma * Y_E + gamma * (sigma * Y_E / delta - K[i, t]) + np.arctan(Y[i, t] - Y_E)
 
 ```
+::: 
+
 ### Plots
 
-```{r kaldor_2}
-#| label: fig-baseline
-#| fig-cap: Income, consumption, and investment (baseline)
+@fig-output displays the dynamics of aggregate output. The model generates endogenous cycles in output that are permanent, i.e. they don't require any external shocks, and they are (roughly) periodic with a cycle length from peak (trough) to peak (trough) of around 17 periods. What generates the turning points? Suppose income is close to its normal level of $Y^E = 10$, but on an increasing trajectory. The accelerator effect on investment will amplify this process as firms will increase their investment, which raises aggregate demand and increases income further. As aggregate output increases, this positive feedback effect gradually becomes weaker, possibly because firms face tighter supply constraints. The rise in the capital stock exerts a negative feedback effect on investment and will eventually dominate the accelerator effect. Firms then start reducing investment and the boom turns into a bust. The accelerator effect again amplifies this downward trajectory until the capital stock has sufficiently fallen to make investment attractive again. This allows the cycle to repeat itself.
+
+```{r kaldor_3}
+#| label: fig-output
+#| fig-cap: Output and capital stock
 
 # Set start and end periods for plots
 Tmax=100
 Tmin =10
 
-#Income, consumption, and investment
-plot(Y[1, Tmin:(Tmax)],type="l", col=1, lwd=2, lty=1, xlab="", ylab="Y, C, I", ylim=range(I[1, Tmin:Tmax],Y[1, Tmin:(Tmax)]))
-title(main="Income, consumption, and investment (baseline)", xlab = 'Time',cex=0.8,line=2)
-lines(S[1, Tmin:Tmax],lty=2)
-lines(I[1, Tmin:Tmax],lty=3)
-legend("topleft", legend=c("Y", "C", "I"),
-       lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
+# Plot aggregate output and capital stock
+plot(Y[1, Tmin:Tmax], type="l", col=1, lwd=2, lty=1, xlab="Time", ylab="Y") 
+title(main="Aggregate output and capital stock", cex=0.8)
+par(mar = c(5, 4, 4, 4) + 0.3)
+par(new = TRUE)
+plot(K[1, Tmin:Tmax], type="l", col=1, lwd=2, lty=2, font.main=1, cex.main=1,ylab = '', axes=FALSE,
+     xlab = '', ylim = range(K[1, Tmin:Tmax]), cex=0.8)
+axis(side = 4, at=pretty(K[1, Tmin:Tmax]))  
+mtext("K", side = 4, line = 3)
+legend("topright", legend=c("Y", "K"),
+       lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
+
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Set start and end periods for plots
+Tmax = 100
+Tmin = 10
+
+# Plot aggregate output and capital stock
+fig, ax1 = plt.subplots(figsize=(8, 6))
+
+# Plot Y (aggregate output)
+ax1.plot(range(Tmin, Tmax), Y[0, Tmin:Tmax], color='black', linewidth=2, linestyle='-', label='Y')
+ax1.set_xlabel("Time")
+ax1.set_ylabel("Y", color='black')
+ax1.tick_params(axis='y', labelcolor='black')
+ax1.set_title("Aggregate Output and Capital Stock", fontsize=10)
+
+# Create a twin axis for the capital stock
+ax2 = ax1.twinx()
+
+# Plot K (capital stock)
+ax2.plot(range(Tmin, Tmax), K[0, Tmin:Tmax], color='black', linewidth=2, linestyle='--', label='K')
+ax2.set_ylabel("K", color='black')
+ax2.tick_params(axis='y', labelcolor='black')
+
+```
+::: 
+
+@fig-saving displays the endogenous fluctuations in saving and investment. The horizontal lines represent the average level of saving and investment computed from the simulated data.^[The first 10 periods were excluded from the computation as these are driven by the adjustment from the arbitrary initialisation.] It can be seen that these are virtually identical, reflecting the fact that that the model generates cycles around the goods market equilibrium but never reaches it.
+
+```{r kaldor_4}
+#| label: fig-saving
+#| fig-cap: Saving and investment
+
+## Calculate average saving and investment ignoring the first 10 periods
+S_avr=rowMeans(S[,10:Q, drop=FALSE])
+I_avr=rowMeans(I[,10:Q, drop=FALSE])
+
+#Plot saving and investment along with their long-run average values
+plot(S[1, Tmin:(Tmax)],type="l", col=1, lwd=2, lty=1, xlab="", ylab="S, I", 
+     ylim=range(I[1, Tmin:Tmax],S[1, Tmin:(Tmax)]))
+title(main="Saving and investment", xlab = 'Time',cex=0.8,line=2)
+lines(I[1, Tmin:Tmax],lty=2)
+abline(h=S_avr, col=2)
+abline(h=I_avr, col=3)
+legend("topleft", legend=c("S", "I"),
+       lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
+
+```
+
+### Creating a bifurcation diagram
+Next, we explore numerically under which conditions the model generates endogenous cycles. To do so, we need to introduce some terminology. First, a *limit cycle* is defined as a closed orbit of the state variables of a dynamic system around a locally unstable equilibrium (see @Gandolfo2009, chap. 23). In the neighbourhood of the equilibrium, the system is unstable and gets pushed away from it. However, rather than exhibiting explosive behaviour, the system eventually reaches a periodic cycle as it is bounded by nonlinearities. The fluctuations in @fig-output indeed constitute a limit cycle. Second, a *bifurcation* is defined as a qualitative change of the behaviour of a dynamic system that occurs as a parameter of the system crosses a critical value (see @Gandolfo2009, chap. 24). Third, a *Hopf bifurcation* is a bifurcation that gives rise to a limit cycle.^[In discrete-time dynamic systems, the Hopf bifurcation is also called *Neimark-Sacker bifurcation*.]
+
+We can analyse the emergence of Hopf bifurcations in this model by means of so-called bifurcation diagrams that plot the dynamics of a representative endogenous variable variable from the model against different values of a parameter of interest. This is accomplished by fixing a parameterisation, simulating the model for a specific value of the parameter of interest, saving the last $T_0$ values of the chosen endogenous variable, and repeating the process for a marginally different value of the parameter of interest. The $T_0$ data points from each run are then placed on the bifurcation diagram.
+
+The following code first creates a function called *kaldor* that simulates the Kaldor model,^[To increase computational efficiency, we simulate a reduced-form version of the model in $Y_t$ and $K_t$ only that is derived in the analytical discussion below.] taking values of $\alpha$ and $\sigma$ as arguments, and returns the last $T_0=50$ values of output.
+
+
+```{r kaldor_5}
+
+# Clear the environment
+rm(list=ls(all=TRUE))
+
+# Define a function called "kaldor" that simulates a reduced-form version of the model
+# and returns the last 50 values of Y; use alpha and sigma as arguments that 
+# need to be supplied when the function is called
+kaldor <- function(alpha, sigma) {
+  
+  # Set how many last values of output you want to save
+  T_0 = 50
+  
+  # Set number of periods
+  Q = 200
+  
+  # Create matrices for simulated data
+  Y = matrix(data = 1, nrow = 1, ncol = Q)  # Income/output
+  K = matrix(data = 1, nrow = 1, ncol = Q)  # Capital stock
+  
+  # Set fixed parameter values
+  gamma = 0.6  # Sensitivity of investment to deviations of actual from normal cap stock
+  delta = 0.2  # Depreciation rate
+  Y_E = 10     # Normal level of output
+
+  # Simulate the model by looping over time periods
+    for (t in 2:Q) {
+
+        ## Model equations
+        # Output
+        Y[1, t] = Y[1, t-1] + 
+          alpha * (sigma * Y_E + gamma * (sigma * Y_E / delta - K[1, t-1]) + 
+                   atan(Y[1, t-1] - Y_E) - sigma * Y[1, t-1])
+        
+        #  Capital stock
+        K[1, t] = (1 - delta) * K[1, t-1] + 
+          sigma * Y_E + gamma * (sigma * Y_E / delta - K[1, t-1]) + 
+          atan(Y[1, t-1] - Y_E)
+        
+    } # Close time loop
+
+  return(Y[1, (Q-T_0):Q])  # Return last 50 periods of output
+}
+```
+
+Next, we prepare an initially empty bifurcation diagram and then loop over the *kaldor* function, increasing the parameter $\alpha$ from 0.5 to 2 in successive steps of 0.01 (while keeping  $\sigma$ fixed at 0.4), and place the resulting data points on the bifurcation diagram. From @fig-bif-alpha, it can be seen that there indeed appears to be a critical value $\alpha_0 \approx 1.15$ below which the model does not generate a limit cycle because the equilibrium is stable. By contrast, for values of $\alpha$ above that critical value, the model generates a limit cycle whose amplitude appears to be increasing in $\alpha$.
+
+```{r kaldor_6}
+#| label: fig-bif-alpha
+#| fig-cap: Bifurcation diagram for different sensitivities of output to saving-investment gap
+
+# Prepare the bifurcation diagram in alpha
+plot(NULL, xlim = c(0.5, 2.0), ylim = c(7.5, 12.5), 
+     xlab = expression(alpha), ylab = expression(Y[t]), 
+     pch = ".", cex = 0.6, col = "blue", main = 
+       expression("Bifurcation diagram in " * alpha))
+
+# Run kaldor function for different values of alpha (keeping sigma at 0.4) 
+# and place data points on bifurcation diagram 
+alpha = 0.5  # initialise alpha
+while (alpha <= 2) { # run kaldor model until alpha assumes value of 2
+  output = kaldor(alpha=alpha, sigma=0.4) # obtain values of Y for given value of alpha
+  points(rep(alpha, length(output)), output, pch = ".", col = "blue", cex = 2)  # add data points to diagram
+  alpha = alpha + 0.01  # increase alpha stepwise
+}
+
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+### Generate kaldor function
+
+# Define a function called "kaldor" that simulates a reduced-form version of the model
+# and returns the last 50 values of Y
+
+def kaldor(alpha, sigma):
+    # Set how many last values of output you want to save
+    T_0 = 50
+    
+    # Set number of periods
+    Q = 200
+    
+    # Create matrices for simulated data
+    Y = np.ones((1, Q))  # Income/output
+    K = np.ones((1, Q))  # Capital stock
+    
+    # Set fixed parameter values
+    gamma = 0.6  # Sensitivity of investment to deviations of actual from normal capital stock
+    delta = 0.2  # Depreciation rate
+    Y_E = 10     # Normal level of output
+    
+    # Simulate the model by looping over time periods
+    for t in range(1, Q):
+        
+        # Model equations
+        
+        # (1) Output
+        Y[0, t] = Y[0, t-1] + alpha * (
+            sigma * Y_E + gamma * (sigma * Y_E / delta - K[0, t-1]) + 
+            np.arctan(Y[0, t-1] - Y_E) - sigma * Y[0, t-1])
+        
+        # (2) Capital stock
+        K[0, t] = (1 - delta) * K[0, t-1] + (
+            sigma * Y_E + gamma * (sigma * Y_E / delta - K[0, t-1]) + 
+            np.arctan(Y[0, t-1] - Y_E))
+    
+    # Return last 50 periods of output
+    return Y[0, (Q-T_0):Q]
+
+
+#### Generate bifurcation diagram
+
+# Prepare the bifurcation diagram in alpha
+plt.figure(figsize=(10, 6))
+plt.title(r'Bifurcation Diagram in $\alpha$', fontsize=14)
+plt.xlabel(r'$\alpha$', fontsize=12)
+plt.ylabel(r'$Y_t$', fontsize=12)
+plt.xlim(0.5, 2.0)
+plt.ylim(7.5, 12.5)
+
+# Run kaldor function for different values of alpha (keeping sigma at 0.4)
+# and place data points on bifurcation diagram
+
+alpha = 0.5  # Initialize alpha
+while alpha <= 2.0:
+    # Obtain values of Y for the given value of alpha
+    output = kaldor(alpha=alpha, sigma=0.4)
+    
+    # Add data points to the diagram
+    plt.scatter([alpha] * len(output), output, color='blue', s=4, marker='.')
+    
+    # Increase alpha stepwise
+    alpha += 0.01
+
+# Show the bifurcation diagram
+plt.show()
+```
+:::
+
+@fig-bif-sigma does the same for the parameter $\sigma$, starting from $\sigma=0.1$ and raising it to 0.5 in steps of 0.001 (while keeping a fixed $\alpha$ of 1.2). The parameter $\sigma$ appears to exhibit a critical value $\sigma_0 \approx 0.25$ above which a limit cycle occurs.
+
+```{r kaldor_7}
+#| label: fig-bif-sigma
+#| fig-cap: Bifurcation diagram for different saving propensities
+
+# Prepare the bifurcation diagram in sigma
+plot(NULL, xlim = c(0.1, 0.5), ylim = c(7, 11.5), 
+     xlab = expression(sigma), ylab = expression(Y[t]), 
+     pch = ".", cex = 0.6, col = "blue",
+     main = expression("Bifurcation diagram in " * sigma))
+
+# Run kaldor function for different values of sigma (keeping alpha at 1.2)
+# and place data points on bifurcation diagram 
+sigma = 0.1 # initialise alpha
+while (sigma <= 0.5) { # run kaldor model until sigma assumes value of 0.5
+  output = kaldor(alpha=1.2, sigma=sigma) # obtain the values of Y for given value of sigma
+  points(rep(sigma, length(output)), output, pch = ".", col = "blue", cex = 1)  # add data points to diagram
+  sigma = sigma + 0.001  # increase sigma stepwise
+}
+```
+
+## Directed graph
+
+Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.
+
+```{r kaldor_8, message=FALSE}
+#| label: fig-dag
+#| fig-cap: Directed graph of Kaldor model
+
+## Create directed graph
+# Construct auxiliary Jacobian matrix for 5 variables: 
+  # endogenous: (1) Y, (2) K, (3) S, (4) I
+  # exogenous: (5) YE
+
+              #Y K S I YE
+M_mat=matrix(c(0,0,1, 1, 1, # Y
+               0,0,0, 1, 0, # K
+               1,0,0, 0, 0, # S
+               1,1,0, 0, 1, # I
+               0,0,0, 0, 0),# YE
+               5, 5, byrow=TRUE)
+
+# Create adjacency matrix from transpose of auxiliary Jacobian
+A_mat=t(M_mat)
+
+# Create directed graph from adjacency matrix
+library(igraph)
+dg=graph_from_adjacency_matrix(A_mat, mode="directed", weighted= NULL)
+
+# Define node labels
+V(dg)$name=c("Y", "K", "S", "I", expression(Y^E))
+
+# Plot directed graph
+plot(dg, main="Directed graph of Kaldor model", vertex.size=40, vertex.color="lightblue", 
+     vertex.label.color="black", edge.arrow.size=0.3, edge.width=1.1, edge.size=1.2,
+     edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
+     vertex.frame.color="NA", margin=-0.08)
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+##### Generate directed graph
+# Import necessary libraries
+import networkx as nx
+
+# Construct auxiliary Jacobian matrix for 5 variables:
+# Endogenous: (1) Y, (2) K, (3) S, (4) I
+# Exogenous: (5) YE
+
+M_mat = np.array([[0, 0, 1, 1, 1],  # Y
+                  [0, 0, 0, 1, 0],  # K
+                  [1, 0, 0, 0, 0],  # S
+                  [1, 1, 0, 0, 1],  # I
+                  [0, 0, 0, 0, 0]]) # YE
+
+# Create adjacency matrix from transpose of auxiliary Jacobian
+A_mat = M_mat.T
+
+# Create directed graph from adjacency matrix
+G = nx.DiGraph(A_mat)
+
+# Define node labels
+nodelabs = {0: "Y", 1: "K", 2: "S", 3: "I", 4: r"$Y^E$"}
+
+# Plot the graph using the specified approach
+pos = nx.spring_layout(G, k=0.5)
+plt.figure(figsize=(8, 4))
+nx.draw_networkx(G, pos, node_size=200, node_color="lightblue", 
+                 edge_color="black", width=1.2, arrowsize=10, 
+                 arrowstyle='->', font_size=8, font_color="black",
+                 with_labels=True, labels=nodelabs)
+
+plt.title("Directed Graph of Kaldor Model", fontsize=14)
+plt.show()
+```
+:::
+
+@fig-dag illustrates the endogenous cycle generated by the interaction between  income $Y$, investment $I$, saving $S$, and the capital stock. An important exogenous variable depicted here is the normal income level $Y^E$, which sets the equilibrium around which output fluctuates.
+
+## Analytical discussion
+To analyse the dynamic properties of this discrete-time version of the @Kaldor1940 model, we first reduce it to a two-dimensional system in $Y_t$ and $K_t$. Substitution of @eq-kaldor_S and @eq-kaldor_S into @eq-kaldor_Y and @eq-kaldor_K yields: 
+
+
+$$
+Y_{t}=Y_{t-1} + \alpha \left[\sigma Y^E + \gamma \left(\frac{\sigma Y^E}{\delta} - K_{t-1} \right) + \arctan(Y_{t-1}- Y^E)  -  \sigma Y_{t-1} \right]
+$$ {#eq-kaldor_Y_reduc}
+
+$$
+K_{t} = (1-\delta)K_{t-1} + \sigma Y^E + \gamma \left(\frac{\sigma Y^E}{\delta} - K_t \right) + \arctan(Y_{t-1}- Y^E). 
+$$ {#eq-kaldor_K_reduc}
+
+
+Using the fact that $\frac{\partial \arctan(a+bx)}{\partial x}=\frac{1}{1+(a+bx)^2}$, we can write the system's Jacobian matrix as:
+
+$$
+J=\begin{bmatrix} 1 + \frac{\alpha}{1+(Y-Y^E)^2} - \alpha\sigma & -\alpha \gamma \\ \frac{1}{1+(Y-Y^E)^2} & 1-\delta - \gamma\  \end{bmatrix}.
+$$
+
+
+Next, we determine the steady states of the model by setting $Y_t = Y_{t-1}$ and $K_t = K_{t-1}$, which yields:
+
+$$
+0=\sigma Y^E + \gamma \left(\frac{\sigma Y^E}{\delta} - K \right) + \arctan(Y- Y^E)  -  \sigma Y 
+$$ {#eq-kaldor_Y_eq}
+
+$$
+0 = -\delta K + \sigma Y^E + \gamma \left(\frac{\sigma Y^E}{\delta} - K \right) + \arctan(Y- Y^E). 
+$$ {#eq-kaldor_K_eq}
+
+From this, we can readily obtain:
+
+$$
+K=\frac{\sigma}{\delta}Y,
+$$
+and using this equation to eliminate $K$ in @eq-kaldor_K_eq, we get:
+
+$$
+\sigma \left(1+\frac{\gamma}{\delta}\right)(Y- Y^E)=\arctan(Y-Y^E).
+$$ {#eq-kaldor_eq}
+
+Let $\sigma \left(1+\frac{\gamma}{\delta}\right)=\theta$. @fig-eq plots the left-hand side and right-hand side of @eq-kaldor_eq, for two different parameterisations of $\theta$. It can be seen that for $\theta_1 >1$, there is a unique equilibrium at $Y^*=Y^E$, which implies $K^*=\frac{\sigma}{\delta}Y^E$. However, for $\theta_2 < 1$, two further equilibria emerge, which are located symmetrically around the $Y^*=Y^E$ equilibrium.
+
+```{r kaldor_9}
+#| label: fig-eq
+#| fig-cap: Equilibria
+
+#### Plot equilibria 
+# Set  parameter values
+parm_1=1.2
+parm_2=0.8
+Y_E=10
+
+# Create functions using Y as argument
+f1a= function(Y){
+  parm_1*(Y - Y_E)
+}
+
+f1b= function(Y){
+  parm_2*(Y - Y_E)
+}
+
+f2= function(Y){
+ atan(Y - Y_E)
+}
+
+# Plot the functions
+curve(f1a, from = 5, to = 15, col = 1, xlab="Y", ylab="" , main="",
+      lwd=1.5, n=10000, ylim=range(-2,2))
+curve(f1b, from = 5, to = 15, col = 2, add=TRUE,
+      lwd=1.5,)
+curve(f2, from = 5, to = 15, col = 3, add=TRUE,
+      lwd=1.5)
+legend("bottomright", legend = c(expression(theta[1](Y-Y^E)), 
+      expression(theta[2](Y-Y^E)), expression(arctan(Y-Y^E))), 
+       col = 1:3, lwd = 2, bty = "n")
+
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+#### Plot equilibria
+
+# Set parameter values
+parm_1 = 1.2
+parm_2 = 0.8
+Y_E = 10
+
+# Define functions
+def f1a(Y):
+    return parm_1 * (Y - Y_E)
+
+def f1b(Y):
+    return parm_2 * (Y - Y_E)
+
+def f2(Y):
+    return np.arctan(Y - Y_E)
+
+# Create Y values for plotting
+Y_vals1 = np.linspace(5, 15, 1000)
+Y_vals2 = np.linspace(5, 15, 1000)
+
+# Plot the functions
+plt.figure(figsize=(8, 6))
+plt.plot(Y_vals1, f1a(Y_vals1), color='black', linewidth=1.5, label=r'$\theta_1(Y - Y^E)$')
+plt.plot(Y_vals1, f1b(Y_vals1), color='red', linewidth=1.5, label=r'$\theta_2(Y - Y^E)$')
+plt.plot(Y_vals2, f2(Y_vals2), color='green', linewidth=1.5, label=r'$\arctan(Y - Y^E)$')
+
+# Customize the plot
+plt.xlabel("Y", fontsize=12)
+plt.ylabel("", fontsize=12)
+plt.ylim(-2, 2)
+plt.legend(loc="lower right", frameon=False)
+
+# Show the plot
+plt.show()
+
+```
+:::
+
+Let us focus on the  $\theta >1$ case yielding the unique $Y^*= Y^E$ equilibrium, which is the one corresponding to the parameterisation used in the simulations above.^[See @Bischi2001 for a comprehensive mathematical analysis of all possible equilibria of the model.] The Jacobian matrix evaluated at this equilibrium is given by:
+
+$$
+J^*=\begin{bmatrix} 1 + \alpha(1-\sigma) & -\alpha \gamma \\ 1 & 1-\delta - \gamma\  \end{bmatrix}.
+$$
+The characteristic polynomial yielding the eigenvalues of the Jacobian is:
+
+$$\lambda^2-\lambda[2+\alpha(1-\sigma)-\delta-\gamma]+(1-\delta -\gamma)(1-\alpha\sigma) +\alpha(1-\delta)=0,$$
+
+where $2+\alpha(1-\sigma)-\delta-\gamma =tr(J)$ and $(1-\delta -\gamma)(1-\alpha\sigma) +\alpha(1-\delta) = det(J)$.
+
+First, let us derive the condition under which the model produces cycles thanks to the eigenvalues being a pair of complex conjugates. The roots of the polynomial are:
+
+$$
+\lambda_{1,2} = \frac{tr(J) \pm \sqrt{tr(J)^2-4det(J)}}{2},
+$$
+
+so that the eigenvalues will be complex if $tr(J)^2-4 det(J)<0$, which can also be written as $(J_{11}-J_{22})^2 + J_{12}J_{21}<0$, where $J_{ii}$ are the elements of the Jacobian matrix.^[See also @Stockhammer2019 on this condition for cycles.] Thus, the condition for cycles becomes:
+
+$$
+[\alpha(1-\sigma) + \delta + \gamma]^2 - 4\alpha \gamma < 0.  
+$$
+Next, the stability conditions for two-dimensional systems in discrete time
+are:
+
+$$
+1+tr(J)+det(J)>0,
+$$ $$
+1-tr(J)+det(J)>0,
+$$ 
+$$
+1-det(J)>0,
+$$ 
+
+where $tr(J)$ is the trace and $det(J)$ is the determinant of the Jacobian.
+
+Let us focus on the last condition, which gives:
+
+$$
+(1-\delta -\gamma)(1-\alpha \sigma) +\alpha(1-\delta)< 1.
+$$
+
+We now generate a plot that displays the cycle and the stability condition in the $(\alpha, \sigma)$-space. We further add a horizontal line at $\sigma \left(1+\frac{\gamma}{\delta}\right)=\theta=1$, demarcating values of $\sigma$ for which there is a unique equilibrium (above the line) and for which there are three equilibria (below the line).^[To plot the conditions, we replace the inequalities by equality signs and solve for 0.]
+
+```{r kaldor_10}
+#| label: fig-bif
+#| fig-cap: Cycle and stability conditions
+
+#### Plot cycle and stability condition 
+
+# Set fixed parameter values
+delta=0.2 # depreciation rate
+gamma=0.6 # sensitivity of investment to deviations of actual from normal cap stock
+
+# Create function for cycle condition
+cyc= function(alpha, sigma){
+ (alpha*(1-sigma) + delta + gamma)^2 - 4*alpha*gamma 
+}
+
+# Create function for stability condition
+stab= function(alpha, sigma){
+ (1-delta -gamma)*(1-alpha*sigma) +alpha*(1-delta) - 1
+}
+
+# Create a grid of alpha and sigma values
+alpha_vals = seq(0.5, 2, length.out = 100)
+sigma_vals = seq(0, 1, length.out = 100)
+grid=expand.grid(alpha = alpha_vals, sigma = sigma_vals)
+
+# Evaluate the functions on the grid
+cyc_vals = matrix(cyc(grid$alpha, grid$sigma), nrow = 100)
+stab_vals = matrix(stab(grid$alpha, grid$sigma), nrow = 100)
+
+# Plot the curves
+contour(alpha_vals, sigma_vals, cyc_vals, levels = 0, col = 1, lwd = 2, 
+        xlab = expression(alpha), ylab = expression(sigma), main = "")
+contour(alpha_vals, sigma_vals, stab_vals, levels = 0, col = 2, lwd = 2, add = TRUE)
+abline(h=1/(1+gamma/delta), col=3)
+legend("topleft", legend = c("cycle condition",
+       "stability condition", "unique equilibrium condition"), 
+       col = 1:3, lty = 1, cex=0.8, bty = "n")
+
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+
+### Plot cycle and stability condition
+from matplotlib.lines import Line2D
+# Set fixed parameter values
+delta = 0.2  # Depreciation rate
+gamma = 0.6  # Sensitivity of investment to deviations from normal capital stock
+
+# Define functions for cycle and stability conditions
+def cyc(alpha, sigma):
+    return (alpha * (1 - sigma) + delta + gamma)**2 - 4 * alpha * gamma
+
+def stab(alpha, sigma):
+    return (1 - delta - gamma) * (1 - alpha * sigma) + alpha * (1 - delta) - 1
+
+# Create a grid of alpha and sigma values
+alpha_vals = np.linspace(0.5, 2, 100)
+sigma_vals = np.linspace(0, 1, 100)
+alpha_grid, sigma_grid = np.meshgrid(alpha_vals, sigma_vals)
+
+# Evaluate the functions on the grid
+cyc_vals = cyc(alpha_grid, sigma_grid)
+stab_vals = stab(alpha_grid, sigma_grid)
+
+# Plot the curves
+plt.figure(figsize=(8, 6))
+
+# Plot cycle condition contour
+cyc_contour = plt.contour(alpha_vals, sigma_vals, cyc_vals, levels=[0], colors='black', linewidths=2)
+
+# Plot stability condition contour
+stab_contour = plt.contour(alpha_vals, sigma_vals, stab_vals, levels=[0], colors='red', linewidths=2)
+
+# Plot unique equilibrium condition
+unique_eq_line = plt.axhline(y=1 / (1 + gamma / delta), color='green', linestyle='-', linewidth=2)
+
+# Customize the plot
+plt.xlabel(r'$\alpha$', fontsize=12)
+plt.ylabel(r'$\sigma$', fontsize=12)
+
+# Create custom legend symbols
+legend_elements = [
+    Line2D([0], [0], color='black', lw=2, label="Cycle condition"),
+    Line2D([0], [0], color='red', lw=2, label="Stability condition"),
+    Line2D([0], [0], color='green', lw=2, label="Unique equilibrium condition")
+]
+
+# Add legend with symbols
+plt.legend(handles=legend_elements, loc="upper left", frameon=False, fontsize=9)
+
+plt.grid(False)
+plt.show()
+
+```
+:::
+
+
+According to @fig-bif, combinations of $\alpha$ and $\sigma$ above the cycle and to the right of the stability condition yield eigenvalues of the model that are a pair of complex conjugates with a modulus greater than one. The model will then generate a limit cycle. For combinations of $\alpha$ and $\sigma$ to the left of the stability and above the cycle condition, the model yields damped oscillations that will converge to a stable equilibrium. For combinations of $\alpha$ and $\sigma$ to the left of the stability and below the cycle condition, the model yields monotonic converges to a stable equilibrium. 
+
+These analytically derived conditions correspond to and illuminate further the numerical results in the bifurcation diagrams above. In @fig-bif-alpha, it could be seen that for a fixed $\sigma=0.4$, limit cycles appear to occur for $\alpha \gtrapprox 1.15$. With the analytical results plotted in @fig-bif we can confirm that this indeed constitutes a Hopf bifurcation, where the equilibrium loses its stability while the eigenvalues are complex. Similarly, in @fig-bif-sigma, it could be seen that for a fixed $\alpha=1.2$, a limit cycle appears to occur for $\sigma \gtrapprox 0.25$. @fig-bif suggests that for values of $\sigma$ below that critical value, the $Y^*=Y^E$ equilibrium ceases to be unique, and the system is apparently attracted to one of the other two equilibria, which appear to be stable.
+
+Finally, we can also compute the eigenvalues and check the analytical stability and cycle conditions numerically.
+
+```{r kaldor_11}
+### Stability analysis
+
+# Set parameter values
+alpha=1.2 # adjustment speed of output
+delta=0.2 # depreciation rate
+sigma=0.4 # propensity to save
+gamma=0.6 # sensitivity of investment to deviations of actual from normal cap stock
+
+# Construct Jacobian matrix evaluated at the Y*=Y_E steady state
+J_base=matrix(c(1+alpha*(1-sigma), -alpha*gamma,
+                1, 1-delta-gamma),
+                 2, 2, byrow=TRUE)
+
+# Obtain eigenvalues
+ev_base=eigen(J_base)
+(evals_base = ev_base$values)
+
+# Obtain determinant and trace
+tr=sum(diag(J_base)) # trace
+(det=det(J_base))      # determinant
+
+# Calculate modulus
+(mod_base=Mod(evals_base[1]))
+
+#Check general stability conditions
+print(1+tr+det>0)
+print(1-tr+det>0)
+print(1-det>0)
+
+# Check analytical stability condition
+((1-delta -gamma)*(1-alpha*sigma) +alpha*(1-delta)) < 1
+
+```
+These results confirm that the modulus of the complex eigenvalue is indeed larger than unity and the system thus unstable.
+
+```{r kaldor_12}
+### Check cycle condition and compute cycle length 
+
+# Check analytical cycle condition
+((alpha*(1-sigma) + delta + gamma)^2 - 4*alpha*gamma) < 0
+
+# Save real and imaginary part of complex eigenvalue
+re=Re(evals_base[1])
+im=Im(evals_base[1])
+
+# Calculate cycle length
+L=(2*pi)/(acos(re/mod_base))
+L
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+###### Stability analysis
+
+# Set parameter values
+alpha = 1.2  # Adjustment speed of output
+delta = 0.2  # Depreciation rate
+sigma = 0.4  # Propensity to save
+gamma = 0.6  # Sensitivity of investment to deviations from normal capital stock
+
+# Construct Jacobian matrix evaluated at the Y* = Y_E steady state
+J_base = np.array([
+    [1 + alpha * (1 - sigma), -alpha * gamma],
+    [1, 1 - delta - gamma]
+])
+
+# Obtain eigenvalues
+evals_base, _ = np.linalg.eig(J_base)
+
+# Print eigenvalues
+print("Eigenvalues:", evals_base)
+
+# Obtain determinant and trace
+tr = np.trace(J_base)   # Trace
+det = np.linalg.det(J_base)  # Determinant
+
+# Print determinant
+print(f"Determinant: {det}")
+
+# Calculate and print modulus of the first eigenvalue
+mod_base = abs(evals_base[0])
+print(f"Modulus of first eigenvalue: {mod_base}")
+
+# Check general stability conditions
+print(f"1 + tr + det > 0: {1 + tr + det > 0}")
+print(f"1 - tr + det > 0: {1 - tr + det > 0}")
+print(f"1 - det > 0: {1 - det > 0}")
+
+# Check analytical stability condition
+print(((1 - delta - gamma) * (1 - alpha * sigma) + alpha * (1 - delta)) < 1)
+
+### Check cycle condition and compute cycle length 
+
+# Check analytical cycle condition
+print(((alpha * (1 - sigma) + delta + gamma)**2 - 4 * alpha * gamma) < 0)
+
+# Save real and imaginary parts of complex eigenvalue
+re = np.real(evals_base[0])
+im = np.imag(evals_base[0])
+
+# Calculate cycle length
+L = (2 * np.pi) / np.arccos(re / mod_base)
+print(f"Cycle length: {L}")
+
+```
+:::
+
+The analytical cycle condition confirms that the eigenvalues of the system will be complex and thus generate cycles. The implied cycle length is around 17 periods.
+
+## References

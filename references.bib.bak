@@ -1,3 +1,4 @@
+% Encoding: UTF-8
 @Article{Pasinetti1960,
   author    = {Luigi L. Pasinetti},
   journal   = {The Review of Economic Studies},
@@ -270,3 +271,81 @@ Complex Systems},
   volume  = {6},
   doi     = {10.1016/0954-349X(95)00032-I},
 }
+@Article{Puu2005,
+  author    = {Puu, Tönu and Gardini, Laura and Sushko, Irina},
+  journal   = {Journal of Economic Behavior \& Organization},
+  title     = {A Hicksian multiplier-accelerator model with floor determined by capital stock},
+  year      = {2005},
+  issn      = {0167-2681},
+  month     = mar,
+  number    = {3},
+  pages     = {331--348},
+  volume    = {56},
+  doi       = {10.1016/j.jebo.2003.10.008},
+  publisher = {Elsevier BV},
+}
+@Article{Wildauer2023,
+  author  = {Rafael Wildauer and Karsten Kohler and Adam Aboobaker and Alexander Guschanski},
+  journal = {Energy Economics},
+  title   = {{Energy price shocks, conflict inflation, and income distribution in a three-sector model}},
+  year    = {2023},
+  volume  = {127B},
+  doi     = {10.1016/j.eneco.2023.106982},
+}
+
+@Article{Rowthorn1977,
+  author  = {R. E. Rowthorn},
+  journal = {Cambridge Journal of Economics},
+  title   = {{Conflict, inflation and money}},
+  year    = {1977},
+  number  = {3},
+  volume  = {1},
+  doi     = {10.1093/oxfordjournals.cje.a035360},
+}
+
+@Book{Hein2023,
+  author    = {Eckhard Hein},
+  publisher = {Edward Elgar},
+  title     = {Macroeconmics after Kalecki and Keynes. Post-Keynesian Foundations},
+  year      = {2023},
+}
+
+@Article{Bischi2001,
+  author    = {Bischi, Gian Italo and Dieci, Roberto and Rodano, Giorgio and Saltari, Enrico},
+  journal   = {Journal of Evolutionary Economics},
+  title     = {Multiple attractors and global bifurcations in a Kaldor-type business cycle model},
+  year      = {2001},
+  issn      = {1432-1386},
+  month     = nov,
+  number    = {5},
+  pages     = {527--554},
+  volume    = {11},
+  doi       = {10.1007/s191-001-8320-9},
+  publisher = {Springer Science and Business Media LLC},
+}
+
+@Article{Chang1971,
+  author    = {Chang, W. W. and Smyth, D. J.},
+  journal   = {The Review of Economic Studies},
+  title     = {The Existence and Persistence of Cycles in a Non-linear Model: Kaldor’s 1940 Model Re-examined},
+  year      = {1971},
+  issn      = {0034-6527},
+  month     = jan,
+  number    = {1},
+  pages     = {37},
+  volume    = {38},
+  doi       = {10.2307/2296620},
+  publisher = {Oxford University Press (OUP)},
+}
+
+@Article{Kaldor1940,
+  author  = {Nicholas Kaldor},
+  journal = {The Economic Journal},
+  title   = {A Model of the Trade Cycle},
+  year    = {1940},
+  number  = {197},
+  pages   = {78-92},
+  volume  = {50},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

@@ -48,6 +48,7 @@ book:
         - a_ricardian_two_sector_model.qmd
         - a_Lewis_model.qmd
         - a_Hicks_model.qmd
+        - a_Kaldor_model.qmd
     - additional_resources.qmd
     
 bibliography: references.bib
