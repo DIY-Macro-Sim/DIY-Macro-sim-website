@@ -40,4 +40,4 @@ We welcome any feedback. If you encounter any issues, find typos or mistakes, or
 The material on this page is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1), thus feel free to use the material for non-commercial purposes but please give credit. 
 
 ## Acknowledgements
-We are grateful for helpful comments from Adam Aboobaker, Chandni Dwarkasing, Giuseppe Fontana, Alex Guschanski, Eckhard Hein, and Rafael Wildauer on various sections of this website. All errors are ours.
+We are grateful for helpful comments from Adam Aboobaker, Chandni Dwarkasing, Giuseppe Fontana, Alex Guschanski, Eckhard Hein, Grégoire Noël, and Rafael Wildauer on various sections of this website. All errors are ours.

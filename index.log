@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2024.11.13)  13 NOV 2024 18:32
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2024.12.9)  9 DEC 2024 13:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1370,14 +1370,14 @@ s.ac.uk
 chapter 1.
 
 LaTeX Warning: Reference `sec-how-to-simulate' on page 5 undefined on input lin
-e 372.
+e 373.
 
 
 LaTeX Warning: Reference `sec-stab_analysis' on page 5 undefined on input line 
-401.
+402.
 
 LaTeX Font Info:    Font shape `TU/lmss/bx/it' in size <14.4> not available
-(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 414.
+(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 415.
 
 
 
@@ -1385,51 +1385,51 @@ LaTeX Font Info:    Font shape `TU/lmss/bx/it' in size <14.4> not available
 
 ]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 471.
+(Font)              scaled to size 9.0pt on input line 472.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 471.
+(Font)              scaled to size 6.0pt on input line 472.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 471.
+(Font)              scaled to size 5.0pt on input line 472.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 9.00082pt on input line 471.
+(Font)              scaled to size 9.00082pt on input line 472.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.00055pt on input line 471.
+(Font)              scaled to size 6.00055pt on input line 472.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.00046pt on input line 471.
+(Font)              scaled to size 5.00046pt on input line 472.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 8.99904pt on input line 471.
+(Font)              scaled to size 8.99904pt on input line 472.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.99936pt on input line 471.
+(Font)              scaled to size 5.99936pt on input line 472.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.99947pt on input line 471.
+(Font)              scaled to size 4.99947pt on input line 472.
 
 
 [6]
-Underfull \vbox (badness 10000) detected at line 633
+Underfull \vbox (badness 10000) detected at line 634
  []
 
 
-Underfull \vbox (badness 10000) detected at line 633
+Underfull \vbox (badness 10000) detected at line 634
  []
 
 
 
 [7]
-Underfull \vbox (badness 10000) detected at line 633
+Underfull \vbox (badness 10000) detected at line 634
  []
 
 
-Underfull \vbox (badness 10000) detected at line 633
+Underfull \vbox (badness 10000) detected at line 634
  []
 
 
 
 [8]
-Underfull \vbox (badness 10000) detected at line 633
+Underfull \vbox (badness 10000) detected at line 634
  []
 
 
-Underfull \vbox (badness 10000) detected at line 633
+Underfull \vbox (badness 10000) detected at line 634
  []
 
 
@@ -1441,7 +1441,7 @@ Underfull \vbox (badness 10000) detected at line 633
 [11]
 
 Package tcolorbox Warning: The upper box part has become overfull on input line
- 786.
+ 787.
 
 
 Overfull \vbox (224.55612pt too high) has occurred while \output is active []
@@ -1449,7 +1449,7 @@ Overfull \vbox (224.55612pt too high) has occurred while \output is active []
 
 
 [12]
-Overfull \hbox (15.46773pt too wide) in paragraph at lines 807--807
+Overfull \hbox (15.46773pt too wide) in paragraph at lines 808--808
 [] \TU/lmtt/m/n/10.95 [1] 1.000000 1.250000 1.361111 1.423611 1.463611 1.491389
  1.511797 1.527422[] 
  []
@@ -1467,18 +1467,18 @@ chapter 2.
 ]
 
 LaTeX Warning: Reference `sec-stab_analysis' on page 15 undefined on input line
- 920.
+ 921.
 
 
 LaTeX Warning: Reference `sec-stab_analysis' on page 15 undefined on input line
- 937.
+ 938.
 
 
 
 [15]
 
 LaTeX Warning: Reference `sec-stab_analysis' on page 16 undefined on input line
- 996.
+ 997.
 
 
 
@@ -1493,7 +1493,7 @@ LaTeX Warning: Reference `sec-stab_analysis' on page 16 undefined on input line
 [20]
 
 LaTeX Warning: Reference `sec-stab_analysis' on page 21 undefined on input line
- 1194.
+ 1195.
 
 
 
@@ -1533,7 +1533,7 @@ File: how_to_simulate_files/figure-pdf/howto_7-1.pdf Graphic file (type pdf)
 [32]
 
 Package tcolorbox Warning: The upper box part has become overfull on input line
- 1609.
+ 1610.
 
 
 
@@ -1558,7 +1558,7 @@ File: how_to_simulate_files/figure-pdf/how_to8-5.pdf Graphic file (type pdf)
 part I.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 1880.
+(scrkbase)              on input line 1881.
 
 
 [40
@@ -1571,79 +1571,79 @@ chapter 3.
 
 ]
 
-LaTeX Warning: Reference `eq-Y_NC' on page 42 undefined on input line 1970.
+LaTeX Warning: Reference `eq-Y_NC' on page 42 undefined on input line 1971.
 
 
-LaTeX Warning: Reference `eq-w_NC' on page 42 undefined on input line 1973.
+LaTeX Warning: Reference `eq-w_NC' on page 42 undefined on input line 1974.
 
 
-LaTeX Warning: Reference `eq-w_NC' on page 42 undefined on input line 1979.
+LaTeX Warning: Reference `eq-w_NC' on page 42 undefined on input line 1980.
 
 
-LaTeX Warning: Reference `eq-I_NC' on page 42 undefined on input line 1979.
+LaTeX Warning: Reference `eq-I_NC' on page 42 undefined on input line 1980.
 
 
-LaTeX Warning: Reference `eq-MD_NC' on page 42 undefined on input line 1979.
+LaTeX Warning: Reference `eq-MD_NC' on page 42 undefined on input line 1980.
 
 
-LaTeX Warning: Reference `eq-N_NC' on page 42 undefined on input line 1980.
+LaTeX Warning: Reference `eq-N_NC' on page 42 undefined on input line 1981.
 
 
-LaTeX Warning: Reference `eq-C_NC' on page 42 undefined on input line 1981.
+LaTeX Warning: Reference `eq-C_NC' on page 42 undefined on input line 1982.
 
 
-LaTeX Warning: Reference `eq-I_NC' on page 42 undefined on input line 1999.
+LaTeX Warning: Reference `eq-I_NC' on page 42 undefined on input line 2000.
 
 
-LaTeX Warning: Reference `eq-G_NC' on page 42 undefined on input line 2001.
+LaTeX Warning: Reference `eq-G_NC' on page 42 undefined on input line 2002.
 
 
-LaTeX Warning: Reference `eq-Y_eq_NC' on page 42 undefined on input line 2002.
+LaTeX Warning: Reference `eq-Y_eq_NC' on page 42 undefined on input line 2003.
 
 
-LaTeX Warning: Reference `eq-rn_NC' on page 42 undefined on input line 2005.
+LaTeX Warning: Reference `eq-rn_NC' on page 42 undefined on input line 2006.
 
 
-LaTeX Warning: Reference `eq-MS_NC' on page 42 undefined on input line 2006.
+LaTeX Warning: Reference `eq-MS_NC' on page 42 undefined on input line 2007.
 
 
-LaTeX Warning: Reference `eq-MD_NC' on page 42 undefined on input line 2007.
+LaTeX Warning: Reference `eq-MD_NC' on page 42 undefined on input line 2008.
 
 
-LaTeX Warning: Reference `eq-M_eq_NC' on page 42 undefined on input line 2010.
+LaTeX Warning: Reference `eq-M_eq_NC' on page 42 undefined on input line 2011.
 
 
 
 [42]
-Overfull \hbox (10.48512pt too wide) in paragraph at lines 2042--2043
+Overfull \hbox (10.48512pt too wide) in paragraph at lines 2043--2044
 []\TU/lmr/m/n/10.95 Scenario  
  []
 
 
-Overfull \hbox (1.62657pt too wide) in paragraph at lines 2075--2075
+Overfull \hbox (1.62657pt too wide) in paragraph at lines 2076--2076
 \TU/lmr/m/n/10.95 pected 
  []
 
 
-Overfull \hbox (5.05392pt too wide) in paragraph at lines 2077--2077
+Overfull \hbox (5.05392pt too wide) in paragraph at lines 2078--2078
 \TU/lmr/m/n/10.95 creased 
  []
 
 
-Overfull \hbox (0.80533pt too wide) in paragraph at lines 2077--2077
+Overfull \hbox (0.80533pt too wide) in paragraph at lines 2078--2078
 \TU/lmr/m/n/10.95 leisure 
  []
 
 [43]
 
 [44]
-Overfull \vbox (0.12044pt too high) detected at line 2175
+Overfull \vbox (0.12044pt too high) detected at line 2176
  []
 
 
 
 [45]
-Overfull \vbox (1.82863pt too high) detected at line 2175
+Overfull \vbox (1.82863pt too high) detected at line 2176
  []
 
 
@@ -1655,22 +1655,22 @@ Overfull \vbox (1.82863pt too high) detected at line 2175
 [48]
 
 Package tcolorbox Warning: The upper box part has become overfull on input line
- 2269.
+ 2270.
 
 
 
 [49]
 
 LaTeX Warning: Reference `fig-output-neocl' on page 50 undefined on input line 
-2273.
+2274.
 
 
 LaTeX Warning: Reference `fig-employment-neocl' on page 50 undefined on input l
-ine 2274.
+ine 2275.
 
 
 LaTeX Warning: Reference `fig-price_level' on page 50 undefined on input line 2
-278.
+279.
 
 File: a_neoclassical_macro_model_files/figure-pdf/fig-output-neocl-1.pdf Graphi
 c file (type pdf)
@@ -1680,19 +1680,19 @@ File: a_neoclassical_macro_model_files/figure-pdf/fig-price_level-1.pdf Graphic
 <use a_neoclassical_macro_model_files/figure-pdf/fig-price_level-1.pdf>
 
 LaTeX Warning: Reference `fig-consumption' on page 50 undefined on input line 2
-325.
+326.
 
 
 LaTeX Warning: Reference `fig-investment' on page 50 undefined on input line 23
-25.
+26.
 
 
 LaTeX Warning: Reference `fig-interest_rate' on page 50 undefined on input line
- 2332.
+ 2333.
 
 
 LaTeX Warning: Reference `fig-investment' on page 50 undefined on input line 23
-33.
+34.
 
 
 
@@ -1713,15 +1713,15 @@ file (type pdf)
 <use a_neoclassical_macro_model_files/figure-pdf/fig-investment-1.pdf>
 
 LaTeX Warning: Reference `fig-consumption' on page 52 undefined on input line 2
-399.
+400.
 
 
 LaTeX Warning: Reference `fig-interest_rate' on page 52 undefined on input line
- 2401.
+ 2402.
 
 
 LaTeX Warning: Reference `fig-investment' on page 52 undefined on input line 24
-02.
+03.
 
 File: a_neoclassical_macro_model_files/figure-pdf/fig-interest_rate-1.pdf Graph
 ic file (type pdf)
@@ -1743,25 +1743,25 @@ pe pdf)
 [56]
 
 Package tcolorbox Warning: The upper box part has become overfull on input line
- 2565.
+ 2566.
 
 
 
 [57]
 
-LaTeX Warning: Reference `fig-dg' on page 58 undefined on input line 2567.
+LaTeX Warning: Reference `fig-dg' on page 58 undefined on input line 2568.
 
 
-LaTeX Warning: Reference `eq-FOC_Nd' on page 58 undefined on input line 2618.
+LaTeX Warning: Reference `eq-FOC_Nd' on page 58 undefined on input line 2619.
 
 
-LaTeX Warning: Reference `eq-w_NC' on page 58 undefined on input line 2618.
+LaTeX Warning: Reference `eq-w_NC' on page 58 undefined on input line 2619.
 
 
-LaTeX Warning: Reference `eq-FOC_I' on page 58 undefined on input line 2621.
+LaTeX Warning: Reference `eq-FOC_I' on page 58 undefined on input line 2622.
 
 
-LaTeX Warning: Reference `eq-I_NC' on page 58 undefined on input line 2622.
+LaTeX Warning: Reference `eq-I_NC' on page 58 undefined on input line 2623.
 
 
 
@@ -1773,34 +1773,34 @@ LaTeX Warning: Reference `eq-I_NC' on page 58 undefined on input line 2622.
 
 [60]
 
-LaTeX Warning: Reference `eq-ibc' on page 61 undefined on input line 2730.
+LaTeX Warning: Reference `eq-ibc' on page 61 undefined on input line 2731.
 
 
-LaTeX Warning: Reference `eq-FOC_C' on page 61 undefined on input line 2746.
+LaTeX Warning: Reference `eq-FOC_C' on page 61 undefined on input line 2747.
 
 
-LaTeX Warning: Reference `eq-FOC_Ns' on page 61 undefined on input line 2747.
+LaTeX Warning: Reference `eq-FOC_Ns' on page 61 undefined on input line 2748.
 
 
-LaTeX Warning: Reference `eq-FOC_M' on page 61 undefined on input line 2748.
+LaTeX Warning: Reference `eq-FOC_M' on page 61 undefined on input line 2749.
 
 
-LaTeX Warning: Reference `eq-N_NC' on page 61 undefined on input line 2748.
+LaTeX Warning: Reference `eq-N_NC' on page 61 undefined on input line 2749.
 
 
-LaTeX Warning: Reference `eq-MD_NC' on page 61 undefined on input line 2749.
+LaTeX Warning: Reference `eq-MD_NC' on page 61 undefined on input line 2750.
 
 
-LaTeX Warning: Reference `eq-ibc' on page 61 undefined on input line 2750.
+LaTeX Warning: Reference `eq-ibc' on page 61 undefined on input line 2751.
 
 
-LaTeX Warning: Reference `eq-FOC_M' on page 61 undefined on input line 2750.
+LaTeX Warning: Reference `eq-FOC_M' on page 61 undefined on input line 2751.
 
 
-LaTeX Warning: Reference `eq-FOC_C' on page 61 undefined on input line 2751.
+LaTeX Warning: Reference `eq-FOC_C' on page 61 undefined on input line 2752.
 
 
-LaTeX Warning: Reference `eq-C_NC' on page 61 undefined on input line 2752.
+LaTeX Warning: Reference `eq-C_NC' on page 61 undefined on input line 2753.
 
 
 
@@ -1812,41 +1812,41 @@ chapter 4.
 
 ]
 
-LaTeX Warning: Reference `eq-islmY' on page 63 undefined on input line 2839.
+LaTeX Warning: Reference `eq-islmY' on page 63 undefined on input line 2840.
 
 
-LaTeX Warning: Reference `eq-islmC' on page 63 undefined on input line 2842.
+LaTeX Warning: Reference `eq-islmC' on page 63 undefined on input line 2843.
 
 
-LaTeX Warning: Reference `eq-islmI' on page 63 undefined on input line 2845.
+LaTeX Warning: Reference `eq-islmI' on page 63 undefined on input line 2846.
 
 
-LaTeX Warning: Reference `eq-islmG' on page 63 undefined on input line 2848.
+LaTeX Warning: Reference `eq-islmG' on page 63 undefined on input line 2849.
 
 
-LaTeX Warning: Reference `eq-islmT' on page 63 undefined on input line 2849.
+LaTeX Warning: Reference `eq-islmT' on page 63 undefined on input line 2850.
 
 
-LaTeX Warning: Reference `eq-islmMs' on page 63 undefined on input line 2850.
+LaTeX Warning: Reference `eq-islmMs' on page 63 undefined on input line 2851.
 
 
-LaTeX Warning: Reference `eq-islmMd' on page 63 undefined on input line 2851.
+LaTeX Warning: Reference `eq-islmMd' on page 63 undefined on input line 2852.
 
 
-LaTeX Warning: Reference `eq-islmN' on page 63 undefined on input line 2856.
+LaTeX Warning: Reference `eq-islmN' on page 63 undefined on input line 2857.
 
 
-LaTeX Warning: Reference `eq-islmU' on page 63 undefined on input line 2860.
+LaTeX Warning: Reference `eq-islmU' on page 63 undefined on input line 2861.
 
 
 
 [63]
-Overfull \hbox (16.90295pt too wide) in paragraph at lines 2893--2894
+Overfull \hbox (16.90295pt too wide) in paragraph at lines 2894--2895
 []\TU/lmr/m/n/10.95 Scenario  
  []
 
 
-Overfull \hbox (11.47176pt too wide) in paragraph at lines 2927--2927
+Overfull \hbox (11.47176pt too wide) in paragraph at lines 2928--2928
 \TU/lmr/m/n/10.95 creased 
  []
 
@@ -1861,22 +1861,22 @@ Overfull \hbox (11.47176pt too wide) in paragraph at lines 2927--2927
 [68]
 
 Package tcolorbox Warning: The upper box part has become overfull on input line
- 3126.
+ 3127.
 
 
 
 [69]
 
-LaTeX Warning: Reference `fig-output' on page 70 undefined on input line 3130.
+LaTeX Warning: Reference `fig-output' on page 70 undefined on input line 3131.
 
 
-LaTeX Warning: Reference `fig-r' on page 70 undefined on input line 3130.
+LaTeX Warning: Reference `fig-r' on page 70 undefined on input line 3131.
 
 
-LaTeX Warning: Reference `fig-U' on page 70 undefined on input line 3138.
+LaTeX Warning: Reference `fig-U' on page 70 undefined on input line 3139.
 
 
-LaTeX Warning: Reference `fig-output' on page 70 undefined on input line 3140.
+LaTeX Warning: Reference `fig-output' on page 70 undefined on input line 3141.
 
 File: an_IS_LM_model_files/figure-pdf/fig-output-1.pdf Graphic file (type pdf)
 <use an_IS_LM_model_files/figure-pdf/fig-output-1.pdf>
@@ -1890,10 +1890,10 @@ File: an_IS_LM_model_files/figure-pdf/fig-r-1.pdf Graphic file (type pdf)
 File: an_IS_LM_model_files/figure-pdf/fig-U-1.pdf Graphic file (type pdf)
 <use an_IS_LM_model_files/figure-pdf/fig-U-1.pdf>
 
-LaTeX Warning: Reference `fig-I' on page 71 undefined on input line 3207.
+LaTeX Warning: Reference `fig-I' on page 71 undefined on input line 3208.
 
 
-LaTeX Warning: Reference `fig-C' on page 71 undefined on input line 3207.
+LaTeX Warning: Reference `fig-C' on page 71 undefined on input line 3208.
 
 File: an_IS_LM_model_files/figure-pdf/fig-I-1.pdf Graphic file (type pdf)
 <use an_IS_LM_model_files/figure-pdf/fig-I-1.pdf>
@@ -1918,34 +1918,34 @@ File: an_IS_LM_model_files/figure-pdf/fig-DAG-2.pdf Graphic file (type pdf)
 [75]
 
 Package tcolorbox Warning: The upper box part has become overfull on input line
- 3399.
+ 3400.
 
 
 
 [76]
 
-LaTeX Warning: Reference `eq-islmC' on page 77 undefined on input line 3403.
+LaTeX Warning: Reference `eq-islmC' on page 77 undefined on input line 3404.
 
 
-LaTeX Warning: Reference `eq-islmT' on page 77 undefined on input line 3404.
+LaTeX Warning: Reference `eq-islmT' on page 77 undefined on input line 3405.
 
 
-LaTeX Warning: Reference `eq-islmY' on page 77 undefined on input line 3404.
+LaTeX Warning: Reference `eq-islmY' on page 77 undefined on input line 3405.
 
 
-LaTeX Warning: Reference `eq-islmMs' on page 77 undefined on input line 3411.
+LaTeX Warning: Reference `eq-islmMs' on page 77 undefined on input line 3412.
 
 
-LaTeX Warning: Reference `eq-islmMd' on page 77 undefined on input line 3412.
+LaTeX Warning: Reference `eq-islmMd' on page 77 undefined on input line 3413.
 
 
-LaTeX Warning: Reference `eq-islmM' on page 77 undefined on input line 3412.
+LaTeX Warning: Reference `eq-islmM' on page 77 undefined on input line 3413.
 
 
-LaTeX Warning: Reference `eq-LM' on page 77 undefined on input line 3420.
+LaTeX Warning: Reference `eq-LM' on page 77 undefined on input line 3421.
 
 
-LaTeX Warning: Reference `eq-IS' on page 77 undefined on input line 3420.
+LaTeX Warning: Reference `eq-IS' on page 77 undefined on input line 3421.
 
 
 
@@ -1957,7 +1957,7 @@ LaTeX Warning: Reference `eq-IS' on page 77 undefined on input line 3420.
 chapter 5.
 
 LaTeX Warning: Reference `sec-islm-model' on page 79 undefined on input line 35
-01.
+02.
 
 
 
@@ -1965,279 +1965,279 @@ LaTeX Warning: Reference `sec-islm-model' on page 79 undefined on input line 35
 
 ]
 
-LaTeX Warning: Reference `eq-Y-AS_AD' on page 80 undefined on input line 3585.
+LaTeX Warning: Reference `eq-Y-AS_AD' on page 80 undefined on input line 3586.
 
 
-LaTeX Warning: Reference `eq-C-AS_AD' on page 80 undefined on input line 3588.
+LaTeX Warning: Reference `eq-C-AS_AD' on page 80 undefined on input line 3589.
 
 
-LaTeX Warning: Reference `eq-I-AS_AD' on page 80 undefined on input line 3591.
+LaTeX Warning: Reference `eq-I-AS_AD' on page 80 undefined on input line 3592.
 
 
-LaTeX Warning: Reference `eq-Ms-AS_AD' on page 80 undefined on input line 3595.
+LaTeX Warning: Reference `eq-Ms-AS_AD' on page 80 undefined on input line 3596.
 
 
 
-LaTeX Warning: Reference `eq-Md-AS_AD' on page 80 undefined on input line 3596.
+LaTeX Warning: Reference `eq-Md-AS_AD' on page 80 undefined on input line 3597.
 
 
 
 LaTeX Warning: Reference `eq-M_eq-AS_AD' on page 80 undefined on input line 360
-1.
+2.
 
 
 
 [80]
 
-LaTeX Warning: Reference `eq-w-AS_AD' on page 81 undefined on input line 3603.
+LaTeX Warning: Reference `eq-w-AS_AD' on page 81 undefined on input line 3604.
 
 
-LaTeX Warning: Reference `eq-W-AS_AD' on page 81 undefined on input line 3613.
+LaTeX Warning: Reference `eq-W-AS_AD' on page 81 undefined on input line 3614.
 
 
-LaTeX Warning: Reference `eq-P-AS_AD' on page 81 undefined on input line 3620.
+LaTeX Warning: Reference `eq-P-AS_AD' on page 81 undefined on input line 3621.
 
 
-LaTeX Warning: Reference `eq-N-AS_AD' on page 81 undefined on input line 3622.
+LaTeX Warning: Reference `eq-N-AS_AD' on page 81 undefined on input line 3623.
 
 
-LaTeX Warning: Reference `eq-U-AS_AD' on page 81 undefined on input line 3626.
+LaTeX Warning: Reference `eq-U-AS_AD' on page 81 undefined on input line 3627.
 
 
 
 [81]
-Overfull \hbox (1.24252pt too wide) in paragraph at lines 3678--3679
+Overfull \hbox (1.24252pt too wide) in paragraph at lines 3679--3680
 []$[][]$  
  []
 
 
-Overfull \hbox (1.24252pt too wide) in paragraph at lines 3680--3681
+Overfull \hbox (1.24252pt too wide) in paragraph at lines 3681--3682
 []$[][]$  
  []
 
 
-Overfull \hbox (1.24252pt too wide) in paragraph at lines 3682--3683
+Overfull \hbox (1.24252pt too wide) in paragraph at lines 3683--3684
 []$[][]$  
  []
 
 
-Overfull \hbox (2.24991pt too wide) in paragraph at lines 3684--3685
+Overfull \hbox (2.24991pt too wide) in paragraph at lines 3685--3686
 []$[][]$  
  []
 
 
-Overfull \hbox (2.06487pt too wide) in paragraph at lines 3690--3691
+Overfull \hbox (2.06487pt too wide) in paragraph at lines 3691--3692
 []$[][]$  
  []
 
 
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3700--3700
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3701--3701
 []|\TU/lmr/m/n/10.95 0.6|  
  []
 
 
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3700--3700
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3701--3701
 []|\TU/lmr/m/n/10.95 0.1|  
  []
 
 
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3700--3700
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3701--3701
 []|\TU/lmr/m/n/10.95 0.2|  
  []
 
 
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3700--3700
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3701--3701
 []|\TU/lmr/m/n/10.95 0.4|  
  []
 
 
-Overfull \hbox (4.5222pt too wide) in paragraph at lines 3701--3701
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3702--3702
 []|\TU/lmr/m/n/10.95 0.3|  
  []
 
 
-Overfull \hbox (4.5222pt too wide) in paragraph at lines 3701--3702
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3702--3703
 []|\TU/lmr/m/n/10.95 0.4|  
  []
 
 
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3702--3702
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3703--3703
 []|\TU/lmr/m/n/10.95 0.6|  
  []
 
 
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3702--3702
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3703--3703
 []|\TU/lmr/m/n/10.95 1.5|  
  []
 
 
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3702--3702
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3703--3703
 []|\TU/lmr/m/n/10.95 0.1|  
  []
 
 
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3703--3703
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3704--3704
 []|\TU/lmr/m/n/10.95 0.2|  
  []
 
 
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3703--3703
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3704--3704
 []|\TU/lmr/m/n/10.95 0.4|  
  []
 
 
-Overfull \hbox (4.5222pt too wide) in paragraph at lines 3703--3703
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3704--3704
 []|\TU/lmr/m/n/10.95 0.3|  
  []
 
 
-Overfull \hbox (4.5222pt too wide) in paragraph at lines 3703--3704
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3704--3705
 []|\TU/lmr/m/n/10.95 0.4|  
- []
-
-
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3704--3704
-[]|\TU/lmr/m/n/10.95 0.6|  
- []
-
-
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3704--3704
-[]|\TU/lmr/m/n/10.95 0.1|  
- []
-
-
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3704--3704
-[]|\TU/lmr/m/n/10.95 0.2|  
  []
 
 
 Overfull \hbox (0.76112pt too wide) in paragraph at lines 3705--3705
-[]|\TU/lmr/m/n/10.95 0.4|  
- []
-
-
-Overfull \hbox (4.5222pt too wide) in paragraph at lines 3705--3705
-[]|\TU/lmr/m/n/10.95 0.3|  
- []
-
-
-Overfull \hbox (4.5222pt too wide) in paragraph at lines 3705--3706
-[]|\TU/lmr/m/n/10.95 0.4|  
- []
-
-
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3706--3706
 []|\TU/lmr/m/n/10.95 0.6|  
  []
 
 
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3706--3706
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3705--3705
 []|\TU/lmr/m/n/10.95 0.1|  
  []
 
 
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3706--3707
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3705--3705
+[]|\TU/lmr/m/n/10.95 0.2|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3706--3706
+[]|\TU/lmr/m/n/10.95 0.4|  
+ []
+
+
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3706--3706
+[]|\TU/lmr/m/n/10.95 0.3|  
+ []
+
+
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3706--3707
+[]|\TU/lmr/m/n/10.95 0.4|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3707--3707
+[]|\TU/lmr/m/n/10.95 0.6|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3707--3707
+[]|\TU/lmr/m/n/10.95 0.1|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3707--3708
 []|\TU/lmr/m/n/10.95 1.5|  
  []
 
 
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3707--3707
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3708--3708
 []|\TU/lmr/m/n/10.95 0.2|  
  []
 
 
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3707--3707
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3708--3708
 []|\TU/lmr/m/n/10.95 0.4|  
  []
 
 
-Overfull \hbox (4.5222pt too wide) in paragraph at lines 3707--3707
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3708--3708
 []|\TU/lmr/m/n/10.95 0.3|  
  []
 
 
-Overfull \hbox (4.5222pt too wide) in paragraph at lines 3707--3708
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3708--3709
 []|\TU/lmr/m/n/10.95 0.4|  
- []
-
-
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3708--3708
-[]|\TU/lmr/m/n/10.95 0.6|  
- []
-
-
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3708--3708
-[]|\TU/lmr/m/n/10.95 0.1|  
- []
-
-
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3708--3708
-[]|\TU/lmr/m/n/10.95 0.2|  
  []
 
 
 Overfull \hbox (0.76112pt too wide) in paragraph at lines 3709--3709
-[]|\TU/lmr/m/n/10.95 0.4|  
- []
-
-
-Overfull \hbox (4.5222pt too wide) in paragraph at lines 3709--3709
-[]|\TU/lmr/m/n/10.95 0.3|  
- []
-
-
-Overfull \hbox (4.5222pt too wide) in paragraph at lines 3709--3710
-[]|\TU/lmr/m/n/10.95 0.4|  
- []
-
-
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3710--3710
 []|\TU/lmr/m/n/10.95 0.6|  
  []
 
 
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3710--3710
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3709--3709
 []|\TU/lmr/m/n/10.95 0.1|  
  []
 
 
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3710--3710
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3709--3709
 []|\TU/lmr/m/n/10.95 0.2|  
  []
 
 
-Overfull \hbox (0.76112pt too wide) in paragraph at lines 3711--3711
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3710--3710
 []|\TU/lmr/m/n/10.95 0.4|  
  []
 
 
-Overfull \hbox (4.5222pt too wide) in paragraph at lines 3711--3711
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3710--3710
 []|\TU/lmr/m/n/10.95 0.3|  
  []
 
 
-Overfull \hbox (4.5222pt too wide) in paragraph at lines 3711--3712
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3710--3711
+[]|\TU/lmr/m/n/10.95 0.4|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3711--3711
+[]|\TU/lmr/m/n/10.95 0.6|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3711--3711
+[]|\TU/lmr/m/n/10.95 0.1|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3711--3711
+[]|\TU/lmr/m/n/10.95 0.2|  
+ []
+
+
+Overfull \hbox (0.76112pt too wide) in paragraph at lines 3712--3712
+[]|\TU/lmr/m/n/10.95 0.4|  
+ []
+
+
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3712--3712
+[]|\TU/lmr/m/n/10.95 0.3|  
+ []
+
+
+Overfull \hbox (4.5222pt too wide) in paragraph at lines 3712--3713
 []|\TU/lmr/m/n/10.95 0.4|  
  []
 
 
 
 [82]
-Underfull \vbox (badness 10000) detected at line 3831
+Underfull \vbox (badness 10000) detected at line 3832
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3831
+Underfull \vbox (badness 10000) detected at line 3832
  []
 
 
 
 [83]
-Underfull \vbox (badness 10000) detected at line 3831
+Underfull \vbox (badness 10000) detected at line 3832
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3831
+Underfull \vbox (badness 10000) detected at line 3832
  []
 
 
@@ -2249,17 +2249,17 @@ Underfull \vbox (badness 10000) detected at line 3831
 [86]
 
 Package tcolorbox Warning: The upper box part has become overfull on input line
- 3938.
+ 3939.
 
 
 
 [87]
 
-LaTeX Warning: Reference `fig-output' on page 88 undefined on input line 3942.
+LaTeX Warning: Reference `fig-output' on page 88 undefined on input line 3943.
 
 
 LaTeX Warning: Reference `fig-nominal-wage-neocl-macro' on page 88 undefined on
- input line 3943.
+ input line 3944.
 
 File: a_neoclassical_synthesis_model_IS_LM_AS_AD_files/figure-pdf/fig-output-ne
 ocl-macro-1.pdf Graphic file (type pdf)
@@ -2309,50 +2309,50 @@ cro-2.pdf>
 [93]
 
 Package tcolorbox Warning: The upper box part has become overfull on input line
- 4224.
+ 4225.
 
 
 
 [94]
 
 LaTeX Warning: Reference `fig-dg-neoclmacro' on page 95 undefined on input line
- 4226.
+ 4227.
 
 
-LaTeX Warning: Reference `eq-C-AS_AD' on page 95 undefined on input line 4250.
+LaTeX Warning: Reference `eq-C-AS_AD' on page 95 undefined on input line 4251.
 
 
-LaTeX Warning: Reference `eq-I-AS_AD' on page 95 undefined on input line 4251.
+LaTeX Warning: Reference `eq-I-AS_AD' on page 95 undefined on input line 4252.
 
 
-LaTeX Warning: Reference `eq-Y-AS_AD' on page 95 undefined on input line 4251.
+LaTeX Warning: Reference `eq-Y-AS_AD' on page 95 undefined on input line 4252.
 
 
-LaTeX Warning: Reference `eq-Ms-AS_AD' on page 95 undefined on input line 4256.
+LaTeX Warning: Reference `eq-Ms-AS_AD' on page 95 undefined on input line 4257.
 
 
 
-LaTeX Warning: Reference `eq-Md-AS_AD' on page 95 undefined on input line 4257.
+LaTeX Warning: Reference `eq-Md-AS_AD' on page 95 undefined on input line 4258.
 
 
 
 LaTeX Warning: Reference `eq-M_eq-AS_AD' on page 95 undefined on input line 425
-7.
+8.
 
 
-LaTeX Warning: Reference `eq-w-AS_AD' on page 95 undefined on input line 4264.
+LaTeX Warning: Reference `eq-w-AS_AD' on page 95 undefined on input line 4265.
 
 
-LaTeX Warning: Reference `eq-W-AS_AD' on page 95 undefined on input line 4265.
+LaTeX Warning: Reference `eq-W-AS_AD' on page 95 undefined on input line 4266.
 
 
-LaTeX Warning: Reference `eq-N-AS_AD' on page 95 undefined on input line 4265.
+LaTeX Warning: Reference `eq-N-AS_AD' on page 95 undefined on input line 4266.
 
 
-LaTeX Warning: Reference `eq-C-AS_AD' on page 95 undefined on input line 4266.
+LaTeX Warning: Reference `eq-C-AS_AD' on page 95 undefined on input line 4267.
 
 
-LaTeX Warning: Reference `eq-P-AS_AD' on page 95 undefined on input line 4266.
+LaTeX Warning: Reference `eq-P-AS_AD' on page 95 undefined on input line 4267.
 
 
 
@@ -2368,139 +2368,124 @@ chapter 6.
 
 ]
 
-LaTeX Warning: Reference `eq-Y-PK' on page 98 undefined on input line 4395.
+LaTeX Warning: Reference `eq-Y-PK' on page 98 undefined on input line 4396.
 
 
-LaTeX Warning: Reference `eq-ND-PK' on page 98 undefined on input line 4400.
+LaTeX Warning: Reference `eq-ND-PK' on page 98 undefined on input line 4401.
 
 
-LaTeX Warning: Reference `eq-D-PK' on page 98 undefined on input line 4402.
+LaTeX Warning: Reference `eq-D-PK' on page 98 undefined on input line 4403.
 
 
-LaTeX Warning: Reference `eq-i-PK' on page 98 undefined on input line 4406.
+LaTeX Warning: Reference `eq-i-PK' on page 98 undefined on input line 4407.
 
 
 LaTeX Warning: Reference `sec-neoclassical-synthesis' on page 98 undefined on i
-nput line 4413.
+nput line 4414.
 
 
-LaTeX Warning: Reference `eq-r-PK' on page 98 undefined on input line 4414.
+LaTeX Warning: Reference `eq-r-PK' on page 98 undefined on input line 4415.
 
 
-LaTeX Warning: Reference `eq-dL-PK' on page 98 undefined on input line 4416.
+LaTeX Warning: Reference `eq-dL-PK' on page 98 undefined on input line 4417.
 
 
-LaTeX Warning: Reference `eq-dM-PK' on page 98 undefined on input line 4420.
+LaTeX Warning: Reference `eq-dM-PK' on page 98 undefined on input line 4421.
 
 
-LaTeX Warning: Reference `eq-dR-PK' on page 98 undefined on input line 4422.
+LaTeX Warning: Reference `eq-dR-PK' on page 98 undefined on input line 4423.
 
 
 
 [98]
 
-LaTeX Warning: Reference `eq-P-PK' on page 99 undefined on input line 4427.
+LaTeX Warning: Reference `eq-P-PK' on page 99 undefined on input line 4428.
 
 
-LaTeX Warning: Reference `eq-U-PK' on page 99 undefined on input line 4431.
+LaTeX Warning: Reference `eq-U-PK' on page 99 undefined on input line 4432.
 
 
-LaTeX Warning: Reference `eq-w-PK' on page 99 undefined on input line 4432.
+LaTeX Warning: Reference `eq-w-PK' on page 99 undefined on input line 4433.
 
 
-LaTeX Warning: Reference `eq-P-PK' on page 99 undefined on input line 4433.
+LaTeX Warning: Reference `eq-P-PK' on page 99 undefined on input line 4434.
 
 
-LaTeX Warning: Reference `eq-N-PK' on page 99 undefined on input line 4435.
+LaTeX Warning: Reference `eq-N-PK' on page 99 undefined on input line 4436.
 
 
-LaTeX Warning: Reference `eq-U-PK' on page 99 undefined on input line 4440.
+LaTeX Warning: Reference `eq-U-PK' on page 99 undefined on input line 4441.
 
 
 
 [99]
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4506--4506
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4507--4507
  []|\TU/lmr/m/n/10.95 0.5| 
  []
 
 
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4506--4506
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4507--4507
  []|\TU/lmr/m/n/10.95 0.8| 
  []
 
 
-Overfull \hbox (2.0819pt too wide) in paragraph at lines 4506--4506
+Overfull \hbox (2.0819pt too wide) in paragraph at lines 4507--4507
  []|\TU/lmr/m/n/10.95 0.01| 
  []
 
 
-Overfull \hbox (7.05537pt too wide) in paragraph at lines 4506--4506
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4507--4507
  []|\TU/lmr/m/n/10.95 0.15| 
  []
 
 
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4506--4506
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4507--4507
  []|\TU/lmr/m/n/10.95 0.3| 
  []
 
 
-Overfull \hbox (7.05537pt too wide) in paragraph at lines 4506--4506
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4507--4507
  []|\TU/lmr/m/n/10.95 0.15| 
  []
 
 
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4507--4507
- []|\TU/lmr/m/n/10.95 0.8| 
- []
-
-
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4507--4507
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4508--4508
  []|\TU/lmr/m/n/10.95 0.8| 
  []
 
 
 Overfull \hbox (1.58037pt too wide) in paragraph at lines 4508--4508
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4509--4509
  []|\TU/lmr/m/n/10.95 0.5| 
  []
 
 
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4508--4508
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4509--4509
  []|\TU/lmr/m/n/10.95 0.4| 
  []
 
 
-Overfull \hbox (2.0819pt too wide) in paragraph at lines 4508--4508
+Overfull \hbox (2.0819pt too wide) in paragraph at lines 4509--4509
  []|\TU/lmr/m/n/10.95 0.01| 
  []
 
 
-Overfull \hbox (7.05537pt too wide) in paragraph at lines 4509--4509
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4510--4510
  []|\TU/lmr/m/n/10.95 0.15| 
- []
-
-
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4509--4509
- []|\TU/lmr/m/n/10.95 0.3| 
- []
-
-
-Overfull \hbox (7.05537pt too wide) in paragraph at lines 4509--4509
- []|\TU/lmr/m/n/10.95 0.15| 
- []
-
-
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4509--4509
- []|\TU/lmr/m/n/10.95 0.8| 
- []
-
-
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4509--4509
- []|\TU/lmr/m/n/10.95 0.8| 
  []
 
 
 Overfull \hbox (1.58037pt too wide) in paragraph at lines 4510--4510
- []|\TU/lmr/m/n/10.95 0.5| 
+ []|\TU/lmr/m/n/10.95 0.3| 
+ []
+
+
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4510--4510
+ []|\TU/lmr/m/n/10.95 0.15| 
  []
 
 
@@ -2509,23 +2494,13 @@ Overfull \hbox (1.58037pt too wide) in paragraph at lines 4510--4510
  []
 
 
-Overfull \hbox (2.0819pt too wide) in paragraph at lines 4510--4510
- []|\TU/lmr/m/n/10.95 0.01| 
- []
-
-
-Overfull \hbox (7.05537pt too wide) in paragraph at lines 4511--4511
- []|\TU/lmr/m/n/10.95 0.15| 
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4510--4510
+ []|\TU/lmr/m/n/10.95 0.8| 
  []
 
 
 Overfull \hbox (1.58037pt too wide) in paragraph at lines 4511--4511
- []|\TU/lmr/m/n/10.95 0.3| 
- []
-
-
-Overfull \hbox (7.05537pt too wide) in paragraph at lines 4511--4511
- []|\TU/lmr/m/n/10.95 0.15| 
+ []|\TU/lmr/m/n/10.95 0.5| 
  []
 
 
@@ -2534,53 +2509,63 @@ Overfull \hbox (1.58037pt too wide) in paragraph at lines 4511--4511
  []
 
 
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4511--4511
+Overfull \hbox (2.0819pt too wide) in paragraph at lines 4511--4511
+ []|\TU/lmr/m/n/10.95 0.01| 
+ []
+
+
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4512--4512
+ []|\TU/lmr/m/n/10.95 0.15| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4512--4512
+ []|\TU/lmr/m/n/10.95 0.3| 
+ []
+
+
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4512--4512
+ []|\TU/lmr/m/n/10.95 0.15| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4512--4512
  []|\TU/lmr/m/n/10.95 0.8| 
  []
 
 
 Overfull \hbox (1.58037pt too wide) in paragraph at lines 4512--4512
- []|\TU/lmr/m/n/10.95 0.5| 
- []
-
-
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4512--4512
  []|\TU/lmr/m/n/10.95 0.8| 
  []
 
 
-Overfull \hbox (2.0819pt too wide) in paragraph at lines 4512--4512
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4513--4513
+ []|\TU/lmr/m/n/10.95 0.5| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4513--4513
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (2.0819pt too wide) in paragraph at lines 4513--4513
  []|\TU/lmr/m/n/10.95 0.01| 
  []
 
 
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4512--4513
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4513--4514
  []|\TU/lmr/m/n/10.95 0.3| 
- []
-
-
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4513--4513
- []|\TU/lmr/m/n/10.95 0.3| 
- []
-
-
-Overfull \hbox (7.05537pt too wide) in paragraph at lines 4513--4513
- []|\TU/lmr/m/n/10.95 0.15| 
- []
-
-
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4513--4513
- []|\TU/lmr/m/n/10.95 0.8| 
- []
-
-
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4513--4513
- []|\TU/lmr/m/n/10.95 0.8| 
  []
 
 
 Overfull \hbox (1.58037pt too wide) in paragraph at lines 4514--4514
- []|\TU/lmr/m/n/10.95 0.5| 
+ []|\TU/lmr/m/n/10.95 0.3| 
+ []
+
+
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4514--4514
+ []|\TU/lmr/m/n/10.95 0.15| 
  []
 
 
@@ -2589,63 +2574,53 @@ Overfull \hbox (1.58037pt too wide) in paragraph at lines 4514--4514
  []
 
 
-Overfull \hbox (2.0819pt too wide) in paragraph at lines 4514--4514
- []|\TU/lmr/m/n/10.95 0.01| 
- []
-
-
-Overfull \hbox (7.05537pt too wide) in paragraph at lines 4515--4515
- []|\TU/lmr/m/n/10.95 0.15| 
- []
-
-
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4515--4515
- []|\TU/lmr/m/n/10.95 0.3| 
- []
-
-
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4515--4515
- []|\TU/lmr/m/n/10.95 0.3| 
- []
-
-
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4515--4515
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4514--4514
  []|\TU/lmr/m/n/10.95 0.8| 
  []
 
 
 Overfull \hbox (1.58037pt too wide) in paragraph at lines 4515--4515
- []|\TU/lmr/m/n/10.95 0.8| 
- []
-
-
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4516--4516
  []|\TU/lmr/m/n/10.95 0.5| 
  []
 
 
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4515--4515
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (2.0819pt too wide) in paragraph at lines 4515--4515
+ []|\TU/lmr/m/n/10.95 0.01| 
+ []
+
+
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4516--4516
+ []|\TU/lmr/m/n/10.95 0.15| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4516--4516
+ []|\TU/lmr/m/n/10.95 0.3| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4516--4516
+ []|\TU/lmr/m/n/10.95 0.3| 
+ []
+
+
 Overfull \hbox (1.58037pt too wide) in paragraph at lines 4516--4516
  []|\TU/lmr/m/n/10.95 0.8| 
  []
 
 
-Overfull \hbox (2.0819pt too wide) in paragraph at lines 4516--4516
- []|\TU/lmr/m/n/10.95 0.01| 
- []
-
-
-Overfull \hbox (7.05537pt too wide) in paragraph at lines 4517--4517
- []|\TU/lmr/m/n/10.95 0.15| 
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4516--4516
+ []|\TU/lmr/m/n/10.95 0.8| 
  []
 
 
 Overfull \hbox (1.58037pt too wide) in paragraph at lines 4517--4517
- []|\TU/lmr/m/n/10.95 0.3| 
- []
-
-
-Overfull \hbox (7.05537pt too wide) in paragraph at lines 4517--4517
- []|\TU/lmr/m/n/10.95 0.15| 
+ []|\TU/lmr/m/n/10.95 0.5| 
  []
 
 
@@ -2654,28 +2629,53 @@ Overfull \hbox (1.58037pt too wide) in paragraph at lines 4517--4517
  []
 
 
-Overfull \hbox (1.58037pt too wide) in paragraph at lines 4517--4517
+Overfull \hbox (2.0819pt too wide) in paragraph at lines 4517--4517
+ []|\TU/lmr/m/n/10.95 0.01| 
+ []
+
+
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4518--4518
+ []|\TU/lmr/m/n/10.95 0.15| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4518--4518
+ []|\TU/lmr/m/n/10.95 0.3| 
+ []
+
+
+Overfull \hbox (7.05537pt too wide) in paragraph at lines 4518--4518
+ []|\TU/lmr/m/n/10.95 0.15| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4518--4518
+ []|\TU/lmr/m/n/10.95 0.8| 
+ []
+
+
+Overfull \hbox (1.58037pt too wide) in paragraph at lines 4518--4518
  []|\TU/lmr/m/n/10.95 0.4| 
  []
 
 
 
 [100]
-Underfull \vbox (badness 10000) detected at line 4654
+Underfull \vbox (badness 10000) detected at line 4655
  []
 
 
-Underfull \vbox (badness 10000) detected at line 4654
+Underfull \vbox (badness 10000) detected at line 4655
  []
 
 
 
 [101]
-Underfull \vbox (badness 10000) detected at line 4654
+Underfull \vbox (badness 10000) detected at line 4655
  []
 
 
-Underfull \vbox (badness 10000) detected at line 4654
+Underfull \vbox (badness 10000) detected at line 4655
  []
 
 
@@ -2687,18 +2687,18 @@ Underfull \vbox (badness 10000) detected at line 4654
 [104]
 
 Package tcolorbox Warning: The upper box part has become overfull on input line
- 4759.
+ 4760.
 
 
 
 [105]
 
 LaTeX Warning: Reference `fig-output-pkmacro' on page 106 undefined on input li
-ne 4763.
+ne 4764.
 
 
 LaTeX Warning: Reference `fig-real-wage-pkmacro' on page 106 undefined on input
- line 4764.
+ line 4765.
 
 File: a_post_keynesian_macro_model_with_endogenous_money_files/figure-pdf/fig-o
 utput-pkmacro-1.pdf Graphic file (type pdf)
@@ -2755,56 +2755,56 @@ g-pkmacro-2.pdf Graphic file (type pdf)
 [112]
 
 Package tcolorbox Warning: The upper box part has become overfull on input line
- 5066.
+ 5067.
 
 
 
 [113]
 
 LaTeX Warning: Reference `fig-dg-pkmacro' on page 114 undefined on input line 5
-068.
+069.
 
 
-LaTeX Warning: Reference `eq-ND-PK' on page 114 undefined on input line 5095.
+LaTeX Warning: Reference `eq-ND-PK' on page 114 undefined on input line 5096.
 
 
-LaTeX Warning: Reference `eq-D-PK' on page 114 undefined on input line 5096.
+LaTeX Warning: Reference `eq-D-PK' on page 114 undefined on input line 5097.
 
 
-LaTeX Warning: Reference `eq-Y-PK' on page 114 undefined on input line 5096.
+LaTeX Warning: Reference `eq-Y-PK' on page 114 undefined on input line 5097.
 
 
-LaTeX Warning: Reference `eq-i-PK' on page 114 undefined on input line 5101.
+LaTeX Warning: Reference `eq-i-PK' on page 114 undefined on input line 5102.
 
 
-LaTeX Warning: Reference `eq-P-PK' on page 114 undefined on input line 5102.
+LaTeX Warning: Reference `eq-P-PK' on page 114 undefined on input line 5103.
 
 
-LaTeX Warning: Reference `eq-W-PK' on page 114 undefined on input line 5102.
+LaTeX Warning: Reference `eq-W-PK' on page 114 undefined on input line 5103.
 
 
-LaTeX Warning: Reference `eq-N-PK' on page 114 undefined on input line 5102.
+LaTeX Warning: Reference `eq-N-PK' on page 114 undefined on input line 5103.
 
 
-LaTeX Warning: Reference `eq-U-PK' on page 114 undefined on input line 5103.
+LaTeX Warning: Reference `eq-U-PK' on page 114 undefined on input line 5104.
 
 
-LaTeX Warning: Reference `eq-r-PK' on page 114 undefined on input line 5103.
+LaTeX Warning: Reference `eq-r-PK' on page 114 undefined on input line 5104.
 
 
-LaTeX Warning: Reference `eq-r-PK' on page 114 undefined on input line 5111.
+LaTeX Warning: Reference `eq-r-PK' on page 114 undefined on input line 5112.
 
 
-LaTeX Warning: Reference `eq-i-PK' on page 114 undefined on input line 5112.
+LaTeX Warning: Reference `eq-i-PK' on page 114 undefined on input line 5113.
 
 
-LaTeX Warning: Reference `eq-W-PK' on page 114 undefined on input line 5118.
+LaTeX Warning: Reference `eq-W-PK' on page 114 undefined on input line 5119.
 
 
-LaTeX Warning: Reference `eq-U-PK' on page 114 undefined on input line 5119.
+LaTeX Warning: Reference `eq-U-PK' on page 114 undefined on input line 5120.
 
 
-LaTeX Warning: Reference `eq-P-PK' on page 114 undefined on input line 5119.
+LaTeX Warning: Reference `eq-P-PK' on page 114 undefined on input line 5120.
 
 
 
@@ -2822,19 +2822,19 @@ chapter 7.
 
 ]
 
-LaTeX Warning: Reference `eq-r-kr' on page 118 undefined on input line 5254.
+LaTeX Warning: Reference `eq-r-kr' on page 118 undefined on input line 5255.
 
 
-LaTeX Warning: Reference `eq-s-kr' on page 118 undefined on input line 5263.
-
-
-LaTeX Warning: Reference `eq-c-kr' on page 118 undefined on input line 5266.
+LaTeX Warning: Reference `eq-s-kr' on page 118 undefined on input line 5264.
 
 
 LaTeX Warning: Reference `eq-c-kr' on page 118 undefined on input line 5267.
 
 
-LaTeX Warning: Reference `eq-h-kr' on page 118 undefined on input line 5272.
+LaTeX Warning: Reference `eq-c-kr' on page 118 undefined on input line 5268.
+
+
+LaTeX Warning: Reference `eq-h-kr' on page 118 undefined on input line 5273.
 
 
 
@@ -2847,18 +2847,18 @@ LaTeX Warning: Reference `eq-h-kr' on page 118 undefined on input line 5272.
 [121]
 
 Package tcolorbox Warning: The upper box part has become overfull on input line
- 5480.
+ 5481.
 
 
 
 [122]
 
 LaTeX Warning: Reference `fig-profshare-kaldor-robinson' on page 123 undefined 
-on input line 5484.
+on input line 5485.
 
 
 LaTeX Warning: Reference `fig-growth-kaldor-robinson' on page 123 undefined on 
-input line 5485.
+input line 5486.
 
 File: a_Kaldor-Robinson_model_files/figure-pdf/fig-profshare-kaldor-robinson-1.
 pdf Graphic file (type pdf)
@@ -2890,28 +2890,28 @@ phic file (type pdf)
 [126]
 
 LaTeX Warning: Reference `fig-dg-kaldor-robinson' on page 127 undefined on inpu
-t line 5665.
+t line 5666.
 
 
-LaTeX Warning: Reference `eq-h-kr' on page 127 undefined on input line 5675.
+LaTeX Warning: Reference `eq-h-kr' on page 127 undefined on input line 5676.
 
 
-LaTeX Warning: Reference `eq-r-kr' on page 127 undefined on input line 5675.
+LaTeX Warning: Reference `eq-r-kr' on page 127 undefined on input line 5676.
 
 
-LaTeX Warning: Reference `eq-g-kr' on page 127 undefined on input line 5676.
+LaTeX Warning: Reference `eq-g-kr' on page 127 undefined on input line 5677.
 
 
-LaTeX Warning: Reference `eq-s-kr' on page 127 undefined on input line 5676.
+LaTeX Warning: Reference `eq-s-kr' on page 127 undefined on input line 5677.
 
 
 
 [127]
 
-LaTeX Warning: Reference `eq-r-kr' on page 128 undefined on input line 5680.
+LaTeX Warning: Reference `eq-r-kr' on page 128 undefined on input line 5681.
 
 
-LaTeX Warning: Reference `eq-g-kr' on page 128 undefined on input line 5685.
+LaTeX Warning: Reference `eq-g-kr' on page 128 undefined on input line 5686.
 
 
 
@@ -2925,19 +2925,19 @@ chapter 8.
 
 ]
 
-LaTeX Warning: Reference `eq-r' on page 131 undefined on input line 5808.
+LaTeX Warning: Reference `eq-r' on page 131 undefined on input line 5809.
 
 
-LaTeX Warning: Reference `eq-s' on page 131 undefined on input line 5817.
-
-
-LaTeX Warning: Reference `eq-c' on page 131 undefined on input line 5821.
+LaTeX Warning: Reference `eq-s' on page 131 undefined on input line 5818.
 
 
 LaTeX Warning: Reference `eq-c' on page 131 undefined on input line 5822.
 
 
-LaTeX Warning: Reference `eq-u' on page 131 undefined on input line 5827.
+LaTeX Warning: Reference `eq-c' on page 131 undefined on input line 5823.
+
+
+LaTeX Warning: Reference `eq-u' on page 131 undefined on input line 5828.
 
 
 
@@ -2954,18 +2954,18 @@ LaTeX Warning: Reference `eq-u' on page 131 undefined on input line 5827.
 [136]
 
 Package tcolorbox Warning: The upper box part has become overfull on input line
- 6160.
+ 6161.
 
 
 
 [137]
 
 LaTeX Warning: Reference `fig-utilisation-pkdg' on page 138 undefined on input 
-line 6164.
+line 6165.
 
 
 LaTeX Warning: Reference `fig-profit-rate-pkdg' on page 138 undefined on input 
-line 6165.
+line 6166.
 
 File: a_post_kaleckian_distribution_and_growth_model_files/figure-pdf/fig-utili
 sation-pkdg-1.pdf Graphic file (type pdf)
@@ -3001,26 +3001,26 @@ g-2.pdf>
 
 [141]
 
-LaTeX Warning: Reference `fig-dg-pkdg' on page 142 undefined on input line 6382
+LaTeX Warning: Reference `fig-dg-pkdg' on page 142 undefined on input line 6383
 .
 
 
-LaTeX Warning: Reference `eq-s' on page 142 undefined on input line 6396.
+LaTeX Warning: Reference `eq-s' on page 142 undefined on input line 6397.
 
 
-LaTeX Warning: Reference `eq-g' on page 142 undefined on input line 6397.
+LaTeX Warning: Reference `eq-g' on page 142 undefined on input line 6398.
 
 
-LaTeX Warning: Reference `eq-u' on page 142 undefined on input line 6397.
+LaTeX Warning: Reference `eq-u' on page 142 undefined on input line 6398.
 
 
 
 [142]
 
-LaTeX Warning: Reference `eq-g' on page 143 undefined on input line 6403.
+LaTeX Warning: Reference `eq-g' on page 143 undefined on input line 6404.
 
 
-LaTeX Warning: Reference `eq-r' on page 143 undefined on input line 6412.
+LaTeX Warning: Reference `eq-r' on page 143 undefined on input line 6413.
 
 
 
@@ -3032,7 +3032,7 @@ LaTeX Warning: Reference `eq-r' on page 143 undefined on input line 6412.
 part II.
 Package scrkbase Info: You've told me to use the font selection of the element
 (scrkbase)             `partprefix' that is an alias of element `partnumber'
-(scrkbase)              on input line 6524.
+(scrkbase)              on input line 6525.
 
 
 [146
@@ -3041,7 +3041,7 @@ Package scrkbase Info: You've told me to use the font selection of the element
 chapter 9.
 
 LaTeX Warning: Reference `sec-how-to-simulate' on page 147 undefined on input l
-ine 6534.
+ine 6535.
 
 
 
@@ -3076,14 +3076,14 @@ le (type pdf)
 [156]
 
 Package tcolorbox Warning: The upper box part has become overfull on input line
- 7025.
+ 7026.
 
 
 
 [157]
 
 LaTeX Warning: Reference `sec-how-to-simulate' on page 158 undefined on input l
-ine 7063.
+ine 7064.
 
 
 
@@ -3121,7 +3121,7 @@ le (type pdf)
 
 [167]
 
-LaTeX Warning: Reference `sec-malthus' on page 168 undefined on input line 7514
+LaTeX Warning: Reference `sec-malthus' on page 168 undefined on input line 7515
 .
 
 
@@ -3136,33 +3136,33 @@ chapter 10.
 
 ]
 
-LaTeX Warning: Reference `eq-nk_y' on page 171 undefined on input line 7607.
+LaTeX Warning: Reference `eq-nk_y' on page 171 undefined on input line 7608.
 
 
-LaTeX Warning: Reference `eq-nk_pi' on page 171 undefined on input line 7611.
+LaTeX Warning: Reference `eq-nk_pi' on page 171 undefined on input line 7612.
 
 
-LaTeX Warning: Reference `eq-nk_rs' on page 171 undefined on input line 7614.
+LaTeX Warning: Reference `eq-nk_rs' on page 171 undefined on input line 7615.
 
 
-LaTeX Warning: Reference `eq-nk_r' on page 171 undefined on input line 7617.
+LaTeX Warning: Reference `eq-nk_r' on page 171 undefined on input line 7618.
 
 
 LaTeX Warning: Reference `sec-analytical' on page 171 undefined on input line 7
-619.
+620.
 
 
-Overfull \hbox (0.10857pt too wide) in alignment at lines 7647--7665
+Overfull \hbox (0.10857pt too wide) in alignment at lines 7648--7666
  [] [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (0.10857pt too wide) in alignment at lines 7665--7667
+Overfull \hbox (0.10857pt too wide) in alignment at lines 7666--7668
  [] [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (0.10857pt too wide) in alignment at lines 7667--7671
+Overfull \hbox (0.10857pt too wide) in alignment at lines 7668--7672
  [] [] [] [] [] [] [] 
  []
 
@@ -3175,7 +3175,7 @@ Overfull \hbox (0.10857pt too wide) in alignment at lines 7667--7671
 [174]
 
 Package tcolorbox Warning: The upper box part has become overfull on input line
- 7794.
+ 7795.
 
 
 
@@ -3215,67 +3215,67 @@ Missing character: There is no ᵀ in font [lmmono10-regular]:!
 
 [181]
 
-LaTeX Warning: Reference `eq-nk_y' on page 182 undefined on input line 8005.
+LaTeX Warning: Reference `eq-nk_y' on page 182 undefined on input line 8006.
 
 
 LaTeX Warning: Reference `sec-neoclassical-model' on page 182 undefined on inpu
-t line 8007.
+t line 8008.
 
 
-LaTeX Warning: Reference `eq-nk_y' on page 182 undefined on input line 8021.
+LaTeX Warning: Reference `eq-nk_y' on page 182 undefined on input line 8022.
 
 
-LaTeX Warning: Reference `eq-nk_pi' on page 182 undefined on input line 8025.
+LaTeX Warning: Reference `eq-nk_pi' on page 182 undefined on input line 8026.
 
 
 
 [182]
 
-LaTeX Warning: Reference `eq-nk_P' on page 183 undefined on input line 8051.
+LaTeX Warning: Reference `eq-nk_P' on page 183 undefined on input line 8052.
 
 
-LaTeX Warning: Reference `eq-nk_W' on page 183 undefined on input line 8053.
+LaTeX Warning: Reference `eq-nk_W' on page 183 undefined on input line 8054.
 
 
-LaTeX Warning: Reference `eq-nk_pi' on page 183 undefined on input line 8054.
+LaTeX Warning: Reference `eq-nk_pi' on page 183 undefined on input line 8055.
 
 
-LaTeX Warning: Reference `eq-nk_pi' on page 183 undefined on input line 8064.
+LaTeX Warning: Reference `eq-nk_pi' on page 183 undefined on input line 8065.
 
 
-LaTeX Warning: Reference `eq-nk_pi' on page 183 undefined on input line 8073.
+LaTeX Warning: Reference `eq-nk_pi' on page 183 undefined on input line 8074.
 
 
-LaTeX Warning: Reference `eq-nk_y' on page 183 undefined on input line 8074.
+LaTeX Warning: Reference `eq-nk_y' on page 183 undefined on input line 8075.
 
 
-LaTeX Warning: Reference `eq-nk_rs' on page 183 undefined on input line 8075.
+LaTeX Warning: Reference `eq-nk_rs' on page 183 undefined on input line 8076.
 
 
-LaTeX Warning: Reference `eq-nk_r' on page 183 undefined on input line 8077.
+LaTeX Warning: Reference `eq-nk_r' on page 183 undefined on input line 8078.
 
 
-LaTeX Warning: Reference `eq-nk_y' on page 183 undefined on input line 8087.
+LaTeX Warning: Reference `eq-nk_y' on page 183 undefined on input line 8088.
 
 
-LaTeX Warning: Reference `eq-nk_pi' on page 183 undefined on input line 8087.
+LaTeX Warning: Reference `eq-nk_pi' on page 183 undefined on input line 8088.
 
 
-LaTeX Warning: Reference `eq-nk_r' on page 183 undefined on input line 8092.
+LaTeX Warning: Reference `eq-nk_r' on page 183 undefined on input line 8093.
 
 
 
 [183]
 
-LaTeX Warning: Reference `eq-nk_y' on page 184 undefined on input line 8097.
+LaTeX Warning: Reference `eq-nk_y' on page 184 undefined on input line 8098.
 
 
 LaTeX Warning: Reference `eq-nk_pi_reduc' on page 184 undefined on input line 8
-098.
+099.
 
 
 LaTeX Warning: Reference `eq-nk_r_reduc' on page 184 undefined on input line 80
-98.
+99.
 
 
 
@@ -3290,42 +3290,42 @@ chapter 11.
 ]
 
 LaTeX Warning: Reference `eq-conflict_omega' on page 187 undefined on input lin
-e 8282.
+e 8284.
 
 
 LaTeX Warning: Reference `eq-conflict_w' on page 187 undefined on input line 82
-83.
+85.
 
 
 LaTeX Warning: Reference `eq-conflict_p' on page 187 undefined on input line 82
-89.
+91.
 
 
 LaTeX Warning: Reference `eq-conflict_pf' on page 187 undefined on input line 8
-292.
+294.
 
 
 LaTeX Warning: Reference `eq-conflict_rf' on page 187 undefined on input line 8
-303.
+305.
 
 
 LaTeX Warning: Reference `eq-conflict_r' on page 187 undefined on input line 83
-08.
+10.
 
 
 LaTeX Warning: Reference `eq-conflict_p_E' on page 187 undefined on input line 
-8309.
+8311.
 
 
 
 [187]
 
 [188]
-Underfull \vbox (badness 10000) detected at line 8447
+Underfull \vbox (badness 10000) detected at line 8449
  []
 
 
-Underfull \vbox (badness 10000) detected at line 8447
+Underfull \vbox (badness 10000) detected at line 8449
  []
 
 
@@ -3337,18 +3337,18 @@ Underfull \vbox (badness 10000) detected at line 8447
 [191]
 
 Package tcolorbox Warning: The upper box part has become overfull on input line
- 8529.
+ 8531.
 
 
 
 [192]
 
 LaTeX Warning: Reference `fig-baseline-prices' on page 193 undefined on input l
-ine 8533.
+ine 8535.
 
 
 LaTeX Warning: Reference `fig-baseline-inflation' on page 193 undefined on inpu
-t line 8535.
+t line 8537.
 
 File: a_conflict_inflation_model_files/figure-pdf/fig-baseline-prices-1.pdf Gra
 phic file (type pdf)
@@ -3362,7 +3362,7 @@ File: a_conflict_inflation_model_files/figure-pdf/fig-baseline-inflation-1.pdf
 Graphic file (type pdf)
 <use a_conflict_inflation_model_files/figure-pdf/fig-baseline-inflation-1.pdf>
 
-LaTeX Warning: Reference `fig-energy' on page 194 undefined on input line 8595.
+LaTeX Warning: Reference `fig-energy' on page 194 undefined on input line 8597.
 
 
 
@@ -3372,7 +3372,7 @@ File: a_conflict_inflation_model_files/figure-pdf/fig-energy-1.pdf Graphic file
  (type pdf)
 <use a_conflict_inflation_model_files/figure-pdf/fig-energy-1.pdf>
 
-LaTeX Warning: Reference `fig-markup' on page 195 undefined on input line 8644.
+LaTeX Warning: Reference `fig-markup' on page 195 undefined on input line 8646.
 
 
 
@@ -3383,7 +3383,7 @@ File: a_conflict_inflation_model_files/figure-pdf/fig-markup-1.pdf Graphic file
 <use a_conflict_inflation_model_files/figure-pdf/fig-markup-1.pdf>
 
 LaTeX Warning: Reference `fig-targetrealwage' on page 196 undefined on input li
-ne 8686.
+ne 8688.
 
 
 
@@ -3398,7 +3398,7 @@ hic file (type pdf)
 [198]
 
 LaTeX Warning: Reference `fig-energy-prof' on page 199 undefined on input line 
-8837.
+8839.
 
 
 
@@ -3421,46 +3421,46 @@ File: a_conflict_inflation_model_files/figure-pdf/conflict_8-1.pdf Graphic file
 [203]
 
 LaTeX Warning: Reference `eq-conflict_omega' on page 204 undefined on input lin
-e 8998.
+e 9004.
 
 
-LaTeX Warning: Reference `eq-conflict_w' on page 204 undefined on input line 89
-98.
+LaTeX Warning: Reference `eq-conflict_w' on page 204 undefined on input line 90
+04.
 
 
 LaTeX Warning: Reference `eq-conflict_r' on page 204 undefined on input line 90
-00.
+06.
 
 
 LaTeX Warning: Reference `eq-conflict_rf' on page 204 undefined on input line 9
-000.
+006.
 
 
 LaTeX Warning: Reference `eq-conflict_omega' on page 204 undefined on input lin
-e 9001.
+e 9007.
 
 
 LaTeX Warning: Reference `eq-conflict_p' on page 204 undefined on input line 90
-01.
+07.
 
 
 LaTeX Warning: Reference `eq-conflict_w_reduc' on page 204 undefined on input l
-ine 9018.
+ine 9024.
 
 
 LaTeX Warning: Reference `eq-conflict_p_reduc' on page 204 undefined on input l
-ine 9019.
+ine 9025.
 
 
 
 [204]
 
 LaTeX Warning: Reference `eq-conflict_w_reduc' on page 205 undefined on input l
-ine 9082.
+ine 9088.
 
 
 LaTeX Warning: Reference `eq-conflict_p_reduc' on page 205 undefined on input l
-ine 9083.
+ine 9089.
 
 
 
@@ -3468,11 +3468,11 @@ ine 9083.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.9120 
+l.9126 
         
 Here is how much of TeX's memory you used:
  40044 strings out of 408788
- 832754 string characters out of 5753002
+ 832754 string characters out of 5753003
  1544598 words of memory out of 5000000
  62347 multiletter control sequences out of 15000+600000
  567509 words of font info for 118 fonts, out of 8000000 for 9000
