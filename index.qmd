@@ -23,7 +23,7 @@ The platform's DIY-approach aims to foster reproducibility and open-source princ
 
 :::  {layout-ncol=2}
 
-[Franz](https://fprante.me/) is a research associate at Chemnitz University of Technology, where he is currently working on the macroeconomic effects of monetary policy and price effects on energy demand. He is also a PhD student at Université Sorbonne Paris Nord.
+[Franz](https://fprante.me/) is a research associate at Chemnitz University of Technology, where he is currently working on the macroeconomic effects of monetary policy and price effects on energy demand. He holds a PhD from Université Sorbonne Paris Nord.
 
 
 [Karsten](https://karstenkohler.com/) is an Associate Professor in Economics at Leeds University Business School, where he does research on the interaction between finance and the real economy, especially sources of cyclical dynamics, instability, and rising inequality.
