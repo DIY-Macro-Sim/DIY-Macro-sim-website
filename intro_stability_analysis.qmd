@@ -666,7 +666,7 @@ In practice, this means that to analyse the local stability of a nonlinear syste
 -   compute the Jacobian matrix of $f(y_{t-1})$
 -   substitute $y^*$ into $f(y_{t-1})$ and analyse the resulting matrix.
 
-An example for the stability analysis of a simple nonlinear system can be found in @sec-malthus.
+An example for the stability analysis of a simple two-dimensional nonlinear system can be found in @sec-ricardo_1_analytical.
 
 ## Key takeaways
 -   dynamic models are systems of difference (or differential) equations

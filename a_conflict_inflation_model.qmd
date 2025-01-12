@@ -577,7 +577,7 @@ dg=graph_from_adjacency_matrix(A_mat, mode="directed", weighted= NULL)
 
 # Define node labels
 V(dg)$name=c(expression(Omega), "w", "p", expression(r^T), "r",
-             expression(p_E), expression(epsilon), expression(theta^T), expression(Omega^W))
+             expression(p^E), expression(epsilon), expression(theta^T), expression(Omega^W))
 
 
 # Plot directed graph matrix
