@@ -13,7 +13,7 @@ To further facilitate the understanding of dynamic models, @sec-stab_analysis of
 
 All simulation codes are written in the open-source programming languages *R* and *Python*. *R* codes are presented in the main text (and images and results in the text are the output of the shown *R* codes), while the corresponding *Python* codes are available by clicking on the callout blocks underneath the *R* codes. 
 
-## Access and introduction to *R* and *Python*
+## Access to *R* and *Python* and some online resources
 To be able to manipulate the codes on this platform on your own machine, you first need to [download and install *R* and *RStudio*](https://rstudio-education.github.io/hopr/starting.html). For Python, there are different options. One of them is to download and install *Spyder* via the [Anaconda Python distribution](https://www.anaconda.com/download). *Spyder* provides an interface for *Python* (like *RStudio* for *R*). If you install it via *Anaconda*, it will install *Python* automatically.
 
 Besides being free, a key advantage of both *R* and *Python* is their huge and growing functionality due to new user-written libraries and packages continuously being added. In addition, a large amount of learning material is freely available on the web, e.g. [here](https://education.rstudio.com/learn/beginner/) and [here](https://www.w3schools.com/r/default.asp) for *R* and [here](https://www.python.org/about/gettingstarted/), and [here](https://www.w3schools.com/python/python_intro.asp) for *Python*. However, to get started in can be best to directly delve into some of the codes on this platform and learn by doing. To this end, the following "cheatsheets" that provide a concise overview of key functions are useful:
@@ -32,22 +32,62 @@ Besides being free, a key advantage of both *R* and *Python* is their huge and g
 
 Once you have installed *R* or *Python*, you can play with the codes on this platform yourself by copy and pasting them into the script panel of your local interface (IDE) and hitting CTRL + Enter to execute them. Don't forget to always comment your code using the "#" symbol and to save your scripts to make sure your future self can seamlessness continue working on it.
 
-The codes below covers some basic operations.^[We are grateful to Rafael Wildauer for permission to reproduce a slightly modified version of his learning materials. In addition, some of the material below is taken from [here](https://www.w3schools.com/r/default.asp).] If you are new to *R* or *Python* and keen to get started, do the following:
 
-- copy the codes below into the script panel of *RStudio* or *Spyder* on your machine
-- adjust the working directory to your personal folder
-- then run the code 
-- make sure you understand what it does
+## Introduction to *R* and *Python*
+The following codes cover some basic operations.^[We are grateful to Rafael Wildauer for permission to reproduce a slightly modified version of his learning materials. In addition, some of the material below is taken from [here](https://www.w3schools.com/r/default.asp).] There are also some simple exercises to work through. Open *RStudio* or *Spyder* on your machine to get started.
+
+
+### Setting your working directory
+A first step is often to set the working directory, which is the folder on your PC where any output you produce will be stored (e.g. simulated data, graphs). 
+To set the working directory, you need to find the path to the folder on your PC where you want to store results:
+
+- [finding the path to a folder on your Microsoft PC](https://www.wikihow.com/Find-a-File%27s-Path-on-Windows)
+- [finding the path to a folder on your Mac](https://www.digitaltrends.com/computing/how-to-find-and-copy-a-file-path-on-mac/)
+
+Note that folders in the path to your working directory need to be separated by forward slashes: /
+
+```{r}
+#| echo: false
+#| output: false
+#| collapse: true
+
+library(reticulate)
+#py_install("numpy")
+
+```
 
 ```{r}
 #| output: false
-################################### R Basics ###########################
+################################### Set working directory ###########################
+# Set the working directory to the desired folder by adjusting the path below:
+# setwd("C:/Users/Your Name/Your Folder")
+
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Set the working directory to the desired folder by adjusting the path below:
+import os
+# os.chdir(""C:/Users/Your Name/Your Folder")  
+
+```
+
+::: 
+
+### Elementary operations
+- the following block of code covers some elementary operations
+```{r}
+#| output: false
+
+################################### Elementary operations ###########################
 
 #In the R script you write code and comments
-  #any line starting with # is a comment and it is NOT executed
-
-## First things first: set the working directory to the the folder in which your R files are stored using: setwd("C:/")
-# note that you need to separate folders by slashes /
+#any line starting with # is a comment and it is NOT executed
 
 #Let's define some variables
 s = 0.05
@@ -87,136 +127,19 @@ paste(text1, text2)
 #R uses standard operators like +, -, *
 #for exponents use ^
 3^2
-
-
-########################### if statements and loops ######################
-
-#sometimes we need to introduce if conditions into our code
-#The syntax is
-#if condition { do something }
-a = 10
-b = 13
-if (b>a) {
-  print("b is bigger")
-}
-#we can also tell R what to do in case the condition is not fulfilled
-b=10
-if (b>a) {
-  print("b is bigger")
-} else {
-  print("b not bigger")
-}
-
-
-#Next we will look at loops which are a key tool to repeat tasks such as solving
-#a theoretical model again and again to find its equilibrium.
-#The basic structure is:
-for (i in 1:5){
-  print(i)
-}
-
-#Let's use it to solve a simple Keynesian cross model of the form
-#Y=C+I
-#C=c0+c1Y
-#Define exogenous parameters
-c0=2
-c1=0.8
-I=10
-#set initial values for two endogenous variable
-Y=C=1
-#Use a for loop to solve it
-C
-Y
-for (i in 1:100){
-  Y = C+I
-  C = c0+c1*Y
-}
-C
-Y
-#solution is Y=(I+c0)/(1-c1)=60
-
-#What is special about this loop is that it uses the values from the previous iteration
-#to define the values of the next, because it starts with assigning a value to Y
-#and then uses that value to assign a new value to C and in the next iteration it
-#uses this new value for C to define a new value for Y etc.
-
-
-########################### Data structures ##########################
-#In most applications we produce outputs which do not consist of a single number.
-#Often we have an entire stream of results, or we want to analyse data and have to store larger amounts of data
-#R has a variety of data structures for this purpose.
-#let's clean up first
-rm(list=ls(all=TRUE))
-
-####Vectors 
-#We can create an empty vector and fill it later (with results of our model for example)
-vec1 = vector(length=3)
-#we can define vectors explicitly using the c() function (c for column?)
-vec2 = c(1,2,3)
-vec3 = c(6,7,8)
-#we can also use the sequence operator
-vec4 = 1:10
-#and we can define the step size
-vec5 = seq(1,2,0.1)
-vec5
-#we can call specific entries using square brackets
-vec5[4]
-#if we want to access more elements at once
-vec5[c(4,1)]
-
-####Matrices
-#define a matrix: 3 rows and 2 columns, all elements equal to 0
-mat1 = matrix(0, nrow=3, ncol=2)
-mat1
-#we can also fill it with specific values
-mat2 = matrix(c(1,2,3,4,5,6), nrow = 3, ncol = 2)
-mat2
-#access specific elements (columns,rows)
-mat2[3,1]
-#access entire rows or columns
-mat2[,1]
-mat2[1,]
-#access sub matrices
-mat2[c(1,2),]
-## Combine two column vectors in a matrix
-mat3=cbind(vec1, vec2)
-mat3
-## Combine two row vectors in a matrix
-mat4=rbind(vec1, vec2)
-mat4
 ```
 
-
-
-
-```{r}
-#| echo: false
-#| output: false
-#| collapse: true
-
-library(reticulate)
-#py_install("numpy")
-
-```
 ::: {.callout-note collapse="true" title="Python code"}
-
 
 ```{python}
 #| echo: true
 #| output: false
 #| collapse: true
 
-
-################################### Python Basics ###########################
+################################### Elementary operations ###########################
 
 #In the Python script you write code and comments
 #any line starting with # is a comment and it is NOT executed
-
-## First things first: set the working directory to the the folder 
-# in which your Python files are stored using: 
-# import os
-# os.setcwd("C:/yourworkingdirectory")
-# note that you need to separate folders by slashes /
 
 # Most of what we will do relies on the library NumPy
 # Let's load NumPy and call its commands by the prefix .np
@@ -245,8 +168,8 @@ max(10, 2, 100, -3)
 np.sqrt(9)
 abs(-13)
 
-#you can find out more about these by using the help function, 
-#e.g.: help(max)
+#you can find out more about these by using the help function, e.g.:
+# help(max)
 
 #How can you delete stuff? Use the del function
 #for individual objects
@@ -261,12 +184,76 @@ print(text1 + ' ' + text2)
 #for exponents use **
 3**2
 
-########################### if statements and loops ######################
+```
 
-#sometimes we need to introduce if conditions into our code
-#The syntax is
-#if condition xxx:
-    #do something    
+:::
+
+### If-else statements and loops
+- sometimes we want to make the execution of code conditional on an *if condition*
+- the basic syntax is: if condition = TRUE, then do the following ...
+- another key tool are *loops* that iterate over the lines of code inside the loop for a specified number of times
+- a *for loop* allows you to iterate over a range of values and also to specify an index variable that is updated in every iteration of the loop
+- for loops will be extensively used on this website to solve economic models 
+```{r}
+#| output: false
+
+################################### If-else statements and loops ###########################
+# example of an if condition
+a = 10
+b = 13
+if (b>a) {
+  print("b is bigger")
+}
+#we can also tell R what to do in case the condition is not fulfilled
+b=10
+if (b>a) {
+  print("b is bigger")
+} else {
+  print("b not bigger")
+}
+
+#example of a for loop
+for (i in 1:5){
+  print(i)
+}
+
+#Let's use it to solve a simple Keynesian cross model of the form
+#Y=C+I
+#C=c0+c1Y
+# where Y is output, C is consumption, and I is investment
+
+
+#Define exogenous parameters
+c0=2
+c1=0.8
+I=10
+
+#set initial values for two endogenous variable
+Y=C=1
+
+#Use a for loop to solve it
+C
+Y
+for (i in 1:100){
+  Y = C+I
+  C = c0+c1*Y
+}
+C
+Y
+
+# NB: equilibrium solution of this model is Y*=(I+c0)/(1-c1)
+
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+########################### if-else statements and loops ######################
+# example of an if condition
 a = 10
 b = 13
 if b > a:
@@ -279,16 +266,65 @@ if b > a:
 else:
     print("b not bigger")
 
-#Next we will look at loops which are a key tool to repeat tasks such as solving
-#a theoretical model to find its equilibrium.
-#The basic structure is:
+# example of a for loop
 for i in range(1, 6):
     print(i)
-# Note the key role played by indentation!
+# Note the key role played by indentation in Python!
 
 #Let's use it to solve a simple Keynesian cross model of the form
 #Y=C+I
 #C=c0+c1Y
+# where Y is output, C is consumption, and I is investment
+
+#Define exogenous parameters and initialise endogenous variables
+c0 = 2
+c1 = 0.8
+I = 10
+Y = C = 1
+
+#Use a for loop that iterates the equations 100 times to solve them
+for i in range(1, 100):
+    Y = C + I
+    C = c0 + c1 * Y
+C
+Y
+# NB: equilibrium solution of this model is Y*=(I+c0)/(1-c1)
+
+```
+
+:::
+
+#### Exercise 1: loops
+Set the parameter values of the Keynesian cross model to $c_0=2$, $c_1=0.8$, and $I=11$, run the loop and check the equilibrium value $Y^*$. Cross-check your result with the analytical solution for $Y^*$. 
+
+::: {.callout-tip collapse="true" title="R Solution"}
+```{r}
+#| echo: true
+#| output: true
+
+#Define exogenous parameters
+c0=2
+c1=0.8
+I=11
+
+#set initial values for two endogenous variable
+Y=C=1
+
+#Use a for loop to solve it
+for (i in 1:100){
+  Y = C+I
+  C = c0+c1*Y
+}
+
+Y
+
+```
+:::
+
+::: {.callout-tip collapse="true" title="Python Solution"}
+```{python}
+#| echo: true
+#| output: true
 
 #Define exogenous parameters and initialise endogenous variables
 c0 = 2
@@ -302,121 +338,293 @@ for i in range(1, 100):
     C = c0 + c1 * Y
 
 Y
-#correct solution is Y=(I+c0)/(1-c1)=60
 
-#The loop uses the values from the previous iteration
-#to calculate the values of the next, because it starts with assigning a value 
-#to Y and then uses that value to assign a new value to C, and in the next
-# iteration it uses this new value for C to define a new value for Y etc.
+```
+:::
 
+::: {.callout-tip collapse="true" title="Mathematical solution"}
 
-########################### Data structures ##########################
-#In most applications we produce outputs which do not consist of a single number.
-#Often we have an entire stream of results, or we want to analyse data and have 
-# to store larger amounts of data. 
-# Python/Numpy has a variety of data structures for this purpose.
+$Y^*=\frac{I+c_0}{1-c_1}=\frac{11+2}{1-0.8}=65$
 
+:::
 
-### Vectors
-#We can create an vector of size 3 with only zeros and fill it later 
-# (with results of our model for example). Importantly, unlike R, Python starts
-# counting the elements in vector at 0 rather than 1
-vec1 = np.zeros((3)) 
-#we can define vectors explicitly 
-vec2 = np.array([1, 2, 3])
-vec3 = np.array([6, 7, 8])
-#we can also use the sequence operator
-vec4 = np.arange(1, 11)
-#and we can define the step size
-vec5 = np.arange(1, 2, 0.1)
-#we can call specific entries using square brackets -- note how Python starts 
-# counting at 0
-vec2[2]
-#if we want to access more elements at once
-vec2[0:3]
+### Functions
+- you can write your own *functions* that can be called and again for different purposes
+- a function consists of a fixed block of code that contains terms (the inputs or arguments of the function) whose values need to be supplied when the function is called
+- this allows running the same type of code many times with changes only to the inputs of the function  
 
-### Matrices
-#define a matrix: 3 rows and 2 columns, all elements equal to 0
-mat1 = np.zeros((3, 2))
-#we can also fill it with specific values
-mat2 = np.array([[1, 2], [3, 4], [5, 6]])
+```{r}
+#| output: false
 
-#access specific elements (columns,rows)
-mat2[2, 0]
-#access entire rows or columns
-mat2[:, 0]
+################## Functions ##################################################
+# Let's cast the previous loop that simulates they Keynesian across 
+# into a function called "keynes"
 
-## Combine two column vectors in a matrix
-mat3 = np.column_stack((vec1, vec2))
-## Combine two row vectors in a matrix
-mat4 = np.row_stack((vec1, vec2))
+# the terms inside the brackets are the arguments of the function whose 
+# values need to be supplied when the function is called
+
+keynes=function(c0, c1, I){
+  # Initialise
+  Y=C=1
+
+  # Solve
+  for (i in 1:100){
+    Y = C+I
+    C = c0+c1*Y
+    } # close loop
+ 
+ return(Y) # specify the value that will be return when the function is executed
+
+} # close function
+
+# Execute function for desired parameter combination
+print(keynes(c0=2, c1=0.8, I=10))
+
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+################## Functions ##################################################
+# Let's cast the previous loop that simulates the Keynesian cross 
+# into a function called "keynes"
+
+# the terms inside the brackets are the arguments of the function whose 
+# values need to be supplied when the function is called
+
+def keynes(c0, c1, I):
+    # Initialize
+    Y = C = 1
+
+    # Solve
+    for i in range(100):
+        Y = C + I
+        C = c0 + c1 * Y
+
+    return Y  # specify the value that will be returned when the function is executed
+
+# Execute function for desired parameter combination
+print(keynes(c0=2, c1=0.8, I=10))
+
 ```
 
 :::
 
-## Simple exercise 
-If you further want to practice your coding skills, attempt the following exercises:
+#### Exercise 2: functions
+Use the 'keynes' function we've just defined to find the equilibrium solution  $Y^*$ when setting $c_0=3$, $c_1=0.8$, and $I=10$.
 
-1. Write a loop which calculates the running sum of $x_i=\frac{1}{i^2}$ by saving each element $\sum_{i=1}^{j}x_i$ in a vector (where $j=1,2,..,10$).
+::: {.callout-tip collapse="true" title="R solution"}
+```{r}
+#| echo: true
+#| output: true
+print(keynes(c0=3, c1=0.8, I=10))
 
-If your code is correct, you should get the solution:
+```
+:::
 
-::: {.callout-tip collapse="true" title="Solution"}
+::: {.callout-tip collapse="true" title="Python solution"}
+```{python}
+#| echo: true
+#| output: true
+print(keynes(c0=3, c1=0.8, I=10))
+
+```
+:::
+
+
+### Basic data structures: vectors and matrices
+- in most applications we produce outputs which do not consist of a single number
+- often we have an entire stream of results, or we want to analyse data and have to store larger amounts of data
+- both *R* and *Python* have a variety of data structures for this purpose
+- we will mostly work with elementary vectors and matrices
 
 ```{r}
-#| echo: false
-#| output: true
+#| output: false
+########################### Basic data structures ##########################
 
-#################################### Exercise 1 #########################################
-
-# Clear environment
+# Let's clean up first by clearing the environment (this is not
+# strictly necessary but keeps your work environment tidy)
 rm(list=ls(all=TRUE))
 
+#### Vectors 
+# We can create an empty vector and fill it later (with results of our model for example)
+vec1 = vector(length=3)
+# we can define vectors explicitly using the c() function (c for column?)
+vec2 = c(1,2,3)
+vec3 = c(6,7,8)
+# we can also use the sequence operator
+vec4 = 1:10
+# and we can define the step size
+vec5 = seq(1,2,0.1)
+vec5
+# we can call specific entries using square brackets
+vec5[4]
+# if we want to access more elements at once
+vec5[c(4,1)]
+
+#### Matrices
+# define a matrix: 3 rows and 2 columns, all elements equal to 0
+mat1 = matrix(0, nrow=3, ncol=2)
+mat1
+# we can also fill it with specific values
+mat2 = matrix(c(1,2,3,4,5,6), nrow = 3, ncol = 2)
+mat2
+# access specific elements (columns,rows)
+mat2[3,1]
+# access entire rows or columns
+mat2[,1]
+mat2[1,]
+# access sub matrices
+mat2[c(1,2),]
+## Combine two column vectors in a matrix
+mat3=cbind(vec1, vec2)
+mat3
+## Combine two row vectors in a matrix
+mat4=rbind(vec1, vec2)
+mat4
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+########################### Basic data structures ##########################
+# In Python, we use the NumPy library for numerical computations with vectors/matrices (called "arrays")
+
+import numpy as np
+
+#### Vectors
+# Create an empty vector (numpy array) and fill it later
+vec1 = np.empty(3)  # creates an empty array with 3 elements
+
+# Define vectors explicitly using numpy's array function
+vec2 = np.array([1, 2, 3])
+vec3 = np.array([6, 7, 8])
+
+# Use the range operator with numpy for sequences
+vec4 = np.arange(1, 11)  
+
+# Define a sequence with a specific step size using numpy's arange
+vec5 = np.arange(1, 2.1, 0.1)  
+print(vec5)
+
+# Access specific entries using square brackets (note that Python uses zero-based indexing, 
+# i.e. it starts counting the first element of a vector as 0
+print(vec5[3])  # 4th element (index 3, 0-based indexing)
+
+# Access multiple elements at once
+print(vec5[[3, 0]])  # accessing the 4th and 1st elements using numpy
+
+#### Matrices
+# Define a matrix: 3 rows and 2 columns, all elements equal to 0
+mat1 = np.zeros((3, 2))  # creates a matrix of zeros
+print(mat1)
+
+# Fill the matrix with specific values
+mat2 = np.array([[1, 2], [3, 4], [5, 6]])  
+print(mat2)
+
+# Access specific elements (row, column)
+print(mat2[2, 0])  # 3rd row, 1st column
+
+# Access entire rows or columns
+print(mat2[:, 0])  # entire first column
+print(mat2[0, :])  # entire first row
+
+# Access submatrices
+print(mat2[[0, 1], :])  # access the first two rows
+
+# Combine two column vectors in a matrix (equivalent to cbind in R)
+mat3 = np.column_stack((vec1, vec2))
+print(mat3)
+
+# Combine two row vectors in a matrix (equivalent to rbind in R)
+mat4 = np.row_stack((vec1, vec2))
+print(mat4)
+
+```
+
+:::
+
+
+#### Exercise 3: vectors and matrices
+Write a loop which calculates $x_i=\frac{1}{i^2}$, where $i=1,2,..,10$, and saves each element $x_i$ in a vector.
+
+::: {.callout-tip collapse="true" title="R solution"}
+
+```{r}
+#| echo: true
+#| output: true
 
 #Define empty vector of length 10 where we save results
 x = vector(length = 10)
 
-#Initialise x for i=1
-x[1]=1
-
-# then define loop for i= 2,..10
-for (i in 2:10){
-    x[i] = x[i-1] + 1/i^2 
+# then define loop 
+for (i in 1:10){
+    x[i] = 1/i^2 
 }
 
 # Print result
 x
 
 ```
-
 :::
 
-2. Write a loop which calculates the running sums of $x_i=\frac{1}{i^2}$ (as in exercise 1) and in addition also $y_i=\frac{1}{i^3}$. Combine the results in a matrix.
+::: {.callout-tip collapse="true" title="Python solution"}
 
-
-If your code is correct, you should get the solution:
-
-::: {.callout-tip collapse="true" title="Solution"}
-
-```{r}
-#| echo: false
+```{python}
+#| echo: true
 #| output: true
 
-################################## Exercise 2 ##########################################
-# Clear environment
-rm(list=ls(all=TRUE))
+import numpy as np
 
-#Define empty vector of length 10 where we save results
+## Remember that in Python indexing starts with 0, which needs to be taken into account here
+
+# Define a zero vector with and index running from 0 to 9
+x = np.zeros(10)
+
+# Then define the loop, where you have two options to adjust for the zero-based indexing
+
+# Option 1: set range of loop from 1 to 10, and deduct 1 in the index on the LHS
+for i in range(1, 11):  
+    x[i-1] = 1 / (i**2)
+
+print(x)
+
+# Option 2: set range of loop from 2 to 10, and add 1 in the index on the RHS
+for i in range(0, 10):  
+    x[i] = 1 / ((i+1)**2)
+
+print(x)
+
+```
+:::
+
+
+Next, write a second loop which calculates $x_i=\frac{1}{i^3}$, where $i=1,2,..,10$, and saves each element $x_i$ in a vector. Combine both vectors in a matrix.
+
+
+::: {.callout-tip collapse="true" title="R solution"}
+
+```{r}
+#| echo: true
+#| output: true
+
+#Define empty vectors of length 10 where we save results
 x = vector(length = 10)
 y = vector(length = 10)
 
-#Initialise x and y for i=1
-x[1]=y[1]=1
-
-# then define loop for i= 2,..10
-for (i in 2:10){
-  x[i] = x[i-1] + 1/i^2 
-  y[i]= y[i-1] + 1/i^3
+# then define loop 
+for (i in 1:10){
+  x[i] = 1/i^2 
+  y[i]= 1/i^3
 }
 
 # Combine vectors in a matrix
@@ -427,4 +635,32 @@ mat
 ```
 
 :::
+
+::: {.callout-tip collapse="true" title="Python solution"}
+
+```{python}
+#| echo: true
+#| output: true
+
+# Define an empty vector of length 10 where we save results
+x = np.zeros(10)
+y = np.zeros(10)
+
+# Then define the loop
+for i in range(1, 11):  
+    x[i-1] = 1 / (i**2)
+    y[i-1] = 1 / (i**3)
+
+# Combine vectors in a matrix
+mat = np.column_stack((x, y))
+
+mat
+
+```
+:::
+
+## Coming up next
+You have now successfully covered the elementary coding skills necessary to simulate macroeconomic models. Proceed to @sec-how-to-simulate for a general introduction to model simulation with a final exercise.
+
+
 

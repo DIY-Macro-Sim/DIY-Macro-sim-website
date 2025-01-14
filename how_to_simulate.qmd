@@ -1,4 +1,5 @@
 # How to Simulate Economic Models {#sec-how-to-simulate}
+This section provides a general introduction into the simulation of economic models. It finishes with a little exercise that will help you build the skills to simulate and visualise models yourself.
 
 ## Introduction: economic models
 
@@ -64,7 +65,7 @@ A limitation of the method of iteration is that it will only converge to the sol
 
 ### Solving economic models numerically: examples
 
-#### A static model
+#### A static model {#sec-static-Keynesian-model}
 
 Consider a two-dimensional simultaneous system represented by a simple Keynesian goods market model:
 
@@ -631,6 +632,123 @@ Broadly speaking, three types of nodes are possible:
 3. nodes to arrows only point towards represent endogenous variables that are residuals (not present in this example) 
 
 It can thus be seen that the key exogenous variable in the @Samuelson1939 model is government spending $G_0$, which determines aggregate income, which in turn feeds into consumption. Consumption then feeds into investment, which feeds back into income yielding the multiplier-accelerator effect.
+
+## Exercise: simulating and visualising a simple model
+- take the code for the static Keynesian goods market from @sec-static-Keynesian-model above 
+- add exogenous government spending $G_0$ to aggregate demand
+- set $G_0 = 2$
+- create a third scenario where $G_0$ increases to $G_0=5$
+- plot equilibrium output $Y^*$ for the three scenarios in a bar chart
+
+::: {.callout-tip collapse="true" title="R solution"}
+
+```{r}
+#| echo: true
+#| output: true
+
+### Add government spending to Keynesian goods market model
+
+#Clear the environment 
+rm(list=ls(all=TRUE))
+
+# Set number of parameterisations that will be considered
+S=3
+
+# Set fixed parameter values
+c0=3
+c1=0.8
+
+#Create vector in which equilibrium solutions from different parameterisations will be stored
+Y_eq=vector(length=S)
+C_eq=vector(length=S)
+
+#Create vectors with parameters that will change 
+I0=vector(length=S)
+I0[]=5 # set I0=5 across all scenarios
+I0[2]=6
+# adding government spending
+G0=vector(length=S)
+G0[]=2  # set G0=2 across all scenarios
+G0[3]=5 # set G0=5 in third scenario
+
+# Initialise endogenous variables at arbitrary positive value 
+Y=C=1
+
+#Solve this system numerically through 1000 iterations based on the initialisation
+for (i in 1:S){
+  for (iteration in 1:1000){
+  Y = C + I0[i] + G0[i]            # add government spending to aggregate demand
+  C = c0 + c1*Y
+  } # close iterations loop
+  
+#Save results for different parameterisations in vector
+Y_eq[i]=Y
+C_eq[i]=C
+} # close parameterisations loop
+
+# Bar chart of different scenarios for output
+barplot(Y_eq, ylab="Y", main="Output", names.arg=c("Baseline", "Increase in I0", "Increase in G0"))
+
+```
+::: 
+
+
+::: {.callout-tip collapse="true" title="Python Solution"}
+
+```{python}
+#| echo: true
+#| output: true
+
+### Add government spending to Keynesian goods market model
+
+# Set the number of parameterisations that will be considered
+S = 3
+
+# Set fixed parameter values
+c0 = 3
+c1 = 0.8
+
+# Create numpy arrays in which equilibrium solutions from different parameterisations will be stored
+Y_eq = np.zeros(S)
+C_eq = np.zeros(S)
+
+# Create a numpy array with the parameter that will change
+I0 = np.zeros(S)
+I0[:] = 5 # set I0=5 across all scenarios
+I0[1] = 6
+# adding government spending
+G0 = np.zeros(S)
+G0[:] = 2 # set G0=2 across all scenarios
+G0[2] = 5 # set G0=5 in third scenario
+
+# Initialize endogenous variables at an arbitrary positive value
+Y = C = 1
+
+# Solve this system numerically through 1000 iterations based on the initialization
+for i in range(S):
+    for iteration in range(1000):
+        Y = C + I0[i] + G0[i]   # add government spending to aggregate demand
+        C = c0 + c1 * Y
+
+    # Save results for different parameterisations in the numpy arrays
+    Y_eq[i] = Y
+    C_eq[i] = C
+
+# Load matplot library
+import matplotlib.pyplot as plt
+
+# Bar chart of different scenarios for output
+scenario_labels = ["Baseline", "Increase in I0", "Increase in G0"]
+plt.bar(scenario_labels, Y_eq)
+plt.xlabel("Scenario")
+plt.ylabel("Y")
+plt.title("Output")
+plt.show()
+
+```
+
+:::
+
 
 ## Appendix: How to simulate dynamic model in continuous time {#sec-sim-continuous}
 
