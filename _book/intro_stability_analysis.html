@@ -330,9 +330,11 @@ window.Quarto = {
   <ul>
 <li><a href="#solution-of-a-single-first-order-linear-difference-equation" id="toc-solution-of-a-single-first-order-linear-difference-equation" class="nav-link active" data-scroll-target="#solution-of-a-single-first-order-linear-difference-equation">Solution of a single first-order linear difference equation</a></li>
   <li><a href="#solution-of-a-linear-system-of-difference-equations" id="toc-solution-of-a-linear-system-of-difference-equations" class="nav-link" data-scroll-target="#solution-of-a-linear-system-of-difference-equations">Solution of a linear system of difference equations</a></li>
+  <li><a href="#an-economic-example-samuelsons-1939-multiplier-accelerator-model" id="toc-an-economic-example-samuelsons-1939-multiplier-accelerator-model" class="nav-link" data-scroll-target="#an-economic-example-samuelsons-1939-multiplier-accelerator-model">An economic example: Samuelson’s (1939) multiplier accelerator model</a></li>
   <li><a href="#complex-eigenvalues-and-cycles" id="toc-complex-eigenvalues-and-cycles" class="nav-link" data-scroll-target="#complex-eigenvalues-and-cycles">Complex eigenvalues and cycles</a></li>
   <li><a href="#nonlinear-systems" id="toc-nonlinear-systems" class="nav-link" data-scroll-target="#nonlinear-systems">Nonlinear systems</a></li>
   <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key takeaways</a></li>
+  <li><a href="#a-simplified-recipe-for-analysing-dynamic-systems" id="toc-a-simplified-recipe-for-analysing-dynamic-systems" class="nav-link" data-scroll-target="#a-simplified-recipe-for-analysing-dynamic-systems">A simplified recipe for analysing dynamic systems</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -390,7 +392,7 @@ y_t = \underbrace{\frac{a_0}{1-a_1}}_{equilibrium \: y^*} + \underbrace{a_1^t\le
 <p><span class="math display">\[
 y_t=a_0 + Ay_{t-1},  
 \]</span></p>
-<p>where <span class="math inline">\(y_t\)</span> is a <span class="math inline">\(1 \times N\)</span> column vector and <span class="math inline">\(A\)</span> an <span class="math inline">\(N \times N\)</span> square matrix.</p>
+<p>where <span class="math inline">\(y_t\)</span> is a <span class="math inline">\(1 \times N\)</span> column vector and <span class="math inline">\(A\)</span> an <span class="math inline">\(N \times N\)</span> square matrix called the <em>coefficient matrix</em>.</p>
 <p>If the inverse <span class="math inline">\((I-A)^{-1}\)</span> exists, which requires <span class="math inline">\(det(I-A) \neq 0\)</span>, the solution will be of the form:</p>
 <p><span class="math display">\[
 y_t= \underbrace{(I-A)^{-1}a_0}_{y^*} + A^t[y_0- \underbrace{(I-A)^{-1}a_0}_{y^*}].
@@ -630,59 +632,44 @@ Python code
 </div>
 </div>
 </div>
-<p>It can be seen that the simulated results are equivalent to the results we obtained analytically. The key takeaway is that by deriving information about the eigenvalues (and possibly eigenvectors) of the Jacobian matrix of the system, we are able to deduce knowledge of the dynamic properties of the system even without numerical simulation. However, the more complex the dynamic system, the more difficult this will be, thereby rendering numerical simulation a key tool to supplement formal analysis.</p>
-</section><section id="complex-eigenvalues-and-cycles" class="level2"><h2 class="anchored" data-anchor-id="complex-eigenvalues-and-cycles">Complex eigenvalues and cycles</h2>
-<p>So far, we have discussed the case where the eigenvalues <span class="math inline">\(\lambda\)</span> are real numbers. However, what if the polynomial <span class="math inline">\(det(A-\lambda I)=0\)</span> does not yield real numbers? Recall that in the case of a second-order polynomial <span class="math inline">\(\lambda^2+b\lambda+c=0\)</span>, the two roots are given by <span class="math inline">\(\lambda_{1,2} = \frac{-b \pm \sqrt{b^2-4c}}{2}\)</span>. If the term under the root <span class="math inline">\(\Delta=b^2-4c\)</span>, also called discriminant, becomes negative, the solution will be a <em>complex number</em>. More specifically, we can write:</p>
+<p>It can be seen that the simulated results are equivalent to the results we obtained analytically. The key takeaway is that by deriving information about the eigenvalues (and possibly eigenvectors) of the coefficient matrix of the system, we are able to deduce knowledge of the dynamic properties of the system even without numerical simulation. However, the more complex the dynamic system, the more difficult this will be, thereby rendering numerical simulation a key tool to supplement formal analysis.</p>
+</section><section id="an-economic-example-samuelsons-1939-multiplier-accelerator-model" class="level2"><h2 class="anchored" data-anchor-id="an-economic-example-samuelsons-1939-multiplier-accelerator-model">An economic example: Samuelson’s (1939) multiplier accelerator model</h2>
+<p>Consider the multiplier accelerator model by <span class="citation" data-cites="Samuelson1939">Samuelson (<a href="#ref-Samuelson1939" role="doc-biblioref">1939</a>)</span> discussed in <a href="how_to_simulate.html" class="quarto-xref"><span>Chapter 2</span></a>:</p>
 <p><span class="math display">\[
-\lambda_{1,2} = \frac{-b \pm \sqrt{b^2-4c}}{2}=\frac{-b \pm \sqrt{4c-b^2}\sqrt{-1}}{2} =\frac{-b \pm \sqrt{4c-b^2}i}{2},
-\]</span></p>
-<p>where <span class="math inline">\(i=\sqrt{-1}\)</span> is the imaginary number. The expression can also be written as:</p>
-<p><span class="math display">\[
-\lambda_{1,2} = \frac{-b}{2} \pm \frac{\sqrt{4c-b^2}}{2}i = h \pm mi,
-\]</span></p>
-<p>which is a pair of conjugate complex numbers containing a real part given by <span class="math inline">\(h\)</span> and an imaginary part given by <span class="math inline">\(m\)</span>.</p>
-<p>Consider the model by <span class="citation" data-cites="Samuelson1939">Samuelson (<a href="#ref-Samuelson1939" role="doc-biblioref">1939</a>)</span> discussed in <a href="how_to_simulate.html" class="quarto-xref"><span>Chapter 2</span></a>: <span class="math display">\[
 C_t= c_1(C_{t-1} + I_{t-1} + G_0)
 \]</span></p>
 <p><span class="math display">\[
 I_t= \beta[c_1(C_{t-1} + I_{t-1} + G_0) - C_{t-1}]
 \]</span></p>
-<p>The Jacobian matrix of this model is given by:</p>
+<p>This is a two-dimensional first-order system with state variables <span class="math inline">\(C_t\)</span> and <span class="math inline">\(I_t\)</span>.</p>
+<p>The coefficient matrix of this model is given by:</p>
 <p><span class="math display">\[
-J=\begin{bmatrix} c_1 &amp; c_1 \\ \beta(c_1-1) &amp; \beta c_1 \end{bmatrix}
+A = \begin{bmatrix} \frac{\partial C_t}{\partial C_{t-1}}&amp; \frac{\partial C_t}{\partial I_{t-1}} \\ \frac{\partial I_t}{\partial C_{t-1}}  &amp; \frac{\partial I_t}{\partial I_{t-1}}  \end{bmatrix}=\begin{bmatrix} c_1 &amp; c_1 \\ \beta(c_1-1) &amp; \beta c_1 \end{bmatrix}
 \]</span></p>
-<p>The characteristic polynomial yielding the eigenvalues of the Jacobian is</p>
+<p>The characteristic polynomial yielding the eigenvalues of <span class="math inline">\(A\)</span> is</p>
 <p><span class="math display">\[\lambda^2-\lambda c_1(1+\beta)+\beta c_1=0,\]</span></p>
 <p>where <span class="math inline">\(c_1(1+\beta) =tr(J)\)</span> and <span class="math inline">\(\beta c_1 = det(J)\)</span>.</p>
 <p>Thus we have</p>
 <p><span class="math display">\[
 \lambda_{1,2} = \frac{c_1(1+\beta) \pm \sqrt{[c_1(1+\beta)]^2-4\beta c_1}}{2}.
 \]</span></p>
-<p>Thus, the two eigenvalues will be a pair of complex conjugates if <span class="math inline">\([c_1(1+\beta)]^2-4\beta c_1 &lt;0\)</span> or <span class="math inline">\(c_1 &lt; \frac{4\beta}{(1+\beta)^2}\)</span>. Suppose we have <span class="math inline">\(c_1=0.4\)</span> and <span class="math inline">\(\beta=2\)</span>. Then the discriminant will be negative and the eigenvalues will be complex:</p>
+<p>Assuming <span class="math inline">\(c_1=0.8\)</span> and <span class="math inline">\(\beta=0.3\)</span>, we can compute the eigenvalues:</p>
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment </span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set fixed parameter values</span></span>
+<span><span class="va">c1</span><span class="op">=</span><span class="fl">0.8</span></span>
+<span><span class="va">beta</span><span class="op">=</span><span class="fl">0.3</span></span>
 <span></span>
-<span><span class="co"># Set parameter values</span></span>
-<span><span class="va">c1</span><span class="op">=</span><span class="fl">0.4</span></span>
-<span><span class="va">beta</span><span class="op">=</span><span class="fl">2</span></span>
-<span></span>
-<span><span class="co"># Check if discriminant is negative</span></span>
-<span><span class="op">(</span><span class="va">c1</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">beta</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">-</span><span class="fl">4</span><span class="op">*</span><span class="va">c1</span><span class="op">*</span><span class="va">beta</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.76</code></pre>
-</div>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Find eigenvalues and eigenvectors of matrix</span></span>
-<span><span class="co"># Define matrix</span></span>
-<span><span class="va">J</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">c1</span>, <span class="va">c1</span>,</span>
+<span><span class="co">## Compute eigenvalues</span></span>
+<span><span class="co"># Define coefficient matrix</span></span>
+<span><span class="va">A</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">c1</span>, <span class="va">c1</span>,</span>
 <span>           <span class="va">beta</span><span class="op">*</span><span class="op">(</span><span class="va">c1</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>, <span class="va">beta</span><span class="op">*</span><span class="va">c1</span><span class="op">)</span>, </span>
 <span>           <span class="fl">2</span>, <span class="fl">2</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Obtain eigenvalues and eigenvectors</span></span>
-<span><span class="va">ev</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span></span>
+<span><span class="va">ev</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
 <span><span class="op">(</span><span class="va">evals</span> <span class="op">=</span> <span class="va">ev</span><span class="op">$</span><span class="va">values</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6+0.663325i 0.6-0.663325i</code></pre>
+<pre><code>[1] 0.694356 0.345644</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Python code">
@@ -698,29 +685,102 @@ Python code
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameter values</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>c1 <span class="op">=</span> <span class="fl">0.4</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if discriminant is negative</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>(c1 <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> beta))<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">4</span> <span class="op">*</span> c1 <span class="op">*</span> beta</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the matrix</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> np.array([[c1, c1],</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>              [beta <span class="op">*</span> (c1 <span class="op">-</span> <span class="dv">1</span>), beta <span class="op">*</span> c1]])</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate eigenvalues and eigenvectors</span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>evals, evecs <span class="op">=</span> np.linalg.eig(J)</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(evals)</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(evals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameter values</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>c1 <span class="op">=</span> <span class="fl">0.8</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="fl">0.3</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the coefficient matrix</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[c1, c1],</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>              [beta <span class="op">*</span> (c1 <span class="op">-</span> <span class="dv">1</span>), beta <span class="op">*</span> c1]])</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate eigenvalues and eigenvectors</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>evals, evecs <span class="op">=</span> np.linalg.eig(A)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(evals)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(evals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p>and conclude that since the dominant eigenvalue is smaller than one (in absolute terms), the system is stable.</p>
+</section><section id="complex-eigenvalues-and-cycles" class="level2"><h2 class="anchored" data-anchor-id="complex-eigenvalues-and-cycles">Complex eigenvalues and cycles</h2>
+<p>So far, we have discussed the case where the eigenvalues <span class="math inline">\(\lambda\)</span> are real numbers. However, what if the polynomial <span class="math inline">\(det(A-\lambda I)=0\)</span> does not yield real numbers? Recall that in the case of a second-order polynomial <span class="math inline">\(\lambda^2+b\lambda+c=0\)</span>, the two roots are given by <span class="math inline">\(\lambda_{1,2} = \frac{-b \pm \sqrt{b^2-4c}}{2}\)</span>. If the term under the root <span class="math inline">\(\Delta=b^2-4c\)</span>, also called discriminant, becomes negative, the solution will be a <em>complex number</em>. More specifically, we can write:</p>
+<p><span class="math display">\[
+\lambda_{1,2} = \frac{-b \pm \sqrt{b^2-4c}}{2}=\frac{-b \pm \sqrt{4c-b^2}\sqrt{-1}}{2} =\frac{-b \pm \sqrt{4c-b^2}i}{2},
+\]</span></p>
+<p>where <span class="math inline">\(i=\sqrt{-1}\)</span> is the imaginary number. The expression can also be written as:</p>
+<p><span class="math display">\[
+\lambda_{1,2} = \frac{-b}{2} \pm \frac{\sqrt{4c-b^2}}{2}i = h \pm mi,
+\]</span></p>
+<p>which is a pair of conjugate complex numbers containing a real part given by <span class="math inline">\(h\)</span> and an imaginary part given by <span class="math inline">\(m\)</span>.</p>
+<p>Consider again the characteristic polynomial of the <span class="citation" data-cites="Samuelson1939">Samuelson (<a href="#ref-Samuelson1939" role="doc-biblioref">1939</a>)</span> model:</p>
+<p><span class="math display">\[
+\lambda_{1,2} = \frac{c_1(1+\beta) \pm \sqrt{[c_1(1+\beta)]^2-4\beta c_1}}{2}.
+\]</span></p>
+<p>The two eigenvalues will be a pair of complex conjugates if <span class="math inline">\([c_1(1+\beta)]^2-4\beta c_1 &lt;0\)</span> or <span class="math inline">\(c_1 &lt; \frac{4\beta}{(1+\beta)^2}\)</span>.</p>
+<p>Suppose we have <span class="math inline">\(c_1=0.4\)</span> and <span class="math inline">\(\beta=2\)</span>. Then the discriminant will be negative and the eigenvalues will be complex:</p>
+<div class="cell">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set parameter values</span></span>
+<span><span class="va">c1</span><span class="op">=</span><span class="fl">0.4</span></span>
+<span><span class="va">beta</span><span class="op">=</span><span class="fl">2</span></span>
+<span></span>
+<span><span class="co"># Check if discriminant is negative</span></span>
+<span><span class="op">(</span><span class="va">c1</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">beta</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">-</span><span class="fl">4</span><span class="op">*</span><span class="va">c1</span><span class="op">*</span><span class="va">beta</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.76</code></pre>
+</div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Find eigenvalues and eigenvectors of matrix</span></span>
+<span><span class="co"># Define matrix</span></span>
+<span><span class="va">A</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">c1</span>, <span class="va">c1</span>,</span>
+<span>           <span class="va">beta</span><span class="op">*</span><span class="op">(</span><span class="va">c1</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>, <span class="va">beta</span><span class="op">*</span><span class="va">c1</span><span class="op">)</span>, </span>
+<span>           <span class="fl">2</span>, <span class="fl">2</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Obtain eigenvalues and eigenvectors</span></span>
+<span><span class="va">ev</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="va">evals</span> <span class="op">=</span> <span class="va">ev</span><span class="op">$</span><span class="va">values</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6+0.663325i 0.6-0.663325i</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameter values</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>c1 <span class="op">=</span> <span class="fl">0.4</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if discriminant is negative</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>(c1 <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> beta))<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">4</span> <span class="op">*</span> c1 <span class="op">*</span> beta</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the matrix</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[c1, c1],</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>              [beta <span class="op">*</span> (c1 <span class="op">-</span> <span class="dv">1</span>), beta <span class="op">*</span> c1]])</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate eigenvalues and eigenvectors</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>evals, evecs <span class="op">=</span> np.linalg.eig(A)</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(evals)</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(evals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
 <p>Another way of understanding the logic behind complex numbers is through a so-called <em>Argand diagram</em> that plots the real part of the eigenvalue on the horizontal and the imaginary part on the vertical axis. By Pythagoras’ theorem, the distance of the eigenvalue from the origin will then be given by <span class="math inline">\(R=\sqrt{h^2+m^2}\)</span>. The value of <span class="math inline">\(R\)</span> (which is always real-valued and positive) is called the <em>modulus</em> (or absolute value) of the complex eigenvalue and will contain important information about the dynamic stability of economic models that exhibit complex eigenvalues.</p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Draw Argand diagram</span></span>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Draw Argand diagram</span></span>
 <span></span>
 <span><span class="co"># Save real and imaginary part of complex eigenvalue</span></span>
 <span><span class="va">re</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html">Re</a></span><span class="op">(</span><span class="va">evals</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
@@ -750,7 +810,7 @@ Python code
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Python code">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -759,40 +819,40 @@ Python code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Draw Argand diagram</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Save real and imaginary part of complex eigenvalue</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>re <span class="op">=</span> evals[<span class="dv">0</span>].real</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>im <span class="op">=</span> evals[<span class="dv">0</span>].imag</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'h'</span>)</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'m'</span>)</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Argand diagram of complex eigenvalue'</span>)</span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot complex eigenvalue</span></span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>ax.plot(re, im, <span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">8</span>, color<span class="op">=</span><span class="st">'k'</span>)</span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot unit circle</span></span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>)</span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>Y<span class="op">=</span> np.sqrt(<span class="dv">1</span><span class="op">-</span>X<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>ax.plot(X, Y, <span class="st">'k--'</span>)</span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a ray from the origin to the eigenvalue</span></span>
-<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="dv">0</span>, re], [<span class="dv">0</span>, im], <span class="st">'k-'</span>)</span>
-<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Add labels</span></span>
-<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.1</span>, <span class="fl">0.025</span>, <span class="vs">r'$\theta$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.001</span>, <span class="fl">0.25</span>, <span class="vs">r'$R=\sqrt{h^2+m^2}$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>ax.text(re, im <span class="op">-</span> <span class="fl">0.1</span>, <span class="vs">r'$\lambda=h+mi$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Draw Argand diagram</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Save real and imaginary part of complex eigenvalue</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>re <span class="op">=</span> evals[<span class="dv">0</span>].real</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>im <span class="op">=</span> evals[<span class="dv">0</span>].imag</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'h'</span>)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'m'</span>)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Argand diagram of complex eigenvalue'</span>)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot complex eigenvalue</span></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>ax.plot(re, im, <span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">8</span>, color<span class="op">=</span><span class="st">'k'</span>)</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot unit circle</span></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>)</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>Y<span class="op">=</span> np.sqrt(<span class="dv">1</span><span class="op">-</span>X<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>ax.plot(X, Y, <span class="st">'k--'</span>)</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a ray from the origin to the eigenvalue</span></span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="dv">0</span>, re], [<span class="dv">0</span>, im], <span class="st">'k-'</span>)</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Add labels</span></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.1</span>, <span class="fl">0.025</span>, <span class="vs">r'$\theta$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.001</span>, <span class="fl">0.25</span>, <span class="vs">r'$R=\sqrt{h^2+m^2}$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>ax.text(re, im <span class="op">-</span> <span class="fl">0.1</span>, <span class="vs">r'$\lambda=h+mi$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -821,19 +881,19 @@ y_{1t}=v_{11}c_1 R_1^t(\cos\theta_1 t \pm \sin\theta_1 t \times i) +...+ y^*_1.
 </ul>
 <p>Let us simulate the Samuelson model with the parameterisation that yields complex eigenvalues to illustrate these results:</p>
 <div class="cell">
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate modulus</span></span>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate modulus</span></span>
 <span><span class="va">mod</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html">Mod</a></span><span class="op">(</span><span class="va">evals</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">mod</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8944272</code></pre>
 </div>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate cycle length</span></span>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate cycle length</span></span>
 <span><span class="va">L</span><span class="op">=</span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="va">pi</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">acos</a></span><span class="op">(</span><span class="va">re</span><span class="op">/</span><span class="va">mod</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">L</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.520433</code></pre>
 </div>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set number of periods for which you want to simulate</span></span>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set number of periods for which you want to simulate</span></span>
 <span><span class="va">Q</span><span class="op">=</span><span class="fl">100</span></span>
 <span></span>
 <span><span class="co"># Set number of parameterisations that will be considered</span></span>
@@ -866,7 +926,7 @@ y_{1t}=v_{11}c_1 R_1^t(\cos\theta_1 t \pm \sin\theta_1 t \times i) +...+ y^*_1.
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Python code">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -875,51 +935,52 @@ Python code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate modulus</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>mod <span class="op">=</span> <span class="bu">abs</span>(evals[<span class="dv">0</span>])</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mod)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate cycle length</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> (<span class="dv">2</span> <span class="op">*</span> math.pi) <span class="op">/</span> math.acos(re <span class="op">/</span> mod)</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(L)</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the number of periods and parameterizations</span></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize matrices for consumption, investment, and exogenous government spending</span></span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> np.ones((S, Q))</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> np.ones((S, Q))</span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>G0 <span class="op">=</span> np.full((S, Q), <span class="dv">5</span>)</span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve the system recursively based on the initialization</span></span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, Q):</span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    C[<span class="dv">0</span>, t] <span class="op">=</span> c1 <span class="op">*</span> (C[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> I[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> G0[<span class="dv">0</span>, t])</span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    I[<span class="dv">0</span>, t] <span class="op">=</span> beta <span class="op">*</span> (c1 <span class="op">*</span> (C[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> I[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> G0[<span class="dv">0</span>, t]) <span class="op">-</span> C[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>])</span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate output</span></span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> C <span class="op">+</span> G0 <span class="op">+</span> I</span>
-<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the time series chart of output dynamics</span></span>
-<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>plt.plot(Y[<span class="dv">0</span>, :<span class="dv">30</span>], color<span class="op">=</span><span class="st">'k'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, linestyle<span class="op">=</span><span class="st">'-'</span>)</span>
-<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time"</span>)</span>
-<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Y"</span>)</span>
-<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Output fluctuations in Samuelson model with complex eigenvalues"</span>)</span>
-<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate modulus</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>mod <span class="op">=</span> <span class="bu">abs</span>(evals[<span class="dv">0</span>])</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mod)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate cycle length</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> (<span class="dv">2</span> <span class="op">*</span> math.pi) <span class="op">/</span> math.acos(re <span class="op">/</span> mod)</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(L)</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the number of periods and parameterizations</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize matrices for consumption, investment, and exogenous government spending</span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> np.ones((S, Q))</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> np.ones((S, Q))</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>G0 <span class="op">=</span> np.full((S, Q), <span class="dv">5</span>)</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve the system recursively based on the initialization</span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, Q):</span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>    C[<span class="dv">0</span>, t] <span class="op">=</span> c1 <span class="op">*</span> (C[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> I[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> G0[<span class="dv">0</span>, t])</span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>    I[<span class="dv">0</span>, t] <span class="op">=</span> beta <span class="op">*</span> (c1 <span class="op">*</span> (C[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> I[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> G0[<span class="dv">0</span>, t]) <span class="op">-</span> C[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate output</span></span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> C <span class="op">+</span> G0 <span class="op">+</span> I</span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the time series chart of output dynamics</span></span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>plt.plot(Y[<span class="dv">0</span>, :<span class="dv">30</span>], color<span class="op">=</span><span class="st">'k'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, linestyle<span class="op">=</span><span class="st">'-'</span>)</span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time"</span>)</span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Y"</span>)</span>
+<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Output fluctuations in Samuelson model with complex eigenvalues"</span>)</span>
+<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
 <p>You can see that the model generates cycles with a length (from peak/trough to peak/trough) of around 7.5 periods. Since the modulus is <span class="math inline">\(R&lt;1\)</span>, the system is stable and eventually converges to the equilibrium.</p>
-<p>A general condition for stability of 2D systems with complex eigenvalues can be derived by making use of the fact that <span class="math inline">\(R=\sqrt{h^2+m^2}= \sqrt{ \left( \frac{b}{2} \right) ^2 + \left(\frac{\sqrt{4c-b^2}}{2}i \right)^2} = \sqrt{c}\)</span>, where <span class="math inline">\(b=tr(J)\)</span> and <span class="math inline">\(c=det(J)\)</span>. Applied to the modulus of the Samuelson model, this yields <span class="math inline">\(R=\sqrt{det(J)}=\sqrt{\beta c_1}\)</span>. Thus, the stability condition is:</p>
+<p>A general condition for stability of 2D systems with complex eigenvalues can be derived by making use of the fact that <span class="math inline">\(R=\sqrt{h^2+m^2}= \sqrt{ \left( \frac{b}{2} \right) ^2 + \left(\frac{\sqrt{4c-b^2}}{2}i \right)^2} = \sqrt{c}\)</span>, where <span class="math inline">\(b=tr(J)\)</span> and <span class="math inline">\(c=det(J)\)</span>.</p>
+<p>Applied to the modulus of the Samuelson model, this yields <span class="math inline">\(R=\sqrt{det(J)}=\sqrt{\beta c_1}\)</span>. Thus, the stability condition is:</p>
 <p><span class="math display">\[\beta c_1&lt;1.\]</span></p>
 <p>The following code generates a plot that displays the condition for cycles and the stability condition in the <span class="math inline">\((\beta, c_1)\)</span>-space:</p>
 <div class="cell">
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create function for cycle condition: c1 &lt; (4*beta)/(1+beta)^2</span></span>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create function for cycle condition: c1 &lt; (4*beta)/(1+beta)^2</span></span>
 <span><span class="va">cyc</span><span class="op">=</span> <span class="kw">function</span> <span class="op">(</span><span class="va">beta</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="op">(</span><span class="fl">4</span><span class="op">*</span><span class="va">beta</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">beta</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
 <span><span class="op">}</span></span>
@@ -943,7 +1004,7 @@ Python code
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Python code">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -952,35 +1013,35 @@ Python code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create function for cycle condition using beta as argument</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cyc(beta):</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="dv">4</span> <span class="op">*</span> beta) <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> beta)<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create function for stability condition using beta as argument</span></span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> stab(beta):</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">/</span> beta</span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the range of beta values</span></span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> np.linspace(<span class="fl">0.001</span>, <span class="dv">5</span>, <span class="dv">10000</span>)  <span class="co"># start from 0.001 to avoid division by zero</span></span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the two functions in (beta, c1)-space</span></span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>plt.plot(beta, cyc(beta), label<span class="op">=</span><span class="st">"cycle condition"</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>plt.plot(beta, stab(beta), label<span class="op">=</span><span class="st">"stability condition"</span>, color<span class="op">=</span><span class="st">'red'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Set labels and title</span></span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'$\beta$'</span>)</span>
-<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'$c_1$'</span>)</span>
-<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">2</span>)</span>
-<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper right"</span>)</span>
-<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
-<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create function for cycle condition using beta as argument</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cyc(beta):</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="dv">4</span> <span class="op">*</span> beta) <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> beta)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create function for stability condition using beta as argument</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> stab(beta):</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">/</span> beta</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the range of beta values</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> np.linspace(<span class="fl">0.001</span>, <span class="dv">5</span>, <span class="dv">10000</span>)  <span class="co"># start from 0.001 to avoid division by zero</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the two functions in (beta, c1)-space</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>plt.plot(beta, cyc(beta), label<span class="op">=</span><span class="st">"cycle condition"</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>plt.plot(beta, stab(beta), label<span class="op">=</span><span class="st">"stability condition"</span>, color<span class="op">=</span><span class="st">'red'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Set labels and title</span></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'$\beta$'</span>)</span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'$c_1$'</span>)</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">2</span>)</span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper right"</span>)</span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1001,20 +1062,21 @@ y_t=f^i(y^*) + \sum_{j=1}^{n}\frac{\partial f^i(y^*)}{\partial y_{jt-1}}(y_{jt-1
 <p><span class="math display">\[
 y_{t}=Ay_{t-1}+B,
 \]</span></p>
-<p>where <span class="math inline">\(A_{11}=\frac{\partial f^1(y^*)}{y_{1t-1}}\)</span> and so forth. Thus, <span class="math inline">\(A\)</span> is simply the Jacobian matrix of <span class="math inline">\(f(y_{t-1})\)</span> evaluated at <span class="math inline">\(y^*\)</span>.</p>
+<p>where <span class="math inline">\(A_{11}=\frac{\partial f^1(y^*)}{y_{1t-1}}\)</span> and so forth.</p>
+<p>The matrix <span class="math inline">\(A\)</span> is the so-called <em>Jacobian matrix</em> of the system <span class="math inline">\(f(y_{t-1})\)</span> <em>evaluated at</em> <span class="math inline">\(y^*\)</span>. The Jacobian matrix collects all partial derivatives of the state variables <span class="math inline">\(y_t\)</span> with respect to each other, i.e.&nbsp;<span class="math inline">\(\frac{\partial y_{1t}}{\partial y_{1t-1}}\)</span>, <span class="math inline">\(\frac{\partial y_{1t}}{\partial y_{2t-1}}\)</span>, and so on.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> The <em>linearised</em> Jacobian matrix <span class="math inline">\(A\)</span> can be obtained by plugging the equilibrium solutions for <span class="math inline">\(y^*\)</span> into the Jacobian.</p>
 <p>In practice, this means that to analyse the local stability of a nonlinear system, one needs to:</p>
 <ul>
 <li>find the equilibrium solution <span class="math inline">\(y^*\)</span> whose neighbourhood you want to analyse</li>
 <li>compute the Jacobian matrix of <span class="math inline">\(f(y_{t-1})\)</span>
 </li>
-<li>substitute <span class="math inline">\(y^*\)</span> into <span class="math inline">\(f(y_{t-1})\)</span> and analyse the resulting matrix.</li>
+<li>substitute <span class="math inline">\(y^*\)</span> into the Jacobian and analyse the resulting matrix.</li>
 </ul>
 <p>An example for the stability analysis of a simple two-dimensional nonlinear system can be found in <a href="a_ricardian_one_sector_model.html#sec-ricardo_1_analytical" class="quarto-xref"><span>Section 14.5</span></a>.</p>
 </section><section id="key-takeaways" class="level2"><h2 class="anchored" data-anchor-id="key-takeaways">Key takeaways</h2>
 <ul>
 <li>dynamic models are systems of difference (or differential) equations</li>
 <li>the stability of a system depends on (a combination of) its coefficients</li>
-<li>more generally, the system’s dynamic properties (including stability) are encapsulated in the Jacobian matrix</li>
+<li>more generally, the system’s dynamic properties (including stability) are encapsulated in the an matrix</li>
 <li>the (dominant) eigenvalues of the Jacobian matrix indicate whether a system is
 <ul>
 <li>stable (<span class="math inline">\(\lambda &lt; 1\)</span>) or unstable (<span class="math inline">\(\lambda &gt; 1\)</span>)</li>
@@ -1023,7 +1085,21 @@ y_{t}=Ay_{t-1}+B,
 </li>
 <li>the (dominant) eigenvectors mediate the impact of the eigenvalues in the dynamics</li>
 <li>nonlinear systems are analysed locally around one of its equilibria</li>
-</ul></section><section id="references" class="level2"><h2 class="anchored" data-anchor-id="references">References</h2>
+</ul></section><section id="a-simplified-recipe-for-analysing-dynamic-systems" class="level2"><h2 class="anchored" data-anchor-id="a-simplified-recipe-for-analysing-dynamic-systems">A simplified recipe for analysing dynamic systems</h2>
+<ol type="1">
+<li>Identify the state variables of your model, i.e.&nbsp;<span class="math inline">\(y_t = f(y_{t-1})\)</span>
+</li>
+<li>Substitute away any other endogenous variables that are not state variables (e.g.&nbsp;by using the equilibrium solutions of the endogenous variables that are determined simultaneously within every period)</li>
+<li>Write your model as a system in the state variables only (with otherwise only exogenous parameters/variables)</li>
+<li>Find the steady state solutions to the state variables by setting <span class="math inline">\(y_t = y_{t-1}=y^*\)</span>
+</li>
+<li>Construct the Jacobian matrix of the system containing the partial derivatives of the state variables with respect to each other</li>
+<li>If the model has nonlinearities, plug the steady state solutions into the Jacobian matrix</li>
+<li>Check the stability of the system by relying on well-known stability conditions, e.g.&nbsp;those in <span class="citation" data-cites="Gandolfo2009">Gandolfo (<a href="#ref-Gandolfo2009" role="doc-biblioref">2009</a>)</span>
+</li>
+<li>Check if other interesting properties can be derived (e.g.&nbsp;complex eigenvalues)</li>
+<li>Confirm your analytical results through numerical simulations, e.g.&nbsp;compute the eigenvalues, check the stability conditions, etc.</li>
+</ol></section><section id="references" class="level2"><h2 class="anchored" data-anchor-id="references">References</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
@@ -1047,6 +1123,7 @@ Sayama, Hiroki. 2015. <em>Introduction to the Modeling and Analysis of Complex S
 <ol>
 <li id="fn1"><p>We will focus here on difference instead of differential equations, i.e.&nbsp;on dynamics in discrete as opposed to continuous time. Most of the continuous-time counterpart is analogous to the material covered here. <span class="citation" data-cites="Sayama2015">Sayama (<a href="#ref-Sayama2015" role="doc-biblioref">2015</a>)</span> provides a very accessible and applied introduction to dynamic systems with Python code. An introductory treatment of the underlying mathematics is <span class="citation" data-cites="Chiang2005">Chiang and Wainwright (<a href="#ref-Chiang2005" role="doc-biblioref">2005</a>)</span>, chaps. 15-19. <span class="citation" data-cites="Gandolfo2009">Gandolfo (<a href="#ref-Gandolfo2009" role="doc-biblioref">2009</a>)</span> provides a more advanced treatment of the mathematics as well as many economic examples. A great introduction to linear algebra is <span class="citation" data-cites="Anthony2012">Anthony and Harvey (<a href="#ref-Anthony2012" role="doc-biblioref">2012</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>This is because in the product <span class="math inline">\((PDP^{-1})(PDP^{-1})(PDP^{-1})...\)</span>, each <span class="math inline">\(P\)</span> cancels a <span class="math inline">\(P^{-1}\)</span>, except for the first <span class="math inline">\(P\)</span> and last <span class="math inline">\(P^{-1}\)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>In this way, the Jacobian matrix can be regarded as a more general version of the coefficient matrix in linear systems.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

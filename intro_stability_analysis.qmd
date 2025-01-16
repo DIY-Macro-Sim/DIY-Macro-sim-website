@@ -60,7 +60,7 @@ $$
 y_t=a_0 + Ay_{t-1},  
 $$
 
-where $y_t$ is a $1 \times N$ column vector and $A$ an $N \times N$ square matrix.
+where $y_t$ is a $1 \times N$ column vector and $A$ an $N \times N$ square matrix called the *coefficient matrix*.
 
 If the inverse $(I-A)^{-1}$ exists, which requires $det(I-A) \neq 0$, the solution will be of the form:
 
@@ -283,7 +283,86 @@ evecs_norm[1,0]
 
 :::
 
-It can be seen that the simulated results are equivalent to the results we obtained analytically. The key takeaway is that by deriving information about the eigenvalues (and possibly eigenvectors) of the Jacobian matrix of the system, we are able to deduce knowledge of the dynamic properties of the system even without numerical simulation. However, the more complex the dynamic system, the more difficult this will be, thereby rendering numerical simulation a key tool to supplement formal analysis.
+It can be seen that the simulated results are equivalent to the results we obtained analytically. The key takeaway is that by deriving information about the eigenvalues (and possibly eigenvectors) of the coefficient matrix of the system, we are able to deduce knowledge of the dynamic properties of the system even without numerical simulation. However, the more complex the dynamic system, the more difficult this will be, thereby rendering numerical simulation a key tool to supplement formal analysis.
+
+## An economic example: Samuelson's (1939) multiplier accelerator model
+Consider the multiplier accelerator model by @Samuelson1939 discussed in @sec-how-to-simulate: 
+
+$$
+C_t= c_1(C_{t-1} + I_{t-1} + G_0)
+$$
+
+$$
+I_t= \beta[c_1(C_{t-1} + I_{t-1} + G_0) - C_{t-1}]
+$$
+
+This is a two-dimensional first-order system with state variables $C_t$ and $I_t$.
+
+The coefficient matrix of this model is given by:
+
+$$
+A = \begin{bmatrix} \frac{\partial C_t}{\partial C_{t-1}}& \frac{\partial C_t}{\partial I_{t-1}} \\ \frac{\partial I_t}{\partial C_{t-1}}  & \frac{\partial I_t}{\partial I_{t-1}}  \end{bmatrix}=\begin{bmatrix} c_1 & c_1 \\ \beta(c_1-1) & \beta c_1 \end{bmatrix}
+$$
+
+The characteristic polynomial yielding the eigenvalues of $A$ is
+
+$$\lambda^2-\lambda c_1(1+\beta)+\beta c_1=0,$$
+
+where $c_1(1+\beta) =tr(J)$ and $\beta c_1 = det(J)$.
+
+Thus we have
+
+$$
+\lambda_{1,2} = \frac{c_1(1+\beta) \pm \sqrt{[c_1(1+\beta)]^2-4\beta c_1}}{2}.
+$$
+
+Assuming $c_1=0.8$ and $\beta=0.3$, we can compute the eigenvalues:
+
+```{r}
+#| echo: true
+
+# Set fixed parameter values
+c1=0.8
+beta=0.3
+
+## Compute eigenvalues
+# Define coefficient matrix
+A=matrix(c(c1, c1,
+           beta*(c1-1), beta*c1), 
+           2, 2, byrow=TRUE)
+
+# Obtain eigenvalues and eigenvectors
+ev=eigen(A)
+(evals = ev$values)
+```
+
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Set parameter values
+c1 = 0.8
+beta = 0.3
+
+# Define the coefficient matrix
+A = np.array([[c1, c1],
+              [beta * (c1 - 1), beta * c1]])
+
+# Calculate eigenvalues and eigenvectors
+evals, evecs = np.linalg.eig(A)
+
+print(evals)
+print(evals)
+
+```
+
+:::
+
+and conclude that since the dominant eigenvalue is smaller than one (in absolute terms), the system is stable.
 
 ## Complex eigenvalues and cycles
 
@@ -301,34 +380,15 @@ $$
 
 which is a pair of conjugate complex numbers containing a real part given by $h$ and an imaginary part given by $m$. 
 
-Consider the model by @Samuelson1939 discussed in @sec-how-to-simulate: 
-$$
-C_t= c_1(C_{t-1} + I_{t-1} + G_0)
-$$
-
-$$
-I_t= \beta[c_1(C_{t-1} + I_{t-1} + G_0) - C_{t-1}]
-$$
-
-The Jacobian matrix of this model is given by:
-
-$$
-J=\begin{bmatrix} c_1 & c_1 \\ \beta(c_1-1) & \beta c_1 \end{bmatrix}
-$$
-
-The characteristic polynomial yielding the eigenvalues of the Jacobian is
-
-$$\lambda^2-\lambda c_1(1+\beta)+\beta c_1=0,$$
-
-where $c_1(1+\beta) =tr(J)$ and $\beta c_1 = det(J)$.
-
-Thus we have
+Consider again the characteristic polynomial of the @Samuelson1939 model: 
 
 $$
 \lambda_{1,2} = \frac{c_1(1+\beta) \pm \sqrt{[c_1(1+\beta)]^2-4\beta c_1}}{2}.
 $$
 
-Thus, the two eigenvalues will be a pair of complex conjugates if $[c_1(1+\beta)]^2-4\beta c_1 <0$ or $c_1 < \frac{4\beta}{(1+\beta)^2}$. Suppose we have $c_1=0.4$ and $\beta=2$. Then the discriminant will be negative and the eigenvalues will be complex:
+The two eigenvalues will be a pair of complex conjugates if $[c_1(1+\beta)]^2-4\beta c_1 <0$ or $c_1 < \frac{4\beta}{(1+\beta)^2}$. 
+
+Suppose we have $c_1=0.4$ and $\beta=2$. Then the discriminant will be negative and the eigenvalues will be complex:
 
 ```{r stab_analysis3}
 #Clear the environment 
@@ -343,12 +403,12 @@ beta=2
 
 ## Find eigenvalues and eigenvectors of matrix
 # Define matrix
-J=matrix(c(c1, c1,
+A=matrix(c(c1, c1,
            beta*(c1-1), beta*c1), 
            2, 2, byrow=TRUE)
 
 # Obtain eigenvalues and eigenvectors
-ev=eigen(J)
+ev=eigen(A)
 (evals = ev$values)
 ```
 
@@ -367,11 +427,11 @@ beta = 2
 (c1 * (1 + beta))**2 - 4 * c1 * beta
 
 # Define the matrix
-J = np.array([[c1, c1],
+A = np.array([[c1, c1],
               [beta * (c1 - 1), beta * c1]])
 
 # Calculate eigenvalues and eigenvectors
-evals, evecs = np.linalg.eig(J)
+evals, evecs = np.linalg.eig(A)
 
 print(evals)
 print(evals)
@@ -566,7 +626,9 @@ plt.show()
 
 You can see that the model generates cycles with a length (from peak/trough to peak/trough) of around 7.5 periods. Since the modulus is $R<1$, the system is stable and eventually converges to the equilibrium.
 
-A general condition for stability of 2D systems with complex eigenvalues can be derived by making use of the fact that $R=\sqrt{h^2+m^2}= \sqrt{ \left( \frac{b}{2} \right) ^2 + \left(\frac{\sqrt{4c-b^2}}{2}i \right)^2} = \sqrt{c}$, where $b=tr(J)$ and $c=det(J)$. Applied to the modulus of the Samuelson model, this yields $R=\sqrt{det(J)}=\sqrt{\beta c_1}$. Thus, the stability condition is:
+A general condition for stability of 2D systems with complex eigenvalues can be derived by making use of the fact that $R=\sqrt{h^2+m^2}= \sqrt{ \left( \frac{b}{2} \right) ^2 + \left(\frac{\sqrt{4c-b^2}}{2}i \right)^2} = \sqrt{c}$, where $b=tr(J)$ and $c=det(J)$. 
+
+Applied to the modulus of the Samuelson model, this yields $R=\sqrt{det(J)}=\sqrt{\beta c_1}$. Thus, the stability condition is:
 
 $$\beta c_1<1.$$ 
 
@@ -658,24 +720,39 @@ $$
 y_{t}=Ay_{t-1}+B,
 $$
 
-where $A_{11}=\frac{\partial f^1(y^*)}{y_{1t-1}}$ and so forth. Thus, $A$ is simply the Jacobian matrix of $f(y_{t-1})$ evaluated at $y^*$.
+where $A_{11}=\frac{\partial f^1(y^*)}{y_{1t-1}}$ and so forth. 
+
+The matrix $A$ is the so-called *Jacobian matrix* of the system $f(y_{t-1})$ *evaluated at* $y^*$. The Jacobian matrix collects all partial derivatives of the state variables $y_t$ with respect to each other, i.e. $\frac{\partial y_{1t}}{\partial y_{1t-1}}$,  $\frac{\partial y_{1t}}{\partial y_{2t-1}}$, and so on.^[In this way, the Jacobian matrix can be regarded as a more general version of the coefficient matrix in linear systems.] The *linearised* Jacobian matrix $A$ can be obtained by plugging the equilibrium solutions for $y^*$ into the Jacobian.
 
 In practice, this means that to analyse the local stability of a nonlinear system, one needs to:
 
 -   find the equilibrium solution $y^*$ whose neighbourhood you want to analyse
 -   compute the Jacobian matrix of $f(y_{t-1})$
--   substitute $y^*$ into $f(y_{t-1})$ and analyse the resulting matrix.
+-   substitute $y^*$ into the Jacobian and analyse the resulting matrix.
 
 An example for the stability analysis of a simple two-dimensional nonlinear system can be found in @sec-ricardo_1_analytical.
 
 ## Key takeaways
 -   dynamic models are systems of difference (or differential) equations
 -   the stability of a system depends on (a combination of) its coefficients
--   more generally, the system's dynamic properties (including stability) are encapsulated in the Jacobian matrix
+-   more generally, the system's dynamic properties (including stability) are encapsulated in the an matrix
 -   the (dominant) eigenvalues of the Jacobian matrix indicate whether a system is
     -   stable ($\lambda < 1$) or unstable ($\lambda > 1$)
     -   acyclical ($\lambda \in \mathbb{R}$) or cyclical ($\lambda \in \mathbb{C}$)
 -   the (dominant) eigenvectors mediate the impact of the eigenvalues in the dynamics
 -   nonlinear systems are analysed locally around one of its equilibria
+
+
+## A simplified recipe for analysing dynamic systems
+1. Identify the state variables of your model, i.e. $y_t = f(y_{t-1})$
+2. Substitute away any other endogenous variables that are not state variables (e.g. by using the equilibrium solutions of the endogenous variables that are determined simultaneously within every period)
+3. Write your model as a system in the state variables only (with otherwise only exogenous parameters/variables) 
+4. Find the steady state solutions to the state variables by setting $y_t = y_{t-1}=y^*$
+5. Construct the Jacobian matrix of the system containing the partial derivatives of the state variables with respect to each other
+6. If the model has nonlinearities, plug the steady state solutions into the Jacobian matrix
+7. Check the stability of the system by relying on well-known stability conditions, e.g. those in @Gandolfo2009
+8. Check if other interesting properties can be derived (e.g. complex eigenvalues)
+9. Confirm your analytical results through numerical simulations, e.g. compute the eigenvalues, check the stability conditions, etc.
+
 
 ## References
