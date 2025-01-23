@@ -63,7 +63,7 @@ p_t= p_{t-1} \left[ 1 + \psi (r^T - r_{t-1}) \right]
 $$ {#eq-conflict_p}
 
 $$
-p^T_t=(1+\theta^T)\left(w_t + \delta p^E\right)  
+p^T_t=(1+\theta^T)\left(w_t + \delta p_t^E\right)  
 $$ {#eq-conflict_pf}
 
 $$
@@ -71,7 +71,7 @@ r^T=\frac{\theta^T}{1+\theta^T}
 $$ {#eq-conflict_rf}
 
 $$
-r_T=1-\Omega_t - \delta \epsilon
+r_t=1-\Omega_t - \delta \epsilon
 $$ {#eq-conflict_r} $$
 p^E_t = \epsilon p_t 
 $$ {#eq-conflict_p_E}
@@ -83,8 +83,8 @@ firms' desired price level, and the nominal energy price, respectively.
 
 @eq-conflict_omega defines the real wage $\Omega$. @eq-conflict_w
 specifies the dynamics of wage setting. Workers set the growth rate of
-nominal wages $w$ proportionally to the gap between their target real
-wage $\Omega^W$ and the actual real wage $\Omega$. The target real wage
+nominal wages proportionally to the gap between their target real
+wage $\Omega^W$ and the actual real wage $\Omega$.^[The growth rates of nominal wages and prices are defined as $\hat{w_t}=\frac{w_t - w_{t-1}}{w_{t-1}}$ and $\hat{p_t}=\frac{p_t - p_{t-1}}{p_{t-1}}$, respectively.] The target real wage
 of workers is taken to be exogenous in this version of the
 model.[^a_conflict_inflation_model-3] By @eq-conflict_p, firms set the
 price inflation rate in a symmetric manner, responding to the deviation
