@@ -129,6 +129,18 @@ for (i in 1:S){
 
 ::: {.callout-note collapse="true" title="Python code"}
 
+```{r}
+#| echo: false
+#| output: false
+#| collapse: true
+
+library(reticulate)
+use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+#py_install("matplotlib")
+#py_config()
+#py_install("numpy")
+```
+
 ```{python}
 #| echo: true
 #| output: false

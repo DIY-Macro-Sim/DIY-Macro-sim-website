@@ -122,17 +122,19 @@ C_eq
 (c0+I0[])/(1-c1)
 ```
 
+::: {.callout-note collapse="true" title="Python code"}
+
 ```{r}
 #| echo: false
 #| output: false
 #| collapse: true
 
 library(reticulate)
+use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+#py_install("matplotlib")
+#py_config()
 #py_install("numpy")
-
 ```
-
-::: {.callout-note collapse="true" title="Python code"}
 
 ```{python}
 #| echo: true

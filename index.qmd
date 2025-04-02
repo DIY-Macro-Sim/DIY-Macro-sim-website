@@ -1,6 +1,6 @@
 # Welcome {.unnumbered}
 
-::: {.callout-warning}
+::: {.callout-note}
 This website is under construction and will be regularly updated and extended.
 :::
 
@@ -14,19 +14,17 @@ The platform's DIY-approach aims to foster reproducibility and open-source princ
 
 :::  {layout-ncol=2}
 
-![Franz Prante](franz.jpeg){width=50%}
-
-
 ![Karsten Kohler](karsten.png){width=61%}
+
+![Franz Prante](franz.jpeg){width=50%}
 
 :::
 
 :::  {layout-ncol=2}
+[Karsten](https://karstenkohler.com/) is an Associate Professor in Economics at Leeds University Business School, where he does research on the interaction between finance and the real economy, especially sources of cyclical dynamics, instability, and rising inequality.
+
 
 [Franz](https://fprante.me/) is a research associate at Chemnitz University of Technology, where he is currently working on the macroeconomic effects of monetary policy and price effects on energy demand. He holds a PhD from Université Sorbonne Paris Nord.
-
-
-[Karsten](https://karstenkohler.com/) is an Associate Professor in Economics at Leeds University Business School, where he does research on the interaction between finance and the real economy, especially sources of cyclical dynamics, instability, and rising inequality.
 
 :::
 
@@ -34,7 +32,7 @@ The platform's DIY-approach aims to foster reproducibility and open-source princ
 We welcome any feedback. If you encounter any issues, find typos or mistakes, or have questions/thoughts on the content, please do get in touch.
 
 1. If you are Github user, you can [report an issue](https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new) in our repository
-2. You can also email us directly: `franz.prante@wiwi.tu.chemnitz.de` and `k.kohler@leeds.ac.uk`
+2. You can also email us directly: `k.kohler@leeds.ac.uk`
 
 ## License
 The material on this page is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1), thus feel free to use the material for non-commercial purposes but please give credit. 
