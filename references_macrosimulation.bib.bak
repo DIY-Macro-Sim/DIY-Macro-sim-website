@@ -422,4 +422,12 @@ Complex Systems},
   publisher = {Elsevier BV},
 }
 
+@Book{Gintis2009,
+  author    = {Herbert Gintis},
+  publisher = {Princeton University Press},
+  title     = {Game Theory Evolving},
+  year      = {2009},
+  edition   = {2nd},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
