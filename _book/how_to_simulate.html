@@ -312,6 +312,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">A Kaldorian Endogenous Business Cycle Model</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./an_evolutionary_game_theoretic_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">An Evolutionary Game Theoretic Model of the Emergence of Property Rights</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item">
@@ -912,11 +918,11 @@ M_{ij} =
 <span>  <span class="co"># exogenous: (4) G0</span></span>
 <span><span class="co"># where non-zero elements in regular Jacobian are set to 1 and zero elements are unchanged</span></span>
 <span></span>
-<span>              <span class="co">#1 2 3 4</span></span>
-<span><span class="va">M_mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>, <span class="co">#1</span></span>
-<span>               <span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="co">#2</span></span>
-<span>               <span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>, <span class="co">#3</span></span>
-<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, <span class="co">#4 </span></span>
+<span>            <span class="co">#  Y  C  I G0</span></span>
+<span><span class="va">M_mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="co"># Y</span></span>
+<span>               <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="co"># C</span></span>
+<span>               <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="co"># I</span></span>
+<span>               <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,<span class="co"># G0 </span></span>
 <span>               <span class="fl">4</span>, <span class="fl">4</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create adjacency matrix from transpose of auxiliary Jacobian and add column names</span></span>
@@ -992,9 +998,10 @@ Python code
 </div>
 <p>Broadly speaking, three types of nodes are possible:</p>
 <ol type="1">
-<li>nodes from which arrows only point away represent exogenous variables (<span class="math inline">\(G_0\)</span>)</li>
-<li>nodes to which arrows point but from which arrows also point away represent endogenous variables that also have a causal impact on other variables (<span class="math inline">\(Y\)</span>, <span class="math inline">\(C\)</span>, and <span class="math inline">\(I\)</span>)</li>
-<li>nodes to arrows only point towards represent endogenous variables that are residuals (not present in this example)</li>
+<li>nodes from which arrows only point away represent <em>exogenous</em> variables (<span class="math inline">\(G_0\)</span>)</li>
+<li>nodes towards which some arrows point, but from which arrows also point away, represent <em>endogenous</em> variables that also have a causal impact on other variables (<span class="math inline">\(Y\)</span>, <span class="math inline">\(C\)</span>, and <span class="math inline">\(I\)</span>)</li>
+<li>nodes arrows only point towards represent endogenous variables that are <em>residuals</em>
+</li>
 </ol>
 <p>It can thus be seen that the key exogenous variable in the <span class="citation" data-cites="Samuelson1939">Samuelson (<a href="#ref-Samuelson1939" role="doc-biblioref">1939</a>)</span> model is government spending <span class="math inline">\(G_0\)</span>, which determines aggregate income, which in turn feeds into consumption. Consumption then feeds into investment, which feeds back into income yielding the multiplier-accelerator effect.</p>
 </section><section id="exercise-simulating-and-visualising-a-simple-model" class="level2"><h2 class="anchored" data-anchor-id="exercise-simulating-and-visualising-a-simple-model">Exercise: simulating and visualising a simple model</h2>

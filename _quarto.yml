@@ -49,9 +49,10 @@ book:
         - a_Lewis_model.qmd
         - a_Hicks_model.qmd
         - a_Kaldor_model.qmd
+        - an_evolutionary_game_theoretic_model.qmd
     - additional_resources.qmd
     
-bibliography: references.bib
+bibliography: references_macrosimulation.bib
 
 format:
   html:

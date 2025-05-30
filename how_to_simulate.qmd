@@ -559,11 +559,11 @@ The code below shows this for the example of the @Samuelson1939 model.^[To creat
   # exogenous: (4) G0
 # where non-zero elements in regular Jacobian are set to 1 and zero elements are unchanged
 
-              #1 2 3 4
-M_mat=matrix(c(0,1,1,1, #1
-               1,0,0,0, #2
-               0,1,0,0, #3
-               0,0,0,0), #4 
+            #  Y  C  I G0
+M_mat=matrix(c(0, 1, 1, 1, # Y
+               1, 0, 0, 0, # C
+               0, 1, 0, 0, # I
+               0, 0, 0, 0),# G0 
                4, 4, byrow=TRUE)
 
 # Create adjacency matrix from transpose of auxiliary Jacobian and add column names
@@ -629,9 +629,9 @@ plt.show()
 
 Broadly speaking, three types of nodes are possible:
 
-1. nodes from which arrows only point away represent exogenous variables ($G_0$)
-2. nodes to which arrows point but from which arrows also point away represent endogenous variables that also have a causal impact on other variables ($Y$, $C$, and $I$)
-3. nodes to arrows only point towards represent endogenous variables that are residuals (not present in this example) 
+1.  nodes from which arrows only point away represent *exogenous* variables ($G_0$)
+2. nodes towards which some arrows point, but from which arrows also point away, represent *endogenous* variables that also have a causal impact on other variables ($Y$, $C$, and $I$)
+3. nodes arrows only point towards represent endogenous variables that are *residuals* 
 
 It can thus be seen that the key exogenous variable in the @Samuelson1939 model is government spending $G_0$, which determines aggregate income, which in turn feeds into consumption. Consumption then feeds into investment, which feeds back into income yielding the multiplier-accelerator effect.
 
