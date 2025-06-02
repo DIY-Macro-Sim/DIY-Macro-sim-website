@@ -361,11 +361,11 @@ Complex Systems},
   publisher = {Elsevier BV},
 }
 
-@Book{Bowles2003,
+@Book{Bowles2004,
   author    = {Samuel Bowles},
   publisher = {Princeton University Press},
   title     = {Microeconomics: Behavior, Institutions, and Evolution},
-  year      = {2003},
+  year      = {2004},
 }
 
 @InBook{Dieci2018,

@@ -4,7 +4,7 @@
 
 [Evolutionary game theory (EGT)](https://en.wikipedia.org/wiki/Evolutionary_game_theory) has its origins in evolutionary biology, where it was developed to study how behavioural strategies evolve within populations. It combines concepts from game theory, such as strategic interactions and their resulting payoffs, with Darwinian evolutionary biology, in particular the idea of differential replication (selection). Populations are assumed to consist of repeatedly interacting agents that follow different strategies with different payoffs. More successful strategies will reproduce faster, thereby increasing their frequencies in the population. EGT studies different strategies, their performance, and the possible equilibria that may emerge over time, which can involve the extinction, dominance, or co-existence of various strategies.^[EGT has been popularised by Richard Dawkin's 1976 book [The Selfish Gene](https://en.wikipedia.org/wiki/The_Selfish_Gene) and Robert Axelrod's 1984 book [The Evolution of Cooperation](https://en.wikipedia.org/wiki/The_Evolution_of_Cooperation). The latter contributed to the application of EGT to the social sciences and is also regarded as a milestone in the development of agent-based modelling. While EGT has predominantly been applied to microeconomic issues, there have been influences on macroeconomics as well. A first path through which EGT has impacted macroeconomics has been via heterogeneous agent models in finance that study speculative dynamics in asset markets driven by competing trading strategies (see  @Dieci2018 for a review). @Franke2017 review approaches that introduce these behavioural dynamics into macroeconomics. A second path has been via models of dynamic competition in evolutionary economics (e.g. @Metcalfe1994), elements of which have fed into macroeconomic agent-based models (@Dosi2010).] Unlike classical game theory which typically assumes agents to be fully rational, EGT assumes agents to follow simple rules whose relative success is not known to the agents in advance. 
 
-In this section, we present a continuous-time model from @Bowles2004, chapter 11, which seeks to illuminate the logic behind the emergence of property rights.^[@sec-sim-continuous explains how continuous time models can be solved numerically.] It asks how social norms that ensure the enforcement of property rights could evolve through the repeated interaction of agents. The model features three types of strategies: sharing, grabbing, and punishing. For property rights to be respected, the grabbing strategy needs to be contained through sufficiently pervasive punishing. A particularly interesting feature of the model, both from an economic and a technical perspective, is that its outcomes depend on initial conditions. The model thus captures a form of path dependence, where a historically given distribution of behavioural rules impacts not only the subsequent trajectory, but also the long-run equilibrium that will emerge.  
+In this section, we present a continuous-time model from @Bowles2004, chapter 11, which seeks to illuminate the logic behind the emergence of property rights.^[@sec-sim-continuous explains how continuous time models can be solved numerically.] It asks how social norms that ensure the enforcement of property rights could evolve through the repeated interaction of agents. The model features three types of strategies: sharing, grabbing, and punishing. For property rights to be respected, the grabbing strategy needs to be contained through sufficiently pervasive punishing. A particularly interesting feature of the model, both from an economic and a technical perspective, is that its outcomes depend on initial conditions. The model thus captures a form of path dependence, where a historically given distribution of behavioural rules impacts not only the subsequent trajectory, but also the long-run equilibrium that will emerge.^[The model from @Bowles2004, chapter 11, has subsequently been developed further and supplemented with empirical evidence in @Bowles2013 and @Bowles2019.]  
 
 ## The strategies and their payoffs
 There are $n$ members of a population that are paired randomly to divide a good whose value is $v$. They can adopt one of three strategies: sharing, grabbing, or punishing. When Sharers meet, they divide the good equally. When Grabbers meet Sharers, they grab the good from the Sharers. When Grabbers meet other Grabbers, they fight and win or bear the costs of defeat $c > v$ with equal probability. Punishers meeting Sharers or other Punishers divide the good equally. When Punishers meets Grabbers, they attempt to punish the Grabbers collectively. If successful, an individual Punisher will distribute the good equally among all Punishers, otherwise it bears the cost of defeat $c$. Because punishing is a collective strategy, its probability of success depends on the population frequency of Punishers. For simplicity, it is assumed that the probability of success is equal to the population frequency of Punishers, $\beta$. With these assumptions, the payoffs of the different interactions are given in Table 1.
@@ -116,7 +116,7 @@ gamma[2, 1]=1- alpha[2, 1] - beta[2, 1]
 # Rousseauian equilibrium #2
 alpha[3, 1]=0.1
 beta[3, 1]=0.6
-gamma[3, 1]=1- alpha[2, 1] - beta[2, 1]
+gamma[3, 1]=1- alpha[3, 1] - beta[3, 1]
 
 # Simulate the model by looping over Q time periods for S different initialisations
 for (i in 1:S){
@@ -147,6 +147,101 @@ for (i in 1:S){
   }  # close time loop
 }   # close scenarios loop
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{r}
+#| echo: false
+#| output: false
+#| collapse: true
+
+library(reticulate)
+use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+#py_install("matplotlib")
+#py_config()
+#py_install("numpy")
+```
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+import numpy as np
+
+# Set number of periods
+Q = 1000
+
+# Time increment
+d = 0.1   
+
+# Set number of initialisations
+S = 3
+
+# Set constant parameter values
+v = 2   # value of good to be divided
+c = 3   # cost of defeat
+
+# Create (S x Q) matrices in which equilibrium solutions from different initialisations will be stored
+pi_S = np.full((S, Q), 0.5)   # payoffs for Sharers
+pi_P = np.full((S, Q), 0.5)   # payoffs for Punishers 
+pi_G = np.full((S, Q), 0.5)   # payoffs for Grabbers 
+pi_bar = np.full((S, Q), 0.5) # average payoffs
+alpha = np.zeros((S, Q))      # population frequency of Sharers
+beta = np.zeros((S, Q))       # population frequency of Punishers
+gamma = np.zeros((S, Q))      # population frequency of Grabbers
+
+### Initialise population shares
+# Hobbesian equilibrium 
+alpha[0, 0] = 1/3
+beta[0, 0] = 1/3
+gamma[0, 0] = 1 - alpha[0, 0] - beta[0, 0]
+
+# Rousseauian equilibrium #1
+alpha[1, 0] = 0.2
+beta[1, 0] = 0.6 
+gamma[1, 0] = 1 - alpha[1, 0] - beta[1, 0]
+
+# Rousseauian equilibrium #2
+alpha[2, 0] = 0.1
+beta[2, 0] = 0.6
+gamma[2, 0] = 1 - alpha[2, 0] - beta[2, 0]  
+
+# Simulate the model by looping over Q time periods for S different initializations
+for i in range(S):
+    
+    for t in range(1, Q):
+        
+        # Population share of Sharers
+        alpha[i, t] = alpha[i, t-1] + alpha[i, t-1] * (pi_S[i, t-1] - pi_bar[i, t-1]) * d
+        
+        # Population share of Punishers
+        beta[i, t] = beta[i, t-1] + beta[i, t-1] * (pi_P[i, t-1] - pi_bar[i, t-1]) * d
+        
+        # Population share of Grabbers
+        gamma[i, t] = 1 - alpha[i, t] - beta[i, t]
+        
+        # Payoffs of Sharers  
+        pi_S[i, t] = 0.5 * v * (alpha[i, t] + beta[i, t])
+        
+        # Payoffs of Punishers  
+        pi_P[i, t] = (0.5 * v * (alpha[i, t] + beta[i, t]) + 
+                      (1 - alpha[i, t] - beta[i, t]) * (beta[i, t] * v - (1 - beta[i, t]) * c))
+        
+        # Payoffs of Grabbers
+        pi_G[i, t] = (alpha[i, t] * v + 
+                      beta[i, t] * ((1 - beta[i, t]) * v - beta[i, t] * c) + 
+                      (1 - alpha[i, t] - beta[i, t]) * 0.5 * (v - c))
+        
+        # Average payoffs
+        pi_bar[i, t] = (alpha[i, t] * pi_S[i, t] + 
+                        beta[i, t] * pi_P[i, t] + 
+                        (1 - alpha[i, t] - beta[i, t]) * pi_G[i, t])
+        
+```
+
+:::
+
 
 ### Plots
 @fig-hobbes displays the population shares for the first initialisation, giving rise to what @Bowles2004 calls the 'Hobbesian equilibrium'. In this equilibrium, the Punishers have died out and the population is split into Sharers and Grabbers. Due to the strong presence of Grabbers, this equilibrium is characterised by frequent fighting that goes unpunished. The red horizontal line displays the average equilibrium payoff. 
@@ -205,6 +300,39 @@ legend("right", legend=c("Sharers", "Punishers", "Grabbers"),
        lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
 
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+## Plot results (here only for the Hobbesian equilibrium)
+
+import matplotlib.pyplot as plt
+
+# Set start and end periods for plots
+Tmin = 3
+Tmax = 100
+
+# Hobbesian equilibrium
+plt.figure(figsize=(8, 5))
+plt.plot(range(Q), alpha[0, :], label="Sharers", color='black', linewidth=2, linestyle='-')
+plt.title("")  
+plt.xlabel("Time")
+plt.ylabel("Population shares")
+plt.ylim(0, 1)
+plt.xlim(Tmin, Tmax)
+plt.plot(range(Q), beta[0, :], linestyle='--', color='black', label="Punishers")
+plt.plot(range(Q), gamma[0, :], linestyle=':', color='black', label="Grabbers")
+plt.axhline(y=pi_bar[0, Q-1], color='red')  
+plt.legend(loc='upper right', fontsize=8, frameon=False)  
+plt.tight_layout()
+plt.show()
+```
+
+:::
 
 ### Creating an interactive 3D diagram of the basins of attraction
 The finding that different Rousseauian equilibria emerge from different initialisations warrants a more detailed examination of the dependence of the equilibria on initial values. In this section, we show how to create a diagram of the 'basins of attraction' of the different equilibria, which map a set of initial conditions to the corresponding equilibria. To this end, we need to simulate the model for different values of the initial conditions and store the results.
@@ -342,6 +470,119 @@ fig_gamma
 
 How could a transition from the Hobbesian equilibrium to a Rousseauian equilibrium occur? The Rousseauian equilibrium requires a sufficiently high number of Punishers, so an exogenous intervention that pushes the share of Punishers beyond the critical value $\beta^H$ would accomplish such a transition. However, as the Rousseauian equilibrium is a continuum, too small an intervention that pushes the population of Punishers just above the critical threshold, where the system will stay without further interventions, may run the risk of falling back into the basin of attraction of the Hobbesian equilibrium.^[ @Bowles2004, pp. 386-390, discusses the issue of equilibrium selection in more detail and considers some mechanisms that would make the Rousseauian equilibrium more robust.]
 
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+#| eval: false
+
+## Run model for different initialisations
+import numpy as np
+import pandas as pd
+
+# Define a function called "bowles" that simulates the model for different initializations
+def bowles(alpha_0, beta_0):
+    
+    # Initialise data arrays
+    pi_S = np.full(Q, 0.5)
+    pi_P = np.full(Q, 0.5)
+    pi_G = np.full(Q, 0.5)
+    pi_bar = np.full(Q, 0.5)
+    
+    alpha = np.empty(Q)
+    beta = np.empty(Q)
+    gamma = np.empty(Q)
+    
+    # Initialise population shares
+    alpha[0] = alpha_0
+    beta[0] = beta_0
+    gamma[0] = round(1 - alpha[0] - beta[0], 2)
+    
+    # Simulate model
+    for t in range(1, Q):
+        alpha[t] = alpha[t-1] + alpha[t-1] * (pi_S[t-1] - pi_bar[t-1]) * d
+        beta[t]  = beta[t-1] + beta[t-1] * (pi_P[t-1] - pi_bar[t-1]) * d
+        gamma[t] = 1 - alpha[t] - beta[t]
+        
+        pi_S[t] = 0.5 * v * (alpha[t] + beta[t])
+        pi_P[t] = (0.5 * v * (alpha[t] + beta[t]) + 
+                   (1 - alpha[t] - beta[t]) * (beta[t] * v - (1 - beta[t]) * c))
+        pi_G[t] = (alpha[t] * v + 
+                   beta[t] * ((1 - beta[t]) * v - beta[t] * c) + 
+                   (1 - alpha[t] - beta[t]) * 0.5 * (v - c))
+        pi_bar[t] = (alpha[t] * pi_S[t] + 
+                     beta[t] * pi_P[t] + 
+                     (1 - alpha[t] - beta[t]) * pi_G[t])
+    
+    # Return final values in a dataframe
+    return pd.DataFrame({
+        'alpha_0': [alpha_0],
+        'beta_0': [beta_0],
+        'gamma_0': [gamma[0]],
+        'alpha_T': [round(alpha[Q-1], 3)],
+        'beta_T': [round(beta[Q-1], 3)],
+        'gamma_T': [round(gamma[Q-1], 3)],
+        'pi_S_T': [round(pi_S[Q-1], 3)],
+        'pi_P_T': [round(pi_P[Q-1], 3)],
+        'pi_G_T': [round(pi_G[Q-1], 3)],
+        'pi_bar': [round(pi_bar[Q-1], 3)]
+    })
+
+# Create grid of initial values for alpha and beta
+alpha_vals = np.arange(0, 1.05, 0.05)
+beta_vals = np.arange(0, 1.05, 0.05)
+
+grid = pd.DataFrame([(a, b) for a in alpha_vals for b in beta_vals],
+                     columns=['alpha_0', 'beta_0'])
+
+# Exclude invalid combinations where alpha + beta > 1
+grid = grid[grid['alpha_0'] + grid['beta_0'] <= 1].reset_index(drop=True)
+
+# Execute the function over the grid and append data from each run as rows to a dataframe named "results"
+results = pd.concat([bowles(row.alpha_0, row.beta_0) for _, row in grid.iterrows()],
+                    ignore_index=True)
+
+### Create 3D plot (here for endogeneous variables only)
+
+# Load plotly package to create 3D plots — done via import
+
+import plotly.graph_objects as go
+import plotly.express as px
+import plotly.io as pio
+
+# Create a 3D scatter plot of the final values of the population shares 
+# using the data from different initializations
+fig_endog = go.Figure(
+    data=[
+        go.Scatter3d(
+            x=results['alpha_T'],
+            y=results['beta_T'],
+            z=results['gamma_T'],
+            mode='markers',
+            marker=dict(size=3, showscale=False)
+        )
+    ]
+)
+
+fig_endog.update_layout(
+    scene=dict(
+        xaxis_title='alpha_T',
+        yaxis_title='beta_T',
+        zaxis_title='gamma_T'
+    ),
+    title=''
+)
+
+# Show plot (this will open the plot in a browser)
+pio.renderers.default = 'browser'
+#fig_endog.show()
+        
+```
+
+:::
+
 ## Analytical discussion
 Here we will formally analyse the equilibria and then their stability.^[We focus on the Hobbesian and Rousseauian equilibria and disregard the less interesting equilibria $\alpha^*=1$ and $\gamma^*=1$.]
 
@@ -352,7 +593,7 @@ $$
 
 We can check these analytical solutions numerically:
 ```{r}
-### Compare numerical equilibrium solutions for alpha and gamma to analytical solutions
+### Compare numerical equilibrium solutions to analytical solutions
 alpha[1,Q]  # numerical
 1-v/c       # analytical
 
@@ -483,5 +724,38 @@ $$
 $$
 
 confirming that the derivatives are indeed equal, so that $det(J^*_R) = 0$.
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+### Compare numerical equilibrium solutions for alpha and gamma to analytical solutions
+
+alpha[0, Q-1]  # numerical
+1 - v / c      # analytical
+
+gamma[0, Q-1]  # numerical
+v / c          # analytical
+
+# Confirm that the payoffs of Sharers and Grabbers are equal in equilibrium
+pi_S[0, Q-1]
+pi_G[0, Q-1]
+pi_bar[0, Q-1]
+
+### Confirm that alpha + beta = 1 in the Rousseauian equilibria
+alpha[1, Q-1] + beta[1, Q-1]   
+alpha[2, Q-1] + beta[2, Q-1]   
+
+# Confirm that the payoffs of Sharers and Punishers are equal in equilibrium
+pi_S[1, Q-1]
+pi_P[1, Q-1]
+pi_bar[1, Q-1]
+        
+```
+
+:::
 
 ## References
