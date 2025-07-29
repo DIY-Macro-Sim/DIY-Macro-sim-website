@@ -136,10 +136,10 @@ for (i in 1:S){
     pi_S[i,t] = 0.5*v*(alpha[i,t] + beta[i,t])
     
     # Payoffs of Punishers  
-    pi_P[i,t] = 0.5*v*(alpha[i,t] + beta[i,t]) + (1 - alpha[i,t] -       beta[i,t])*(beta[i,t]*v-(1-beta[i,t])*c)
+    pi_P[i,t] = 0.5*v*(alpha[i,t] + beta[i,t]) + (1-alpha[i,t]-beta[i,t])*(beta[i,t]*v-(1-beta[i,t])*c)
     
     # Payoffs of Grabbers
-    pi_G[i,t] = alpha[i,t]*v + beta[i,t]*((1-beta[i,t])*v-beta[i,t]*c) + (1-alpha[i,t] - beta[i,t])*0.5*(v-c)
+    pi_G[i,t] = alpha[i,t]*v + beta[i,t]*((1-beta[i,t])*v-beta[i,t]*c) + (1-alpha[i,t]-beta[i,t])*0.5*(v-c)
     
     # Average payoffs
     pi_bar[i,t] = alpha[i,t]*pi_S[i,t] + beta[i,t]*pi_P[i,t] + (1-alpha[i,t]-beta[i,t])*pi_G[i,t]
@@ -606,7 +606,7 @@ pi_G[1,Q]
 pi_bar[1,Q]
 ```
 
-The Rousseauian equilibria occur for $\gamma^*=0$ and $\alpha + \beta =1 $. For $\dot{\alpha}=\dot{\beta}=0$, we require $\pi^S=\pi^P=\bar{\pi}$, and with $\gamma^*=0$, we have $\bar{\pi}=\alpha \pi^S + \beta \pi^P$. From $\pi^S = \alpha \pi^S + \beta \pi^P$ and $\beta=(1-\alpha)$, we get $\pi^S=\pi^P$. Using @eq-evolutionary_pi-s and @eq-evolutionary_pi-p, confirms that this equilibrium does require $\gamma^*=(1-\alpha^* - \beta^*)=0$, but it does not allow to pin down unique equilibrium values.
+The Rousseauian equilibria occur for $\gamma^*=0$ and $\alpha$ + $\beta$ =1 $. For $\dot{\alpha}=\dot{\beta}=0$, we require $\pi^S=\pi^P=\bar{\pi}$, and with $\gamma^*=0$, we have $\bar{\pi}=\alpha \pi^S + \beta \pi^P$. From $\pi^S = \alpha \pi^S + \beta \pi^P$ and $\beta=(1-\alpha)$, we get $\pi^S=\pi^P$. Using @eq-evolutionary_pi-s and @eq-evolutionary_pi-p, confirms that this equilibrium does require $\gamma^*=(1-\alpha^* - \beta^*)=0$, but it does not allow to pin down unique equilibrium values.
 
 ```{r}
 ### Confirm that alpha+gamma=1 in the Rousseauian equilibria

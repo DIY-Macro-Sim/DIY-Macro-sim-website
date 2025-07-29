@@ -1,4 +1,4 @@
-# Additional Online Resources {.unnumbered}
+# Additional Online Resources {#sec-resources}
 
 Below you can find some related free online resources for macroeconomic model simulation.
 

@@ -430,4 +430,57 @@ Complex Systems},
   edition   = {2nd},
 }
 
+@Article{Bowles2019,
+  author    = {Bowles, Samuel and Choi, Jung-Kyoo},
+  journal   = {Journal of Political Economy},
+  title     = {The Neolithic Agricultural Revolution and the Origins of Private Property},
+  year      = {2019},
+  issn      = {1537-534X},
+  month     = oct,
+  number    = {5},
+  pages     = {2186--2228},
+  volume    = {127},
+  doi       = {10.1086/701789},
+  publisher = {University of Chicago Press},
+}
+
+@Article{Bowles2013,
+  author    = {Bowles, Samuel and Choi, Jung-Kyoo},
+  journal   = {Proceedings of the National Academy of Sciences},
+  title     = {Coevolution of farming and private property during the early Holocene},
+  year      = {2013},
+  issn      = {1091-6490},
+  month     = may,
+  number    = {22},
+  pages     = {8830--8835},
+  volume    = {110},
+  doi       = {10.1073/pnas.1212149110},
+  publisher = {Proceedings of the National Academy of Sciences},
+}
+
+@Book{Godley2006,
+  author    = {Wynne Godley and Marc Lavoie},
+  publisher = {Palgrave Macmillan},
+  title     = {Monetary Economics. An Integrated Approach to Credit, Money, Income, Production and Wealth},
+  year      = {2006},
+  month     = apr,
+  pagetotal = {530},
+}
+
+@Book{Graziani2003,
+  author    = {Augusto Graziani},
+  publisher = {Cambridge University Press},
+  title     = {The Monetary Theory of Production},
+  year      = {2003},
+}
+
+@InCollection{Godley2012,
+  author    = {Wynne Godley},
+  booktitle = {The Stock–Flow Consistent Approach. Selected Writings of Wynne Godley},
+  publisher = {Palgrave Macmillan},
+  title     = {Weaving Cloth from Graziani’s Thread: Endogenous Money in a Simple (but Complete) Keynesian Model},
+  year      = {2012},
+  editor    = {Marc Lavoie and Gennaro Zezza},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

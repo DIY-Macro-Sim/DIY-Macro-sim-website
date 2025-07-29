@@ -45,7 +45,7 @@ Table 1 reports the parameterisation used in the simulation. For all parameteris
 | Scenario                              | $a_1$ | $a_2$ | $b$ | $A$ | $\pi^T$ | $y_e$ |
 |-----------|-----------|-----------|-----------|-----------|-----------|-----------|
 | 1: rise in aggregate demand ($A$)     | 0.3   | 0.7   | 1   | 12  | 2       | 5     |
-| 2: higher inflation target ($\pi^T$)  | 0.3   | 0.7   | 1   | 10  | 2.5     | 5     |
+| 2: higher inflation target ($\pi^T$)  | 0.3   | 0.7   | 1   | 10  | 3     | 5     |
 | 3: rise in equilibrium output ($y_e$) | 0.3   | 0.7   | 1   | 10  | 2       | 7     |
 
 ### Simulation code

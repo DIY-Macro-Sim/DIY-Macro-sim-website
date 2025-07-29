@@ -1,4 +1,4 @@
-# A Post-Keynesian Macro Model with Endogenous Money
+# A Post-Keynesian Macro Model with Endogenous Money {#sec-PK-endog-money}
 
 ## Overview
 

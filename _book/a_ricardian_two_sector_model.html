@@ -318,12 +318,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">An Evolutionary Game Theoretic Model of the Emergence of Property Rights</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./an_sfc_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">A Stock-Flow Consistent Model of the Monetary Circuit</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./additional_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Additional Online Resources</span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Additional Online Resources</span></span></a>
   </div>
 </li>
     </ul>
@@ -334,7 +340,8 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#the-model" id="toc-the-model" class="nav-link active" data-scroll-target="#the-model">The Model</a></li>
+<li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#the-model" id="toc-the-model" class="nav-link" data-scroll-target="#the-model">The Model</a></li>
   <li>
 <a href="#simulation" id="toc-simulation" class="nav-link" data-scroll-target="#simulation">Simulation</a>
   <ul>
@@ -364,8 +371,9 @@ window.Quarto = {
   
 
 
-</header><p>This model captures some key feature of David Ricardo’s theory of growth and distribution as developed in his 1817 book <a href="https://en.wikipedia.org/wiki/On_the_Principles_of_Political_Economy_and_Taxation">On the Principles of Political Economy and Taxation</a>. The model revolves around the determination of real wages, rents, and profits, and how profitability in turn drives capital accumulation.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> It assumes an economy with two sectors: an agricultural sector producing corn subject to diminishing marginal returns and a luxury good sector with constant marginal returns.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Prices are determined by the quantity of labour required for production. Rent on the land used for agricultural production is a differential surplus landowners gain based on the fertility of their land relative to the marginal plot of land (the plot of land where fertility is lowest and no rent is earned). Real wages are determined by the subsistence level in the long run. Profits in agriculture are a residual and set the economy-wide profit rate. As employment increases and more land is utilised, marginal productivity in agriculture falls and differential rents increase. As a result, profits are driven down to zero and capital accumulation comes to a halt. A ‘stationary state’ is reached. Landowners are the main beneficiaries of this process. The model is adapted from <span class="citation" data-cites="Pasinetti1960">Pasinetti (<a href="#ref-Pasinetti1960" role="doc-biblioref">1960</a>)</span>.</p>
-<section id="the-model" class="level2"><h2 class="anchored" data-anchor-id="the-model">The Model</h2>
+</header><section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This model captures some key feature of David Ricardo’s theory of growth and distribution as developed in his 1817 book <a href="https://en.wikipedia.org/wiki/On_the_Principles_of_Political_Economy_and_Taxation">On the Principles of Political Economy and Taxation</a>. The model revolves around the determination of real wages, rents, and profits, and how profitability in turn drives capital accumulation.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> It assumes an economy with two sectors: an agricultural sector producing corn subject to diminishing marginal returns and a luxury good sector with constant marginal returns.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Prices are determined by the quantity of labour required for production. Rent on the land used for agricultural production is a differential surplus landowners gain based on the fertility of their land relative to the marginal plot of land (the plot of land where fertility is lowest and no rent is earned). Real wages are determined by the subsistence level in the long run. Profits in agriculture are a residual and set the economy-wide profit rate. As employment increases and more land is utilised, marginal productivity in agriculture falls and differential rents increase. As a result, profits are driven down to zero and capital accumulation comes to a halt. A ‘stationary state’ is reached. Landowners are the main beneficiaries of this process. The model is adapted from <span class="citation" data-cites="Pasinetti1960">Pasinetti (<a href="#ref-Pasinetti1960" role="doc-biblioref">1960</a>)</span>.</p>
+</section><section id="the-model" class="level2"><h2 class="anchored" data-anchor-id="the-model">The Model</h2>
 <p>The following equations describe the model: <span id="eq-ricardo2_Y"><span class="math display">\[
 Y_t=AN_{1t}^{a_1}
 \tag{15.1}\]</span></span></p>
@@ -875,9 +883,8 @@ Python code
 <span>             <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">P</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, <span class="st">"P"</span>, <span class="st">"K"</span>, <span class="st">"N"</span>, <span class="st">"A"</span>, </span>
 <span>             <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">a</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">a</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">w</span><span class="op">^</span><span class="va">S</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Plot directed graph</span></span>
-<span><span class="co"># Plot directed graph</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dg</span>, main<span class="op">=</span><span class="st">"Figure 9: Directed graph"</span>, vertex.size<span class="op">=</span><span class="fl">20</span>, vertex.color<span class="op">=</span><span class="st">"lightblue"</span>, </span>
+<span><span class="co"># Plot directed graph (using a tree-like layout)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dg</span>, layout <span class="op">=</span> <span class="fu"><a href="https://r.igraph.org/reference/layout_as_tree.html">layout_as_tree</a></span><span class="op">(</span><span class="va">dg</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Figure 9: Directed graph"</span>, vertex.size<span class="op">=</span><span class="fl">22</span>, vertex.color<span class="op">=</span><span class="st">"lightblue"</span>, </span>
 <span>     vertex.label.color<span class="op">=</span><span class="st">"black"</span>, edge.arrow.size<span class="op">=</span><span class="fl">0.3</span>, edge.width<span class="op">=</span><span class="fl">1.1</span>, edge.size<span class="op">=</span><span class="fl">1.2</span>,</span>
 <span>     edge.arrow.width<span class="op">=</span><span class="fl">1.2</span>, edge.color<span class="op">=</span><span class="st">"black"</span>, vertex.label.cex<span class="op">=</span><span class="fl">0.8</span>, </span>
 <span>     vertex.frame.color<span class="op">=</span><span class="st">"NA"</span>, margin<span class="op">=</span><span class="fl">0.08</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
