@@ -13,6 +13,8 @@ This chapter is still under construction!
 3. Stock-flow consistency: flows accumulate into stocks,
 4. Quadruple entry book-keeping: every transaction involves a quadruple entry in accounting -- two for each party of the transaction. 
 
+To illustrate these principles by means of a simple example, consider an economy with only two aggregate sectors -- firms and households. Households earn wages by  working for firms and spend a part of their wage income on goods, creating revenues for firms (flow consistency). If households do not spend all their wage income on consumption, firms will not receive back all the wages they paid and thus need to borrow to fill the gap. They could sell bonds to households (a liability for firms), thereby offering them a financial asset to save in (stock consistency). If households save some of their wage income in the form of bonds in every peiod, they will gradually increase their (net) wealth (stock-flow consistency). Finally, suppose households sell back some of their bonds to firms to pay for additional consumption. This will be recorded as a reduction of bond assets and an increase in consumption expenses for households, and a reduction in bond liabilities for firms coupled with an increase in revenues (quadruple entry book-keeping). 
+
 These principles are usually applied by means of two matrices that summarise the accounting structure of an SFC model: a balance sheet matrix (for stocks) and a transactions flow matrix (for flows and changes in stocks). These matrices provide a first set of equations that enter an SFC model to ensure accounting consistency. Accounting equations are then complemented by behavioural equations and equilibrium conditions that add causal assumptions to the accounting structure. Most SFC models draw on (post-)Keynesian macroeconomic theory when it comes to the behavioural assumptions. Correspondingly, most SFC models assume that economic activity is demand-determined, that households follow simple behavioural rules when making consumption decision (such as a constant marginal propensity to consume out of income), that firms operate in oligopolistic markets where they set prices based on a markup on unit cost, and that actors in financial markets make financial investment decisions based on relative rates of return. Another key feature is money endogeneity: money is created when commercial banks make loans to accommodate the demand for credit by (creditworthy) borrowers 
 (see also @sec-PK-endog-money). Like aggregate output, the stock of money is thus an endogenous variable that responds to the spending decisions of economic actors (both private and public).
 
@@ -336,6 +338,130 @@ use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
 
 import numpy as np
 
+# Set number of periods
+Q = 300
+
+# Set number of scenarios
+S = 4
+
+# Set period in which shock/shift will occur
+s = 10
+
+# Create (S x Q)-matrices that will contain the simulated data
+Y = np.ones((S, Q))       # income/output
+IN = np.ones((S, Q))      # inventories 
+IN_T = np.ones((S, Q))    # target inventories 
+C = np.ones((S, Q))       # consumption (= sales)
+W = np.ones((S, Q))       # wage bill 
+C_E = np.ones((S, Q))     # expected consumption (= expected sales)
+Pi = np.ones((S, Q))      # net profits
+B = np.ones((S, Q))       # bonds
+M = np.ones((S, Q))       # deposits
+L = np.ones((S, Q))       # loans
+YD = np.ones((S, Q))      # disposable income
+V_H = np.ones((S, Q))     # household wealth         
+p_B = np.ones((S, Q))     # prices of bonds                    
+i_B = np.full((S, Q), 0.1)  # interest rate on bonds
+
+# Set constant parameter values
+sigma = 0.3       # inventories to sales ratio
+gamma = 1         # adjustment speed of sales expectations
+i_L = i_M = 0.01  # loan rate = deposit rate
+alpha_1 = 0.8     # propensity to consume out of income
+alpha_2 = 0.2     # propensity to consume out of wealth
+lambda_1 = 0.9    # sensitivity of bond demand to deposit rate
+lambda_2 = 0.3    # sensitivity of bond demand to return on bonds
+lambda_3 = 0.1    # sensitivity of bond demand to disposable income 
+w = 1             # nominal wage rate
+delta = 2         # productivity
+
+# Create matrices for parameters that will change in scenarios
+alpha_0 = np.ones((S, Q))       # autonomous consumption
+lambda_0 = np.full((S, Q), 0.2) # autonomous demand for bonds
+rho = np.full((S, Q), 0.03)     # premium on corporate bond rate 
+beta = np.full((S, Q), 0.05)    # share of inventories financed by bonds
+
+# Create scenarios
+alpha_0[0, s:] = 1.1     # scenario 1: aggregate demand boost
+beta[1, s:] = 0.1        # scenario 2: rise in share of inventories financed by bonds
+lambda_0[2, s:] = 0.3    # scenario 3: rise in autonomous demand for bonds
+rho[3, s:] = 0.04        # scenario 4: rise in corporate bond premium
+
+# Initialise variables in equilibrium
+for iteration in range(200):
+    i_B[:, 0] = rho[:, 0] + i_M
+    W[:, 0] = w * Y[:, 0] / delta
+    M[:, 0] = L[:, 0] = 1 
+    V_H[:, 0] = M[:, 0] + p_B[:, 0] * B[:, 0]
+    Y[:, 0] = YD[:, 0] = (alpha_0[:, 0] + alpha_2 * V_H[:, 0]) / (1 - alpha_1)
+    IN[:, 0] = IN_T[:, 0] = sigma * Y[:, 0]
+    C[:, 0] = C_E[:, 0] = Y[:, 0]
+    p_B[:, 0] = (i_B[:, 0] * lambda_2) / (
+        (beta[:, 0] * sigma + lambda_3) * 
+        (alpha_0[:, 0] + alpha_2 * V_H[:, 0]) / 
+        (V_H[:, 0] * (1 - alpha_1)) - 
+        (lambda_0[:, 0] - lambda_1 * i_M)
+    )
+    Pi[:, 0] = C[:, 0] - W[:, 0] - i_L * L[:, 0] - i_B[:, 0] * B[:, 0]
+    B[:, 0] = beta[:, 0] * IN[:, 0] / p_B[:, 0]
+
+# Simulate the model by looping over Q time periods for S different scenarios
+for i in range(S):
+    for t in range(1, Q):
+        for iteration in range(200):
+
+            # (1) Consumption
+            C[i, t] = alpha_0[i, t] + alpha_1 * Y[i, t] + alpha_2 * V_H[i, t-1]
+
+            # (2) Wage bill
+            W[i, t] = w * Y[i, t] / delta
+
+            # (3) Profits
+            Pi[i, t] = (C[i, t] - W[i, t] - i_L * L[i, t-1] -
+                        i_B[i, t-1] * B[i, t-1] +
+                        IN[i, t] - IN[i, t-1])
+
+            # (4) Household wealth
+            V_H[i, t] = (V_H[i, t-1] + Y[i, t] - C[i, t] +
+                         (p_B[i, t] - p_B[i, t-1]) * B[i, t-1])
+
+            # (5) Household deposits
+            M[i, t] = V_H[i, t] - p_B[i, t] * B[i, t]
+
+            # (6) Production
+            Y[i, t] = C_E[i, t] + IN_T[i, t] - IN[i, t-1]
+
+            # (7) Target inventories
+            IN_T[i, t] = sigma * C_E[i, t]
+
+            # (8) Expected consumption (= expected sales)
+            C_E[i, t] = C_E[i, t-1] + gamma * (IN_T[i, t-1] - IN[i, t-1])
+
+            # (9) Inventories
+            IN[i, t] = IN[i, t-1] + Y[i, t] - C[i, t]
+
+            # (10) Bond supply 
+            B[i, t] = beta[i, t] * IN[i, t-1] / p_B[i, t]
+
+            # (11) Rate on corporate bonds
+            i_B[i, t] = rho[i, t] + i_L
+
+            # (12) Loans
+            L[i, t] = (L[i, t-1] + IN[i, t] - IN[i, t-1] -
+                       p_B[i, t] * (B[i, t] - B[i, t-1]))
+
+            # (13) i_L = i_M (omitted from simulation because fixed)
+
+            # (14) Bond prices
+            p_B[i, t] = (i_B[i, t] * lambda_2) / (
+                beta[i, t] * (IN[i, t-1] / V_H[i, t-1]) -
+                lambda_0[i, t] + lambda_1 * i_M +
+                lambda_3 * (Y[i, t-1] / V_H[i, t-1])
+            )
+
+# Compute business wealth
+V_F = IN - L - p_B * B
+
 ```
 :::
 
@@ -524,8 +650,185 @@ print(tfm(t=2, scen=1), quote = FALSE, right = TRUE)
 # Print TFM of first scenario for last period
 print(tfm(t=Q, scen=1), quote = FALSE, right = TRUE)
 ```
-
 The fact that all column sum to zero affirms flow consistency.
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+### SFC check
+import pandas as pd
+
+# Define function to create balance sheet matrices (BSM)
+def bsm(t, scen):
+
+    # Pull data from selected period and scenario
+    data = {
+        "M":    M[scen, t],
+        "B":    B[scen, t],
+        "L":    L[scen, t],
+        "IN":   IN[scen, t],
+        "p_B":  p_B[scen, t],
+        "V_H":  V_H[scen, t],
+        "V_F":  V_F[scen, t]
+    }
+
+    # Households column
+    households = [
+        "",  # inventories 
+        f"+{data['M']:.2f}",  # deposits
+        "",  # loans
+        f"+{data['p_B'] * data['B']:.2f}",  # bonds
+        f"+{data['V_H']:.2f}"  # net worth
+    ]
+
+    # Firms column
+    firms = [
+        f"+{data['IN']:.2f}",  # inventories 
+        "",  # deposits
+        f"-{data['L']:.2f}",  # loans
+        f"-{data['p_B'] * data['B']:.2f}",  # bonds
+        f"{data['V_F']:.2f}"  # net worth 
+    ]
+
+    # Banks column
+    banks = [
+        "",  # inventories 
+        f"-{data['M']:.2f}",  # deposits
+        f"+{data['L']:.2f}",  # loans
+        "",  # bonds
+        f"{data['M'] - data['L']:.2f}"  # net worth
+    ]
+
+    # Summation column
+    sum_col = [
+        f"+{data['IN']:.2f}",
+        "0", "0", "0",
+        f"+{data['V_H'] + data['V_F']:.2f}"
+    ]
+
+    # Combine into a DataFrame
+    bsm_df = pd.DataFrame({
+        "Households": households,
+        "Firms": firms,
+        "Banks": banks,
+        "∑": sum_col
+    }, index=["Inventories", "Deposits", "Loans", "Bonds", "∑"])
+
+    return bsm_df
+
+# Print BSM of first scenario for first period
+# (Note: Python uses 0-based indexing, so t=0, scen=0)
+print(bsm(t=0, scen=0).to_string(index=True))
+
+# Print BSM of first scenario for last period
+print(bsm(t=Q-1, scen=0).to_string(index=True))
+
+
+#### Define function to create transactions flow matrices (TFM)
+def tfm(t, scen):
+
+    # Pull data from selected period and scenario
+    data = {
+        "C": C[scen, t],
+        "W": W[scen, t],
+        "Pi": Pi[scen, t],
+        "M": M[scen, t-1],
+        "L": L[scen, t-1],
+        "B": B[scen, t-1],
+        "i_B": i_B[scen, t-1],
+        "dM": M[scen, t] - M[scen, t-1],
+        "dL": L[scen, t] - L[scen, t-1],
+        "dB": p_B[scen, t] * (B[scen, t] - B[scen, t-1]),
+        "dIN": IN[scen, t] - IN[scen, t-1],
+        "dp_B": B[scen, t-1] * (p_B[scen, t] - p_B[scen, t-1])
+    }
+
+    # Households column
+    households = [
+        f"-{data['C']:.2f}",                      # consumption
+        "",                                       # change in inventories
+        f"+{data['W']:.2f}",                      # wages
+        f"+{data['Pi']:.2f}",                     # net profits
+        f"+{i_M * data['M']:.2f}",                # interest on deposits
+        "",                                       # interest on loans
+        f"+{data['i_B'] * data['B']:.2f}",        # interest on bonds
+        f"-{data['dM']:.2f}",                     # change in deposits
+        "",                                       # change in loans
+        f"-{data['dB']:.2f}",                     # change in bonds
+        f"{-data['C'] + data['W'] + data['Pi'] + i_M*data['M'] + data['i_B']*data['B'] - data['dM'] - data['dB']:.2f}",  # sum
+        f"-{data['dp_B']:.2f}"                    # capital gains
+    ]
+
+    # Firms current account column
+    firms_current = [
+        f"+{data['C']:.2f}",                      # consumption
+        f"+{data['dIN']:.2f}",                    # change in inventories
+        f"-{data['W']:.2f}",                      # wages
+        f"-{data['Pi']:.2f}",                     # net profits
+        "",                                       # interest on deposits
+        f"-{i_L * data['L']:.2f}",                # interest on loans
+        f"-{data['i_B'] * data['B']:.2f}",        # interest on bonds
+        "", "", "",                               # change in deposits/loans/bonds
+        f"{data['C'] + data['dIN'] - data['W'] - data['Pi'] - i_L*data['L'] - data['i_B']*data['B']:.2f}",  # sum
+        ""                                        # capital gains
+    ]
+
+    # Firms capital account column
+    firms_capital = [
+        "",                                       # consumption
+        f"-{data['dIN']:.2f}",                    # change in inventories
+        "", "", "", "", "",                       # wages/profits/interest payments
+        "",                                       # change in deposits
+        f"+{data['dL']:.2f}",                     # change in loans
+        f"+{data['dB']:.2f}",                     # change in bonds
+        f"{-data['dIN'] + data['dL'] + data['dB']:.2f}",  # sum
+        f"+{data['dp_B']:.2f}"                    # capital gains
+    ]
+
+    # Banks column
+    banks = [
+        "", "", "", "",                           # consumption/inventories/wages/profits
+        f"-{i_M * data['M']:.2f}",                # interest on deposits
+        f"+{i_L * data['L']:.2f}",                # interest on loans
+        "",                                       # interest on bonds
+        f"+{data['dM']:.2f}",                     # change in deposits
+        f"-{data['dL']:.2f}",                     # change in loans
+        "",                                       # change in bonds 
+        f"{-i_M*data['M'] + i_L*data['L'] + data['dM'] - data['dL']:.2f}",  # sum
+        ""                                        # capital gains
+    ]
+
+    # Summation column
+    sum_col = ["0"] * 12
+
+    # Combine into a DataFrame
+    tfm_df = pd.DataFrame({
+        "Households": households,
+        "Firms (Cur)": firms_current,
+        "Firms (Cap)": firms_capital,
+        "Banks": banks,
+        "∑": sum_col
+    }, index=[
+        "Consumption", "Change in inventories", "Wages", "Net profits",
+        "Interest on deposits", "Interest on loans", "Interest on bonds",
+        "Change in deposits", "Change in loans", "Change in bonds",
+        "∑", "Capital gains"
+    ])
+
+    return tfm_df
+
+# Print TFM of first scenario for second period
+print(tfm(t=1, scen=0).to_string(index=True))
+
+# Print TFM of first scenario for last period
+print(tfm(t=Q - 1, scen=0).to_string(index=True))
+
+```
+:::
 
 ### Plots
 @fig-sfc-output to @fig-bprice display the behaviour of several of the model's key variables during the four scenarios listed in Table 3. The first scenario represents a boost to aggregate demand stemming from an increase in autonomous consumption demand ($\alpha_0$). Due to the Keynesian nature of the model, the increase in aggregate demand translates into an increase in aggregate output. The adjustment to the new equilibrium is cyclical: with uncertainty over future sales, firms use the information embodied in past deviations of actual investments from target to form expectations about future sales (see @eq-sfc_Ce). This (imperfect) approach leads to a (temporary) over- and then undershooting of production along the adjustment path. The increase in production leads to a greater demand for loans (to finance inventories), which directly translates into an increase in the money stock -- reflecting the principle of endogenous money. The effects of the aggregate-demand boost on the corporate bond market are slightly less intuitive. The price of bonds increases, which through further inspection can be attributed to a fall in the household income-to-wealth ratio, which reduces the transactions demand for deposit money and increases the demand for bonds. 
@@ -612,6 +915,44 @@ The second scenario, a rise in the share of inventories financed by bonds ($\bet
 
 The last two scenarios, a rise in autonomous demand for bonds by households ($\lambda_0$)) and a rise in the premium on corporate bonds offered by firms ($\rho$), produce quite similar effects. In both cases, bond demand increases, driving up bond prices. The resulting wealth effect on consumption has a (small) positive effect on output. This illustrates that both households as buyers of bonds and firms as suppliers of bonds can impact bond prices. Shifts in households' demand for demand, e.g. due to changes in liquidity preference, can alter bond prices. Similarly, firms can manipulate the bond premium to impact demand for bonds and thereby change bond prices. For a given supply of bonds, a rise in the corporate bond premium will drive up bond prices. 
 
+::: {.callout-note collapse="true" title="Python code"}
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+### Plots (here only for output)
+import matplotlib.pyplot as plt
+
+# Set maximum period for plots
+Tmin = 1
+Tmax = 100
+
+# Output under different scenarios
+plt.figure(figsize=(10, 6))
+plt.plot(range(Tmin, Tmax + 1), Y[0, Tmin-1:Tmax], label="1: AD boost", color='black', linewidth=2, linestyle='-')
+plt.plot(range(Tmin, Tmax + 1), Y[1, Tmin-1:Tmax], label="2: rise in bond finance", linewidth=2, linestyle='--')
+plt.plot(range(Tmin, Tmax + 1), Y[2, Tmin-1:Tmax], label="3: rise bond demand", linewidth=2, linestyle='-.')
+plt.plot(range(Tmin, Tmax + 1), Y[3, Tmin-1:Tmax], label="4: rise bond premium", linewidth=2, linestyle=':')
+
+# Axis labels and limits
+plt.xlabel("Time", fontsize=12)
+plt.ylabel("Y", fontsize=12)
+plt.xlim(Tmin, Tmax)
+plt.ylim(np.min(Y[:, Tmin-1:Tmax]), np.max(Y[:, Tmin-1:Tmax]))
+
+# Title (empty as in R)
+plt.title("")
+
+# Add legend
+plt.legend(loc='upper right', fontsize=10, frameon=False)
+
+# Show the plot
+plt.tight_layout()
+plt.show()
+```
+:::
+
 ## Directed graph
 
 Another perspective on the model's properties is provided by its
@@ -671,17 +1012,84 @@ plot(dg, layout = layout_as_tree(dg), main="", vertex.size=24, vertex.color="lig
 #| output: false
 #| collapse: true
 
-## Directed graph
+### Directed graph
+import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
 
+# Define adjacency matrix (transpose of your M_mat)
+M_mat = np.array([
+    [0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0],  # C
+    [1,0,0,1,0,0,0,1,0,0,1,0,0,0,0,0],  # VH
+    [0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0],  # M
+    [0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0],  # Y
+    [0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],  # INT
+    [0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0],  # CE
+    [1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],  # IN
+    [0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0],  # B
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1],  # iB
+    [0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0],  # dL
+    [0,1,0,1,0,0,1,0,1,0,0,0,1,1,0,1],  # pB
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],  # alpha0
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],  # beta
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],  # lambda0
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],  # rho
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]   # iM
+])
 
+# Transpose to get adjacency matrix
+A_mat = M_mat.T
 
+# Create directed graph
+G = nx.from_numpy_array(A_mat, create_using=nx.DiGraph)
+
+# Node labels
+node_labels = {
+    0: r"$C$",
+    1: r"$V_{H}$",
+    2: r"$M$",
+    3: r"$Y$",
+    4: r"$INT$",
+    5: r"$\Delta C^{E}$",
+    6: r"$IN$",
+    7: r"$B$",
+    8: r"$i_{B}$",
+    9: r"$\Delta L$",
+    10: r"$p^{B}$",
+    11: r"$\alpha_0$",
+    12: r"$\beta$",
+    13: r"$\lambda_0$",
+    14: r"$\rho$",
+    15: r"$i_{M}$"
+}
+
+# Use spring layout (networkx does not offer a tree-like layout)
+pos = nx.spring_layout(G, seed=42)  # fixed seed for reproducibility
+
+# Plot
+plt.figure(figsize=(12, 8))
+nx.draw(
+    G, pos,
+    labels=node_labels,
+    node_size=1500,
+    node_color='lightblue',
+    font_size=10,
+    font_weight='bold',
+    arrows=True,
+    edge_color='black',
+    width=1.2,
+    arrowsize=12
+)
+plt.title("", fontsize=14)
+plt.axis('off')
+plt.tight_layout()
+plt.show()
 ```
 :::
 
 
 Given the comparatively large number of variables, the directed graph is somewhat busy. We used the tree-like layout to impose some structure. The four exogenous variables considered in the scenarios are grouped at the top. Only autonomous consumption $(\alpha_0)$ has a direct impact on the real part of the model. The other exogenous variables $(\beta, \lambda_0, \rho, i_M)$ directly impact bond prices $p_B$ (or the bond rate $i_B$), which then feeds into the real part of the model via the effect on household wealth. The real and financial parts of the model are connected through the interplay of demand-determined output, the accumulation of saving into wealth, and the effects of wealth on consumption.  
+
 
 ## Analytical discussion
 Despite having 14 equations, the model admits some analytical solutions for its steady state. In a steady state, there are no changes in expectations, which requires inventories to be on target, so that $C^{E*} = C^*$, $IN^*=IN^{T*}$, and $C^*=Y^*$. 
@@ -747,6 +1155,53 @@ For the parameterisations we consider, this condition is indeed satisfied:
 ## Check necessary equilibrium condition (for all scenarios)
 (1-alpha_1-beta[,Q]*sigma*alpha_2 > 0)
 ```
+
+::: {.callout-note collapse="true" title="Python code"}
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+
+### Check analytical solutions (here for the baseline only)
+
+# Equilibrium output
+print(Y[0, Q-1])  # numerical
+print((alpha_0[0, Q-1] + alpha_2 * V_H[0, Q-1]) / (1 - alpha_1))  # analytical
+
+# Equilibrium inventories
+print(IN[0, Q-1])  # numerical
+print(sigma * Y[0, Q-1])  # analytical
+
+# Equilibrium wealth
+print(V_H[0, Q-1])  # numerical
+print(M[0, Q-1] + beta[0, Q-1] * sigma * Y[0, Q-1])  # analytical (simple)
+print((M[0, Q-1] * (1 - alpha_1) + beta[0, Q-1] * sigma * alpha_0[0, Q-1]) / (1 - alpha_1 - beta[0, Q-1] * sigma * alpha_2))  # analytical (complex)
+
+# Equilibrium bond price
+print(p_B[0, Q-1])  # numerical
+print(
+    ((rho[0, Q-1] + i_M) * lambda_2) /
+    ((beta[0, Q-1] * sigma + lambda_3) * (alpha_0[0, Q-1] + alpha_2 * V_H[0, Q-1]) / (V_H[0, Q-1] * (1 - alpha_1)) - (lambda_0[0, Q-1] - lambda_1 * i_M))
+)
+
+# Check necessary equilibrium condition (for all scenarios)
+print((1 - alpha_1 - beta[:, Q-1] * sigma * alpha_2) > 0)
+
+```
+:::
+
+## A simplified recipe for constructing SFC models
+1. Decide how many sectors and assets/liabilities you want to include, and how the assets/liabilities will be distributed over the sectors
+2. Write down the balance sheet matrix (BSM)
+3. Write down the transactions flow matrix (TFM)
+4. For each sector, decide on the residual item ensuring that the sector's budget constraint (column of TFM) is always met
+5. Decide which accounting relationships to include in the model equations and which will be satisfied by implication (confirm the latter through a consistency check once you have simulated the model)
+6. Add the relevant behavioural equations and equilibrium conditions to complete the model (remember that you need exactly one equation per endogenous variable)
+7. Simulate the model
+8. Perform a consistency check
+9. Decide on the scenarios you want to consider (i.e. shocks or shifts to exogenous variables/parameters and how they impact endogenous variables of interest)
+10. Try to find analytical solutions for the steady state of the model
 
 
 ## References
