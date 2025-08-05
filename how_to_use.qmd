@@ -1,7 +1,7 @@
 # Getting Started {#sec-how-to-use}
 
-## Structure of platform
-The platform starts off with a general introduction the numerical simulation of economic models (@sec-how-to-simulate). After that, it jumps right into a series of macroeconomic models. These models are grouped into static and dynamic models. In static models, time plays no role and all variables adjust instantaneously. By contrast, dynamic models characterise the adjustment of variables over time. 
+## Structure of website
+The website starts off with a general introduction the numerical simulation of economic models (@sec-how-to-simulate). After that, it jumps right into a series of macroeconomic models. These models are grouped into static and dynamic models. In static models, time plays no role and all variables adjust instantaneously. By contrast, dynamic models characterise the adjustment of variables over time. 
 
 The model entries are largely self-contained and can be read independently of each other. For each model, the chapters provide three main components:
 
@@ -14,9 +14,9 @@ To further facilitate the understanding of dynamic models, @sec-stab_analysis of
 All simulation codes are written in the open-source programming languages *R* and *Python*. *R* codes are presented in the main text (and images and results in the text are the output of the shown *R* codes), while the corresponding *Python* codes are available by clicking on the callout blocks underneath the *R* codes. 
 
 ## Access to *R* and *Python* and some online resources
-To be able to manipulate the codes on this platform on your own machine, you first need to [download and install *R* and *RStudio*](https://rstudio-education.github.io/hopr/starting.html). For Python, there are different options. One of them is to download and install *Spyder* via the [Anaconda Python distribution](https://www.anaconda.com/download). *Spyder* provides an interface for *Python* (like *RStudio* for *R*). If you install it via *Anaconda*, it will install *Python* automatically.
+To be able to manipulate the codes from this website on your own machine, you first need to [download and install *R* and *RStudio*](https://rstudio-education.github.io/hopr/starting.html). For Python, there are different options. One of them is to download and install *Spyder* via the [Anaconda Python distribution](https://www.anaconda.com/download). *Spyder* provides an interface for *Python* (like *RStudio* for *R*). If you install it via *Anaconda*, it will install *Python* automatically.
 
-Besides being free, a key advantage of both *R* and *Python* is their huge and growing functionality due to new user-written libraries and packages continuously being added. In addition, a large amount of learning material is freely available on the web, e.g. [here](https://education.rstudio.com/learn/beginner/) and [here](https://www.w3schools.com/r/default.asp) for *R* and [here](https://www.python.org/about/gettingstarted/), and [here](https://www.w3schools.com/python/python_intro.asp) for *Python*. However, to get started in can be best to directly delve into some of the codes on this platform and learn by doing. To this end, the following "cheatsheets" that provide a concise overview of key functions are useful:
+Besides being free, a key advantage of both *R* and *Python* is their huge and growing functionality due to new user-written libraries and packages continuously being added. In addition, a large amount of learning material is freely available on the web, e.g. [here](https://education.rstudio.com/learn/beginner/) and [here](https://www.w3schools.com/r/default.asp) for *R* and [here](https://www.python.org/about/gettingstarted/), and [here](https://www.w3schools.com/python/python_intro.asp) for *Python*. However, to get started in can be best to directly delve into some of the codes on this website and learn by doing. To this end, the following "cheatsheets" that provide a concise overview of key functions are useful:
 
 - [R Studio Cheatsheet](https://posit.co/wp-content/uploads/2022/10/rstudio-ide-1.pdf)
 
@@ -30,7 +30,7 @@ Besides being free, a key advantage of both *R* and *Python* is their huge and g
 
 - [Python Cheatsheet for NumPy library](https://assets.datacamp.com/blog_assets/Numpy_Python_Cheat_Sheet.pdf)
 
-Once you have installed *R* or *Python*, you can play with the codes on this platform yourself by copy and pasting them into the script panel of your local interface (IDE) and hitting CTRL + Enter to execute them. Don't forget to always comment your code using the "#" symbol and to save your scripts to make sure your future self can seamlessness continue working on it.
+Once you have installed *R* or *Python*, you can play with the codes on this website yourself by copy and pasting them into the script panel of your local interface (IDE) and hitting CTRL + Enter to execute them. Don't forget to always comment your code using the "#" symbol and to save your scripts to make sure your future self can seamlessness continue working on it.
 
 
 ## Introduction to *R* and *Python*

@@ -1,9 +1,5 @@
 # A Stock-Flow Consistent Model of the Monetary Circuit  {#sec-sfc}
 
-::: {.callout-warning}
-This chapter is still under construction!
-:::
-
 ## Overview
 
 [The stock-flow consistent (SFC) approach](https://en.wikipedia.org/wiki/Stock-flow_consistent_model) to macroeconomic modelling has become increasingly prominent since the 2006 publication of the foundational book *Monetary Economics* by Wynne Godley and Marc Lavoie.^[See @Godley2006. @Lavoie2022, chapter 4.6 provides an introduction, while @Caverzasi2014 and @Nikiforos2017 survey research in the field. Some online resources can be found in @sec-resources.] The SFC approach integrates the real and financial side of the economy, i.e. the physical production and consumption of goods and services, and the financial flows that arise in the course of production, consumption, and investment. As the name suggests, an SFC model covers both flows (over a certain period of time) and stocks (at a particular point in time), which are embedded in a consistent and fully coherent accounting framework. SFC models typically comprise multiple aggregate sectors, such as a household sector, a firm sector, a banking sector, a central bank, and a government. Each of these sectors makes spending and financing decisions subject to budget constraints, giving rise to physical and financial flows across sectors, which lead to changes in physical and financial stocks over time. To ensure consistent accounting, four key principles are applied:
@@ -541,7 +537,7 @@ print(bsm(t=1, scen=1), quote = FALSE, right = TRUE)
 print(bsm(t=Q, scen=1), quote = FALSE, right = TRUE)
 ```
 
-It can be seen that the last row and last column sum to the same value, reflecting stock consistency.
+It can be seen that the last row and last column sum to the same value, i.e. $V_H+V_F=IN$, reflecting stock consistency.^[Note that $V_H+V_F=IN$ is not an equation used in the simulation of the model, but follows logically from the other accounting equations used in the model.]
 
 Now we do the same thing for the TFM (note that we need to use the second period instead of the first, as the TFM contains flows).
 

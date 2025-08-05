@@ -374,20 +374,7 @@ window.Quarto = {
   
 
 
-</header><div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This chapter is still under construction!</p>
-</div>
-</div>
-<section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
+</header><section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p><a href="https://en.wikipedia.org/wiki/Stock-flow_consistent_model">The stock-flow consistent (SFC) approach</a> to macroeconomic modelling has become increasingly prominent since the 2006 publication of the foundational book <em>Monetary Economics</em> by Wynne Godley and Marc Lavoie.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The SFC approach integrates the real and financial side of the economy, i.e.&nbsp;the physical production and consumption of goods and services, and the financial flows that arise in the course of production, consumption, and investment. As the name suggests, an SFC model covers both flows (over a certain period of time) and stocks (at a particular point in time), which are embedded in a consistent and fully coherent accounting framework. SFC models typically comprise multiple aggregate sectors, such as a household sector, a firm sector, a banking sector, a central bank, and a government. Each of these sectors makes spending and financing decisions subject to budget constraints, giving rise to physical and financial flows across sectors, which lead to changes in physical and financial stocks over time. To ensure consistent accounting, four key principles are applied:</p>
 <ol type="1">
 <li>Flow consistency: every transaction comes from somewhere and goes somewhere,</li>
@@ -898,7 +885,7 @@ p^B_t = \frac{i_B \lambda_2}{\beta \frac{IN_{t-1}}{V_{Ht-1}} - \lambda_0 + \lamb
 <span><span class="va">V_F</span> <span class="op">=</span> <span class="va">IN</span> <span class="op">-</span> <span class="va">L</span> <span class="op">-</span> <span class="va">p_B</span><span class="op">*</span><span class="va">B</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Python code">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -907,7 +894,7 @@ Python code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1126,7 +1113,7 @@ Bonds            +0.10 -0.10           0
 ∑                +1.33  0.72 -0.00 +2.05</code></pre>
 </div>
 </div>
-<p>It can be seen that the last row and last column sum to the same value, reflecting stock consistency.</p>
+<p>It can be seen that the last row and last column sum to the same value, i.e.&nbsp;<span class="math inline">\(V_H+V_F=IN\)</span>, reflecting stock consistency.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 <p>Now we do the same thing for the TFM (note that we need to use the second period instead of the first, as the TFM contains flows).</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#### Define function to create transactions flow matrices (TFM)</span></span>
@@ -1263,7 +1250,7 @@ Capital gains              -0.00                   +0.00       0</code></pre>
 </div>
 <p>The fact that all column sum to zero affirms flow consistency.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Python code">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1272,7 +1259,7 @@ Python code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">### SFC check</span></span>
@@ -1556,7 +1543,7 @@ Figure&nbsp;20.5: Bond price
 <p>The second scenario, a rise in the share of inventories financed by bonds (<span class="math inline">\(\beta\)</span>), as expected leads to a higher share of bonds in firms’ liabilities. This affirms <span class="math inline">\(\beta\)</span>’s role as a liability management parameter reflecting firms preferences for bonds as opposed to loans as a source of external funds. The corresponding increase in the supply of bonds leads to a fall in bond prices and a rise in yields. The money stock falls as loans are partially replaced by bonds. The effect on output is contractionary, which is likely due to the fall in nominal household wealth.</p>
 <p>The last two scenarios, a rise in autonomous demand for bonds by households (<span class="math inline">\(\lambda_0\)</span>)) and a rise in the premium on corporate bonds offered by firms (<span class="math inline">\(\rho\)</span>), produce quite similar effects. In both cases, bond demand increases, driving up bond prices. The resulting wealth effect on consumption has a (small) positive effect on output. This illustrates that both households as buyers of bonds and firms as suppliers of bonds can impact bond prices. Shifts in households’ demand for demand, e.g.&nbsp;due to changes in liquidity preference, can alter bond prices. Similarly, firms can manipulate the bond premium to impact demand for bonds and thereby change bond prices. For a given supply of bonds, a rise in the corporate bond premium will drive up bond prices.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Python code">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1565,7 +1552,7 @@ Python code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Plots (here only for output)</span></span>
@@ -1653,7 +1640,7 @@ Python code
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Python code">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1662,7 +1649,7 @@ Python code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Directed graph</span></span>
@@ -1818,7 +1805,7 @@ V_H^* = \frac{M^*(1-\alpha_1) +\beta \sigma \alpha_0}{1-\alpha_1-\beta \sigma \a
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Python code">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1827,7 +1814,7 @@ Python code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a></span>
@@ -1900,6 +1887,7 @@ Nikiforos, Michalis, and Gennaro Zezza. 2017. <span>“STOCK‐FLOW CONSISTENT M
 <li id="fn2"><p>A more complex version of this model can be found in <span class="citation" data-cites="Godley2006">Godley and Lavoie (<a href="#ref-Godley2006" role="doc-biblioref">2006</a>)</span>, chapter 9.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>The assumption of perfect foresight made in <span class="citation" data-cites="Godley2012">Godley (<a href="#ref-Godley2012" role="doc-biblioref">2012</a>)</span> was also relaxed in <span class="citation" data-cites="Godley2006">Godley and Lavoie (<a href="#ref-Godley2006" role="doc-biblioref">2006</a>)</span>, chapter 9. However, we will use a different (simpler) specification for sales expectations and inventory management.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>As a result, the aggregate wage share <span class="math inline">\(\frac{W}{pY}=\frac{w}{p\delta}\)</span> is constant in this model.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Note that <span class="math inline">\(V_H+V_F=IN\)</span> is not an equation used in the simulation of the model, but follows logically from the other accounting equations used in the model.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

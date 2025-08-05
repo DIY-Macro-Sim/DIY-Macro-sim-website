@@ -3,6 +3,7 @@ project:
   output-dir: _book
 execute:
   warning: false
+  freeze: auto
 book:
   title: "DIY Macroeconomic Model Simulation"
   #author: "<a href='https://github.com/DIY-Macro-Sim'>DIY-Macro-Sim<a/>"
@@ -71,4 +72,5 @@ format:
 editor: source
 
 df-print: paged
+
 
