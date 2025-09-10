@@ -385,7 +385,7 @@ window.Quarto = {
 <li><p>a set of <span class="math inline">\(N\)</span> endogenous variables</p></li>
 <li><p>a set of exogenous or fixed coefficients (‘parameters’) and exogenous variables</p></li>
 </ol>
-<p>The solution to the model, its ‘equilibrium’, will pin down values for the endogenous variables of the model for a given set of parameters and exogenous variables. Thus, the endogenous variables, e.g.&nbsp;unemployment, are determined within the system, while exogenous variables are determined outside of the system and often reflect policy variables, such as the central bank interest rate. The equations connect the variables of the system. They typically express:</p>
+<p>The solution to the model, its ‘equilibrium’, will pin down values for the endogenous variables of the model for a given set of parameters and exogenous variables. Thus, the endogenous variables, e.g.&nbsp;unemployment, are determined within the system, while exogenous variables are determined outside of the system and often reflect policy variables, such as the central bank interest rate or government spending. The equations connect the variables of the system. They typically express:</p>
 <ul>
 <li><p>economic (accounting) identities (e.g.&nbsp;that in a closed economy without government, saving is income that is not consumed: <span class="math inline">\(S=Y-C\)</span>)</p></li>
 <li><p>budget constraints (e.g.&nbsp;that business investment can be financed out of retained profits and new debt, <span class="math inline">\(I=\Pi+\Delta D\)</span>)</p></li>
@@ -412,21 +412,23 @@ window.Quarto = {
 <p>If a (dynamic) model exclusively contains recursive relationships, it can be solved iteratively by sequentially updating the endogenous variables from (arbitrarily set) initial conditions. This is easy to do with a computer. By contrast, if interrelationships are simultaneous, solving the system for the endogenous variables as described above is less trivial for a computer (finding the solution for <span class="math inline">\(x\)</span> requires the solution of <span class="math inline">\(y\)</span>, but the latter requires in turn the solution for <span class="math inline">\(x\)</span>). One approach is to use linear algebra: cast the system in matrix form (<span class="math inline">\(b=Ax\)</span>) and let the computer find <span class="math inline">\(x^*=A^{-1}b\)</span> through some algorithm (e.g.&nbsp;<a href="https://en.wikipedia.org/wiki/Gauss%E2%80%93Seidel_method">the Gauss-Seidel method</a>).</p>
 <p>We will use an approach that is simpler and based on <em>iteration</em>:</p>
 <ul>
-<li><p>choose a set of numerical parameter values (e.g.&nbsp;<span class="math inline">\(c_1=0.8\)</span>)</p></li>
-<li><p>choose (arbitrary but non-zero) initial values for the endogenous variables (e.g.&nbsp;<span class="math inline">\(C_0=1)\)</span></p></li>
+<li><p>choose a set of numerical parameter values (e.g.&nbsp;a marginal propensity to consume of <span class="math inline">\(c_1=0.8\)</span>)</p></li>
+<li><p>choose (arbitrary but non-zero) initial values for the endogenous variables (e.g.&nbsp;<span class="math inline">\(C=Y=1)\)</span></p></li>
 <li><p>then solve the system of equations many times using a <em>for loop</em></p></li>
 </ul>
 <p>In this way, the solution gets approximated successively.</p>
 <p>A limitation of the method of iteration is that it will only converge to the solution of the simultaneous component of a model if the equilibrium is stable (more on stability in <a href="intro_stability_analysis.html" class="quarto-xref"><span>Chapter 9</span></a>). For most static models, stability is required for the model to be economically meaningful. In that sense, if the iterative approach does not yield a solution, this is a sign that the model and/or parameterisation needs to be reconsidered. In dynamic models, stability is a key question that should be addressed in any case. Therefore, this limitation of the method of iteration may not be too restrictive in practice.</p>
 <section id="solving-economic-models-numerically-examples" class="level3"><h3 class="anchored" data-anchor-id="solving-economic-models-numerically-examples">Solving economic models numerically: examples</h3>
 <section id="sec-static-Keynesian-model" class="level4"><h4 class="anchored" data-anchor-id="sec-static-Keynesian-model">A static model</h4>
-<p>Consider a two-dimensional simultaneous system represented by a simple Keynesian goods market model:</p>
+<p>Consider a two-dimensional simultaneous system represented by a simple Keynesian goods market model. We can use this model to make a theoretical prediction of how an increase in government spending affects aggregate output.</p>
 <p><span class="math display">\[
-Y= C + I_0
+Y= C + G_0
 \]</span> <span class="math display">\[
 C = c_0 + c_1Y
-\]</span> In a closed economy without government, aggregate demand is composed of consumption <span class="math inline">\(C\)</span> and investment <span class="math inline">\(I\)</span>, with the latter assumed to be exogenous. Goods market equilibrium requires aggregate demand to be equal to aggregate income <span class="math inline">\(Y\)</span>. Consumption is assumed to be determined by an autonomous component <span class="math inline">\(c_0\)</span> and a marginal propensity to consume out of income <span class="math inline">\(c_1\)</span>.</p>
-<p>Suppose the parameters are given by <span class="math inline">\(c_0=3\)</span> and <span class="math inline">\(c_1=0.8\)</span>. You are interested in how a change in investment from <span class="math inline">\(I_0=5\)</span> to <span class="math inline">\(I_0=6\)</span> affects the solution of the system. Through the method of substitution, we can easily derive that <span class="math inline">\(Y^*=\frac{c_0+I_0}{1-c_1}\)</span>. The code below shows how to find this solution via simulation.</p>
+\]</span></p>
+<p>Aggregate demand is composed of consumption <span class="math inline">\(C\)</span> and government spending <span class="math inline">\(G_0\)</span>. The latter is assumed to be exogenous and will be treated as a causal driver of changes in aggregate income and consumption. Goods market equilibrium requires aggregate demand to be equal to aggregate income <span class="math inline">\(Y\)</span> (first equation). Consumption is assumed to be determined by an autonomous component <span class="math inline">\(c_0\)</span> and a marginal propensity to consume out of income <span class="math inline">\(c_1\)</span> (second equation).</p>
+<p>Through the method of substitution, we can easily derive the analytical solution for equilibrium output: <span class="math inline">\(Y^*=\frac{c_0+G_0}{1-c_1}\)</span>. With this solution, we can work out the predicted effect of an increase in government spending on output: <span class="math inline">\(\frac{\partial Y^*}{\partial G_0}=\frac{1}{1-c_1}\)</span>.</p>
+<p>We are interested in how an increase in government spending from <span class="math inline">\(G_0=5\)</span> to <span class="math inline">\(G_0=6\)</span> affects the solution of the system, especially equilibrium output. To solve the model numerically, suppose the parameters of the consumption function are given by <span class="math inline">\(c_0=3\)</span> and <span class="math inline">\(c_1=0.8\)</span>. The code below shows how to find the solution via simulation.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Simulate Keynesian goods market model via iteration</span></span>
 <span></span>
@@ -444,10 +446,10 @@ C = c_0 + c_1Y
 <span><span class="va">Y_eq</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span></span>
 <span><span class="va">C_eq</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#Create vector with parameter that will change </span></span>
-<span><span class="va">I0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span></span>
-<span><span class="va">I0</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="fl">5</span></span>
-<span><span class="va">I0</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">=</span><span class="fl">6</span></span>
+<span><span class="co">#Create vector with exogenous value for government spending that will change across scenarios </span></span>
+<span><span class="va">G0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span></span>
+<span><span class="va">G0</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="fl">5</span></span>
+<span><span class="va">G0</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">=</span><span class="fl">6</span></span>
 <span></span>
 <span><span class="co"># Initialise endogenous variables at arbitrary positive value </span></span>
 <span><span class="va">Y</span><span class="op">=</span><span class="va">C</span><span class="op">=</span><span class="fl">1</span></span>
@@ -455,7 +457,7 @@ C = c_0 + c_1Y
 <span><span class="co">#Solve this system numerically through 1000 iterations based on the initialisation</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="kw">for</span> <span class="op">(</span><span class="va">iteration</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">Y</span> <span class="op">=</span> <span class="va">C</span> <span class="op">+</span> <span class="va">I0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
+<span>  <span class="va">Y</span> <span class="op">=</span> <span class="va">C</span> <span class="op">+</span> <span class="va">G0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
 <span>  <span class="va">C</span> <span class="op">=</span> <span class="va">c0</span> <span class="op">+</span> <span class="va">c1</span><span class="op">*</span><span class="va">Y</span></span>
 <span>  <span class="op">}</span> <span class="co"># close iterations loop</span></span>
 <span>  </span>
@@ -473,8 +475,8 @@ C = c_0 + c_1Y
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 35 39</code></pre>
 </div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Verify solutions for Y</span></span>
-<span><span class="op">(</span><span class="va">c0</span><span class="op">+</span><span class="va">I0</span><span class="op">[</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">c1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Verify solutions for Y using the analytical solution </span></span>
+<span><span class="op">(</span><span class="va">c0</span><span class="op">+</span><span class="va">G0</span><span class="op">[</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">c1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 40 45</code></pre>
 </div>
@@ -508,10 +510,10 @@ Python code
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>Y_eq <span class="op">=</span> np.zeros(S)</span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>C_eq <span class="op">=</span> np.zeros(S)</span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a numpy array with the parameter that will change</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>I0 <span class="op">=</span> np.zeros(S)</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>I0[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>I0[<span class="dv">1</span>] <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Create vector with exogenous value for government spending that will change across scenarios </span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>G0 <span class="op">=</span> np.zeros(S)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>G0[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>G0[<span class="dv">1</span>] <span class="op">=</span> <span class="dv">6</span></span>
 <span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize endogenous variables at an arbitrary positive value</span></span>
 <span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> C <span class="op">=</span> <span class="dv">1</span></span>
@@ -519,24 +521,23 @@ Python code
 <span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve this system numerically through 1000 iterations based on the initialization</span></span>
 <span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(S):</span>
 <span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> iteration <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>        Y <span class="op">=</span> C <span class="op">+</span> I0[i]</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>        Y <span class="op">=</span> C <span class="op">+</span> G0[i]</span>
 <span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>        C <span class="op">=</span> c0 <span class="op">+</span> c1 <span class="op">*</span> Y</span>
 <span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Save results for different parameterisations in the numpy arrays</span></span>
 <span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    Y_eq[i] <span class="op">=</span> Y</span>
 <span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    C_eq[i] <span class="op">=</span> C</span>
 <span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Display solutions</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Display solutions for Y</span></span>
 <span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>Y_eq</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>C_eq</span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify solutions for Y</span></span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>(c0<span class="op">+</span>I0)<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>c1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify solutions for Y using the analytical solution </span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>(c0<span class="op">+</span>G0)<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>c1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
-<p>Let’s break this code down a little bit:</p>
+<p>Let’s break this code down:</p>
 <ul>
 <li><p>set the number of scenarios <span class="math inline">\(S\)</span>, define parameter values, and create vectors of length <span class="math inline">\(S\)</span> in which the results for the endogenous variables will be stored</p></li>
 <li><p>define changes in exogenous variables or parameters (i.e.&nbsp;construct different scenarios)</p></li>
@@ -548,11 +549,11 @@ Python code
 <li>the loop says: repeat the segment of code insights the curly brackets 1000 times</li>
 </ul>
 </li>
-<li><p>nest the loop that solves the system in an outer loop that loops through different parameterisations (here for <span class="math inline">\(I_0\)</span>)</p></li>
+<li><p>nest the loop that solves the system in an outer loop that loops through different parameterisations (here for different values of <span class="math inline">\(G_0\)</span>)</p></li>
 <li><p>after the iterations loop is finished, save the results for the current pameterisation</p></li>
 </ul>
 <p>What happens is the following: in the first iteration, <span class="math inline">\(Y\)</span> and <span class="math inline">\(C\)</span> are calculated based on the initial values and the parameter values. In the second iteration, the values are then overwritten based on the results from the first iteration. This process continues 1000 times. In this way, the correct solution is successively approximated. If you have an analytical solution, you can compare it with the numerical one to double-check your results.</p>
-<p>When does the method of iteration fail to provide a solution? In the following code, everything is the same with the only difference that the marginal propensity to consume is now larger than unity (<span class="math inline">\(c_1=1.2\)</span>). Now the numerical simulation fails to find the solution. This is because with <span class="math inline">\(c_1&gt;0\)</span>, the so-called Keynesian equilibrium condition is violated and the system happens to be unstable. We will discuss in <a href="intro_stability_analysis.html" class="quarto-xref"><span>Chapter 9</span></a> the issue of stability and how to analyse it formally. At this point, we simply note that the method of iterations requires static models to be stable to yield equilibrium solutions.</p>
+<p>When does the method of iteration fail to provide a solution? In the following code, everything is the same with the only difference that the marginal propensity to consume is now larger than unity (<span class="math inline">\(c_1=1.2\)</span>). Now the numerical simulation fails to find the correct solution. This is because with <span class="math inline">\(c_1&gt;1\)</span>, the so-called Keynesian equilibrium condition is violated and the equilibrium happens to be unstable. We will discuss in <a href="intro_stability_analysis.html" class="quarto-xref"><span>Chapter 9</span></a> the issue of stability and how to analyse it formally. At this point, we simply note that the method of iterations requires static models to be stable to yield equilibrium solutions.</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Parameterisation for which method of iteration fails</span></span>
 <span></span>
@@ -571,9 +572,9 @@ Python code
 <span><span class="va">C_eq</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#Create vector with parameter that will change </span></span>
-<span><span class="va">I0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span></span>
-<span><span class="va">I0</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="fl">5</span></span>
-<span><span class="va">I0</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">=</span><span class="fl">6</span></span>
+<span><span class="va">G0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span></span>
+<span><span class="va">G0</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="fl">5</span></span>
+<span><span class="va">G0</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">=</span><span class="fl">6</span></span>
 <span></span>
 <span><span class="co"># Initialise endogenous variables at arbitrary positive value </span></span>
 <span><span class="va">Y</span><span class="op">=</span><span class="va">C</span><span class="op">=</span><span class="fl">1</span></span>
@@ -581,7 +582,7 @@ Python code
 <span><span class="co">#Solve this system numerically through 1000 iterations based on the initialisation</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="kw">for</span> <span class="op">(</span><span class="va">iteration</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">Y</span> <span class="op">=</span> <span class="va">C</span> <span class="op">+</span> <span class="va">I0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
+<span>  <span class="va">Y</span> <span class="op">=</span> <span class="va">C</span> <span class="op">+</span> <span class="va">G0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
 <span>  <span class="va">C</span> <span class="op">=</span> <span class="va">c0</span> <span class="op">+</span> <span class="va">c1</span><span class="op">*</span><span class="va">Y</span></span>
 <span>  <span class="op">}</span> <span class="co"># close iterations loop</span></span>
 <span>  </span>
@@ -590,13 +591,13 @@ Python code
 <span><span class="va">C_eq</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span><span class="va">C</span></span>
 <span><span class="op">}</span> <span class="co"># close parameterisations loop</span></span>
 <span></span>
-<span><span class="co"># Display solutions</span></span>
+<span><span class="co"># Display solution</span></span>
 <span><span class="va">Y_eq</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  5.818655e+80 8.832196e+159</code></pre>
 </div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Verify solutions for Y</span></span>
-<span><span class="op">(</span><span class="va">c0</span><span class="op">+</span><span class="va">I0</span><span class="op">[</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">c1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">(</span><span class="va">c0</span><span class="op">+</span><span class="va">G0</span><span class="op">[</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">c1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -40 -45</code></pre>
 </div>
@@ -623,7 +624,7 @@ Python code
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve this system numerically through 1000 iterations based on the initialization</span></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(S):</span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> iteration <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        Y <span class="op">=</span> C <span class="op">+</span> I0[i]</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        Y <span class="op">=</span> C <span class="op">+</span> G0[i]</span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>        C <span class="op">=</span> c0 <span class="op">+</span> c1 <span class="op">*</span> Y</span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Save results for different parameterisations in the numpy arrays</span></span>
@@ -634,13 +635,13 @@ Python code
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>Y_eq</span>
 <span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify solutions for Y</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>(c0<span class="op">+</span>I0)<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>c1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>(c0<span class="op">+</span>G0)<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>c1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
 </section><section id="a-dynamic-model-in-discrete-time" class="level4"><h4 class="anchored" data-anchor-id="a-dynamic-model-in-discrete-time">A dynamic model (in discrete time)</h4>
-<p>Consider now a dynamic version of the Keynesian goods market model that was proposed by Paul <span class="citation" data-cites="Samuelson1939">Samuelson (<a href="#ref-Samuelson1939" role="doc-biblioref">1939</a>)</span>. In this model, investment (<span class="math inline">\(I\)</span>) becomes endogenous and reacts to the change in consumption. Aggregate demand now also contains government spending (<span class="math inline">\(G\)</span>), which is assumed to be exogenous. Consumption (<span class="math inline">\(C\)</span>) responds to changes in income (<span class="math inline">\(Y\)</span>) with a lag:</p>
+<p>Consider now a dynamic version of the Keynesian goods market model that was proposed by Paul <span class="citation" data-cites="Samuelson1939">Samuelson (<a href="#ref-Samuelson1939" role="doc-biblioref">1939</a>)</span>. In this model, investment (<span class="math inline">\(I\)</span>) is endogenous and reacts to the change in consumption. Consumption (<span class="math inline">\(C\)</span>) responds to changes in income (<span class="math inline">\(Y\)</span>) with a lag:</p>
 <p><span class="math display">\[
 Y_t = C_t + I_t + G_0
 \]</span> <span class="math display">\[
@@ -680,7 +681,7 @@ I_t= \beta[c_1(C_{t-1} + I_{t-1} + G_0) - C_{t-1}]
 <span><span class="va">G0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">5</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Set parameter values for different scenarios</span></span>
-<span><span class="va">G0</span><span class="op">[</span><span class="fl">2</span>,<span class="va">s</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">6</span>     <span class="co"># scenario: permanent increase in government spending from I0=5 to I0=6 from period s=15 onwards</span></span>
+<span><span class="va">G0</span><span class="op">[</span><span class="fl">2</span>,<span class="va">s</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">6</span>     <span class="co"># scenario: permanent increase in government spending from G0=5 to G0=6 from period s=15 onwards</span></span>
 <span></span>
 <span><span class="co">#Solve this system recursively based on the initialisation</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
@@ -741,7 +742,7 @@ Python code
 <span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>G0 <span class="op">=</span> np.ones((S, Q))<span class="op">*</span><span class="dv">5</span> </span>
 <span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameter values for different scenarios</span></span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>G0[<span class="dv">1</span>, s:Q] <span class="op">=</span> <span class="dv">6</span>  <span class="co"># scenario: permanent increase in government spending from I0=5 to I0=6 from period s=15 onwards</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>G0[<span class="dv">1</span>, s:Q] <span class="op">=</span> <span class="dv">6</span>  <span class="co"># scenario: permanent increase in government spending from G0=5 to G0=6 from period s=15 onwards</span></span>
 <span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve this system recursively based on the initialization</span></span>
 <span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(S):</span>
@@ -1013,10 +1014,10 @@ Python code
 </section><section id="exercise-simulating-and-visualising-a-simple-model" class="level2"><h2 class="anchored" data-anchor-id="exercise-simulating-and-visualising-a-simple-model">Exercise: simulating and visualising a simple model</h2>
 <ul>
 <li>take the code for the static Keynesian goods market from <a href="#sec-static-Keynesian-model" class="quarto-xref"><span>Section 2.2.1.1</span></a> above</li>
-<li>add exogenous government spending <span class="math inline">\(G_0\)</span> to aggregate demand</li>
-<li>set <span class="math inline">\(G_0 = 2\)</span>
+<li>add exogenous investment <span class="math inline">\(I_0\)</span> to aggregate demand</li>
+<li>set <span class="math inline">\(I_0 = 2\)</span>
 </li>
-<li>create a third scenario where <span class="math inline">\(G_0\)</span> increases to <span class="math inline">\(G_0=5\)</span>
+<li>create a third scenario where <span class="math inline">\(I_0\)</span> increases to <span class="math inline">\(I_0=5\)</span>
 </li>
 <li>plot equilibrium output <span class="math inline">\(Y^*\)</span> for the three scenarios in a bar chart</li>
 </ul>
@@ -1050,13 +1051,13 @@ R solution
 <span><span class="va">C_eq</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#Create vectors with parameters that will change </span></span>
-<span><span class="va">I0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span></span>
-<span><span class="va">I0</span><span class="op">[</span><span class="op">]</span><span class="op">=</span><span class="fl">5</span> <span class="co"># set I0=5 across all scenarios</span></span>
-<span><span class="va">I0</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">=</span><span class="fl">6</span></span>
-<span><span class="co"># adding government spending</span></span>
 <span><span class="va">G0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span></span>
-<span><span class="va">G0</span><span class="op">[</span><span class="op">]</span><span class="op">=</span><span class="fl">2</span>  <span class="co"># set G0=2 across all scenarios</span></span>
-<span><span class="va">G0</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">=</span><span class="fl">5</span> <span class="co"># set G0=5 in third scenario</span></span>
+<span><span class="va">G0</span><span class="op">[</span><span class="op">]</span><span class="op">=</span><span class="fl">5</span> <span class="co"># set G0=5 across all scenarios</span></span>
+<span><span class="va">G0</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">=</span><span class="fl">6</span></span>
+<span><span class="co"># adding investment spending</span></span>
+<span><span class="va">I0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length<span class="op">=</span><span class="va">S</span><span class="op">)</span></span>
+<span><span class="va">I0</span><span class="op">[</span><span class="op">]</span><span class="op">=</span><span class="fl">2</span>  <span class="co"># set I0=2 across all scenarios</span></span>
+<span><span class="va">I0</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">=</span><span class="fl">5</span> <span class="co"># set I0=5 in third scenario</span></span>
 <span></span>
 <span><span class="co"># Initialise endogenous variables at arbitrary positive value </span></span>
 <span><span class="va">Y</span><span class="op">=</span><span class="va">C</span><span class="op">=</span><span class="fl">1</span></span>
@@ -1064,7 +1065,7 @@ R solution
 <span><span class="co">#Solve this system numerically through 1000 iterations based on the initialisation</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">S</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="kw">for</span> <span class="op">(</span><span class="va">iteration</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">Y</span> <span class="op">=</span> <span class="va">C</span> <span class="op">+</span> <span class="va">I0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="va">G0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>            <span class="co"># add government spending to aggregate demand</span></span>
+<span>  <span class="va">Y</span> <span class="op">=</span> <span class="va">C</span> <span class="op">+</span> <span class="va">G0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="va">I0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>           <span class="co"># add investment to aggregate demand</span></span>
 <span>  <span class="va">C</span> <span class="op">=</span> <span class="va">c0</span> <span class="op">+</span> <span class="va">c1</span><span class="op">*</span><span class="va">Y</span></span>
 <span>  <span class="op">}</span> <span class="co"># close iterations loop</span></span>
 <span>  </span>
@@ -1074,7 +1075,7 @@ R solution
 <span><span class="op">}</span> <span class="co"># close parameterisations loop</span></span>
 <span></span>
 <span><span class="co"># Bar chart of different scenarios for output</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">Y_eq</span>, ylab<span class="op">=</span><span class="st">"Y"</span>, main<span class="op">=</span><span class="st">"Output"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Baseline"</span>, <span class="st">"Increase in I0"</span>, <span class="st">"Increase in G0"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">Y_eq</span>, ylab<span class="op">=</span><span class="st">"Y"</span>, main<span class="op">=</span><span class="st">"Output"</span>, names.arg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Baseline"</span>, <span class="st">"Increase in G0"</span>, <span class="st">"Increase in I0"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="how_to_simulate_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="672"></p>
@@ -1112,13 +1113,13 @@ Python Solution
 <span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>C_eq <span class="op">=</span> np.zeros(S)</span>
 <span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a numpy array with the parameter that will change</span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>I0 <span class="op">=</span> np.zeros(S)</span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>I0[:] <span class="op">=</span> <span class="dv">5</span> <span class="co"># set I0=5 across all scenarios</span></span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>I0[<span class="dv">1</span>] <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="co"># adding government spending</span></span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>G0 <span class="op">=</span> np.zeros(S)</span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>G0[:] <span class="op">=</span> <span class="dv">2</span> <span class="co"># set G0=2 across all scenarios</span></span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>G0[<span class="dv">2</span>] <span class="op">=</span> <span class="dv">5</span> <span class="co"># set G0=5 in third scenario</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>G0 <span class="op">=</span> np.zeros(S)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>G0[:] <span class="op">=</span> <span class="dv">5</span> <span class="co"># set G0=5 across all scenarios</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>G0[<span class="dv">1</span>] <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="co"># adding investment</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>I0 <span class="op">=</span> np.zeros(S)</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>I0[:] <span class="op">=</span> <span class="dv">2</span> <span class="co"># set I0=2 across all scenarios</span></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>I0[<span class="dv">2</span>] <span class="op">=</span> <span class="dv">5</span> <span class="co"># set I0=5 in third scenario</span></span>
 <span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize endogenous variables at an arbitrary positive value</span></span>
 <span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> C <span class="op">=</span> <span class="dv">1</span></span>
@@ -1126,7 +1127,7 @@ Python Solution
 <span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve this system numerically through 1000 iterations based on the initialization</span></span>
 <span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(S):</span>
 <span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> iteration <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):</span>
-<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>        Y <span class="op">=</span> C <span class="op">+</span> I0[i] <span class="op">+</span> G0[i]   <span class="co"># add government spending to aggregate demand</span></span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>        Y <span class="op">=</span> C <span class="op">+</span> G0[i] <span class="op">+</span> I0[i]    <span class="co"># add investment to aggregate demand</span></span>
 <span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>        C <span class="op">=</span> c0 <span class="op">+</span> c1 <span class="op">*</span> Y</span>
 <span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Save results for different parameterisations in the numpy arrays</span></span>
@@ -1137,7 +1138,7 @@ Python Solution
 <span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Bar chart of different scenarios for output</span></span>
-<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>scenario_labels <span class="op">=</span> [<span class="st">"Baseline"</span>, <span class="st">"Increase in I0"</span>, <span class="st">"Increase in G0"</span>]</span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>scenario_labels <span class="op">=</span> [<span class="st">"Baseline"</span>, <span class="st">"Increase in G0"</span>, <span class="st">"Increase in I0"</span>]</span>
 <span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a>plt.bar(scenario_labels, Y_eq)</span>
 <span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Scenario"</span>)</span>
 <span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Y"</span>)</span>
@@ -1154,15 +1155,15 @@ Python Solution
 </div>
 </div>
 </section><section id="sec-sim-continuous" class="level2"><h2 class="anchored" data-anchor-id="sec-sim-continuous">Appendix: How to simulate dynamic model in continuous time</h2>
-<p>Sometimes, dynamic economic models are written in continuous time where the time increment is assumed to be infinitesimally small. Consider, for example, a continuous-time version of the Keynesian goods market model:</p>
+<p>Sometimes, dynamic economic models are written in continuous time where the time increment is assumed to be infinitesimally small. Consider, for example, a continuous-time version of a Keynesian goods market model:</p>
 <p><span class="math display">\[
-\dot{Y}= k(C + I_0 - Y)
+\dot{Y}= k(C + G_0 - Y)
 \]</span></p>
 <p><span class="math display">\[
 C = c_0 + c_1Y,
 \]</span> where <span class="math inline">\(\dot{Y}=\frac{dY}{dt}\)</span>. To simulate this model, we have to approximate the differential equation for <span class="math inline">\(\dot{Y}\)</span> by a difference equation for <span class="math inline">\(Y_t\)</span> and let the time increment <span class="math inline">\(\Delta t\)</span> become very small. More specifically, we write:</p>
 <p><span class="math display">\[
-Y(t+\Delta t)=Y_t + \dot{Y} \Delta t =Y_t + [k(C + I_0 - Y)]\Delta t.
+Y(t+\Delta t)=Y_t + \dot{Y} \Delta t =Y_t + [k(C + G_0 - Y)]\Delta t.
 \]</span> This approach is also called the <em>Euler forward method</em>. The code below shows to implement that method. We use <span class="math inline">\(\Delta t = 0.01\)</span>. Note that we need to raise the time horizon <span class="math inline">\(Q\)</span> and set the adjustment speed <span class="math inline">\(k\)</span> relatively high to make sure that the system has effectively converged to the equilibrium by <span class="math inline">\(Q\)</span>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Simulate continuous time version of Keynesian goods market model</span></span>
@@ -1187,19 +1188,19 @@ Y(t+\Delta t)=Y_t + \dot{Y} \Delta t =Y_t + [k(C + I_0 - Y)]\Delta t.
 <span><span class="va">C</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#Construct matrices for exogenous variable </span></span>
-<span><span class="va">I0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">5</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span></span>
+<span><span class="va">G0</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">5</span>, nrow<span class="op">=</span><span class="va">S</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#Solve this system recursively based on the initialisation</span></span>
 <span>  <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="va">Q</span><span class="op">)</span><span class="op">{</span></span>
 <span>    <span class="kw">for</span> <span class="op">(</span><span class="va">iterations</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span><span class="op">{</span></span>
-<span>    <span class="va">Y</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">Y</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">delta</span><span class="op">*</span><span class="op">(</span><span class="va">k</span><span class="op">*</span><span class="op">(</span><span class="va">C</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">I0</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">Y</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="va">Y</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">Y</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">delta</span><span class="op">*</span><span class="op">(</span><span class="va">k</span><span class="op">*</span><span class="op">(</span><span class="va">C</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">G0</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">Y</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span>    <span class="va">C</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">c0</span> <span class="op">+</span> <span class="va">c1</span><span class="op">*</span><span class="va">Y</span><span class="op">[</span><span class="fl">1</span>,<span class="va">t</span><span class="op">]</span></span>
 <span>    <span class="op">}</span> <span class="co"># close within-period loop</span></span>
 <span>  <span class="op">}</span> <span class="co"># close time loop</span></span>
 <span></span>
 <span></span>
 <span><span class="co"># Verify solutions for Y</span></span>
-<span><span class="op">(</span><span class="va">c0</span><span class="op">+</span><span class="va">I0</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">c1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">(</span><span class="va">c0</span><span class="op">+</span><span class="va">G0</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">c1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 40</code></pre>
 </div>
@@ -1243,16 +1244,16 @@ Python code
 <span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> np.ones((S, Q))</span>
 <span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the matrix for the exogenous variable</span></span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>I0 <span class="op">=</span> np.full((S, Q), <span class="dv">5</span>)</span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>G0 <span class="op">=</span> np.full((S, Q), <span class="dv">5</span>)</span>
 <span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve this system recursively based on the initialization</span></span>
 <span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, Q):</span>
 <span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> iterations <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):</span>
-<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>        Y[<span class="dv">0</span>, t] <span class="op">=</span> Y[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> delta <span class="op">*</span> (k <span class="op">*</span> (C[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> I0[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">-</span> Y[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>]))</span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>        Y[<span class="dv">0</span>, t] <span class="op">=</span> Y[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> delta <span class="op">*</span> (k <span class="op">*</span> (C[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> G0[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>] <span class="op">-</span> Y[<span class="dv">0</span>, t <span class="op">-</span> <span class="dv">1</span>]))</span>
 <span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>        C[<span class="dv">0</span>, t] <span class="op">=</span> c0 <span class="op">+</span> c1 <span class="op">*</span> Y[<span class="dv">0</span>, t]</span>
 <span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the solution for Y at time Q</span></span>
-<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>(c0 <span class="op">+</span> I0[<span class="dv">0</span>, Q <span class="op">-</span> <span class="dv">1</span>]) <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> c1)</span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>(c0 <span class="op">+</span> G0[<span class="dv">0</span>, Q <span class="op">-</span> <span class="dv">1</span>]) <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> c1)</span>
 <span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>Y[<span class="dv">0</span>,Q <span class="op">-</span> <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

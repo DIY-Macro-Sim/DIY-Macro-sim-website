@@ -13,7 +13,7 @@ Every economic model essentially consist of three things:
 
 3.  a set of exogenous or fixed coefficients ('parameters') and exogenous variables
 
-The solution to the model, its 'equilibrium', will pin down values for the endogenous variables of the model for a given set of parameters and exogenous variables. Thus, the endogenous variables, e.g. unemployment, are determined within the system, while exogenous variables are determined outside of the system and often reflect policy variables, such as the central bank interest rate. The equations connect the variables of the system. They typically express:
+The solution to the model, its 'equilibrium', will pin down values for the endogenous variables of the model for a given set of parameters and exogenous variables. Thus, the endogenous variables, e.g. unemployment, are determined within the system, while exogenous variables are determined outside of the system and often reflect policy variables, such as the central bank interest rate or government spending. The equations connect the variables of the system. They typically express:
 
 -   economic (accounting) identities (e.g. that in a closed economy without government, saving is income that is not consumed: $S=Y-C$)
 
@@ -53,9 +53,9 @@ If a (dynamic) model exclusively contains recursive relationships, it can be sol
 
 We will use an approach that is simpler and based on *iteration*:
 
--   choose a set of numerical parameter values (e.g. $c_1=0.8$)
+-   choose a set of numerical parameter values (e.g. a marginal propensity to consume of $c_1=0.8$)
 
--   choose (arbitrary but non-zero) initial values for the endogenous variables (e.g. $C_0=1)$
+-   choose (arbitrary but non-zero) initial values for the endogenous variables (e.g. $C=Y=1)$
 
 -   then solve the system of equations many times using a *for loop*
 
@@ -67,15 +67,19 @@ A limitation of the method of iteration is that it will only converge to the sol
 
 #### A static model {#sec-static-Keynesian-model}
 
-Consider a two-dimensional simultaneous system represented by a simple Keynesian goods market model:
+Consider a two-dimensional simultaneous system represented by a simple Keynesian goods market model. We can use this model to make a theoretical prediction of how an increase in government spending affects aggregate output. 
 
 $$
-Y= C + I_0
+Y= C + G_0
 $$ $$
 C = c_0 + c_1Y
-$$ In a closed economy without government, aggregate demand is composed of consumption $C$ and investment $I$, with the latter assumed to be exogenous. Goods market equilibrium requires aggregate demand to be equal to aggregate income $Y$. Consumption is assumed to be determined by an autonomous component $c_0$ and a marginal propensity to consume out of income $c_1$.
+$$ 
 
-Suppose the parameters are given by $c_0=3$ and $c_1=0.8$. You are interested in how a change in investment from $I_0=5$ to $I_0=6$ affects the solution of the system. Through the method of substitution, we can easily derive that $Y^*=\frac{c_0+I_0}{1-c_1}$. The code below shows how to find this solution via simulation.
+Aggregate demand is composed of consumption $C$ and government spending $G_0$. The latter is assumed to be exogenous and will be treated as a causal driver of changes in aggregate income and consumption. Goods market equilibrium requires aggregate demand to be equal to aggregate income $Y$ (first equation). Consumption is assumed to be determined by an autonomous component $c_0$ and a marginal propensity to consume out of income $c_1$ (second equation).
+
+Through the method of substitution, we can easily derive the analytical solution for equilibrium output: $Y^*=\frac{c_0+G_0}{1-c_1}$. With this solution, we can work out the predicted effect of an increase in government spending on output: $\frac{\partial Y^*}{\partial G_0}=\frac{1}{1-c_1}$.
+
+We are interested in how an increase in government spending from $G_0=5$ to $G_0=6$ affects the solution of the system, especially equilibrium output. To solve the model numerically, suppose the parameters of the consumption function are given by $c_0=3$ and $c_1=0.8$. The code below shows how to find the solution via simulation.
 
 ```{r howto_1}
 ### Simulate Keynesian goods market model via iteration
@@ -94,10 +98,10 @@ c1=0.8
 Y_eq=vector(length=S)
 C_eq=vector(length=S)
 
-#Create vector with parameter that will change 
-I0=vector(length=S)
-I0[1]=5
-I0[2]=6
+#Create vector with exogenous value for government spending that will change across scenarios 
+G0=vector(length=S)
+G0[1]=5
+G0[2]=6
 
 # Initialise endogenous variables at arbitrary positive value 
 Y=C=1
@@ -105,7 +109,7 @@ Y=C=1
 #Solve this system numerically through 1000 iterations based on the initialisation
 for (i in 1:S){
   for (iteration in 1:1000){
-  Y = C + I0[i]
+  Y = C + G0[i]
   C = c0 + c1*Y
   } # close iterations loop
   
@@ -118,8 +122,8 @@ C_eq[i]=C
 Y_eq
 C_eq
 
-# Verify solutions for Y
-(c0+I0[])/(1-c1)
+# Verify solutions for Y using the analytical solution 
+(c0+G0[])/(1-c1)
 ```
 
 ::: {.callout-note collapse="true" title="Python code"}
@@ -157,10 +161,10 @@ c1 = 0.8
 Y_eq = np.zeros(S)
 C_eq = np.zeros(S)
 
-# Create a numpy array with the parameter that will change
-I0 = np.zeros(S)
-I0[0] = 5
-I0[1] = 6
+#Create vector with exogenous value for government spending that will change across scenarios 
+G0 = np.zeros(S)
+G0[0] = 5
+G0[1] = 6
 
 # Initialize endogenous variables at an arbitrary positive value
 Y = C = 1
@@ -168,24 +172,23 @@ Y = C = 1
 # Solve this system numerically through 1000 iterations based on the initialization
 for i in range(S):
     for iteration in range(1000):
-        Y = C + I0[i]
+        Y = C + G0[i]
         C = c0 + c1 * Y
 
     # Save results for different parameterisations in the numpy arrays
     Y_eq[i] = Y
     C_eq[i] = C
 
-# Display solutions
+# Display solutions for Y
 Y_eq
-C_eq
 
-# Verify solutions for Y
-(c0+I0)/(1-c1)
+# Verify solutions for Y using the analytical solution 
+(c0+G0)/(1-c1)
 ```
 
 :::
 
-Let's break this code down a little bit:
+Let's break this code down:
 
 -   set the number of scenarios $S$, define parameter values, and create vectors of length $S$ in which the results for the endogenous variables will be stored
 
@@ -199,13 +202,13 @@ Let's break this code down a little bit:
 
     -   the loop says: repeat the segment of code insights the curly brackets 1000 times
 
--   nest the loop that solves the system in an outer loop that loops through different parameterisations (here for $I_0$)
+-   nest the loop that solves the system in an outer loop that loops through different parameterisations (here for different values of $G_0$)
 
 -   after the iterations loop is finished, save the results for the current pameterisation
 
 What happens is the following: in the first iteration, $Y$ and $C$ are calculated based on the initial values and the parameter values. In the second iteration, the values are then overwritten based on the results from the first iteration. This process continues 1000 times. In this way, the correct solution is successively approximated. If you have an analytical solution, you can compare it with the numerical one to double-check your results.
 
-When does the method of iteration fail to provide a solution? In the following code, everything is the same with the only difference that the marginal propensity to consume is now larger than unity ($c_1=1.2$). Now the numerical simulation fails to find the solution. This is because with $c_1>0$, the so-called Keynesian equilibrium condition is violated and the system happens to be unstable. We will discuss in @sec-stab_analysis the issue of stability and how to analyse it formally. At this point, we simply note that the method of iterations requires static models to be stable to yield equilibrium solutions.
+When does the method of iteration fail to provide a solution? In the following code, everything is the same with the only difference that the marginal propensity to consume is now larger than unity ($c_1=1.2$). Now the numerical simulation fails to find the correct solution. This is because with $c_1>1$, the so-called Keynesian equilibrium condition is violated and the equilibrium happens to be unstable. We will discuss in @sec-stab_analysis the issue of stability and how to analyse it formally. At this point, we simply note that the method of iterations requires static models to be stable to yield equilibrium solutions.
 
 ```{r howto_2}
 ### Parameterisation for which method of iteration fails
@@ -225,9 +228,9 @@ Y_eq=vector(length=S)
 C_eq=vector(length=S)
 
 #Create vector with parameter that will change 
-I0=vector(length=S)
-I0[1]=5
-I0[2]=6
+G0=vector(length=S)
+G0[1]=5
+G0[2]=6
 
 # Initialise endogenous variables at arbitrary positive value 
 Y=C=1
@@ -235,7 +238,7 @@ Y=C=1
 #Solve this system numerically through 1000 iterations based on the initialisation
 for (i in 1:S){
   for (iteration in 1:1000){
-  Y = C + I0[i]
+  Y = C + G0[i]
   C = c0 + c1*Y
   } # close iterations loop
   
@@ -244,11 +247,11 @@ Y_eq[i]=Y
 C_eq[i]=C
 } # close parameterisations loop
 
-# Display solutions
+# Display solution
 Y_eq
 
 # Verify solutions for Y
-(c0+I0[])/(1-c1)
+(c0+G0[])/(1-c1)
 ```
 
 ::: {.callout-note collapse="true" title="Python code"}
@@ -267,7 +270,7 @@ Y = C = 1
 # Solve this system numerically through 1000 iterations based on the initialization
 for i in range(S):
     for iteration in range(1000):
-        Y = C + I0[i]
+        Y = C + G0[i]
         C = c0 + c1 * Y
 
     # Save results for different parameterisations in the numpy arrays
@@ -278,7 +281,7 @@ for i in range(S):
 Y_eq
 
 # Verify solutions for Y
-(c0+I0)/(1-c1)
+(c0+G0)/(1-c1)
 
 ```
 
@@ -286,7 +289,7 @@ Y_eq
 
 #### A dynamic model (in discrete time)
 
-Consider now a dynamic version of the Keynesian goods market model that was proposed by Paul @Samuelson1939. In this model, investment ($I$) becomes endogenous and reacts to the change in consumption. Aggregate demand now also contains government spending ($G$), which is assumed to be exogenous. Consumption ($C$) responds to changes in income ($Y$) with a lag:
+Consider now a dynamic version of the Keynesian goods market model that was proposed by Paul @Samuelson1939. In this model, investment ($I$) is endogenous and reacts to the change in consumption. Consumption ($C$) responds to changes in income ($Y$) with a lag:
 
 $$
 Y_t = C_t + I_t + G_0
@@ -329,7 +332,7 @@ I=matrix(data=1, nrow=S, ncol=Q)
 G0=matrix(data=5, nrow=S, ncol=Q)
 
 # Set parameter values for different scenarios
-G0[2,s:Q]=6     # scenario: permanent increase in government spending from I0=5 to I0=6 from period s=15 onwards
+G0[2,s:Q]=6     # scenario: permanent increase in government spending from G0=5 to G0=6 from period s=15 onwards
 
 #Solve this system recursively based on the initialisation
 for (i in 1:S){
@@ -380,7 +383,7 @@ I = np.ones((S, Q))
 G0 = np.ones((S, Q))*5 
 
 # Set parameter values for different scenarios
-G0[1, s:Q] = 6  # scenario: permanent increase in government spending from I0=5 to I0=6 from period s=15 onwards
+G0[1, s:Q] = 6  # scenario: permanent increase in government spending from G0=5 to G0=6 from period s=15 onwards
 
 # Solve this system recursively based on the initialization
 for i in range(S):
@@ -637,9 +640,9 @@ It can thus be seen that the key exogenous variable in the @Samuelson1939 model 
 
 ## Exercise: simulating and visualising a simple model
 - take the code for the static Keynesian goods market from @sec-static-Keynesian-model above 
-- add exogenous government spending $G_0$ to aggregate demand
-- set $G_0 = 2$
-- create a third scenario where $G_0$ increases to $G_0=5$
+- add exogenous investment $I_0$ to aggregate demand
+- set $I_0 = 2$
+- create a third scenario where $I_0$ increases to $I_0=5$
 - plot equilibrium output $Y^*$ for the three scenarios in a bar chart
 
 ::: {.callout-tip collapse="true" title="R solution"}
@@ -665,13 +668,13 @@ Y_eq=vector(length=S)
 C_eq=vector(length=S)
 
 #Create vectors with parameters that will change 
-I0=vector(length=S)
-I0[]=5 # set I0=5 across all scenarios
-I0[2]=6
-# adding government spending
 G0=vector(length=S)
-G0[]=2  # set G0=2 across all scenarios
-G0[3]=5 # set G0=5 in third scenario
+G0[]=5 # set G0=5 across all scenarios
+G0[2]=6
+# adding investment spending
+I0=vector(length=S)
+I0[]=2  # set I0=2 across all scenarios
+I0[3]=5 # set I0=5 in third scenario
 
 # Initialise endogenous variables at arbitrary positive value 
 Y=C=1
@@ -679,7 +682,7 @@ Y=C=1
 #Solve this system numerically through 1000 iterations based on the initialisation
 for (i in 1:S){
   for (iteration in 1:1000){
-  Y = C + I0[i] + G0[i]            # add government spending to aggregate demand
+  Y = C + G0[i] + I0[i]           # add investment to aggregate demand
   C = c0 + c1*Y
   } # close iterations loop
   
@@ -689,7 +692,7 @@ C_eq[i]=C
 } # close parameterisations loop
 
 # Bar chart of different scenarios for output
-barplot(Y_eq, ylab="Y", main="Output", names.arg=c("Baseline", "Increase in I0", "Increase in G0"))
+barplot(Y_eq, ylab="Y", main="Output", names.arg=c("Baseline", "Increase in G0", "Increase in I0"))
 
 ```
 ::: 
@@ -715,13 +718,13 @@ Y_eq = np.zeros(S)
 C_eq = np.zeros(S)
 
 # Create a numpy array with the parameter that will change
-I0 = np.zeros(S)
-I0[:] = 5 # set I0=5 across all scenarios
-I0[1] = 6
-# adding government spending
 G0 = np.zeros(S)
-G0[:] = 2 # set G0=2 across all scenarios
-G0[2] = 5 # set G0=5 in third scenario
+G0[:] = 5 # set G0=5 across all scenarios
+G0[1] = 6
+# adding investment
+I0 = np.zeros(S)
+I0[:] = 2 # set I0=2 across all scenarios
+I0[2] = 5 # set I0=5 in third scenario
 
 # Initialize endogenous variables at an arbitrary positive value
 Y = C = 1
@@ -729,7 +732,7 @@ Y = C = 1
 # Solve this system numerically through 1000 iterations based on the initialization
 for i in range(S):
     for iteration in range(1000):
-        Y = C + I0[i] + G0[i]   # add government spending to aggregate demand
+        Y = C + G0[i] + I0[i]    # add investment to aggregate demand
         C = c0 + c1 * Y
 
     # Save results for different parameterisations in the numpy arrays
@@ -740,7 +743,7 @@ for i in range(S):
 import matplotlib.pyplot as plt
 
 # Bar chart of different scenarios for output
-scenario_labels = ["Baseline", "Increase in I0", "Increase in G0"]
+scenario_labels = ["Baseline", "Increase in G0", "Increase in I0"]
 plt.bar(scenario_labels, Y_eq)
 plt.xlabel("Scenario")
 plt.ylabel("Y")
@@ -754,10 +757,10 @@ plt.show()
 
 ## Appendix: How to simulate dynamic model in continuous time {#sec-sim-continuous}
 
-Sometimes, dynamic economic models are written in continuous time where the time increment is assumed to be infinitesimally small. Consider, for example, a continuous-time version of the Keynesian goods market model:
+Sometimes, dynamic economic models are written in continuous time where the time increment is assumed to be infinitesimally small. Consider, for example, a continuous-time version of a Keynesian goods market model:
 
 $$
-\dot{Y}= k(C + I_0 - Y)
+\dot{Y}= k(C + G_0 - Y)
 $$
 
 $$
@@ -765,7 +768,7 @@ C = c_0 + c_1Y,
 $$ where $\dot{Y}=\frac{dY}{dt}$. To simulate this model, we have to approximate the differential equation for $\dot{Y}$ by a difference equation for $Y_t$ and let the time increment $\Delta t$ become very small. More specifically, we write:
 
 $$
-Y(t+\Delta t)=Y_t + \dot{Y} \Delta t =Y_t + [k(C + I_0 - Y)]\Delta t.
+Y(t+\Delta t)=Y_t + \dot{Y} \Delta t =Y_t + [k(C + G_0 - Y)]\Delta t.
 $$ This approach is also called the *Euler forward method*. The code below shows to implement that method. We use $\Delta t = 0.01$. Note that we need to raise the time horizon $Q$ and set the adjustment speed $k$ relatively high to make sure that the system has effectively converged to the equilibrium by $Q$.
 
 ```{r howto_9}
@@ -791,19 +794,19 @@ Y=matrix(data=1, nrow=S, ncol=Q)
 C=matrix(data=1, nrow=S, ncol=Q)
 
 #Construct matrices for exogenous variable 
-I0=matrix(data=5, nrow=S, ncol=Q)
+G0=matrix(data=5, nrow=S, ncol=Q)
 
 #Solve this system recursively based on the initialisation
   for (t in 2:Q){
     for (iterations in 1:1000){
-    Y[1,t] = Y[1,t-1] + delta*(k*(C[1,t-1] + I0[1,t-1] - Y[1,t-1]))
+    Y[1,t] = Y[1,t-1] + delta*(k*(C[1,t-1] + G0[1,t-1] - Y[1,t-1]))
     C[1,t] = c0 + c1*Y[1,t]
     } # close within-period loop
   } # close time loop
 
 
 # Verify solutions for Y
-(c0+I0[1,Q])/(1-c1)
+(c0+G0[1,Q])/(1-c1)
 Y[1,Q]
 ```
 
@@ -836,16 +839,16 @@ Y = np.ones((S, Q))
 C = np.ones((S, Q))
 
 # Initialize the matrix for the exogenous variable
-I0 = np.full((S, Q), 5)
+G0 = np.full((S, Q), 5)
 
 # Solve this system recursively based on the initialization
 for t in range(1, Q):
     for iterations in range(1000):
-        Y[0, t] = Y[0, t - 1] + delta * (k * (C[0, t - 1] + I0[0, t - 1] - Y[0, t - 1]))
+        Y[0, t] = Y[0, t - 1] + delta * (k * (C[0, t - 1] + G0[0, t - 1] - Y[0, t - 1]))
         C[0, t] = c0 + c1 * Y[0, t]
 
 # Verify the solution for Y at time Q
-(c0 + I0[0, Q - 1]) / (1 - c1)
+(c0 + G0[0, Q - 1]) / (1 - c1)
 
 Y[0,Q - 1]
 
