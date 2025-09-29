@@ -8,11 +8,11 @@ New Keynesian dynamic general equilibrium models were developed in the 1990s and
 
 The IS curve establishes a negative relationship between real income and the real interest rate. For a higher real interest rate, households will save more and thus consume less. The Phillips curve models inflation as a function of the output gap. A positive output gap (an economic expansion) leads to higher inflation. The monetary policy rule specifies how the central bank reacts to deviations of actual inflation from a politically determined inflation target.
 
-The simplified version of the 3-equation model we consider here is directly taken from chapter 4 of @Carlin2014. This is a short-run model in which prices are flexible but the capital stock is fixed. The focus is thus on goods market equilibrium rather than economic growth. In the Carlin-Soskice version, inflation expectations are assumed to be adaptive and the response of aggregate demand to a change in the interest rate is sluggish. This renders the model dynamic.[^a_new_keynesian_3_equation_model-2]
+The simplified version of the 3-equation model we consider here is directly taken from chapter 3 of @Carlin2014.^[A PDF version of the most 2024 edition of the book is freely available [here](https://www.stone-econ.org/resources/free-textbook-in-intermediate-macroeconomics).] This is a short-run model in which prices are flexible but the capital stock is fixed. The focus is thus on goods market equilibrium rather than economic growth. In the Carlin-Soskice version, inflation expectations are assumed to be adaptive and the response of aggregate demand to a change in the interest rate is sluggish. This renders the model dynamic.[^a_new_keynesian_3_equation_model-2]
 
-[^a_new_keynesian_3_equation_model-2]: Note that this is quite different from conventional New Keynesian dynamic general equilibrium models in which the dynamic element stems from agents with rational expectations that react to serially correlated shocks.
+[^a_new_keynesian_3_equation_model-2]: Note that this is quite different from conventional New Keynesian dynamic stochastic general equilibrium (DSGE) models in which the dynamic element stems from agents with rational expectations that react to serially correlated shocks. See chapter 16 of @Carlin2014 for a comparison of their 3-equation model with New Keynesian DSGE models.]
 
-## The Model
+## The model
 
 $$
 y_t=A -a_1r_{t-1}
@@ -43,10 +43,10 @@ Table 1 reports the parameterisation used in the simulation. For all parameteris
 **Table 1: Parameterisation**
 
 | Scenario                              | $a_1$ | $a_2$ | $b$ | $A$ | $\pi^T$ | $y_e$ |
-|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
-| 1: rise in aggregate demand ($A$)     | 0.3   | 0.7   | 1   | 12  | 2       | 5     |
-| 2: higher inflation target ($\pi^T$)  | 0.3   | 0.7   | 1   | 10  | 3     | 5     |
-| 3: rise in equilibrium output ($y_e$) | 0.3   | 0.7   | 1   | 10  | 2       | 7     |
+|---------------------------------------|-------|-------|-----|---- |----   --|-------|
+| 1: rise in aggregate demand ($A$)     | 0.3   | 0.7   | 1   | 7   | 2       | 5     |
+| 2: higher inflation target ($\pi^T$)  | 0.3   | 0.7   | 1   | 6   | 3       | 5     |
+| 3: rise in equilibrium output ($y_e$) | 0.3   | 0.7   | 1   | 6   | 2       | 5.5   |
 
 ### Simulation code
 
@@ -66,7 +66,7 @@ s=5
 # Create (S x Q)-matrices that will contain the simulated data
 y=matrix(data=0,nrow=S,ncol=Q) # Income/output
 p=matrix(data=0,nrow=S,ncol=Q) # Inflation rate
-r=matrix(data=0,nrow=S,ncol=Q) # Real interest rate
+r=matrix(data=0,nrow=S,ncol=Q) # Policy rate
 rs=matrix(data=0,nrow=S,ncol=Q) # Stabilising interest rate
 
 # Set constant parameter values
@@ -76,13 +76,13 @@ b=1     # Sensitivity of central bank to inflation gap
 a3=(a1*(1/(b*a2) + a2))^(-1)
 
 # Set parameter values for different scenarios
-A=matrix(data=10,nrow=S,ncol=Q) # autonomous spending
+A=matrix(data=6,nrow=S,ncol=Q) # autonomous spending
 pt=matrix(data=2,nrow=S,ncol=Q) # Inflation target
 ye=matrix(data=5,nrow=S,ncol=Q) # Potential output
 
-A[1,s:Q]=12  # scenario 1: AD boost  
+A[1,s:Q]=7  # scenario 1: AD boost  
 pt[2,s:Q]=3  # scenario 2: higher inflation target
-ye[3,s:Q]=7  # scenario 3: higher potential output
+ye[3,s:Q]=5.5  # scenario 3: higher potential output
 
 # Initialise endogenous variables at equilibrium values
 y[,1]=ye[,1]
@@ -144,7 +144,7 @@ s = 5
 # Create (S x Q) arrays to store simulated data
 y = np.zeros((S, Q))  # Income/output
 p = np.zeros((S, Q))  # Inflation rate
-r = np.zeros((S, Q))  # Real interest rate
+r = np.zeros((S, Q))  # Policy rate
 rs = np.zeros((S, Q))  # Stabilizing interest rate
 
 # Set constant parameter values
@@ -154,13 +154,13 @@ b = 1     # Sensitivity of the central bank to inflation gap
 a3 = (a1 * (1 / (b * a2) + a2)) ** (-1)
 
 # Set parameter values for different scenarios
-A = np.full((S, Q), 10)  # Autonomous spending
+A = np.full((S, Q), 6)  # Autonomous spending
 pt = np.full((S, Q), 2)  # Inflation target
 ye = np.full((S, Q), 5)  # Potential output
 
-A[0, s:Q] = 12  # Scenario 1: AD boost
+A[0, s:Q] = 7  # Scenario 1: AD boost
 pt[1, s:Q] = 3  # Scenario 2: Higher inflation target
-ye[2, s:Q] = 7  # Scenario 3: Higher potential output
+ye[2, s:Q] = 5.5  # Scenario 3: Higher potential output
 
 # Initialize endogenous variables at equilibrium values
 y[:, 0] = ye[:, 0]
@@ -186,35 +186,48 @@ for i in range(S):
 
 ### Plots
 
-Figures 1-3 depict the response of the model's key endogenous variables to various shifts. A permanent rise in aggregate demand (scenario 1) has an instantaneous expansionary effect on output, but also pushes inflation above the target. This induces the central bank to raise the interest rate, which brings down output below equilibrium in the next period. The central bank then gradually lowers the policy rate towards its new higher equilibrium value, where inflation is again stabilised at its target level.
+Figures @fig-nk-output - @fig-nk-policyrate depict the response of the model's key endogenous variables to various shifts. A permanent rise in aggregate demand (scenario 1) has an instantaneous expansionary effect on output, but also pushes inflation above the target. This induces the central bank to raise the interest rate, which brings down output below equilibrium in the next period. The central bank then gradually lowers the policy rate towards its new higher equilibrium value, where inflation is again stabilised at its target level.
 
-```{r nk2}
+
+```{r}
+#| label: fig-nk-output
+#| fig-cap: Output under different scenarios
+
 ### Plot results
 
-### Plots
 # Set maximum period for plots
 Tmax=15
 
 # Output under different scenarios
 plot(y[1, 1:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlab="", xlim=range(2:(Tmax)), ylab="y", ylim=range(y[1, 1:Tmax],y[3, 1:(Tmax)])) 
-title(main="Figure 1: Output under different scenarios", xlab = "Time",cex=0.8 ,line=2)
+title(main="Output", xlab = "Time",cex=0.8 ,line=2)
 lines(y[2, 1:(Tmax+1)],lty=2, lwd=2)
 lines(y[3, 1:(Tmax+1)],lty=3, lwd=2)
 legend("bottomright", legend=c("1: aggregate demand boost", "2: rise inflation target", "3: rise potential output"), lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
+```
+
+```{r}
+#| label: fig-nk-inflation
+#| fig-cap: Inflation under different scenarios
 
 # Inflation under different scenarios
-plot(p[1, 1:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlab="", xlim=range(2:(Tmax)), ylab=expression(pi), ylim=range(p[1, 2:Tmax],p[3, 2:(Tmax)])) 
-title(main="Figure 2: Inflation under different scenarios", xlab = "Time",cex=0.8 ,line=2)
+plot(p[1, 1:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlab="", xlim=range(2:(Tmax)), ylab=expression(pi), ylim=range(p[, 2:Tmax])) 
+title(main="Inflation", xlab = "Time",cex=0.8 ,line=2)
 lines(p[2, 1:(Tmax+1)],lty=2, lwd=2)
 lines(p[3, 1:(Tmax+1)],lty=3, lwd=2)
 legend("bottomright", legend=c("1: aggregate demand boost", "2: rise inflation target", "3: rise potential output"), lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
+```
+
+```{r}
+#| label: fig-nk-policyrate
+#| fig-cap: Policy rate under different scenarios
 
 # Policy rate under different scenarios
-plot(r[1, 2:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlab="", xlim=range(1:(Tmax)), ylab="r", ylim=range(r[1, 2:Tmax],r[3, 2:(Tmax)])) 
-title(main="Figure 3: Policy rate under different scenarios", xlab = "Time",cex=0.8 ,line=2)
-lines(r[2, 2:(Tmax+1)],lty=2, lwd=2)
-lines(r[3, 2:(Tmax+1)],lty=3, lwd=2)
-legend("bottomright", legend=c("1: aggregate demand boost", "2: rise inflation target", "3: rise potential output"), lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
+plot(r[1, 1:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlab="", xlim=range(2:(Tmax)), ylab="r", ylim=range(r[, 2:Tmax])) 
+title(main="Policy rate", xlab = "Time",cex=0.8 ,line=2)
+lines(r[2, 1:(Tmax+1)],lty=2, lwd=2)
+lines(r[3, 1:(Tmax+1)],lty=3, lwd=2)
+legend("right", legend=c("1: aggregate demand boost", "2: rise inflation target", "3: rise potential output"), lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
 ```
 
 ::: {.callout-note collapse="true" title="Python code"}
@@ -253,6 +266,252 @@ plt.show()
 An increase in the central bank's inflation target (scenario 2) gradually raises the inflation rate to a new level. During the adjustment period, the interest rate falls, which temporarily allows for a higher level of output. However, there is no permanent expansionary effect.
 
 By contrast, an increase in potential or equilibrium output (scenario 3) allows for a permanently higher level of output and a lower real interest rate.
+
+## Introducing rational inflation expectations
+How do the predictions of the model change when assuming that private actors have rational instead of adaptive inflation expectations? The Phillips curve, @eq-nk_pi of the model, assumes adaptive expectations: $E[\pi_{t+1}]=\pi_{t-1}$. Following chapter 4 of @Carlin2014, a (simplified) way of introducing rational inflation expectations is to assume $E[\pi_{t+1}]=\pi^T$, i.e. rational agents know the central bank's inflation target and assume that future inflation will (on average) be equal to the inflation target. The central bank will only be able to credibly commit to this target if it can deliver $y_t=y_e$ in expectation. This, in turn, requires output to respond instantaneously to the interest, so that the IS curve becomes: $y_t=A -a_1r_{t}$.^[The IS curve in the Carlin-Soskice version of the 3-equation model is only loosely based on intertemporal optimisation (see analytical discussion section below). A rigorously derived IS-curve in a New Keynesian model with forward-looking expectations would contain the future expected output gap and expected inflation, see @gali_state_2018.] 
+
+We simulate the model for both adaptive and rational inflation expectations to see how the economy reacts to a one-off 5-percentage point inflationary shock occurring in $t=5$.
+
+```{r}
+#Clear the environment
+rm(list=ls(all=TRUE))
+
+# Set number of periods
+Q=50
+
+# Set number of scenarios (here: comparison of adaptive and rational expectations)
+S=2
+
+# Set period in which shock/shift will occur
+s=5
+
+# Create (S x Q)-matrices that will contain the simulated data
+y=matrix(data=0,nrow=S,ncol=Q) # Income/output
+p=matrix(data=0,nrow=S,ncol=Q) # Inflation rate
+r=matrix(data=0,nrow=S,ncol=Q) # Policy  rate
+
+# Set constant parameter values
+a1=0.3  # Sensitivity of inflation with respect to output gap 
+a2=0.7  # Sensitivity of output with respect to interest rate
+b=1     # Sensitivity of central bank to inflation gap
+a3=(a1*(1/(b*a2) + a2))^(-1)
+A=6 # autonomous spending
+pt=2 # Inflation target
+ye=5 # Potential output
+rs=(A - ye)/a1 # Stabilising interest rate
+
+# Initialise endogenous variables at equilibrium values
+y[,1]=ye
+p[,1]=pt
+r[,1]=rs
+
+# create a temporary inflation shock in period s
+eps=matrix(data=0,nrow=S,ncol=Q) # inflation shock
+eps[,s]=5
+
+### Simulate adaptive expectations version of the model with an inflationary shock in t=s
+# Use i=1 for adaptive expectations version
+i=1
+
+for (t in 2:Q){
+  
+      # IS curve (with lagged interest rate)
+      y[i,t] = A - a1*r[i,t-1]
+
+      # Adaptive expectations Phillips Curve
+      p[i,t] = p[i,t-1] + a2 * (y[i,t] - ye) + eps[i,t]
+
+      # Monetary policy rule
+      r[i,t] = rs + a3*(p[i,t]-pt)
+
+} # close time loop
+
+### Simulate rational expectations version of the model with an inflationary shock in t=s
+# Use i=2 for rational expectations version
+i=2
+
+for (t in 2:Q){
+     
+   # Needs within-period iterations loop due to contemporaneous interest rate in the IS curve
+    for (iterations in 1:100){
+  
+      # IS curve (with contemporaneous interest rate)
+      y[i,t] = A - a1*r[i,t]
+        
+      # Rational expectations Phillips Curve 
+      p[i,t] = pt + a2 * (y[i,t] - ye) + eps[i,t]
+    
+      # Monetary policy rule
+      r[i,t] = rs + a3*(p[i,t]-pt)
+  
+  } # close iterations loop
+}  # close time loop
+```
+
+
+```{r}
+#| label: fig-nk-inflation-ra
+#| fig-cap: Response of inflation to inflationary shock, different expectations
+
+# Set maximum period for plots
+Tmax = 15
+
+# Inflation under adaptive vs rational expectations
+plot(p[1, 1:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlab="", xlim=range(2:(Tmax)), ylab=expression(pi), ylim=range(p[, 2:Tmax])) 
+title(main="Inflation", xlab = "Time",cex=0.8 ,line=2)
+lines(p[2, 1:(Tmax+1)],lty=2, lwd=2)
+legend("topright", legend=c("1: Adaptive expectations", "2: Rational expectations"), lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
+
+```
+
+```{r}
+#| label: fig-nk-polcyrate-ra
+#| fig-cap: Response of central bank to inflationary shock, different expectations
+
+# Policy rate under adaptive vs rational expectations
+plot(r[1, 1:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlab="", xlim=range(2:(Tmax)), ylab="r", ylim=range(r[, 2:Tmax])) 
+title(main="Policy rate", xlab = "Time",cex=0.8 ,line=2)
+lines(r[2, 1:(Tmax+1)],lty=2, lwd=2)
+legend("topright", legend=c("1: Adaptive expectations", "2: Rational expectations"), lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
+
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+# Set number of periods
+Q = 50
+
+# Set number of scenarios (here: comparison of adaptive and rational expectations)
+S = 2
+
+# Set period in which shock/shift will occur
+s = 5
+
+# Create (S x Q)-matrices that will contain the simulated data
+y = np.zeros((S, Q))  # Income/output
+p = np.zeros((S, Q))  # Inflation rate
+r = np.zeros((S, Q))  # Policy rate
+
+# Set constant parameter values
+a1 = 0.3  # Sensitivity of inflation with respect to output gap 
+a2 = 0.7  # Sensitivity of output with respect to interest rate
+b = 1     # Sensitivity of central bank to inflation gap
+a3 = (a1 * (1 / (b * a2) + a2))**(-1)
+A = 6     # Autonomous spending
+pt = 2    # Inflation target
+ye = 5    # Potential output
+rs = (A - ye) / a1  # Stabilising interest rate
+
+# Initialise endogenous variables at equilibrium values
+y[:, 0] = ye
+p[:, 0] = pt
+r[:, 0] = rs
+
+# Create a temporary inflation shock in period s
+eps = np.zeros((S, Q))  # inflation shock
+eps[:, s] = 5
+
+# ----------------------------
+# Simulate adaptive expectations version of the model with an inflationary shock in t=s
+# Use i=0 for adaptive expectations version
+# ----------------------------
+i = 0
+
+for t in range(1, Q):  # Python is 0-based, so start at 1 for the 2nd period
+    
+    # IS curve (with lagged interest rate)
+    y[i, t] = A - a1 * r[i, t-1]
+
+    # Adaptive expectations Phillips Curve
+    p[i, t] = p[i, t-1] + a2 * (y[i, t] - ye) + eps[i, t]
+
+    # Monetary policy rule
+    r[i, t] = rs + a3 * (p[i, t] - pt)
+
+# ----------------------------
+# Simulate rational expectations version of the model with an inflationary shock in t=s
+# Use i=1 for rational expectations version
+# ----------------------------
+i = 1
+
+for t in range(1, Q):
+    
+    # Needs within-period iterations loop due to contemporaneous interest rate in the IS curve
+    for _ in range(100):  # iteration loop
+      
+        # IS curve (with contemporaneous interest rate)
+        y[i, t] = A - a1 * r[i, t]
+        
+        # Rational expectations Phillips Curve 
+        p[i, t] = pt + a2 * (y[i, t] - ye) + eps[i, t]
+    
+        # Monetary policy rule
+        r[i, t] = rs + a3 * (p[i, t] - pt)
+
+
+## Plot results
+import matplotlib.pyplot as plt
+
+# Set maximum period for plots
+Tmax = 15
+
+# Inflation under adaptive vs rational expectations
+plt.figure(figsize=(7, 5))
+
+# Adaptive expectations (i=0)
+plt.plot(range(Tmax+1), p[0, 0:Tmax+1], 
+         color="black", linewidth=2, linestyle="-", label="1: Adaptive expectations")
+
+# Rational expectations (i=1)
+plt.plot(range(Tmax+1), p[1, 0:Tmax+1], 
+         color="black", linewidth=2, linestyle="--", label="2: Rational expectations")
+
+# Titles and labels
+plt.title("Inflation", fontsize=12)
+plt.xlabel("Time", fontsize=10)
+plt.ylabel(r"$\pi$", fontsize=12)
+
+# Legend
+plt.legend(loc="upper right", fontsize=9, frameon=False)
+
+# Tight layout for nicer spacing
+plt.tight_layout()
+plt.show()
+
+# Policy rate under adaptive vs rational expectations
+plt.figure(figsize=(7, 5))
+
+# Adaptive expectations (i=0)
+plt.plot(range(Tmax+1), r[0, 0:Tmax+1], 
+         color="black", linewidth=2, linestyle="-", label="1: Adaptive expectations")
+
+# Rational expectations (i=1)
+plt.plot(range(Tmax+1), r[1, 0:Tmax+1], 
+         color="black", linewidth=2, linestyle="--", label="2: Rational expectations")
+
+# Titles and labels
+plt.title("Policy rate", fontsize=12)
+plt.xlabel("Time", fontsize=10)
+plt.ylabel("r", fontsize=12)
+
+# Legend
+plt.legend(loc="upper right", fontsize=9, frameon=False)
+
+# Tight layout for nicer spacing
+plt.tight_layout()
+plt.show()
+
+```
+
+:::
+
+It can be seen that under rational inflation expectations, the economy is less sensitive to shocks and returns to equilibrium much quicker. The job of the central bank is simpler: it only needs to raise the interest rate in the period the shock occurs to bring the economy back on target in the next period. Compared to adaptive expectations, a less drastic reponse is required.
+
 
 ## Directed graph
 
@@ -385,7 +644,7 @@ L=(y_t-y_e)^2 + b(\pi_t - \pi^T)^2.
 $$ Substituting the Phillips curve (@eq-nk_pi) into the loss function, differentiating with respect to $y_t$, and simplifying yields the first-order condition:
 
 $$
-y_t-y_e = -a_2b(\pi-\pi^T),
+y_t-y_e = -a_2b(\pi_t-\pi^T),
 $$
 
 which can also be regarded as a monetary policy rule. Next, substitute the Phillips curve (@eq-nk_pi), the IS-curve (@eq-nk_y), and the stabilising interest rate (@eq-nk_rs) into the monetary policy rule and define $a_3 = \frac{1}{a_1(\frac{1}{a_2b} + a_2)}$, which yields the interest rate rule (@eq-nk_r).

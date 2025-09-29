@@ -341,7 +341,7 @@ window.Quarto = {
    
   <ul>
 <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#the-model" id="toc-the-model" class="nav-link" data-scroll-target="#the-model">The Model</a></li>
+  <li><a href="#the-model" id="toc-the-model" class="nav-link" data-scroll-target="#the-model">The model</a></li>
   <li>
 <a href="#simulation" id="toc-simulation" class="nav-link" data-scroll-target="#simulation">Simulation</a>
   <ul>
@@ -350,6 +350,7 @@ window.Quarto = {
   <li><a href="#plots" id="toc-plots" class="nav-link" data-scroll-target="#plots">Plots</a></li>
   </ul>
 </li>
+  <li><a href="#introducing-rational-inflation-expectations" id="toc-introducing-rational-inflation-expectations" class="nav-link" data-scroll-target="#introducing-rational-inflation-expectations">Introducing rational inflation expectations</a></li>
   <li><a href="#directed-graph" id="toc-directed-graph" class="nav-link" data-scroll-target="#directed-graph">Directed graph</a></li>
   <li>
 <a href="#sec-analytical" id="toc-sec-analytical" class="nav-link" data-scroll-target="#sec-analytical">Analytical discussion</a>
@@ -389,8 +390,8 @@ window.Quarto = {
 </header><section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>New Keynesian dynamic general equilibrium models were developed in the 1990s and 2000s to guide monetary policy.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> They build on real business cycle models with rational expectations but introduce Keynesian frictions such as imperfect competition and nominal rigidities. While the structural forms of these models are typically complex as behavioural functions are derived from the intertemporal optimisation, the reduced-form of the benchmark models can be represented by three main equations: (i) an IS curve, (ii) a Phillips curve, (iii) and an interest rate rule.</p>
 <p>The IS curve establishes a negative relationship between real income and the real interest rate. For a higher real interest rate, households will save more and thus consume less. The Phillips curve models inflation as a function of the output gap. A positive output gap (an economic expansion) leads to higher inflation. The monetary policy rule specifies how the central bank reacts to deviations of actual inflation from a politically determined inflation target.</p>
-<p>The simplified version of the 3-equation model we consider here is directly taken from chapter 4 of <span class="citation" data-cites="Carlin2014">Carlin and Soskice (<a href="#ref-Carlin2014" role="doc-biblioref">2014</a>)</span>. This is a short-run model in which prices are flexible but the capital stock is fixed. The focus is thus on goods market equilibrium rather than economic growth. In the Carlin-Soskice version, inflation expectations are assumed to be adaptive and the response of aggregate demand to a change in the interest rate is sluggish. This renders the model dynamic.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-</section><section id="the-model" class="level2"><h2 class="anchored" data-anchor-id="the-model">The Model</h2>
+<p>The simplified version of the 3-equation model we consider here is directly taken from chapter 3 of <span class="citation" data-cites="Carlin2014">Carlin and Soskice (<a href="#ref-Carlin2014" role="doc-biblioref">2014</a>)</span>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> This is a short-run model in which prices are flexible but the capital stock is fixed. The focus is thus on goods market equilibrium rather than economic growth. In the Carlin-Soskice version, inflation expectations are assumed to be adaptive and the response of aggregate demand to a change in the interest rate is sluggish. This renders the model dynamic.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+</section><section id="the-model" class="level2"><h2 class="anchored" data-anchor-id="the-model">The model</h2>
 <p><span id="eq-nk_y"><span class="math display">\[
 y_t=A -a_1r_{t-1}
 \tag{10.1}\]</span></span></p>
@@ -404,60 +405,14 @@ r_s=\frac{(A - y_e)}{a_1}
 r_t = r_s + a_3(\pi_t-\pi^T)
 \tag{10.4}\]</span></span></p>
 <p>where <span class="math inline">\(y\)</span>, <span class="math inline">\(A\)</span>, <span class="math inline">\(r\)</span>, <span class="math inline">\(\pi\)</span>, <span class="math inline">\(y_e\)</span>, <span class="math inline">\(r_s\)</span>, and <span class="math inline">\(\pi^T\)</span> are real output, autonomous demand (times the multiplier), the real interest rate, inflation, equilibrium output, the stabilising real interest rate, and the inflation target, respectively.</p>
-<p><a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a> is the IS curve or goods market equilibrium condition. Aggregate output adjusts to the level of aggregate demand, which is given by autonomous demand (times the multiplier) and a component that is negatively related to the (lagged) real interest rate via households’ saving (<span class="math inline">\(a_1&gt;0\)</span>). <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a> is the Phillips curve. It is assumed that inflation is driven by adaptive expectations (<span class="math inline">\(E[\pi_{t+1}]=\pi_{t-1}\)</span>) and positively related to the output gap <span class="math inline">\((y_t-y_e)\)</span>, i.e.&nbsp;<span class="math inline">\(a_2&gt;0\)</span>. By <a href="#eq-nk_rs" class="quarto-xref">Equation&nbsp;<span>10.3</span></a>, the stabilising real interest rate is that real interest rate that is consistent with equilibrium output (<span class="math inline">\(y_e=A -a_1r_s\)</span>). Finally, the interest rate rule in <a href="#eq-nk_r" class="quarto-xref">Equation&nbsp;<span>10.4</span></a> specifies the real interest rate the central bank needs to set to minimise its loss function (see <a href="#sec-analytical" class="quarto-xref"><span>Section 10.5</span></a> below for a derivation). The parameter <span class="math inline">\(a_3\)</span> is a composite one given by <span class="math inline">\(a_3 = \frac{1}{a_1(\frac{1}{a_2 b} + a_2)} &gt;0\)</span>. Although the central bank only sets the nominal interest rate <span class="math inline">\(i = r + E[\pi_{t+1}]\)</span> directly, the fact that expected inflation is predetermined in every period allows it to indirectly control the real interest rate.</p>
+<p><a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a> is the IS curve or goods market equilibrium condition. Aggregate output adjusts to the level of aggregate demand, which is given by autonomous demand (times the multiplier) and a component that is negatively related to the (lagged) real interest rate via households’ saving (<span class="math inline">\(a_1&gt;0\)</span>). <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a> is the Phillips curve. It is assumed that inflation is driven by adaptive expectations (<span class="math inline">\(E[\pi_{t+1}]=\pi_{t-1}\)</span>) and positively related to the output gap <span class="math inline">\((y_t-y_e)\)</span>, i.e.&nbsp;<span class="math inline">\(a_2&gt;0\)</span>. By <a href="#eq-nk_rs" class="quarto-xref">Equation&nbsp;<span>10.3</span></a>, the stabilising real interest rate is that real interest rate that is consistent with equilibrium output (<span class="math inline">\(y_e=A -a_1r_s\)</span>). Finally, the interest rate rule in <a href="#eq-nk_r" class="quarto-xref">Equation&nbsp;<span>10.4</span></a> specifies the real interest rate the central bank needs to set to minimise its loss function (see <a href="#sec-analytical" class="quarto-xref"><span>Section 10.6</span></a> below for a derivation). The parameter <span class="math inline">\(a_3\)</span> is a composite one given by <span class="math inline">\(a_3 = \frac{1}{a_1(\frac{1}{a_2 b} + a_2)} &gt;0\)</span>. Although the central bank only sets the nominal interest rate <span class="math inline">\(i = r + E[\pi_{t+1}]\)</span> directly, the fact that expected inflation is predetermined in every period allows it to indirectly control the real interest rate.</p>
 </section><section id="simulation" class="level2"><h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
 <section id="parameterisation" class="level3"><h3 class="anchored" data-anchor-id="parameterisation">Parameterisation</h3>
 <p>Table 1 reports the parameterisation used in the simulation. For all parameterisations, the system is initialised at the equilibrium <span class="math inline">\((y^*,\pi^*,r^*)=(y_e,\pi^T, r_s)\)</span>. Three scenarios will then be considered. In scenario 1, there is an increase in autonomous aggregate demand (<span class="math inline">\(A\)</span>). In scenario 2, the central bank sets a higher inflation target (<span class="math inline">\(\pi^T\)</span>). Scenario 3 considers a rise in equilibrium output (<span class="math inline">\(y_e\)</span>).</p>
 <p><strong>Table 1: Parameterisation</strong></p>
-<table class="table">
-<colgroup>
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-</colgroup>
-<thead><tr class="header">
-<th>Scenario</th>
-<th><span class="math inline">\(a_1\)</span></th>
-<th><span class="math inline">\(a_2\)</span></th>
-<th><span class="math inline">\(b\)</span></th>
-<th><span class="math inline">\(A\)</span></th>
-<th><span class="math inline">\(\pi^T\)</span></th>
-<th><span class="math inline">\(y_e\)</span></th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>1: rise in aggregate demand (<span class="math inline">\(A\)</span>)</td>
-<td>0.3</td>
-<td>0.7</td>
-<td>1</td>
-<td>12</td>
-<td>2</td>
-<td>5</td>
-</tr>
-<tr class="even">
-<td>2: higher inflation target (<span class="math inline">\(\pi^T\)</span>)</td>
-<td>0.3</td>
-<td>0.7</td>
-<td>1</td>
-<td>10</td>
-<td>3</td>
-<td>5</td>
-</tr>
-<tr class="odd">
-<td>3: rise in equilibrium output (<span class="math inline">\(y_e\)</span>)</td>
-<td>0.3</td>
-<td>0.7</td>
-<td>1</td>
-<td>10</td>
-<td>2</td>
-<td>7</td>
-</tr>
-</tbody>
-</table></section><section id="simulation-code" class="level3"><h3 class="anchored" data-anchor-id="simulation-code">Simulation code</h3>
+<div class="line-block">Scenario | <span class="math inline">\(a_1\)</span> | <span class="math inline">\(a_2\)</span> | <span class="math inline">\(b\)</span> | <span class="math inline">\(A\)</span> | <span class="math inline">\(\pi^T\)</span> | <span class="math inline">\(y_e\)</span> |</div>
+<p>|—————————————|——-|——-|—–|—- |—- –|——-| | 1: rise in aggregate demand (<span class="math inline">\(A\)</span>) | 0.3 | 0.7 | 1 | 7 | 2 | 5 | | 2: higher inflation target (<span class="math inline">\(\pi^T\)</span>) | 0.3 | 0.7 | 1 | 6 | 3 | 5 | | 3: rise in equilibrium output (<span class="math inline">\(y_e\)</span>) | 0.3 | 0.7 | 1 | 6 | 2 | 5.5 |</p>
+</section><section id="simulation-code" class="level3"><h3 class="anchored" data-anchor-id="simulation-code">Simulation code</h3>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
@@ -474,7 +429,7 @@ r_t = r_s + a_3(\pi_t-\pi^T)
 <span><span class="co"># Create (S x Q)-matrices that will contain the simulated data</span></span>
 <span><span class="va">y</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># Income/output</span></span>
 <span><span class="va">p</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># Inflation rate</span></span>
-<span><span class="va">r</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># Real interest rate</span></span>
+<span><span class="va">r</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># Policy rate</span></span>
 <span><span class="va">rs</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># Stabilising interest rate</span></span>
 <span></span>
 <span><span class="co"># Set constant parameter values</span></span>
@@ -484,13 +439,13 @@ r_t = r_s + a_3(\pi_t-\pi^T)
 <span><span class="va">a3</span><span class="op">=</span><span class="op">(</span><span class="va">a1</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="va">b</span><span class="op">*</span><span class="va">a2</span><span class="op">)</span> <span class="op">+</span> <span class="va">a2</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Set parameter values for different scenarios</span></span>
-<span><span class="va">A</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">10</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># autonomous spending</span></span>
+<span><span class="va">A</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">6</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># autonomous spending</span></span>
 <span><span class="va">pt</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">2</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># Inflation target</span></span>
 <span><span class="va">ye</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">5</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># Potential output</span></span>
 <span></span>
-<span><span class="va">A</span><span class="op">[</span><span class="fl">1</span>,<span class="va">s</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">12</span>  <span class="co"># scenario 1: AD boost  </span></span>
+<span><span class="va">A</span><span class="op">[</span><span class="fl">1</span>,<span class="va">s</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">7</span>  <span class="co"># scenario 1: AD boost  </span></span>
 <span><span class="va">pt</span><span class="op">[</span><span class="fl">2</span>,<span class="va">s</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">3</span>  <span class="co"># scenario 2: higher inflation target</span></span>
-<span><span class="va">ye</span><span class="op">[</span><span class="fl">3</span>,<span class="va">s</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">7</span>  <span class="co"># scenario 3: higher potential output</span></span>
+<span><span class="va">ye</span><span class="op">[</span><span class="fl">3</span>,<span class="va">s</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">5.5</span>  <span class="co"># scenario 3: higher potential output</span></span>
 <span></span>
 <span><span class="co"># Initialise endogenous variables at equilibrium values</span></span>
 <span><span class="va">y</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">ye</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
@@ -545,7 +500,7 @@ Python code
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create (S x Q) arrays to store simulated data</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.zeros((S, Q))  <span class="co"># Income/output</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.zeros((S, Q))  <span class="co"># Inflation rate</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.zeros((S, Q))  <span class="co"># Real interest rate</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.zeros((S, Q))  <span class="co"># Policy rate</span></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>rs <span class="op">=</span> np.zeros((S, Q))  <span class="co"># Stabilizing interest rate</span></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Set constant parameter values</span></span>
@@ -555,13 +510,13 @@ Python code
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>a3 <span class="op">=</span> (a1 <span class="op">*</span> (<span class="dv">1</span> <span class="op">/</span> (b <span class="op">*</span> a2) <span class="op">+</span> a2)) <span class="op">**</span> (<span class="op">-</span><span class="dv">1</span>)</span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameter values for different scenarios</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.full((S, Q), <span class="dv">10</span>)  <span class="co"># Autonomous spending</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.full((S, Q), <span class="dv">6</span>)  <span class="co"># Autonomous spending</span></span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>pt <span class="op">=</span> np.full((S, Q), <span class="dv">2</span>)  <span class="co"># Inflation target</span></span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>ye <span class="op">=</span> np.full((S, Q), <span class="dv">5</span>)  <span class="co"># Potential output</span></span>
 <span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">0</span>, s:Q] <span class="op">=</span> <span class="dv">12</span>  <span class="co"># Scenario 1: AD boost</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">0</span>, s:Q] <span class="op">=</span> <span class="dv">7</span>  <span class="co"># Scenario 1: AD boost</span></span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>pt[<span class="dv">1</span>, s:Q] <span class="op">=</span> <span class="dv">3</span>  <span class="co"># Scenario 2: Higher inflation target</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>ye[<span class="dv">2</span>, s:Q] <span class="op">=</span> <span class="dv">7</span>  <span class="co"># Scenario 3: Higher potential output</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>ye[<span class="dv">2</span>, s:Q] <span class="op">=</span> <span class="fl">5.5</span>  <span class="co"># Scenario 3: Higher potential output</span></span>
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize endogenous variables at equilibrium values</span></span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>y[:, <span class="dv">0</span>] <span class="op">=</span> ye[:, <span class="dv">0</span>]</span>
@@ -585,48 +540,63 @@ Python code
 </div>
 </div>
 </section><section id="plots" class="level3"><h3 class="anchored" data-anchor-id="plots">Plots</h3>
-<p>Figures 1-3 depict the response of the model’s key endogenous variables to various shifts. A permanent rise in aggregate demand (scenario 1) has an instantaneous expansionary effect on output, but also pushes inflation above the target. This induces the central bank to raise the interest rate, which brings down output below equilibrium in the next period. The central bank then gradually lowers the policy rate towards its new higher equilibrium value, where inflation is again stabilised at its target level.</p>
+<p>Figures <a href="#fig-nk-output" class="quarto-xref">Figure&nbsp;<span>10.1</span></a> - <a href="#fig-nk-policyrate" class="quarto-xref">Figure&nbsp;<span>10.3</span></a> depict the response of the model’s key endogenous variables to various shifts. A permanent rise in aggregate demand (scenario 1) has an instantaneous expansionary effect on output, but also pushes inflation above the target. This induces the central bank to raise the interest rate, which brings down output below equilibrium in the next period. The central bank then gradually lowers the policy rate towards its new higher equilibrium value, where inflation is again stabilised at its target level.</p>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### Plot results</span></span>
 <span></span>
-<span><span class="co">### Plots</span></span>
 <span><span class="co"># Set maximum period for plots</span></span>
 <span><span class="va">Tmax</span><span class="op">=</span><span class="fl">15</span></span>
 <span></span>
 <span><span class="co"># Output under different scenarios</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">y</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">""</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">)</span>, ylab<span class="op">=</span><span class="st">"y"</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">y</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,<span class="va">y</span><span class="op">[</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Figure 1: Output under different scenarios"</span>, xlab <span class="op">=</span> <span class="st">"Time"</span>,cex<span class="op">=</span><span class="fl">0.8</span> ,line<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Output"</span>, xlab <span class="op">=</span> <span class="st">"Time"</span>,cex<span class="op">=</span><span class="fl">0.8</span> ,line<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">y</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">y</span><span class="op">[</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">3</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: aggregate demand boost"</span>, <span class="st">"2: rise inflation target"</span>, <span class="st">"3: rise potential output"</span><span class="op">)</span>, lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="a_new_keynesian_3_equation_model_files/figure-html/nk2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div id="fig-nk-output" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-nk-output-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_new_keynesian_3_equation_model_files/figure-html/fig-nk-output-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nk-output-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.1: Output under different scenarios
+</figcaption></figure>
 </div>
 </div>
+</div>
+<div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Inflation under different scenarios</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">""</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">)</span>, ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">pi</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,<span class="va">p</span><span class="op">[</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Figure 2: Inflation under different scenarios"</span>, xlab <span class="op">=</span> <span class="st">"Time"</span>,cex<span class="op">=</span><span class="fl">0.8</span> ,line<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">""</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">)</span>, ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">pi</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Inflation"</span>, xlab <span class="op">=</span> <span class="st">"Time"</span>,cex<span class="op">=</span><span class="fl">0.8</span> ,line<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">3</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: aggregate demand boost"</span>, <span class="st">"2: rise inflation target"</span>, <span class="st">"3: rise potential output"</span><span class="op">)</span>, lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="a_new_keynesian_3_equation_model_files/figure-html/nk2-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div id="fig-nk-inflation" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-nk-inflation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_new_keynesian_3_equation_model_files/figure-html/fig-nk-inflation-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nk-inflation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.2: Inflation under different scenarios
+</figcaption></figure>
 </div>
 </div>
+</div>
+<div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Policy rate under different scenarios</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">""</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">)</span>, ylab<span class="op">=</span><span class="st">"r"</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,<span class="va">r</span><span class="op">[</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Figure 3: Policy rate under different scenarios"</span>, xlab <span class="op">=</span> <span class="st">"Time"</span>,cex<span class="op">=</span><span class="fl">0.8</span> ,line<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">3</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: aggregate demand boost"</span>, <span class="st">"2: rise inflation target"</span>, <span class="st">"3: rise potential output"</span><span class="op">)</span>, lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">""</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">)</span>, ylab<span class="op">=</span><span class="st">"r"</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Policy rate"</span>, xlab <span class="op">=</span> <span class="st">"Time"</span>,cex<span class="op">=</span><span class="fl">0.8</span> ,line<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">3</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"right"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: aggregate demand boost"</span>, <span class="st">"2: rise inflation target"</span>, <span class="st">"3: rise potential output"</span><span class="op">)</span>, lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="a_new_keynesian_3_equation_model_files/figure-html/nk2-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div id="fig-nk-policyrate" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-nk-policyrate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_new_keynesian_3_equation_model_files/figure-html/fig-nk-policyrate-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nk-policyrate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.3: Policy rate under different scenarios
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -670,10 +640,265 @@ Python code
 </div>
 <p>An increase in the central bank’s inflation target (scenario 2) gradually raises the inflation rate to a new level. During the adjustment period, the interest rate falls, which temporarily allows for a higher level of output. However, there is no permanent expansionary effect.</p>
 <p>By contrast, an increase in potential or equilibrium output (scenario 3) allows for a permanently higher level of output and a lower real interest rate.</p>
-</section></section><section id="directed-graph" class="level2"><h2 class="anchored" data-anchor-id="directed-graph">Directed graph</h2>
+</section></section><section id="introducing-rational-inflation-expectations" class="level2"><h2 class="anchored" data-anchor-id="introducing-rational-inflation-expectations">Introducing rational inflation expectations</h2>
+<p>How do the predictions of the model change when assuming that private actors have rational instead of adaptive inflation expectations? The Phillips curve, <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a> of the model, assumes adaptive expectations: <span class="math inline">\(E[\pi_{t+1}]=\pi_{t-1}\)</span>. Following chapter 4 of <span class="citation" data-cites="Carlin2014">Carlin and Soskice (<a href="#ref-Carlin2014" role="doc-biblioref">2014</a>)</span>, a (simplified) way of introducing rational inflation expectations is to assume <span class="math inline">\(E[\pi_{t+1}]=\pi^T\)</span>, i.e.&nbsp;rational agents know the central bank’s inflation target and assume that future inflation will (on average) be equal to the inflation target. The central bank will only be able to credibly commit to this target if it can deliver <span class="math inline">\(y_t=y_e\)</span> in expectation. This, in turn, requires output to respond instantaneously to the interest, so that the IS curve becomes: <span class="math inline">\(y_t=A -a_1r_{t}\)</span>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>We simulate the model for both adaptive and rational inflation expectations to see how the economy reacts to a one-off 5-percentage point inflationary shock occurring in <span class="math inline">\(t=5\)</span>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set number of periods</span></span>
+<span><span class="va">Q</span><span class="op">=</span><span class="fl">50</span></span>
+<span></span>
+<span><span class="co"># Set number of scenarios (here: comparison of adaptive and rational expectations)</span></span>
+<span><span class="va">S</span><span class="op">=</span><span class="fl">2</span></span>
+<span></span>
+<span><span class="co"># Set period in which shock/shift will occur</span></span>
+<span><span class="va">s</span><span class="op">=</span><span class="fl">5</span></span>
+<span></span>
+<span><span class="co"># Create (S x Q)-matrices that will contain the simulated data</span></span>
+<span><span class="va">y</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># Income/output</span></span>
+<span><span class="va">p</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># Inflation rate</span></span>
+<span><span class="va">r</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># Policy  rate</span></span>
+<span></span>
+<span><span class="co"># Set constant parameter values</span></span>
+<span><span class="va">a1</span><span class="op">=</span><span class="fl">0.3</span>  <span class="co"># Sensitivity of inflation with respect to output gap </span></span>
+<span><span class="va">a2</span><span class="op">=</span><span class="fl">0.7</span>  <span class="co"># Sensitivity of output with respect to interest rate</span></span>
+<span><span class="va">b</span><span class="op">=</span><span class="fl">1</span>     <span class="co"># Sensitivity of central bank to inflation gap</span></span>
+<span><span class="va">a3</span><span class="op">=</span><span class="op">(</span><span class="va">a1</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="va">b</span><span class="op">*</span><span class="va">a2</span><span class="op">)</span> <span class="op">+</span> <span class="va">a2</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">A</span><span class="op">=</span><span class="fl">6</span> <span class="co"># autonomous spending</span></span>
+<span><span class="va">pt</span><span class="op">=</span><span class="fl">2</span> <span class="co"># Inflation target</span></span>
+<span><span class="va">ye</span><span class="op">=</span><span class="fl">5</span> <span class="co"># Potential output</span></span>
+<span><span class="va">rs</span><span class="op">=</span><span class="op">(</span><span class="va">A</span> <span class="op">-</span> <span class="va">ye</span><span class="op">)</span><span class="op">/</span><span class="va">a1</span> <span class="co"># Stabilising interest rate</span></span>
+<span></span>
+<span><span class="co"># Initialise endogenous variables at equilibrium values</span></span>
+<span><span class="va">y</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">ye</span></span>
+<span><span class="va">p</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">pt</span></span>
+<span><span class="va">r</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">=</span><span class="va">rs</span></span>
+<span></span>
+<span><span class="co"># create a temporary inflation shock in period s</span></span>
+<span><span class="va">eps</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0</span>,nrow<span class="op">=</span><span class="va">S</span>,ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># inflation shock</span></span>
+<span><span class="va">eps</span><span class="op">[</span>,<span class="va">s</span><span class="op">]</span><span class="op">=</span><span class="fl">5</span></span>
+<span></span>
+<span><span class="co">### Simulate adaptive expectations version of the model with an inflationary shock in t=s</span></span>
+<span><span class="co"># Use i=1 for adaptive expectations version</span></span>
+<span><span class="va">i</span><span class="op">=</span><span class="fl">1</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="va">Q</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>      <span class="co"># IS curve (with lagged interest rate)</span></span>
+<span>      <span class="va">y</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">A</span> <span class="op">-</span> <span class="va">a1</span><span class="op">*</span><span class="va">r</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
+<span></span>
+<span>      <span class="co"># Adaptive expectations Phillips Curve</span></span>
+<span>      <span class="va">p</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">p</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">a2</span> <span class="op">*</span> <span class="op">(</span><span class="va">y</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">-</span> <span class="va">ye</span><span class="op">)</span> <span class="op">+</span> <span class="va">eps</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span></span>
+<span></span>
+<span>      <span class="co"># Monetary policy rule</span></span>
+<span>      <span class="va">r</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">rs</span> <span class="op">+</span> <span class="va">a3</span><span class="op">*</span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">-</span><span class="va">pt</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">}</span> <span class="co"># close time loop</span></span>
+<span></span>
+<span><span class="co">### Simulate rational expectations version of the model with an inflationary shock in t=s</span></span>
+<span><span class="co"># Use i=2 for rational expectations version</span></span>
+<span><span class="va">i</span><span class="op">=</span><span class="fl">2</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="va">Q</span><span class="op">)</span><span class="op">{</span></span>
+<span>     </span>
+<span>   <span class="co"># Needs within-period iterations loop due to contemporaneous interest rate in the IS curve</span></span>
+<span>    <span class="kw">for</span> <span class="op">(</span><span class="va">iterations</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>      <span class="co"># IS curve (with contemporaneous interest rate)</span></span>
+<span>      <span class="va">y</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">A</span> <span class="op">-</span> <span class="va">a1</span><span class="op">*</span><span class="va">r</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span></span>
+<span>        </span>
+<span>      <span class="co"># Rational expectations Phillips Curve </span></span>
+<span>      <span class="va">p</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">pt</span> <span class="op">+</span> <span class="va">a2</span> <span class="op">*</span> <span class="op">(</span><span class="va">y</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">-</span> <span class="va">ye</span><span class="op">)</span> <span class="op">+</span> <span class="va">eps</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span></span>
+<span>    </span>
+<span>      <span class="co"># Monetary policy rule</span></span>
+<span>      <span class="va">r</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">rs</span> <span class="op">+</span> <span class="va">a3</span><span class="op">*</span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">-</span><span class="va">pt</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="op">}</span> <span class="co"># close iterations loop</span></span>
+<span><span class="op">}</span>  <span class="co"># close time loop</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set maximum period for plots</span></span>
+<span><span class="va">Tmax</span> <span class="op">=</span> <span class="fl">15</span></span>
+<span></span>
+<span><span class="co"># Inflation under adaptive vs rational expectations</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">""</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">)</span>, ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">pi</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Inflation"</span>, xlab <span class="op">=</span> <span class="st">"Time"</span>,cex<span class="op">=</span><span class="fl">0.8</span> ,line<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: Adaptive expectations"</span>, <span class="st">"2: Rational expectations"</span><span class="op">)</span>, lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-nk-inflation-ra" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-nk-inflation-ra-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_new_keynesian_3_equation_model_files/figure-html/fig-nk-inflation-ra-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nk-inflation-ra-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.4: Response of inflation to inflationary shock, different expectations
+</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Policy rate under adaptive vs rational expectations</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, xlab<span class="op">=</span><span class="st">""</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">)</span><span class="op">)</span>, ylab<span class="op">=</span><span class="st">"r"</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">"Policy rate"</span>, xlab <span class="op">=</span> <span class="st">"Time"</span>,cex<span class="op">=</span><span class="fl">0.8</span> ,line<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">Tmax</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: Adaptive expectations"</span>, <span class="st">"2: Rational expectations"</span><span class="op">)</span>, lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-nk-polcyrate-ra" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-nk-polcyrate-ra-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_new_keynesian_3_equation_model_files/figure-html/fig-nk-polcyrate-ra-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nk-polcyrate-ra-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.5: Response of central bank to inflationary shock, different expectations
+</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set number of periods</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set number of scenarios (here: comparison of adaptive and rational expectations)</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Set period in which shock/shift will occur</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create (S x Q)-matrices that will contain the simulated data</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.zeros((S, Q))  <span class="co"># Income/output</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.zeros((S, Q))  <span class="co"># Inflation rate</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.zeros((S, Q))  <span class="co"># Policy rate</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Set constant parameter values</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>a1 <span class="op">=</span> <span class="fl">0.3</span>  <span class="co"># Sensitivity of inflation with respect to output gap </span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>a2 <span class="op">=</span> <span class="fl">0.7</span>  <span class="co"># Sensitivity of output with respect to interest rate</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">1</span>     <span class="co"># Sensitivity of central bank to inflation gap</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>a3 <span class="op">=</span> (a1 <span class="op">*</span> (<span class="dv">1</span> <span class="op">/</span> (b <span class="op">*</span> a2) <span class="op">+</span> a2))<span class="op">**</span>(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> <span class="dv">6</span>     <span class="co"># Autonomous spending</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>pt <span class="op">=</span> <span class="dv">2</span>    <span class="co"># Inflation target</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>ye <span class="op">=</span> <span class="dv">5</span>    <span class="co"># Potential output</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>rs <span class="op">=</span> (A <span class="op">-</span> ye) <span class="op">/</span> a1  <span class="co"># Stabilising interest rate</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialise endogenous variables at equilibrium values</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>y[:, <span class="dv">0</span>] <span class="op">=</span> ye</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>p[:, <span class="dv">0</span>] <span class="op">=</span> pt</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>r[:, <span class="dv">0</span>] <span class="op">=</span> rs</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a temporary inflation shock in period s</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>eps <span class="op">=</span> np.zeros((S, Q))  <span class="co"># inflation shock</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>eps[:, s] <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate adaptive expectations version of the model with an inflationary shock in t=s</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Use i=0 for adaptive expectations version</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, Q):  <span class="co"># Python is 0-based, so start at 1 for the 2nd period</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># IS curve (with lagged interest rate)</span></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>    y[i, t] <span class="op">=</span> A <span class="op">-</span> a1 <span class="op">*</span> r[i, t<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Adaptive expectations Phillips Curve</span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>    p[i, t] <span class="op">=</span> p[i, t<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> a2 <span class="op">*</span> (y[i, t] <span class="op">-</span> ye) <span class="op">+</span> eps[i, t]</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Monetary policy rule</span></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>    r[i, t] <span class="op">=</span> rs <span class="op">+</span> a3 <span class="op">*</span> (p[i, t] <span class="op">-</span> pt)</span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------</span></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate rational expectations version of the model with an inflationary shock in t=s</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Use i=1 for rational expectations version</span></span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------</span></span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, Q):</span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Needs within-period iterations loop due to contemporaneous interest rate in the IS curve</span></span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):  <span class="co"># iteration loop</span></span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>        <span class="co"># IS curve (with contemporaneous interest rate)</span></span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>        y[i, t] <span class="op">=</span> A <span class="op">-</span> a1 <span class="op">*</span> r[i, t]</span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Rational expectations Phillips Curve </span></span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>        p[i, t] <span class="op">=</span> pt <span class="op">+</span> a2 <span class="op">*</span> (y[i, t] <span class="op">-</span> ye) <span class="op">+</span> eps[i, t]</span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Monetary policy rule</span></span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>        r[i, t] <span class="op">=</span> rs <span class="op">+</span> a3 <span class="op">*</span> (p[i, t] <span class="op">-</span> pt)</span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a><span class="co">## Plot results</span></span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Set maximum period for plots</span></span>
+<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a>Tmax <span class="op">=</span> <span class="dv">15</span></span>
+<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Inflation under adaptive vs rational expectations</span></span>
+<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a><span class="co"># Adaptive expectations (i=0)</span></span>
+<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a>plt.plot(<span class="bu">range</span>(Tmax<span class="op">+</span><span class="dv">1</span>), p[<span class="dv">0</span>, <span class="dv">0</span>:Tmax<span class="op">+</span><span class="dv">1</span>], </span>
+<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a>         color<span class="op">=</span><span class="st">"black"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, linestyle<span class="op">=</span><span class="st">"-"</span>, label<span class="op">=</span><span class="st">"1: Adaptive expectations"</span>)</span>
+<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a><span class="co"># Rational expectations (i=1)</span></span>
+<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a>plt.plot(<span class="bu">range</span>(Tmax<span class="op">+</span><span class="dv">1</span>), p[<span class="dv">1</span>, <span class="dv">0</span>:Tmax<span class="op">+</span><span class="dv">1</span>], </span>
+<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a>         color<span class="op">=</span><span class="st">"black"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, label<span class="op">=</span><span class="st">"2: Rational expectations"</span>)</span>
+<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a><span class="co"># Titles and labels</span></span>
+<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Inflation"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r"$\pi$"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a><span class="co"># Legend</span></span>
+<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper right"</span>, fontsize<span class="op">=</span><span class="dv">9</span>, frameon<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a><span class="co"># Tight layout for nicer spacing</span></span>
+<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a><span class="co"># Policy rate under adaptive vs rational expectations</span></span>
+<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a><span class="co"># Adaptive expectations (i=0)</span></span>
+<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a>plt.plot(<span class="bu">range</span>(Tmax<span class="op">+</span><span class="dv">1</span>), r[<span class="dv">0</span>, <span class="dv">0</span>:Tmax<span class="op">+</span><span class="dv">1</span>], </span>
+<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a>         color<span class="op">=</span><span class="st">"black"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, linestyle<span class="op">=</span><span class="st">"-"</span>, label<span class="op">=</span><span class="st">"1: Adaptive expectations"</span>)</span>
+<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a><span class="co"># Rational expectations (i=1)</span></span>
+<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a>plt.plot(<span class="bu">range</span>(Tmax<span class="op">+</span><span class="dv">1</span>), r[<span class="dv">1</span>, <span class="dv">0</span>:Tmax<span class="op">+</span><span class="dv">1</span>], </span>
+<span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a>         color<span class="op">=</span><span class="st">"black"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, label<span class="op">=</span><span class="st">"2: Rational expectations"</span>)</span>
+<span id="cb10-111"><a href="#cb10-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-112"><a href="#cb10-112" aria-hidden="true" tabindex="-1"></a><span class="co"># Titles and labels</span></span>
+<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Policy rate"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"r"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a><span class="co"># Legend</span></span>
+<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper right"</span>, fontsize<span class="op">=</span><span class="dv">9</span>, frameon<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a><span class="co"># Tight layout for nicer spacing</span></span>
+<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p>It can be seen that under rational inflation expectations, the economy is less sensitive to shocks and returns to equilibrium much quicker. The job of the central bank is simpler: it only needs to raise the interest rate in the period the shock occurs to bring the economy back on target in the next period. Compared to adaptive expectations, a less drastic reponse is required.</p>
+</section><section id="directed-graph" class="level2"><h2 class="anchored" data-anchor-id="directed-graph">Directed graph</h2>
 <p>Another perspective on the model’s properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node <span class="math inline">\(x_1\)</span> to node <span class="math inline">\(x_2\)</span> indicates a causal impact of <span class="math inline">\(x_1\)</span> on <span class="math inline">\(x_2\)</span>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Construct auxiliary Jacobian matrix for 7 variables: y, p, r, A, ye, rs, pt</span></span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Construct auxiliary Jacobian matrix for 7 variables: y, p, r, A, ye, rs, pt</span></span>
 <span><span class="co"># where non-zero elements in regular Jacobian are set to 1 and zero elements are unchanged</span></span>
 <span></span>
 <span><span class="va">M_mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,</span>
@@ -701,130 +926,9 @@ Python code
 <span>     vertex.frame.color<span class="op">=</span><span class="st">"NA"</span>, margin<span class="op">=</span><span class="op">-</span><span class="fl">0.08</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="a_new_keynesian_3_equation_model_files/figure-html/nk3-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="a_new_keynesian_3_equation_model_files/figure-html/nk3-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="Python code">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Python code
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Directed graph</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the Jacobian matrix</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>M_mat <span class="op">=</span> np.array([[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                  [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                  [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>],</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                  [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                  [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                  [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                  [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                 ])</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Create adjacency matrix from transpose of auxiliary Jacobian and add column names</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>A_mat <span class="op">=</span> M_mat.transpose()</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the graph from the adjacency matrix</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.DiGraph(A_mat)</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Define node labels</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>nodelabs <span class="op">=</span> {</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>: <span class="st">"y"</span>,</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>: <span class="st">"π"</span>,</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>: <span class="st">"r"</span>,</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>: <span class="st">"A"</span>,</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>: <span class="st">"yₑ"</span>,</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>: <span class="st">"rₛ"</span>,</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>: <span class="st">"πᵀ"</span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the directed graph</span></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> nx.spring_layout(G, seed<span class="op">=</span><span class="dv">43</span>)  </span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>nx.draw(G, pos, with_labels<span class="op">=</span><span class="va">True</span>, labels<span class="op">=</span>nodelabs, node_size<span class="op">=</span><span class="dv">300</span>, node_color<span class="op">=</span><span class="st">'lightblue'</span>, </span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>        font_size<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>edge_labels <span class="op">=</span> {(u, v): <span class="st">''</span> <span class="cf">for</span> u, v <span class="kw">in</span> G.edges}</span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_edge_labels(G, pos, edge_labels<span class="op">=</span>edge_labels, font_color<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-<p>In Figure 4, it can be seen that aggregate demand (<span class="math inline">\(A\)</span>), equilibrium output (<span class="math inline">\(y_e\)</span>), and the inflation target (<span class="math inline">\(\pi^T\)</span>) are the key exogenous variables of the model. All other variables are endogenous and form a closed loop (or cycle) within the system. The upper-right side of the graph represents the supply side, given by the equilibrium level of output and its effect on inflation. The upper-left side captures the demand side and its effect on actual output. The key endogenous variables, output, inflation, and the interest rate form the centre of the graph, where they stand in a triangular relationship to each other. Output drives inflation, which in turn impacts the real interest rate. The latter then feeds back into output. Structural changes in the relationship between demand and supply (e.g.&nbsp;excess demand) also impact the system through their effect on the stabilising interest rate (<span class="math inline">\(r_s\)</span>).</p>
-</section><section id="sec-analytical" class="level2"><h2 class="anchored" data-anchor-id="sec-analytical">Analytical discussion</h2>
-<section id="derivation-of-core-equations" class="level3"><h3 class="anchored" data-anchor-id="derivation-of-core-equations">Derivation of core equations</h3>
-<section id="is-curve" class="level4"><h4 class="anchored" data-anchor-id="is-curve">IS curve</h4>
-<p>The IS curve in <a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a> is loosely based on the consumption Euler equation introduced in <a href="a_neoclassical_macro_model.html" class="quarto-xref"><span>Chapter 3</span></a>. Suppose there are two periods and the household maximises its utility function <span class="math inline">\(U=\ln(C_t) + \beta \ln(C_{t+1})\)</span> subject to the intertemporal budget constraint <span class="math inline">\(C_t+\frac{C_{t+1}}{1+r}=Y_t + \frac{Y_{t+1}}{1+r}\)</span>. Substituting the constraint into the objective function and differentiating with respect to <span class="math inline">\(C_t\)</span> yields the first-order condition:</p>
-<p><span class="math display">\[
-C_t = \frac{C_{t+1}}{\beta(1+r)}.
-\]</span></p>
-<p>This consumption Euler equation establishes the negative relationship between the real interest rate and expenditures in <a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a>.</p>
-</section><section id="pc-curve" class="level4"><h4 class="anchored" data-anchor-id="pc-curve">PC curve</h4>
-<p>The Phillips curve <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a> is derived from wage- and price-setting in imperfect labour markets.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Consider the following wage- and price-setting functions: <span class="math display">\[
-\frac{W}{P^E} = B + \alpha(y_t - y_e) + z_w
-\]</span> <span id="eq-nk_P"><span class="math display">\[
-P=(1+\mu)\frac{W}{\lambda},
-\tag{10.5}\]</span></span></p>
-<p>i.e.&nbsp;the nominal wage <span class="math inline">\(W\)</span>, adjusted for the expected price level, is increasing in the output gap, a factor <span class="math inline">\(B\)</span> capturing unemployment benefits and the disutility of work as well as a vector <span class="math inline">\(z_w\)</span> of wage-push factors. Prices are set based on a constant mark-up (<span class="math inline">\(\mu\)</span>) on unit labour cost (<span class="math inline">\(\frac{W}{\lambda}\)</span>).</p>
-<p>In equilibrium, the real wage is given by: <span class="math inline">\(w_e = B + z_w\)</span>. In a dynamic setting, wage setters will raise the expected real wage by <span class="math inline">\(\left(\frac{W_t}{P_{t}^E}\right) - \left(\frac{W_{t-1}}{P_{t-1}}\right)=\alpha(y_t - y_e)\)</span>. Together with adaptive expectations for prices <span class="math inline">\(\hat{P_t^E} = \hat{P}_{t-1}\)</span> and the approximation <span class="math inline">\(\hat{W_t} - \hat{P_{t-1}} \approx \left(\frac{W_t}{P_{t}^E}\right) - \left(\frac{W_{t-1}}{P_{t-1}}\right)\)</span>, this yields the following equation for wage inflation: <span id="eq-nk_W"><span class="math display">\[
-\hat{W_t} = \hat{P}_{t-1} +\alpha(y_t - y_e).
-\tag{10.6}\]</span></span></p>
-<p>Transforming equation <a href="#eq-nk_P" class="quarto-xref">Equation&nbsp;<span>10.5</span></a> into growth rates (<span class="math inline">\(\hat{P}=\hat{W}\)</span>) and combining it with the wage-inflation equation <a href="#eq-nk_W" class="quarto-xref">Equation&nbsp;<span>10.6</span></a> yields the Phillips curve <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a>.</p>
-</section><section id="monetary-policy-rule" class="level4"><h4 class="anchored" data-anchor-id="monetary-policy-rule">Monetary policy rule</h4>
-<p>Finally, to derive the interest rate rule, start from the following central bank loss function:<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
-<p><span class="math display">\[
-L=(y_t-y_e)^2 + b(\pi_t - \pi^T)^2.
-\]</span> Substituting the Phillips curve (<a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a>) into the loss function, differentiating with respect to <span class="math inline">\(y_t\)</span>, and simplifying yields the first-order condition:</p>
-<p><span class="math display">\[
-y_t-y_e = -a_2b(\pi-\pi^T),
-\]</span></p>
-<p>which can also be regarded as a monetary policy rule. Next, substitute the Phillips curve (<a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a>), the IS-curve (<a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a>), and the stabilising interest rate (<a href="#eq-nk_rs" class="quarto-xref">Equation&nbsp;<span>10.3</span></a>) into the monetary policy rule and define <span class="math inline">\(a_3 = \frac{1}{a_1(\frac{1}{a_2b} + a_2)}\)</span>, which yields the interest rate rule (<a href="#eq-nk_r" class="quarto-xref">Equation&nbsp;<span>10.4</span></a>).</p>
-</section></section><section id="equilibrium-solutions-and-stability-analysis" class="level3"><h3 class="anchored" data-anchor-id="equilibrium-solutions-and-stability-analysis">Equilibrium solutions and stability analysis</h3>
-<p>By definition, in the steady state we have <span class="math inline">\(y^*=y_e\)</span>. This implies that <span class="math inline">\(r^*=r_s\)</span>. From this, it follows that <span class="math inline">\(\pi^* = \pi^T\)</span>.</p>
-<p>To analyse the dynamic stability of the model, we rewrite it as a system of first-order difference equations. To this end, substitute <a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a> into <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a>, which yields: <span id="eq-nk_pi_reduc"><span class="math display">\[
-\pi_t = \pi_{t-1} + a_2(A - a_1r_{t-1}-y_e)
-\tag{10.7}\]</span></span></p>
-<p>Substitute this equation into <a href="#eq-nk_r" class="quarto-xref">Equation&nbsp;<span>10.4</span></a>, which yields: <span id="eq-nk_r_reduc"><span class="math display">\[
-r_t= r_{s} + a_3[\pi_{t-1} + a_2(A - a_1r_{t-1}-y_e) - \pi^T].
-\tag{10.8}\]</span></span></p>
-<p>The Jacobian matrix of the system in <a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a>, <a href="#eq-nk_pi_reduc" class="quarto-xref">Equation&nbsp;<span>10.7</span></a>, and <a href="#eq-nk_r_reduc" class="quarto-xref">Equation&nbsp;<span>10.8</span></a> is given by: <span class="math display">\[
-J=\begin{bmatrix} 0&amp; 0 &amp;-a_1 \\0 &amp; 1 &amp; -a_1 a_2 \\ 0 &amp; a_3 &amp; -a_1 a_2 a_3 \end{bmatrix}.
-\]</span> The eigenvalues of the Jacobian can be obtained from the characteristic polynomial <span class="math inline">\(\lambda^3 - Tr(J)\lambda^2 + [Det(J_1) + Det(J_2) + Det(J_3)]\lambda - Det(J) = 0\)</span>, where <span class="math inline">\(Tr(J)\)</span> and <span class="math inline">\(Det(J\)</span>) are the trace and determinant, respectively, and <span class="math inline">\(Det(J_i)\)</span> refers to the <span class="math inline">\(i_{th}\)</span> principal minor of the matrix. As there is a column in the Jacobian that only contains zeros, it follows that the matrix is singular and will have a zero determinant. In addition, all principal minors turn out to be zero. The characteristic polynomial thus reduces to <span class="math inline">\(\lambda^2[\lambda - Tr(J)]=0\)</span>. From this, it is immediate that <span class="math inline">\(\lambda_{1,2}=0\)</span> and <span class="math inline">\(\lambda_{3}=Tr(J)\)</span>, where <span class="math inline">\(Tr(J)=1-a_1a_2a_3=\frac{1}{1+a_2^2b}\)</span>. Stability requires the single real eigenvalue to be smaller than unity (in absolute terms). With <span class="math inline">\(\lambda_3=\frac{1}{1+a_2^2b}\)</span>, stability thus only requires <span class="math inline">\(a_2 \neq 0\)</span> and <span class="math inline">\(b&gt;0\)</span>, i.e.&nbsp;the output gap needs to impact inflation (otherwise the key channel through which interest rate policy brings inflation back on target is blocked) and the central bank needs to assign a (non-negative) loss to deviations of actual inflation from its target.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
-<p>We can verify these analytical solutions by comparing them with the results from the numerical solution:</p>
-<div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Construct Jacobian matrix </span></span>
-<span><span class="va">J</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="op">-</span><span class="va">a1</span>,</span>
-<span>           <span class="fl">0</span>,<span class="fl">1</span>,<span class="op">-</span><span class="va">a1</span><span class="op">*</span><span class="va">a2</span>,</span>
-<span>           <span class="fl">0</span>,<span class="va">a3</span>,<span class="op">-</span><span class="va">a1</span><span class="op">*</span><span class="va">a2</span><span class="op">*</span><span class="va">a3</span><span class="op">)</span>, <span class="fl">3</span>, <span class="fl">3</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Obtain eigenvalues</span></span>
-<span><span class="va">ev</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span></span>
-<span><span class="op">(</span><span class="va">values</span> <span class="op">&lt;-</span> <span class="va">ev</span><span class="op">$</span><span class="va">values</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6711409 0.0000000 0.0000000</code></pre>
-</div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Obtain determinant and trace</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/det.html">det</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span>       <span class="co"># determinant</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
-</div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span><span class="op">)</span> <span class="co"># trace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6711409</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Python code">
@@ -840,24 +944,145 @@ Python code
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct Jacobian matrix </span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> np.array([[<span class="dv">0</span>, <span class="dv">0</span>, <span class="op">-</span>a1],</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">0</span>, <span class="dv">1</span>, <span class="op">-</span>a1 <span class="op">*</span> a2],</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">0</span>, a3, <span class="op">-</span>a1 <span class="op">*</span> a2 <span class="op">*</span> a3],])</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate eigenvalues</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>eigenvalues <span class="op">=</span> np.linalg.eigvals(J)</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the resulting eigenvalues</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(eigenvalues)</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the determinant and trace of the Jacobian matrix</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>determinant <span class="op">=</span> np.linalg.det(J)</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>trace <span class="op">=</span> np.trace(J)</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(determinant)</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(trace)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Directed graph</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the Jacobian matrix</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>M_mat <span class="op">=</span> np.array([[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                  [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                  [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>],</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                  [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                  [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>                  [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>                  [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>                 ])</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Create adjacency matrix from transpose of auxiliary Jacobian and add column names</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>A_mat <span class="op">=</span> M_mat.transpose()</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the graph from the adjacency matrix</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.DiGraph(A_mat)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Define node labels</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>nodelabs <span class="op">=</span> {</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>: <span class="st">"y"</span>,</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>: <span class="st">"π"</span>,</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>: <span class="st">"r"</span>,</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>: <span class="st">"A"</span>,</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>: <span class="st">"yₑ"</span>,</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>: <span class="st">"rₛ"</span>,</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>: <span class="st">"πᵀ"</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the directed graph</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> nx.spring_layout(G, seed<span class="op">=</span><span class="dv">43</span>)  </span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>nx.draw(G, pos, with_labels<span class="op">=</span><span class="va">True</span>, labels<span class="op">=</span>nodelabs, node_size<span class="op">=</span><span class="dv">300</span>, node_color<span class="op">=</span><span class="st">'lightblue'</span>, </span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>        font_size<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>edge_labels <span class="op">=</span> {(u, v): <span class="st">''</span> <span class="cf">for</span> u, v <span class="kw">in</span> G.edges}</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_edge_labels(G, pos, edge_labels<span class="op">=</span>edge_labels, font_color<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p>In Figure 4, it can be seen that aggregate demand (<span class="math inline">\(A\)</span>), equilibrium output (<span class="math inline">\(y_e\)</span>), and the inflation target (<span class="math inline">\(\pi^T\)</span>) are the key exogenous variables of the model. All other variables are endogenous and form a closed loop (or cycle) within the system. The upper-right side of the graph represents the supply side, given by the equilibrium level of output and its effect on inflation. The upper-left side captures the demand side and its effect on actual output. The key endogenous variables, output, inflation, and the interest rate form the centre of the graph, where they stand in a triangular relationship to each other. Output drives inflation, which in turn impacts the real interest rate. The latter then feeds back into output. Structural changes in the relationship between demand and supply (e.g.&nbsp;excess demand) also impact the system through their effect on the stabilising interest rate (<span class="math inline">\(r_s\)</span>).</p>
+</section><section id="sec-analytical" class="level2"><h2 class="anchored" data-anchor-id="sec-analytical">Analytical discussion</h2>
+<section id="derivation-of-core-equations" class="level3"><h3 class="anchored" data-anchor-id="derivation-of-core-equations">Derivation of core equations</h3>
+<section id="is-curve" class="level4"><h4 class="anchored" data-anchor-id="is-curve">IS curve</h4>
+<p>The IS curve in <a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a> is loosely based on the consumption Euler equation introduced in <a href="a_neoclassical_macro_model.html" class="quarto-xref"><span>Chapter 3</span></a>. Suppose there are two periods and the household maximises its utility function <span class="math inline">\(U=\ln(C_t) + \beta \ln(C_{t+1})\)</span> subject to the intertemporal budget constraint <span class="math inline">\(C_t+\frac{C_{t+1}}{1+r}=Y_t + \frac{Y_{t+1}}{1+r}\)</span>. Substituting the constraint into the objective function and differentiating with respect to <span class="math inline">\(C_t\)</span> yields the first-order condition:</p>
+<p><span class="math display">\[
+C_t = \frac{C_{t+1}}{\beta(1+r)}.
+\]</span></p>
+<p>This consumption Euler equation establishes the negative relationship between the real interest rate and expenditures in <a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a>.</p>
+</section><section id="pc-curve" class="level4"><h4 class="anchored" data-anchor-id="pc-curve">PC curve</h4>
+<p>The Phillips curve <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a> is derived from wage- and price-setting in imperfect labour markets.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Consider the following wage- and price-setting functions: <span class="math display">\[
+\frac{W}{P^E} = B + \alpha(y_t - y_e) + z_w
+\]</span> <span id="eq-nk_P"><span class="math display">\[
+P=(1+\mu)\frac{W}{\lambda},
+\tag{10.5}\]</span></span></p>
+<p>i.e.&nbsp;the nominal wage <span class="math inline">\(W\)</span>, adjusted for the expected price level, is increasing in the output gap, a factor <span class="math inline">\(B\)</span> capturing unemployment benefits and the disutility of work as well as a vector <span class="math inline">\(z_w\)</span> of wage-push factors. Prices are set based on a constant mark-up (<span class="math inline">\(\mu\)</span>) on unit labour cost (<span class="math inline">\(\frac{W}{\lambda}\)</span>).</p>
+<p>In equilibrium, the real wage is given by: <span class="math inline">\(w_e = B + z_w\)</span>. In a dynamic setting, wage setters will raise the expected real wage by <span class="math inline">\(\left(\frac{W_t}{P_{t}^E}\right) - \left(\frac{W_{t-1}}{P_{t-1}}\right)=\alpha(y_t - y_e)\)</span>. Together with adaptive expectations for prices <span class="math inline">\(\hat{P_t^E} = \hat{P}_{t-1}\)</span> and the approximation <span class="math inline">\(\hat{W_t} - \hat{P_{t-1}} \approx \left(\frac{W_t}{P_{t}^E}\right) - \left(\frac{W_{t-1}}{P_{t-1}}\right)\)</span>, this yields the following equation for wage inflation: <span id="eq-nk_W"><span class="math display">\[
+\hat{W_t} = \hat{P}_{t-1} +\alpha(y_t - y_e).
+\tag{10.6}\]</span></span></p>
+<p>Transforming equation <a href="#eq-nk_P" class="quarto-xref">Equation&nbsp;<span>10.5</span></a> into growth rates (<span class="math inline">\(\hat{P}=\hat{W}\)</span>) and combining it with the wage-inflation equation <a href="#eq-nk_W" class="quarto-xref">Equation&nbsp;<span>10.6</span></a> yields the Phillips curve <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a>.</p>
+</section><section id="monetary-policy-rule" class="level4"><h4 class="anchored" data-anchor-id="monetary-policy-rule">Monetary policy rule</h4>
+<p>Finally, to derive the interest rate rule, start from the following central bank loss function:<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p><span class="math display">\[
+L=(y_t-y_e)^2 + b(\pi_t - \pi^T)^2.
+\]</span> Substituting the Phillips curve (<a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a>) into the loss function, differentiating with respect to <span class="math inline">\(y_t\)</span>, and simplifying yields the first-order condition:</p>
+<p><span class="math display">\[
+y_t-y_e = -a_2b(\pi_t-\pi^T),
+\]</span></p>
+<p>which can also be regarded as a monetary policy rule. Next, substitute the Phillips curve (<a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a>), the IS-curve (<a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a>), and the stabilising interest rate (<a href="#eq-nk_rs" class="quarto-xref">Equation&nbsp;<span>10.3</span></a>) into the monetary policy rule and define <span class="math inline">\(a_3 = \frac{1}{a_1(\frac{1}{a_2b} + a_2)}\)</span>, which yields the interest rate rule (<a href="#eq-nk_r" class="quarto-xref">Equation&nbsp;<span>10.4</span></a>).</p>
+</section></section><section id="equilibrium-solutions-and-stability-analysis" class="level3"><h3 class="anchored" data-anchor-id="equilibrium-solutions-and-stability-analysis">Equilibrium solutions and stability analysis</h3>
+<p>By definition, in the steady state we have <span class="math inline">\(y^*=y_e\)</span>. This implies that <span class="math inline">\(r^*=r_s\)</span>. From this, it follows that <span class="math inline">\(\pi^* = \pi^T\)</span>.</p>
+<p>To analyse the dynamic stability of the model, we rewrite it as a system of first-order difference equations. To this end, substitute <a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a> into <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a>, which yields: <span id="eq-nk_pi_reduc"><span class="math display">\[
+\pi_t = \pi_{t-1} + a_2(A - a_1r_{t-1}-y_e)
+\tag{10.7}\]</span></span></p>
+<p>Substitute this equation into <a href="#eq-nk_r" class="quarto-xref">Equation&nbsp;<span>10.4</span></a>, which yields: <span id="eq-nk_r_reduc"><span class="math display">\[
+r_t= r_{s} + a_3[\pi_{t-1} + a_2(A - a_1r_{t-1}-y_e) - \pi^T].
+\tag{10.8}\]</span></span></p>
+<p>The Jacobian matrix of the system in <a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a>, <a href="#eq-nk_pi_reduc" class="quarto-xref">Equation&nbsp;<span>10.7</span></a>, and <a href="#eq-nk_r_reduc" class="quarto-xref">Equation&nbsp;<span>10.8</span></a> is given by: <span class="math display">\[
+J=\begin{bmatrix} 0&amp; 0 &amp;-a_1 \\0 &amp; 1 &amp; -a_1 a_2 \\ 0 &amp; a_3 &amp; -a_1 a_2 a_3 \end{bmatrix}.
+\]</span> The eigenvalues of the Jacobian can be obtained from the characteristic polynomial <span class="math inline">\(\lambda^3 - Tr(J)\lambda^2 + [Det(J_1) + Det(J_2) + Det(J_3)]\lambda - Det(J) = 0\)</span>, where <span class="math inline">\(Tr(J)\)</span> and <span class="math inline">\(Det(J\)</span>) are the trace and determinant, respectively, and <span class="math inline">\(Det(J_i)\)</span> refers to the <span class="math inline">\(i_{th}\)</span> principal minor of the matrix. As there is a column in the Jacobian that only contains zeros, it follows that the matrix is singular and will have a zero determinant. In addition, all principal minors turn out to be zero. The characteristic polynomial thus reduces to <span class="math inline">\(\lambda^2[\lambda - Tr(J)]=0\)</span>. From this, it is immediate that <span class="math inline">\(\lambda_{1,2}=0\)</span> and <span class="math inline">\(\lambda_{3}=Tr(J)\)</span>, where <span class="math inline">\(Tr(J)=1-a_1a_2a_3=\frac{1}{1+a_2^2b}\)</span>. Stability requires the single real eigenvalue to be smaller than unity (in absolute terms). With <span class="math inline">\(\lambda_3=\frac{1}{1+a_2^2b}\)</span>, stability thus only requires <span class="math inline">\(a_2 \neq 0\)</span> and <span class="math inline">\(b&gt;0\)</span>, i.e.&nbsp;the output gap needs to impact inflation (otherwise the key channel through which interest rate policy brings inflation back on target is blocked) and the central bank needs to assign a (non-negative) loss to deviations of actual inflation from its target.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p>We can verify these analytical solutions by comparing them with the results from the numerical solution:</p>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Construct Jacobian matrix </span></span>
+<span><span class="va">J</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="op">-</span><span class="va">a1</span>,</span>
+<span>           <span class="fl">0</span>,<span class="fl">1</span>,<span class="op">-</span><span class="va">a1</span><span class="op">*</span><span class="va">a2</span>,</span>
+<span>           <span class="fl">0</span>,<span class="va">a3</span>,<span class="op">-</span><span class="va">a1</span><span class="op">*</span><span class="va">a2</span><span class="op">*</span><span class="va">a3</span><span class="op">)</span>, <span class="fl">3</span>, <span class="fl">3</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Obtain eigenvalues</span></span>
+<span><span class="va">ev</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="va">values</span> <span class="op">&lt;-</span> <span class="va">ev</span><span class="op">$</span><span class="va">values</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6711409 0.0000000 0.0000000</code></pre>
+</div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Obtain determinant and trace</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/det.html">det</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span>       <span class="co"># determinant</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span><span class="op">)</span> <span class="co"># trace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6711409</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct Jacobian matrix </span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> np.array([[<span class="dv">0</span>, <span class="dv">0</span>, <span class="op">-</span>a1],</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">0</span>, <span class="dv">1</span>, <span class="op">-</span>a1 <span class="op">*</span> a2],</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">0</span>, a3, <span class="op">-</span>a1 <span class="op">*</span> a2 <span class="op">*</span> a3],])</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate eigenvalues</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>eigenvalues <span class="op">=</span> np.linalg.eigvals(J)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the resulting eigenvalues</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(eigenvalues)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the determinant and trace of the Jacobian matrix</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>determinant <span class="op">=</span> np.linalg.det(J)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>trace <span class="op">=</span> np.trace(J)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(determinant)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(trace)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -876,10 +1101,12 @@ Galí, Jordi. 2018. <span>“The <span>State</span> of <span>New Keynesian Econo
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>See <span class="citation" data-cites="gali_state_2018">Galí (<a href="#ref-gali_state_2018" role="doc-biblioref">2018</a>)</span> for an overview.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Note that this is quite different from conventional New Keynesian dynamic general equilibrium models in which the dynamic element stems from agents with rational expectations that react to serially correlated shocks.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>See chapter 2 of <span class="citation" data-cites="Carlin2014">Carlin and Soskice (<a href="#ref-Carlin2014" role="doc-biblioref">2014</a>)</span> for details.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>See chapter 2 of <span class="citation" data-cites="Carlin2014">Carlin and Soskice (<a href="#ref-Carlin2014" role="doc-biblioref">2014</a>)</span> for details.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>As mentioned in footnote 2, this property of the Carlin-Soskice model is very different from conventional New Keynesian models with rational expectations. In these models, variables such as output and inflation are driven by the ‘forward-looking’ behaviour of rational agents, i.e.&nbsp;they depend on expectational terms for their current values rather than lagged values. To ensure what is called ‘determinancy’, these forward-looking variables must adjust fast (or ‘jump’) to bring the economy back onto a path that is consistent with the optimising equilibrium. This requires the number of jump variables to be matched by an equal number of unstable roots (i.e.&nbsp;being outside the unit circle).<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>A PDF version of the most 2024 edition of the book is freely available <a href="https://www.stone-econ.org/resources/free-textbook-in-intermediate-macroeconomics">here</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Note that this is quite different from conventional New Keynesian dynamic stochastic general equilibrium (DSGE) models in which the dynamic element stems from agents with rational expectations that react to serially correlated shocks. See chapter 16 of <span class="citation" data-cites="Carlin2014">Carlin and Soskice (<a href="#ref-Carlin2014" role="doc-biblioref">2014</a>)</span> for a comparison of their 3-equation model with New Keynesian DSGE models.]<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>The IS curve in the Carlin-Soskice version of the 3-equation model is only loosely based on intertemporal optimisation (see analytical discussion section below). A rigorously derived IS-curve in a New Keynesian model with forward-looking expectations would contain the future expected output gap and expected inflation, see <span class="citation" data-cites="gali_state_2018">Galí (<a href="#ref-gali_state_2018" role="doc-biblioref">2018</a>)</span>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>See chapter 2 of <span class="citation" data-cites="Carlin2014">Carlin and Soskice (<a href="#ref-Carlin2014" role="doc-biblioref">2014</a>)</span> for details.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>See chapter 2 of <span class="citation" data-cites="Carlin2014">Carlin and Soskice (<a href="#ref-Carlin2014" role="doc-biblioref">2014</a>)</span> for details.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>As mentioned in footnote 2, this property of the Carlin-Soskice model is very different from conventional New Keynesian models with rational expectations. In these models, variables such as output and inflation are driven by the ‘forward-looking’ behaviour of rational agents, i.e.&nbsp;they depend on expectational terms for their current values rather than lagged values. To ensure what is called ‘determinancy’, these forward-looking variables must adjust fast (or ‘jump’) to bring the economy back onto a path that is consistent with the optimising equilibrium. This requires the number of jump variables to be matched by an equal number of unstable roots (i.e.&nbsp;being outside the unit circle).<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

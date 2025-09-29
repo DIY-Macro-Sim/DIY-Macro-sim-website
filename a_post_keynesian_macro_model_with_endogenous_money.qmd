@@ -51,10 +51,6 @@ W=W_0 - hU, \quad h > 0
 $$ {#eq-W-PK}
 
 $$
-w=\frac{1}{(1+n)a}
-$$ {#eq-w-PK}
-
-$$
 N=aY
 $$ {#eq-N-PK}
 
@@ -62,11 +58,11 @@ $$
 U=1-\frac{N}{N^f}
 $$ {#eq-U-PK}
 
-where $Y$, $ND$, $D$, $r$, $i$, $P$, $dL$, $dM$, $dR$, $W$, $w$, $N$, $U$, and $N^f$ are output, the not debt-financed component of aggregate demand, the desired debt-financed component of aggregate demand, the lending rate, the policy rate, the price level, the change in loans, the change in money (bank deposits), the change in bank reserves, the nominal wage, the real wage, employment, the unemployment rate, and full employment (or total labour supply), respectively.
+where $Y$, $ND$, $D$, $r$, $i$, $P$, $dL$, $dM$, $dR$, $W$, $N$, $U$, and $N^f$ are output, the not debt-financed component of aggregate demand, the desired debt-financed component of aggregate demand, the lending rate, the policy rate, the price level, the change in loans, the change in money (bank deposits), the change in bank reserves, the nominal wage, employment, the unemployment rate, and full employment (or total labour supply), respectively.
 
 @eq-Y-PK is the goods market equilibrium condition. Aggregate supply ($Y$) accommodates to the level of aggregate demand which is the sum of a not debt-financed component ($ND$) and a (desired) debt-financed component ($D$). The coefficient $c$ is the proportion of loan applications that are deemed creditworthy and thus captures credit rationing by banks. By @eq-ND-PK, the not debt-financed component of aggregate demand is a function of current income. In @eq-D-PK, the debt-financed component of aggregate demand has an autonomous component ($d_0$)^[For simplicity, it is assumed that all autonomous demand is debt-financed, i.e. there is no spending out of wealth.] and is otherwise negatively related to the lending rate $r$. @eq-i-PK specifies the monetary policy rule, where it is assumed that the central bank raises the policy rate $i$ when the price level increases.^[This specification is somewhat unrealistic given that most modern central banks target a positive rate of inflation. However, it allows for an AS-AD representation of the model, which facilitates the comparison with the Neoclassical Synthesis model (@sec-neoclassical-synthesis) The lending rate in @eq-r-PK is given by a mark-up $m$ that banks charge on the policy rate (which is the rate at which they can borrow reserves). The change in loans in @eq-dL-PK is equal to the creditworthy demand for loans ($cD$). This captures the demand-driven nature of credit creation. The changes in loans translates one-to-one into a change in money, which are bank deposits in this model (@eq-dM-PK). This reflects the endogenous money creation process where commercial banks create new deposits when they make new loans. By @eq-dR-PK, banks obtain new reserves from the central bank to maintain a constant reserve-to-deposit ratio $k$. Thus, the causality in this model runs from debt-financed demand to loans, to deposits, and finally to reserves. 
 
-By @eq-P-PK, the price level is set by firms based on a mark-up ($n$) on unit labour cost (which are the product of the nominal wage $W$ and the labour coefficient $a$). Nominal wages are set by workers based on their bargaining power, which is declining in the unemployment rate (@eq-U-PK). The real wage in @eq-w-PK is derived from the pricing @eq-P-PK, i.e. through their price setting power, firms ultimately determine the real wage. The level of employment in @eq-N-PK is determined residually based on economic activity and a constant-coefficient production function $(Y=\frac{N}{a})$. Finally, the level of employment in conjunction with an exogenously given labour force $N^f$ (or total available labour time) can be used to obtain an unemployment rate in @eq-U-PK.
+By @eq-P-PK, the price level is set by firms based on a mark-up ($n$) on unit labour cost (which are the product of the nominal wage $W$ and the labour coefficient $a$).^[Markup pricing implies that the real wage is determined by the markup and the labour coefficient: $\frac{W}{P}=\frac{1}{(1+n)a}$. The share of wages in national income is exclusively determined by the markup: $\omega = \frac{WN}{PY}=\frac{1}{1+n}$.] Nominal wages are set by workers based on their bargaining power, which is declining in the unemployment rate (@eq-U-PK). The level of employment in @eq-N-PK is determined residually based on economic activity and a constant-coefficient production function $(Y=\frac{N}{a})$. Finally, the level of employment in conjunction with an exogenously given labour force $N^f$ (or total available labour time) can be used to obtain an unemployment rate in @eq-U-PK.
 
 ## Simulation
 
@@ -103,7 +99,6 @@ r_star=vector(length=S)  # lending rate
 N_star=vector(length=S)  # employment
 U_star=vector(length=S)  # unemployment
 P_star=vector(length=S)  # price level
-w_star=vector(length=S)  # real wage
 W_star=vector(length=S)  # nominal wage
 i_star=vector(length=S)  # central bank rate
 dL_star=vector(length=S) # change in loans
@@ -153,7 +148,7 @@ k=0.3   # desired reserve ratio
 W0=2    # exogenous component of nominal wage
 
 # Initialise endogenous variables at some arbitrary positive value 
-Y = D = ND = r = N = U = P = w = W = i = dL = dR = dM = 1
+Y = D = ND = r = N = U = P = W = i = dL = dR = dM = 1
 
 #Solve this system numerically through 1000 iterations based on the initialisation
 for (j in 1:S){
@@ -192,13 +187,10 @@ for (j in 1:S){
     # (10) Nominal wage
     W = W0 - h*(U)
     
-    # (11) Real wage
-    w = 1/((1+n[j])*a[j])
-    
-    # (12) Employment
+    # (11) Employment
     N = a[j]*Y
     
-    # (13) Unemployment rate
+    # (12) Unemployment rate
     U = (Nf - N)/Nf
     
   }
@@ -211,7 +203,6 @@ for (j in 1:S){
   N_star[j]=N
   U_star[j]=U
   P_star[j]=P
-  w_star[j]=w
   W_star[j]=W
   i_star[j]=i
   dL_star[j]=dL
@@ -255,7 +246,6 @@ r_star = np.zeros(S)  # lending rate
 N_star = np.zeros(S)  # employment
 U_star = np.zeros(S)  # unemployment
 P_star = np.zeros(S)  # price level
-w_star = np.zeros(S)  # real wage
 W_star = np.zeros(S)  # nominal wage
 i_star = np.zeros(S)  # central bank rate
 dL_star = np.zeros(S)  # change in loans
@@ -303,7 +293,7 @@ k = 0.3  # desired reserve ratio
 W0 = 2  # exogenous component of nominal wage
 
 # Initialize endogenous variables at some arbitrary positive value
-Y = D = ND = r = N = U = P = w = W = i = dL = dR = dM = 1
+Y = D = ND = r = N = U = P = W = i = dL = dR = dM = 1
 
 # Iterate through the system
 for j in range(S):
@@ -319,7 +309,6 @@ for j in range(S):
         dR = k * dM
         P = (1 + n[j]) * a[j] * W
         W = W0 - h * U
-        w = 1 / ((1 + n[j]) * a[j])
         N = a[j] * Y
         U = (Nf - N) / Nf
 
@@ -331,7 +320,6 @@ for j in range(S):
     N_star[j] = N
     U_star[j] = U
     P_star[j] = P
-    w_star[j] = w
     W_star[j] = W
     i_star[j] = i
     dL_star[j] = dL
@@ -343,7 +331,7 @@ for j in range(S):
 
 ### Plots
 
-Figures @fig-output-pkmacro - @fig-real-wage-pkmacro depict the response of the model's key endogenous variables to various shifts.
+Figures @fig-output-pkmacro - @fig-nominal-wage-pkmacro depict the response of the model's key endogenous variables to various shifts.
 
 ```{r pkmacro2}
 #| label: fig-output-pkmacro
@@ -385,7 +373,7 @@ barplot(dM_star, ylab="dM", names.arg=c("1:baseline", "2:rise credit rat.", "3:r
 
 ```
 
-In scenarios 4 and 5, the interest rate (or bank) mark-up and the price (or firm) mark-up increase, respectively. The increase in the bank mark-up raises the lending rate, which has a contractionary effect. The increase in the firm mark-up raises the price level, which has a contractionary effect through the monetary policy response. Notably, the rise in the price mark-up reduces the real wage.
+In scenarios 4 and 5, the interest rate (or bank) mark-up and the price (or firm) mark-up increase, respectively. The increase in the bank mark-up raises the lending rate, which has a contractionary effect. The increase in the firm mark-up raises the price level, which has a contractionary effect through the monetary policy response.
 
 ```{r pkmacro6}
 #| label: fig-unemployment-pkmacro
@@ -405,16 +393,7 @@ barplot(W_star, ylab="W", names.arg=c("1:baseline", "2:rise credit rat.", "3:ris
 
 ```
 
-Finally, an increase in productivity (scenario 6) reduces the price level, which induces a lower policy rate, leading to a small expansionary effect. However, it increases the unemployment rate as fewer workers are needed to produce the same level of output. This reduces the nominal wage, but raises the real wage.
-
-```{r pkmacro8}
-#| label: fig-real-wage-pkmacro
-#| fig-cap: Real wage
-
-barplot(w_star, ylab="w", names.arg=c("1:baseline", "2:rise credit rat.", "3:rise AD",
-                                      "4:rise bank markup","5:rise firm markup", "6:rise product."), cex.names = 0.6)
-
-```
+Finally, an increase in productivity (scenario 6) reduces the price level, which induces a lower policy rate, leading to a small expansionary effect. However, it increases the unemployment rate as fewer workers are needed to produce the same level of output.
 
 ::: {.callout-note collapse="true" title="Python code"}
 
@@ -451,27 +430,28 @@ Another perspective on the model's properties is provided by its directed graph.
 #| fig-cap: Directed graph of post-Keynesian endogenous money model
 
 ## Create directed graph 
-# Construct auxiliary Jacobian matrix for 18 variables: 
-# r, Y, ND, D, i, P, W, w, N, U, dl, dM, dR, d0, c, m, a, n 
+# Construct auxiliary Jacobian matrix for 17 variables: 
 
-M_mat=matrix(c(0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,
-               0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,
-               0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-               1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,
-               0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,
-               0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,
-               0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,
-               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
-               0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,
-               0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,
-               0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,
-               0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
-               0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,
-               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-               0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0), 18, 18, byrow=TRUE)
+             # r, Y, ND,D, i, P, W, N, U, dl,dM,dR,d0,c, m, a, n 
+M_mat=matrix(c(0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, #r
+               0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, #Y
+               0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, #ND
+               1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 ,0, #D
+               0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, #i
+               0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, #P
+               0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, #W
+               0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, #N
+               0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, #U
+               0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, #dL
+               0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, #dM
+               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, #dR
+               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, #d0
+               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, #c 
+               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, #m 
+               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, #m
+               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), #n
+               17, 17, byrow=TRUE)
+
 
 # Create adjacency matrix from transpose of auxiliary Jacobian 
 A_mat=t(M_mat)
@@ -481,7 +461,7 @@ library(igraph)
 dg= graph_from_adjacency_matrix(A_mat, mode="directed", weighted= NULL)
 
 # Define node labels
-V(dg)$name=c("r", "Y", "ND", "D", "i", "P", "W", "w", "N", "U", "dL", "dM", "dR", expression(d[0]), "c", "m", "a", "n")
+V(dg)$name=c("r", "Y", "ND", "D", "i", "P", "W", "N", "U", "dL", "dM", "dR", expression(d[0]), "c", "m", "a", "n")
 
 # Plot directed graph
 plot(dg, main="", vertex.size=20, vertex.color="lightblue", 
@@ -503,27 +483,27 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Construct auxiliary Jacobian matrix for 18 variables
-#    r  Y ND  D  i  P  W  w  N  U  dL dM dR d0 c  m  a  n
-
-M_mat = np.array([[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0],
-               [0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0],
-               [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-               [1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],
-               [0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],
-               [0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1],
-               [0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
-               [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
-               [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0],
-               [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
-               [0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0],
-               [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0],
-               [0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0],
-               [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-               [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-               [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-               [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-               [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]])
+# Construct auxiliary Jacobian matrix for 17 variables
+                # r, Y, ND, D, i, P, W, N, U, dL,dM,dR,d0, c, m, a, n
+M_mat = np.array([
+                  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0], # r
+                  [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], # Y
+                  [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], # ND
+                  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0], # D
+                  [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], # i
+                  [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1], # P
+                  [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], # W
+                  [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0], # N
+                  [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], # U
+                  [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], # dL
+                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0], # dM
+                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0], # dR
+                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], # d0
+                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], # c
+                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], # m
+                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], # a
+                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  # n
+])
 
     
 # Create adjacency matrix from transpose of auxiliary Jacobian and add column names
@@ -533,9 +513,9 @@ A_mat = M_mat.transpose()
 G = nx.DiGraph(A_mat)
 
 # Define node labels
-nodelabs = {0: "r", 1: "Y", 2: "ND", 3: "D", 4: "i", 5:"P", 6: "W", 7: "w", 
-            8: "N", 9: "U", 10: "dL", 11: "dM", 12: "dR", 13: "d0", 14: "c", 
-            15: "m", 16: "a", 17: "n"}
+nodelabs = {0: "r", 1: "Y", 2: "ND", 3: "D", 4: "i", 5:"P", 6: "W", 
+            7: "N", 8: "U", 9: "dL", 10: "dM", 11: "dR", 12: "d0", 13: "c", 
+            14: "m", 15: "a", 16: "n"}
 
 # Plot the directed graph
 pos = nx.spring_layout(G, seed=42)  
@@ -550,7 +530,7 @@ plt.show()
 
 :::
 
-In Figure @fig-dg-pkmacro, it can be seen that credit rationing ($c$), productivity ($a$), the price mark-up ($n$), the interest rate mark-up ($m$), and autonomous demand ($d_0$), are the key exogenous variables of the model. All other variables are endogenous, and many of them form a closed loop (or cycle) within the system. The lower-right part of the graph captures the goods market: debt- and not debt-financed aggregate demand determine output. The outer right part depicts the endogenous money creation process: creditworthy debt-financed demand determines credit creation, which translates into deposit money creation. Bank reserves are a residual. The lower-left part of the graph represents the labour market. The goods market feeds into the labour market via employment, which determines nominal wages and the price level. The real wage is a residual. The price level feeds into interest rate determination in the upper part of the model, which establishes a causal feedback link from the labour market to the goods market. 
+In Figure @fig-dg-pkmacro, it can be seen that credit rationing ($c$), productivity ($a$), the price mark-up ($n$), the interest rate mark-up ($m$), and autonomous demand ($d_0$), are the key exogenous variables of the model. All other variables are endogenous, and many of them form a closed loop (or cycle) within the system. The lower-right part of the graph captures the goods market: debt- and not debt-financed aggregate demand determine output. The outer right part depicts the endogenous money creation process: creditworthy debt-financed demand determines credit creation, which translates into deposit money creation. Bank reserves are a residual. The lower-left part of the graph represents the labour market. The goods market feeds into the labour market via employment, which determines nominal wages and the price level. The price level feeds into interest rate determination in the upper part of the model, which establishes a causal feedback link from the labour market to the goods market. 
 
 ## Analytical discussion
 
