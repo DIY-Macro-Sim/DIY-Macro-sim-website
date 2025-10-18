@@ -405,14 +405,60 @@ r_s=\frac{(A - y_e)}{a_1}
 r_t = r_s + a_3(\pi_t-\pi^T)
 \tag{10.4}\]</span></span></p>
 <p>where <span class="math inline">\(y\)</span>, <span class="math inline">\(A\)</span>, <span class="math inline">\(r\)</span>, <span class="math inline">\(\pi\)</span>, <span class="math inline">\(y_e\)</span>, <span class="math inline">\(r_s\)</span>, and <span class="math inline">\(\pi^T\)</span> are real output, autonomous demand (times the multiplier), the real interest rate, inflation, equilibrium output, the stabilising real interest rate, and the inflation target, respectively.</p>
-<p><a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a> is the IS curve or goods market equilibrium condition. Aggregate output adjusts to the level of aggregate demand, which is given by autonomous demand (times the multiplier) and a component that is negatively related to the (lagged) real interest rate via households’ saving (<span class="math inline">\(a_1&gt;0\)</span>). <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a> is the Phillips curve. It is assumed that inflation is driven by adaptive expectations (<span class="math inline">\(E[\pi_{t+1}]=\pi_{t-1}\)</span>) and positively related to the output gap <span class="math inline">\((y_t-y_e)\)</span>, i.e.&nbsp;<span class="math inline">\(a_2&gt;0\)</span>. By <a href="#eq-nk_rs" class="quarto-xref">Equation&nbsp;<span>10.3</span></a>, the stabilising real interest rate is that real interest rate that is consistent with equilibrium output (<span class="math inline">\(y_e=A -a_1r_s\)</span>). Finally, the interest rate rule in <a href="#eq-nk_r" class="quarto-xref">Equation&nbsp;<span>10.4</span></a> specifies the real interest rate the central bank needs to set to minimise its loss function (see <a href="#sec-analytical" class="quarto-xref"><span>Section 10.6</span></a> below for a derivation). The parameter <span class="math inline">\(a_3\)</span> is a composite one given by <span class="math inline">\(a_3 = \frac{1}{a_1(\frac{1}{a_2 b} + a_2)} &gt;0\)</span>. Although the central bank only sets the nominal interest rate <span class="math inline">\(i = r + E[\pi_{t+1}]\)</span> directly, the fact that expected inflation is predetermined in every period allows it to indirectly control the real interest rate.</p>
+<p><a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>10.1</span></a> is the IS curve or goods market equilibrium condition. Aggregate output adjusts to the level of aggregate demand, which is given by autonomous demand (times the multiplier) and a component that is negatively related to the (lagged) real interest rate via households’ saving (<span class="math inline">\(a_1&gt;0\)</span>). <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a> is the Phillips curve. It is assumed that inflation is driven by adaptive expectations (<span class="math inline">\(E[\pi_{t}]=\pi_{t-1}\)</span>) and positively related to the output gap <span class="math inline">\((y_t-y_e)\)</span>, i.e.&nbsp;<span class="math inline">\(a_2&gt;0\)</span>. By <a href="#eq-nk_rs" class="quarto-xref">Equation&nbsp;<span>10.3</span></a>, the stabilising real interest rate is that real interest rate that is consistent with equilibrium output (<span class="math inline">\(y_e=A -a_1r_s\)</span>). Finally, the interest rate rule in <a href="#eq-nk_r" class="quarto-xref">Equation&nbsp;<span>10.4</span></a> specifies the real interest rate the central bank needs to set to minimise its loss function (see <a href="#sec-analytical" class="quarto-xref"><span>Section 10.6</span></a> below for a derivation). The parameter <span class="math inline">\(a_3\)</span> is a composite one given by <span class="math inline">\(a_3 = \frac{1}{a_1(\frac{1}{a_2 b} + a_2)} &gt;0\)</span>. Although the central bank only sets the nominal interest rate <span class="math inline">\(i = r + E[\pi_{t}]\)</span> directly, the fact that expected inflation is predetermined in every period allows it to indirectly control the real interest rate.</p>
 </section><section id="simulation" class="level2"><h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
 <section id="parameterisation" class="level3"><h3 class="anchored" data-anchor-id="parameterisation">Parameterisation</h3>
 <p>Table 1 reports the parameterisation used in the simulation. For all parameterisations, the system is initialised at the equilibrium <span class="math inline">\((y^*,\pi^*,r^*)=(y_e,\pi^T, r_s)\)</span>. Three scenarios will then be considered. In scenario 1, there is an increase in autonomous aggregate demand (<span class="math inline">\(A\)</span>). In scenario 2, the central bank sets a higher inflation target (<span class="math inline">\(\pi^T\)</span>). Scenario 3 considers a rise in equilibrium output (<span class="math inline">\(y_e\)</span>).</p>
 <p><strong>Table 1: Parameterisation</strong></p>
-<div class="line-block">Scenario | <span class="math inline">\(a_1\)</span> | <span class="math inline">\(a_2\)</span> | <span class="math inline">\(b\)</span> | <span class="math inline">\(A\)</span> | <span class="math inline">\(\pi^T\)</span> | <span class="math inline">\(y_e\)</span> |</div>
-<p>|—————————————|——-|——-|—–|—- |—- –|——-| | 1: rise in aggregate demand (<span class="math inline">\(A\)</span>) | 0.3 | 0.7 | 1 | 7 | 2 | 5 | | 2: higher inflation target (<span class="math inline">\(\pi^T\)</span>) | 0.3 | 0.7 | 1 | 6 | 3 | 5 | | 3: rise in equilibrium output (<span class="math inline">\(y_e\)</span>) | 0.3 | 0.7 | 1 | 6 | 2 | 5.5 |</p>
-</section><section id="simulation-code" class="level3"><h3 class="anchored" data-anchor-id="simulation-code">Simulation code</h3>
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 11%">
+<col style="width: 8%">
+</colgroup>
+<thead><tr class="header">
+<th>Scenario</th>
+<th><span class="math inline">\(a_1\)</span></th>
+<th><span class="math inline">\(a_2\)</span></th>
+<th><span class="math inline">\(b\)</span></th>
+<th><span class="math inline">\(A\)</span></th>
+<th><span class="math inline">\(\pi^T\)</span></th>
+<th><span class="math inline">\(y_e\)</span></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>1: rise in aggregate demand (<span class="math inline">\(A\)</span>)</td>
+<td>0.3</td>
+<td>0.7</td>
+<td>1</td>
+<td>7</td>
+<td>2</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>2: higher inflation target (<span class="math inline">\(\pi^T\)</span>)</td>
+<td>0.3</td>
+<td>0.7</td>
+<td>1</td>
+<td>6</td>
+<td>3</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>3: rise in equilibrium output (<span class="math inline">\(y_e\)</span>)</td>
+<td>0.3</td>
+<td>0.7</td>
+<td>1</td>
+<td>6</td>
+<td>2</td>
+<td>5.5</td>
+</tr>
+</tbody>
+</table></section><section id="simulation-code" class="level3"><h3 class="anchored" data-anchor-id="simulation-code">Simulation code</h3>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
@@ -641,7 +687,7 @@ Python code
 <p>An increase in the central bank’s inflation target (scenario 2) gradually raises the inflation rate to a new level. During the adjustment period, the interest rate falls, which temporarily allows for a higher level of output. However, there is no permanent expansionary effect.</p>
 <p>By contrast, an increase in potential or equilibrium output (scenario 3) allows for a permanently higher level of output and a lower real interest rate.</p>
 </section></section><section id="introducing-rational-inflation-expectations" class="level2"><h2 class="anchored" data-anchor-id="introducing-rational-inflation-expectations">Introducing rational inflation expectations</h2>
-<p>How do the predictions of the model change when assuming that private actors have rational instead of adaptive inflation expectations? The Phillips curve, <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a> of the model, assumes adaptive expectations: <span class="math inline">\(E[\pi_{t+1}]=\pi_{t-1}\)</span>. Following chapter 4 of <span class="citation" data-cites="Carlin2014">Carlin and Soskice (<a href="#ref-Carlin2014" role="doc-biblioref">2014</a>)</span>, a (simplified) way of introducing rational inflation expectations is to assume <span class="math inline">\(E[\pi_{t+1}]=\pi^T\)</span>, i.e.&nbsp;rational agents know the central bank’s inflation target and assume that future inflation will (on average) be equal to the inflation target. The central bank will only be able to credibly commit to this target if it can deliver <span class="math inline">\(y_t=y_e\)</span> in expectation. This, in turn, requires output to respond instantaneously to the interest, so that the IS curve becomes: <span class="math inline">\(y_t=A -a_1r_{t}\)</span>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>How do the predictions of the model change when assuming that private actors have rational instead of adaptive inflation expectations? The Phillips curve, <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>10.2</span></a> of the model, assumes adaptive expectations: <span class="math inline">\(E[\pi_{t}]=\pi_{t-1}\)</span>. Following chapter 4 of <span class="citation" data-cites="Carlin2014">Carlin and Soskice (<a href="#ref-Carlin2014" role="doc-biblioref">2014</a>)</span>, a (simplified) way of introducing rational inflation expectations is to assume <span class="math inline">\(E[\pi_{t}]=\pi^T\)</span>, i.e.&nbsp;rational agents know the central bank’s inflation target and assume that future inflation will (on average) be equal to the inflation target. The central bank will only be able to credibly commit to this target if it can deliver <span class="math inline">\(y_t=y_e\)</span> in expectation. This, in turn, requires output to respond instantaneously to the interest, so that the IS curve becomes: <span class="math inline">\(y_t=A -a_1r_{t}\)</span>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <p>We simulate the model for both adaptive and rational inflation expectations to see how the economy reacts to a one-off 5-percentage point inflationary shock occurring in <span class="math inline">\(t=5\)</span>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment</span></span>
