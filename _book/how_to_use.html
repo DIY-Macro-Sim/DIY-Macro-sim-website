@@ -572,7 +572,7 @@ Python code
 <span><span class="co">#Let's use it to solve a simple Keynesian cross model of the form</span></span>
 <span><span class="co">#Y=C+I</span></span>
 <span><span class="co">#C=c0+c1Y</span></span>
-<span><span class="co"># where Y is output, C is consumption, and I is investment</span></span>
+<span><span class="co"># where Y is output, C is consumption, and I is exogenous investment</span></span>
 <span></span>
 <span></span>
 <span><span class="co">#Define exogenous parameters</span></span>
@@ -630,7 +630,7 @@ Python code
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#Let's use it to solve a simple Keynesian cross model of the form</span></span>
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">#Y=C+I</span></span>
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#C=c0+c1Y</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># where Y is output, C is consumption, and I is investment</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># where Y is output, C is consumption, and I is exogenous investment</span></span>
 <span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">#Define exogenous parameters and initialise endogenous variables</span></span>
 <span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>c0 <span class="op">=</span> <span class="dv">2</span></span>
@@ -702,7 +702,7 @@ Python Solution
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Define exogenous parameters and initialise endogenous variables</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>c0 <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>c1 <span class="op">=</span> <span class="fl">0.8</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> <span class="dv">11</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> C <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Use a for loop that iterates the equations 100 times to solve them</span></span>
@@ -712,7 +712,7 @@ Python Solution
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>Y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>59.999999984403956</code></pre>
+<pre><code>64.9999999831308</code></pre>
 </div>
 </div>
 </div>
@@ -968,7 +968,9 @@ Python code
 </div>
 </div>
 <section id="exercise-3-vectors-and-matrices" class="level4"><h4 class="anchored" data-anchor-id="exercise-3-vectors-and-matrices">Exercise 3: vectors and matrices</h4>
-<p>Write a loop which calculates <span class="math inline">\(x_i=\frac{1}{i^2}\)</span>, where <span class="math inline">\(i=1,2,..,10\)</span>, and saves each element <span class="math inline">\(x_i\)</span> in a vector.</p>
+<ol type="a">
+<li>Write a loop which calculates <span class="math inline">\(x_i=\frac{1}{i^2}\)</span>, where <span class="math inline">\(i=1,2,..,10\)</span>, and saves each element <span class="math inline">\(x_i\)</span> in a vector.</li>
+</ol>
 <div class="callout callout-style-default callout-tip callout-titled" title="R solution">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1044,7 +1046,9 @@ Python solution
 </div>
 </div>
 </div>
-<p>Next, write a second loop which calculates <span class="math inline">\(x_i=\frac{1}{i^3}\)</span>, where <span class="math inline">\(i=1,2,..,10\)</span>, and saves each element <span class="math inline">\(x_i\)</span> in a vector. Combine both vectors in a matrix.</p>
+<ol start="2" type="a">
+<li>Write a second loop which calculates the cumulative sum <span class="math inline">\(X_k= \sum^{k}_{i=1}x_i\)</span>, where <span class="math inline">\(x_i=\frac{1}{i^2}\)</span> and <span class="math inline">\(k=1,.., 10\)</span>, and save each element <span class="math inline">\(X_i\)</span> in a vector. Combine both vectors in a matrix.</li>
+</ol>
 <div class="callout callout-style-default callout-tip callout-titled" title="R solution">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1060,31 +1064,35 @@ R solution
 <div class="cell">
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Define empty vectors of length 10 where we save results</span></span>
 <span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="va">y</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># then define loop </span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="va">i</span><span class="op">^</span><span class="fl">2</span> </span>
-<span>  <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="va">i</span><span class="op">^</span><span class="fl">3</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">X</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>            <span class="co">#  initialise cumulative sum</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">X</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">X</span><span class="op">[</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> </span>
+<span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># Combine vectors in a matrix</span></span>
-<span><span class="va">mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
+<span><span class="va">mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">X</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Print result</span></span>
 <span><span class="va">mat</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>               x           y
- [1,] 1.00000000 1.000000000
- [2,] 0.25000000 0.125000000
- [3,] 0.11111111 0.037037037
- [4,] 0.06250000 0.015625000
- [5,] 0.04000000 0.008000000
- [6,] 0.02777778 0.004629630
- [7,] 0.02040816 0.002915452
- [8,] 0.01562500 0.001953125
- [9,] 0.01234568 0.001371742
-[10,] 0.01000000 0.001000000</code></pre>
+<pre><code>               x        X
+ [1,] 1.00000000 1.000000
+ [2,] 0.25000000 1.250000
+ [3,] 0.11111111 1.361111
+ [4,] 0.06250000 1.423611
+ [5,] 0.04000000 1.463611
+ [6,] 0.02777778 1.491389
+ [7,] 0.02040816 1.511797
+ [8,] 0.01562500 1.527422
+ [9,] 0.01234568 1.539768
+[10,] 0.01000000 1.549768</code></pre>
 </div>
 </div>
 </div>
@@ -1105,28 +1113,32 @@ Python solution
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define an empty vector of length 10 where we save results</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.zeros(<span class="dv">10</span>)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.zeros(<span class="dv">10</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.zeros(<span class="dv">10</span>)</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Then define the loop</span></span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>):  </span>
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    x[i<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> (i<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    y[i<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> (i<span class="op">**</span><span class="dv">3</span>)</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine vectors in a matrix</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>mat <span class="op">=</span> np.column_stack((x, y))</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>        X[i<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> x[i<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>        X[i<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> X[i<span class="op">-</span><span class="dv">2</span>] <span class="op">+</span> x[i<span class="op">-</span><span class="dv">1</span>]</span>
 <span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine vectors in a matrix</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>mat <span class="op">=</span> np.column_stack((x, X))</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>array([[1.        , 1.        ],
-       [0.25      , 0.125     ],
-       [0.11111111, 0.03703704],
-       [0.0625    , 0.015625  ],
-       [0.04      , 0.008     ],
-       [0.02777778, 0.00462963],
-       [0.02040816, 0.00291545],
-       [0.015625  , 0.00195312],
-       [0.01234568, 0.00137174],
-       [0.01      , 0.001     ]])</code></pre>
+       [0.25      , 1.25      ],
+       [0.11111111, 1.36111111],
+       [0.0625    , 1.42361111],
+       [0.04      , 1.46361111],
+       [0.02777778, 1.49138889],
+       [0.02040816, 1.51179705],
+       [0.015625  , 1.52742205],
+       [0.01234568, 1.53976773],
+       [0.01      , 1.54976773]])</code></pre>
 </div>
 </div>
 </div>

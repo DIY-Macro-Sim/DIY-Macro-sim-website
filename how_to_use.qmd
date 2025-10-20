@@ -222,7 +222,7 @@ for (i in 1:5){
 #Let's use it to solve a simple Keynesian cross model of the form
 #Y=C+I
 #C=c0+c1Y
-# where Y is output, C is consumption, and I is investment
+# where Y is output, C is consumption, and I is exogenous investment
 
 
 #Define exogenous parameters
@@ -276,7 +276,7 @@ for i in range(1, 6):
 #Let's use it to solve a simple Keynesian cross model of the form
 #Y=C+I
 #C=c0+c1Y
-# where Y is output, C is consumption, and I is investment
+# where Y is output, C is consumption, and I is exogenous investment
 
 #Define exogenous parameters and initialise endogenous variables
 c0 = 2
@@ -331,7 +331,7 @@ Y
 #Define exogenous parameters and initialise endogenous variables
 c0 = 2
 c1 = 0.8
-I = 10
+I = 11
 Y = C = 1
 
 #Use a for loop that iterates the equations 100 times to solve them
@@ -557,7 +557,7 @@ print(mat4)
 
 
 #### Exercise 3: vectors and matrices
-Write a loop which calculates $x_i=\frac{1}{i^2}$, where $i=1,2,..,10$, and saves each element $x_i$ in a vector.
+a) Write a loop which calculates $x_i=\frac{1}{i^2}$, where $i=1,2,..,10$, and saves each element $x_i$ in a vector.
 
 ::: {.callout-tip collapse="true" title="R solution"}
 
@@ -610,7 +610,7 @@ print(x)
 :::
 
 
-Next, write a second loop which calculates $x_i=\frac{1}{i^3}$, where $i=1,2,..,10$, and saves each element $x_i$ in a vector. Combine both vectors in a matrix.
+b) Write a second loop which calculates the cumulative sum $X_k= \sum^{k}_{i=1}x_i$, where $x_i=\frac{1}{i^2}$ and $k=1,.., 10$, and save each element $X_i$ in a vector. Combine both vectors in a matrix.
 
 
 ::: {.callout-tip collapse="true" title="R solution"}
@@ -621,16 +621,20 @@ Next, write a second loop which calculates $x_i=\frac{1}{i^3}$, where $i=1,2,..,
 
 #Define empty vectors of length 10 where we save results
 x = vector(length = 10)
-y = vector(length = 10)
+X = vector(length = 10)
 
 # then define loop 
 for (i in 1:10){
   x[i] = 1/i^2 
-  y[i]= 1/i^3
+  if (i == 1) {
+    X[i] <- x[i]            #  initialise cumulative sum
+  } else {
+    X[i] <- X[i - 1] + x[i] 
+  }
 }
 
 # Combine vectors in a matrix
-mat=cbind(x,y)
+mat=cbind(x,X)
 
 # Print result
 mat
@@ -646,15 +650,19 @@ mat
 
 # Define an empty vector of length 10 where we save results
 x = np.zeros(10)
-y = np.zeros(10)
+X = np.zeros(10)
 
 # Then define the loop
 for i in range(1, 11):  
     x[i-1] = 1 / (i**2)
-    y[i-1] = 1 / (i**3)
+    if i == 1:
+        X[i-1] = x[i-1]
+    else:
+        X[i-1] = X[i-2] + x[i-1]
+
 
 # Combine vectors in a matrix
-mat = np.column_stack((x, y))
+mat = np.column_stack((x, X))
 
 mat
 
