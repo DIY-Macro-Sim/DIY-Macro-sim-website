@@ -1,4 +1,4 @@
-# A Sraffian Supermultiplier Model
+# A Sraffian Supermultiplier Model {#sec-Sraffian}
 
 ## Overview
 

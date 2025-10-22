@@ -1,5 +1,5 @@
 # An Introduction to the Analysis of Dynamic Models {#sec-stab_analysis}
-To build and analyse dynamic models, we need to understand the dynamics of *state variables*, which are a function of their own previous values: $y_t=h(y_{t-1})$. The state variables govern the dynamics of the entire model (including the non-state variables). Typically, as model has multiple state variables that interact with each other over time. As briefly shown in @sec-how-to-simulate, we can simulate dynamic models numerically for a specific parameterisation. However, to study their dynamics in general, we need to mathematically analyse a *system of difference (or differential) equations*. This chapter provides a basic introduction to the mathematical tools to do this. It will help you understand the analytical discussions in the chapters on dynamic models but can be skipped if you are mostly interested in numerical simulation.
+To build and analyse dynamic models, we need to understand the dynamics of *state variables*, which are a function of their own previous values: $y_t=h(y_{t-1})$. The state variables govern the dynamics of the entire model (including the non-state variables). Typically, as model has multiple state variables that interact with each other over time. As shown in @sec-how-to-simulate, we can simulate dynamic models numerically for a specific parameterisation. However, to study their dynamics in general, we need to mathematically analyse a *system of difference (or differential) equations*. This chapter provides a basic introduction to the mathematical tools to do this. It will help you understand the analytical discussions in the chapters on dynamic models but can be skipped if you are mostly interested in numerical simulation.
 
 ## Solution of a single first-order linear difference equation
 
@@ -46,7 +46,7 @@ For the case of a first-order difference equation, we can distinguish the follow
 
 -   if $a_1=1$ and $a_0 \neq0$, then $y_t$ will grow linearly
 
--   if $a_1=1$ and $a_0 =0$, then $y_t$ will not grow or fall forever, but it will also not approach a unique equilibrium
+-   if $a_1=1$ and $a_0 =0$, then $y_t$ will not grow or fall forever, but it will also not approach a unique equilibrium (so-called Lyapunov stability)
 
 To better understand the last two cases, note that if $a_1=1$, a different (more general) approach to finding the particular solution is required: the so-called *method of undetermined coefficients*. This method consists of substituting a trial solution that contains undetermined coefficients into the difference equation and then attempting to solve for those coefficients. If the trial solution allows to pin down unique values for the coefficients, it constitute a valid particular solution.
 
@@ -194,7 +194,7 @@ Before comparing these analytical results with those from a numerical simulation
 
 -   since both variables will grow or decay at the same rate, their ratio will be constant as $t \rightarrow \infty$ and will approach a value that is given by the ratio of the elements in the dominant eigenvector
 
-To see the last point, observe that in $\frac{y_{2t}}{y_{1t}}=\frac{\frac{1}{3}c_{1}2^t + 0.4c_{2}1^t}{c_{1}2^t + c_{2}1^t}$ the first terms in the numerator and denominator, respectively, quickly dominate the second terms as $t \rightarrow \infty$ (you can show this formally using [L'Hopital's rule](https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule)). Thus, $\frac{y_{2t}}{y_{1t}}$ will approach $\frac{1}{3}$ as $t \rightarrow \infty$.
+To see the last point, observe that in $\frac{y_{2t}}{y_{1t}}=\frac{\frac{1}{3}c_{1}2^t + 0.4c_{2}1^t}{c_{1}2^t + c_{2}1^t}$ the first terms in the numerator and denominator, respectively, quickly dominate the second terms as $t \rightarrow \infty$ (you can show this formally using [L'Hopital's rule](https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule)). Thus, $\frac{y_{2t}}{y_{1t}}$ will approach $\frac{1}{3}$ as $t \rightarrow \infty$. From an economic point of view, the systems thus displays a form of *balanced growth*, where both variables grow exponentially at the same rate.
 
 Let us simulate the system and compare the results for, say, $t=10$ with the analytical solution:
 
@@ -636,7 +636,7 @@ plt.show()
 
 :::
 
-You can see that the model generates cycles with a length (from peak/trough to peak/trough) of around 7.5 periods. Since the modulus is $R<1$, the system is stable and eventually converges to the equilibrium.
+You can see that the model generates cycles with a length (from peak/trough to peak/trough) of around 7.5 periods. Since the modulus is $R<1$, the system is stable and eventually converges to the equilibrium. This type of cyclical dynamics is called *damped oscillations*.
 
 A general condition for stability of 2D systems with complex eigenvalues can be derived by making use of the fact that $R=\sqrt{h^2+m^2}= \sqrt{ \left( \frac{b}{2} \right) ^2 + \left(\frac{\sqrt{4c-b^2}}{2}i \right)^2} = \sqrt{c}$, where $b=tr(J)$ and $c=det(J)$. 
 
@@ -744,15 +744,17 @@ In practice, this means that to analyse the local stability of a nonlinear syste
 
 An example for the stability analysis of a simple two-dimensional nonlinear system can be found in @sec-ricardo_1_analytical.
 
+From an modelling point of view, nonlinear dynamic systems are of considerable interest because they allow for richer dynamics. For example, under certain conditions, a nonlinear system with complex eigenvalues can generate a *limit cycle*, which is an endogenous cycle that continues indefinitely without external shocks. A second example are *chaotic* dynamics, which are seemingly random despite being generate by a deterministic system. Chaotic models also often displayed sensitivity to initial conditions, i.e. a form of path dependence.
+
 ## Key takeaways
 -   dynamic models are systems of difference (or differential) equations
 -   the stability of a system depends on (a combination of) its coefficients
 -   more generally, the system's dynamic properties (including stability) are encapsulated in the an matrix
--   the (dominant) eigenvalues of the Jacobian matrix indicate whether a system is
-    -   stable ($\lambda < 1$) or unstable ($\lambda > 1$)
+-   the dominant eigenvalue $\lambda$ (or modulus in the case of complex eigenvalues) of the Jacobian matrix indicates whether a system is
+    -   stable ($|\lambda| < 1$) or unstable ($|\lambda| > 1$)
     -   acyclical ($\lambda \in \mathbb{R}$) or cyclical ($\lambda \in \mathbb{C}$)
--   the (dominant) eigenvectors mediate the impact of the eigenvalues in the dynamics
--   nonlinear systems are analysed locally around one of its equilibria
+-   the (dominant) eigenvectors mediate the impact of the eigenvalues on the dynamics
+-   nonlinear systems are analysed locally around one of their equilibria
 
 
 ## A simplified recipe for analysing dynamic systems
@@ -765,6 +767,42 @@ An example for the stability analysis of a simple two-dimensional nonlinear syst
 7. Check the stability of the system by relying on well-known stability conditions, e.g. those in @Gandolfo2009
 8. Check if other interesting properties can be derived (e.g. complex eigenvalues)
 9. Confirm your analytical results through numerical simulations, e.g. compute the eigenvalues, check the stability conditions, etc.
+
+
+
+## A typology of dynamic systems
+
+```{r}
+#| echo: false
+
+library(magick)
+
+# read the PDF (page 1) and convert to PNG
+img=image_read_pdf("tree_diagram_dynamic_systems_website.pdf", density = 300) 
+image_write(img, path = "tree_diagram_dynamic_systems_website.png", format = "png")
+```
+The following typology classifies dynamic systems based on their eigenvalues, which give rise to different dynamic properties, as explained in this section.
+
+![A typology of dynamic systems](tree_diagram_dynamic_systems_website.png){ width=100% }
+
+In this section, we analysed the linear @Samuelson1939 model and showed that it can give rise to either monotonic convergence (if its eigenvalues are real) or damped oscillations (if they are complex). Exponential growth and explosive oscillations are also possible, if the model becomes unstable. 
+
+Based on this typology, we can classify the dynamic models on this website as follows:
+
+|   | Model | Dynamic Behaviour |
+|---|-------|-----------------|
+|@sec-NK  | A New Keynesian 3-Equation Model | Monotonic convergence |
+|@sec-inflation| A Conflict Inflation Model | Balanced exponential growth |
+|@sec-Sraffian| A Sraffian Supermultiplier Model | Damped oscillations |
+|@sec-malthus| A Malthusian Model | Monotonic convergence |
+|@sec-ricardo_1| A Ricardian One-Sector Model | Monotonic convergence |
+|@sec-ricardo_2| A Ricardian Two-Sector Model | Monotonic convergence |
+|@sec-lewis| A Lewis Model of Economic Development | Balanced exponential growth |
+|@sec-hicks| A Hicksian Business Cycle Model | (Quasi-) Limit cycle |
+|@sec-kaldor| A Kaldorian Endogenous Business Cycle Model | Limit cycle |
+|@sec-evolutionary   | An Evolutionary Game Theoretic Model | Monotonic convergence or Lyapunov stability |
+|@sec-sfc   | A Stock-Flow Consistent Model | Damped oscillations |
+
 
 
 ## References

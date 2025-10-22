@@ -347,6 +347,7 @@ window.Quarto = {
   <li><a href="#nonlinear-systems" id="toc-nonlinear-systems" class="nav-link" data-scroll-target="#nonlinear-systems">Nonlinear systems</a></li>
   <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key takeaways</a></li>
   <li><a href="#a-simplified-recipe-for-analysing-dynamic-systems" id="toc-a-simplified-recipe-for-analysing-dynamic-systems" class="nav-link" data-scroll-target="#a-simplified-recipe-for-analysing-dynamic-systems">A simplified recipe for analysing dynamic systems</a></li>
+  <li><a href="#a-typology-of-dynamic-systems" id="toc-a-typology-of-dynamic-systems" class="nav-link" data-scroll-target="#a-typology-of-dynamic-systems">A typology of dynamic systems</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -366,7 +367,7 @@ window.Quarto = {
   
 
 
-</header><p>To build and analyse dynamic models, we need to understand the dynamics of <em>state variables</em>, which are a function of their own previous values: <span class="math inline">\(y_t=h(y_{t-1})\)</span>. The state variables govern the dynamics of the entire model (including the non-state variables). Typically, as model has multiple state variables that interact with each other over time. As briefly shown in <a href="how_to_simulate.html" class="quarto-xref"><span>Chapter 2</span></a>, we can simulate dynamic models numerically for a specific parameterisation. However, to study their dynamics in general, we need to mathematically analyse a <em>system of difference (or differential) equations</em>. This chapter provides a basic introduction to the mathematical tools to do this. It will help you understand the analytical discussions in the chapters on dynamic models but can be skipped if you are mostly interested in numerical simulation.</p>
+</header><p>To build and analyse dynamic models, we need to understand the dynamics of <em>state variables</em>, which are a function of their own previous values: <span class="math inline">\(y_t=h(y_{t-1})\)</span>. The state variables govern the dynamics of the entire model (including the non-state variables). Typically, as model has multiple state variables that interact with each other over time. As shown in <a href="how_to_simulate.html" class="quarto-xref"><span>Chapter 2</span></a>, we can simulate dynamic models numerically for a specific parameterisation. However, to study their dynamics in general, we need to mathematically analyse a <em>system of difference (or differential) equations</em>. This chapter provides a basic introduction to the mathematical tools to do this. It will help you understand the analytical discussions in the chapters on dynamic models but can be skipped if you are mostly interested in numerical simulation.</p>
 <section id="solution-of-a-single-first-order-linear-difference-equation" class="level2"><h2 class="anchored" data-anchor-id="solution-of-a-single-first-order-linear-difference-equation">Solution of a single first-order linear difference equation</h2>
 <p>Consider a first-order linear difference equation:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p><span class="math display">\[
@@ -395,7 +396,7 @@ y_t = \underbrace{\frac{a_0}{1-a_1}}_{equilibrium \: y^*} + \underbrace{a_1^t\le
 <li><p>if <span class="math inline">\(|a_1|&lt;1\)</span>, then the complementary function will converge to zero and <span class="math inline">\(y_t\)</span> will approach the particular solution <span class="math inline">\(y^*\)</span></p></li>
 <li><p>if <span class="math inline">\(|a_1|&gt;1\)</span>, then the complementary function will grow exponentially or decay, and <span class="math inline">\(y_t\)</span> will thus never converge to the particular solution <span class="math inline">\(y^*\)</span></p></li>
 <li><p>if <span class="math inline">\(a_1=1\)</span> and <span class="math inline">\(a_0 \neq0\)</span>, then <span class="math inline">\(y_t\)</span> will grow linearly</p></li>
-<li><p>if <span class="math inline">\(a_1=1\)</span> and <span class="math inline">\(a_0 =0\)</span>, then <span class="math inline">\(y_t\)</span> will not grow or fall forever, but it will also not approach a unique equilibrium</p></li>
+<li><p>if <span class="math inline">\(a_1=1\)</span> and <span class="math inline">\(a_0 =0\)</span>, then <span class="math inline">\(y_t\)</span> will not grow or fall forever, but it will also not approach a unique equilibrium (so-called Lyapunov stability)</p></li>
 </ul>
 <p>To better understand the last two cases, note that if <span class="math inline">\(a_1=1\)</span>, a different (more general) approach to finding the particular solution is required: the so-called <em>method of undetermined coefficients</em>. This method consists of substituting a trial solution that contains undetermined coefficients into the difference equation and then attempting to solve for those coefficients. If the trial solution allows to pin down unique values for the coefficients, it constitute a valid particular solution.</p>
 <p>In the case above where <span class="math inline">\(a_1 \neq 1\)</span>, we could have used the trial solution <span class="math inline">\(y_t=y_{t-1}=y^*\)</span> and then solve for <span class="math inline">\(y\)</span> to obtain <span class="math inline">\(\frac{a_0}{1-a}\)</span> as the particular solution. In the case where <span class="math inline">\(a_1=1\)</span> and <span class="math inline">\(a_0 \neq 0\)</span>, we can use the trial solution <span class="math inline">\(y^*=kt\)</span>, which is a growing equilibrium. This yields <span class="math inline">\(y_t = k(t-1) + a_0\)</span>, which solves for <span class="math inline">\(k=a_0\)</span>, so that we can conclude <span class="math inline">\(y^*=a_0t\)</span>. This explains why we obtain linear growth. If <span class="math inline">\(a_1=1\)</span> and <span class="math inline">\(a_0 =0\)</span>, we have <span class="math inline">\(y_t=y_{t-1}\)</span>, so that the equilibrium is given by the initial condition <span class="math inline">\(y_0\)</span>.</p>
@@ -515,7 +516,7 @@ y_{2t} = \frac{1}{3}c_{1}2^t + 0.4c_{2}1^t.
 <li><p>since both elements in the dominant eigenvector <span class="math inline">\(v_1=\begin{bmatrix} 1 \\ \frac{1}{3} \end{bmatrix}\)</span> are non-zero, both variables in the system will be driven by that dominant eigenvalue</p></li>
 <li><p>since both variables will grow or decay at the same rate, their ratio will be constant as <span class="math inline">\(t \rightarrow \infty\)</span> and will approach a value that is given by the ratio of the elements in the dominant eigenvector</p></li>
 </ul>
-<p>To see the last point, observe that in <span class="math inline">\(\frac{y_{2t}}{y_{1t}}=\frac{\frac{1}{3}c_{1}2^t + 0.4c_{2}1^t}{c_{1}2^t + c_{2}1^t}\)</span> the first terms in the numerator and denominator, respectively, quickly dominate the second terms as <span class="math inline">\(t \rightarrow \infty\)</span> (you can show this formally using <a href="https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule">L’Hopital’s rule</a>). Thus, <span class="math inline">\(\frac{y_{2t}}{y_{1t}}\)</span> will approach <span class="math inline">\(\frac{1}{3}\)</span> as <span class="math inline">\(t \rightarrow \infty\)</span>.</p>
+<p>To see the last point, observe that in <span class="math inline">\(\frac{y_{2t}}{y_{1t}}=\frac{\frac{1}{3}c_{1}2^t + 0.4c_{2}1^t}{c_{1}2^t + c_{2}1^t}\)</span> the first terms in the numerator and denominator, respectively, quickly dominate the second terms as <span class="math inline">\(t \rightarrow \infty\)</span> (you can show this formally using <a href="https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule">L’Hopital’s rule</a>). Thus, <span class="math inline">\(\frac{y_{2t}}{y_{1t}}\)</span> will approach <span class="math inline">\(\frac{1}{3}\)</span> as <span class="math inline">\(t \rightarrow \infty\)</span>. From an economic point of view, the systems thus displays a form of <em>balanced growth</em>, where both variables grow exponentially at the same rate.</p>
 <p>Let us simulate the system and compare the results for, say, <span class="math inline">\(t=10\)</span> with the analytical solution:</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set number of periods for which you want to simulate</span></span>
@@ -986,7 +987,7 @@ Python code
 </div>
 </div>
 </div>
-<p>You can see that the model generates cycles with a length (from peak/trough to peak/trough) of around 7.5 periods. Since the modulus is <span class="math inline">\(R&lt;1\)</span>, the system is stable and eventually converges to the equilibrium.</p>
+<p>You can see that the model generates cycles with a length (from peak/trough to peak/trough) of around 7.5 periods. Since the modulus is <span class="math inline">\(R&lt;1\)</span>, the system is stable and eventually converges to the equilibrium. This type of cyclical dynamics is called <em>damped oscillations</em>.</p>
 <p>A general condition for stability of 2D systems with complex eigenvalues can be derived by making use of the fact that <span class="math inline">\(R=\sqrt{h^2+m^2}= \sqrt{ \left( \frac{b}{2} \right) ^2 + \left(\frac{\sqrt{4c-b^2}}{2}i \right)^2} = \sqrt{c}\)</span>, where <span class="math inline">\(b=tr(J)\)</span> and <span class="math inline">\(c=det(J)\)</span>.</p>
 <p>Applied to the modulus of the Samuelson model, this yields <span class="math inline">\(R=\sqrt{det(J)}=\sqrt{\beta c_1}\)</span>. Thus, the stability condition is:</p>
 <p><span class="math display">\[\beta c_1&lt;1.\]</span></p>
@@ -1084,19 +1085,20 @@ y_{t}=Ay_{t-1}+B,
 <li>substitute <span class="math inline">\(y^*\)</span> into the Jacobian and analyse the resulting matrix.</li>
 </ul>
 <p>An example for the stability analysis of a simple two-dimensional nonlinear system can be found in <a href="a_ricardian_one_sector_model.html#sec-ricardo_1_analytical" class="quarto-xref"><span>Section 14.5</span></a>.</p>
+<p>From an modelling point of view, nonlinear dynamic systems are of considerable interest because they allow for richer dynamics. For example, under certain conditions, a nonlinear system with complex eigenvalues can generate a <em>limit cycle</em>, which is an endogenous cycle that continues indefinitely without external shocks. A second example are <em>chaotic</em> dynamics, which are seemingly random despite being generate by a deterministic system. Chaotic models also often displayed sensitivity to initial conditions, i.e.&nbsp;a form of path dependence.</p>
 </section><section id="key-takeaways" class="level2"><h2 class="anchored" data-anchor-id="key-takeaways">Key takeaways</h2>
 <ul>
 <li>dynamic models are systems of difference (or differential) equations</li>
 <li>the stability of a system depends on (a combination of) its coefficients</li>
 <li>more generally, the system’s dynamic properties (including stability) are encapsulated in the an matrix</li>
-<li>the (dominant) eigenvalues of the Jacobian matrix indicate whether a system is
+<li>the dominant eigenvalue <span class="math inline">\(\lambda\)</span> (or modulus in the case of complex eigenvalues) of the Jacobian matrix indicates whether a system is
 <ul>
-<li>stable (<span class="math inline">\(\lambda &lt; 1\)</span>) or unstable (<span class="math inline">\(\lambda &gt; 1\)</span>)</li>
+<li>stable (<span class="math inline">\(|\lambda| &lt; 1\)</span>) or unstable (<span class="math inline">\(|\lambda| &gt; 1\)</span>)</li>
 <li>acyclical (<span class="math inline">\(\lambda \in \mathbb{R}\)</span>) or cyclical (<span class="math inline">\(\lambda \in \mathbb{C}\)</span>)</li>
 </ul>
 </li>
-<li>the (dominant) eigenvectors mediate the impact of the eigenvalues in the dynamics</li>
-<li>nonlinear systems are analysed locally around one of its equilibria</li>
+<li>the (dominant) eigenvectors mediate the impact of the eigenvalues on the dynamics</li>
+<li>nonlinear systems are analysed locally around one of their equilibria</li>
 </ul></section><section id="a-simplified-recipe-for-analysing-dynamic-systems" class="level2"><h2 class="anchored" data-anchor-id="a-simplified-recipe-for-analysing-dynamic-systems">A simplified recipe for analysing dynamic systems</h2>
 <ol type="1">
 <li>Identify the state variables of your model, i.e.&nbsp;<span class="math inline">\(y_t = f(y_{t-1})\)</span>
@@ -1111,7 +1113,83 @@ y_{t}=Ay_{t-1}+B,
 </li>
 <li>Check if other interesting properties can be derived (e.g.&nbsp;complex eigenvalues)</li>
 <li>Confirm your analytical results through numerical simulations, e.g.&nbsp;compute the eigenvalues, check the stability conditions, etc.</li>
-</ol></section><section id="references" class="level2"><h2 class="anchored" data-anchor-id="references">References</h2>
+</ol></section><section id="a-typology-of-dynamic-systems" class="level2"><h2 class="anchored" data-anchor-id="a-typology-of-dynamic-systems">A typology of dynamic systems</h2>
+<p>The following typology classifies dynamic systems based on their eigenvalues, which give rise to different dynamic properties, as explained in this section.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="tree_diagram_dynamic_systems_website.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>A typology of dynamic systems</figcaption></figure>
+</div>
+<p>In this section, we analysed the linear <span class="citation" data-cites="Samuelson1939">Samuelson (<a href="#ref-Samuelson1939" role="doc-biblioref">1939</a>)</span> model and showed that it can give rise to either monotonic convergence (if its eigenvalues are real) or damped oscillations (if they are complex). Exponential growth and explosive oscillations are also possible, if the model becomes unstable.</p>
+<p>Based on this typology, we can classify the dynamic models on this website as follows:</p>
+<table class="table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 25%">
+<col style="width: 62%">
+</colgroup>
+<thead><tr class="header">
+<th></th>
+<th>Model</th>
+<th>Dynamic Behaviour</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><a href="a_new_keynesian_3_equation_model.html" class="quarto-xref"><span>Chapter 10</span></a></td>
+<td>A New Keynesian 3-Equation Model</td>
+<td>Monotonic convergence</td>
+</tr>
+<tr class="even">
+<td><a href="a_conflict_inflation_model.html" class="quarto-xref"><span>Chapter 11</span></a></td>
+<td>A Conflict Inflation Model</td>
+<td>Balanced exponential growth</td>
+</tr>
+<tr class="odd">
+<td><a href="a_sraffian_supermultiplier_model.html" class="quarto-xref"><span>Chapter 12</span></a></td>
+<td>A Sraffian Supermultiplier Model</td>
+<td>Damped oscillations</td>
+</tr>
+<tr class="even">
+<td><a href="a_malthusian_model.html" class="quarto-xref"><span>Chapter 13</span></a></td>
+<td>A Malthusian Model</td>
+<td>Monotonic convergence</td>
+</tr>
+<tr class="odd">
+<td><a href="a_ricardian_one_sector_model.html" class="quarto-xref"><span>Chapter 14</span></a></td>
+<td>A Ricardian One-Sector Model</td>
+<td>Monotonic convergence</td>
+</tr>
+<tr class="even">
+<td><a href="a_ricardian_two_sector_model.html" class="quarto-xref"><span>Chapter 15</span></a></td>
+<td>A Ricardian Two-Sector Model</td>
+<td>Monotonic convergence</td>
+</tr>
+<tr class="odd">
+<td><a href="a_Lewis_model.html" class="quarto-xref"><span>Chapter 16</span></a></td>
+<td>A Lewis Model of Economic Development</td>
+<td>Balanced exponential growth</td>
+</tr>
+<tr class="even">
+<td><a href="a_Hicks_model.html" class="quarto-xref"><span>Chapter 17</span></a></td>
+<td>A Hicksian Business Cycle Model</td>
+<td>(Quasi-) Limit cycle</td>
+</tr>
+<tr class="odd">
+<td><a href="a_Kaldor_model.html" class="quarto-xref"><span>Chapter 18</span></a></td>
+<td>A Kaldorian Endogenous Business Cycle Model</td>
+<td>Limit cycle</td>
+</tr>
+<tr class="even">
+<td><a href="an_evolutionary_game_theoretic_model.html" class="quarto-xref"><span>Chapter 19</span></a></td>
+<td>An Evolutionary Game Theoretic Model</td>
+<td>Monotonic convergence or Lyapunov stability</td>
+</tr>
+<tr class="odd">
+<td><a href="an_sfc_model.html" class="quarto-xref"><span>Chapter 20</span></a></td>
+<td>A Stock-Flow Consistent Model</td>
+<td>Damped oscillations</td>
+</tr>
+</tbody>
+</table></section><section id="references" class="level2"><h2 class="anchored" data-anchor-id="references">References</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">

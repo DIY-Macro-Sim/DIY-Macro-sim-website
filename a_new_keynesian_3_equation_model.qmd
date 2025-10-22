@@ -1,4 +1,4 @@
-# A New Keynesian 3-Equation Model
+# A New Keynesian 3-Equation Model {#sec-NK}
 
 ## Overview
 

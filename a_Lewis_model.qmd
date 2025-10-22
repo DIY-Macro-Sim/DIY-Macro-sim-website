@@ -600,6 +600,7 @@ J=matrix(c(1 + delta*beta*(beta-1)*(L2[1,tp[1]-1]^(beta-2))*(K[1,tp[1]-1]^(1-bet
 # Obtain eigenvalues
 ev=eigen(J)
 (values = ev$values)
+(vecs=ev$vectors)
 
 # Obtain determinant and trace
 (det=det(J))      # determinant

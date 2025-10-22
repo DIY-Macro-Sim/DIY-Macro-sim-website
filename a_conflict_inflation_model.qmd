@@ -1,4 +1,4 @@
-# A Conflict Inflation Model
+# A Conflict Inflation Model {#sec-inflation}
 
 ## Overview
 

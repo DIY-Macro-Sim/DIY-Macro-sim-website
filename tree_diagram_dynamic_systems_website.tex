@@ -1,0 +1,31 @@
+\documentclass[tikz,border=2mm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{trees, arrows}
+
+\begin{document}
+	
+\begin{tikzpicture}[sibling distance=11.5cm, node distance=4cm,
+every node/.style = {shape=rectangle, align=center, color=black!80},
+edge from parent/.style={draw,-latex}]
+%
+\node [] {{\Large Dynamic Systems}}
+	child { node[] (real) {Real eigenvalues}
+	 child { node[] (stable_real) {stable}
+	  child { node[align=left] {\textbf{Monotonic} \\ \textbf{convergence}}} }
+	child { node[, below of=real] (unstable_real) {unstable}
+		child { node[, align=left, below of=unstable_real] (dominantnonzero) {Dominant \\ eigenvector \\ nonzero}
+			child { node[, align=left, below of=dominantnonzero] {\textbf{Balanced} \\ \textbf{exponential growth}}} } } 
+ }
+	child { node[] (complex) {Complex eigenvalues}
+		child { node[] {stable}
+			child { node[, align=left] (damped) {\textbf{Damped} \\ \textbf{oscillations}}} }
+		child { node[, below of=complex] (unstable) {unstable}
+			child { node[, below of=damped] (linear) {linear}
+				child { node (explosive) {\textbf{Explosive oscillations}} } }
+			child { node[, below of=unstable] (nonlinear1) {nonlinear}
+				[sibling distance=5cm]
+				child { node (limitcycle) {\textbf{Limit cycle}} } } } }
+;
+\end{tikzpicture}
+	
+\end{document}
