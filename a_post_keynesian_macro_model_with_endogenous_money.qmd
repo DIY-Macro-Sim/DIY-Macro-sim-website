@@ -11,7 +11,7 @@ In this short-run model, prices are flexible but the capital stock is fixed. The
 ## The Model
 
 $$
-Y=ND+cD
+Y=ND+cD, \quad c \in (0,1]
 $$ {#eq-Y-PK}
 
 $$
