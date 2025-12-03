@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.550">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>DIY Macroeconomic Model Simulation - 21&nbsp; The Solow Growth Model</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./additional_resources.html" rel="next">
+<link href="./an_sfc_model.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_stability_analysis.html">Dynamic Models</a></li><li class="breadcrumb-item"><a href="./a_Solow_model.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">The Solow Growth Model</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">DIY Macroeconomic Model Simulation</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./how_to_use.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./how_to_simulate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to Simulate Economic Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Static Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_neoclassical_macro_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Neoclassical Macro Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./an_IS_LM_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An IS-LM Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_neoclassical_synthesis_model_IS_LM_AS_AD.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Neoclassical Synthesis Model (IS-LM-AS-AD)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_post_keynesian_macro_model_with_endogenous_money.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">A Post-Keynesian Macro Model with Endogenous Money</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_Kaldor-Robinson_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">A Kaldor-Robinson Distribution and Growth Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_post_kaleckian_distribution_and_growth_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Post-Kaleckian Distribution and Growth Model</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Dynamic Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_stability_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">An Introduction to the Analysis of Dynamic Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_new_keynesian_3_equation_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">A New Keynesian 3-Equation Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_conflict_inflation_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">A Conflict Inflation Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_sraffian_supermultiplier_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">A Sraffian Supermultiplier Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_malthusian_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">A Malthusian Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_ricardian_one_sector_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">A Ricardian One-Sector Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_ricardian_two_sector_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">A Ricardian Two-Sector Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_Lewis_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">A Lewis Model of Economic Development</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_Hicks_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">A Hicksian Business Cycle Model with Floors and Ceilings</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_Kaldor_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">A Kaldorian Endogenous Business Cycle Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./an_evolutionary_game_theoretic_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">An Evolutionary Game Theoretic Model of the Emergence of Property Rights</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./an_sfc_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">A Stock-Flow Consistent Model of the Monetary Circuit</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a_Solow_model.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">The Solow Growth Model</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./additional_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Additional Online Resources</span></span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#the-model" id="toc-the-model" class="nav-link" data-scroll-target="#the-model">The Model</a></li>
+  <li>
+<a href="#simulation" id="toc-simulation" class="nav-link" data-scroll-target="#simulation">Simulation</a>
+  <ul>
+<li><a href="#parameterisation" id="toc-parameterisation" class="nav-link" data-scroll-target="#parameterisation">Parameterisation</a></li>
+  <li><a href="#simulation-code" id="toc-simulation-code" class="nav-link" data-scroll-target="#simulation-code">Simulation code</a></li>
+  <li><a href="#plots" id="toc-plots" class="nav-link" data-scroll-target="#plots">Plots</a></li>
+  </ul>
+</li>
+  <li><a href="#directed-graph" id="toc-directed-graph" class="nav-link" data-scroll-target="#directed-graph">Directed graph</a></li>
+  <li><a href="#adding-exogenous-technical-progress" id="toc-adding-exogenous-technical-progress" class="nav-link" data-scroll-target="#adding-exogenous-technical-progress">Adding exogenous technical progress</a></li>
+  <li><a href="#analytical-discussion" id="toc-analytical-discussion" class="nav-link" data-scroll-target="#analytical-discussion">Analytical discussion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_stability_analysis.html">Dynamic Models</a></li><li class="breadcrumb-item"><a href="./a_Solow_model.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">The Solow Growth Model</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-solow" class="quarto-section-identifier"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">The Solow Growth Model</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This section presents a version of the famous neoclassical growth model developed by <span class="citation" data-cites="Solow1956">Solow (<a href="#ref-Solow1956" role="doc-biblioref">1956</a>)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The model is based on a neoclassical aggregate production function with capital and labour as inputs that are substitutable. The production function exhibits constant returns to scale (a doubling of both inputs leads to a doubling of output), but diminishing marginal returns to its individual inputs. Unlike the Keynesian growth models analysed in <a href="a_Kaldor-Robinson_model.html" class="quarto-xref"><span>Chapter 7</span></a> and <a href="a_post_kaleckian_distribution_and_growth_model.html" class="quarto-xref"><span>Chapter 8</span></a>, growth in the neoclassical model is supply driven. There is no independent investment function; instead it is assumed that all saving is automatically invested. In the simplest version of the model with fixed productivity, growth in output and capital is driven by exogenous population growth. The output-labour ratio only grows during the adjustment towards the steady state, but then reaches a constant value that is positively related to the saving propensity and productivity. In an augmented version with exogenous labour-saving technical progress, the output-labour ratio grows at the exogenous rate of technical change.</p>
+<p>This section present a continuous-time version of the model with a Cobb-Douglas production function.</p>
+</section><section id="the-model" class="level2"><h2 class="anchored" data-anchor-id="the-model">The Model</h2>
+<p><span id="eq-solow_Y"><span class="math display">\[
+Y_{t}= A K_t^{\alpha} L_t^{1-\alpha},  \quad \alpha \in (0,1)
+\tag{21.1}\]</span></span></p>
+<p><span id="eq-solow_K"><span class="math display">\[
+\dot{K}_{t} = I_t - \delta K_{t},  \quad \delta \in (0,1)
+\tag{21.2}\]</span></span></p>
+<p><span id="eq-solow_S"><span class="math display">\[
+S_{t} = sY_t,  \quad s \in (0,1)
+\tag{21.3}\]</span></span></p>
+<p><span id="eq-solow_I"><span class="math display">\[
+I_{t} = S_t,  
+\tag{21.4}\]</span></span></p>
+<p><span id="eq-solow_L"><span class="math display">\[
+\dot{L}_{t} = nL_t,  
+\tag{21.5}\]</span></span></p>
+<p>where <span class="math inline">\(Y_t\)</span>, <span class="math inline">\(K_t\)</span>, <span class="math inline">\(S_t\)</span>, <span class="math inline">\(I_t\)</span>, and <span class="math inline">\(L_t\)</span> represent aggregate output, the capital stock, saving, investment, and the labour force, respectively.</p>
+<p><a href="#eq-solow_Y" class="quarto-xref">Equation&nbsp;<span>21.1</span></a> is the aggregate production function, which is of the Cobb-Douglas type. The coefficient <span class="math inline">\(\alpha\)</span> represents the capital elasticity of output Since <span class="math inline">\(\alpha \in (0,1)\)</span>, the production function exhibits diminishing returns to capital and labour, but constant returns to scale. <a href="#eq-solow_K" class="quarto-xref">Equation&nbsp;<span>21.2</span></a> is the law of motion of the capital stock, with <span class="math inline">\(\delta\)</span> representing the rate of depreciation. <a href="#eq-solow_S" class="quarto-xref">Equation&nbsp;<span>21.3</span></a> is the saving function with a constant marginal propensity to save out of income <span class="math inline">\(s\)</span>. The neoclassical growth model assumes that all saving is invested (<a href="#eq-solow_I" class="quarto-xref">Equation&nbsp;<span>21.4</span></a>); hence there is no independent investment function. Finally, <a href="#eq-solow_L" class="quarto-xref">Equation&nbsp;<span>21.5</span></a> specifies exogenous labour force growth at the rate <span class="math inline">\(n\)</span>.</p>
+</section><section id="simulation" class="level2"><h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
+<section id="parameterisation" class="level3"><h3 class="anchored" data-anchor-id="parameterisation">Parameterisation</h3>
+<p>Table 1 reports the parameterisation used in the simulation. Beyond a baseline scenario, we will consider the effects of a rise in the propensity to save (<span class="math inline">\(s\)</span>), a rise in in the capital elasticity of output (<span class="math inline">\(\alpha\)</span>), a rise in the population growth rate (<span class="math inline">\(n\)</span>), and a rise in total factor productivity (<span class="math inline">\(A\)</span>).</p>
+<p><strong>Table 1: Parameterisation</strong></p>
+<table class="table">
+<colgroup>
+<col style="width: 47%">
+<col style="width: 6%">
+<col style="width: 13%">
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 6%">
+</colgroup>
+<thead><tr class="header">
+<th>Scenario</th>
+<th><span class="math inline">\(s\)</span></th>
+<th><span class="math inline">\(\alpha\)</span></th>
+<th><span class="math inline">\(n\)</span></th>
+<th><span class="math inline">\(\delta\)</span></th>
+<th><span class="math inline">\(A\)</span></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>1: baseline</td>
+<td>0.2</td>
+<td>0.3</td>
+<td>0.02</td>
+<td>0.01</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2: rise in prop. save (<span class="math inline">\(s\)</span>)</td>
+<td>0.3</td>
+<td>0.3</td>
+<td>0.02</td>
+<td>0.01</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>3: rise in capital elast. (<span class="math inline">\(\alpha\)</span>)</td>
+<td>0.2</td>
+<td>0.4</td>
+<td>0.02</td>
+<td>0.01</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>4: rise in pop. growth (<span class="math inline">\(n\)</span>)</td>
+<td>0.2</td>
+<td>0.3</td>
+<td>0.03</td>
+<td>0.01</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>5: rise in productivity (<span class="math inline">\(A\)</span>)</td>
+<td>0.2</td>
+<td>0.3</td>
+<td>0.02</td>
+<td>0.01</td>
+<td>1.1</td>
+</tr>
+</tbody>
+</table></section><section id="simulation-code" class="level3"><h3 class="anchored" data-anchor-id="simulation-code">Simulation code</h3>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Set number of periods</span></span>
+<span><span class="va">Q</span> <span class="op">=</span> <span class="fl">5000</span></span>
+<span></span>
+<span><span class="co"># Set number of scenarios (including baseline)</span></span>
+<span><span class="va">sc</span><span class="op">=</span><span class="fl">5</span></span>
+<span></span>
+<span><span class="co"># Set period in which exogenous shift will occur</span></span>
+<span><span class="va">q</span><span class="op">=</span><span class="fl">1</span></span>
+<span></span>
+<span><span class="co"># Set time increment</span></span>
+<span><span class="va">d</span><span class="op">=</span><span class="fl">0.1</span></span>
+<span></span>
+<span><span class="co">#Create (S x Q) matrices in which equilibrium solutions from different parameterisations will be stored</span></span>
+<span><span class="va">Y</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>   <span class="co"># output</span></span>
+<span><span class="va">K</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>   <span class="co"># capital</span></span>
+<span><span class="va">L</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>   <span class="co"># labour force</span></span>
+<span><span class="va">S</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>   <span class="co"># saving</span></span>
+<span><span class="va">I</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>   <span class="co"># investment</span></span>
+<span></span>
+<span><span class="co"># Set constant parameters</span></span>
+<span><span class="va">delta</span><span class="op">=</span><span class="fl">0.01</span>   <span class="co"># depreciation rate</span></span>
+<span></span>
+<span><span class="co"># Set and initialise exogenous variables/parameters that will be shifted</span></span>
+<span><span class="va">s</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.2</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>     <span class="co"># saving propensity</span></span>
+<span><span class="va">A</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>       <span class="co"># productivity</span></span>
+<span><span class="va">alpha</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.3</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># elasticity of output with respect to capital</span></span>
+<span><span class="va">n</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.02</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>    <span class="co"># labour force growth rate</span></span>
+<span></span>
+<span><span class="co"># Set parameter values for different scenarios</span></span>
+<span><span class="va">s</span><span class="op">[</span><span class="fl">2</span>,<span class="va">q</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">0.3</span>     <span class="co"># scenario 2: rise in saving propensity</span></span>
+<span><span class="va">alpha</span><span class="op">[</span><span class="fl">3</span>,<span class="va">q</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">0.4</span> <span class="co"># scenario 3: rise in capital elasticity of output</span></span>
+<span><span class="va">n</span><span class="op">[</span><span class="fl">4</span>,<span class="va">q</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">0.03</span>    <span class="co"># scenario 4: rise in population growth rate</span></span>
+<span><span class="va">A</span><span class="op">[</span><span class="fl">5</span>,<span class="va">q</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">1.1</span>     <span class="co"># scenario 5: rise in productivity</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># Simulate the model by looping over Q time periods for S different scenarios</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">sc</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="va">Q</span><span class="op">)</span><span class="op">{</span></span>
+<span>    </span>
+<span>      <span class="co"># Labour force growth</span></span>
+<span>      <span class="va">L</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">L</span><span class="op">[</span><span class="va">i</span>, <span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">n</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">d</span><span class="op">)</span></span>
+<span></span>
+<span>      <span class="co"># Capital stock dynamics</span></span>
+<span>      <span class="va">K</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">K</span><span class="op">[</span><span class="va">i</span>, <span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="op">(</span><span class="va">I</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="va">delta</span><span class="op">*</span><span class="va">K</span><span class="op">[</span><span class="va">i</span>, <span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">*</span><span class="va">d</span></span>
+<span>                  </span>
+<span>      <span class="co"># Output</span></span>
+<span>      <span class="va">Y</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span><span class="va">A</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="va">K</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">^</span><span class="op">(</span><span class="va">alpha</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="va">L</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">)</span> </span>
+<span>      </span>
+<span>      <span class="co"># Saving </span></span>
+<span>      <span class="va">S</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">s</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">*</span><span class="va">Y</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span></span>
+<span>      </span>
+<span>      <span class="co"># Investment</span></span>
+<span>      <span class="va">I</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">S</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span></span>
+<span>      </span>
+<span>  <span class="op">}</span>  <span class="co"># close time loop</span></span>
+<span><span class="op">}</span>   <span class="co"># close scenarios loop</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set number of periods</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> <span class="dv">5000</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Set number of scenarios (including baseline)</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Set period in which exogenous shift will occur</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">1</span>   <span class="co"># Python uses 0-based indexing; we adjust below</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Set time increment</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Create (S x Q) matrices in which equilibrium solutions from different parameterisations will be stored</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.ones((sc, Q))  <span class="co"># output</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> np.ones((sc, Q))  <span class="co"># capital</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> np.ones((sc, Q))  <span class="co"># labour force</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> np.ones((sc, Q))  <span class="co"># saving</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> np.ones((sc, Q))  <span class="co"># investment</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Set constant parameters</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>delta <span class="op">=</span> <span class="fl">0.01</span>   <span class="co"># depreciation rate</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Set and initialise exogenous variables/parameters that will be shifted</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> np.full((sc, Q), <span class="fl">0.2</span>)     <span class="co"># saving propensity</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.full((sc, Q), <span class="fl">1.0</span>)     <span class="co"># productivity</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> np.full((sc, Q), <span class="fl">0.3</span>) <span class="co"># elasticity of output with respect to capital</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> np.full((sc, Q), <span class="fl">0.02</span>)    <span class="co"># labour force growth rate</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameter values for different scenarios</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co"># (adjusting q to Python’s 0-based indexing: q:R → q-1:Python)</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>s[<span class="dv">1</span>, q<span class="op">-</span><span class="dv">1</span>:Q] <span class="op">=</span> <span class="fl">0.3</span>         <span class="co"># scenario 2: rise in saving propensity</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>alpha[<span class="dv">2</span>, q<span class="op">-</span><span class="dv">1</span>:Q] <span class="op">=</span> <span class="fl">0.4</span>     <span class="co"># scenario 3: rise in capital elasticity of output</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>n[<span class="dv">3</span>, q<span class="op">-</span><span class="dv">1</span>:Q] <span class="op">=</span> <span class="fl">0.03</span>        <span class="co"># scenario 4: rise in population growth rate</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">4</span>, q<span class="op">-</span><span class="dv">1</span>:Q] <span class="op">=</span> <span class="fl">1.1</span>         <span class="co"># scenario 5: rise in productivity</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate the model by looping over Q time periods for S different scenarios</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(sc):</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, Q):</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Labour force growth</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        L[i, t] <span class="op">=</span> L[i, t<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> n[i, t<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> d)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Capital stock dynamics</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>        K[i, t] <span class="op">=</span> K[i, t<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> (I[i, t<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> delta <span class="op">*</span> K[i, t<span class="op">-</span><span class="dv">1</span>]) <span class="op">*</span> d</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Output</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>        Y[i, t] <span class="op">=</span> A[i, t] <span class="op">*</span> (K[i, t] <span class="op">**</span> alpha[i, t]) <span class="op">*</span> (L[i, t] <span class="op">**</span> (<span class="dv">1</span> <span class="op">-</span> alpha[i, t]))</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Saving</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>        S[i, t] <span class="op">=</span> s[i, t] <span class="op">*</span> Y[i, t]</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Investment</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>        I[i, t] <span class="op">=</span> S[i, t]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="plots" class="level3"><h3 class="anchored" data-anchor-id="plots">Plots</h3>
+<p><a href="#fig-growth" class="quarto-xref">Figure&nbsp;<span>21.1</span></a> plots the natural logarithm of output, the labour force, and the capital stock. In the steady state, all these variables grow at the exogenously given labour force growth rate <span class="math inline">\(n\)</span>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set maximum period for plots</span></span>
+<span><span class="va">Tmin</span><span class="op">=</span><span class="fl">5</span></span>
+<span><span class="va">Tmax</span><span class="op">=</span><span class="fl">4000</span></span>
+<span></span>
+<span><span class="co"># Log output, labour force, and capital</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>,<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Y</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, font.main<span class="op">=</span><span class="fl">1</span>,cex.main<span class="op">=</span><span class="fl">1</span>, </span>
+<span>     ylab <span class="op">=</span> <span class="st">''</span>,xlab <span class="op">=</span> <span class="st">'Time'</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Y</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">Tmax</span><span class="op">)</span>, cex.axis<span class="op">=</span><span class="fl">1</span>,cex.lab<span class="op">=</span><span class="fl">0.75</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">""</span>,cex<span class="op">=</span><span class="fl">0.8</span> ,line<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>,<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">L</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>,<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">K</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"log(Y)"</span>, <span class="st">"log(L)"</span>, <span class="st">"log(K)"</span><span class="op">)</span>,</span>
+<span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-growth" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-growth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_Solow_model_files/figure-html/fig-growth-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-growth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;21.1: Logs of output, labour force, and capital
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-output-pt1" class="quarto-xref">Figure&nbsp;<span>21.2</span></a> and <a href="#fig-output-pt2" class="quarto-xref">Figure&nbsp;<span>21.3</span></a> display the dynamics of the output-labour ratio <span class="math inline">\(y=\frac{Y}{L}\)</span> for the different scenarios. During the adjustment from the initialisation to the steady state, the model generates income-per-capita growth. In the steady state, where all variables grow at the same rate, ratios stabilise at finite values. Changes to any of the parameters other than <span class="math inline">\(n\)</span> will change the growth <em>path</em>, but not the growth <em>rate</em>. It can be seen that compared to the baseline, a rise in the saving propensity <span class="math inline">\(s\)</span> raises the growth path and yields a higher steady-state output-labour ratio. A similar effect occurs for a rise in the capital elasticity of output (<span class="math inline">\(\alpha\)</span>).</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># compute output-labour ratio</span></span>
+<span><span class="va">y</span><span class="op">=</span><span class="va">Y</span><span class="op">/</span><span class="va">L</span></span>
+<span></span>
+<span><span class="co"># Output-labour ratio, pt. 1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>,<span class="va">y</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, font.main<span class="op">=</span><span class="fl">1</span>,cex.main<span class="op">=</span><span class="fl">1</span>, </span>
+<span>     ylab <span class="op">=</span> <span class="st">'y'</span>,xlab <span class="op">=</span> <span class="st">'Time'</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">Tmax</span><span class="op">)</span>, cex.axis<span class="op">=</span><span class="fl">1</span>,cex.lab<span class="op">=</span><span class="fl">0.75</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">""</span>,cex<span class="op">=</span><span class="fl">0.8</span> ,line<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>,<span class="va">y</span><span class="op">[</span><span class="fl">2</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>,<span class="va">y</span><span class="op">[</span><span class="fl">3</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2:Rise saving prop."</span>, <span class="st">"3:Rise capital elasticity"</span><span class="op">)</span>,</span>
+<span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-output-pt1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-output-pt1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_Solow_model_files/figure-html/fig-output-pt1-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-output-pt1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;21.2: Output-labour ratio (pt.&nbsp;1)
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>In <a href="#fig-output-pt2" class="quarto-xref">Figure&nbsp;<span>21.3</span></a> it can be seen that a rise in labour force growth rate <span class="math inline">\(n\)</span> lowers income-per-capita in the steady state, despite raising the growth rate of all variables in levels. By contrast, a rise in total factor productivity <span class="math inline">\(A\)</span> leads to higher income-per-capita.</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Output-labour ratio, pt. 2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>, <span class="va">y</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, font.main<span class="op">=</span><span class="fl">1</span>,cex.main<span class="op">=</span><span class="fl">1</span>, </span>
+<span>     ylab <span class="op">=</span> <span class="st">'y'</span>,xlab <span class="op">=</span> <span class="st">'Time'</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">y</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">5</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="va">Tmax</span><span class="op">)</span>, cex.axis<span class="op">=</span><span class="fl">1</span>,cex.lab<span class="op">=</span><span class="fl">0.75</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">""</span>,cex<span class="op">=</span><span class="fl">0.8</span> ,line<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>, <span class="va">y</span><span class="op">[</span><span class="fl">4</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>, <span class="va">y</span><span class="op">[</span><span class="fl">5</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Baseline"</span>, <span class="st">"4:Rise pop. growth"</span>, <span class="st">"5:Rise productivity"</span><span class="op">)</span>,</span>
+<span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-output-pt2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-output-pt2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_Solow_model_files/figure-html/fig-output-pt2-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-output-pt2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;21.3: Output-labour ratio (pt.&nbsp;2)
+</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set maximum period for plots</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>Tmin <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Tmax <span class="op">=</span> <span class="dv">4000</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Log output, labour force, and capital</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>t_range <span class="op">=</span> np.arange(Tmin, Tmax <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    t_range,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    np.log(Y[<span class="dv">0</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>]),   <span class="co"># scenario 1, log(Y)</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    linestyle<span class="op">=</span><span class="st">'-'</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'black'</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">""</span>)   <span class="co"># main title</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">''</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># match R's ylim = range(log(Y)[1:3, Tmin:Tmax])</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>ylim_min <span class="op">=</span> np.log(Y[<span class="dv">0</span>:<span class="dv">3</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>]).<span class="bu">min</span>()</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>ylim_max <span class="op">=</span> np.log(Y[<span class="dv">0</span>:<span class="dv">3</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>]).<span class="bu">max</span>()</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>plt.ylim(ylim_min, ylim_max)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, Tmax)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Add lines for log(L) and log(K)</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>plt.plot(t_range, np.log(L[<span class="dv">0</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>]), linestyle<span class="op">=</span><span class="st">'--'</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>plt.plot(t_range, np.log(K[<span class="dv">0</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>]), linestyle<span class="op">=</span><span class="st">':'</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Legend</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>plt.legend([<span class="st">"log(Y)"</span>, <span class="st">"log(L)"</span>, <span class="st">"log(K)"</span>], loc<span class="op">=</span><span class="st">"lower right"</span>)</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="co"># compute output-labour ratio</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> Y <span class="op">/</span> L</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Output-labour ratio, pt. 1</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>t_range <span class="op">=</span> np.arange(Tmin, Tmax <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    t_range,</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    y[<span class="dv">0</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>],        <span class="co"># scenario 1 (baseline)</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    linestyle<span class="op">=</span><span class="st">'-'</span>,</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'black'</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">""</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'y'</span>)</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="co"># ylim = range(y[1:3, Tmin:Tmax])</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>ylim_min <span class="op">=</span> y[<span class="dv">0</span>:<span class="dv">3</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>].<span class="bu">min</span>()</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>ylim_max <span class="op">=</span> y[<span class="dv">0</span>:<span class="dv">3</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>].<span class="bu">max</span>()</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>plt.ylim(ylim_min, ylim_max)</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, Tmax)</span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Add additional scenarios</span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>plt.plot(t_range, y[<span class="dv">1</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>], linestyle<span class="op">=</span><span class="st">'--'</span>, color<span class="op">=</span><span class="st">'black'</span>)  <span class="co"># scenario 2</span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>plt.plot(t_range, y[<span class="dv">2</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>], linestyle<span class="op">=</span><span class="st">':'</span>, color<span class="op">=</span><span class="st">'black'</span>)   <span class="co"># scenario 3</span></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>plt.legend(</span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"1: Baseline"</span>, <span class="st">"2: Rise saving prop."</span>, <span class="st">"3: Rise capital elasticity"</span>],</span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>    loc<span class="op">=</span><span class="st">"lower right"</span>,</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>    frameon<span class="op">=</span><span class="va">False</span></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="co"># Output-labour ratio, pt. 2</span></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>t_range <span class="op">=</span> np.arange(Tmin, Tmax <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>    t_range,</span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>    y[<span class="dv">0</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>],          <span class="co"># baseline (R's y[1,] → Python y[0,])</span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>    linestyle<span class="op">=</span><span class="st">'-'</span>,</span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'black'</span></span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">""</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'y'</span>)</span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a><span class="co"># ylim = range(y[4:5, Tmin:Tmax])  → R rows 4 &amp; 5 → Python rows 3 &amp; 4</span></span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>ylim_min <span class="op">=</span> y[<span class="dv">3</span>:<span class="dv">5</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>].<span class="bu">min</span>()</span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>ylim_max <span class="op">=</span> y[<span class="dv">3</span>:<span class="dv">5</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>].<span class="bu">max</span>()</span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>plt.ylim(ylim_min, ylim_max)</span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a><span class="co"># xlim = range(0:Tmax) in R; Python equivalent:</span></span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, Tmax)</span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a><span class="co"># Additional scenarios</span></span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>plt.plot(t_range, y[<span class="dv">3</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>], linestyle<span class="op">=</span><span class="st">'--'</span>, color<span class="op">=</span><span class="st">'black'</span>)   <span class="co"># scenario 4 (pop. growth)</span></span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>plt.plot(t_range, y[<span class="dv">4</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>], linestyle<span class="op">=</span><span class="st">':'</span>, color<span class="op">=</span><span class="st">'black'</span>)    <span class="co"># scenario 5 (productivity)</span></span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>plt.legend(</span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Baseline"</span>, <span class="st">"4: Rise pop. growth"</span>, <span class="st">"5: Rise productivity"</span>],</span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>    loc<span class="op">=</span><span class="st">"lower right"</span>,</span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>    frameon<span class="op">=</span><span class="va">False</span></span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section></section><section id="directed-graph" class="level2"><h2 class="anchored" data-anchor-id="directed-graph">Directed graph</h2>
+<p>Another perspective on the model’s properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node <span class="math inline">\(x_1\)</span> to node <span class="math inline">\(x_2\)</span> indicates a causal impact of <span class="math inline">\(x_1\)</span> on <span class="math inline">\(x_2\)</span>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Create directed graph</span></span>
+<span><span class="co"># Construct auxiliary Jacobian matrix for 9 variables: </span></span>
+<span>  <span class="co"># endogenous: (1) Y, (2) K, (3) S, (4) I, (5) L</span></span>
+<span>  <span class="co"># exogenous: (6) s, (7) A, (8) alpha, (9) n</span></span>
+<span></span>
+<span>              <span class="co">#Y K S I L s A a n </span></span>
+<span><span class="va">M_mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="co"># Y</span></span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="co"># K</span></span>
+<span>               <span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="co"># S</span></span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="co"># I</span></span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="co"># L</span></span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="co"># s</span></span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="co"># A</span></span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="co"># alpha</span></span>
+<span>               <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="co"># n</span></span>
+<span>               <span class="op">)</span>,       </span>
+<span>               <span class="fl">9</span>, <span class="fl">9</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create adjacency matrix from transpose of auxiliary Jacobian</span></span>
+<span><span class="va">A_mat</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">M_mat</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create directed graph from adjacency matrix</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
+<span><span class="va">dg</span><span class="op">=</span><span class="fu"><a href="https://r.igraph.org/reference/graph_from_adjacency_matrix.html">graph_from_adjacency_matrix</a></span><span class="op">(</span><span class="va">A_mat</span>, mode<span class="op">=</span><span class="st">"directed"</span>, weighted<span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define node labels</span></span>
+<span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">dg</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Y"</span>, <span class="st">"K"</span>, <span class="st">"S"</span>, <span class="st">"I"</span>, <span class="st">"L"</span>, <span class="st">"s"</span>, <span class="st">"A"</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">alpha</span><span class="op">)</span>, <span class="st">"n"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot directed graph</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dg</span>, main<span class="op">=</span><span class="st">""</span>, vertex.size<span class="op">=</span><span class="fl">30</span>, vertex.color<span class="op">=</span><span class="st">"lightblue"</span>, </span>
+<span>     vertex.label.color<span class="op">=</span><span class="st">"black"</span>, edge.arrow.size<span class="op">=</span><span class="fl">0.3</span>, edge.width<span class="op">=</span><span class="fl">1.1</span>, edge.size<span class="op">=</span><span class="fl">1.2</span>,</span>
+<span>     edge.arrow.width<span class="op">=</span><span class="fl">1.2</span>, edge.color<span class="op">=</span><span class="st">"black"</span>, vertex.label.cex<span class="op">=</span><span class="fl">1.2</span>, </span>
+<span>     vertex.frame.color<span class="op">=</span><span class="st">"NA"</span>, margin<span class="op">=</span><span class="op">-</span><span class="fl">0.08</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-dag" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-dag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_Solow_model_files/figure-html/fig-dag-4.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;21.4: Directed graph of Solow model
+</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create directed graph</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct auxiliary Jacobian matrix for 9 variables:</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># endogenous: (1) Y, (2) K, (3) S, (4) I, (5) L</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># exogenous: (6) s, (7) A, (8) alpha, (9) n</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Y  K  S  I  L  s  A  a  n </span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>M_mat <span class="op">=</span> np.array([</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>],  <span class="co"># Y</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>],  <span class="co"># K</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>],  <span class="co"># S</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>],  <span class="co"># I</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>],  <span class="co"># L</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>],  <span class="co"># s</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>],  <span class="co"># A</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>],  <span class="co"># alpha</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>]   <span class="co"># n</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Create adjacency matrix from transpose of auxiliary Jacobian</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>A_mat <span class="op">=</span> M_mat.T</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Create directed graph from adjacency matrix</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>dg <span class="op">=</span> nx.from_numpy_array(A_mat, create_using<span class="op">=</span>nx.DiGraph)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Define node labels</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> {</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>: <span class="st">"Y"</span>,</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>: <span class="st">"K"</span>,</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>: <span class="st">"S"</span>,</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>: <span class="st">"I"</span>,</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>: <span class="st">"L"</span>,</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>: <span class="st">"s"</span>,</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>: <span class="st">"A"</span>,</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    <span class="dv">7</span>: <span class="vs">r"$\alpha$"</span>,</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    <span class="dv">8</span>: <span class="st">"n"</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot directed graph</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">7</span>))</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> nx.spring_layout(dg, seed<span class="op">=</span><span class="dv">23</span>)  <span class="co"># automatic layout</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>nx.draw(</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    dg, pos,</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>labels,</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>    node_size<span class="op">=</span><span class="dv">1200</span>,</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>    node_color<span class="op">=</span><span class="st">"lightblue"</span>,</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>    edge_color<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="fl">1.1</span>,</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>    arrowsize<span class="op">=</span><span class="dv">15</span>,</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>    arrowstyle<span class="op">=</span><span class="st">"-|&gt;"</span>,</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>    font_size<span class="op">=</span><span class="dv">12</span>,</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>    font_color<span class="op">=</span><span class="st">"black"</span></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">""</span>)</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p><a href="#fig-dag" class="quarto-xref">Figure&nbsp;<span>21.4</span></a> illustrates the critical role of labour force growth <span class="math inline">\(n\)</span> as the driver of economic growth. Higher labour input translates into higher output, a fixed portion of which is saved. Savings, in turn, drive investment, which raises the capital stock that can be used to produce more output.</p>
+<p>Next, we will consider a version with exogenous technical progress, in which <span class="math inline">\(A\)</span> becomes the main driver of growth, triggering the same feedback loop between output, saving, and investment.</p>
+</section><section id="adding-exogenous-technical-progress" class="level2"><h2 class="anchored" data-anchor-id="adding-exogenous-technical-progress">Adding exogenous technical progress</h2>
+<p>We have seen that the neoclassical growth model with fixed total factor productivity <span class="math inline">\(A\)</span> does not generate permanent income-per-capita growth. A common extension is to let productivity grow at an exogenous rate <span class="math inline">\(\mu\)</span>:</p>
+<p><span class="math display">\[
+\dot{A}=A\mu.
+\]</span> For exogenous technical progress to yield balanced growth where output grows at a constant rate and the capital-output ratio remains constant in the steady state, it must be <em>labour augmenting</em>:<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <span class="math inline">\(Y_t=F(K_t, A_t L_t)\)</span>.</p>
+<p>With a Cobb-Douglas production function, this requires:</p>
+<p><span id="eq-solow_y_aug"><span class="math display">\[
+Y_{t}=  K_t^{\alpha} (A_tL_t)^{1-\alpha},  \quad \alpha \in (0,1).
+\tag{21.6}\]</span></span></p>
+<p>Let’s simulate the model with labour-augmenting technical progress.</p>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Clear the environment</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Set number of periods</span></span>
+<span><span class="va">Q</span> <span class="op">=</span> <span class="fl">20000</span></span>
+<span></span>
+<span><span class="co"># Set number of scenarios (including baseline)</span></span>
+<span><span class="va">sc</span><span class="op">=</span><span class="fl">5</span></span>
+<span></span>
+<span><span class="co"># Set period in which exogenous shift will occur</span></span>
+<span><span class="va">q</span><span class="op">=</span><span class="fl">1</span></span>
+<span></span>
+<span><span class="co"># Set time increment</span></span>
+<span><span class="va">d</span><span class="op">=</span><span class="fl">0.01</span></span>
+<span></span>
+<span><span class="co">#Create (S x Q) matrices in which equilibrium solutions from different parameterisations will be stored</span></span>
+<span><span class="va">Y</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>   <span class="co"># output</span></span>
+<span><span class="va">K</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>   <span class="co"># capital</span></span>
+<span><span class="va">L</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>   <span class="co"># labour force</span></span>
+<span><span class="va">A</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>   <span class="co"># total factor productivity</span></span>
+<span><span class="va">S</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>  <span class="co"># saving</span></span>
+<span><span class="va">I</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>  <span class="co"># investment</span></span>
+<span></span>
+<span><span class="co"># Set constant parameters</span></span>
+<span><span class="va">delta</span><span class="op">=</span><span class="fl">0.01</span>   <span class="co"># depreciation rate</span></span>
+<span></span>
+<span><span class="co"># Set and initialise exogenous variables/parameters that will be shifted</span></span>
+<span><span class="va">s</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.2</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>     <span class="co"># saving propensity</span></span>
+<span><span class="va">A</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">1</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>       <span class="co"># productivity</span></span>
+<span><span class="va">alpha</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.3</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span> <span class="co"># elasticity of output with respect to capital</span></span>
+<span><span class="va">n</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.02</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>    <span class="co"># labour force growth rate</span></span>
+<span><span class="va">mu</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>data<span class="op">=</span><span class="fl">0.04</span>, nrow<span class="op">=</span><span class="va">sc</span>, ncol<span class="op">=</span><span class="va">Q</span><span class="op">)</span>   <span class="co"># productivity growth rate</span></span>
+<span></span>
+<span><span class="co"># Set parameter values for different scenarios</span></span>
+<span><span class="va">s</span><span class="op">[</span><span class="fl">2</span>,<span class="va">q</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">0.3</span>     <span class="co"># scenario 2: rise in saving propensity</span></span>
+<span><span class="va">alpha</span><span class="op">[</span><span class="fl">3</span>,<span class="va">q</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">0.4</span> <span class="co"># scenario 3: rise in capital elasticity of output</span></span>
+<span><span class="va">n</span><span class="op">[</span><span class="fl">4</span>,<span class="va">q</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">0.03</span>    <span class="co"># scenario 4: rise in population growth rate</span></span>
+<span><span class="va">mu</span><span class="op">[</span><span class="fl">5</span>,<span class="va">q</span><span class="op">:</span><span class="va">Q</span><span class="op">]</span><span class="op">=</span><span class="fl">0.06</span>   <span class="co"># scenario 5: rise in productivity growth rate</span></span>
+<span></span>
+<span><span class="co"># Simulate the model by looping over Q time periods for S different scenarios</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">sc</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="va">Q</span><span class="op">)</span><span class="op">{</span></span>
+<span>    </span>
+<span>      <span class="co"># Labour force growth</span></span>
+<span>      <span class="va">L</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">L</span><span class="op">[</span><span class="va">i</span>, <span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">n</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">d</span><span class="op">)</span></span>
+<span></span>
+<span>      <span class="co"># Productivity growth</span></span>
+<span>      <span class="va">A</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">A</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">mu</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="va">d</span><span class="op">)</span></span>
+<span>      </span>
+<span>      <span class="co"># Capital stock dynamics</span></span>
+<span>      <span class="va">K</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">K</span><span class="op">[</span><span class="va">i</span>, <span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="op">(</span><span class="va">I</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="va">delta</span><span class="op">*</span><span class="va">K</span><span class="op">[</span><span class="va">i</span>, <span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">*</span><span class="va">d</span></span>
+<span>                  </span>
+<span>      <span class="co"># Output</span></span>
+<span>      <span class="va">Y</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="op">(</span><span class="va">K</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">^</span><span class="va">alpha</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="va">A</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">*</span><span class="va">L</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">)</span> </span>
+<span>      </span>
+<span>      <span class="co"># Saving </span></span>
+<span>      <span class="va">S</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">s</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span><span class="op">*</span><span class="va">Y</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span></span>
+<span>      </span>
+<span>      <span class="co"># Investment</span></span>
+<span>      <span class="va">I</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span> <span class="op">=</span> <span class="va">S</span><span class="op">[</span><span class="va">i</span>,<span class="va">t</span><span class="op">]</span></span>
+<span>      </span>
+<span>  <span class="op">}</span>  <span class="co"># close time loop</span></span>
+<span><span class="op">}</span>   <span class="co"># close scenarios loop</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="#fig-growth-aug" class="quarto-xref">Figure&nbsp;<span>21.5</span></a> shows that with labour-augmenting technical progress, the output-labour ratio grows at the rate <span class="math inline">\(\mu\)</span> (and so does the capital-output ratio), while the labour force continues to grow at <span class="math inline">\(n\)</span>. Output grows at <span class="math inline">\(\mu + n\)</span>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set maximum period for plots</span></span>
+<span><span class="va">Tmin</span><span class="op">=</span><span class="fl">5</span></span>
+<span><span class="va">Tmax</span><span class="op">=</span><span class="fl">6000</span></span>
+<span></span>
+<span><span class="co"># Log output-labour, labour force, and output</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>,<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Y</span><span class="op">/</span><span class="va">L</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, font.main<span class="op">=</span><span class="fl">1</span>,cex.main<span class="op">=</span><span class="fl">1</span>, </span>
+<span>     ylab <span class="op">=</span> <span class="st">''</span>,xlab <span class="op">=</span> <span class="st">'Time'</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Y</span><span class="op">/</span><span class="va">L</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">L</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">K</span><span class="op">/</span><span class="va">L</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">Tmax</span><span class="op">)</span>, cex.axis<span class="op">=</span><span class="fl">1</span>,cex.lab<span class="op">=</span><span class="fl">0.75</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">""</span>,cex<span class="op">=</span><span class="fl">0.8</span> ,line<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>,<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">L</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>,<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Y</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"log(Y/L)"</span>, <span class="st">"log(L)"</span>, <span class="st">"log(Y)"</span><span class="op">)</span>,</span>
+<span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-growth-aug" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-growth-aug-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_Solow_model_files/figure-html/fig-growth-aug-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-growth-aug-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;21.5: Logs of output-labour ratio, labour force, and output
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>In the model with labour-augmenting technical progress, it is common to normalise variables by units of “effective labour” <span class="math inline">\(A_tL_t\)</span>. The output-effective labour ratio is then defined as <span class="math inline">\(y^*=\frac{Y_t}{A_t L_t}\)</span>. <a href="#fig-output-pt3" class="quarto-xref">Figure&nbsp;<span>21.6</span></a> - <a href="#fig-output-pt4" class="quarto-xref">Figure&nbsp;<span>21.7</span></a> plots the dynamics of this ratio for the different scenarios, where the last scenario is now given by an increase in the productivity growth rate <span class="math inline">\(\mu\)</span>. As in the model without productivity growth, a rise in the saving propensity <span class="math inline">\(s\)</span> raises the growth path and yields a higher steady-state output-effective labour ratio. A similar effect occurs for a rise in the capital elasticity of output (<span class="math inline">\(\alpha\)</span>).</p>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># compute output-labour ratio in effective labour units</span></span>
+<span><span class="va">y</span><span class="op">=</span><span class="va">Y</span><span class="op">/</span><span class="op">(</span><span class="va">A</span><span class="op">*</span><span class="va">L</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#  Output-effective labour ratio</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>,<span class="va">y</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, font.main<span class="op">=</span><span class="fl">1</span>,cex.main<span class="op">=</span><span class="fl">1</span>, </span>
+<span>     ylab <span class="op">=</span> <span class="st">'y*'</span>,xlab <span class="op">=</span> <span class="st">'Time'</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">Tmax</span><span class="op">)</span>, cex.axis<span class="op">=</span><span class="fl">1</span>,cex.lab<span class="op">=</span><span class="fl">0.75</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">""</span>,cex<span class="op">=</span><span class="fl">0.8</span> ,line<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>,<span class="va">y</span><span class="op">[</span><span class="fl">2</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>,<span class="va">y</span><span class="op">[</span><span class="fl">3</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1:Baseline"</span>, <span class="st">"2: Rise saving prop."</span>, <span class="st">"3: Rise capital elasticity"</span><span class="op">)</span>,</span>
+<span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-output-pt3" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-output-pt3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_Solow_model_files/figure-html/fig-output-pt3-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-output-pt3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;21.6: Output-effective labour ratio (pt.&nbsp;1)
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>A rise in either the population or in the productivity growth rate reduces the steady-state output-effective labour ratio.</p>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#  Output-effective labour ratio</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>, <span class="va">y</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">1</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fl">1</span>, font.main<span class="op">=</span><span class="fl">1</span>,cex.main<span class="op">=</span><span class="fl">1</span>, </span>
+<span>     ylab <span class="op">=</span> <span class="st">'y*'</span>,xlab <span class="op">=</span> <span class="st">'Time'</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">y</span><span class="op">[</span><span class="fl">1</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>, <span class="va">y</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">5</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span><span class="op">)</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="va">Tmax</span><span class="op">)</span>, cex.axis<span class="op">=</span><span class="fl">1</span>,cex.lab<span class="op">=</span><span class="fl">0.75</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main<span class="op">=</span><span class="st">""</span>,cex<span class="op">=</span><span class="fl">0.8</span> ,line<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>, <span class="va">y</span><span class="op">[</span><span class="fl">4</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span>, <span class="va">y</span><span class="op">[</span><span class="fl">5</span>, <span class="va">Tmin</span><span class="op">:</span><span class="va">Tmax</span><span class="op">]</span>,lty<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1: Baseline"</span>, <span class="st">"4: Rise pop. growth"</span>, <span class="st">"5:Rise prod. growth"</span><span class="op">)</span>,</span>
+<span>       lty<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, cex<span class="op">=</span><span class="fl">0.8</span>, bty <span class="op">=</span> <span class="st">"n"</span>, y.intersp<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-output-pt4" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-output-pt4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="a_Solow_model_files/figure-html/fig-output-pt4-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-output-pt4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;21.7: Output-effective labour ratio (pt.&nbsp;2)
+</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set number of periods</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> <span class="dv">20000</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Set number of scenarios (including baseline)</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Set period in which exogenous shift will occur</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">1</span>   <span class="co"># Will adjust to Python's 0-based index in slicing</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Set time increment</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create (S x Q) matrices in which equilibrium solutions </span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co"># from different parameterisations will be stored</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.ones((sc, Q))   <span class="co"># output</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> np.ones((sc, Q))   <span class="co"># capital</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> np.ones((sc, Q))   <span class="co"># labour force</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.ones((sc, Q))   <span class="co"># total factor productivity</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> np.ones((sc, Q))   <span class="co"># saving</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> np.ones((sc, Q))   <span class="co"># investment</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Set constant parameters</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>delta <span class="op">=</span> <span class="fl">0.01</span>   <span class="co"># depreciation rate</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Set and initialise exogenous variables/parameters </span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="co"># that will be shifted</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>s     <span class="op">=</span> np.full((sc, Q), <span class="fl">0.2</span>)     <span class="co"># saving propensity</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>A_ex  <span class="op">=</span> np.full((sc, Q), <span class="fl">1.0</span>)     <span class="co"># productivity (renamed A_ex to avoid confusion with A above)</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> np.full((sc, Q), <span class="fl">0.3</span>)     <span class="co"># elasticity of output wrt capital</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>n     <span class="op">=</span> np.full((sc, Q), <span class="fl">0.02</span>)    <span class="co"># labour force growth rate</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>mu    <span class="op">=</span> np.full((sc, Q), <span class="fl">0.04</span>)    <span class="co"># productivity growth rate</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameter values for different scenarios</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a><span class="co"># (convert R's q:Q to Python's q-1:Q)</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------</span></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>s[<span class="dv">1</span>,     q<span class="op">-</span><span class="dv">1</span>:Q] <span class="op">=</span> <span class="fl">0.3</span>    <span class="co"># scenario 2: rise in saving propensity</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>alpha[<span class="dv">2</span>, q<span class="op">-</span><span class="dv">1</span>:Q] <span class="op">=</span> <span class="fl">0.4</span>    <span class="co"># scenario 3: rise in capital elasticity</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>n[<span class="dv">3</span>,     q<span class="op">-</span><span class="dv">1</span>:Q] <span class="op">=</span> <span class="fl">0.03</span>   <span class="co"># scenario 4: rise in population growth rate</span></span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>mu[<span class="dv">4</span>,    q<span class="op">-</span><span class="dv">1</span>:Q] <span class="op">=</span> <span class="fl">0.06</span>   <span class="co"># scenario 5: rise in productivity growth rate</span></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------</span></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate the model by looping over time periods </span></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a><span class="co"># for S different scenarios</span></span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------</span></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(sc):</span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, Q):</span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Labour force growth</span></span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>        L[i, t] <span class="op">=</span> L[i, t<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> n[i, t<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> d)</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Productivity growth</span></span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>        A[i, t] <span class="op">=</span> A[i, t<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> mu[i, t<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> d)</span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Capital stock dynamics</span></span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>        K[i, t] <span class="op">=</span> K[i, t<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> (I[i, t<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> delta <span class="op">*</span> K[i, t<span class="op">-</span><span class="dv">1</span>]) <span class="op">*</span> d</span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Output</span></span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>        Y[i, t] <span class="op">=</span> (K[i, t] <span class="op">**</span> alpha[i, t]) <span class="op">*</span> ((A[i, t] <span class="op">*</span> L[i, t]) <span class="op">**</span> (<span class="dv">1</span> <span class="op">-</span> alpha[i, t]))</span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Saving</span></span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>        S[i, t] <span class="op">=</span> s[i, t] <span class="op">*</span> Y[i, t]</span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Investment</span></span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>        I[i, t] <span class="op">=</span> S[i, t]</span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Set maximum period for plots</span></span>
+<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a>Tmin <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a>Tmax <span class="op">=</span> <span class="dv">6000</span></span>
+<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a>t_range <span class="op">=</span> np.arange(Tmin, Tmax <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-85"><a href="#cb13-85" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute ratios</span></span>
+<span id="cb13-86"><a href="#cb13-86" aria-hidden="true" tabindex="-1"></a>YL <span class="op">=</span> Y <span class="op">/</span> L        <span class="co"># Y/L</span></span>
+<span id="cb13-87"><a href="#cb13-87" aria-hidden="true" tabindex="-1"></a>KL <span class="op">=</span> K <span class="op">/</span> L        <span class="co"># K/L</span></span>
+<span id="cb13-88"><a href="#cb13-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-89"><a href="#cb13-89" aria-hidden="true" tabindex="-1"></a><span class="co"># Log output-labour, labour force, and output</span></span>
+<span id="cb13-90"><a href="#cb13-90" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb13-91"><a href="#cb13-91" aria-hidden="true" tabindex="-1"></a>    t_range,</span>
+<span id="cb13-92"><a href="#cb13-92" aria-hidden="true" tabindex="-1"></a>    np.log(YL[<span class="dv">0</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>]),        <span class="co"># log(Y/L), baseline scenario</span></span>
+<span id="cb13-93"><a href="#cb13-93" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb13-94"><a href="#cb13-94" aria-hidden="true" tabindex="-1"></a>    linestyle<span class="op">=</span><span class="st">'-'</span>,</span>
+<span id="cb13-95"><a href="#cb13-95" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'black'</span></span>
+<span id="cb13-96"><a href="#cb13-96" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-97"><a href="#cb13-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-98"><a href="#cb13-98" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">""</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb13-99"><a href="#cb13-99" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time"</span>)</span>
+<span id="cb13-100"><a href="#cb13-100" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">""</span>)</span>
+<span id="cb13-101"><a href="#cb13-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-102"><a href="#cb13-102" aria-hidden="true" tabindex="-1"></a><span class="co"># R equivalent:</span></span>
+<span id="cb13-103"><a href="#cb13-103" aria-hidden="true" tabindex="-1"></a><span class="co"># ylim = range(log(Y/L)[1,...], log(L)[1,...], log(K/L)[1,...])</span></span>
+<span id="cb13-104"><a href="#cb13-104" aria-hidden="true" tabindex="-1"></a>ylim_min <span class="op">=</span> <span class="bu">min</span>(</span>
+<span id="cb13-105"><a href="#cb13-105" aria-hidden="true" tabindex="-1"></a>    np.log(YL[<span class="dv">0</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>]).<span class="bu">min</span>(),</span>
+<span id="cb13-106"><a href="#cb13-106" aria-hidden="true" tabindex="-1"></a>    np.log(L[<span class="dv">0</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>]).<span class="bu">min</span>(),</span>
+<span id="cb13-107"><a href="#cb13-107" aria-hidden="true" tabindex="-1"></a>    np.log(KL[<span class="dv">0</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>]).<span class="bu">min</span>()</span>
+<span id="cb13-108"><a href="#cb13-108" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-109"><a href="#cb13-109" aria-hidden="true" tabindex="-1"></a>ylim_max <span class="op">=</span> <span class="bu">max</span>(</span>
+<span id="cb13-110"><a href="#cb13-110" aria-hidden="true" tabindex="-1"></a>    np.log(YL[<span class="dv">0</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>]).<span class="bu">max</span>(),</span>
+<span id="cb13-111"><a href="#cb13-111" aria-hidden="true" tabindex="-1"></a>    np.log(L[<span class="dv">0</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>]).<span class="bu">max</span>(),</span>
+<span id="cb13-112"><a href="#cb13-112" aria-hidden="true" tabindex="-1"></a>    np.log(KL[<span class="dv">0</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>]).<span class="bu">max</span>()</span>
+<span id="cb13-113"><a href="#cb13-113" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-114"><a href="#cb13-114" aria-hidden="true" tabindex="-1"></a>plt.ylim(ylim_min, ylim_max)</span>
+<span id="cb13-115"><a href="#cb13-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-116"><a href="#cb13-116" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, Tmax)</span>
+<span id="cb13-117"><a href="#cb13-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-118"><a href="#cb13-118" aria-hidden="true" tabindex="-1"></a><span class="co"># Additional lines</span></span>
+<span id="cb13-119"><a href="#cb13-119" aria-hidden="true" tabindex="-1"></a>plt.plot(t_range, np.log(L[<span class="dv">0</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>]), linestyle<span class="op">=</span><span class="st">'--'</span>, color<span class="op">=</span><span class="st">'black'</span>)   <span class="co"># log(L)</span></span>
+<span id="cb13-120"><a href="#cb13-120" aria-hidden="true" tabindex="-1"></a>plt.plot(t_range, np.log(Y[<span class="dv">0</span>, Tmin:Tmax<span class="op">+</span><span class="dv">1</span>]), linestyle<span class="op">=</span><span class="st">':'</span>, color<span class="op">=</span><span class="st">'black'</span>)    <span class="co"># log(Y)</span></span>
+<span id="cb13-121"><a href="#cb13-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-122"><a href="#cb13-122" aria-hidden="true" tabindex="-1"></a><span class="co"># Legend</span></span>
+<span id="cb13-123"><a href="#cb13-123" aria-hidden="true" tabindex="-1"></a>plt.legend(</span>
+<span id="cb13-124"><a href="#cb13-124" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"log(Y/L)"</span>, <span class="st">"log(L)"</span>, <span class="st">"log(Y)"</span>],</span>
+<span id="cb13-125"><a href="#cb13-125" aria-hidden="true" tabindex="-1"></a>    loc<span class="op">=</span><span class="st">"lower right"</span>,</span>
+<span id="cb13-126"><a href="#cb13-126" aria-hidden="true" tabindex="-1"></a>    frameon<span class="op">=</span><span class="va">False</span></span>
+<span id="cb13-127"><a href="#cb13-127" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-128"><a href="#cb13-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-129"><a href="#cb13-129" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="analytical-discussion" class="level2"><h2 class="anchored" data-anchor-id="analytical-discussion">Analytical discussion</h2>
+<p>To study mathematically the Solow model (firstly without technical progress), it is common to reduce the model to a differential equation in the capital-labour ratio <span class="math inline">\(k=\frac{K}{L}\)</span>. Differentiating this ratio with respect to time (where <span class="math inline">\(\dot{x}=\frac{dx}{dt}\)</span> and <span class="math inline">\(\hat{x}=\frac{\dot{x}}{x}\)</span>), we have:</p>
+<p><span class="math display">\[
+\dot{k}=\frac{\dot K}{L}-\hat{L}k.
+\]</span></p>
+<p>Using <a href="#eq-solow_K" class="quarto-xref">Equation&nbsp;<span>21.2</span></a>, <a href="#eq-solow_I" class="quarto-xref">Equation&nbsp;<span>21.4</span></a>, <a href="#eq-solow_S" class="quarto-xref">Equation&nbsp;<span>21.3</span></a>, <a href="#eq-solow_L" class="quarto-xref">Equation&nbsp;<span>21.5</span></a>, and <a href="#eq-solow_Y" class="quarto-xref">Equation&nbsp;<span>21.1</span></a>, and simplifying we get: <span id="eq-solow_k"><span class="math display">\[
+\dot{k}= sAk^{\alpha}-(n+\delta)k.
+\tag{21.7}\]</span></span></p>
+<p>This is a nonlinear differential equation called <a href="https://en.wikipedia.org/wiki/Bernoulli_differential_equation">Bernoulli differential equation</a> that has the general form <span class="math inline">\(\dot{y} + ay = by^n\)</span>. A convenient feature of the Bernoulli equation is that it can easily be transformed into a linear differential equation that can then be analysed in the standard way.</p>
+<p>To do this, re-write <a href="#eq-solow_k" class="quarto-xref">Equation&nbsp;<span>21.7</span></a> as follows: <span class="math display">\[
+\dot{k} +(n+\delta)k= sAk^{\alpha},
+\]</span> and multiply through by <span class="math inline">\(k^{-\alpha}\)</span>:</p>
+<p><span class="math display">\[
+\dot{k}k^{-\alpha} +(n+\delta)k^{1-\alpha}= sAk.
+\]</span> Now define <span class="math inline">\(z=k^{1-\alpha}\)</span> with time derivative <span class="math inline">\(\dot{z}=(1-\alpha)k^{-\alpha}\dot{k}\)</span>, so that <span class="math inline">\(\dot{k}= \frac{\dot{z}}{(1-\alpha)k^{-\alpha}}\)</span>. With these definitions, our equation can be written as:</p>
+<p><span class="math display">\[
+\frac{\dot{z}}{(1-\alpha)k^{-\alpha}}k^{-\alpha} + (n+\delta)z=sA,
+\]</span> which can be simplified to: <span id="eq-solow_z"><span class="math display">\[
+\dot{z}(1-\alpha)(n+\delta)z=(1-\alpha)sA,
+\tag{21.8}\]</span></span></p>
+<p>which is now a linear differential equation in <span class="math inline">\(z\)</span>.</p>
+<p>Setting <span class="math inline">\(\dot{z}=0\)</span>, we can find its steady state solution: <span class="math display">\[
+z^*=\frac{sA}{n+\delta}.
+\]</span> Using the definition <span class="math inline">\(z=k^{1-\alpha}\)</span>, this gives us the following steady state solutions for the capital-labour ratio <span class="math inline">\(k\)</span> and the capital-output ratio <span class="math inline">\(y\)</span>:</p>
+<p><span class="math display">\[
+k^*=\left(\frac{sA}{n+\delta}\right)^\frac{1}{1-\alpha},
+\]</span></p>
+<p><span class="math display">\[
+y^*=Ak^{*\alpha}.
+\]</span> Under which conditions will the system converge to the steady state? From <a href="#eq-solow_z" class="quarto-xref">Equation&nbsp;<span>21.8</span></a>, we can see that if <span class="math inline">\((1-\alpha)(n+\delta)&gt;0\)</span>, we have <span class="math inline">\(\frac{d\dot{z}}{dz}&lt;0\)</span>, so that deviations from the steady state are self-correcting, yielding stability. With diminishing returns in the production function (<span class="math inline">\(\alpha &lt;1\)</span>), the stability condition is always satisfied.</p>
+<p>The formal analysis of the model with exogenous technical progress is very similar. It is common to normalise variables by “effective labour” <span class="math inline">\(A_tL_t\)</span>, so that <span class="math inline">\(k=\frac{K_t}{A_tL_t}\)</span> and <span class="math inline">\(y=\frac{Y_t}{A_tL_t}\)</span>. Differentiation of <span class="math inline">\(k\)</span> with respect to time then yields:</p>
+<p><span class="math display">\[
+\dot{k}=\frac{\dot K}{AL}-\hat{L}k-\hat{A}k.
+\]</span> Using the relevant equations as before as well as <span class="math inline">\(y=\frac{Y_t}{A_tL_t}=k^\alpha\)</span>, this expression can be written as: <span class="math display">\[
+\dot{k}= sk^{\alpha}-(n+\delta+\mu)k,
+\]</span> which is very similar to <a href="#eq-solow_k" class="quarto-xref">Equation&nbsp;<span>21.7</span></a>, except for the presence of <span class="math inline">\(\mu\)</span>. The resulting steady state <span class="math inline">\(k\)</span> and <span class="math inline">\(y\)</span> are given by:</p>
+<p><span class="math display">\[
+k^*=\left(\frac{s}{n+\delta+\mu}\right)^\frac{1}{1-\alpha},
+\]</span></p>
+<p><span class="math display">\[
+y^*=k^{*\alpha}.
+\]</span> We can confirm these analytical results using the numerical simulation of the model with technical progress:</p>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Check analytical results (here for baseline only)</span></span>
+<span><span class="va">k</span><span class="op">=</span><span class="va">K</span><span class="op">/</span><span class="op">(</span><span class="va">A</span><span class="op">*</span><span class="va">L</span><span class="op">)</span> <span class="co"># construct capital-effective labour ratio</span></span>
+<span><span class="va">y</span><span class="op">=</span><span class="va">Y</span><span class="op">/</span><span class="op">(</span><span class="va">A</span><span class="op">*</span><span class="va">L</span><span class="op">)</span> <span class="co"># construct output-effective labour ratio</span></span>
+<span></span>
+<span><span class="va">k</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span>      <span class="co"># numerical solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.479588</code></pre>
+</div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">s</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">/</span><span class="op">(</span><span class="va">n</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span> <span class="op">+</span> <span class="va">delta</span> <span class="op">+</span> <span class="va">mu</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="co"># analytical solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.48055</code></pre>
+</div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">y</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span>   <span class="co"># numerical solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.568092</code></pre>
+</div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">s</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">/</span><span class="op">(</span><span class="va">n</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span> <span class="op">+</span> <span class="va">delta</span> <span class="op">+</span> <span class="va">mu</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="va">alpha</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">[</span><span class="fl">1</span>,<span class="va">Q</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="co"># analytical solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.568193</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Python code">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>k<span class="op">=</span>K<span class="op">/</span>(A<span class="op">*</span>L) <span class="co"># construct capital-effective labour ratio</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>Y<span class="op">/</span>(A<span class="op">*</span>L) <span class="co"># construct output-effective labour ratio</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>k[<span class="dv">0</span>,Q<span class="op">-</span><span class="dv">1</span>]      <span class="co"># numerical solution</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>(s[<span class="dv">0</span>,Q<span class="op">-</span><span class="dv">1</span>]<span class="op">/</span>(n[<span class="dv">0</span>,Q<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> delta <span class="op">+</span> mu[<span class="dv">0</span>,Q<span class="op">-</span><span class="dv">1</span>]))<span class="op">**</span>(<span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>alpha[<span class="dv">0</span>,Q<span class="op">-</span><span class="dv">1</span>])) <span class="co"># analytical solution</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">0</span>,Q<span class="op">-</span><span class="dv">1</span>]   <span class="co"># numerical solution</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>(s[<span class="dv">0</span>,Q<span class="op">-</span><span class="dv">1</span>]<span class="op">/</span>(n[<span class="dv">0</span>,Q<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> delta <span class="op">+</span> mu[<span class="dv">0</span>,Q<span class="op">-</span><span class="dv">1</span>]))<span class="op">**</span>(alpha[<span class="dv">0</span>,Q<span class="op">-</span><span class="dv">1</span>]<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>alpha[<span class="dv">0</span>,Q<span class="op">-</span><span class="dv">1</span>])) <span class="co"># analytical solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p>Up to a small approximation error, the solutions match.</p>
+<p>Finally, we can derive the growth rate of output, by taking the log of <a href="#eq-solow_y_aug" class="quarto-xref">Equation&nbsp;<span>21.6</span></a>, giving:</p>
+<p><span class="math display">\[
+\ln(Y_t)=\alpha \ln(K_t)+(1-\alpha)[\ln(A_t)+\ln(L_t)].
+\]</span> Differentiating with respect to time yields: <span class="math display">\[
+g_Y = \alpha g_K + (1- \alpha)(g_A+g_L),
+\]</span> where <span class="math inline">\(g_Y\)</span> is the growth rate of <span class="math inline">\(Y\)</span> and so forth.</p>
+<p>On a balanced growth path with a constant output-capital ratio, we have <span class="math inline">\(g_K=g_Y\)</span>, giving: <span class="math display">\[
+g_Y = g_A + g_L = \mu + n.
+\]</span></p>
+</section><section id="references" class="level2"><h2 class="anchored" data-anchor-id="references">References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Acemoglu2009" class="csl-entry" role="listitem">
+Acemoglu, Daron. 2009. <em>Introduction to Modern Economic Growth</em>. Princeton University Press.
+</div>
+<div id="ref-Garin2021" class="csl-entry" role="listitem">
+Garín, Julio, Robert Lester, and Eric Sims. 2021. <em>Intermediate Macroeconomics</em>. Draft Version 3.0.1. <a href="https://juliogarin.com/files/textbook/GLS_Intermediate_Macro.pdf">https://juliogarin.com/files/textbook/GLS_Intermediate_Macro.pdf</a>.
+</div>
+<div id="ref-Solow1956" class="csl-entry" role="listitem">
+Solow, Robert M. 1956. <span>“A Contribution to the Theory of Economic Growth.”</span> <em>The Quarterly Journal of Economics</em> 70 (1): 65. <a href="https://doi.org/10.2307/1884513">https://doi.org/10.2307/1884513</a>.
+</div>
+</div>
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>An intermediate textbook treatment of the model can be found in chapter 5 of <span class="citation" data-cites="Garin2021">Garín, Lester, and Sims (<a href="#ref-Garin2021" role="doc-biblioref">2021</a>)</span>. A rigorous formal analysis is presented in chapter 2 of <span class="citation" data-cites="Acemoglu2009">Acemoglu (<a href="#ref-Acemoglu2009" role="doc-biblioref">2009</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>See <span class="citation" data-cites="Acemoglu2009">Acemoglu (<a href="#ref-Acemoglu2009" role="doc-biblioref">2009</a>)</span>, chap.&nbsp;2.7, for details. Labour-augmenting technical progress is also called Harrod-neutral.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./an_sfc_model.html" class="pagination-link" aria-label="A Stock-Flow Consistent Model of the Monetary Circuit">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">A Stock-Flow Consistent Model of the Monetary Circuit</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./additional_resources.html" class="pagination-link" aria-label="Additional Online Resources">
+        <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Additional Online Resources</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>An open-source platform for macroeconomic model simulation.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a>License: …</a><a></a> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a></p>
+</div>
+  </div>
+</footer>
+
+
+</body></html>

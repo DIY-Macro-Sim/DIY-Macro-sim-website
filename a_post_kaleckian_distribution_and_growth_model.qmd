@@ -1,4 +1,4 @@
-# A Post-Kaleckian Distribution and Growth Model
+# A Post-Kaleckian Distribution and Growth Model {#sec-post-kaleckian}
 
 ## Overview
 
