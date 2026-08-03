@@ -539,4 +539,52 @@ Complex Systems},
   publisher = {Oxford University Press (OUP)},
 }
 
+@Book{Acemoglu2009,
+  author    = {Daron Acemoglu},
+  publisher = {Princeton University Press},
+  title     = {Introduction to Modern Economic Growth},
+  year      = {2009},
+}
+
+@Article{Akcigit2023,
+  author    = {Akcigit, Ufuk and Ates, Sina T.},
+  journal   = {Journal of Political Economy},
+  title     = {What Happened to US Business Dynamism?},
+  year      = {2023},
+  issn      = {1537-534X},
+  month     = aug,
+  number    = {8},
+  pages     = {2059--2124},
+  volume    = {131},
+  doi       = {10.1086/724289},
+  publisher = {University of Chicago Press},
+}
+
+@Article{Covarrubias2020,
+  author    = {Covarrubias, Matias and Gutiérrez, Germán and Philippon, Thomas},
+  journal   = {NBER Macroeconomics Annual},
+  title     = {From Good to Bad Concentration? US Industries over the Past 30 Years},
+  year      = {2020},
+  issn      = {1537-2642},
+  month     = jan,
+  pages     = {1--46},
+  volume    = {34},
+  doi       = {10.1086/707169},
+  publisher = {University of Chicago Press},
+}
+
+@Article{Akcigit2021,
+  author    = {Akcigit, Ufuk and Ates, Sina T.},
+  journal   = {American Economic Journal: Macroeconomics},
+  title     = {Ten Facts on Declining Business Dynamism and Lessons from Endogenous Growth Theory},
+  year      = {2021},
+  issn      = {1945-7715},
+  month     = jan,
+  number    = {1},
+  pages     = {257--298},
+  volume    = {13},
+  doi       = {10.1257/mac.20180449},
+  publisher = {American Economic Association},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
