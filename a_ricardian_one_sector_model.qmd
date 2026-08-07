@@ -44,9 +44,9 @@ $$
 N_t = N_{t-1} + \gamma (w_{t-1} - w^S)
 $$ {#eq-ricardo1_N}
 
-where $Y_t$, $A$, $N_t$, $W_t$, $K_t$,$w_t$, $Y_t$, $MPL_t$, $R_t$, $P_t$, and $w^S$ are real output (measured in units of corn), productivity, employment, the real wage bill (or wage fund), the capital stock, the real wage rate, the marginal product of labour, rents, profits, and the subsistence wage, respectively.
+where $Y_t$, $A$, $N_t$, $W_t$, $K_t$,$w_t$, $MPL_t$, $R_t$, $P_t$, and $w^S$ are real output (measured in units of corn), productivity, employment, the real wage bill (or wage fund), the capital stock, the real wage rate, the marginal product of labour, rents, profits, and the subsistence wage, respectively.
 
-@eq-ricardo1_Y is the production function with $\alpha \in (0,1)$, i.e. exhibiting diminishing marginal returns to labour.[^a_ricardian_one_sector_model-3] By @eq-ricardo1_W, the wage fund is defined as the capital stock of this model (reflecting the fact that the production of corn only involves labour). @eq-ricardo1_w defines the real wage rate. @eq-ricardo1_w specifies the marginal product of labour. @eq-ricardo1_R captures the determination of (differential) rents as a negative function of the marginal product of labour.[^a_ricardian_one_sector_model-4] Thus, the lower the productivity on the marginal land, the higher the rents. In @eq-ricardo1_P, profits are determined residually. Capital accumulation in @eq-ricardo1_K is driven by the reinvestment of profits (with $\beta$ determining the proportion of profits that are reinvested). Finally, @eq-ricardo1_N specifies population dynamics, whereby the population increases whenever the actual real wage is above the subsistence wage, echoing the Malthusian population mechanism.
+@eq-ricardo1_Y is the production function with $a \in (0,1)$, i.e. exhibiting diminishing marginal returns to labour.[^a_ricardian_one_sector_model-3] By @eq-ricardo1_W, the wage fund is defined as the capital stock of this model (reflecting the fact that the production of corn only involves labour). @eq-ricardo1_w defines the real wage rate. @eq-ricardo1_w specifies the marginal product of labour. @eq-ricardo1_R captures the determination of (differential) rents as a negative function of the marginal product of labour.[^a_ricardian_one_sector_model-4] Thus, the lower the productivity on the marginal land, the higher the rents. In @eq-ricardo1_P, profits are determined residually. Capital accumulation in @eq-ricardo1_K is driven by the reinvestment of profits (with $\beta$ determining the proportion of profits that are reinvested). Finally, @eq-ricardo1_N specifies population dynamics, whereby the population increases whenever the actual real wage is above the subsistence wage, echoing the Malthusian population mechanism.
 
 [^a_ricardian_one_sector_model-3]: @Pasinetti1960 specifies a generic function $f(N_t)$ with $f(0) \geq$ 0, $f'(0) > w^*$, and $f''(N_t) < 0$. @eq-ricardo1_Y satisfies these conditions.
 
@@ -159,7 +159,7 @@ for (i in 1:S){
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")
@@ -238,9 +238,12 @@ for i in range(S):
 
 ### Plots
 
-Figure 1 displays employment, capital accumulation, and income for the baseline scenario. Starting from a below-equilibrium level of population, the economy grows in terms of output, capital, and employment but then approaches what Ricardo famously called a 'stationary state'. Figure 2 shows that during the adjustment phase, the MPL declines reflecting diminishing marginal returns in the production of corn. This captures the idea that a growing economy will have to utilise less fertile lands. The real wage is initially below the MPL, allowing for profits. Over time, the MPL and actual real wage converge to the exogenously given subsistence wage. Figure 3 shows that profits initially increase but are then squeezed to zero as differential rents increase.
+@fig-ricardo1-baseline displays employment, capital accumulation, and income for the baseline scenario. Starting from a below-equilibrium level of population, the economy grows in terms of output, capital, and employment but then approaches what Ricardo famously called a 'stationary state'. @fig-ricardo1-wages shows that during the adjustment phase, the MPL declines reflecting diminishing marginal returns in the production of corn. This captures the idea that a growing economy will have to utilise less fertile lands. The real wage is initially below the MPL, allowing for profits. Over time, the MPL and actual real wage converge to the exogenously given subsistence wage. @fig-ricardo1-profits-rents shows that profits initially increase but are then squeezed to zero as differential rents increase.
 
-```{r ricardo1_2}
+```{r}
+#| label: fig-ricardo1-baseline
+#| fig-cap: Employment, capital accumulation, and income
+
 # Set start and end periods for plots
 Tmax=280
 Tmin =10
@@ -248,46 +251,60 @@ Tmin =10
 ## Baseline
 #Employment, capital accumulation, and income
 plot(N[1, Tmin:(Tmax+1)],type="l", lwd=2, lty=1, xlim=range(0:(Tmax)), ylab = '', xlab = '')
-title(main="Figure 1: Employment, capital accumulation, and income",ylab = 'N', xlab = 'Time', cex=0.8, line=2)
+title(ylab = 'N', xlab = 'Time', cex=0.8, line=2)
 par(mar = c(5, 4, 4, 4) + 0.3)
 par(new = TRUE)
 plot(K[1, Tmin:Tmax],type="l", col=1, lwd=2, lty=2, font.main=1,cex.main=1,ylab = '', axes=FALSE,
      xlab = '',ylim = range(Y[1, 2:(Tmax+1)]),cex.axis=1,cex.lab=0.75)
 lines(Y[1, Tmin:(Tmax+1)],lty=3, lwd=2)
-axis(side = 4, at = pretty(range(Y[1, 2:(Tmax+1)])))  
+axis(side = 4, at = pretty(range(Y[1, 2:(Tmax+1)])), tcl = 0.5)
 mtext("K, Y", side = 4, line = 2)
 legend("bottomright", legend=c("N", "K", "Y"),
        lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
 
+```
+
+```{r}
+#| label: fig-ricardo1-wages
+#| fig-cap: Real wage, marginal product of labour, and subsistence wage
+
 # Real wage, subsistence wage, and MPL
-plot(w[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlim=range(0:(Tmax)), xlab="", ylab="", ylim=range(wS[1, Tmin:Tmax],w[1, Tmin:(Tmax)])) 
-title(main="Figure 2: Real wage, marginal product of labour, and subsistence wage", xlab = 'Time',cex=0.8,line=2)
+plot(w[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlim=range(0:(Tmax)), xlab="", ylab="", ylim=range(wS[1, Tmin:Tmax],w[1, Tmin:(Tmax)]))
+title(xlab = 'Time',cex=0.8,line=2)
 lines(MPL[1, Tmin:Tmax],lty=2)
 lines(wS[1, Tmin:Tmax],lty=3)
 legend("topright", legend=c("w", "MPL", "wS"),
        lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
 
+```
+
+```{r}
+#| label: fig-ricardo1-profits-rents
+#| fig-cap: Profits and rents
+
 # Profits and Rents
-plot(P[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlim=range(0:(Tmax)), xlab="", ylab="", ylim=range(P[1, Tmin:Tmax])) 
-title(main="Figure 3: Profits and rents", xlab = 'Time',cex=0.8,line=2)
+plot(P[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlim=range(0:(Tmax)), xlab="", ylab="", ylim=range(P[1, Tmin:Tmax]))
+title(xlab = 'Time',cex=0.8,line=2)
 par(mar = c(5, 4, 4, 4) + 0.3)
 par(new = TRUE)
-plot(R[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=2, xlim=range(0:(Tmax)), xlab="", ylab="P", 
-     ylim=range(R[1, 3:Tmax]), axes=FALSE) 
-axis(side = 4, at = pretty(range(R[1, Tmin:(Tmax+1)])))  
+plot(R[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=2, xlim=range(0:(Tmax)), xlab="", ylab="P",
+     ylim=range(R[1, 3:Tmax]), axes=FALSE)
+axis(side = 4, at = pretty(range(R[1, Tmin:(Tmax+1)])), tcl = 0.5)
 mtext("R", side = 4, line = 2)
 legend("right", legend=c("P", "R"), lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
 
-
 ```
 
-Figure 4 displays capital accumulation under the different scenarios described in Table 1. As expected, both forms of technical change boost both the speed of capital accumulation and the equilibrium level of capital. An increase in the subsistence wage reduces the pace of capital accumulation and leads to a lower equilibrium level of capital.
+@fig-ricardo1-scenarios displays capital accumulation under the different scenarios described in Table 1. As expected, both forms of technical change boost both the speed of capital accumulation and the equilibrium level of capital. An increase in the subsistence wage reduces the pace of capital accumulation and leads to a lower equilibrium level of capital.
 
-```{r ricardo1_3}
+```{r}
+#| label: fig-ricardo1-scenarios
+#| fig-cap: Capital accumulation under different scenarios
+
 ## Different scenarios
 # Capital accumulation
 plot(K[1, Tmin:(Tmax+1)],type="l", lwd=2, lty=1, xlim=range(0:(Tmax)), ylim=range(K[1, 2:Tmax], K[2, Tmin:Tmax]), ylab = '', xlab = '')
-title(main="Figure 4: Capital accumulation under different scenarios",ylab = 'K', xlab = 'Time',cex=0.8, line=2)
+title(ylab = 'K', xlab = 'Time',cex=0.8, line=2)
 lines(K[2, Tmin:(Tmax+1)],lty=2, lwd=2)
 lines(K[3, Tmin:(Tmax+1)],lty=3, lwd=2)
 lines(K[4, Tmin:(Tmax+1)],lty=4, lwd=2)
@@ -324,7 +341,6 @@ ax2.set_ylabel('Y, K', rotation=0)
 lines, labels = ax1.get_legend_handles_labels() #collect legend in one box
 lines2, labels2 = ax2.get_legend_handles_labels()
 ax2.legend(lines + lines2, labels + labels2, loc=5)
-plt.title("Figure 1: Employment, capital accumulation, and income")
 plt.show()
 ```
 
@@ -334,7 +350,10 @@ plt.show()
 
 Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.
 
-```{r ricardo1_4, message=FALSE}
+```{r message=FALSE}
+#| label: fig-ricardo1-dag
+#| fig-cap: Directed graph of Ricardian One-Sector Model
+
 ## Create directed graph
 # Construct auxiliary Jacobian matrix for 10 variables: Y W w MPL R P K N A wS,
 # where non-zero elements in regular Jacobian are set to 1 and zero elements are unchanged
@@ -360,7 +379,7 @@ dg= graph_from_adjacency_matrix(A_mat, mode="directed", weighted= NULL)
 V(dg)$name=c("Y", "W", "w", "MPL", "R", "P", "K", "N", "A", expression(w^S))
 
 # Plot directed graph
-plot(dg, main="Figure 5: Directed graph of Ricardian One-Sector Model", vertex.size=20, vertex.color="lightblue", 
+plot(dg, vertex.size=20, vertex.color="lightblue",
      vertex.label.color="black", edge.arrow.size=0.3, edge.width=1.1, edge.size=1.2,
      edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
      vertex.frame.color="NA", margin=-0.08)
@@ -408,13 +427,12 @@ nx.draw_networkx(G, pos, node_size=500, node_color="lightblue",
                  arrowstyle='->', font_size=12, font_color="black",
                  with_labels=True, labels=nodelabs)
 plt.axis("off")
-plt.title("Figure 5: Directed graph of Ricardian One-Sector Model")
 plt.show()
 ```
 
 :::
 
-In Figure 5, it can be seen that productivity ($A$) and the subsistence wage ($w^S$) are the key exogenous variables that impact income and the marginal product of labour, and population dynamics, respectively. Most other variables are endogenous and form a closed loop (or cycle) within the system. Profits are a residual. The directed graph illustrates the supply-driven nature of the model, where productivity determines employment and distribution, which in turn feed back into income and capital accumulation. At the same time, income distribution has an exogenous element in the form of the subsistence wage, which feeds into the system.
+In @fig-ricardo1-dag, it can be seen that productivity ($A$) and the subsistence wage ($w^S$) are the key exogenous variables that impact income and the marginal product of labour, and population dynamics, respectively. Most other variables are endogenous and form a closed loop (or cycle) within the system. Profits are a residual. The directed graph illustrates the supply-driven nature of the model, where productivity determines employment and distribution, which in turn feed back into income and capital accumulation. At the same time, income distribution has an exogenous element in the form of the subsistence wage, which feeds into the system.
 
 ## Analytical discussion {#sec-ricardo_1_analytical}
 
@@ -425,7 +443,7 @@ K_t = (1-\beta)K_{t-1}+\beta(aA N_{t-1}^a )
 $$ $$
 N_t = N_{t-1} +\gamma\left(\frac{K_{t-1}}{N_{t-1}} -w^S\right) 
 $$ The Jacobian matrix is given by: $$
-J(K, N)=\begin{bmatrix} 1-\beta& \beta a^2AN^{\alpha-1} \\\frac{\gamma}{N} & 1-\frac{\gamma K}{N^2} \end{bmatrix}.
+J(K, N)=\begin{bmatrix} 1-\beta& \beta a^2AN^{a-1} \\\frac{\gamma}{N} & 1-\frac{\gamma K}{N^2} \end{bmatrix}.
 $$
 
 From equations @eq-ricardo1_K and @eq-ricardo1_N, it can readily be seen that an equilibrium is reached when $$

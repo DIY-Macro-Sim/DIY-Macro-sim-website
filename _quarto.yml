@@ -15,7 +15,7 @@ book:
     left: |
        An open-source platform for macroeconomic model simulation. 
     right: |
-      <a>License: ...<a/> <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a>
+      License: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (text) / <a href="https://opensource.org/license/mit/">MIT</a> (code) &middot; <a href="https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website">Source code</a>
 
   site-url: https://github.com/DIY-Macro-Sim
   repo-url: https://github.com/DIY-Macro-Sim/DIY-Macro-sim-website
@@ -41,18 +41,18 @@ book:
     - part: "Dynamic Models"
       chapters:
         - intro_stability_analysis.qmd
-        - a_new_keynesian_3_equation_model.qmd
-        - a_conflict_inflation_model.qmd
-        - a_sraffian_supermultiplier_model.qmd
         - a_malthusian_model.qmd
         - a_ricardian_one_sector_model.qmd
         - a_ricardian_two_sector_model.qmd
         - a_Lewis_model.qmd
-        - a_Hicks_model.qmd
+        - a_Solow_model.qmd
+        - a_sraffian_supermultiplier_model.qmd
         - a_Kaldor_model.qmd
+        - a_Hicks_model.qmd
+        - a_new_keynesian_3_equation_model.qmd
+        - a_conflict_inflation_model.qmd
         - an_evolutionary_game_theoretic_model.qmd
         - an_sfc_model.qmd
-        - a_Solow_model.qmd
     - additional_resources.qmd
     
 bibliography: references_macrosimulation.bib

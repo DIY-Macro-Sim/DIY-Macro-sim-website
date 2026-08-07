@@ -39,7 +39,7 @@ $$
 $$ {#eq-evolutionary_alpha-dot}
 
 $$
-\dot{\beta}=\beta_t( \pi^G_{t} - \bar{\pi})
+\dot{\beta}=\beta_t( \pi^P_{t} - \bar{\pi})
 $$ {#eq-evolutionary_beta-dot}
 
 $$
@@ -156,7 +156,7 @@ for (i in 1:S){
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")

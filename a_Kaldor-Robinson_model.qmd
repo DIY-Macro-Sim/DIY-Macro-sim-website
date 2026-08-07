@@ -3,7 +3,7 @@
 ## Overview
 In the 1950s and 1960s in Cambridge UK, Nicholas Kaldor and Joan Robinson developed a theory of growth that aimed to apply John Maynard Keynes' principle of effective demand to the long run.^[See @hein_distribution_2014, chap. 4 for a detailed treatment.] The main Keynesian assumption retained by Kaldor and Robinson was that investment and saving are independent, and that a change in investment may lead to an adjustment in saving. However, unlike Keynes, Kaldor and Robinson assumed a fixed level of capacity utilisation, which they considered a key feature of a long-run equilibrium. As a result, goods market clearing cannot be established via output adjustment. Instead, Kaldor and Robinson assumed price adjustment, which would translate into a change in income distribution. Changes in the distribution of income then affect consumption (and saving), as workers tend to have a higher marginal propensity to consume than capital owners. For example, an increase in investment demand due to improved animal spirits would then lead to excess demand, which raises the price level. For a given level of nominal wages, the rise in the price level lowers real wages, leading to a redistribution of income towards profits. The resulting rise in the profit share increases aggregate saving, thereby leading to an adjustment of saving to investment. Taken together, the Kaldor-Robinson approach highlights the relevance of supply constraints in the long run that can lead to inflationary outcomes of demand shocks.
 
-We consider a simple version of the model proposed in @hein_distribution_2014, chap. 4.4. This is a model of long-run steady state growth. In the steady state, all endogenous variables grow at the same rate.^[All variables are normalised by the capital stock and thus rendered stationary.] Changes in parameters or exogenous variables lead to an instantaneous adjustment of the model's variables, so that the model can be analysed like a static one. The key question addressed by this model is a how changes in aggregate demand affects income distribution and the rate of growth. 
+We consider a simple version of the model proposed in @hein_distribution_2014, chap. 4.4. This is a model of long-run steady state growth. In the steady state, all endogenous variables grow at the same rate.^[All variables are normalised by the capital stock and thus rendered stationary.] Changes in parameters or exogenous variables lead to an instantaneous adjustment of the model's variables, so that the model can be analysed like a static one. The key question addressed by this model is how changes in aggregate demand affect income distribution and the rate of growth. 
 
 ## The Model
 
@@ -30,7 +30,7 @@ $$ {#eq-h-kr}
 
 where $r$, $s$, $c$, $g$, and $h$ are the profit rate, the saving rate, the consumption rate, the investment rate, and the profit share, respectively.
 
-@eq-r-kr decomposes the profit rate into the product of the profit share $h$ (total profits over total output), the normal rate of capacity utilisation ($u_n$), and the inverse of $v$ (the capital-potential output ratio). Let $Y$ be output, $K$ be the capital stock, and $Y^P$ be potential output, then the decomposition can also be written as $r=\frac{\Pi}{K}=\frac{\Pi}{Y}\frac{Y}{Y^P}\frac{Y^P}{K}$. The normal rate of capacity utilisation and the capital-potential output ratio are taken to be exogenous in this model. Note also that the wage share is given by $1-h$. By @eq-s-kr, the economy-wide saving rate is given by saving out of profits ($s_\Pi r$). It is assumed that workers don't save, i.e. have a higher marginal propensity to consume than capital owners. @eq-c-kr simply states that consumption is income not saved. According to @eq-c-kr, investment is determined by an autonomous component $g_0$ that may capture Keynesian 'animal spirits' and by the profit rate. The profit rate may stimulate investment if firms use adaptive expectations and predict higher future profits in response to an increase in the current profit rate. Finally, @eq-h-kr is the goods market equilibrium condition $g=s$ solved for the profit share, reflecting the fact that prices are assumed to clear the goods market which translates into an adjustment of the profit share.
+@eq-r-kr decomposes the profit rate into the product of the profit share $h$ (total profits over total output), the normal rate of capacity utilisation ($u_n$), and the inverse of $v$ (the capital-potential output ratio). Let $Y$ be output, $K$ be the capital stock, and $Y^P$ be potential output, then the decomposition can also be written as $r=\frac{\Pi}{K}=\frac{\Pi}{Y}\frac{Y}{Y^P}\frac{Y^P}{K}$. The normal rate of capacity utilisation and the capital-potential output ratio are taken to be exogenous in this model. Note also that the wage share is given by $1-h$. By @eq-s-kr, the economy-wide saving rate is given by saving out of profits ($s_\Pi r$). It is assumed that workers don't save, i.e. have a higher marginal propensity to consume than capital owners. @eq-c-kr simply states that consumption is income not saved. According to @eq-g-kr, investment is determined by an autonomous component $g_0$ that may capture Keynesian 'animal spirits' and by the profit rate. The profit rate may stimulate investment if firms use adaptive expectations and predict higher future profits in response to an increase in the current profit rate. Finally, @eq-h-kr is the goods market equilibrium condition $g=s$ solved for the profit share, reflecting the fact that prices are assumed to clear the goods market which translates into an adjustment of the profit share.
 
 
 ## Simulation
@@ -135,7 +135,7 @@ for (i in 1:S){
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")
@@ -220,7 +220,7 @@ for i in range(S):
 
 Figures @fig-profshare-kaldor-robinson - @fig-growth-kaldor-robinson depict the response of the model's key endogenous variables to changes in aggregate demand. A rise in animal spirits (scenario 2) raises the profit share. This reduces consumption. However, the effect on capital accumulation and thus growth is positive. In that sense, long-run growth is demand-driven, despite the fixed rate of capacity utilisation. 
 
-```{r kaldor-robinson2}
+```{r}
 #| label: fig-profshare-kaldor-robinson
 #| fig-cap: Profit share
 
@@ -231,7 +231,7 @@ barplot(h_star, ylab="h", names.arg=c("1: baseline", "2: rise animal spirits", "
 In the second scenario, the saving propensity of capital owners increases. This constitutes a reduction in aggregate demand, leading to a fall in the profit share, and a fall in the growth rate. Since $g=s$, the effect reflects the Keynesian 'paradox of saving': a rise in the saving propensity leads to a fall in the aggregate saving rate.
 
 
-```{r kaldor-robinson3}
+```{r}
 #| label: fig-consumption-kaldor-robinson
 #| fig-cap: Rate of consumption
 
@@ -239,7 +239,7 @@ barplot(c_star, ylab="c", names.arg=c("1: baseline", "2: rise animal spirits", "
 
 ```
 
-```{r kaldor-robinson4}
+```{r}
 #| label: fig-growth-kaldor-robinson
 #| fig-cap: Rate of growth
 

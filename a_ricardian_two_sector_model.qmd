@@ -69,7 +69,7 @@ $$
 N_t = N_{t-1} + \gamma (w_{t-1} - w^S)
 $$ {#eq-ricardo2_N}
 
-where $Y_t$, $A$, $N_t$, $W_t$, $K_t$,$w_t$, $Y_t$, $MPL_t$, $R_t$, $P_t$, $p$, and $w^S$ are real output, productivity, employment, the real wage bill (or wage fund), the capital stock (in terms of corn), the real wage rate (in terms of corn), the marginal product of labour (in the corn sector), rents, profits, prices, and the subsistence wage, respectively. The subscripts 1 and 2 denote the corn, i.e. agricultural, sector and the luxury goods sectors, respectively.
+where $Y_t$, $A$, $N_t$, $W_t$, $K_t$,$w_t$, $MPL_t$, $R_t$, $P_t$, $p$, and $w^S$ are real output, productivity, employment, the real wage bill (or wage fund), the capital stock (in terms of corn), the real wage rate (in terms of corn), the marginal product of labour (in the corn sector), rents, profits, prices, and the subsistence wage, respectively. The subscripts 1 and 2 denote the corn, i.e. agricultural, sector and the luxury goods sectors, respectively.
 
 @eq-ricardo2_Y is the production function with $\alpha \in (0,1)$, i.e. exhibiting diminishing marginal returns to labour.[^a_ricardian_two_sector_model-3] By @eq-ricardo2_W, the wage fund is defined as the capital stock of this model (reflecting the fact that the production of corn only involves labour). @eq-ricardo2_w defines the real wage rate. @eq-ricardo2_w specifies the marginal product of labour. By @eq-ricardo2_N1, employment in agriculture is residually determined after employment in the luxury goods sector has been determined (more on this below) @eq-ricardo2_R captures the determination of (differential) rents as a negative function of the marginal product of labour.[^a_ricardian_two_sector_model-4] Thus, the lower the productivity on the marginal land, the higher the rents. By @eq-ricardo2_P1, profits in agriculture are determined residually. Equation @eq-ricardo2_p1 specifies price determination and captures Ricardo's labour theory of value according to which the value of a good (net of rent) is determined by the quantity of labour required to produce it. [^a_ricardian_two_sector_model-5]
 
@@ -233,7 +233,7 @@ for (i in 1:S){
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")
@@ -325,9 +325,12 @@ for i in range(S):
 
 ### Plots
 
-Figures 1-4 illustrate the model's dynamics under the baseline parameterisation. Starting from below-equilibrium levels, the economy grows in terms of output, capital, and employment but then approaches what Ricardo famously called a 'stationary state'. Figure 3 shows that during the adjustment phase, the MPL declines, reflecting diminishing marginal returns in agriculture. This captures the idea that a growing economy will have to utilise less fertile lands. The real wage is driven up until it is equal to the MPL. Figure 4 shows that total profits initially increase but are then squeezed to zero as differential rents increase.
+@fig-ricardo2-emp-cap - @fig-ricardo2-profits-rents illustrate the model's dynamics under the baseline parameterisation. Starting from below-equilibrium levels, the economy grows in terms of output, capital, and employment but then approaches what Ricardo famously called a 'stationary state'. @fig-ricardo2-wages shows that during the adjustment phase, the MPL declines, reflecting diminishing marginal returns in agriculture. This captures the idea that a growing economy will have to utilise less fertile lands. The real wage is driven up until it is equal to the MPL. @fig-ricardo2-profits-rents shows that total profits initially increase but are then squeezed to zero as differential rents increase.
 
-```{r ricardo2_2}
+```{r}
+#| label: fig-ricardo2-emp-cap
+#| fig-cap: Employment and capital accumulation
+
 # Set start and end periods for plots
 Tmax=100
 Tmin=6
@@ -335,74 +338,110 @@ Tmin=6
 ## Baseline
 #Employment and capital accumulation
 plot(N[1, Tmin:(Tmax+1)],type="l", lwd=2, lty=1, xlim=range(0:(Tmax)), ylab = '', xlab = '')
-title(main="Figure 1: Employment and capital accumulation",ylab = 'N', xlab = 'Time', cex=0.8, line=2)
+title(ylab = 'N', xlab = 'Time', cex=0.8, line=2)
 par(mar = c(5, 4, 4, 4) + 0.3)
 par(new = TRUE)
 plot(K[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=2, font.main=1,cex.main=1,ylab = '', axes=FALSE,
      xlab = '',ylim = range(K[1, Tmin:(Tmax+1)]), cex=0.8)
-axis(side = 4, at = pretty(range(K[1, 2:(Tmax+1)])))  
+axis(side = 4, at = pretty(range(K[1, 2:(Tmax+1)])), tcl = 0.5)
 mtext("K", side = 4, line = 2)
 legend("bottomright", legend=c("N", "K"),
        lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
 
+```
+
+```{r}
+#| label: fig-ricardo2-output
+#| fig-cap: Output in agriculture and luxuries
+
 #Output in the two sectors
-plot(Y1[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlim=range(0:(Tmax)), xlab="", ylab="", ylim=range(Y1[1, Tmin:Tmax],Y2[1, Tmin:(Tmax)])) 
-title(main="Figure 2: Output in agriculture and luxuries", xlab = 'Time',cex=0.8 ,line=2)
+plot(Y1[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlim=range(0:(Tmax)), xlab="", ylab="", ylim=range(Y1[1, Tmin:Tmax],Y2[1, Tmin:(Tmax)]))
+title(xlab = 'Time',cex=0.8 ,line=2)
 lines(Y2[1, Tmin:(Tmax+1)],lty=2)
 legend("bottomright", legend=c("Y1", "Y2"),
        lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
 
+```
+
+```{r}
+#| label: fig-ricardo2-wages
+#| fig-cap: Real wage, marginal product of labour, and subsistence wage
+
 # Real wage, MPL, and subsistence wage
-plot(w[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlim=range(0:(Tmax)), xlab="", ylab="", ylim=range(wS[1, Tmin:Tmax],w[1, Tmin:(Tmax)])) 
-title(main="Figure 3: Real wage, marginal product of labour, and subsistence wage", xlab = 'Time',cex=0.8,line=2)
+plot(w[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlim=range(0:(Tmax)), xlab="", ylab="", ylim=range(wS[1, Tmin:Tmax],w[1, Tmin:(Tmax)]))
+title(xlab = 'Time',cex=0.8,line=2)
 lines(MPL[1, Tmin:Tmax],lty=2)
 lines(wS[1, Tmin:Tmax],lty=3)
 legend("topright", legend=c("w", "MPL", "wS"),
        lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
 
+```
+
+```{r}
+#| label: fig-ricardo2-profits-rents
+#| fig-cap: Total profits and rents
+
 # Total Profits and Rents
-plot(P[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlim=range(0:(Tmax)), xlab="", ylab="", ylim=range(P[1, Tmin:Tmax],R[1, Tmin:(Tmax)])) 
-title(main="Figure 4: Total profits and rents", xlab = 'Time',cex=0.8,line=2)
+plot(P[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, xlim=range(0:(Tmax)), xlab="", ylab="", ylim=range(P[1, Tmin:Tmax],R[1, Tmin:(Tmax)]))
+title(xlab = 'Time',cex=0.8,line=2)
 lines(R[1, Tmin:(Tmax+1)],lty=2)
 legend("right", legend=c("P", "R"),
        lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
 ```
 
-Figures 5 and 6 display capital accumulation under the five different scenarios described in Table 1. Technical change that increases productivity in agriculture (scenarios 2 and 3) raises the speed of capital accumulation and the equilibrium level of capital. By contrast, an increase in productivity in the luxury good sector (scenario 4) has no effect on capital accumulation. This is because productivity in sector 2 has no effects on functional income distribution.[^a_ricardian_two_sector_model-9] An increase in the initial stock of capital (scenario 5) raises the steady state value. Thus, economies with larger initial endowments will reach a higher level of income in the stationary state.
+@fig-ricardo2-capital-scen1 and @fig-ricardo2-capital-scen2 display capital accumulation under the five different scenarios described in Table 1. Technical change that increases productivity in agriculture (scenarios 2 and 3) raises the speed of capital accumulation and the equilibrium level of capital. By contrast, an increase in productivity in the luxury good sector (scenario 4) has no effect on capital accumulation. This is because productivity in sector 2 has no effects on functional income distribution.[^a_ricardian_two_sector_model-9] An increase in the initial stock of capital (scenario 5) raises the steady state value. Thus, economies with larger initial endowments will reach a higher level of income in the stationary state.
 
 [^a_ricardian_two_sector_model-9]: The increase in $a_2$ does raise real output and profits in sector 2 but it leaves total profits unchanged.
 
-```{r ricardo2_3}
+```{r}
+#| label: fig-ricardo2-capital-scen1
+#| fig-cap: Capital accumulation under different scenarios (pt 1)
+
 ## Scenarios
 # Capital accumulation under scenarios 1-3
 plot(K[1, Tmin:(Tmax+1)],type="l", lwd=2, lty=1, xlim=range(0:(Tmax)), ylim=range(K[1, Tmin:Tmax], K[2, Tmin:Tmax]), ylab = '', xlab = '')
-title(main="Figure 5: Capital accumulation under different scenarios (pt 1)",ylab = 'K', xlab = 'Time',cex=0.8, line=2)
+title(ylab = 'K', xlab = 'Time',cex=0.8, line=2)
 lines(K[2, Tmin:(Tmax+1)],lty=2, lwd=2)
 lines(K[3, Tmin:(Tmax+1)],lty=3, lwd=2)
 legend("topleft", legend=c("1: baseline","2: productivity boost I", "3: productivity boost II"), lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
 
+```
+
+```{r}
+#| label: fig-ricardo2-capital-scen2
+#| fig-cap: Capital accumulation under different scenarios (pt 2)
+
 # Capital accumulation under scenarios 1, 4+5
 plot(K[1, Tmin:(Tmax+1)],type="l", lwd=2, lty=1, xlim=range(0:(Tmax)), ylim=range(K[1, Tmin:Tmax], K[5, Tmin:Tmax]), ylab = '', xlab = '')
-title(main="Figure 6: Capital accumulation under different scenarios (pt 2)",ylab = 'K', xlab = 'Time',cex=0.8, line=2)
+title(ylab = 'K', xlab = 'Time',cex=0.8, line=2)
 lines(K[4, Tmin:(Tmax+1)],lty=2, lwd=2)
 lines(K[5, Tmin:(Tmax+1)],lty=3, lwd=2)
 legend("topleft", legend=c("1: baseline","4: productivity boost III", "5: higher subsist. wage"), lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
 ```
 
-Figures 7 and 8 show the dynamics of relative prices (corn price relative to luxury good price) for the different scenarios. Over time, corn becomes more expensive in relative turns due to diminishing marginal returns. Improvements in labour productivity reduce the relative price of the respective sector in line with the labour theory of value.
+@fig-ricardo2-relprices1 and @fig-ricardo2-relprices2 show the dynamics of relative prices (corn price relative to luxury good price) for the different scenarios. Over time, corn becomes more expensive in relative turns due to diminishing marginal returns. Improvements in labour productivity reduce the relative price of the respective sector in line with the labour theory of value.
 
-```{r ricardo2_4}
+```{r}
+#| label: fig-ricardo2-relprices1
+#| fig-cap: Relative prices under different scenarios (pt 1)
+
 # Relative prices under scenarios 1 - 3
 relpr=p1/p2
-plot(relpr[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, font.main=1,cex.main=1, 
-     main="Figure 7: Relative prices under different scenarios (pt 1)",ylab = 'p1/p2',xlab = 'Time',ylim = range(relpr[1, Tmin:(Tmax+1)], relpr[2, Tmin:(Tmax+1)]),cex=0.8)
+plot(relpr[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, font.main=1,cex.main=1,
+     ylab = 'p1/p2',xlab = 'Time',ylim = range(relpr[1, Tmin:(Tmax+1)], relpr[2, Tmin:(Tmax+1)]),cex=0.8)
 lines(relpr[2, Tmin:(Tmax+1)],lty=2, lwd=2)
 lines(relpr[3, Tmin:(Tmax+1)],lty=3, lwd=2)
 legend("bottomright", legend=c("1: baseline", "2: productivity boost I", "3: productivity boost II"),lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
 
+```
+
+```{r}
+#| label: fig-ricardo2-relprices2
+#| fig-cap: Relative prices under different scenarios (pt 2)
+
 # Relative prices under scenarios 1, 4-5
-plot(relpr[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, font.main=1,cex.main=1, 
-     main="Figure 8: Relative prices under different scenarios (pt 2)",ylab = 'p1/p2',xlab = 'Time',ylim = range(relpr[1, Tmin:(Tmax+1)], relpr[4, Tmin:(Tmax+1)]),cex=0.8)
+plot(relpr[1, Tmin:(Tmax+1)],type="l", col=1, lwd=2, lty=1, font.main=1,cex.main=1,
+     ylab = 'p1/p2',xlab = 'Time',ylim = range(relpr[1, Tmin:(Tmax+1)], relpr[4, Tmin:(Tmax+1)]),cex=0.8)
 lines(relpr[4, Tmin:(Tmax+1)],lty=2, lwd=2)
 lines(relpr[5, Tmin:(Tmax+1)],lty=3, lwd=2)
 legend("bottomright", legend=c("1: baseline", "4: productivity boost III", "5: higher subsist. wage"), lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
@@ -438,7 +477,6 @@ ax2.set_ylabel('K', rotation=0)
 lines, labels = ax1.get_legend_handles_labels() #collect legend in one box
 lines2, labels2 = ax2.get_legend_handles_labels()
 ax2.legend(lines + lines2, labels + labels2, loc=5)
-plt.title("Figure 1: Employment and capital accumulation")
 plt.show()
 
 ```
@@ -451,7 +489,10 @@ Another perspective on the model's properties is provided by its directed graph.
 
 [^a_ricardian_two_sector_model-10]: Valuation effects from changes in relative prices were omitted for simplicity.
 
-```{r ricardo2_5, message=FALSE}
+```{r message=FALSE}
+#| label: fig-ricardo2-dag
+#| fig-cap: Directed graph of Ricardian Two-Sector Model
+
 ## Create directed graph
 # Construct auxiliary Jacobian matrix for 18 variables: 
 #(1)Y1 (2)N1 (3)MPL (4)R (5)P1 (6)p1 (7)Y2 (8)w (9)N2 (10)p2 (11)P2
@@ -493,7 +534,7 @@ V(dg)$name=c(expression(Y[1]), expression(N[1]), "MPL", "R", expression(P[1]),
              expression(a[1]), expression(a[2]), expression(w^S))
 
 # Plot directed graph (using a tree-like layout)
-plot(dg, layout = layout_as_tree(dg), main="Figure 9: Directed graph", vertex.size=22, vertex.color="lightblue", 
+plot(dg, layout = layout_as_tree(dg), vertex.size=22, vertex.color="lightblue",
      vertex.label.color="black", edge.arrow.size=0.3, edge.width=1.1, edge.size=1.2,
      edge.arrow.width=1.2, edge.color="black", vertex.label.cex=0.8, 
      vertex.frame.color="NA", margin=0.08)
@@ -556,14 +597,13 @@ nx.draw_networkx(G, pos, node_size=200, node_color="lightblue",
                  arrowstyle='->', font_size=8, font_color="black",
                  with_labels=True, labels=nodelabs)
 plt.axis("off")
-plt.title("Figure: Directed graph of Ricardian Two-Sector Model")
 plt.show()
 
 ```
 
 :::
 
-In Figure 9, it can be seen that productivity in agriculture ($A$ and $a_1$) are key exogenous variables that impact income in sector 1 and the marginal product of labour. The subsistence wage ($w^S$) is another exogenous variable that impacts the system through its effect on population dynamics. Productivity in the luxuries sector ($a_2$) feeds into the system via employment.ost other variables are endogenous and form a closed loop (or cycle) within the system. Profits are a residual. The directed graph illustrates the supply-driven nature of the agricultural sector, where (marginal) productivity determine employment and distribution. By contrast, the luxury goods sector is demand-determined with employment being the residual. Profits determine capital accumulation, which in turn provides funds that can be used to hire more agricultural workers. A higher subsistence wage reduces capital accumulation as it leaves fewer profits to be reinvested.
+In @fig-ricardo2-dag, it can be seen that productivity in agriculture ($A$ and $a_1$) are key exogenous variables that impact income in sector 1 and the marginal product of labour. The subsistence wage ($w^S$) is another exogenous variable that impacts the system through its effect on population dynamics. Productivity in the luxuries sector ($a_2$) feeds into the system via employment. Most other variables are endogenous and form a closed loop (or cycle) within the system. Profits are a residual. The directed graph illustrates the supply-driven nature of the agricultural sector, where (marginal) productivity determine employment and distribution. By contrast, the luxury goods sector is demand-determined with employment being the residual. Profits determine capital accumulation, which in turn provides funds that can be used to hire more agricultural workers. A higher subsistence wage reduces capital accumulation as it leaves fewer profits to be reinvested.
 
 ## Analytical discussion
 
@@ -571,8 +611,8 @@ To analyse the dynamics, combine @eq-ricardo2_Y to @eq-ricardo2_P and substitute
 
 $$
 K_t = (1-\beta)K_{t-1}+\beta(a_1^{a_1}A N_{t-1}^{a_1} )
-$$ $$ 
-N_t = N\_{t-1} +\gamma\left(\frac{K_{t-1}}{N_{t-1}} -w^S\right)
+$$ $$
+N_t = N_{t-1} +\gamma\left(\frac{K_{t-1}}{N_{t-1}} -w^S\right)
 $$ The Jacobian matrix is given by:
 
 $$
@@ -634,10 +674,10 @@ K[1,Q]
 
 ### Examine model properties (here for the baseline scenario only)
 # Construct Jacobian matrix at the equilibrium 
-J=matrix(c(1-beta, 
+J=matrix(c(1-beta,
            beta*a1[1,Q]*wS[1,Q],
-           gamma*(wS[1,Q]/((a1[i,Q]^a1[i,Q])*A[1,Q]))^(1/(1-a1[1,Q])),
-           1-gamma*(a1[i,Q]^a1[i,Q])*A[1,Q]*(wS[1,Q]/((a1[i,Q]^a1[i,Q])*A[1,Q]))^((2-a1[1,Q])/(1-a1[1,Q]))), 2, 2, byrow=TRUE)
+           gamma*(wS[1,Q]/((a1[1,Q]^a1[1,Q])*A[1,Q]))^(1/(1-a1[1,Q])),
+           1-gamma*(a1[1,Q]^a1[1,Q])*A[1,Q]*(wS[1,Q]/((a1[1,Q]^a1[1,Q])*A[1,Q]))^((2-a1[1,Q])/(1-a1[1,Q]))), 2, 2, byrow=TRUE)
 
 # Obtain eigenvalues
 ev=eigen(J)
@@ -655,7 +695,7 @@ print(1-det>0)
 # Check specific stability condition for the case beta=1
 for (i in 1:S){
 print(paste0("Scenario ", i, ":"))
-print(2-gamma*((a1[i,Q]^a1[i,Q])*A[i,Q]*(wS[i,Q]/(((a1[i,Q]^a1[i,Q])*A[i,Q])))^((2-a1[i,Q])/(1-a1[i,Q]))) + a1[i,Q]*wS[i,Q]*(wS[i,Q]/(((a1[i,Q]^a1[i,Q])*A[i,Q]))^(1/(1-a1[i,Q])))>0)
+print(2-gamma*(((a1[i,Q]^a1[i,Q])*A[i,Q]*(wS[i,Q]/((a1[i,Q]^a1[i,Q])*A[i,Q]))^((2-a1[i,Q])/(1-a1[i,Q]))) + (a1[i,Q]*wS[i,Q]*(wS[i,Q]/((a1[i,Q]^a1[i,Q])*A[i,Q]))^(1/(1-a1[i,Q]))))>0)
 }
 ```
 

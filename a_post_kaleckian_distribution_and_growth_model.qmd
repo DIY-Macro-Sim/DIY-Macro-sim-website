@@ -14,7 +14,7 @@ r=h \frac{u}{v}
 $$ {#eq-r}
 
 $$
-s=[s_W + (s_\Pi - s_W)h]\frac{u}{v}, \quad 0 \geq s_W > s_\Pi \geq 1
+s=[s_W + (s_\Pi - s_W)h]\frac{u}{v}, \quad 0 \leq s_W < s_\Pi \leq 1
 $$ {#eq-s}
 
 $$
@@ -31,9 +31,9 @@ $$ {#eq-u}
 
 where $r$, $s$, $c$, $g$, and $u$ are the profit rate, the saving rate, the consumption rate, the investment rate, and the rate of capacity utilisation, respectively.
 
-@eq-r decomposes the profit rate into the product of the profit share $h$ (total profits over total output), the rate of capacity utilisation (actual output over potential output), and the inverse of $v$ (the capital-potential output ratio). Let $Y$ be output, $K$ be the capital stock, and $Y^P$ be potential output, the decomposition can also be written as $r=\frac{\Pi}{K}=\frac{\Pi}{Y}\frac{Y}{Y^P}\frac{Y^P}{K}$. The profit share and the capital-potential output ratio are taken to be exogenous in this model. Note also that the wage share is given by $1-h$. By @eq-s, the economy-wide saving rate is given by the sum of saving out of wages ($s_W(1-h)\frac{u}{v}$) and saving out of profits ($s_\Pi h\frac{u}{v}$). It is assumed that workers have a higher marginal propensity to consume than capital owners ($s_W>s_\Pi$). @eq-c simply states that consumption is income not saved. According to @eq-c, investment is determined by an autonomous component $g_0$ that may capture Keynesian `animal spirits', by the rate of capacity utilisation, and by the profit share. While the rate of capacity utilisation is a signal of (future) demand, the profit share may stimulate investment as internal funds are typically the cheapest source of finance. Finally, @eq-u is an equilibrium condition that assumes that the rate of capacity utilisation adjusts to clear the goods market.
+@eq-r decomposes the profit rate into the product of the profit share $h$ (total profits over total output), the rate of capacity utilisation (actual output over potential output), and the inverse of $v$ (the capital-potential output ratio). Let $Y$ be output, $K$ be the capital stock, and $Y^P$ be potential output, the decomposition can also be written as $r=\frac{\Pi}{K}=\frac{\Pi}{Y}\frac{Y}{Y^P}\frac{Y^P}{K}$. The profit share and the capital-potential output ratio are taken to be exogenous in this model. Note also that the wage share is given by $1-h$. By @eq-s, the economy-wide saving rate is given by the sum of saving out of wages ($s_W(1-h)\frac{u}{v}$) and saving out of profits ($s_\Pi h\frac{u}{v}$). It is assumed that workers have a higher marginal propensity to consume than capital owners ($s_W<s_\Pi$). @eq-c simply states that consumption is income not saved. According to @eq-c, investment is determined by an autonomous component $g_0$ that may capture Keynesian `animal spirits', by the rate of capacity utilisation, and by the profit share. While the rate of capacity utilisation is a signal of (future) demand, the profit share may stimulate investment as internal funds are typically the cheapest source of finance. Finally, @eq-u is an equilibrium condition that assumes that the rate of capacity utilisation adjusts to clear the goods market.
 
-The key question addressed by this model is a how a change in the profit share affects the rate of capacity utilisation and the rate of growth.^[@bhaduri_unemployment_1990 further discuss the effects on the profit rate.] As shown formally in the analytical discussion below, there is no unambiguous answer to this question as the model encompasses different regimes. Three main regimes can be identified. First, a regime in which both the rate of utilisation and the rate of growth are negatively affected by an increase in the profit share. We will call this a wage-led demand and growth regime (WLD/WLG). Second, a regime in which the rate of utilisation is negatively affected and the rate of growth is positively affected by an increase in the profit share. We will call this a wage-led demand regime and profit-led growth regime (WLD/PLG). Third, a regime in which both the rate of utilisation and the rate of growth are positively affected by an increase in the profit share. We will call this a profit-led demand and growth regime (PLD/PLG).
+The key question addressed by this model is how a change in the profit share affects the rate of capacity utilisation and the rate of growth.^[@bhaduri_unemployment_1990 further discuss the effects on the profit rate.] As shown formally in the analytical discussion below, there is no unambiguous answer to this question as the model encompasses different regimes. Three main regimes can be identified. First, a regime in which both the rate of utilisation and the rate of growth are negatively affected by an increase in the profit share. We will call this a wage-led demand and growth regime (WLD/WLG). Second, a regime in which the rate of utilisation is negatively affected and the rate of growth is positively affected by an increase in the profit share. We will call this a wage-led demand regime and profit-led growth regime (WLD/PLG). Third, a regime in which both the rate of utilisation and the rate of growth are positively affected by an increase in the profit share. We will call this a profit-led demand and growth regime (PLD/PLG).
 
 ## Simulation
 
@@ -179,7 +179,7 @@ for (i in 1:S){
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")
@@ -300,7 +300,7 @@ for i in range(S):
 
 Figures @fig-utilisation-pkdg - @fig-profit-rate-pkdg depict the response of the model's key endogenous variables to changes in the profit share. In the first case of a wage-led demand and growth regime (WLD/WLG), investment is equally sensitive to a change in the rate of capacity utilisation ($g_1$) and a change in the profit share ($g_2$). A rise in the profit share reduces consumption, which reduces the rate of capacity utilisation and the rate of growth. This is despite a positive effect on the profit rate.^[If the negative effect on the rate of capacity utilisation was stronger, the profit rate could fall as well. See the analytical discussion for a formal derivation of the condition under which this may happen.] 
 
-```{r pkdg2}
+```{r}
 #| label: fig-utilisation-pkdg
 #| fig-cap: Rate of capacity utilisation
 
@@ -310,7 +310,7 @@ barplot(u_star, ylab="u", names.arg=c("1a:baseline WLD/WLG", "1b:rise prof share
 
 In the second case where the demand regime is wage-led but the growth regime is profit-led (WLD/PLG), investment is slightly less sensitive to a change in the rate of capacity utilisation compared to a change in the profit share. The rise in the profit share reduces consumption and the rate of utilisation, but the ultimate effect on investment is positive because investment reacts more strongly to the rise in the profit share than to the fall in demand.
 
-```{r pkdg3}
+```{r}
 #| label: fig-growth-pkdg
 #| fig-cap: Rate of growth
 
@@ -322,7 +322,7 @@ barplot(g_star, ylab="g", names.arg=c("1:baseline WLD/WLG", "2:rise prof share",
 
 Finally, in the third case where the demand regime and the growth regime are profit-led, investment is again equally sensitive to a change in the rate of capacity utilisation and to a change in the profit share, but now animal spirits are negative. A rise in the profit share now has strong positive effects on investment, which raises the rate of capacity utilisation and consumption.
 
-```{r pkdg4}
+```{r}
 #| label: fig-consumption-pkdg
 #| fig-cap: Rate of consumption
 
@@ -333,7 +333,7 @@ barplot(c_star, ylab="c", names.arg=c("1:baseline WLD/WLG", "2:rise prof share",
 ```
 
 
-```{r pkdg5}
+```{r}
 #| label: fig-profit-rate-pkdg
 #| fig-cap: Rate of profit
 

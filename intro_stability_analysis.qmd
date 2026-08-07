@@ -1,5 +1,5 @@
 # An Introduction to the Analysis of Dynamic Models {#sec-stab_analysis}
-To build and analyse dynamic models, we need to understand the dynamics of *state variables*, which are a function of their own previous values: $y_t=h(y_{t-1})$. The state variables govern the dynamics of the entire model (including the non-state variables). Typically, as model has multiple state variables that interact with each other over time. As shown in @sec-how-to-simulate, we can simulate dynamic models numerically for a specific parameterisation. However, to study their dynamics in general, we need to mathematically analyse a *system of difference (or differential) equations*. This chapter provides a basic introduction to the mathematical tools to do this. It will help you understand the analytical discussions in the chapters on dynamic models but can be skipped if you are mostly interested in numerical simulation.
+To build and analyse dynamic models, we need to understand the dynamics of *state variables*, which are a function of their own previous values: $y_t=h(y_{t-1})$. The state variables govern the dynamics of the entire model (including the non-state variables). Typically, a model has multiple state variables that interact with each other over time. As shown in @sec-how-to-simulate, we can simulate dynamic models numerically for a specific parameterisation. However, to study their dynamics in general, we need to mathematically analyse a *system of difference (or differential) equations*. This chapter provides a basic introduction to the mathematical tools to do this. It will help you understand the analytical discussions in the chapters on dynamic models but can be skipped if you are mostly interested in numerical simulation.
 
 ## Solution of a single first-order linear difference equation
 
@@ -48,9 +48,9 @@ For the case of a first-order difference equation, we can distinguish the follow
 
 -   if $a_1=1$ and $a_0 =0$, then $y_t$ will not grow or fall forever, but it will also not approach a unique equilibrium (so-called Lyapunov stability)
 
-To better understand the last two cases, note that if $a_1=1$, a different (more general) approach to finding the particular solution is required: the so-called *method of undetermined coefficients*. This method consists of substituting a trial solution that contains undetermined coefficients into the difference equation and then attempting to solve for those coefficients. If the trial solution allows to pin down unique values for the coefficients, it constitute a valid particular solution.
+To better understand the last two cases, note that if $a_1=1$, a different (more general) approach to finding the particular solution is required: the so-called *method of undetermined coefficients*. This method consists of substituting a trial solution that contains undetermined coefficients into the difference equation and then attempting to solve for those coefficients. If the trial solution allows to pin down unique values for the coefficients, it constitutes a valid particular solution.
 
-In the case above where $a_1 \neq 1$, we could have used the trial solution $y_t=y_{t-1}=y^*$ and then solve for $y$ to obtain $\frac{a_0}{1-a}$ as the particular solution. In the case where $a_1=1$ and $a_0 \neq 0$, we can use the trial solution $y^*=kt$, which is a growing equilibrium. This yields $y_t = k(t-1) + a_0$, which solves for $k=a_0$, so that we can conclude $y^*=a_0t$. This explains why we obtain linear growth. If $a_1=1$ and $a_0 =0$, we have $y_t=y_{t-1}$, so that the equilibrium is given by the initial condition $y_0$.
+In the case above where $a_1 \neq 1$, we could have used the trial solution $y_t=y_{t-1}=y^*$ and then solve for $y$ to obtain $\frac{a_0}{1-a_1}$ as the particular solution. In the case where $a_1=1$ and $a_0 \neq 0$, we can use the trial solution $y^*=kt$, which is a growing equilibrium. This yields $y_t = k(t-1) + a_0$, which solves for $k=a_0$, so that we can conclude $y^*=a_0t$. This explains why we obtain linear growth. If $a_1=1$ and $a_0 =0$, we have $y_t=y_{t-1}$, so that the equilibrium is given by the initial condition $y_0$.
 
 ## Solution of a linear system of difference equations
 
@@ -68,7 +68,7 @@ $$
 y_t= \underbrace{(I-A)^{-1}a_0}_{y^*} + A^t[y_0- \underbrace{(I-A)^{-1}a_0}_{y^*}].
 $$
 
-The problem with this generic solution is that it is difficult to assess what is going on: the dynamics of any variable in $y_t$ will depend on a lengthy combination of the parameters in $A$ that result from repeated matrix multiplication ($A^t=A\times A\times A\times A...$). This makes it is impossible to assess whether the system converges to the particular solution. To address this problem, we can use a tool from linear algebra called *matrix diagonalisation*. Under certain conditions, a matrix $A$ can be decomposed into the product of three matrices in which the matrix in the middle is diagonal. As we will see, this trick has a useful application to our problem.
+The problem with this generic solution is that it is difficult to assess what is going on: the dynamics of any variable in $y_t$ will depend on a lengthy combination of the parameters in $A$ that result from repeated matrix multiplication ($A^t=A\times A\times A\times A...$). This makes it impossible to assess whether the system converges to the particular solution. To address this problem, we can use a tool from linear algebra called *matrix diagonalisation*. Under certain conditions, a matrix $A$ can be decomposed into the product of three matrices in which the matrix in the middle is diagonal. As we will see, this trick has a useful application to our problem.
 
 A matrix $A$ is diagonalisable if there is a diagonal matrix $D$ and an invertible matrix $P$ such that $A=PDP^{-1}$. A major advantage of this decomposition is the following property: $A^n = (PDP^{-1})^n = PD^nP^{-1}$.[^intro_stability_analysis-2] Thus, the $nth$ power of the matrix $A$, which typically yields very cumbersome expressions, simplifies to $PD^nP^{-1}$, where the $nth$ power of $D$ is simply applied to each individual element on the main diagonal thanks to $D$ being a diagonal matrix. As a result, diagonalisation allows us to write the complementary function in the solution to a system of difference equations as: $PD^tP^{-1}y_0$. We can further define a vector of arbitrary constants $c=P^{-1}y_0$ so that the complementary function becomes $PD^tc$. The solution then takes the form $y_t = y^* + PD^tP^{-1}[y_0- y^*] = y^* + PD^tc$
 
@@ -133,7 +133,7 @@ evecs_norm
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")
@@ -224,7 +224,7 @@ c
 
 ## Compute solution manually for y2 at t=10 and compare with simulated solution
 t=10
-evecs_norm[2,1]*c[1,1]*evals[1]^t + evecs_norm[2,1]*c[2,1]*evals[2]^t # analytical solution
+evecs_norm[2,1]*c[1,1]*evals[1]^t + evecs_norm[2,2]*c[2,1]*evals[2]^t # analytical solution
 y2[,t+1] # simulated solution
 
 # Plot dynamics of y2/y1
@@ -274,9 +274,9 @@ c = np.linalg.inv(evecs_norm).dot(y0)
 c
 
 ## Compute solution manually for y2 at t=10 and compare with simulated solution
-t = 10 +1
-evecs_norm[1, 1] * c[0] * evals[0] ** t + evecs_norm[1, 1] * c[1] * evals[1] ** t
-y2[t-1]
+t = 10
+evecs_norm[1, 0] * c[0] * evals[0] ** t + evecs_norm[1, 1] * c[1] * evals[1] ** t
+y2[t]
 
 
 # Calculate the ratio y2/y1
@@ -547,7 +547,7 @@ $$
 
 From this solution we can again deduce key information about the dynamics of the system based on the (complex) eigenvalues:
 
--   stability will depend on the modulus: for $R<$ the system will be stable, for $R>1$ it will be unstable
+-   stability will depend on the modulus: for $R<1$ the system will be stable, for $R>1$ it will be unstable
 -   from the nature of the trigonometric functions $\sin(\theta t)$ and $\cos(\theta t)$, we know that system will exhibit periodic cyclical dynamics as $t$ increases
 -   the length of the cycles will be given by $L=\frac{2\pi}{\theta}$ and the frequency by $F=1/L=\frac{\theta}{2\pi}$
 -   the amplitude of the cycles will depend on the elements of the eigenvectors, the initial conditions, and $R$.
@@ -638,7 +638,7 @@ plt.show()
 
 You can see that the model generates cycles with a length (from peak/trough to peak/trough) of around 7.5 periods. Since the modulus is $R<1$, the system is stable and eventually converges to the equilibrium. This type of cyclical dynamics is called *damped oscillations*.
 
-A general condition for stability of 2D systems with complex eigenvalues can be derived by making use of the fact that $R=\sqrt{h^2+m^2}= \sqrt{ \left( \frac{b}{2} \right) ^2 + \left(\frac{\sqrt{4c-b^2}}{2}i \right)^2} = \sqrt{c}$, where $b=tr(J)$ and $c=det(J)$. 
+A general condition for stability of 2D systems with complex eigenvalues can be derived by making use of the fact that $R=\sqrt{h^2+m^2}= \sqrt{ \left( \frac{b}{2} \right) ^2 + \left(\frac{\sqrt{4c-b^2}}{2} \right)^2} = \sqrt{c}$, where $b=tr(J)$ and $c=det(J)$. 
 
 Applied to the modulus of the Samuelson model, this yields $R=\sqrt{det(J)}=\sqrt{\beta c_1}$. Thus, the stability condition is:
 
@@ -732,7 +732,7 @@ $$
 y_{t}=Ay_{t-1}+B,
 $$
 
-where $A_{11}=\frac{\partial f^1(y^*)}{y_{1t-1}}$ and so forth. 
+where $A_{11}=\frac{\partial f^1(y^*)}{\partial y_{1t-1}}$ and so forth. 
 
 The matrix $A$ is the so-called *Jacobian matrix* of the system $f(y_{t-1})$ *evaluated at* $y^*$. The Jacobian matrix collects all partial derivatives of the state variables $y_t$ with respect to each other, i.e. $\frac{\partial y_{1t}}{\partial y_{1t-1}}$,  $\frac{\partial y_{1t}}{\partial y_{2t-1}}$, and so on.^[In this way, the Jacobian matrix can be regarded as a more general version of the coefficient matrix in linear systems.] The *linearised* Jacobian matrix $A$ can be obtained by plugging the equilibrium solutions for $y^*$ into the Jacobian.
 
@@ -749,7 +749,7 @@ From an modelling point of view, nonlinear dynamic systems are of considerable i
 ## Key takeaways
 -   dynamic models are systems of difference (or differential) equations
 -   the stability of a system depends on (a combination of) its coefficients
--   more generally, the system's dynamic properties (including stability) are encapsulated in the an matrix
+-   more generally, the system's dynamic properties (including stability) are encapsulated in the Jacobian matrix
 -   the dominant eigenvalue $\lambda$ (or modulus in the case of complex eigenvalues) of the Jacobian matrix indicates whether a system is
     -   stable ($|\lambda| < 1$) or unstable ($|\lambda| > 1$)
     -   acyclical ($\lambda \in \mathbb{R}$) or cyclical ($\lambda \in \mathbb{C}$)
@@ -791,15 +791,16 @@ Based on this typology, we can classify the dynamic models on this website as fo
 
 |   | Model | Dynamic Behaviour |
 |---|-------|-----------------|
-|@sec-NK  | A New Keynesian 3-Equation Model | Monotonic convergence |
-|@sec-inflation| A Conflict Inflation Model | Balanced exponential growth |
-|@sec-Sraffian| A Sraffian Supermultiplier Model | Damped oscillations |
 |@sec-malthus| A Malthusian Model | Monotonic convergence |
 |@sec-ricardo_1| A Ricardian One-Sector Model | Monotonic convergence |
 |@sec-ricardo_2| A Ricardian Two-Sector Model | Monotonic convergence |
 |@sec-lewis| A Lewis Model of Economic Development | Balanced exponential growth |
-|@sec-hicks| A Hicksian Business Cycle Model | (Quasi-) Limit cycle |
+|@sec-solow   | The Solow Growth Model | Monotonic convergence |
+|@sec-Sraffian| A Sraffian Supermultiplier Model | Damped oscillations |
 |@sec-kaldor| A Kaldorian Endogenous Business Cycle Model | Limit cycle |
+|@sec-hicks| A Hicksian Business Cycle Model | (Quasi-) Limit cycle |
+|@sec-NK  | A New Keynesian 3-Equation Model | Monotonic convergence |
+|@sec-inflation| A Conflict Inflation Model | Balanced exponential growth |
 |@sec-evolutionary   | An Evolutionary Game Theoretic Model | Monotonic convergence or Lyapunov stability |
 |@sec-sfc   | A Stock-Flow Consistent Model | Damped oscillations |
 

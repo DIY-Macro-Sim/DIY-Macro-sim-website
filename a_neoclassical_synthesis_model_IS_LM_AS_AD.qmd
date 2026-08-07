@@ -55,7 +55,7 @@ $$
 U=1-\frac{N}{N^f} 
 $$ {#eq-U-AS_AD}
 
-where $Y$, $C$, $I$, $G_0$, $T_0$, $r$, $M_s$, $M_d$, $w$, $A$, $K$, $N$, $W$, $P^e$ $N^f$, $P$, and $U$ are output, consumption, investment, (exogenous) government spending, (exogenous) taxes, the real interest rate on bonds, nominal money supply, nominal money demand, the real wage, productivity, the capital stock, employment, the nominal wage, the price level expected by workers, the labour force (or total available time for work), the actual price level, and the unemployment rate, respectively.
+where $Y$, $C$, $I$, $G_0$, $T_0$, $r$, $M_s$, $M_d$, $w$, $A$, $K$, $N$, $W$, $P^e$, $N^f$, $P$, and $U$ are output, consumption, investment, (exogenous) government spending, (exogenous) taxes, the real interest rate on bonds, nominal money supply, nominal money demand, the real wage, productivity, the capital stock, employment, the nominal wage, the price level expected by workers, the labour force (or total available time for work), the actual price level, and the unemployment rate, respectively.
 
 @eq-Y-AS_AD is the goods market equilibrium condition. Aggregate supply ($Y$) accommodates to the level of aggregate demand which is the sum of consumption, investment, and government spending. @eq-C-AS_AD is the consumption function consisting of autonomous consumption demand ($c_0$) and a marginal propensity to consume ($c_1$) out of disposable income ($Y-T_0$). Investment demand in @eq-I-AS_AD has an autonomous component ($i_0$) capturing Keynesian animal spirits and a component that is negatively related to the rate of interest on bonds. Government spending and taxation are exogenous. Similarly, the nominal money supply ($M_0$) in @eq-Ms-AS_AD is assumed to be exogenous. By @eq-Md-AS_AD, households' real money demand is positively related to income (capturing the transaction demand for money) and negatively related to the interest rate on bonds (capturing speculative demand). There is also an autonomous term ($m_0$) capturing Keynesian liquidity preference. Equilibrium in the money market @eq-M_eq-AS_AD yields an equation for the interest rate. 
 
@@ -208,7 +208,7 @@ for (i in 1:S){
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")
@@ -317,6 +317,12 @@ for i in range(S):
     Y_star[i] = Y
     C_star[i] = C
     I_star[i] = I
+    r_star[i] = r
+    N_star[i] = N
+    U_star[i] = U
+    P_star[i] = P
+    w_star[i] = w
+    W_star[i] = W
 ```
 
 ::: 
@@ -325,7 +331,7 @@ for i in range(S):
 
 Figures @fig-output - @fig-nominal-wage-neocl-macro depict the response of the model's key endogenous variables to various shifts. A fall in animal spirits (scenario 2) reduces aggregate demand and thereby output and employment (despite a fall in the interest rate). This reduces workers' nominal wage demands and thus the price level. An increase in productivity (scenario 3) has expansionary effects on output but adverse effects on employment. Higher productivity means that fewer workers need to be hired to produce the same level of output. However, the corresponding reduction in employment also reduces the price level, which lowers the (real) demand for money and thus lowers the interest rate. This has expansionary effects on output. 
 
-```{r neoclmacro2}
+```{r}
 #| label: fig-output-neocl-macro
 #| fig-cap: Output
 barplot(Y_star, ylab="Y", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise product.",
@@ -333,7 +339,7 @@ barplot(Y_star, ylab="Y", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:
 
 ```
 
-```{r neoclmacro3}
+```{r}
 #| label: fig-price-level-neocl-macro
 #| fig-cap: Price level
 barplot(P_star, ylab="P", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise product.",
@@ -342,7 +348,7 @@ barplot(P_star, ylab="P", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:
 ```
 
 
-```{r neoclmacro4}
+```{r}
 #| label: fig-interest_rate-neocl-macro
 #| fig-cap: Interest rate
 barplot(r_star, ylab="r", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise product.",
@@ -353,7 +359,7 @@ barplot(r_star, ylab="r", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:
 
 A rise in the expected price level (scenario 4) raises nominal wages and thereby the actual price level. This raises the interest rate, which exerts a (small) contractionary effect on output and employment. Scenarios 5 and 6 assess two different macroeconomic policy tools to stimulate output. A monetary expansion lowers the interest rate and increases output but also the price level. Similar results arise for a fiscal expansion. The main difference is that the monetary expansion lowers the interest rate, whereas the fiscal expansion increases it. \\
 
-```{r neoclmacro5}
+```{r}
 #| label: fig-unemployment-neocl-macro
 #| fig-cap: Unemployment rate
 barplot(U_star*100, ylab="U (%)", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:Rise product.",
@@ -362,7 +368,7 @@ barplot(U_star*100, ylab="U (%)", names.arg=c("1:Baseline", "2:Fall animal spiri
 ```
 
 
-```{r neoclmacro6}
+```{r}
 #| label: fig-nominal-wage-neocl-macro
 #| fig-cap: Nominal wage
 
@@ -371,7 +377,7 @@ barplot(W_star, ylab="W", names.arg=c("1:Baseline", "2:Fall animal spirits", "3:
 ```
 
 
-```{r neoclmacro7}
+```{r}
 #| label: fig-real-wage-neocl-macro
 #| fig-cap: Real wage
 
@@ -537,8 +543,8 @@ r&=\left(\frac{1}{m_2}\right)(m_0 - \frac{M_0}{P} + m_1Y).
 To obtain the AS-curve, substitute @eq-w-AS_AD, @eq-W-AS_AD, @eq-N-AS_AD, and @eq-C-AS_AD into @eq-P-AS_AD:
 
 \begin{align}\label{eq:AS}\tag{AS}
-P&=\frac{b(c_0-c_1T_0)+ P^ebc_1Y}{(1-a)\left[\left(AK^aY^{-a}\right)^{\frac{1}{1-a}} - \frac{Y}{N^f}\right]}.
-\end{align}	
+P&=\frac{P^eb\left[(c_0-c_1T_0)+ c_1Y\right]}{(1-a)\left[\left(AK^aY^{-a}\right)^{\frac{1}{1-a}} - \frac{Y}{N^f}\right]}.
+\end{align}
 
 It can readily be seen that the AS-curve is upward-sloping in the $(Y, P)$-space (recall that $a \in (0,1)$).
 

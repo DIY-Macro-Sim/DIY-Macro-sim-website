@@ -63,10 +63,10 @@ In this model, total output/income $Y$ is composed of expenditures on consumptio
 $$
   Y=C +\Delta IN = W + \Pi + i_LL + i_bB.
 $$ 
-The sectoral budget constraints are key to understand the financing decisions of each sectors. Starting with households, we know from the BSM that their net wealth consists of deposits and bonds: $V_H=M+p^BB$. Thus, the change in their net wealth is given by $\Delta V_H=\Delta M +\Delta Bp + \Delta pB$, where $\Delta p^B B$ represents capital gains on bonds. Using the output equation and the first column of the BSM, we have:
+The sectoral budget constraints are key to understand the financing decisions of each sectors. Starting with households, we know from the BSM that their net wealth consists of deposits and bonds: $V_H=M+p^BB$. Thus, the change in their net wealth is given by $\Delta V_H=\Delta M +p^B\Delta B + \Delta p^B B$, where $\Delta p^B B$ represents capital gains on bonds. Using the output equation and the first column of the BSM, we have:
 
 $$
-\Delta V_H = Y - C + \Delta pB,
+\Delta V_H = Y - C + \Delta p^B B,
 $$
 
 where $Y-C=\Delta M + \Delta B$, meaning that households can save either in the form of money or bonds, and that their total change in wealth is given by saving in those assets plus capital gains. Note that we assume that all net profits are distributed to the household sector.
@@ -154,7 +154,7 @@ The banking sector in this model is kept very simple. Banks make loans and issue
 Finally, equation @eq-sfc_pB represents the determination of corporate bond prices on financial markets. This equation is derived from the portfolio choice decisions of households, where it is assumed that households' desired share of bonds (at market value) in their total wealth is a function of rates of return as well as household income. Specifically, the underlying portfolio equation is:
 
 $$
-\frac{p^B_tB^D_t}{V_{Ht-1}} = \lambda_0 - \lambda_1 i_M + \lambda_2 \frac{i_B}{p^B_t} - \lambda_3 \frac{Y_t}{V_{Ht-1}}.
+\frac{p^B_tB^D_t}{V_{Ht-1}} = \lambda_0 - \lambda_1 i_M + \lambda_2 \frac{i_B}{p^B_t} - \lambda_3 \frac{Y_{t-1}}{V_{Ht-1}}.
 $$
 The term $\lambda_0$ represents autonomous demand for bonds (which is inversely related to liquidity preference, i.e. the autonomous demand for deposits) and the negative term $\lambda_1 i_M$ captures the foregone returns from holding deposits instead of bonds. The term $\lambda_2 \frac{i_B}{p^B_t}$ captures the positive effect of bond yields on bond demand. Note that we assume a fixed face value (or 'par value') of bonds of unity, so that the coupon rate coincides with the interest payments on the bond. Thus,  $\frac{i_B}{p^B_t}$ is the *yield* on corporate bonds, which is inversely related to bond prices. The last term in the bond demand equation represents the negative effect of income (relative to wealth) on bond demand, which stems from the transactions demand for deposit money. Using this equation for the bond demand of households with the bond supply of firms given by @eq-sfc_B, imposing equilibrium, and solving for $p^B_t$ gives @eq-sfc_pB.  
 
@@ -321,7 +321,7 @@ V_F = IN - L - p_B*B
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")
@@ -1101,7 +1101,7 @@ $$
 IN^*=\sigma Y^*
 $$
 $$
-p_t^{B*} = \frac{(\rho + i_M) \lambda_2}{\left( \beta \sigma + \lambda_3 \right) \left( \frac{\alpha_0 + \alpha_2 V_H^*}{V_H^*(1 - a_1)} \right) - (\lambda_0 - \lambda_1 i_M)}.
+p_t^{B*} = \frac{(\rho + i_M) \lambda_2}{\left( \beta \sigma + \lambda_3 \right) \left( \frac{\alpha_0 + \alpha_2 V_H^*}{V_H^*(1 - \alpha_1)} \right) - (\lambda_0 - \lambda_1 i_M)}.
 $$
 
 

@@ -5,7 +5,7 @@ This section provides a general introduction into the simulation of economic mod
 
 Why do we build formal economic models? Because they help us think carefully about the *causal mechanisms* that generate certain economic outcomes (e.g. unemployment). Models are especially useful when the variables of interest are inherently quantitative (e.g. the interest rate and unemployment) and when several of these quantitative variables interact with each other. More specifically, models provide a precise formal representation of a set of *interlinked* causal mechanisms that are often difficult to analyse informally.
 
-Every economic model essentially consist of three things:
+Every economic model essentially consists of three things:
 
 1.  a set of $N$ equations
 
@@ -134,7 +134,7 @@ C_eq
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")
@@ -200,11 +200,11 @@ Let's break this code down:
 
 -   place these equations inside a *for loop*
 
-    -   the loop says: repeat the segment of code insights the curly brackets 1000 times
+    -   the loop says: repeat the segment of code inside the curly brackets 1000 times
 
 -   nest the loop that solves the system in an outer loop that loops through different parameterisations (here for different values of $G_0$)
 
--   after the iterations loop is finished, save the results for the current pameterisation
+-   after the iterations loop is finished, save the results for the current parameterisation
 
 What happens is the following: in the first iteration, $Y$ and $C$ are calculated based on the initial values and the parameter values. In the second iteration, the values are then overwritten based on the results from the first iteration. This process continues 1000 times. In this way, the correct solution is successively approximated. If you have an analytical solution, you can compare it with the numerical one to double-check your results.
 
@@ -317,7 +317,7 @@ Q=100
 # Set number of parameterisations that will be considered
 S=2
 
-# Set period in which shock or shift in an will occur
+# Set period in which shock or shift will occur
 s=15
 
 # Set fixed parameter values
@@ -367,7 +367,7 @@ Q = 100
 # Set the number of parameterisations that will be considered
 S = 2
 
-# Set the period in which a shock or shift in 'an' will occur
+# Set the period in which a shock or shift will occur
 s = 15
 
 # Set fixed parameter values
@@ -417,11 +417,11 @@ The code solves the recursive system numerically through iteration. Let's again 
 
 -   place these equations inside a *for loop* that runs from $t=2$ to $Q$
 
-    -   the loop says: repeat the segment of code insights the curly brackets, each time with the index number $t$ shifted by $+1$ until $t=Q$
+    -   the loop says: repeat the segment of code inside the curly brackets, each time with the index number $t$ shifted by $+1$ until $t=Q$
 
 -   nest the loop that solves the system in an outer loop that loops through different parameterisations (here for $G_0$)
 
-Note that due to the exclusive presence of recursive equations, no loop is need that iterates the equations within every period. However, many dynamic models contain both simultaneous and recursive equations. In this case, a third loop inside the time loop is needed that iterates the equations within each period so as to solve the simultaneous equations. Otherwise, the approach to solving dynamic systems is not fundamentally different from the one for static systems.
+Note that due to the exclusive presence of recursive equations, no loop is needed that iterates the equations within every period. However, many dynamic models contain both simultaneous and recursive equations. In this case, a third loop inside the time loop is needed that iterates the equations within each period so as to solve the simultaneous equations. Otherwise, the approach to solving dynamic systems is not fundamentally different from the one for static systems.
 
 At the end of the simulation run, we can again compare the results from the numerical simulation with the analytical solution. However, what is perhaps more interesting is to trace the dynamic adjustment of the endogenous variables towards equilibrium. The best way to examine this is by plotting the results.
 
@@ -466,7 +466,7 @@ par(mar = c(5, 4, 4, 4) + 0.3)
 par(new = TRUE)
 plot(I[1, 1:100], type="l", col=1, lwd=2, lty=2, font.main=1, cex.main=1,ylab = '', axes=FALSE,
      xlab = '', ylim = range(I[1, 1:100]), cex=0.8)
-axis(side = 4, at=pretty(range(I[1, 1:100])))  
+axis(side = 4, at=pretty(range(I[1, 1:100])), tcl = 0.5)  
 mtext("I", side = 4, line = 3)
 legend("right", legend=c("C", "I"),
        lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
@@ -536,7 +536,7 @@ plt.show()
 
 Another perspective on a model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.
 
-The directed graph can be derived from the model's Jacobian matrix.[^how_to_simulate-1] Let $x$ be the vector containing the model's endogenous variables and $f(x)$ the system of equations making up the model. The Jacobian matrix is then given by $J=\frac{\partial f()}{\partial x}$. As we often also want to display exogenous variables in the directed graph, it can be useful to expand the Jacobian matrix by adding rows and columns for those exogenous variables.
+The directed graph can be derived from the model's Jacobian matrix.[^how_to_simulate-1] Let $x$ be the vector containing the model's endogenous variables and $f(x)$ the system of equations making up the model. The Jacobian matrix is then given by $J=\frac{\partial f(x)}{\partial x}$. As we often also want to display exogenous variables in the directed graph, it can be useful to expand the Jacobian matrix by adding rows and columns for those exogenous variables.
 
 [^how_to_simulate-1]: See @Fennell2015 for a neat exposition.
 
@@ -550,7 +550,7 @@ M_{ij} =
 \end{cases}
 $$
 
-Finally, taking the transpose of this \`auxiliary' Jacobian matrix yields the *adjacency matrix* $A=M^T$, which is a binary matrix whose elements ($A_{ji}$) indicate whether there is a directed edge from a node $x_j$ to node $x_i$. From the adjacency matrix, the directed graph is constructed. 
+Finally, taking the transpose of this 'auxiliary' Jacobian matrix yields the *adjacency matrix* $A=M^T$, which is a binary matrix whose elements ($A_{ji}$) indicate whether there is a directed edge from a node $x_j$ to node $x_i$. From the adjacency matrix, the directed graph is constructed. 
 
 The code below shows this for the example of the @Samuelson1939 model.^[To create the directed graph, we rely on external libraries which you may have to install first. In *R*, this can be accomplished with `install.packages("igraph")` and in Python with `pip install networkx`. Once that library is installed, you only need to activate it in each session before you use it. In 
 *R*, you can do this by executing `library(igraph)` and in *Python* through `import networkx`.]

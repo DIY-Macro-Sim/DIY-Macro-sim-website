@@ -2,7 +2,7 @@
 
 ## Overview
 
-This model captures some key features of W. Arthur @Lewis1954' two-sector model of the growth process of a developing country. The model describes the development process as one where a modern urban sector draws labour inputs from a traditional subsistence sector that is characterised by surplus labour, i.e. labour that does not produce any additional output (reflected in a zero marginal product). Workers in the traditional sector are paid a fixed subsistence wage. The presence of surplus labour allows the modern sector to attract workers from the traditional sector for a small wage premium above the subsistence wage. This enables the modern sector to make excess profits that are reinvested and thus drive rapid capital accumulation in the modern sector. As a result, the economy undergoes industrialisation. This process of rapid structural change comes to an end when the surplus labour in the traditional sector is depleted. Labour supply then becomes sensitive to the real wage, leading to a slowdown in the growth of profits and capital accumulation.
+This model captures some key features of W. Arthur @Lewis1954's two-sector model of the growth process of a developing country. The model describes the development process as one where a modern urban sector draws labour inputs from a traditional subsistence sector that is characterised by surplus labour, i.e. labour that does not produce any additional output (reflected in a zero marginal product). Workers in the traditional sector are paid a fixed subsistence wage. The presence of surplus labour allows the modern sector to attract workers from the traditional sector for a small wage premium above the subsistence wage. This enables the modern sector to make excess profits that are reinvested and thus drive rapid capital accumulation in the modern sector. As a result, the economy undergoes industrialisation. This process of rapid structural change comes to an end when the surplus labour in the traditional sector is depleted. Labour supply then becomes sensitive to the real wage, leading to a slowdown in the growth of profits and capital accumulation.
 
 We present a formal version of the model that is adapted from the graphical representation in @Todaro2015, pp. 124-127.
 
@@ -60,7 +60,7 @@ where the subscripts 1 and 2 refer to the traditional and modern sector, respect
 
 ### Parameterisation
 
-Table reports the parameterisation used in the simulation. All scenarios are initialised such that there is surplus labour ($L_{10} > \lambda$).
+Table 1 reports the parameterisation used in the simulation. All scenarios are initialised such that there is surplus labour ($L_{10} > \lambda$).
 
 **Table 1: Parameterisation**
 
@@ -203,7 +203,7 @@ PS2=(P2)/(Y2)
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")
@@ -324,7 +324,7 @@ PS2 = P2 / Y2
 
 @fig-output - @fig-capacc display the model's dynamics under the baseline scenario. The red vertical line marks the 'Lewis turning point', which is the period in which the surplus labour in the traditional sector is depleted $(L_{1t}<\lambda)$. It can be seen that before the Lewis turning point is reached, output in the modern sector grows exponentially thanks to the availability of cheap surplus labour whose employment comes with rising profits. After the turning point, output continues to increase but at a lower rate. This is because as the surplus labour in the traditional sector is depleted, the modern sector faces an upward-sloping labour supply curve. As a result, real wages increase and profits are reduced. This slows down capital accumulation and growth. In the traditional sector, output falls after the turning point as the sector now faces diminishing marginal return to labour.
 
-```{r lewis2, collapse=TRUE}
+```{r collapse=TRUE}
 #| label: fig-output
 #| fig-cap: Output in traditional (Y1) and modern (Y2) sector
 
@@ -343,7 +343,7 @@ legend("topleft", legend=c(expression(Y[1]), expression(Y[2])),
 ```
 
 
-```{r lewis3, collapse=TRUE}
+```{r collapse=TRUE}
 #| label: fig-employment
 #| fig-cap: Employment in traditional (L1) and modern (L2) sector
 
@@ -358,7 +358,7 @@ legend("right", legend=c(expression(L[1]), expression(L[2])),
 ```
 
 
-```{r lewis4, collapse=TRUE}
+```{r collapse=TRUE}
 #| label: fig-capacc
 #| fig-cap: Capital accumulation and profits in modern sector
 
@@ -370,16 +370,16 @@ par(mar = c(5, 4, 4, 4) + 0.3)
 par(new = TRUE)
 plot(K[1, Tmin:Tmax],type="l", col=1, lwd=2, lty=2, font.main=1,cex.main=1,ylab = '', axes=FALSE,
      xlab = '',ylim = range(K[1, Tmin:Tmax]),cex.axis=1,cex.lab=0.75)
-axis(side = 4, at = pretty(range(K[1, Tmin:Tmax])))  
+axis(side = 4, at = pretty(range(K[1, Tmin:Tmax])), tcl = 0.5)
 mtext(expression(K[2]), side = 4, line = 2)
 legend("bottomright", legend=c(expression(P[2]), expression(K[2])),
        lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
 
 ```
 
-@fig-wage and @fig-profshare illustrate the distributional implications of the model. Before the Lewis turning point, the profit share of the modern sector increases, as firms benefit from a real wage that is fixed below the marginal product of labour. After the turning point, real wages jump upwards and begin to increase further, gradually closing the gap with the marginal product. As a result, the profit share falls and embarks on a downward convergence to the level implied by the marginal product of labour.^[In equilibrium, where $L_{2t} - L_{2t-1} =0$, the real wage $w_2$ will be equal to the MPL in sector 2. The profit share is then constant and given by $\frac{P{_2}}{Y{_2}} = 1-\beta$.] The aggregate profit share broadly displays an inverted U-shaped pattern.
+@fig-wage and @fig-profshare illustrate the distributional implications of the model. Before the Lewis turning point, the profit share of the modern sector increases, as firms benefit from a real wage that is fixed below the marginal product of labour. After the turning point, real wages jump upwards and begin to increase further, gradually closing the gap with the marginal product. As a result, the profit share falls and embarks on a downward convergence to the level implied by the marginal product of labour.^[In equilibrium, where $L_{2t} - L_{2t-1} =0$, the real wage $w_2$ will be equal to the MPL in sector 2. The profit share is then constant and given by $\frac{P_2}{Y_2} = 1-\beta$.] The aggregate profit share broadly displays an inverted U-shaped pattern.
 
-```{r lewis5, collapse=TRUE}
+```{r collapse=TRUE}
 #| label: fig-wage
 #| fig-cap: Real wage and profit share in modern sector
 
@@ -391,14 +391,14 @@ par(mar = c(5, 4, 4, 4) + 0.3)
 par(new = TRUE)
 plot(w2[1, Tmin:Tmax],type="l", col=1, lwd=2, lty=2, font.main=1,cex.main=1,ylab = '', axes=FALSE, xlim=range(0:Tmax),
      xlab = '', ylim = range(w2[1, Tmin:Tmax]), cex.axis=1,cex.lab=0.75)
-axis(side = 4, at = pretty(range(w2[1, Tmin:Tmax])))  
+axis(side = 4, at = pretty(range(w2[1, Tmin:Tmax])), tcl = 0.5)
 mtext(expression(w[2]), side = 4, line = 2)
 legend("topleft", legend=c(expression(pi[2]), expression(w[2])),
        lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
 
 ```
 
-```{r lewis6, collapse=TRUE}
+```{r collapse=TRUE}
 #| label: fig-profshare
 #| fig-cap: Aggregate profit share
 
@@ -412,7 +412,7 @@ abline(v = tp[1], col = "darkred")
 @fig-scen2 compares output dynamics in the modern sector for the baseline scenario with scenario 2 in which the subsistence wage $w^s$ is fixed at a lower level and with scenario 3 in which the labour supply elasticity $\gamma$ the modern sector faces after the turning point is higher. It can be seen that for a lower subsistence wage, the modern sector grows faster and the Lewis turning point is reached earlier. For a higher labour supply elasticity, the labour supply curve after the turning point is steeper, which leads to a faster increase in the real wage, a stronger squeeze of profits, and thus slower output growth. These results illustrate the Classical nature of the model, whereby capital accumulation is driven by profits. Thus, any reduction in profits slows down the growth process.
 
 
-```{r lewis7, collapse=TRUE}
+```{r collapse=TRUE}
 #| label: fig-scen2
 #| fig-cap: Output in modern sector under different scenarios
 

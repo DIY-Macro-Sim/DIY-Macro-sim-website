@@ -45,7 +45,7 @@ M_s=M_0
 $$ {#eq-MS_NC}
 
 $$
-M_d=\frac{b_3(1+r_n)PC}{r_n}
+M_d=\frac{b_3(1+r_n)P\left[C+b_1\ln(1-N)\right]}{r_n}
 $$ {#eq-MD_NC}
 
 $$
@@ -53,9 +53,9 @@ M = M_d(P)= M_s
 $$ {#eq-M_eq_NC} 
 
 
-where $Y$, $K$, $N$, $w$, $C$, $G$, $r$, $I$, $r_n$, $\pi$, $M_s$, $M_d$, and $P_t$ are real output, the capital stock, employment, the real wage, consumption, government expenditures, the real interest rate, investment, the nominal interest rate, inflation, the money supply, money demand, and the price level, respectively. The $f$-superscript denotes (expected) future values. For simplicity, expected future variables will be treated as exogenous.
+where $Y$, $K$, $N$, $w$, $C$, $G$, $r$, $I$, $r_n$, $\pi$, $M_s$, $M_d$, and $P$ are real output, the capital stock, employment, the real wage, consumption, government expenditures, the real interest rate, investment, the nominal interest rate, inflation, the money supply, money demand, and the price level, respectively. The $f$-superscript denotes (expected) future values. For simplicity, expected future variables will be treated as exogenous.
 
-By @eq-Y_NC, output is determined by a Cobb-Douglass production function with constant returns to scale and diminishing marginal returns to each factor (capital and labour). @eq-w_NC is the labour demand of firms solved for the real wage. Profit maximising firms will hire workers until the real wage is equal to the marginal product of labour $\left(\frac{\partial Y}{\partial N}=(1-a)AK^aN^{-a}\right)$.^[See the analytical discussion below for a derivation of equations @eq-w_NC -@eq-I_NC and @eq-MD_NC from optimising microfoundations.] @eq-N_NC specifies households' labour supply, which is positively related to the real wage. By @eq-C_NC, consumption is positively related to the real wage, current and (expected) future income,^[Households are assumed to form rational expectations. In a deterministic setting, this implies perfect foresight so that expected and actual future income coincide.] and negatively related to the real interest rate. The composite parameters $c_1= \left(\frac{1}{1+b_2+b_3}\right)$ and $c_2= b_1(b_2+b_3)$ stem from the weights in the household's utility function (see analytical discussion below). The consumption function implies that for a higher real interest rate, households increase their saving (the supply of loanable funds). Furthermore, consumption is negatively related to current and future government expenditures. This is an implication of consumption smoothing: as households know that governments will have to repay its debts in the future through higher taxes, an increase in government expenditures today is perceived as an increase in taxes (regardless of whether the government finances its current expenditures through taxes or debt, a result that is also called 'Ricardian Equivalence').^[See the analytical discussion below for more details on Ricardian Equivalence.] @eq-I_NC specifies investment as a negative function of the real interest rate and a positive function of productivity. By @eq-G_NC, government expenditures are exogenous. @eq-Y_eq_NC is the goods market equilibrium condition, which pins down the equilibrium real interest rate through the market for loanable funds. @eq-rn_NC specifies the nominal interest rate using the well-known Fisher equation. @eq-MS_NC says that the money supply is exogenous. By @eq-MD_NC, households' money demand is negatively related to the nominal interest rate and positively related to consumption (capturing the transaction demand for money). Finally, @eq-M_eq_NC is the equilibrium condition for the money market, which pins down the price level.
+By @eq-Y_NC, output is determined by a Cobb-Douglass production function with constant returns to scale and diminishing marginal returns to each factor (capital and labour). @eq-w_NC is the labour demand of firms solved for the real wage. Profit maximising firms will hire workers until the real wage is equal to the marginal product of labour $\left(\frac{\partial Y}{\partial N}=(1-a)AK^aN^{-a}\right)$.^[See the analytical discussion below for a derivation of equations @eq-w_NC -@eq-I_NC and @eq-MD_NC from optimising microfoundations.] @eq-N_NC specifies households' labour supply, which is positively related to the real wage. By @eq-C_NC, consumption is positively related to the real wage, current and (expected) future income,^[Households are assumed to form rational expectations. In a deterministic setting, this implies perfect foresight so that expected and actual future income coincide.] and negatively related to the real interest rate. The composite parameters $c_1= \left(\frac{1}{1+b_2+b_3}\right)$ and $c_2= b_1(b_2+b_3)$ stem from the weights in the household's utility function (see analytical discussion below). The consumption function implies that for a higher real interest rate, households increase their saving (the supply of loanable funds). Furthermore, consumption is negatively related to current and future government expenditures. This is an implication of consumption smoothing: as households know that governments will have to repay its debts in the future through higher taxes, an increase in government expenditures today is perceived as an increase in taxes (regardless of whether the government finances its current expenditures through taxes or debt, a result that is also called 'Ricardian Equivalence').^[See the analytical discussion below for more details on Ricardian Equivalence.] @eq-I_NC specifies investment as a negative function of the real interest rate and a positive function of productivity. By @eq-G_NC, government expenditures are exogenous. @eq-Y_eq_NC is the goods market equilibrium condition, which pins down the equilibrium real interest rate through the market for loanable funds. @eq-rn_NC specifies the nominal interest rate using the well-known Fisher equation. @eq-MS_NC says that the money supply is exogenous. By @eq-MD_NC, households' money demand is negatively related to the nominal interest rate and positively related to the composite consumption-leisure term $C+b_1\ln(1-N)$ that also appears in the marginal utility of consumption (capturing the transaction demand for money). Since $\ln(1-N)$ is decreasing in employment, money demand is thus increasing in consumption but decreasing in employment, holding consumption fixed. Finally, @eq-M_eq_NC is the equilibrium condition for the money market, which pins down the price level.
 
 ## Simulation
 
@@ -69,7 +69,7 @@ Table 1 reports the parameterisation used in the simulation. Besides a baseline 
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1: baseline | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 1 | 1 | 5 | 5 | 0.02 |
 | 2: monetary expansion ($M_{0}$) | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 1 | 1 | 6 | 5 | 0.02 |
-| 3: fiscal expansion ($G_{0}$) | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 2 | 1 | 6 | 5 | 0.02 |
+| 3: fiscal expansion ($G_{0}$) | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 1.3 | 1 | 6 | 5 | 0.02 |
 | 4: productivity boost ($A$) | 2.5 | 0.3 | 0.4 | 0.9 | 0.6 | 1 | 1 | 5 | 5 | 0.02 |
 | 5: lower expected future income ($Y^{f}$) | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 1 | 0.2 | 5 | 5 | 0.02 |
 | 6: increased preference for leisure ($b_{1}$) | 2 | 0.3 | 0.8 | 0.9 | 0.6 | 1 | 1 | 5 | 5 | 0.02 |
@@ -109,7 +109,7 @@ b1[]=0.4
 
 # Set parameter values for different scenarios
 M0[2]=6   # scenario 2: monetary expansion 
-G0[3]=2   # scenario 3: fiscal expansion
+G0[3]=1.3 # scenario 3: fiscal expansion
 A[4]=2.5  # scenario 4: productivity boost
 Yf[5]=0.2 # scenario 5: lower expected future income
 b1[6]=0.8 # scenario 6: increased preference for leisure
@@ -154,7 +154,7 @@ for (iterations in 1:1000){
   rn = r + pe
   
   #(8) Price level
-  P = (M0[i]*rn)/((1+rn)*b3*C) 
+  P = (M0[i]*rn)/((1+rn)*b3*(C+b1[i]*log(1-N)))
 
 }
   
@@ -179,7 +179,7 @@ rn_star[i]=rn
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")
@@ -221,7 +221,7 @@ b1[:] = 0.4
 
 # Set parameter values for different scenarios
 M0[1] = 6   # Scenario 2: monetary expansion
-G0[2] = 2   # Scenario 3: fiscal expansion
+G0[2] = 1.3  # Scenario 3: fiscal expansion
 A[3] = 2.5  # Scenario 4: productivity boost
 Yf[4] = 0.2  # Scenario 5: lower expected future income
 b1[5] = 0.8  # Scenario 6: increased preference for leisure
@@ -264,7 +264,7 @@ for i in range(S):
         rn = r + pe
 
         # (8) Price level
-        P = (M0[i] * rn) / ((1 + rn) * b3 * C)
+        P = (M0[i] * rn) / ((1 + rn) * b3 * (C + b1[i] * np.log(1 - N)))
 
     # Save results for different parameterizations in the arrays
     Y_star[i] = Y
@@ -283,23 +283,23 @@ for i in range(S):
 
 Figures @fig-output-neocl - @fig-employment-neocl depicts the model economy's real activity under different scenarios. Monetary expansions (scenario 2) have no effects on output and employment, capturing the idea of money neutrality (Classical Dichotomy). However, the monetary expansion does  raise the price level (see @fig-price_level ), capturing the key idea of the Quantity Theory of Money that inflation is driven by a growing money supply.
 
-```{r neoclass2}
+```{r}
 #| label: fig-output-neocl
 #| fig-cap: Output
 barplot(Y_star, ylab="Y", names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", "5: Decrease in Yf", "6: Increase in b1"), cex.names = 0.6)
 
 ```
 
-```{r neoclass6}
+```{r}
 #| label: fig-price_level
 #| fig-cap: Price level
 barplot(P_star, ylab="P",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", "5: Decrease in Yf", "6: Increase in b1"), cex.names = 0.6)
 
 ```
 
-An increase in government spending (by one unit) in scenario 3 does *not* raise employment and real output as these are fully determined by the supply side rather than aggregate demand.^[This result is partly driven by the use of a non-separable utility function, see analytical discussion below. With a separable utility function, the increase in government spending would increase labour supply and thereby have effects on employment and output.] Looking at Figures @fig-consumption and @fig-investment, it can be seen that government spending crowds out private spending (consumption and investment). The decrease in consumption is a result of consumption smoothing via the Euler equation: the household anticipates higher taxes in the future and reduces current consumption somewhat to smooth out the impact. The increase in government expenditures also raises demand for loanable funds, which pushes up the real interest rate (see @fig-interest_rate) and reduces investment (@fig-investment) and consumption. There is also an inflationary effect linked to the higher real interest rate, which raises the nominal interest rate and reduces the demand for money. 
+An increase in government spending in scenario 3 does *not* raise employment and real output as these are fully determined by the supply side rather than aggregate demand.^[This result is partly driven by the use of a non-separable utility function, see analytical discussion below. With a separable utility function, the increase in government spending would increase labour supply and thereby have effects on employment and output.] Looking at Figures @fig-consumption and @fig-investment, it can be seen that government spending crowds out private spending (consumption and investment). The decrease in consumption is a result of consumption smoothing via the Euler equation: the household anticipates higher taxes in the future and reduces current consumption somewhat to smooth out the impact. The increase in government expenditures also raises demand for loanable funds, which pushes up the real interest rate (see @fig-interest_rate) and reduces investment (@fig-investment) and consumption. There is also an inflationary effect linked to the higher real interest rate, which raises the nominal interest rate and reduces the demand for money. 
 
-```{r neoclass3}
+```{r}
 #| label: fig-employment-neocl
 #| fig-cap: Employment
 barplot(N_star, ylab="N",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", "5: Decrease in Yf", "6: Increase in b1"), cex.names = 0.6)
@@ -308,14 +308,14 @@ barplot(N_star, ylab="N",  names.arg=c("1: Baseline", "2: Increase in M0", "3: I
 
 Improvements to the supply-side are captured by an increase in productivity (scenario 4), which raises real output, employment, and aggregate demand. In contrast to expansionary government policy, the price level falls.
 
-```{r neoclass4}
+```{r}
 #| label: fig-consumption
 #| fig-cap: Consumption
 barplot(C_star, ylab="C",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", "5: Decrease in Yf", "6: Increase in b1"), cex.names = 0.6)
 
 ```
 
-```{r neoclass41}
+```{r}
 #| label: fig-investment
 #| fig-cap: Investment
 barplot(I_star, ylab="I",  names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", "5: Decrease in Yf", "6: Increase in b1"), cex.names = 0.6)
@@ -324,7 +324,7 @@ barplot(I_star, ylab="I",  names.arg=c("1: Baseline", "2: Increase in M0", "3: I
 
 A decrease in expected future income (scenario 5) has a small expansionary effect on aggregate output. This is because households will reduce some of their current consumption (see @fig-consumption ) and supply more labour to smooth their consumption over time. The increase in saving reduces the real interest rate (see @fig-interest_rate ) and is compensated by an increase in investment (see @fig-investment ). 
 
-```{r neoclass5}
+```{r}
 #| label: fig-interest_rate
 #| fig-cap: Interest rate
 barplot(r_star, ylab="r", names.arg=c("1: Baseline", "2: Increase in M0", "3: Increase in G0","4: Increase in A", "5: Decrease in Yf", "6: Increase in b1"), cex.names = 0.6)
@@ -384,7 +384,7 @@ M_mat=matrix(c(0,0,1,0,0,0,0,0,0,0,1,0,0,
               0,0,0,0,0,0,0,0,0,0,0,0,0,
               0,0,0,0,0,0,0,0,0,0,0,0,0,
               0,0,0,0,0,0,0,0,0,0,0,0,0,
-              0,0,0,1,0,0,1,1,0,0,0,0,0), 13, 13, byrow=TRUE)
+              0,0,1,1,0,0,1,1,0,0,0,0,0), 13, 13, byrow=TRUE)
 
 # Create adjacency matrix from transpose of auxiliary Jacobian 
 A_mat=t(M_mat)
@@ -430,7 +430,7 @@ M_mat = np.array([
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0]
+    [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0]
 ])
 
 # Create adjacency matrix from transpose of auxiliary Jacobian and add column names
@@ -470,7 +470,7 @@ plt.show()
 
 :::
 
-In @fig-dg , it can be seen that productivity ($A$), future income ($Y^f$), the money supply ($M_0$), and government spending ($G_0$) are the key exogenous variables of the model. All other variables are endogenous, and many of them form a closed loop (or cycle) within the system. The left part of the graph captures the supply side: the labour market simultaneously pins down the real wage and employment, which together with the exogenously level of productivity determine output. The part in the middle embodies the demand side: aggregate demand (consumption, investment, and government spending) together with a given level of output determine the real interest rate. The right part captures the nominal side of the model given by the money market, which determines the price level. Notably, while the real side of the model feeds into the money market via the nominal interest rate ($r_n$), there is not causal effect from the money market to the real side reflecting the Classical Dichotomy. 
+In @fig-dg , it can be seen that productivity ($A$), future income ($Y^f$), the money supply ($M_0$), and government spending ($G_0$) are the key exogenous variables of the model. All other variables are endogenous, and many of them form a closed loop (or cycle) within the system. The left part of the graph captures the supply side: the labour market simultaneously pins down the real wage and employment, which together with the exogenous level of productivity determine output. The part in the middle embodies the demand side: aggregate demand (consumption, investment, and government spending) together with a given level of output determine the real interest rate. The right part captures the nominal side of the model given by the money market, which determines the price level. Notably, while the real side of the model feeds into the money market via the nominal interest rate ($r_n$), there is no causal effect from the money market to the real side reflecting the Classical Dichotomy. 
 
 ## Analytical discussion: derivation of behavioural functions
 

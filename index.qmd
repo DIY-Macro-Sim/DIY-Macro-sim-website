@@ -31,7 +31,12 @@ We welcome any feedback. If you encounter any issues, find typos or mistakes, or
 2. You can also email us directly: `k.kohler@leeds.ac.uk`
 
 ## License
-The material on this page is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1), thus feel free to use the material for non-commercial purposes but please give credit. 
+
+This project uses two separate licenses:
+
+[![CC BY-NC-SA 4.0](https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/4.0/) **Text and other non-code content** (explanations, derivations, tables, and figures) are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). You are free to share and adapt this material for non-commercial purposes, provided you give appropriate credit and license your own contributions under the same terms. Commercial pedagogical use — e.g. incorporating this material into a paid course, curriculum, or textbook — is not permitted.
+
+[![MIT License](https://img.shields.io/badge/License-MIT-yellow.png)](https://opensource.org/license/mit/) **The R and Python code** shown throughout the site is licensed under the [MIT License](https://opensource.org/license/mit/). You are free to use, modify, and redistribute it for any purpose, including commercial use, provided the copyright notice and license text are retained.
 
 ## Acknowledgements
 We are grateful for helpful comments from Adam Aboobaker, Chandni Dwarkasing, Giuseppe Fontana, Alex Guschanski, Eckhard Hein, Nitin Nair, Grégoire Noël, and Rafael Wildauer on various sections of this website. All errors are ours.

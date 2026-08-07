@@ -2,7 +2,7 @@
 
 ## Overview
 
-This model captures some key features of John R. @Hicks1950' nonlinear model of business cycle fluctuations. The model builds on @Samuelson1939's linear multiplier-accelerator model analysed in @sec-how-to-simulate and @sec-stab_analysis, but gives it a different twist. While @Samuelson1939's business cycle model usually requires repeated external shocks to produce sustained cycles, @Hicks1950's model produces permanent, shock-independent fluctuations that are bounded by a floor and a ceiling.^[More precisely, @Samuelson1939's model generates shock-independent cycles only for a very specific parameter combination, whereas @Hicks1950's model generates endogenous cycles for a much broader set of parameters.] The goods market equilibrium is assumed to be locally unstable due to a strong accelerator effect, i.e. investment reacts strongly to increases in aggregate output, which creates more output and boosts investment even further. However, aggregate output is constrained by a ceiling that may stem from full employment (and a fixed labour supply). On the downward trajectory, output is constrained by a floor that is given by a minimum amount of investment needed to replace the depreciated capital stock.  
+This model captures some key features of John R. @Hicks1950's nonlinear model of business cycle fluctuations. The model builds on @Samuelson1939's linear multiplier-accelerator model analysed in @sec-how-to-simulate and @sec-stab_analysis, but gives it a different twist. While @Samuelson1939's business cycle model usually requires repeated external shocks to produce sustained cycles, @Hicks1950's model produces permanent, shock-independent fluctuations that are bounded by a floor and a ceiling.^[More precisely, @Samuelson1939's model generates shock-independent cycles only for a very specific parameter combination, whereas @Hicks1950's model generates endogenous cycles for a much broader set of parameters.] The goods market equilibrium is assumed to be locally unstable due to a strong accelerator effect, i.e. investment reacts strongly to increases in aggregate output, which creates more output and boosts investment even further. However, aggregate output is constrained by a ceiling that may stem from full employment (and a fixed labour supply). On the downward trajectory, output is constrained by a floor that is given by a minimum amount of investment needed to replace the depreciated capital stock.  
 
 We present a version of the model that is adapted from @Gabisch1989, chapter 2.1.^[Following @Hommes1995, we consider a stationary version of the model that abstracts from the growth path assumed in @Hicks1950.]
 
@@ -28,14 +28,14 @@ where $Y_t$, $C_t$, $I_t$, $Y^C$, and $D$, represent output, consumption, invest
 
 ### Parameterisation
 
-Table 1 reports the parameterisation used in the simulation. Besides a baseline (scenario 1), we consider a fall in the output ceiling $Y^C$ in scenario 2, an increase in the investment floor $I_0 - D$ in scenario 3, and finally a decrease in the accelerator coefficient $\beta$ (scenario 4).
+Table 1 reports the parameterisation used in the simulation. Besides a baseline (scenario 1), we consider a rise in the output ceiling $Y^C$ in scenario 2, an increase in the investment floor $I_0 - D$ in scenario 3, and finally a decrease in the accelerator coefficient $\beta$ (scenario 4).
 
 **Table 1: Parameterisation**
 
 |     Scenario                                    | $c_0$ | $c_1$ | $I_0$ | $\beta$ | $Y^C$ | $D$ |
 |-------------------------------------------------|-----|---------|-------|---------|-------|-----|
 | 1: baseline                                     | 0   | 0.75    | 10    | 1.25    | 80    | 10  | 
-| 2: fall in output ceiling ($Y^C$)               | 0   | 0.75    | 10    | 1.25    | 100   | 10  |
+| 2: rise in output ceiling ($Y^C$)               | 0   | 0.75    | 10    | 1.25    | 100   | 10  |
 | 3: increase in investment floor ($I_0 - D$)     | 0   | 0.75    | 10    | 1.25    | 80    | 1   | 
 | 4: decrease in accelerator coefficient ($\beta$)| 0   | 0.75    | 10    | 0.8     | 80    | 10  | 
 
@@ -109,7 +109,7 @@ for (i in 1:S){
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")
@@ -182,7 +182,7 @@ for i in range(S):
 
 @fig-baseline displays the model's dynamics under the baseline scenario. The model generates cycles in aggregate output, consumption and investment that are constrained by the output ceiling $Y^C=80$ and the investment floor $I_0-D=0$. These cycles are permanent, i.e. they don't require any external shocks, and they are (roughly) periodic, with a cycle length from peak (trough) to peak (trough) of around 13.5 periods. What generates the turning points? Suppose income is on an increasing trajectory. The accelerator effect on investment will amplify this process as firms will increase their investment, which raises aggregate demand and increases income further. When the output ceiling is reached, the change in income becomes zero, and investment demand decreases relative to the boom phase. This decrease in investment lowers aggregate output, and the accelerator effect again amplifies this tendency that now plays out on a downward trajectory until net investment hits the lower bound. Once investment has stopped its downward trajectory, aggregate income stops falling as well, which allows the accelerator effect to turn positive again and thereby induce a new cycle.
 
-```{r hicks_2}
+```{r}
 #| label: fig-baseline
 #| fig-cap: Income, consumption, and investment (baseline)
 
@@ -201,7 +201,7 @@ legend("topleft", legend=c("Y", "C", "I"),
 
 In @fig-scen2, the output ceiling rises to $Y^C = 100$ in $t=50$. This raises the amplitude of the cycles. Interestingly, the ceiling is no longer binding, but the cycles still do not explode. This illustrates a feature of the model that has been noted before: it actually does not need a ceiling to generate bounded cycles (see, e.g., @Puu2005). The acceleration of income during a boom will become smaller and smaller, and eventually turn negative, thereby lowering investment and inducing a switch from boom to bust. Hence, cycles (and thus turning points) will occur even without floor and ceilings, but to prevent these cycles to become larger and larger, a floor is sufficient. 
 
-```{r hicks_3}
+```{r}
 #| label: fig-scen2
 #| fig-cap: Increase in output ceiling
 
@@ -215,7 +215,7 @@ legend("topright", legend=c("Y", "C", "I"),
 ```
 An increase in the investment floor to $I_0 - D = 9$ in period $t=50$, displayed in @fig-scen3, has the effect of reducing the amplitude of the fluctuations. Intuitively, the milder the bust, the milder the recovery.
 
-```{r hicks_4}
+```{r}
 #| label: fig-scen3
 #| fig-cap: Increase in investment floor
 
@@ -230,7 +230,7 @@ legend("topright", legend=c("Y", "C", "I"),
 ```
 Finally, @fig-scen4 displays the scenario where the accelerator coefficient $\beta$ falls, rendering investment much less sensitive to changes in aggregate income. As a result, the model's regular cycles turn into damped oscillations that eventually converge to a stable equilibrium. 
 
-```{r hicks_5}
+```{r}
 #| label: fig-scen4
 #| fig-cap: Reduction in accelerator coefficient
 
@@ -375,7 +375,7 @@ $$
 I_{t} = I_0 + \max[\beta(X_{t} - X_{t-1}), -D].
 $$ {#eq-hicks_I_mod}
 
-Then shift @eq-hicks_C_mod one period back and substite into @eq-hicks_X to obtain:
+Then shift @eq-hicks_C_mod one period back and substitute into @eq-hicks_X to obtain:
 
 $$
   X_{t}=\min [c_0 + c_1 X_{t-1} + I_{t-1}, Y^C]. 
@@ -387,7 +387,7 @@ $$
 I_{t} = I_0 + \max[\beta( c_0 + (c_1 -1) X_{t-1} + I_{t-1}), -D].
 $$ {#eq-hicks_I_mod2}
 
-@eq-hicks_X_mod and @eq-hicks_I_mod2 are a two-dimensional dynamic system in $X_t$ and $It$. 
+@eq-hicks_X_mod and @eq-hicks_I_mod2 are a two-dimensional dynamic system in $X_t$ and $I_t$. 
 
 For $Y_t < Y^C$ and $I_t > I_0 - D$, the system's Jacobian matrix is given by:
 
@@ -409,7 +409,7 @@ $$
 
 and two eigenvalues will be a pair of complex conjugates if $(c_1+\beta)^2-4\beta <0$ or $\left( \frac{c_1+\beta}{2} \right)^2 < \beta$.
 
-To assess stability, we need to check whether the modulus of the complex eigenvalue $R$ is inside the unit circle, i.e. $R \in (-1,1)$. For a two-dimensional system with complex eigenvalues, we have $R=\sqrt{det(J)}$. Thus, the stability condition for the Hicks model is $\beta <1$.
+To assess stability, we need to check whether the modulus of the complex eigenvalue $R$ is inside the unit circle, i.e. $R<1$. For a two-dimensional system with complex eigenvalues, we have $R=\sqrt{det(J)}$. Thus, the stability condition for the Hicks model is $\beta <1$.
 
 The following code generates a plot that displays the condition for cycles, $\left( \frac{c_1+\beta}{2} \right)^2 < \beta$, and the stability condition, $\beta <1$, in the $(\beta, c_1)$-space:^[To create the function for the cycle condition, we set $\left( \frac{c_1+\beta}{2} \right)^2 = \beta$ and solve for $c_1$, where we only consider positive values for $c_1$ and $\beta$.]
 

@@ -145,7 +145,7 @@ for (i in 1:S){
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")
@@ -233,36 +233,48 @@ for i in range(S):
 
 ### Plots
 
-Figures 1-3 depict the response of the three main endogenous variables to changes in the exogenous variables. In the second scenario (solid line), the growth rate of autonomous demand increases from 2% to 3%. As a result, the rate of capacity temporarily increases but then returns to the level given by the normal rate, as the rate of autonomous demand falls due to the increase in the capital stock. By contrast, the growth rate permanently settles to the new rate given by the autonomous rate.
+@fig-ssm-u, @fig-ssm-g, and @fig-ssm-z depict the response of the three main endogenous variables to changes in the exogenous variables. In the second scenario (solid line), the growth rate of autonomous demand increases from 2% to 3%. As a result, the rate of capacity temporarily increases but then returns to the level given by the normal rate, as the rate of autonomous demand falls due to the increase in the capital stock. By contrast, the growth rate permanently settles to the new rate given by the autonomous rate.
 
 In the third scenario (dashed line), the profit share rises, which initially has a contractionary effect on the rate of utilisation and growth. Both variables then briefly overshoot due to the increase in the autonomous demand rate and then return to their previous values.
 
-```{r ssm2}
+```{r}
+#| label: fig-ssm-u
+#| fig-cap: Rate of capacity utilisation under different scenarios
+
 # Set maximum period for plots
 Tmax=700
 
 # Capacity utilisation
-plot(u[2, 2:(Tmax+1)], type="l", col=1, lwd=2, lty=1, font.main=1,cex.main=1, 
+plot(u[2, 2:(Tmax+1)], type="l", col=1, lwd=2, lty=1, font.main=1,cex.main=1,
      ylab = 'u',xlab = 'Time',ylim=range(max(u[, 2:Tmax]),min(u[, 2:Tmax])),cex.axis=1,cex.lab=0.75)
-title(main="Figure 1: Rate of capacity utilisation under different scenarios",cex=0.8 ,line=2)
 lines(u[3, 2:(Tmax+1)],lty=2)
 lines(u[4, 2:(Tmax+1)],lty=3)
 legend("bottomright", legend=c("Rise autom demand", "Rise profit share", "Rise normal rate"),
        lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
 
+```
+
+```{r}
+#| label: fig-ssm-g
+#| fig-cap: Growth rate under different scenarios
+
 # Growth
-plot(g[2, 2:(Tmax+1)], type="l", col=1, lwd=2, lty=1, font.main=1,cex.main=1, 
+plot(g[2, 2:(Tmax+1)], type="l", col=1, lwd=2, lty=1, font.main=1,cex.main=1,
      ylab = 'g',xlab = 'Time',ylim=range(max(g[, 2:Tmax]),min(g[, 2:Tmax])),cex.axis=1,cex.lab=0.75)
-title(main="Figure 2: Growth rate under different scenarios",cex=0.8 ,line=2)
 lines(g[3, 2:(Tmax+1)],lty=2)
 lines(g[4, 2:(Tmax+1)],lty=3)
 legend("bottomright", legend=c("Rise autom demand", "Rise profit share", "Rise normal rate"),
        lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
 
+```
+
+```{r}
+#| label: fig-ssm-z
+#| fig-cap: Rate of autonomous demand under different scenarios
+
 # Autonomous demand rate
-plot(z[2, 2:(Tmax+1)], type="l", col=1, lwd=2, lty=1, font.main=1,cex.main=1, 
+plot(z[2, 2:(Tmax+1)], type="l", col=1, lwd=2, lty=1, font.main=1,cex.main=1,
      ylab = 'z',xlab = 'Time',ylim=range(max(z[, 2:Tmax]),min(z[, 2:Tmax])),cex.axis=1,cex.lab=0.75)
-title(main="Figure 3: Rate of autonomous demand under different scenarios",cex=0.8 ,line=2)
 lines(z[3, 2:(Tmax+1)],lty=2)
 lines(z[4, 2:(Tmax+1)],lty=3)
 legend("right", legend=c("Rise autom demand", "Rise profit share", "Rise normal rate"),
@@ -306,8 +318,11 @@ Finally, a rise in the normal rate (dotted line) initially has contractionary ef
 
 Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.
 
-```{r ssm3, message=FALSE}
-# Construct auxiliary Jacobian matrix for 9 variables: 
+```{r message=FALSE}
+#| label: fig-ssm-dag
+#| fig-cap: Directed graph of Sraffian Supermultiplier Model
+
+# Construct auxiliary Jacobian matrix for 9 variables:
 # r, c, g, u, g0, z, pi, gz, un
 
 M_mat=matrix(c(0,0,0,1,0,0,1,0,0,
@@ -331,7 +346,7 @@ dg=graph_from_adjacency_matrix(A_mat, mode="directed", weighted=NULL)
 V(dg)$name=c("r", "c", "g", "u", expression(g^0), "z", expression(pi), expression(g[z]), expression(u[n]))
 
 # Plot directed graph
-plot(dg, main="Figure 4: Directed graph of Sraffian Supermultiplier Model", vertex.size=20, vertex.color="lightblue", 
+plot(dg, vertex.size=20, vertex.color="lightblue",
      vertex.label.color="black", edge.arrow.size=0.3, edge.width=1.1, edge.size=1.2,
      edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
      vertex.frame.color="NA", margin=-0.08)
@@ -389,7 +404,7 @@ plt.show()
 
 :::
 
-In Figure 4, it can be seen that the growth rate of autonomous demand ($g_z$), the profit share ($\pi$), and the normal rate of capacity utilisation ($u_n$) are the key exogenous variable of the model. The profit rate ($r$), consumption ($c$), the autonomous demand rate ($z$), investment ($g$), the rate of utilisation ($u$), an the expected growth rate ($g_0$) form a closed loop (or cycle) within the system. For example, an increase in the growth rate of autonomous demand increases consumption, which raises the rate of capacity utilisation, growth, and the expected growth rate. In a second-round effect, the increase in the growth rate then feeds back negatively into the autonomous demand rate, which leads to a return of the rate of capacity utilisation to its previous value.
+In @fig-ssm-dag, it can be seen that the growth rate of autonomous demand ($g_z$), the profit share ($\pi$), and the normal rate of capacity utilisation ($u_n$) are the key exogenous variable of the model. The profit rate ($r$), consumption ($c$), the autonomous demand rate ($z$), investment ($g$), the rate of utilisation ($u$), and the expected growth rate ($g_0$) form a closed loop (or cycle) within the system. For example, an increase in the growth rate of autonomous demand increases consumption, which raises the rate of capacity utilisation, growth, and the expected growth rate. In a second-round effect, the increase in the growth rate then feeds back negatively into the autonomous demand rate, which leads to a return of the rate of capacity utilisation to its previous value.
 
 ## Analytical discussion
 
@@ -407,7 +422,7 @@ The determinant of the Jacobian matrix evaluated at the long-run equilibrium is:
 det(J^*) = \frac{(u_n s_r \pi - g_z)\mu g_1}{s_r\pi-g_1} > 0,
 $$
 
-which is positive provided $s_r\pi-g_1$, i.e. if the Keynesian stability condition holds.
+which is positive provided $s_r\pi-g_1>0$, i.e. if the Keynesian stability condition holds.
 
 The trace is: 
 

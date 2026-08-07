@@ -4,7 +4,7 @@ Below you can find some related free online resources for macroeconomic model si
 
 ## Economic Modelling in General
 - [Sayama (2015)](https://open.umn.edu/opentextbooks/textbooks/233) is a free introductory textbook for the modelling and simulation of complex systems in *Python*
-- [QuantEcon](https://open.umn.edu/opentextbooks/textbooks/233) provides online intermediate and advanced resources for economic modelling and data analysis in *Python* and *Julia*
+- [QuantEcon](https://quantecon.org) provides online intermediate and advanced resources for economic modelling and data analysis in *Python* and *Julia*
 
 ## Stock-Flow Consistent Modelling
 - [Marco Veronese Passarella's website](https://www.marcopassarella.it/en/teaching-2/) provides *R* codes for most chapters of [Monetary Economics: An Integrated Approach to Credit, Money, Income, Production and Wealth](https://link.springer.com/book/10.1057/9780230626546) by Wynne Godley and Marc Lavoie, and more

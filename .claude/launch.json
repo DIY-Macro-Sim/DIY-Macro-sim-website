@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "diy-macro-sim-website",
+      "runtimeExecutable": "quarto",
+      "runtimeArgs": ["preview", "--port", "4848", "--no-browser"],
+      "port": 4848
+    }
+  ]
+}

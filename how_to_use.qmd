@@ -1,9 +1,11 @@
 # Getting Started {#sec-how-to-use}
 
 ## Structure of website
-The website starts off with a general introduction the numerical simulation of economic models (@sec-how-to-simulate). After that, it jumps right into a series of macroeconomic models. These models are grouped into static and dynamic models. In static models, time plays no role and all variables adjust instantaneously. By contrast, dynamic models characterise the adjustment of variables over time. 
+The website starts off with a general introduction to the numerical simulation of economic models (@sec-how-to-simulate). After that, it jumps right into a series of macroeconomic models. These models are broadly grouped into static and dynamic models. In static models, time plays no role and all variables adjust instantaneously. By contrast, dynamic models characterise the adjustment of variables over time.
 
-The model entries are largely self-contained and can be read independently of each other. For each model, the chapters provide three main components:
+The first set of models moves from static models of price and output determination (neoclassical, Keynesian, and Post-Keynesian) to models of income distribution and growth, while the second set is grouped into dynamic models of growth and distribution theories, business cycles, inflation and monetary policy, and more general modern modelling frameworks. Within each thematic group, models are ordered roughly chronologically. The model entries are largely self-contained and can be read independently of each other.
+
+For each model, the chapters provide three main components:
 
 1. **Model descriptions** that concisely explain the key ideas, assumptions, and equations of each model. This helps users grasp the underlying concepts and intuition behind the models.
 2. **Annotated code** that allows users to numerically simulate the models, examine their results under different scenarios, and produce visualisations to better understand the models' structure and output. This hands-on approach enables users to gain practical coding skills while exploring different macroeconomic theories.
@@ -30,7 +32,7 @@ Besides being free, a key advantage of both *R* and *Python* is their huge and g
 
 - [Python Cheatsheet for NumPy library](https://assets.datacamp.com/blog_assets/Numpy_Python_Cheat_Sheet.pdf)
 
-Once you have installed *R* or *Python*, you can play with the codes on this website yourself by copy and pasting them into the script panel of your local interface (IDE) and hitting CTRL + Enter to execute them. Don't forget to always comment your code using the "#" symbol and to save your scripts to make sure your future self can seamlessness continue working on it.
+Once you have installed *R* or *Python*, you can play with the codes on this website yourself by copy and pasting them into the script panel of your local interface (IDE) and hitting CTRL + Enter to execute them. Don't forget to always comment your code using the "#" symbol and to save your scripts to make sure your future self can seamlessly continue working on it.
 
 
 ## Introduction to *R* and *Python*
@@ -52,7 +54,7 @@ Note that folders in the path to your working directory need to be separated by 
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")
@@ -75,7 +77,7 @@ use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
 
 # Set the working directory to the desired folder by adjusting the path below:
 import os
-# os.chdir(""C:/Users/Your Name/Your Folder")  
+# os.chdir("C:/Users/Your Name/Your Folder")
 
 ```
 
@@ -359,7 +361,7 @@ $Y^*=\frac{I+c_0}{1-c_1}=\frac{11+2}{1-0.8}=65$
 #| output: false
 
 ################## Functions ##################################################
-# Let's cast the previous loop that simulates they Keynesian across 
+# Let's cast the previous loop that simulates the Keynesian cross
 # into a function called "keynes"
 
 # the terms inside the brackets are the arguments of the function whose 
@@ -600,7 +602,7 @@ for i in range(1, 11):
 
 print(x)
 
-# Option 2: set range of loop from 2 to 10, and add 1 in the index on the RHS
+# Option 2: set range of loop from 0 to 9, and add 1 in the index on the RHS
 for i in range(0, 10):  
     x[i] = 1 / ((i+1)**2)
 

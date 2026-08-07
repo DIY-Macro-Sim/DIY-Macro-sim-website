@@ -205,7 +205,7 @@ for (i in 1:S){
     p_E[i,t]=epsilon[i,t]*p[i,t]
     
     # Target profit margin
-    r_T[i, t-1] = theta_T[i, t]/(1 + theta_T[i, t])
+    r_T[i, t] = theta_T[i, t]/(1 + theta_T[i, t])
     
     # Realised profit margin
     r[i, t] = 1 - omega[i, t] - epsilon[i,t]*delta
@@ -230,7 +230,7 @@ for (i in 1:S){
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")
@@ -303,7 +303,7 @@ for i in range(S):
             p_E[i, t] = epsilon[i, t] * p[i, t]
             
             # Target profit margin
-            r_T[i, t-1] = theta_T[i, t] / (1 + theta_T[i, t])
+            r_T[i, t] = theta_T[i, t] / (1 + theta_T[i, t])
             
             # Realised profit margin
             r[i, t] = 1 - omega[i, t] - epsilon[i, t] * delta
@@ -326,7 +326,7 @@ and wage inflation rates. It can be seen that after an initial
 adjustment period, both rates converge on the same value, implying a
 constant real wage (and a constant profit margin).
 
-```{r conflict_2}
+```{r}
 #| label: fig-baseline-prices
 #| fig-cap: Prices and wages (baseline)
 
@@ -343,7 +343,7 @@ legend("topleft", legend=c("p", "w"),
 
 ```
 
-```{r conflict_3}
+```{r}
 #| label: fig-baseline-inflation
 #| fig-cap: Price and wage inflation (baseline)
 
@@ -375,7 +375,7 @@ falls in response to the increase in the real energy price.
 [^a_conflict_inflation_model-5]: More accurately this is an energy price
     'shift'.
 
-```{r conflict_4}
+```{r}
 #| label: fig-energy
 #| fig-cap: Price and wage inflation and real wage (energy price shock)
 
@@ -392,7 +392,7 @@ par(mar = c(5, 4, 4, 4) + 0.3)
 par(new = TRUE)
 plot(omega[2, Tmin:Tmax], type="l", col=1, lwd=2, lty=3, font.main=1, cex.main=1,ylab = '', axes=FALSE,
      xlab = '', ylim = range(omega[2, Tmin:Tmax]), cex=0.8)
-axis(side = 4, at=pretty(omega[2, Tmin:Tmax]))  
+axis(side = 4, at=pretty(omega[2, Tmin:Tmax]), tcl = 0.5)
 mtext(expression(Omega), side = 4, line = 3)
 legend("topright", legend=c(expression(hat(p)),expression(hat(w)), expression(Omega)),
        lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
@@ -407,7 +407,7 @@ wage falls until a new equilibrium with a higher inflation rate has been
 reached. In contrast to the energy price shock, both the profit margin
 and the profit share must increase in this scenario.
 
-```{r conflict_6}
+```{r}
 #| label: fig-markup
 #| fig-cap: Increase in target markup
 
@@ -424,7 +424,7 @@ par(mar = c(5, 4, 4, 4) + 0.3)
 par(new = TRUE)
 plot(omega[3, Tmin:Tmax], type="l", col=1, lwd=2, lty=3, font.main=1, cex.main=1,ylab = '', axes=FALSE,
      xlab = '', ylim = range(omega[3, Tmin:Tmax]), cex=0.8)
-axis(side = 4, at=pretty(omega[3, Tmin:Tmax]))  
+axis(side = 4, at=pretty(omega[3, Tmin:Tmax]), tcl = 0.5)
 mtext(expression(Omega), side = 4, line = 3)
 legend("topright", legend=c(expression(hat(p)),expression(hat(w)), expression(Omega)),
        lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
@@ -446,7 +446,7 @@ output will result in elevated social conflict, reflected in an increase
 in the inflation rate. The resulting distributional effect will depend
 on which party initiates the conflict.
 
-```{r conflict_7}
+```{r}
 #| label: fig-targetrealwage
 #| fig-cap: Increase in target real wage of workers
 
@@ -459,7 +459,7 @@ par(mar = c(5, 4, 4, 4) + 0.3)
 par(new = TRUE)
 plot(omega[4, Tmin:Tmax], type="l", col=1, lwd=2, lty=3, font.main=1, cex.main=1,ylab = '', axes=FALSE,
      xlab = '', ylim = range(omega[4, Tmin:Tmax]), cex=0.8)
-axis(side = 4, at=pretty(omega[4, Tmin:Tmax]))  
+axis(side = 4, at=pretty(omega[4, Tmin:Tmax]), tcl = 0.5)
 mtext(expression(Omega), side = 4, line = 3)
 legend("topright", legend=c(expression(hat(p)),expression(hat(w)), expression(Omega)),
        lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
@@ -516,7 +516,7 @@ these measures.
 |---------------|---------------|----------------|---------------|
 | Profit margin = profit share of energy sector | $$ r^E = \pi^E = \frac{\Pi^E}{p^E E} $$ | $$ r^E = \frac{p^E E - w^E L^E}{p^E E} = 1 - \frac{\Omega^E}{\epsilon} $$               | Positive                                                   |
 | Profit margin of final output sector          | $$ r = \frac{\Pi}{pY} $$                   | $$ r = \frac{pY - wL - p^E E}{pY} = 1 - \Omega - \delta \epsilon $$                        | Negative                                                   |
-| Profit share of final output sector           | $$ \pi = \frac{\Pi}{pVA} $$                | $$ \pi = \frac{pY - wL - p^E E}{pY - p^E E} = 1 - \frac{\Omega}{1 - p^E \epsilon} $$ | Ambiguous                                                  |
+| Profit share of final output sector           | $$ \pi = \frac{\Pi}{pVA} $$                | $$ \pi = \frac{pY - wL - p^E E}{pY - p^E E} = 1 - \frac{\Omega}{1 - \delta\epsilon} $$ | Ambiguous                                                  |
 | Total profit share                            | $$ \pi^{Total} = \frac{\Pi + \Pi^E}{pY} $$ | $$ \pi^{Total} = \frac{pY - w^E L^E - wL}{pY} = 1 - \delta \Omega^E - \Omega $$               | Positive                                                   |
 
 **Note:** $\Pi$ represents nominal profits, $E$ is the output of
@@ -536,7 +536,7 @@ the profit margin and profit share of the final output sector in the simulations
 to the increase in energy cost, the profit share *rises*. This is because for the chosen parameterisation, we have $\psi r^T-\phi\Omega^W>0$, for which $\frac{\partial \pi}{\partial \epsilon} > 0$.^[See analytical discussion below.] Thus, if the price-setting
 power of firms and their target profit margins $\psi r^T$ are sufficiently large  relative to wage-setting power and  real wage target of workers $\phi\Omega^W$, profit shares of domestic non-energy sectors may rise in response to an energy cost shock. 
 
-```{r conflict_5}
+```{r}
 #| label: fig-energy-prof
 #| fig-cap: Profit margin and profit share (energy price shock)
 
@@ -785,11 +785,8 @@ $$
 
 ```{=tex}
 \begin{equation}
-
 \det(J)=1-\Omega(\phi+\psi)+\hat{w}[2+\hat{w} - \Omega(\phi+\psi)].
-
 \end{equation}
-
 ```
 
 
@@ -801,7 +798,7 @@ $$
 $$
 
 Substituting the equilibrium solutions for $\hat{w}^*$ and $\omega^*$
-into the term insight the square brackets yields:
+into the term inside the square brackets yields:
 
 $$
 -\hat{w}^*\left(\frac{\omega^W\phi^2+(2\phi+\psi)\psi \Omega^F}{\phi+\psi}\right)<0.

@@ -16,4 +16,10 @@ The repository is structured into ... categories:
 
 ...
 
+## License
 
+This repository uses two licenses:
+
+- The **R and Python code** is licensed under the [MIT License](LICENSE).
+- The **text, explanations, derivations, tables, and figures** are licensed
+  under [CC BY-NC-SA 4.0](LICENSE-CONTENT.md).

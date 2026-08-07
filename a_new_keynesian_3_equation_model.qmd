@@ -10,7 +10,7 @@ The IS curve establishes a negative relationship between real income and the rea
 
 The simplified version of the 3-equation model we consider here is directly taken from chapter 3 of @Carlin2014.^[A PDF version of the most 2024 edition of the book is freely available [here](https://www.stone-econ.org/resources/free-textbook-in-intermediate-macroeconomics).] This is a short-run model in which prices are flexible but the capital stock is fixed. The focus is thus on goods market equilibrium rather than economic growth. In the Carlin-Soskice version, inflation expectations are assumed to be adaptive and the response of aggregate demand to a change in the interest rate is sluggish. This renders the model dynamic.[^a_new_keynesian_3_equation_model-2]
 
-[^a_new_keynesian_3_equation_model-2]: Note that this is quite different from conventional New Keynesian dynamic stochastic general equilibrium (DSGE) models in which the dynamic element stems from agents with rational expectations that react to serially correlated shocks. See chapter 16 of @Carlin2014 for a comparison of their 3-equation model with New Keynesian DSGE models.]
+[^a_new_keynesian_3_equation_model-2]: Note that this is quite different from conventional New Keynesian dynamic stochastic general equilibrium (DSGE) models in which the dynamic element stems from agents with rational expectations that react to serially correlated shocks. See chapter 16 of @Carlin2014 for a comparison of their 3-equation model with New Keynesian DSGE models.
 
 ## The model
 
@@ -119,7 +119,7 @@ for (i in 1:S){
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Users/Karsten Kohler/anaconda3/python.exe", required = TRUE)
+use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")
@@ -510,14 +510,17 @@ plt.show()
 
 :::
 
-It can be seen that under rational inflation expectations, the economy is less sensitive to shocks and returns to equilibrium much quicker. The job of the central bank is simpler: it only needs to raise the interest rate in the period the shock occurs to bring the economy back on target in the next period. Compared to adaptive expectations, a less drastic reponse is required.
+It can be seen that under rational inflation expectations, the economy is less sensitive to shocks and returns to equilibrium much quicker. The job of the central bank is simpler: it only needs to raise the interest rate in the period the shock occurs to bring the economy back on target in the next period. Compared to adaptive expectations, a less drastic response is required.
 
 
 ## Directed graph
 
 Another perspective on the model's properties is provided by its directed graph. A directed graph consists of a set of nodes that represent the variables of the model. Nodes are connected by directed edges. An edge directed from a node $x_1$ to node $x_2$ indicates a causal impact of $x_1$ on $x_2$.
 
-```{r nk3, message=FALSE}
+```{r message=FALSE}
+#| label: fig-nk3-dag
+#| fig-cap: Directed graph of 3-Equation model
+
 # Construct auxiliary Jacobian matrix for 7 variables: y, p, r, A, ye, rs, pt
 # where non-zero elements in regular Jacobian are set to 1 and zero elements are unchanged
 
@@ -540,7 +543,7 @@ dg=graph_from_adjacency_matrix(A_mat, mode="directed", weighted=NULL)
 V(dg)$name=c("y", expression(pi), "r", "A", expression(y[e]),expression(r[s]), expression(pi^T))
 
 # Plot directed graph
-plot(dg, main="Figure 4: Directed graph of 3-Equation model", vertex.size=20, vertex.color="lightblue", 
+plot(dg, vertex.size=20, vertex.color="lightblue",
      vertex.label.color="black", edge.arrow.size=0.3, edge.width=1.1, edge.size=1.2,
      edge.arrow.width=1.2, edge.color="black", vertex.label.cex=1.2, 
      vertex.frame.color="NA", margin=-0.08)
@@ -599,7 +602,7 @@ plt.show()
 
 :::
 
-In Figure 4, it can be seen that aggregate demand ($A$), equilibrium output ($y_e$), and the inflation target ($\pi^T$) are the key exogenous variables of the model. All other variables are endogenous and form a closed loop (or cycle) within the system. The upper-right side of the graph represents the supply side, given by the equilibrium level of output and its effect on inflation. The upper-left side captures the demand side and its effect on actual output. The key endogenous variables, output, inflation, and the interest rate form the centre of the graph, where they stand in a triangular relationship to each other. Output drives inflation, which in turn impacts the real interest rate. The latter then feeds back into output. Structural changes in the relationship between demand and supply (e.g. excess demand) also impact the system through their effect on the stabilising interest rate ($r_s$).
+In @fig-nk3-dag, it can be seen that aggregate demand ($A$), equilibrium output ($y_e$), and the inflation target ($\pi^T$) are the key exogenous variables of the model. All other variables are endogenous and form a closed loop (or cycle) within the system. The upper-right side of the graph represents the supply side, given by the equilibrium level of output and its effect on inflation. The upper-left side captures the demand side and its effect on actual output. The key endogenous variables, output, inflation, and the interest rate form the centre of the graph, where they stand in a triangular relationship to each other. Output drives inflation, which in turn impacts the real interest rate. The latter then feeds back into output. Structural changes in the relationship between demand and supply (e.g. excess demand) also impact the system through their effect on the stabilising interest rate ($r_s$).
 
 ## Analytical discussion {#sec-analytical}
 
