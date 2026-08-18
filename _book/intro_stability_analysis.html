@@ -1161,28 +1161,75 @@ y_{1t}=v_{11}c_1 R_1^t(\cos\theta_1 t \pm \sin\theta_1 t \times i) +...+ y^*_1.
 <p>A general condition for stability of 2D systems with complex eigenvalues can be derived by making use of the fact that <span class="math inline">\(R=\sqrt{h^2+m^2}= \sqrt{ \left( \frac{b}{2} \right) ^2 + \left(\frac{\sqrt{4c-b^2}}{2} \right)^2} = \sqrt{c}\)</span>, where <span class="math inline">\(b=tr(J)\)</span> and <span class="math inline">\(c=det(J)\)</span>.</p>
 <p>Applied to the modulus of the Samuelson model, this yields <span class="math inline">\(R=\sqrt{det(J)}=\sqrt{\beta c_1}\)</span>. Thus, the stability condition is:</p>
 <p><span class="math display">\[\beta c_1&lt;1.\]</span></p>
-<p>The following code generates a plot that displays the condition for cycles and the stability condition in the <span class="math inline">\((\beta, c_1)\)</span>-space:</p>
+<p>The following code generates a multi-region plot that displays the condition for cycles and the stability condition in the <span class="math inline">\((\beta, c_1)\)</span>-space:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create function for cycle condition: c1 &lt; (4*beta)/(1+beta)^2</span></span>
-<span><span class="va">cyc</span><span class="op">=</span> <span class="kw">function</span> <span class="op">(</span><span class="va">beta</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="va">cyc</span> <span class="op">=</span> <span class="kw">function</span> <span class="op">(</span><span class="va">beta</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="op">(</span><span class="fl">4</span><span class="op">*</span><span class="va">beta</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">beta</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># Create function for stability condition: c1 &lt; 1/beta</span></span>
-<span><span class="va">stab</span><span class="op">=</span> <span class="kw">function</span> <span class="op">(</span><span class="va">beta</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="va">stab</span> <span class="op">=</span> <span class="kw">function</span> <span class="op">(</span><span class="va">beta</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fl">1</span><span class="op">/</span><span class="va">beta</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="co"># Plot the two functions in (beta, c1)-space</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="va">cyc</span>, from <span class="op">=</span> <span class="fl">0</span>, to <span class="op">=</span> <span class="fl">5</span>, col <span class="op">=</span> <span class="fl">1</span>, xlab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span>, ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">c</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> , main<span class="op">=</span><span class="st">""</span>,</span>
-<span>      lwd<span class="op">=</span><span class="fl">1.5</span>, n<span class="op">=</span><span class="fl">10000</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1.5</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="va">stab</span>, from <span class="op">=</span> <span class="fl">0</span>, to <span class="op">=</span> <span class="fl">5</span>, col <span class="op">=</span> <span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">1.5</span>, n<span class="op">=</span><span class="fl">10000</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cycle condition"</span>, <span class="st">"stability condition"</span><span class="op">)</span>, </span>
-<span>       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span><span class="co"># Set upper display limit for c1 </span></span>
+<span><span class="va">ymax</span> <span class="op">=</span> <span class="fl">1.5</span></span>
+<span></span>
+<span><span class="co"># Build a beta-grid </span></span>
+<span><span class="va">beta_left</span>  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.001</span>, <span class="fl">1</span>, length.out <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span><span class="va">beta_right</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, length.out <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span><span class="va">beta_grid</span>  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">beta_left</span>, <span class="va">beta_right</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cyc_vals</span>  <span class="op">=</span> <span class="fu">cyc</span><span class="op">(</span><span class="va">beta_grid</span><span class="op">)</span></span>
+<span><span class="va">stab_vals</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmin</a></span><span class="op">(</span><span class="fu">stab</span><span class="op">(</span><span class="va">beta_grid</span><span class="op">)</span>, <span class="va">ymax</span><span class="op">)</span>   <span class="co"># clip near beta -&gt; 0</span></span>
+<span></span>
+<span><span class="va">lower_env</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmin</a></span><span class="op">(</span><span class="va">cyc_vals</span>, <span class="va">stab_vals</span><span class="op">)</span>   <span class="co"># boundary of "stable &amp; cyclical"</span></span>
+<span><span class="va">upper_env</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmax</a></span><span class="op">(</span><span class="va">cyc_vals</span>, <span class="va">stab_vals</span><span class="op">)</span>   <span class="co"># boundary of "unstable &amp; non-cyclical"</span></span>
+<span></span>
+<span><span class="co"># Set up an empty plotting canvas</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="cn">NULL</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">ymax</span><span class="op">)</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span>, ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">c</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Region: stable &amp; non-cyclical -- only occurs for beta &lt;= 1 </span></span>
+<span><span class="va">idx</span> <span class="op">=</span> <span class="va">beta_grid</span> <span class="op">&lt;=</span> <span class="fl">1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/polygon.html">polygon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">beta_grid</span><span class="op">[</span><span class="va">idx</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">beta_grid</span><span class="op">[</span><span class="va">idx</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">cyc_vals</span><span class="op">[</span><span class="va">idx</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">stab_vals</span><span class="op">[</span><span class="va">idx</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        col <span class="op">=</span> <span class="st">"grey92"</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Region: stable &amp; cyclical (below both curves, all beta)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/polygon.html">polygon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">beta_grid</span>, <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">beta_grid</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">beta_grid</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">lower_env</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        col <span class="op">=</span> <span class="st">"grey78"</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Region: unstable &amp; cyclical -- only occurs for beta &gt;= 1 (between stab and cyc)</span></span>
+<span><span class="va">idx2</span> <span class="op">=</span> <span class="va">beta_grid</span> <span class="op">&gt;=</span> <span class="fl">1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/polygon.html">polygon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">beta_grid</span><span class="op">[</span><span class="va">idx2</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">beta_grid</span><span class="op">[</span><span class="va">idx2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">stab_vals</span><span class="op">[</span><span class="va">idx2</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">cyc_vals</span><span class="op">[</span><span class="va">idx2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        col <span class="op">=</span> <span class="st">"grey60"</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Region: unstable &amp; non-cyclical (above both curves, all beta)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/polygon.html">polygon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">beta_grid</span>, <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">beta_grid</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">upper_env</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">ymax</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">beta_grid</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>        col <span class="op">=</span> <span class="st">"grey45"</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Overlay the boundary curves on top of the shading</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="va">cyc</span>, from <span class="op">=</span> <span class="fl">0.001</span>, to <span class="op">=</span> <span class="fl">5</span>, col <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">1.5</span>, n <span class="op">=</span> <span class="fl">1000</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="va">stab</span>, from <span class="op">=</span> <span class="fl">0.001</span>, to <span class="op">=</span> <span class="fl">5</span>, col <span class="op">=</span> <span class="fl">2</span>, lwd <span class="op">=</span> <span class="fl">1.5</span>, n <span class="op">=</span> <span class="fl">1000</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Label each region directly in the plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="fl">0.3</span>, <span class="fl">1.15</span>, <span class="st">"stable &amp;\nnon-cyclical"</span>, cex <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="fl">1.0</span>, <span class="fl">0.35</span>, <span class="st">"stable &amp;\ncyclical"</span>, cex <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="fl">3.0</span>, <span class="fl">0.5</span>, <span class="st">"unstable &amp;\ncyclical"</span>, cex <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="fl">4.0</span>, <span class="fl">1.15</span>, <span class="st">"unstable &amp;\nnon-cyclical"</span>, cex <span class="op">=</span> <span class="fl">0.65</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="intro_stability_analysis_files/figure-html/stab_analysis6-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div id="fig-stab-cycle-regions" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-stab-cycle-regions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="intro_stability_analysis_files/figure-html/fig-stab-cycle-regions-2.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stab-cycle-regions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.1: Cycle and stability regions
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -1210,26 +1257,55 @@ y_{1t}=v_{11}c_1 R_1^t(\cos\theta_1 t \pm \sin\theta_1 t \times i) +...+ y^*_1.
 <span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> stab(beta):</span>
 <span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">/</span> beta</span>
 <span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the range of beta values</span></span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> np.linspace(<span class="fl">0.001</span>, <span class="dv">5</span>, <span class="dv">10000</span>)  <span class="co"># start from 0.001 to avoid division by zero</span></span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the two functions in (beta, c1)-space</span></span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>plt.plot(beta, cyc(beta), label<span class="op">=</span><span class="st">"cycle condition"</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>plt.plot(beta, stab(beta), label<span class="op">=</span><span class="st">"stability condition"</span>, color<span class="op">=</span><span class="st">'red'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Set labels and title</span></span>
-<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'</span><span class="dv">$\b</span><span class="vs">eta</span><span class="dv">$</span><span class="vs">'</span>)</span>
-<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'</span><span class="dv">$</span><span class="vs">c_1</span><span class="dv">$</span><span class="vs">'</span>)</span>
-<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">2</span>)</span>
-<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper right"</span>)</span>
-<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
-<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Set upper display limit for c1 (stab() diverges as beta -&gt; 0, so the</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="co"># stability boundary is clipped at this value for plotting purposes)</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>ymax <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the range of beta values</span></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> np.linspace(<span class="fl">0.001</span>, <span class="dv">5</span>, <span class="dv">2000</span>)  <span class="co"># start from 0.001 to avoid division by zero</span></span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>cyc_vals <span class="op">=</span> cyc(beta)</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>stab_vals <span class="op">=</span> np.minimum(stab(beta), ymax)  <span class="co"># clip near beta -&gt; 0</span></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>lower_env <span class="op">=</span> np.minimum(cyc_vals, stab_vals)  <span class="co"># boundary of "stable &amp; cyclical"</span></span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>upper_env <span class="op">=</span> np.maximum(cyc_vals, stab_vals)  <span class="co"># boundary of "unstable &amp; non-cyclical"</span></span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Region: stable &amp; non-cyclical -- only for beta &lt;= 1 (between cyc and stab)</span></span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>ax.fill_between(beta, cyc_vals, stab_vals, where<span class="op">=</span>(beta <span class="op">&lt;=</span> <span class="dv">1</span>), interpolate<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">'0.92'</span>)</span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Region: stable &amp; cyclical (below both curves, all beta)</span></span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a>ax.fill_between(beta, <span class="dv">0</span>, lower_env, color<span class="op">=</span><span class="st">'0.78'</span>)</span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Region: unstable &amp; cyclical -- only for beta &gt;= 1 (between stab and cyc)</span></span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a>ax.fill_between(beta, stab_vals, cyc_vals, where<span class="op">=</span>(beta <span class="op">&gt;=</span> <span class="dv">1</span>), interpolate<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">'0.60'</span>)</span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Region: unstable &amp; non-cyclical (above both curves, all beta)</span></span>
+<span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a>ax.fill_between(beta, upper_env, ymax, color<span class="op">=</span><span class="st">'0.45'</span>)</span>
+<span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Overlay the crisp boundary curves on top of the shading</span></span>
+<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a>ax.plot(beta, cyc_vals, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb38-40"><a href="#cb38-40" aria-hidden="true" tabindex="-1"></a>ax.plot(beta, stab_vals, color<span class="op">=</span><span class="st">'red'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb38-41"><a href="#cb38-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Label each region directly in the plot</span></span>
+<span id="cb38-43"><a href="#cb38-43" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.3</span>, <span class="fl">1.15</span>, <span class="st">"stable &amp;</span><span class="ch">\n</span><span class="st">non-cyclical"</span>, fontsize<span class="op">=</span><span class="dv">7</span>, ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb38-44"><a href="#cb38-44" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">1.0</span>, <span class="fl">0.35</span>, <span class="st">"stable &amp;</span><span class="ch">\n</span><span class="st">cyclical"</span>, fontsize<span class="op">=</span><span class="dv">7</span>, ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb38-45"><a href="#cb38-45" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">3.0</span>, <span class="fl">0.5</span>, <span class="st">"unstable &amp;</span><span class="ch">\n</span><span class="st">cyclical"</span>, fontsize<span class="op">=</span><span class="dv">7</span>, ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb38-46"><a href="#cb38-46" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">4.0</span>, <span class="fl">1.15</span>, <span class="st">"unstable &amp;</span><span class="ch">\n</span><span class="st">non-cyclical"</span>, fontsize<span class="op">=</span><span class="dv">7</span>, ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb38-47"><a href="#cb38-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-48"><a href="#cb38-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Set labels and title</span></span>
+<span id="cb38-49"><a href="#cb38-49" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r'</span><span class="dv">$\b</span><span class="vs">eta</span><span class="dv">$</span><span class="vs">'</span>)</span>
+<span id="cb38-50"><a href="#cb38-50" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r'</span><span class="dv">$</span><span class="vs">c_1</span><span class="dv">$</span><span class="vs">'</span>)</span>
+<span id="cb38-51"><a href="#cb38-51" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">5</span>)</span>
+<span id="cb38-52"><a href="#cb38-52" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, ymax)</span>
+<span id="cb38-53"><a href="#cb38-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-54"><a href="#cb38-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="cb38-55"><a href="#cb38-55" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </div>
-<p>Combinations of <span class="math inline">\(c_1\)</span> and <span class="math inline">\(\beta\)</span> below the cycle condition curve yield complex eigenvalues and thus cycles, while combinations below the stability condition curve yield an asymptotically stable equilibrium.</p>
+<p>In <a href="#fig-stab-cycle-regions" class="quarto-xref">Figure&nbsp;<span>9.1</span></a>, the cycle condition (black curve) and the stability condition (red curve) divide the <span class="math inline">\((\beta, c_1)\)</span>-space into the four regions. Below both curves the eigenvalues are complex with modulus below one, giving cyclical adjustment towards a stable equilibrium. Above both curves, the eigenvalues are real with the larger root above one (unstable, non-cyclical); between the curves for <span class="math inline">\(\beta&lt;1\)</span> they are real and below one in modulus (stable, non-cyclical); and between the curves for <span class="math inline">\(\beta&gt;1\)</span> they are complex with modulus above one (unstable, cyclical).</p>
 </section><section id="nonlinear-systems" class="level2"><h2 class="anchored" data-anchor-id="nonlinear-systems">Nonlinear systems</h2>
 <p>So far, we have analysed dynamic systems that are linear. However, in the more general case, a dynamic system may be nonlinear and of the form:</p>
 <p><span class="math display">\[
@@ -1344,22 +1420,27 @@ y_{t}=Ay_{t-1}+B,
 <td>(Quasi-) Limit cycle</td>
 </tr>
 <tr class="odd">
-<td><a href="a_new_keynesian_3_equation_model.html" class="quarto-xref"><span>Chapter 18</span></a></td>
+<td><span class="quarto-unresolved-ref">?sec-housing</span></td>
+<td>An Endogenous Housing Cycle Model</td>
+<td>Limit cycle</td>
+</tr>
+<tr class="even">
+<td><a href="a_new_keynesian_3_equation_model.html" class="quarto-xref"><span>Chapter 19</span></a></td>
 <td>A New Keynesian 3-Equation Model</td>
 <td>Monotonic convergence</td>
 </tr>
-<tr class="even">
-<td><a href="a_conflict_inflation_model.html" class="quarto-xref"><span>Chapter 19</span></a></td>
+<tr class="odd">
+<td><a href="a_conflict_inflation_model.html" class="quarto-xref"><span>Chapter 20</span></a></td>
 <td>A Conflict Inflation Model</td>
 <td>Balanced exponential growth</td>
 </tr>
-<tr class="odd">
-<td><a href="an_evolutionary_game_theoretic_model.html" class="quarto-xref"><span>Chapter 20</span></a></td>
+<tr class="even">
+<td><a href="an_evolutionary_game_theoretic_model.html" class="quarto-xref"><span>Chapter 21</span></a></td>
 <td>An Evolutionary Game Theoretic Model</td>
 <td>Monotonic convergence or Lyapunov stability</td>
 </tr>
-<tr class="even">
-<td><a href="an_sfc_model.html" class="quarto-xref"><span>Chapter 21</span></a></td>
+<tr class="odd">
+<td><a href="an_sfc_model.html" class="quarto-xref"><span>Chapter 22</span></a></td>
 <td>A Stock-Flow Consistent Model</td>
 <td>Damped oscillations</td>
 </tr>

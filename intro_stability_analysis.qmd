@@ -644,26 +644,71 @@ Applied to the modulus of the Samuelson model, this yields $R=\sqrt{det(J)}=\sqr
 
 $$\beta c_1<1.$$ 
 
-The following code generates a plot that displays the condition for cycles and the stability condition in the $(\beta, c_1)$-space:
+The following code generates a multi-region plot that displays the condition for cycles and the stability condition in the $(\beta, c_1)$-space:
 
-```{r stab_analysis6}
+```{r}
+#| label: fig-stab-cycle-regions
+#| fig-cap: Cycle and stability regions
 
 # Create function for cycle condition: c1 < (4*beta)/(1+beta)^2
-cyc= function (beta) {
+cyc = function (beta) {
   (4*beta)/(1+beta)^2
 }
 
 # Create function for stability condition: c1 < 1/beta
-stab= function (beta) {
+stab = function (beta) {
   1/beta
 }
 
-# Plot the two functions in (beta, c1)-space
-curve(cyc, from = 0, to = 5, col = 1, xlab=expression(beta), ylab=expression(c[1]) , main="",
-      lwd=1.5, n=10000, ylim=range(0, 1.5))
-curve(stab, from = 0, to = 5, col = 2, lwd=1.5, n=10000, add = TRUE)
-legend("topright", legend = c("cycle condition", "stability condition"), 
-       col = c(1, 2), lwd = 2)
+# Set upper display limit for c1 
+ymax = 1.5
+
+# Build a beta-grid 
+beta_left  = seq(0.001, 1, length.out = 1000)
+beta_right = seq(1, 5, length.out = 1000)
+beta_grid  = c(beta_left, beta_right[-1])
+
+cyc_vals  = cyc(beta_grid)
+stab_vals = pmin(stab(beta_grid), ymax)   # clip near beta -> 0
+
+lower_env = pmin(cyc_vals, stab_vals)   # boundary of "stable & cyclical"
+upper_env = pmax(cyc_vals, stab_vals)   # boundary of "unstable & non-cyclical"
+
+# Set up an empty plotting canvas
+plot(NULL, xlim = c(0, 5), ylim = c(0, ymax),
+     xlab = expression(beta), ylab = expression(c[1]), main = "")
+
+# Region: stable & non-cyclical -- only occurs for beta <= 1 
+idx = beta_grid <= 1
+polygon(c(beta_grid[idx], rev(beta_grid[idx])),
+        c(cyc_vals[idx], rev(stab_vals[idx])),
+        col = "grey92", border = NA)
+
+# Region: stable & cyclical (below both curves, all beta)
+polygon(c(beta_grid, rev(beta_grid)),
+        c(rep(0, length(beta_grid)), rev(lower_env)),
+        col = "grey78", border = NA)
+
+# Region: unstable & cyclical -- only occurs for beta >= 1 (between stab and cyc)
+idx2 = beta_grid >= 1
+polygon(c(beta_grid[idx2], rev(beta_grid[idx2])),
+        c(stab_vals[idx2], rev(cyc_vals[idx2])),
+        col = "grey60", border = NA)
+
+# Region: unstable & non-cyclical (above both curves, all beta)
+polygon(c(beta_grid, rev(beta_grid)),
+        c(upper_env, rep(ymax, length(beta_grid))),
+        col = "grey45", border = NA)
+
+# Overlay the boundary curves on top of the shading
+curve(cyc, from = 0.001, to = 5, col = 1, lwd = 1.5, n = 1000, add = TRUE)
+curve(stab, from = 0.001, to = 5, col = 2, lwd = 1.5, n = 1000, add = TRUE)
+
+# Label each region directly in the plot
+text(0.3, 1.15, "stable &\nnon-cyclical", cex = 0.65)
+text(1.0, 0.35, "stable &\ncyclical", cex = 0.65)
+text(3.0, 0.5, "unstable &\ncyclical", cex = 0.65)
+text(4.0, 1.15, "unstable &\nnon-cyclical", cex = 0.65)
 
 ```
 
@@ -685,18 +730,47 @@ def cyc(beta):
 def stab(beta):
     return 1 / beta
 
-# Define the range of beta values
-beta = np.linspace(0.001, 5, 10000)  # start from 0.001 to avoid division by zero
+# Set upper display limit for c1 (stab() diverges as beta -> 0, so the
+# stability boundary is clipped at this value for plotting purposes)
+ymax = 1.5
 
-# Plot the two functions in (beta, c1)-space
-plt.plot(beta, cyc(beta), label="cycle condition", color='black', linewidth=1.5)
-plt.plot(beta, stab(beta), label="stability condition", color='red', linewidth=1.5)
+# Define the range of beta values
+beta = np.linspace(0.001, 5, 2000)  # start from 0.001 to avoid division by zero
+cyc_vals = cyc(beta)
+stab_vals = np.minimum(stab(beta), ymax)  # clip near beta -> 0
+
+lower_env = np.minimum(cyc_vals, stab_vals)  # boundary of "stable & cyclical"
+upper_env = np.maximum(cyc_vals, stab_vals)  # boundary of "unstable & non-cyclical"
+
+fig, ax = plt.subplots()
+
+# Region: stable & non-cyclical -- only for beta <= 1 (between cyc and stab)
+ax.fill_between(beta, cyc_vals, stab_vals, where=(beta <= 1), interpolate=True, color='0.92')
+
+# Region: stable & cyclical (below both curves, all beta)
+ax.fill_between(beta, 0, lower_env, color='0.78')
+
+# Region: unstable & cyclical -- only for beta >= 1 (between stab and cyc)
+ax.fill_between(beta, stab_vals, cyc_vals, where=(beta >= 1), interpolate=True, color='0.60')
+
+# Region: unstable & non-cyclical (above both curves, all beta)
+ax.fill_between(beta, upper_env, ymax, color='0.45')
+
+# Overlay the crisp boundary curves on top of the shading
+ax.plot(beta, cyc_vals, color='black', linewidth=1.5)
+ax.plot(beta, stab_vals, color='red', linewidth=1.5)
+
+# Label each region directly in the plot
+ax.text(0.3, 1.15, "stable &\nnon-cyclical", fontsize=7, ha='center')
+ax.text(1.0, 0.35, "stable &\ncyclical", fontsize=7, ha='center')
+ax.text(3.0, 0.5, "unstable &\ncyclical", fontsize=7, ha='center')
+ax.text(4.0, 1.15, "unstable &\nnon-cyclical", fontsize=7, ha='center')
 
 # Set labels and title
-plt.xlabel(r'$\beta$')
-plt.ylabel(r'$c_1$')
-plt.ylim(0, 2)
-plt.legend(loc="upper right")
+ax.set_xlabel(r'$\beta$')
+ax.set_ylabel(r'$c_1$')
+ax.set_xlim(0, 5)
+ax.set_ylim(0, ymax)
 
 # Display the plot
 plt.show()
@@ -705,7 +779,7 @@ plt.show()
 
 :::
 
-Combinations of $c_1$ and $\beta$ below the cycle condition curve yield complex eigenvalues and thus cycles, while combinations below the stability condition curve yield an asymptotically stable equilibrium. 
+In @fig-stab-cycle-regions, the cycle condition (black curve) and the stability condition (red curve) divide the $(\beta, c_1)$-space into the four regions. Below both curves the eigenvalues are complex with modulus below one, giving cyclical adjustment towards a stable equilibrium. Above both curves, the eigenvalues are real with the larger root above one (unstable, non-cyclical); between the curves for $\beta<1$ they are real and below one in modulus (stable, non-cyclical); and between the curves for $\beta>1$ they are complex with modulus above one (unstable, cyclical).
 
 
 ## Nonlinear systems
@@ -799,6 +873,7 @@ Based on this typology, we can classify the dynamic models on this website as fo
 |@sec-Sraffian| A Sraffian Supermultiplier Model | Damped oscillations |
 |@sec-kaldor| A Kaldorian Endogenous Business Cycle Model | Limit cycle |
 |@sec-hicks| A Hicksian Business Cycle Model | (Quasi-) Limit cycle |
+|@sec-housing| An Endogenous Housing Cycle Model | Limit cycle |
 |@sec-NK  | A New Keynesian 3-Equation Model | Monotonic convergence |
 |@sec-inflation| A Conflict Inflation Model | Balanced exponential growth |
 |@sec-evolutionary   | An Evolutionary Game Theoretic Model | Monotonic convergence or Lyapunov stability |

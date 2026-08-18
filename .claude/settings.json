@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tasklist*)",
+      "Bash(where *)",
+      "mcp__Claude_Browser__get_page_text",
+      "mcp__Claude_Browser__preview_logs",
+      "mcp__Claude_Browser__read_page",
+      "mcp__Claude_Browser__find",
+      "mcp__Claude_Browser__read_console_messages"
+    ]
+  }
+}
