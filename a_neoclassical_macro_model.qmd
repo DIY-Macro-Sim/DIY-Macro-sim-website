@@ -69,7 +69,7 @@ Table 1 reports the parameterisation used in the simulation. Besides a baseline 
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1: baseline | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 1 | 1 | 5 | 5 | 0.02 |
 | 2: monetary expansion ($M_{0}$) | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 1 | 1 | 6 | 5 | 0.02 |
-| 3: fiscal expansion ($G_{0}$) | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 1.3 | 1 | 6 | 5 | 0.02 |
+| 3: fiscal expansion ($G_{0}$) | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 1.3 | 1 | 5 | 5 | 0.02 |
 | 4: productivity boost ($A$) | 2.5 | 0.3 | 0.4 | 0.9 | 0.6 | 1 | 1 | 5 | 5 | 0.02 |
 | 5: lower expected future income ($Y^{f}$) | 2 | 0.3 | 0.4 | 0.9 | 0.6 | 1 | 0.2 | 5 | 5 | 0.02 |
 | 6: increased preference for leisure ($b_{1}$) | 2 | 0.3 | 0.8 | 0.9 | 0.6 | 1 | 1 | 5 | 5 | 0.02 |

@@ -72,7 +72,7 @@ Table 1 reports the parameterisation used in the simulation. Besides a baseline 
 
 **Table 1: Parameterisation**
 
-| Scenario                                | $b$ | $c$ | $d_0$ | $d_1$ | $i_0$ | $i1$ | $m$ | $k$ | $n$ | $W_0$ | $h$ | $a$ | $N^f$ |
+| Scenario                                | $b$ | $c$ | $d_0$ | $d_1$ | $i_0$ | $i_1$ | $m$ | $k$ | $n$ | $W_0$ | $h$ | $a$ | $N^f$ |
 |:---------------------------------------:|:---:|:---:|:-----:|:-----:|:-----:|:----:|:---:|:---:|:---:|:-----:|:---:|:---:|:-----:|
 | 1: baseline                             | 0.5 | 0.8 | 5     | 0.8   | 0.01  | 0.5  | 0.15| 0.3 | 0.15| 2     | 0.8 | 0.8 | 12    |
 | 2: rise in credit rationing ($c$)       | 0.5 | 0.4 | 5     | 0.8   | 0.01  | 0.5  | 0.15| 0.3 | 0.15| 2     | 0.8 | 0.8 | 12    |

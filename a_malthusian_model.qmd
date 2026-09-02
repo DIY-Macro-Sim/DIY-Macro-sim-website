@@ -355,7 +355,7 @@ plt.show()
 
 :::
 
-In @fig-malthus-dag, it can be seen that the exogenous birth rate ($b0$) and productivity ($a0$) are exogenous variables that impact births and income, respectively. Births, deaths, employment and income are endogenous and form a closed loop (or cycle) within the system. Births and deaths affect the population size (with simultaneous feedback from population to births and deaths), and the population affects income. Income, in turn, feeds back into population size.
+In @fig-malthus-dag, it can be seen that the exogenous birth rate ($b_0$) and productivity ($a_0$) are exogenous variables that impact births and income, respectively. Births, deaths, employment and income are endogenous and form a closed loop (or cycle) within the system. Births and deaths affect the population size (with simultaneous feedback from population to births and deaths), and the population affects income. Income, in turn, feeds back into population size.
 
 ## Analytical discussion
 
