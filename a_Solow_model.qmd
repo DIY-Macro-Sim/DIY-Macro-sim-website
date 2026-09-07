@@ -213,7 +213,7 @@ legend("bottomright", legend=c("log(Y)", "log(L)", "log(K)"),
 
 ```
 
-@fig-output-pt1 and @fig-output-pt2 display the dynamics of the output-labour ratio $y=\frac{Y}{L}$ for the different scenarios. During the adjustment from the initialisation to the steady state, the model generates income-per-capita growth. In the steady state, where all variables grow at the same rate, ratios stabilise at finite values. Changes to any of the parameters other than $n$ will change the growth *path*, but not the growth *rate*. It can be seen that compared to the baseline, a rise in the saving propensity $s$ raises the growth path and yields a higher steady-state output-labour ratio. A similar effect occurs for a rise in the capital elasticity of output  ($\alpha$).
+@fig-output-pt1 and @fig-output-pt2 display the dynamics of the output-labour ratio $y=\frac{Y}{L}$ for the different scenarios. During the adjustment from the initialisation to the steady state, the model generates income-per-capita growth. In the steady state, where all variables grow at the same rate, ratios stabilise at finite values. Changes to any of the parameters other than $n$ will change the growth *path*, but not the growth *rate*. It can be seen that compared to the baseline, a rise in the saving propensity $s$ raises the growth path and yields a higher steady-state output-labour ratio. A similar effect occurs for a rise in the capital elasticity of output  ($\alpha$).^[This effect is ambiguous in general -- it depends on whether $sA \gtrless n+\delta$ -- but is positive for the parameterisation used here.]
 
 ```{r}
 #| label: fig-output-pt1
