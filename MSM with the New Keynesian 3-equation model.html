@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.29">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Karsten Kohler">
+<meta name="author" content="Nitin Nair">
+
+<title>msm-with-the-new-keynesian-3-equation-model</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="MSM with the New Keynesian 3-equation model_files/libs/clipboard/clipboard.min.js"></script>
+<script src="MSM with the New Keynesian 3-equation model_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="MSM with the New Keynesian 3-equation model_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="MSM with the New Keynesian 3-equation model_files/libs/quarto-html/popper.min.js"></script>
+<script src="MSM with the New Keynesian 3-equation model_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="MSM with the New Keynesian 3-equation model_files/libs/quarto-html/anchor.min.js"></script>
+<link href="MSM with the New Keynesian 3-equation model_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="MSM with the New Keynesian 3-equation model_files/libs/quarto-html/quarto-syntax-highlighting-dfa48a90d809c806c7ea2d5aecd9fc66.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="MSM with the New Keynesian 3-equation model_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="MSM with the New Keynesian 3-equation model_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="MSM with the New Keynesian 3-equation model_files/libs/bootstrap/bootstrap-efbb37e9afcc02144ebbc7afd12a776f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Karsten Kohler </p>
+             <p>Nitin Nair </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sec-msm" class="level1">
+<h1>Calibrating a Model with the Method of Simulated Moments</h1>
+<p>So far, all models on this website have been parameterised by hand without dedicating much attention to empirical accuracy. For example, we may have set the marginal propensity to consume in the Keynesian consumption function (<strong>?@eq-islmC</strong>) of the <strong>?@sec-islm-model</strong> to a value of <span class="math inline">\(c_1=0.6\)</span> without checking that this value actually generates empirically plausible results.</p>
+<p>The present chapter asks: given a model and some real-world data, how can we choose the model’s parameter values so that its simulated data match the empirical data as closely as possible? The technique we use to achieve this is the <strong>method of simulated moments (MSM)</strong> <span class="citation" data-cites="Duffie1993 McFadden1989">(<a href="#ref-Duffie1993" role="doc-biblioref">Duffie and Singleton 1993</a>; <a href="#ref-McFadden1989" role="doc-biblioref">McFadden 1989</a>)</span>. The MSM chooses parameters to minimise the distance between a set of data moments (e.g.&nbsp;means, variances, autocovariances, cross-covariances, …) and the same moments computed from the simulated model’s data. To stick with the Keynesian consumption function example, we might use empirical data on the correlation between aggregate output and consumption for an economy of interest to calibrate the marginal propensity, so that the correlation between aggregate output and consumption in the simulated data of the IS-LM model is as close as possible to the empirically observed one.</p>
+<p>The MSM is the workhorse estimation method in the agent-based and behavioural macroeconomics literature, which we follow here.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> We illustrate its application with the <strong>?@sec-NK</strong> model already covered on this site.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<section id="the-method-of-simulated-moments" class="level2">
+<h2 class="anchored" data-anchor-id="the-method-of-simulated-moments">The method of simulated moments</h2>
+<p>Let <span class="math inline">\(m^{emp}\)</span> be a <span class="math inline">\((n_m \times 1)\)</span> column vector of <span class="math inline">\(n_m\)</span> moments computed from the data, and let <span class="math inline">\(m(\theta)\)</span> be the corresponding vector of simulated moments computed from data simulated by the model at parameter vector <span class="math inline">\(\theta\)</span>. Let <span class="math inline">\(J(\theta)\)</span> be a quadratic loss function that computes the (weighted) sum of squared deviations of the simulated from the empirical moments:<br>
+<span id="eq-loss"><span class="math display">\[
+J(\theta) = \big[m(\theta)-m^{emp}\big]' \, W \, \big[m(\theta)-m^{emp}\big],
+\tag{1}\]</span></span></p>
+<p>where <span class="math inline">\(W\)</span> is a <span class="math inline">\((n_m \times n_m)\)</span> weighting matrix that assigns a weight to each squared deviation in the sum.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>The MSM chooses the parameter vector <span class="math inline">\(\theta\)</span> so as to minimise the value of the loss function: <span class="math display">\[
+\hat\theta = \arg\min_\theta \; J(\theta). \qquad
+\]</span> The MSM is typically applied to models that do not have a closed-form solution for <span class="math inline">\(m(\theta)\)</span>, the function that describes how the parameters determine the simulated moments. As a result, <span class="math inline">\(J(\theta)\)</span> does not have a closed-form solution either and needs to be minimised numerically. In practice, this is done by simulating the model many times for different values of the parameter vector <span class="math inline">\(\theta\)</span>, evaluating the loss function for each of those parameterisations, and eventually choosing the parameterisation that gives the lowest value of the loss function. To smooth out noise, the simulated moments are typically computed as averages over multiple Monte Carlo runs for a given parameterisation.</p>
+<p>Typically, the theoretically admissible parameter space (i.e.&nbsp;the total number of conceivable parameterisations) is vast – too large to be numerically explored exhaustively. In practice, only a subset of the parameter space will be used to evaluate the loss function. We will discuss below some strategies for exploring the parameter space.</p>
+<p>A further practical issue is the choice of which empirical moments to target. Table 1 summarises some of the most commonly used ones, the feature of the data they capture, and when it is useful to include it in the vector of target moments <span class="math inline">\(m^{emp}\)</span>.</p>
+<p><strong>Table 1: Common target moments in the MSM</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Moment</th>
+<th style="text-align: left;">What it captures</th>
+<th style="text-align: left;">When is it useful</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mean</td>
+<td style="text-align: left;">Average levels</td>
+<td style="text-align: left;">To match the observed level of an individual variable</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Variance</td>
+<td style="text-align: left;">Volatility</td>
+<td style="text-align: left;">To match the observed fluctuations of an individual variable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Autocovariance</td>
+<td style="text-align: left;">Persistence</td>
+<td style="text-align: left;">To match how long an observed change in an individual variable lasts</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cross-covariance</td>
+<td style="text-align: left;">Comovement</td>
+<td style="text-align: left;">To match the observed contemporaneous relationship between two variables</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lagged cross-covariance</td>
+<td style="text-align: left;">Dynamic relationships</td>
+<td style="text-align: left;">To match observed lead-lag relationships between two variables</td>
+</tr>
+</tbody>
+</table>
+<p>We will illustrate the choice of moments in the applied example below.</p>
+<p>A final practical issue concerns the choice of the weighting matrix <span class="math inline">\(W\)</span>. Three common choices, in increasing order of sophistication, are:</p>
+<ul>
+<li><strong>Identity weighting</strong> <span class="math inline">\((W=I)\)</span>: treats every moment as equally important, but ignores the fact that moments are typically measured with very different precision, may be measured in different units or are naturally at different scales.</li>
+<li><strong>Diagonal inverse-variance weighting</strong>: use a diagonal <span class="math inline">\(W\)</span> with entries <span class="math inline">\(1/\widehat{\mathrm{Var}}(m^{emp}_i)\)</span>, so that imprecisely estimated moments or moments at naturally larger scales than others are down-weighted.</li>
+<li><strong>Fully efficient weighting</strong> <span class="math inline">\((W=\hat\Omega^{-1})\)</span>: uses the inverse of the entire variance-covariance matrix <span class="math inline">\(\Omega\)</span> of the empirical moments, which is the asymptotically optimal weighting. Takes into account not only the variances of the moments, but also their co-variances.</li>
+</ul>
+<p>We will discuss these different options for the weighting matrix in the applied example below.</p>
+</section>
+<section id="applied-example-calibrating-the-new-keynesian-3-equation-model" class="level2">
+<h2 class="anchored" data-anchor-id="applied-example-calibrating-the-new-keynesian-3-equation-model">Applied example: calibrating the New Keynesian 3-equation model</h2>
+<p>Recall the New Keynesian 3-equation model from <span class="citation" data-cites="Carlin2014">Carlin and Soskice (<a href="#ref-Carlin2014" role="doc-biblioref">2014</a>)</span> presented in <strong>?@sec-NK</strong>:</p>
+<p><span class="math display">\[y_t = A - a_1 r_{t-1} \qquad \text{(IS curve)}\]</span> <span class="math display">\[\pi_t = \pi_{t-1} + a_2(y_t - y_e) \qquad \text{(Phillips curve)}\]</span> <span class="math display">\[r_t = r_s + a_3(\pi_t - \pi^T), \qquad \text{(Monetary policy rule)}\]</span></p>
+<p><span class="math display">\[r_s =  (A-y_e)/a_1, \qquad \text{(stabilising interest rate)} \]</span></p>
+<p><span class="math display">\[a_3 = \frac{1}{a_1\left(\frac{1}{a_2 b} + a_2\right)} \qquad \text{(monetary policy parameter)},\]</span> where <span class="math inline">\(y\)</span>, <span class="math inline">\(A\)</span>, <span class="math inline">\(r\)</span>, <span class="math inline">\(\pi\)</span>, <span class="math inline">\(y_e\)</span>, <span class="math inline">\(r_s\)</span>, and <span class="math inline">\(\pi^T\)</span> are real output, autonomous demand, the real interest rate, inflation, equilibrium output, the stabilising real interest rate, and the inflation target, respectively. The parameters <span class="math inline">\(a_1, a_2\)</span> and <span class="math inline">\(b\)</span> are the sensitivity of aggregate demand with respect to the interest rate, the sensitivity of the inflation to the output gap, and the sensitivity of the central bank to deviations of inflation from target.</p>
+<p>This version of the model is <em>deterministic</em>, it does not contain any random shocks. To calibrate it against noisy real-world macro data, we need to (i) decide which of its parameters are free to calibrate, and (ii) add a stochastic structure so the model actually produces simulated variances and autocorrelations we can compare against data.</p>
+<section id="choosing-the-parameters-to-be-calibrated" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-the-parameters-to-be-calibrated">Choosing the parameters to be calibrated</h3>
+<p>A first important question when calibrating a model is which parameters are to be calibrated and which are fixed externally. The 3-equation model has six exogenous parameters/variables: <span class="math inline">\((A, y_e, \pi^T, a_1,a_2,b)\)</span>. We can fix the inflation target externally at a value of 2% followed explicitly or implicitly by many central banks, i.e.&nbsp;<span class="math inline">\(\pi^T=2\)</span>. Setting autonomous demand <span class="math inline">\(A\)</span> and potential output <span class="math inline">\(y_e\)</span> to realistic values is less straightforward as these are not directly observable. Suppose we are not interested in reaching empirically realistic average values for output and the real interest rate in levels. Let us thus fix <span class="math inline">\(A = y_e = 0\)</span>, so that <span class="math inline">\(r_s=0\)</span>, and the steady state becomes <span class="math inline">\((y^*,\pi^*,r^*) = (0, \pi^T, 0)\)</span>. This means <span class="math inline">\(y_t\)</span> and <span class="math inline">\(r_t\)</span> can be interpreted as gaps with clean empirical counterparts (an output gap and a de-meaned real interest rate). This normalisation implies that the first moments (= means) of <span class="math inline">\(y,\pi,r\)</span> carry no information about the remaining three free parameters <span class="math inline">\(a_1,a_2,b\)</span> and should not be used as target moments. Instead, we will only use variances, autocovariances, and cross-covariances to identify them.</p>
+<p>Next, we need to introduce stochasticity to the model. To this end, three shocks are added, one per equation - a demand shock in the IS curve, a cost-push shock in the Phillips curve, and a monetary-policy shock in the policy rule. Along with the aforementioned parameter restrictions, this gives the following stochastic version of the 3-equation model:</p>
+<p><span class="math display">\[y_t = -a_1 r_{t-1} + \varepsilon_{d,t}\]</span> <span class="math display">\[\varepsilon_{d,t} = \rho_d \varepsilon_{d,t-1} + \mu_{d,t}\]</span> <span class="math display">\[\pi_t = \pi_{t-1} + a_2 y_t + \varepsilon_{s,t}\]</span> <span class="math display">\[r_t = a_3(\pi_t - \pi^T) + \varepsilon_{m,t},\]</span></p>
+<p>where we let the demand shock <span class="math inline">\(\varepsilon_{d,t}\)</span> follow an AR(1) process so as to introduce some persistence, which is a common property of macroeconomic time series. The other shocks are assumed to be i.i.d. for simplicity and to save on parameters. The shock processes contain the parameters <span class="math inline">\(\rho_d, \sigma_d, \sigma_s,\)</span> and <span class="math inline">\(\sigma_m\)</span>, which are the autocorrelation coefficient of the demand shock, and the standard deviations of the demand, inflation, and monetary policy shocks, respectively.</p>
+<p>This gives <span class="math inline">\(n_p=7\)</span> free parameters to be calibrated: <span class="math inline">\(\theta = (a_1, a_2, b, \rho_d, \sigma_d, \sigma_s, \sigma_m)\)</span>, with stability requiring <span class="math inline">\(a_1,a_2,b&gt;0\)</span> and <span class="math inline">\(|\rho_d|&lt;1\)</span>.</p>
+</section>
+<section id="data-and-empirical-moments" class="level3">
+<h3 class="anchored" data-anchor-id="data-and-empirical-moments">Data and empirical moments</h3>
+<p>The next important step is to choose an appropriate set of empirical moments. The number of moments should generally be at least as large as the number of parameters <span class="math inline">\((n_m \geq n_p)\)</span>. The key variables in the 3-equation model are the output gap, the inflation rate, and the policy rate. We will use their variances, first-order autocovariances, and contemporaneous cross-covariances, giving 9 target moments to calibrate 7 parameters. We will use data for the US economy.</p>
+<p>To construct an empirical measure of the output gap, we use the <strong>Hamilton regression filter</strong> (<span class="citation" data-cites="Hamilton2018">Hamilton (<a href="#ref-Hamilton2018" role="doc-biblioref">2018</a>)</span>).<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> It regresses <span class="math inline">\(y_{t+h}\)</span> on a constant and <span class="math inline">\(p\)</span> lags <span class="math inline">\(y_t,\dots,y_{t-p+1}\)</span>, yielding regression residuals that represent the cyclical component. We use the standard settings for quarterly data of <span class="math inline">\(h=8\)</span> and <span class="math inline">\(p=4\)</span>.</p>
+<p>Inflation is annualised quarter-on-quarter core PCE inflation, and the real policy rate is the quarterly-averaged effective federal funds rate minus inflation, de-meaned so its sample mean is exactly zero (matching the normalised steady state of <span class="math inline">\(r^*=0\)</span>). We restrict the sample to <strong>1996Q1-2007Q4</strong> to focus on the Fed’s de facto 2% inflation-targeting era and to exclude the post-2008 zero-lower bound period, where the policy rate was not really reacting to inflation in the sense the model assumes.</p>
+<p>The first block of code fetches the relevant US time series data from <a href="https://fred.stlouisfed.org/">Fred</a> and constructs the desired series (output gap, inflation rate, and de-meaned real policy rate).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear the environment</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load relevant libraries</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quantmod)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: xts</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: zoo</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'zoo'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    as.Date, as.Date.numeric</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: TTR</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'quantmod':
+  method            from
+  as.zoo.data.frame zoo </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xts)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Suppress an unnecessary warning</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">xts.message.period.apply.mean =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Set desired sample period</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>sample_start <span class="ot">=</span> <span class="fu">as.yearqtr</span>(<span class="st">"1996 Q1"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>sample_end   <span class="ot">=</span> <span class="fu">as.yearqtr</span>(<span class="st">"2007 Q4"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Pull relevant series from Fred (real GDP, CPI, nominal federal funds rate) </span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">getSymbols</span>(<span class="fu">c</span>(<span class="st">"GDPC1"</span>, <span class="st">"PCEPILFE"</span>, <span class="st">"FEDFUNDS"</span>), <span class="at">src =</span> <span class="st">"FRED"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "GDPC1"    "PCEPILFE" "FEDFUNDS"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Align the three series to quarterly frequency and drop missing values</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gdp      <span class="ot">=</span> <span class="fu">na.omit</span>(GDPC1)                       </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>pcepilfe <span class="ot">=</span> <span class="fu">apply.quarterly</span>(<span class="fu">na.omit</span>(PCEPILFE), mean)  <span class="co"># monthly -&gt; quarterly average</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>fedfunds <span class="ot">=</span> <span class="fu">apply.quarterly</span>(<span class="fu">na.omit</span>(FEDFUNDS), mean)  <span class="co"># monthly -&gt; quarterly average</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Put together data frame with the raw series</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>data_raw <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">qtr =</span> <span class="fu">as.yearqtr</span>(<span class="fu">index</span>(gdp)), <span class="at">gdp =</span> <span class="fu">as.numeric</span>(gdp))</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>data_raw <span class="ot">=</span> <span class="fu">merge</span>(data_raw, <span class="fu">data.frame</span>(<span class="at">qtr =</span> <span class="fu">as.yearqtr</span>(<span class="fu">index</span>(pcepilfe)),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">pcepilfe =</span> <span class="fu">as.numeric</span>(pcepilfe)), <span class="at">by =</span> <span class="st">"qtr"</span>, <span class="at">all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>data_raw <span class="ot">=</span> <span class="fu">merge</span>(data_raw, <span class="fu">data.frame</span>(<span class="at">qtr =</span> <span class="fu">as.yearqtr</span>(<span class="fu">index</span>(fedfunds)),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">fedfunds =</span> <span class="fu">as.numeric</span>(fedfunds)), <span class="at">by =</span> <span class="st">"qtr"</span>, <span class="at">all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>data_raw <span class="ot">=</span> data_raw[<span class="fu">order</span>(data_raw<span class="sc">$</span>qtr), ]</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Write function to apply the Hamilton filter and return the cyclical component</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># NB: need to check which possible regression observations have no missing or infinite values</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>hamilton_filter <span class="ot">=</span> <span class="cf">function</span>(y, <span class="at">h =</span> <span class="dv">8</span>, <span class="at">p =</span> <span class="dv">4</span>) {</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">length</span>(y)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  t_all <span class="ot">=</span> p<span class="sc">:</span>(n <span class="sc">-</span> h)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  valid <span class="ot">=</span> <span class="fu">sapply</span>(t_all, <span class="cf">function</span>(tt) <span class="fu">all</span>(<span class="fu">is.finite</span>(<span class="fu">c</span>(y[tt <span class="sc">+</span> h], y[(tt <span class="sc">-</span> p <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>tt]))))</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  t <span class="ot">=</span> t_all[valid]</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">=</span> <span class="fu">cbind</span>(<span class="dv">1</span>, <span class="fu">sapply</span>(<span class="dv">0</span><span class="sc">:</span>(p <span class="sc">-</span> <span class="dv">1</span>), <span class="cf">function</span>(j) y[t <span class="sc">-</span> j]))</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  model <span class="ot">=</span> <span class="fu">lm</span>(y[t <span class="sc">+</span> h] <span class="sc">~</span> X <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  cycle <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA_real_</span>, n)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  cycle[t <span class="sc">+</span> h] <span class="ot">=</span> <span class="fu">residuals</span>(model)</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  cycle</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Put together data frame for the transformed series</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>data_transformed <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">qtr =</span> data_raw<span class="sc">$</span>qtr)</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>data_transformed<span class="sc">$</span>y  <span class="ot">=</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">hamilton_filter</span>(<span class="fu">log</span>(data_raw<span class="sc">$</span>gdp))    <span class="co"># output gap</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>data_transformed<span class="sc">$</span>pi <span class="ot">=</span> <span class="dv">400</span> <span class="sc">*</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="fu">diff</span>(<span class="fu">log</span>(data_raw<span class="sc">$</span>pcepilfe)))   <span class="co"># annualised inflation</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>data_transformed<span class="sc">$</span>r  <span class="ot">=</span> data_raw<span class="sc">$</span>fedfunds <span class="sc">-</span> data_transformed<span class="sc">$</span>pi     <span class="co"># real policy rate</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Restrict to the desired sample period and remove missing values</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>data_transformed <span class="ot">=</span> data_transformed[data_transformed<span class="sc">$</span>qtr <span class="sc">&gt;=</span> sample_start <span class="sc">&amp;</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>                                     data_transformed<span class="sc">$</span>qtr <span class="sc">&lt;=</span> sample_end, ]</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>data_transformed <span class="ot">=</span> <span class="fu">na.omit</span>(data_transformed)</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Demean the real policy rate</span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>data_transformed<span class="sc">$</span>r <span class="ot">=</span> data_transformed<span class="sc">$</span>r <span class="sc">-</span> <span class="fu">mean</span>(data_transformed<span class="sc">$</span>r)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Next, we write a function to compute the nine desired empirical moments from the <span class="math inline">\(y\)</span>, <span class="math inline">\(\pi\)</span>, and <span class="math inline">\(r\)</span> series:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write function that computes the nine desired moments from y, pi, and r series</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>compute_moments <span class="ot">=</span> <span class="cf">function</span>(mat) {</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> mat[, <span class="st">"y"</span>]; pi <span class="ot">=</span> mat[, <span class="st">"pi"</span>]; r <span class="ot">=</span> mat[, <span class="st">"r"</span>]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">nrow</span>(mat)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">var_y    =</span> <span class="fu">var</span>(y),</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">var_pi   =</span> <span class="fu">var</span>(pi),</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">var_r    =</span> <span class="fu">var</span>(r),</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">ar1_y    =</span> <span class="fu">cov</span>(y[<span class="dv">2</span><span class="sc">:</span>n],  y[<span class="dv">1</span><span class="sc">:</span>(n <span class="sc">-</span> <span class="dv">1</span>)]),</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">ar1_pi   =</span> <span class="fu">cov</span>(pi[<span class="dv">2</span><span class="sc">:</span>n], pi[<span class="dv">1</span><span class="sc">:</span>(n <span class="sc">-</span> <span class="dv">1</span>)]),</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">ar1_r    =</span> <span class="fu">cov</span>(r[<span class="dv">2</span><span class="sc">:</span>n],  r[<span class="dv">1</span><span class="sc">:</span>(n <span class="sc">-</span> <span class="dv">1</span>)]),</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">cov_y_pi =</span> <span class="fu">cov</span>(y, pi),</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">cov_y_r  =</span> <span class="fu">cov</span>(y, r),</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">cov_pi_r =</span> <span class="fu">cov</span>(pi, r)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the empirical series to a matrix and apply function to compute empirical moments</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>ts_data <span class="ot">=</span> <span class="fu">as.matrix</span>(data_transformed[, <span class="fu">c</span>(<span class="st">"y"</span>, <span class="st">"pi"</span>, <span class="st">"r"</span>)])</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>obs_moments_raw <span class="ot">=</span> <span class="fu">compute_moments</span>(ts_data)</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Print rounded moments</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(obs_moments_raw, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   var_y   var_pi    var_r    ar1_y   ar1_pi    ar1_r cov_y_pi  cov_y_r 
+    3.94     0.28     3.53     3.71     0.08     3.30    -0.12     2.29 
+cov_pi_r 
+   -0.31 </code></pre>
+</div>
+</div>
+</section>
+<section id="simulated-moments" class="level3">
+<h3 class="anchored" data-anchor-id="simulated-moments">Simulated moments</h3>
+<p>Next, we write a function that simulates the stochastic version of the model. The function takes as arguments the parameter vector <span class="math inline">\((\theta)\)</span>, the desired time horizon of the simulation (<code>T_sim</code>), and a chosen “burn-in” period of initial data points that will be discarded (<code>burnin</code>). Three further arguments will specify the desired implementation of a manual shock scenario that will be used later to create illustrative impulse response function. By setting <code>burnin=NULL</code>, we can ignore these arguments for now.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set inflation target externally</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pt <span class="ot">=</span> <span class="dv">2</span>  </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define function to simulate the model</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>simulate_model <span class="ot">=</span> <span class="cf">function</span>(theta, <span class="at">T_sim =</span> <span class="dv">300</span>, <span class="at">burnin =</span> <span class="dv">100</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">shock_t =</span> <span class="cn">NULL</span>, <span class="at">shock_size =</span> <span class="dv">0</span>, <span class="at">shock_eq =</span> <span class="st">"d"</span>) {</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Assign parameter values from parameter vector to individual parameters</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  a1 <span class="ot">=</span> theta[<span class="dv">1</span>] </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  a2 <span class="ot">=</span> theta[<span class="dv">2</span>] </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  b <span class="ot">=</span> theta[<span class="dv">3</span>]</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  rho_d <span class="ot">=</span> theta[<span class="dv">4</span>]</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  sigma_d <span class="ot">=</span> theta[<span class="dv">5</span>] </span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  sigma_s <span class="ot">=</span> theta[<span class="dv">6</span>] </span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  sigma_m <span class="ot">=</span> theta[<span class="dv">7</span>]</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  a3 <span class="ot">=</span> (a1 <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> (a2 <span class="sc">*</span> b) <span class="sc">+</span> a2))<span class="sc">^</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create vectors that will contain the simulated data</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> <span class="fu">numeric</span>(T_sim); p <span class="ot">=</span> <span class="fu">numeric</span>(T_sim); r <span class="ot">=</span> <span class="fu">numeric</span>(T_sim); eps_d <span class="ot">=</span> <span class="fu">numeric</span>(T_sim)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create shock processes</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  mu_d <span class="ot">=</span> <span class="fu">rnorm</span>(T_sim, <span class="dv">0</span>, sigma_d)                      </span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  shock_s <span class="ot">=</span> <span class="fu">rnorm</span>(T_sim, <span class="dv">0</span>, sigma_s)</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  shock_m <span class="ot">=</span> <span class="fu">rnorm</span>(T_sim, <span class="dv">0</span>, sigma_m)</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create (optional) additional shock scenario (will later be used to generate IRF)</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(shock_t)) {</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (shock_eq <span class="sc">==</span> <span class="st">"d"</span>) mu_d[shock_t] <span class="ot">=</span> mu_d[shock_t] <span class="sc">+</span> shock_size</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (shock_eq <span class="sc">==</span> <span class="st">"s"</span>) shock_s[shock_t] <span class="ot">=</span> shock_s[shock_t] <span class="sc">+</span> shock_size</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (shock_eq <span class="sc">==</span> <span class="st">"m"</span>) shock_m[shock_t] <span class="ot">=</span> shock_m[shock_t] <span class="sc">+</span> shock_size</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Initialise at steady state</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  y[<span class="dv">1</span>] <span class="ot">=</span> <span class="dv">0</span>; p[<span class="dv">1</span>] <span class="ot">=</span> pt; r[<span class="dv">1</span>] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Simulate</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>T_sim) {</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    eps_d[t] <span class="ot">=</span> rho_d <span class="sc">*</span> eps_d[t<span class="dv">-1</span>] <span class="sc">+</span> mu_d[t]       <span class="co"># AR(1) demand shock</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    y[t] <span class="ot">=</span> <span class="sc">-</span>a1 <span class="sc">*</span> r[t <span class="sc">-</span> <span class="dv">1</span>] <span class="sc">+</span> eps_d[t]            <span class="co"># IS curve, A=0</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    p[t] <span class="ot">=</span> p[t <span class="sc">-</span> <span class="dv">1</span>] <span class="sc">+</span> a2 <span class="sc">*</span> y[t] <span class="sc">+</span> shock_s[t]    <span class="co"># Phillips curve, ye=0</span></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    r[t] <span class="ot">=</span> a3 <span class="sc">*</span> (p[t] <span class="sc">-</span> pt) <span class="sc">+</span> shock_m[t]        <span class="co"># Policy rule, rs=0</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return simulated data for the chosen simulation period</span></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">=</span> <span class="fu">cbind</span>(<span class="at">y =</span> y, <span class="at">p =</span> p, <span class="at">r =</span> r)</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res[(burnin <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>T_sim, ])</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Then we define another function that computes the simulated moments for a given parameterisation as averages over <span class="math inline">\(MC\)</span> Monte Carlo runs (which we set to <span class="math inline">\(MC=50\)</span> here). By averaging the moments over multiple runs, we reduce sensitivity of the results to outlier values. Note that we fix a random seed <em>inside</em> the <code>sim_moments()</code> function, so it resets to the same reproducible sequence of random numbers every time the function is called - which will happen repeatedly below when we simulate the model for different parameterisations. This means that while every <em>individual</em> Monte Carlo run performed via the <code>simulate_model</code> function is based on different random values for the shocks, the <em>sequence</em> of Monte Carlo runs performed for every parameterisation uses the same underlying sequence of shocks; only the parameterisation changes what happens to them. This approach keeps the loss function comparable and smooth across evaluations.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write function that computes simulated moments as Monte Carlo averages</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>sim_moments <span class="ot">=</span> <span class="cf">function</span>(theta, <span class="at">MC =</span> <span class="dv">50</span>) {</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># fix random seed</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">123</span>)                 </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create matrix in which simulated moments will be stored</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  all_moms <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, MC, <span class="dv">9</span>)  </span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>MC) {             <span class="co"># Monte Carlo loop</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    sim_data <span class="ot">=</span> <span class="fu">simulate_model</span>(theta)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    y_s <span class="ot">=</span> sim_data[, <span class="st">"y"</span>]; p_s <span class="ot">=</span> sim_data[, <span class="st">"p"</span>]; r_s <span class="ot">=</span> sim_data[, <span class="st">"r"</span>]</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    n <span class="ot">=</span> <span class="fu">nrow</span>(sim_data)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute simulated moments  </span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    all_moms[s, ] <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">var</span>(y_s), <span class="fu">var</span>(p_s), <span class="fu">var</span>(r_s),</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cov</span>(y_s[<span class="dv">2</span><span class="sc">:</span>n], y_s[<span class="dv">1</span><span class="sc">:</span>(n <span class="sc">-</span> <span class="dv">1</span>)]),</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cov</span>(p_s[<span class="dv">2</span><span class="sc">:</span>n], p_s[<span class="dv">1</span><span class="sc">:</span>(n <span class="sc">-</span> <span class="dv">1</span>)]),</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cov</span>(r_s[<span class="dv">2</span><span class="sc">:</span>n], r_s[<span class="dv">1</span><span class="sc">:</span>(n <span class="sc">-</span> <span class="dv">1</span>)]),</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cov</span>(y_s, p_s), <span class="fu">cov</span>(y_s, r_s), <span class="fu">cov</span>(p_s, r_s)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>   }                          <span class="co"># close loop</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return moments</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  moms <span class="ot">=</span> <span class="fu">colMeans</span>(all_moms, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">any</span>(<span class="sc">!</span><span class="fu">is.finite</span>(moms))) <span class="fu">return</span>(<span class="fu">rep</span>(<span class="fl">1e6</span>, <span class="dv">9</span>))</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(moms)</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="loss-function" class="level3">
+<h3 class="anchored" data-anchor-id="loss-function">Loss function</h3>
+<p>Then we define a function that computes the value of the loss function (<a href="#eq-loss" class="quarto-xref">Equation&nbsp;1</a>) for a given set of parameters <span class="math inline">\(\theta\)</span> and a weighting matrix <span class="math inline">\(W\)</span> that need to be supplied as arguments to the function:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define function that compute the value of the loss function</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>objective <span class="ot">=</span> <span class="cf">function</span>(theta, Wmat) {</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  sim_moms <span class="ot">=</span> <span class="fu">sim_moments</span>(theta)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">any</span>(<span class="sc">!</span><span class="fu">is.finite</span>(sim_moms))) <span class="fu">return</span>(<span class="fl">1e10</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  diff <span class="ot">=</span> sim_moms <span class="sc">-</span> obs_moments_raw</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>(<span class="fu">t</span>(diff) <span class="sc">%*%</span> Wmat <span class="sc">%*%</span> diff)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="exploring-the-parameter-space" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-the-parameter-space">Exploring the parameter space</h3>
+<p>A key challenge when using a numerical solution method like the MSM is to decide on a procedure for how to explore the, typically vast, parameter space. We will tackle this problem in two ways. First, we utilise R’s general-purpose numerical minimiser, <code>optim()</code>. This is not specifically designed for the MSM - it just repeatedly evaluates whatever objective function you supply at different trial parameter vectors, and searches for the one that returns the smallest number. Here we use <code>method="L-BFGS-B"</code>, a quasi-Newton algorithm: at each trial point it numerically approximates the gradient — the local slope of the objective function, i.e.&nbsp;how much the loss would change if each parameter were nudged up or down slightly, and in which direction that loss decreases fastest. It then uses accumulated gradient information to approximate the objective function’s local curvature to decide which parameterisation to evaluate next. The <code>optim()</code> function takes as arguments two constraints (<code>lower</code>/<code>upper</code>) that specify the admissible min and max values for each parameter. Specifying these bounds also allows us to enforce <span class="math inline">\(a_1,a_2,b&gt;0\)</span> and <span class="math inline">\(|\rho_d|&lt;1\)</span>, which we require to ensure stability of the stochastic version of the 3-equation model.</p>
+<p>Two things are worth flagging about <code>optim()</code>. First, it returns a <code>convergence</code> code: <code>0</code> means it believes it stopped at a genuine local minimum, while nonzero codes flag a problem. Second, and more importantly: <code>optim()</code> is a <em>local</em> search. It has no way of knowing whether the minimum it finds is the best one available, or just the closest one to wherever it started. Consequently, the result might be sensitive to the initial parameterisation that needs to be supplied to the function.</p>
+<p>This brings us to the second way in which we will tackle the parameter choice problem. In a robustness test, which we perform below, we will not only consider one initial parameterisation, but many that are sampled from a parameter grid. This allows us to assess the sensitivity of the optimal parameterisation to the initial values, and to potentially find better parameterisations.</p>
+</section>
+<section id="taking-a-first-shot-at-the-calibration" class="level3">
+<h3 class="anchored" data-anchor-id="taking-a-first-shot-at-the-calibration">Taking a first shot at the calibration</h3>
+<p>For our first shot at the calibration, we will use a simplified approach. First, we will start the minimisation algorithm from only a single initial parameterisation. Second, we will use identity weighting in the loss function, i.e.&nbsp;we will set <span class="math inline">\(W=I\)</span>. This will produce a tentative “optimal” parameterisation. We will then refine our approach to see if it yields a different, potentially better, parameterisation.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define an initial parameterisation</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>theta_start <span class="ot">=</span> <span class="fu">c</span>(<span class="at">a1 =</span> <span class="fl">0.3</span>, <span class="at">a2 =</span> <span class="fl">0.7</span>, <span class="at">b =</span> <span class="dv">1</span>, <span class="at">rho_d =</span> <span class="fl">0.5</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sigma_d =</span> <span class="fl">0.3</span>, <span class="at">sigma_s =</span> <span class="fl">0.3</span>, <span class="at">sigma_m =</span> <span class="fl">0.3</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define lower and upper bounds for the admissible parameter values</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>bounds_lower <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.01</span>, <span class="fl">0.01</span>, <span class="sc">-</span><span class="fl">0.99</span>, <span class="fl">0.001</span>, <span class="fl">0.001</span>, <span class="fl">0.001</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>bounds_upper <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="fl">0.99</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up an identity weighting matrix</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>W_identity <span class="ot">=</span> <span class="fu">diag</span>(<span class="fu">length</span>(obs_moments_raw))    </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Run minimisation algorithm on loss function</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>fit_id <span class="ot">=</span> <span class="fu">optim</span>(theta_start, <span class="cf">function</span>(th) <span class="fu">objective</span>(th, W_identity),</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">method =</span> <span class="st">"L-BFGS-B"</span>,</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>                <span class="at">lower =</span> bounds_lower, <span class="at">upper =</span> bounds_upper,</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">control =</span> <span class="fu">list</span>(<span class="at">maxit =</span> <span class="dv">1000</span>, <span class="at">factr =</span> <span class="fl">1e12</span>, <span class="at">pgtol =</span> <span class="fl">1e-3</span>))</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Print fit</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Convergence:"</span>, fit_id<span class="sc">$</span>convergence, <span class="st">" Objective:"</span>, <span class="fu">round</span>(fit_id<span class="sc">$</span>value, <span class="dv">4</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Convergence: 0  Objective: 7.398 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print calibrated parameters (including the implied a_3 parameter)</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>theta_id <span class="ot">=</span> fit_id<span class="sc">$</span>par</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>a3_id <span class="ot">=</span> <span class="fu">with</span>(<span class="fu">as.list</span>(theta_id), (a1 <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> (a2 <span class="sc">*</span> b) <span class="sc">+</span> a2))<span class="sc">^</span>(<span class="sc">-</span><span class="dv">1</span>))</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">c</span>(theta_id, <span class="at">a3 =</span> a3_id), <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     a1      a2       b   rho_d sigma_d sigma_s sigma_m      a3 
+ 0.0100  0.0203  2.0460  0.5367  1.8726  0.0115  0.5202  4.1568 </code></pre>
+</div>
+</div>
+<p>Before evaluating the goodness of fit of this tentative parameterisation, let us check if we’d get a different result when using a different weighting matrix.</p>
+</section>
+<section id="taking-a-second-shot-with-a-diagonal-weighting-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="taking-a-second-shot-with-a-diagonal-weighting-matrix">Taking a second shot with a diagonal weighting matrix</h3>
+<p>Next, we re-run the calibration using a more sophisticated version of the weighting matrix <span class="math inline">\(W\)</span>. To weight moments by how precisely they are estimated, we need to estimate the variance-covariance matrix, <span class="math inline">\(\Omega\)</span>, of the empirical moments. We estimate <span class="math inline">\(\Omega\)</span> with a <strong>block bootstrap</strong> of the empirical data, using the <code>tsboot()</code> function from R’s <code>boot</code> package. Rather than resampling individual quarters independently, a block bootstrap resamples (with replacement) contiguous blocks of quarters, which preserves the autocorrelation in the data. We use the specification <code>sim="geom"</code>, which draws blocks of random (geometrically distributed) length rather than a single fixed length, with a mean block length of <code>l=8</code> quarters (= two years). We perform <code>R=5000</code> bootstrap replications.</p>
+<p>Note that in order to call the <code>tsboot()</code> function, we need to supply a function as an argument that computes the statistics that are to be bootstrapped. For this, we re-use the previously created <code>compute_moments</code> function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set random seed for reproducibiliy</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a bootstrap sample of the moments</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>boot_out  <span class="ot">=</span> <span class="fu">tsboot</span>(ts_data, compute_moments, <span class="at">R =</span> <span class="dv">5000</span>, <span class="at">l =</span> <span class="dv">8</span>, <span class="at">sim =</span> <span class="st">"geom"</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Save bootstrap sample as a matrix</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>boot_moms <span class="ot">=</span> boot_out<span class="sc">$</span>t</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(boot_moms) <span class="ot">=</span> <span class="fu">names</span>(obs_moments_raw)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute variance-covariance matrix of the bootstrapped moments sample</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>Omega_boot <span class="ot">=</span> <span class="fu">cov</span>(boot_moms)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Print estimated standard errors of the moments</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">diag</span>(Omega_boot)), <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   var_y   var_pi    var_r    ar1_y   ar1_pi    ar1_r cov_y_pi  cov_y_r 
+    1.25     0.04     0.92     1.15     0.04     0.90     0.20     1.03 
+cov_pi_r 
+    0.14 </code></pre>
+</div>
+</div>
+<p>Having obtained an estimate for the variance-covariance matrix <span class="math inline">\(\hat{\Omega}\)</span> of the moments, we re-run the calibration using diagonal inverse-variance weighting, where <span class="math inline">\(W\)</span> is a diagonal matrix with entries <span class="math inline">\(1/\widehat{\mathrm{Var}}(m^{emp}_i)\)</span>, i.e.&nbsp;the inverse of the main diagonal of <span class="math inline">\(\hat{\Omega}\)</span>.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Note that we use the previously calibrated optimal parameter vector as an initialisation for the minimisation algorithm.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct diagonal weighting matrix</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>W_opt_diag <span class="ot">=</span> <span class="fu">diag</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="fu">diag</span>(Omega_boot))</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run miminisation algorithm</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>fit_diag <span class="ot">=</span> <span class="fu">optim</span>(theta_id, <span class="cf">function</span>(th) <span class="fu">objective</span>(th, W_opt_diag),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">method =</span> <span class="st">"L-BFGS-B"</span>, <span class="at">lower =</span> bounds_lower, <span class="at">upper =</span> bounds_upper,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">control =</span> <span class="fu">list</span>(<span class="at">maxit =</span> <span class="dv">1000</span>, <span class="at">factr =</span> <span class="fl">1e12</span>, <span class="at">pgtol =</span> <span class="fl">1e-3</span>))</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>theta_diag <span class="ot">=</span> fit_diag<span class="sc">$</span>par</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the implied monetary policy parameter a3 </span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>a3_diag <span class="ot">=</span> <span class="fu">with</span>(<span class="fu">as.list</span>(theta_diag), (a1 <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> (a2 <span class="sc">*</span> b) <span class="sc">+</span> a2))<span class="sc">^</span>(<span class="sc">-</span><span class="dv">1</span>))</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Print both parameterisations</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">rbind</span>(<span class="at">identity =</span> <span class="fu">c</span>(theta_id, <span class="at">a3 =</span> a3_id), <span class="at">diagonal =</span> <span class="fu">c</span>(theta_diag, <span class="at">a3 =</span> a3_diag)), <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             a1     a2      b  rho_d sigma_d sigma_s sigma_m     a3
+identity 0.0100 0.0203 2.0460 0.5367  1.8726  0.0115  0.5202 4.1568
+diagonal 0.2938 0.0100 1.4347 0.8506  1.0728  0.0323  1.8468 0.0488</code></pre>
+</div>
+</div>
+<p>It can be seen that the diagonal weighting matrix does give a different optimal parameter vector. However, this difference might also stem from having used a different initialisation from which the algorithm may have converged to a different local minimum. As a final exercise, before we evaluate the fit of the different candidate parameterisations, we will run the minimisation algorithm for different initialisation.</p>
+</section>
+<section id="taking-a-third-shot-with-multiple-initialisations" class="level3">
+<h3 class="anchored" data-anchor-id="taking-a-third-shot-with-multiple-initialisations">Taking a third shot with multiple initialisations</h3>
+<p>Recall that <code>optim()</code> only explores the basin closest to the initial paremeterisation that is being supplied. To check whether that basin is a genuine (near-)global optimum, we draw a space-filling set of starting points with <strong>Latin Hypercube Sampling (LHS)</strong>: stratify each parameter’s range into equal-probability bins, take exactly one random draw per bin, then randomly pair bins across parameters. This covers the 7-dimensional parameter space more evenly than independent uniform draws would, which could easily leave whole regions unsampled by chance. We draw a sample of size 30 with <code>randomLHS()</code> from R’s <code>lhs</code> package, which returns a sample on the unit hypercube <span class="math inline">\([0,1]^7\)</span>. We then use <code>qunif()</code> to rescale each column to the parameter’s chosen bounds. We also append <code>theta_id</code> and <code>theta_diag</code> to the set of starting points (so that the search is guaranteed to yield a parameterisation that is at least as good as the ones we already found). The <code>optim()</code> function is then re-run for every starting sample, keeping the best result. We continue to use the diagonal weighting matrix in the loss function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lhs)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set random set for reproducibility</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Set number of parameter samples and save number of parameters</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>N_starts <span class="ot">=</span> <span class="dv">30</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>n_par    <span class="ot">=</span> <span class="fu">length</span>(theta_id)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw a Latin Hypercube sample on the unit hypercube</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>lhs_unit   <span class="ot">=</span> <span class="fu">randomLHS</span>(N_starts, n_par)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Rescale each column to the corresponding parameter's chosen bounds defined previously</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>lhs_starts <span class="ot">=</span> lhs_unit</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_par) {</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  lhs_starts[, j] <span class="ot">=</span> <span class="fu">qunif</span>(lhs_unit[, j], bounds_lower[j], bounds_upper[j])</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(lhs_starts) <span class="ot">=</span> <span class="fu">names</span>(theta_id)</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Append the two parameterisations already found (theta_id, theta_diag) as two more</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="co"># starting points</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>all_starts <span class="ot">=</span> <span class="fu">rbind</span>(lhs_starts, <span class="at">theta_id =</span> theta_id, <span class="at">theta_diag =</span> theta_diag)</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>N_all <span class="ot">=</span> <span class="fu">nrow</span>(all_starts)</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a matrix that will contain the optimal parameterisation for each start</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>multistart_par <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, N_all, <span class="fu">length</span>(theta_id))</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(multistart_par) <span class="ot">=</span> <span class="fu">names</span>(theta_id)</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a matrix that will contain the associated value of the loss function</span></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>multistart_obj <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, N_all)</span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Calibrate for each start</span></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N_all) {</span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>  fit_i <span class="ot">=</span> <span class="fu">tryCatch</span>(</span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">optim</span>(all_starts[i, ], <span class="cf">function</span>(th) <span class="fu">objective</span>(th, W_opt_diag),</span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>          <span class="at">method =</span> <span class="st">"L-BFGS-B"</span>, <span class="at">lower =</span> bounds_lower, <span class="at">upper =</span> bounds_upper,</span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>          <span class="at">control =</span> <span class="fu">list</span>(<span class="at">maxit =</span> <span class="dv">1000</span>, <span class="at">factr =</span> <span class="fl">1e12</span>, <span class="at">pgtol =</span> <span class="fl">1e-3</span>)),</span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NULL</span></span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(fit_i)) {</span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>    multistart_par[i, ] <span class="ot">=</span> fit_i<span class="sc">$</span>par</span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>    multistart_obj[i]   <span class="ot">=</span> fit_i<span class="sc">$</span>value</span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Find and print parameterisation that minimises loss function</span></span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>best_i <span class="ot">=</span> <span class="fu">which.min</span>(multistart_obj)</span>
+<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">rbind</span>(<span class="at">single_start =</span> <span class="fu">c</span>(theta_diag, <span class="at">obj =</span> fit_diag<span class="sc">$</span>value),</span>
+<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a>            <span class="at">lhs_best     =</span> <span class="fu">c</span>(multistart_par[best_i, ], <span class="at">obj =</span> multistart_obj[best_i])), <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 a1   a2      b  rho_d sigma_d sigma_s sigma_m     obj
+single_start 0.2938 0.01 1.4347 0.8506  1.0728  0.0323  1.8468 35.9786
+lhs_best     0.2937 0.01 1.4346 0.8495  1.0721  0.0323  1.8469 35.9766</code></pre>
+</div>
+</div>
+<p>It turns out that parameterisation found earlier using a single initialisation had already found the best fit available: the best of the 32 starts (objective <span class="math inline">\(\approx\)</span> 36) lands at essentially the same point as <code>theta_diag</code> itself, up to negligible numerical noise. This will not always be the case - as discussed above, <code>optim()</code> gives no guarantee of finding a global optimum - so this robustness check is still worth doing.</p>
+</section>
+<section id="comparing-the-fit-of-the-candidate-parameterisations" class="level3">
+<h3 class="anchored" data-anchor-id="comparing-the-fit-of-the-candidate-parameterisations">Comparing the fit of the candidate parameterisations</h3>
+<p>Since the search across multiple initialisations returned the same parameterisation as the single diagonal-weighting run, we are left with two distinct candidates to compare - identity weighting and diagonal weighting. Let’s compare them by checking how closely each one’s simulated moments match their empirical counterparts. We will assess the empirical fit by (i) checking whether the simulated moment has the same sign as its empirical counterpart, (ii) the percent deviation of the simulated from the empirical moment, and (iii) a <strong>moment missing rate (MMR)</strong>, proposed by <span class="citation" data-cites="Franke2022">Franke (<a href="#ref-Franke2022" role="doc-biblioref">2022</a>)</span>, defined as a moment’s deviation from its empirical counterpart as a percentage of the moment’s bootstrapped confidence interval.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>The sign match is a useful piece of qualitative information on whether the model gets the <em>direction</em> of a relationship right. While the percent deviation is an intuitive quantitative measure, it may not be directly comparable across moments: it blows up for a moment whose empirical value is close to zero (e.g.&nbsp;<code>cov_y_pi</code>), and it does not distinguish a large miss on a precisely-estimated moment from an equally large miss on a very noisily-estimated one. The MMR addresses these issues. A value of 0 is a perfect match; below 100 means the simulated moment falls inside the empirical 95% confidence interval (<code>obs</code> <span class="math inline">\(\pm\)</span> <code>2*SE</code>); above 100 means it falls outside.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Name the best LHS-seeded parameterisation, alongside theta_id and theta_diag</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (kept for the counterfactual-scenario section below, even though it turns out to</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># coincide with theta_diag here)</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>theta_lhs <span class="ot">=</span> <span class="fu">setNames</span>(multistart_par[best_i, ], <span class="fu">names</span>(theta_id))</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute simulated moments under each of the two parameterisations</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>sim_id   <span class="ot">=</span> <span class="fu">sim_moments</span>(theta_id)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>sim_diag <span class="ot">=</span> <span class="fu">sim_moments</span>(theta_diag)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve bootstrapped standard error of each moment</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>se_boot <span class="ot">=</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(Omega_boot))</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Define function to build goodness-of-fit table for each parameterisation</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>gof_table <span class="ot">=</span> <span class="cf">function</span>(sim, obs, se) {</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">moment      =</span> <span class="fu">names</span>(obs),</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">empirical   =</span> <span class="fu">round</span>(obs, <span class="dv">3</span>),</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">simulated   =</span> <span class="fu">round</span>(sim, <span class="dv">3</span>),</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">sign_match  =</span> <span class="fu">sign</span>(sim) <span class="sc">==</span> <span class="fu">sign</span>(obs),</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct_dev     =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> (sim <span class="sc">-</span> obs) <span class="sc">/</span> obs, <span class="dv">1</span>),</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">mmr         =</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> <span class="fu">abs</span>(sim <span class="sc">-</span> obs) <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> se), <span class="dv">1</span>),</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">NULL</span></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Call function</span></span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>table_identity <span class="ot">=</span> <span class="fu">gof_table</span>(sim_id,   obs_moments_raw, se_boot)</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>table_diagonal <span class="ot">=</span> <span class="fu">gof_table</span>(sim_diag, obs_moments_raw, se_boot)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="identity-weighting" class="level4">
+<h4 class="anchored" data-anchor-id="identity-weighting">Identity weighting</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>table_identity</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    moment empirical simulated sign_match pct_dev   mmr
+1    var_y     3.936     4.879       TRUE    24.0  37.8
+2   var_pi     0.276     0.187       TRUE   -32.3 101.1
+3    var_r     3.531     3.471       TRUE    -1.7   3.3
+4    ar1_y     3.708     2.641       TRUE   -28.8  46.2
+5   ar1_pi     0.080     0.185       TRUE   130.8 147.8
+6    ar1_r     3.297     3.155       TRUE    -4.3   7.8
+7 cov_y_pi    -0.121     0.057      FALSE  -147.2  45.0
+8  cov_y_r     2.286     0.255       TRUE   -88.8  99.0
+9 cov_pi_r    -0.310     0.772      FALSE  -348.8 394.2</code></pre>
+</div>
+</div>
+</section>
+<section id="diagonal-weighting" class="level4">
+<h4 class="anchored" data-anchor-id="diagonal-weighting">Diagonal weighting</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>table_diagonal</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    moment empirical simulated sign_match pct_dev   mmr
+1    var_y     3.936     4.249       TRUE     7.9  12.6
+2   var_pi     0.276     0.161       TRUE   -41.8 130.9
+3    var_r     3.531     3.481       TRUE    -1.4   2.7
+4    ar1_y     3.708     3.331       TRUE   -10.2  16.4
+5   ar1_pi     0.080     0.159       TRUE    98.6 111.3
+6    ar1_r     3.297    -0.061      FALSE  -101.8 185.7
+7 cov_y_pi    -0.121     0.032      FALSE  -126.4  38.6
+8  cov_y_r     2.286     0.084       TRUE   -96.3 107.4
+9 cov_pi_r    -0.310    -0.003       TRUE   -98.9 111.8</code></pre>
+</div>
+</div>
+<p>Averaging the MMR across all 9 moments gives a single overall goodness-of-fit score for each parameterisation,</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">c</span>(<span class="at">identity =</span> <span class="fu">mean</span>(table_identity<span class="sc">$</span>mmr),</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">diagonal =</span> <span class="fu">mean</span>(table_diagonal<span class="sc">$</span>mmr)), <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>identity diagonal 
+    98.0     79.7 </code></pre>
+</div>
+</div>
+<p>suggesting that the diagonal weighting matrix overall delivers the better fit. Looking at the fit of the individual moments, we see that variances of <span class="math inline">\(r\)</span> and <span class="math inline">\(y\)</span>, and the auto-covariance of <span class="math inline">\(y\)</span> are matched quite well. The match for the covariance of <span class="math inline">\(y\)</span> and <span class="math inline">\(\pi\)</span> is also relatively decent. By contrast, the match for the variance of <span class="math inline">\(\pi\)</span> is poor, and also for the auto-covariances of <span class="math inline">\(\pi\)</span> and <span class="math inline">\(r\)</span>, the latter even getting the sign wrong. Recall that we are not using AR(1) process for <span class="math inline">\(\pi\)</span> and <span class="math inline">\(r\)</span>, which might partly explain this poor fit. The cross-covariances are also matched relatively poorly, with simulated moments being outside of the 95% confidence band and the simulated covariance between <span class="math inline">\(y\)</span> and <span class="math inline">\(\pi\)</span> exhibiting the wrong sign.</p>
+<p>Overall, this suggests that there is room for improvement when it comes to calibrating the 3-equation model. One might want to consider a different set of moments (e.g.&nbsp;lagged auto-covariances), a different sample period, using different shock processes in the model, or even re-considering the lag structure assumed by the model. We will discuss some more general caveats below.</p>
+</section>
+</section>
+<section id="analysing-a-cost-push-shock-with-the-calibrated-model" class="level3">
+<h3 class="anchored" data-anchor-id="analysing-a-cost-push-shock-with-the-calibrated-model">Analysing a cost-push shock with the calibrated model</h3>
+<p>A natural use of a calibrated model is to trace out its predicted response to a shock via an <strong>impulse response function (IRF)</strong>. Here we consider a <em>cost-push shock</em> by perturbing the <span class="math inline">\(\varepsilon_{s,t}\)</span> term in the Phillips curve by one percentage point.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> We then assess how <span class="math inline">\(\pi_t, r_t, y_t\)</span> evolve relative to their otherwise identical unshocked path.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select optimal parameter vector</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>theta_eff <span class="ot">=</span> <span class="cf">if</span> (multistart_obj[best_i] <span class="sc">&lt;</span> fit_diag<span class="sc">$</span>value) theta_lhs <span class="cf">else</span> theta_diag</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>H <span class="ot">=</span> <span class="dv">40</span>              <span class="co"># horizon, in quarters after the shock</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>shock_period <span class="ot">=</span> <span class="dv">5</span>    <span class="co"># quarter (within the simulated window) the shock hits</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the previously generated simulation function to simulate the model once with and once with shock </span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>); sim_base  <span class="ot">=</span> <span class="fu">simulate_model</span>(theta_eff, <span class="at">shock_size =</span> <span class="dv">0</span>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>); sim_shock <span class="ot">=</span> <span class="fu">simulate_model</span>(theta_eff, <span class="at">shock_size =</span> <span class="dv">1</span>,</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">shock_t =</span> <span class="dv">100</span> <span class="sc">+</span> shock_period, <span class="at">shock_eq =</span> <span class="st">"s"</span>)</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute impulse response as the deviation of the shocked path from the (otherwise</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="co"># identical) baseline path, indexed in quarters since the shock hit</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>horizon <span class="ot">=</span> <span class="dv">0</span><span class="sc">:</span>H</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>irf_p <span class="ot">=</span> sim_shock[shock_period <span class="sc">+</span> horizon, <span class="st">"p"</span>] <span class="sc">-</span> sim_base[shock_period <span class="sc">+</span> horizon, <span class="st">"p"</span>]</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>irf_r <span class="ot">=</span> sim_shock[shock_period <span class="sc">+</span> horizon, <span class="st">"r"</span>] <span class="sc">-</span> sim_base[shock_period <span class="sc">+</span> horizon, <span class="st">"r"</span>]</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>irf_y <span class="ot">=</span> sim_shock[shock_period <span class="sc">+</span> horizon, <span class="st">"y"</span>] <span class="sc">-</span> sim_base[shock_period <span class="sc">+</span> horizon, <span class="st">"y"</span>]</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot IRFs</span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(horizon, irf_p, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"tomato"</span>,</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Quarters after shock"</span>, <span class="at">ylab =</span> <span class="st">"Deviation from baseline (pp)"</span>, <span class="at">main =</span> <span class="st">"Inflation"</span>)</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"grey50"</span>)</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(horizon, irf_r, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"tomato"</span>,</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Quarters after shock"</span>, <span class="at">ylab =</span> <span class="st">"Deviation from baseline (pp)"</span>, <span class="at">main =</span> <span class="st">"Policy rate"</span>)</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"grey50"</span>)</span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(horizon, irf_y, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"tomato"</span>,</span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Quarters after shock"</span>, <span class="at">ylab =</span> <span class="st">"Deviation from baseline (pp)"</span>, <span class="at">main =</span> <span class="st">"Output gap"</span>)</span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"grey50"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="MSM-with-the-New-Keynesian-3-equation-model_files/figure-html/nk-msm-irf-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Impulse responses to a 1-percentage-point inflationary (cost-push) shock</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Inflation jumps by the full size of the shock on impact and then starts to fall, but extremely slowly.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> This is a direct reflection of the calibrated parameter value of <span class="math inline">\(a_2=0.01\)</span> in the Phillips curve: with the estimated sensitivity of inflation to the output gap being very low while inflation expectations are strongly adaptive, it takes extremely long for inflation to return to target. The policy rate does move in the right direction - the central bank raises <span class="math inline">\(r\)</span>, which lowers <span class="math inline">\(y\)</span>, which should help pull inflation back down - but both responses are tiny and just as persistent as the inflation shock itself. The soft monetary policy response is due to the relatively low value of <span class="math inline">\(a_3 = \frac{1}{a_1\left(\frac{1}{a_2 b} + a_2\right)} \approx \frac{1}{0.29\left(\frac{1}{0.01 \times 1.43} + 0.01\right)}  \approx 0.05\)</span> in the monetary policy reaction function. While the central bank cares relatively strongly about inflation <span class="math inline">\((b=1.43)\)</span>, it knows that the reaction of inflation to output is weak. As a result, it is not willing to fight inflation more aggressively as it would require the creation of a large output gap. Thus, with a weak link between the output gap and inflation and a relatively weak monetary policy response, even a sustained increase in <span class="math inline">\(r\)</span> leaves the shock largely unaddressed over any horizon of practical interest.</p>
+</section>
+</section>
+<section id="caveats" class="level2">
+<h2 class="anchored" data-anchor-id="caveats">Caveats</h2>
+<p>Beyond the specific fit problems already discussed, our exercise illustrates some more general limitations of the MSM worth keeping in mind.</p>
+<p><strong>Moments are correlational, not causal.</strong> The MSM identifies parameters from unconditional variances and (cross-)covariances - purely descriptive statistical objects that carry no information about a causal direction on their own. By contrast, the parameters that are to be calibrated, e.g.&nbsp;the response of inflation to the output gap, <span class="math inline">\(a_2&gt;0\)</span>, represent theoretically assumed causal effects. An empirically measured moment such as the cross-covariance between <span class="math inline">\(y\)</span> and <span class="math inline">\(\pi\)</span> is driven by all sorts of confounding shocks that occurred during the sample period. A positive cost-shock, for example, may generate a negative correlation between <span class="math inline">\(y\)</span> and <span class="math inline">\(\pi\)</span>, whereas a positive demand shock may yield a positive one. It is thus far from obvious that the empirically observed correlation is sufficient for pinning down the causal effect of <span class="math inline">\(y\)</span> on <span class="math inline">\(\pi\)</span>, represented by <span class="math inline">\(a_2&gt;0\)</span>.</p>
+<p><strong>The choice of moments is itself a source of arbitrariness.</strong> It is a priori unclear, which are the best moments to choose to calibrate a given set of parameters. There is no uniquely correct set of moments to target, so any statement about a calibrated parameter is implicitly conditional on the particular moments (and weights) chosen. A different set of target moments may lead to a different set of calibrated parameters.</p>
+<p><strong>A poor fit does not diagnose its own cause.</strong> When a moment is badly matched, it is not obvious what the source of the poor fit is: a genuinely misspecified causal structure, weak identification (several very different parameterisations fitting about equally well), and sampling noise from a small or structurally unstable sample are all consistent with the same symptom. Telling them apart takes economic judgement beyond what the fitted moments alone can offer.</p>
+</section>
+<section id="summary-and-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="summary-and-discussion">Summary and discussion</h2>
+<p>The Method of Simulated Moments (MSM) is a relatively easy-to-implement numerical method to calibrate the parameters of a model to empirical data. We have seen that calibrating even a small, well-known model raises difficult practical choices at every step: which empirical moments meaningfully identify which parameters; how to add an appropriate stochastic structure to the model; how to weight moments of very different precision and scale; and how to check that a numerical optimiser has actually found a good answer rather than a nearby one. Every one of these choices requires experimentation combined with careful reasoning. Unfortunately, many of the underlying questions do not have an obvious or objectively correct answer and require making judgement calls. This is why transparency and reproducibility are important: documenting and explaining each step carefully, so that other researchers can scrutinise and build on it. Below we give a simple recipe for implementing the method in practice – bearing in mind that some flexibility and independent reasoning is required at each step.</p>
+<p>A key conclusion from our illustrative calibration of the simple 3-equation model against moments from US data over the period 1996 to 2007 is that the calibrated model does a mixed job at producing meaningful results. Put bluntly, it predicts a quasi permanent response to a one-off inflationary cost-push shock that the central bank is neither able nor willing to fight via contractionary monetary policy. While the 2021-23 inflation episode did involve a sustained increase in inflation, it also prompted a relatively aggressive response by many central banks. To what extent it was this monetary policy response rather than a change in the underlying drivers of inflation that brought inflation down is open to debate – however, inflation largely did stabilise again.</p>
+<p>Unfortunately, the calibration exercise as such is silent on the question why the calibrated model generates a relatively implausible result. The culprit could lie in the way the model was calibrated or the model itself, or both. For example, a different data set, a different set of target moments, a different weighting matrix, and possibly even a different minimisation algorithm might yield a very different, possibly better, parametrisation of the model. At the same time, a different specification for the stochastic elements of the model, a different lag structure in the model (e.g.&nbsp;in the IS and/or Phillips curve) or a different assumption about inflation expectation formation might yield a better fit with the data. While this is perhaps not an entirely satisfactory conclusion, it shows that calibrating a model yields a lot of food for thought for further refinements of the model.</p>
+</section>
+<section id="a-simple-recipe-for-calibrating-economic-models-with-the-msm" class="level2">
+<h2 class="anchored" data-anchor-id="a-simple-recipe-for-calibrating-economic-models-with-the-msm">A simple recipe for calibrating economic models with the MSM</h2>
+<ol type="1">
+<li>Add a minimal stochastic structure to the model.</li>
+<li>Choose the free parameters of the model to be calibrated (i.e.&nbsp;those not already pinned down by a normalisation or fixed on other grounds).</li>
+<li>Choose target moments that are informative about the free parameters (at least as many moments as free parameters, i.e.&nbsp;<span class="math inline">\(n_m \geq n_p\)</span>).</li>
+<li>Compute the chosen moments in the empirical data as well as in simulated model data, averaging the latter over many Monte Carlo runs.</li>
+<li>Choose a weighting matrix for the loss function</li>
+<li>Minimise the loss function numerically, e.g.&nbsp;using R’s <code>optim()</code> function, restricting the search to a region of the parameter space that is economically plausible.</li>
+<li>Assess the fit of the calibrated model along several dimensions (e.g.&nbsp;whether the model matches the sign of each moment, percent deviations, moment-missing-rates).</li>
+<li>Check the robustness of the numerical solution (e.g.&nbsp;by multiple starting values for the minimisation algorithm, sample selection, data transformations, target moments, …)</li>
+<li>Interrogate a poor fit or implausible parameter estimate (do they reflect problems with the data, methodology, or theoretical model?).</li>
+</ol>
+</section>
+<section id="references" class="level2 unnumbered">
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Carlin2014" class="csl-entry" role="listitem">
+Carlin, Wendy, and David Soskice. 2014. <em>Macroeconomics. Instititions, Instability, and the Financial System</em>. Oxford University Press.
+</div>
+<div id="ref-Duffie1993" class="csl-entry" role="listitem">
+Duffie, Darrell, and Kenneth J. Singleton. 1993. <span>“Simulated Moments Estimation of <span>M</span>arkov Models of Asset Prices.”</span> <em>Econometrica</em> 61 (4): 929–52. <a href="https://doi.org/10.2307/2951768">https://doi.org/10.2307/2951768</a>.
+</div>
+<div id="ref-Franke2018" class="csl-entry" role="listitem">
+Franke, Reiner. 2018. <span>“Competitive Moment Matching of a <span>N</span>ew-<span>K</span>eynesian and an <span>O</span>ld-<span>K</span>eynesian Model.”</span> <em>Journal of Economic Interaction and Coordination</em> 13: 201–39. <a href="https://doi.org/10.1007/s11403-016-0181-0">https://doi.org/10.1007/s11403-016-0181-0</a>.
+</div>
+<div id="ref-Franke2022" class="csl-entry" role="listitem">
+Franke, Reiner. 2022. <span>“An Empirical Test of a Fundamental <span>H</span>arrod-<span>K</span>aldor Business Cycle Model.”</span> <em>Structural Change and Economic Dynamics</em> 60: 1–14. <a href="https://doi.org/10.1016/j.strueco.2021.11.001">https://doi.org/10.1016/j.strueco.2021.11.001</a>.
+</div>
+<div id="ref-Franke2012" class="csl-entry" role="listitem">
+Franke, Reiner, and Frank Westerhoff. 2012. <span>“Structural Stochastic Volatility in Asset Pricing Dynamics: Estimation and Model Contest.”</span> <em>Journal of Economic Dynamics &amp; Control</em> 36 (8): 1193–211. <a href="https://doi.org/10.1016/j.jedc.2011.10.004">https://doi.org/10.1016/j.jedc.2011.10.004</a>.
+</div>
+<div id="ref-Hamilton2018" class="csl-entry" role="listitem">
+Hamilton, James D. 2018. <span>“Why You Should Never Use the <span>H</span>odrick-<span>P</span>rescott Filter.”</span> <em>The Review of Economics and Statistics</em> 100 (5): 831–43. <a href="https://doi.org/10.1162/rest_a_00706">https://doi.org/10.1162/rest_a_00706</a>.
+</div>
+<div id="ref-McFadden1989" class="csl-entry" role="listitem">
+McFadden, Daniel. 1989. <span>“A Method of Simulated Moments for Estimation of Discrete Response Models Without Numerical Integration.”</span> <em>Econometrica</em> 57 (5): 995–1026. <a href="https://doi.org/10.2307/1913621">https://doi.org/10.2307/1913621</a>.
+</div>
+<div id="ref-Reissl2020" class="csl-entry" role="listitem">
+Reissl, Severin. 2020. <span>“Minsky from the Bottom up – Formalising the Two-Price Model of Investment in a Simple Agent-Based Framework.”</span> <em>Journal of Economic Behavior &amp; Organization</em> 177: 109–42. <a href="https://doi.org/10.1016/j.jebo.2020.06.012">https://doi.org/10.1016/j.jebo.2020.06.012</a>.
+</div>
+<div id="ref-Wildauer2023" class="csl-entry" role="listitem">
+Wildauer, Rafael, Karsten Kohler, Adam Aboobaker, and Alexander Guschanski. 2023. <span>“<span class="nocase">Energy price shocks, conflict inflation, and income distribution in a three-sector model</span>.”</span> <em>Energy Economics</em> 127B. <a href="https://doi.org/10.1016/j.eneco.2023.106982">https://doi.org/10.1016/j.eneco.2023.106982</a>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>See <span class="citation" data-cites="Franke2012">Franke and Westerhoff (<a href="#ref-Franke2012" role="doc-biblioref">2012</a>)</span>, <span class="citation" data-cites="Franke2018">Franke (<a href="#ref-Franke2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="Franke2022">Franke (<a href="#ref-Franke2022" role="doc-biblioref">2022</a>)</span>, <span class="citation" data-cites="Reissl2020">Reissl (<a href="#ref-Reissl2020" role="doc-biblioref">2020</a>)</span>, and <span class="citation" data-cites="Wildauer2023">Wildauer et al. (<a href="#ref-Wildauer2023" role="doc-biblioref">2023</a>)</span> for some applications.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><span class="citation" data-cites="Franke2018">Franke (<a href="#ref-Franke2018" role="doc-biblioref">2018</a>)</span> is particularly close to the current chapter, but considerably more ambitious: he uses the MSM to compare a richer version of the New Keynesian model to a sentiment-driven Old-Keynesian model of business optimism and pessimism, matching up to 78 moments.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>A mathematically equivalent representation of <a href="#eq-loss" class="quarto-xref">Equation&nbsp;1</a> is <span class="math display">\[
+J(\theta) = \sum_{i=1}^{n_m}w_i\big[m_i(\theta)-m_i^{emp}\big]^2\]</span>, where <span class="math inline">\(i\)</span> indexes the <span class="math inline">\(i=1,..,n_m\)</span> moments.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Alternatively, we could use the CBO’s <code>GDPPOT</code> potential-GDP series, which is a model-based estimate.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>We leave the exploration of <span class="math inline">\(W=\hat{\Omega}^{-1}\)</span> as an exercise to the reader.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>We compute this as <span class="math inline">\(\text{MMR}_i = \frac{100 \cdot |m_i - m_i^{emp}|}{2 \cdot SE_i}\)</span>, where <span class="math inline">\(SE_i\)</span> is the bootstrapped standard error of moment <span class="math inline">\(i\)</span>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Since the model is linear, the response to any other shock size is simply a rescaled version of this one - e.g.&nbsp;the response to a shock half this size is half as large.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>The very long adjustment period can also be shown more formally. In <strong>?@sec-analytical-NK</strong>, we show that the model’s single eigenvalue is given by <span class="math inline">\(\lambda = 1 - a_1 a_2 a_3\)</span>. With the calibrated parameters, this evaluates to <span class="math inline">\(\lambda \approx 0.9999\)</span>, i.e.&nbsp;a near unit-root.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -478,20 +478,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./a_dornbusch_overshooting_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">A Dornbusch Exchange Rate Overshooting Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./a_conflict_inflation_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">A Conflict Inflation Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">A Conflict Inflation Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_evolutionary_game_theoretic_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">An Evolutionary Game Theoretic Model of the Emergence of Property Rights</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">An Evolutionary Game Theoretic Model of the Emergence of Property Rights</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_sfc_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">A Stock-Flow Consistent Model of the Monetary Circuit</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">A Stock-Flow Consistent Model of the Monetary Circuit</span></span></a>
   </div>
 </li>
       </ul>
@@ -499,7 +505,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./additional_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Additional Online Resources</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Additional Online Resources</span></span></a>
   </div>
 </li>
     </ul>
@@ -1344,6 +1350,7 @@ y_{t}=Ay_{t-1}+B,
 </ul>
 </li>
 <li>the (dominant) eigenvectors mediate the impact of the eigenvalues on the dynamics</li>
+<li>an unstable system with both stable and unstable eigenvalues (a saddle point) converges only if jump variables place it on the stable arm</li>
 <li>nonlinear systems are analysed locally around one of their equilibria</li>
 </ul></section><section id="a-simplified-recipe-for-analysing-dynamic-systems" class="level2"><h2 class="anchored" data-anchor-id="a-simplified-recipe-for-analysing-dynamic-systems">A simplified recipe for analysing dynamic systems</h2>
 <ol type="1">
@@ -1365,7 +1372,7 @@ y_{t}=Ay_{t-1}+B,
 <figure class="figure"><p><img src="tree_diagram_dynamic_systems_website.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption>A typology of dynamic systems</figcaption></figure>
 </div>
-<p>In this section, we analysed the linear <span class="citation" data-cites="Samuelson1939">Samuelson (<a href="#ref-Samuelson1939" role="doc-biblioref">1939</a>)</span> model and showed that it can give rise to either monotonic convergence (if its eigenvalues are real) or damped oscillations (if they are complex). Exponential growth and explosive oscillations are also possible, if the model becomes unstable.</p>
+<p>In this section, we analysed the linear <span class="citation" data-cites="Samuelson1939">Samuelson (<a href="#ref-Samuelson1939" role="doc-biblioref">1939</a>)</span> model and showed that it can give rise to either monotonic convergence (if its eigenvalues are real) or damped oscillations (if they are complex). Exponential growth and explosive oscillations are also possible, if the model becomes unstable. An unstable system that also has stable eigenvalues is a <em>saddle point</em>. If it contains forward-looking jump variables, these can place the system on the stable arm of the saddle, so that it converges despite the unstable eigenvalue.</p>
 <p>Based on this typology, we can classify the dynamic models on this website as follows:</p>
 <table class="caption-top table">
 <colgroup>
@@ -1425,17 +1432,22 @@ y_{t}=Ay_{t-1}+B,
 <td>Monotonic convergence</td>
 </tr>
 <tr class="even">
-<td><a href="a_conflict_inflation_model.html" class="quarto-xref"><span>Chapter 19</span></a></td>
+<td><a href="a_dornbusch_overshooting_model.html" class="quarto-xref"><span>Chapter 19</span></a></td>
+<td>A Dornbusch Exchange Rate Overshooting Model</td>
+<td>Saddle-path convergence</td>
+</tr>
+<tr class="odd">
+<td><a href="a_conflict_inflation_model.html" class="quarto-xref"><span>Chapter 20</span></a></td>
 <td>A Conflict Inflation Model</td>
 <td>Balanced exponential growth</td>
 </tr>
-<tr class="odd">
-<td><a href="an_evolutionary_game_theoretic_model.html" class="quarto-xref"><span>Chapter 20</span></a></td>
+<tr class="even">
+<td><a href="an_evolutionary_game_theoretic_model.html" class="quarto-xref"><span>Chapter 21</span></a></td>
 <td>An Evolutionary Game Theoretic Model</td>
 <td>Monotonic convergence or Lyapunov stability</td>
 </tr>
-<tr class="even">
-<td><a href="an_sfc_model.html" class="quarto-xref"><span>Chapter 21</span></a></td>
+<tr class="odd">
+<td><a href="an_sfc_model.html" class="quarto-xref"><span>Chapter 22</span></a></td>
 <td>A Stock-Flow Consistent Model</td>
 <td>Damped oscillations</td>
 </tr>

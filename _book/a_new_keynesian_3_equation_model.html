@@ -83,7 +83,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./a_conflict_inflation_model.html" rel="next">
+<link href="./a_dornbusch_overshooting_model.html" rel="next">
 <link href="./a_Hicks_model.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -478,20 +478,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./a_dornbusch_overshooting_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">A Dornbusch Exchange Rate Overshooting Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./a_conflict_inflation_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">A Conflict Inflation Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">A Conflict Inflation Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_evolutionary_game_theoretic_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">An Evolutionary Game Theoretic Model of the Emergence of Property Rights</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">An Evolutionary Game Theoretic Model of the Emergence of Property Rights</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./an_sfc_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">A Stock-Flow Consistent Model of the Monetary Circuit</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">A Stock-Flow Consistent Model of the Monetary Circuit</span></span></a>
   </div>
 </li>
       </ul>
@@ -499,7 +505,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./additional_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Additional Online Resources</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Additional Online Resources</span></span></a>
   </div>
 </li>
     </ul>
@@ -523,7 +529,7 @@ window.Quarto = {
   <li><a href="#introducing-rational-inflation-expectations" id="toc-introducing-rational-inflation-expectations" class="nav-link" data-scroll-target="#introducing-rational-inflation-expectations">Introducing rational inflation expectations</a></li>
   <li><a href="#directed-graph" id="toc-directed-graph" class="nav-link" data-scroll-target="#directed-graph">Directed graph</a></li>
   <li>
-<a href="#sec-analytical" id="toc-sec-analytical" class="nav-link" data-scroll-target="#sec-analytical">Analytical discussion</a>
+<a href="#sec-analytical-NK" id="toc-sec-analytical-NK" class="nav-link" data-scroll-target="#sec-analytical-NK">Analytical discussion</a>
   <ul>
 <li>
 <a href="#derivation-of-core-equations" id="toc-derivation-of-core-equations" class="nav-link" data-scroll-target="#derivation-of-core-equations">Derivation of core equations</a>
@@ -573,7 +579,7 @@ r_s=\frac{(A - y_e)}{a_1}
 r_t = r_s + a_3(\pi_t-\pi^T)
 \tag{18.4}\]</span></span></p>
 <p>where <span class="math inline">\(y\)</span>, <span class="math inline">\(A\)</span>, <span class="math inline">\(r\)</span>, <span class="math inline">\(\pi\)</span>, <span class="math inline">\(y_e\)</span>, <span class="math inline">\(r_s\)</span>, and <span class="math inline">\(\pi^T\)</span> are real output, autonomous demand (times the multiplier), the real interest rate, inflation, equilibrium output, the stabilising real interest rate, and the inflation target, respectively.</p>
-<p><a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>18.1</span></a> is the IS curve or goods market equilibrium condition. Aggregate output adjusts to the level of aggregate demand, which is given by autonomous demand (times the multiplier) and a component that is negatively related to the (lagged) real interest rate via households’ saving (<span class="math inline">\(a_1&gt;0\)</span>). <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>18.2</span></a> is the Phillips curve. It is assumed that inflation is driven by adaptive expectations (<span class="math inline">\(E[\pi_{t}]=\pi_{t-1}\)</span>) and positively related to the output gap <span class="math inline">\((y_t-y_e)\)</span>, i.e.&nbsp;<span class="math inline">\(a_2&gt;0\)</span>. By <a href="#eq-nk_rs" class="quarto-xref">Equation&nbsp;<span>18.3</span></a>, the stabilising real interest rate is that real interest rate that is consistent with equilibrium output (<span class="math inline">\(y_e=A -a_1r_s\)</span>). Finally, the interest rate rule in <a href="#eq-nk_r" class="quarto-xref">Equation&nbsp;<span>18.4</span></a> specifies the real interest rate the central bank needs to set to minimise its loss function (see <a href="#sec-analytical" class="quarto-xref"><span>Section 18.6</span></a> below for a derivation). The parameter <span class="math inline">\(a_3\)</span> is a composite one given by <span class="math inline">\(a_3 = \frac{1}{a_1(\frac{1}{a_2 b} + a_2)} &gt;0\)</span>. Although the central bank only sets the nominal interest rate <span class="math inline">\(i = r + E[\pi_{t}]\)</span> directly, the fact that expected inflation is predetermined in every period allows it to indirectly control the real interest rate.</p>
+<p><a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>18.1</span></a> is the IS curve or goods market equilibrium condition. Aggregate output adjusts to the level of aggregate demand, which is given by autonomous demand (times the multiplier) and a component that is negatively related to the (lagged) real interest rate via households’ saving (<span class="math inline">\(a_1&gt;0\)</span>). <a href="#eq-nk_pi" class="quarto-xref">Equation&nbsp;<span>18.2</span></a> is the Phillips curve. It is assumed that inflation is driven by adaptive expectations (<span class="math inline">\(E[\pi_{t}]=\pi_{t-1}\)</span>) and positively related to the output gap <span class="math inline">\((y_t-y_e)\)</span>, i.e.&nbsp;<span class="math inline">\(a_2&gt;0\)</span>. By <a href="#eq-nk_rs" class="quarto-xref">Equation&nbsp;<span>18.3</span></a>, the stabilising real interest rate is that real interest rate that is consistent with equilibrium output (<span class="math inline">\(y_e=A -a_1r_s\)</span>). Finally, the interest rate rule in <a href="#eq-nk_r" class="quarto-xref">Equation&nbsp;<span>18.4</span></a> specifies the real interest rate the central bank needs to set to minimise its loss function (see the analytical discussion section below for a derivation). The parameter <span class="math inline">\(a_3\)</span> is a composite one given by <span class="math inline">\(a_3 = \frac{1}{a_1(\frac{1}{a_2 b} + a_2)} &gt;0\)</span>. Although the central bank only sets the nominal interest rate <span class="math inline">\(i = r + E[\pi_{t}]\)</span> directly, the fact that expected inflation is predetermined in every period allows it to indirectly control the real interest rate.</p>
 </section><section id="simulation" class="level2"><h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
 <section id="parameterisation" class="level3"><h3 class="anchored" data-anchor-id="parameterisation">Parameterisation</h3>
 <p>Table 1 reports the parameterisation used in the simulation. For all parameterisations, the system is initialised at the equilibrium <span class="math inline">\((y^*,\pi^*,r^*)=(y_e,\pi^T, r_s)\)</span>. Three scenarios will then be considered. In scenario 1, there is an increase in autonomous aggregate demand (<span class="math inline">\(A\)</span>). In scenario 2, the central bank sets a higher inflation target (<span class="math inline">\(\pi^T\)</span>). Scenario 3 considers a rise in equilibrium output (<span class="math inline">\(y_e\)</span>).</p>
@@ -1208,7 +1214,7 @@ Figure&nbsp;18.6: Directed graph of 3-Equation model
 </div>
 </div>
 <p>In <a href="#fig-nk3-dag" class="quarto-xref">Figure&nbsp;<span>18.6</span></a>, it can be seen that aggregate demand (<span class="math inline">\(A\)</span>), equilibrium output (<span class="math inline">\(y_e\)</span>), and the inflation target (<span class="math inline">\(\pi^T\)</span>) are the key exogenous variables of the model. All other variables are endogenous and form a closed loop (or cycle) within the system. The upper-right side of the graph represents the supply side, given by the equilibrium level of output and its effect on inflation. The upper-left side captures the demand side and its effect on actual output. The key endogenous variables, output, inflation, and the interest rate form the centre of the graph, where they stand in a triangular relationship to each other. Output drives inflation, which in turn impacts the real interest rate. The latter then feeds back into output. Structural changes in the relationship between demand and supply (e.g.&nbsp;excess demand) also impact the system through their effect on the stabilising interest rate (<span class="math inline">\(r_s\)</span>).</p>
-</section><section id="sec-analytical" class="level2"><h2 class="anchored" data-anchor-id="sec-analytical">Analytical discussion</h2>
+</section><section id="sec-analytical-NK" class="level2"><h2 class="anchored" data-anchor-id="sec-analytical-NK">Analytical discussion</h2>
 <section id="derivation-of-core-equations" class="level3"><h3 class="anchored" data-anchor-id="derivation-of-core-equations">Derivation of core equations</h3>
 <section id="is-curve" class="level4"><h4 class="anchored" data-anchor-id="is-curve">IS curve</h4>
 <p>The IS curve in <a href="#eq-nk_y" class="quarto-xref">Equation&nbsp;<span>18.1</span></a> is loosely based on the consumption Euler equation introduced in <a href="a_neoclassical_macro_model.html" class="quarto-xref"><span>Chapter 3</span></a>. Suppose there are two periods and the household maximises its utility function <span class="math inline">\(U=\ln(C_t) + \beta \ln(C_{t+1})\)</span> subject to the intertemporal budget constraint <span class="math inline">\(C_t+\frac{C_{t+1}}{1+r}=Y_t + \frac{Y_{t+1}}{1+r}\)</span>. Substituting the constraint into the objective function and differentiating with respect to <span class="math inline">\(C_t\)</span> yields the first-order condition:</p>
@@ -1743,8 +1749,8 @@ Galí, Jordi. 2018. <span>“The <span>State</span> of <span>New Keynesian Econo
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./a_conflict_inflation_model.html" class="pagination-link" aria-label="A Conflict Inflation Model">
-        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">A Conflict Inflation Model</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./a_dornbusch_overshooting_model.html" class="pagination-link" aria-label="A Dornbusch Exchange Rate Overshooting Model">
+        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">A Dornbusch Exchange Rate Overshooting Model</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

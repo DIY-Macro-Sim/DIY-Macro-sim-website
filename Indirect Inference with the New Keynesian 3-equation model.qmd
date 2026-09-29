@@ -1,0 +1,762 @@
+---
+author:
+  - Karsten Kohler
+  - Nitin Nair
+bibliography: references_macrosimulation.bib
+---
+
+# Calibrating a Model with Indirect Inference {#sec-ii}
+
+In @sec-msm, we calibrated the New Keynesian 3-equation model from @Carlin2014 presented in @sec-NK by matching *unconditional* moments -- variances, autocovariances, and cross-covariances -- computed from empirical data. This chapter presents an alternative approach: rather than matching unconditional moments, we match the simulated dynamic response to a shock that can be given a causal interpretation. Targeting an estimated, causally identified, impulse response function (IRF) aims to address the unresolved endogeneity problem associated with using unconditional moments that we flagged in @sec-msm.  
+
+Two closely related minimum-distance estimators are commonly used to calibrate a model against an estimated IRF: **indirect inference** and **IRF matching** [@Smith1993; @Gourieroux1993; @Castellanos2025]. Indirect inference targets the estimated coefficients of an *auxiliary model* -- here, a small vector auto-regression (VAR) or a set of local projections used to estimate the IRF -- fitted first to the real data and then, repeatedly, to data simulated from the structural model. By contrast, IRF matching directly uses the model's theoretical impulse response and compares it to the empirically estimated one, instead of estimating it from simulated data.
+
+Here we present indirect inference as the baseline approach and only use IRF matching as a robustness check.^[@Castellanos2025 conducts a Monte Carlo study of this class of estimators and finds that indirect inference is the more robust choice whenever there is a risk that the auxiliary model is imperfectly identified, biased in small samples, or estimated with the wrong lag length.] We again use the New Keynesian 3-equation model from @Carlin2014 as an applied example. 
+
+## The methods of indirect inference and IRF matching
+
+Let $\beta^{emp}$ denote a vector of coefficients estimated by fitting an auxiliary statistical model -- e.g., a VAR or a set of local projections -- to real-world data. This auxiliary model summarises a specific feature of the data that we want our theoretical model to replicate: in our application, $\beta$ will be the estimated impulse response of output, inflation, and the policy rate to a monetary policy shock. Denote by $\beta(\theta)$ the same auxiliary-model coefficients, but estimated instead on data *simulated* from the theoretical model at parameter vector $\theta$. The **indirect inference** estimator chooses $\theta$ to minimise the distance between the two:
+$$
+J^{IndInf}(\theta) = \big[\beta^{emp} - \beta(\theta)\big]' \, W \, \big[\beta^{emp} - \beta(\theta)\big],
+$$ {#eq-loss-ii}
+
+where $W$ is a weighting matrix, exactly as in @eq-loss.^[Indirect inference is a generalisation of the MSM from @sec-msm: if the "auxiliary model" is simply the sample mean/variance/covariance operators used there, $\beta(\theta)$ collapses to $m(\theta)$ and @eq-loss-ii collapses to @eq-loss.] Because $\beta(\theta)$ has to be re-estimated on a freshly simulated dataset every time $\theta$ is updated, computing @eq-loss-ii is considerably more expensive than computing the MSM's loss function. 
+
+An alternative, cheaper procedure is **IRF matching**. Rather than estimating the auxiliary model on simulated data, IRF matching compares $\beta$ directly to the theoretical model's theoretical impulse response $IRF(\theta)$, which -- when the model is linear (or linearised) -- can be computed directly from $\theta$ without any simulation at all:^[More specifically, it can be computed from the model's coefficient matrix ... REFERENCE DYNAMICS CHAPTER!]
+$$
+J^{IrfMat}(\theta) = \big[\beta - IRF(\theta)\big]' \, W \, \big[\beta - IRF(\theta)\big].
+$$ {#eq-loss-irf}
+
+IRF matching is faster because $IRF(\theta)$ requires no simulation. However, it compares a finite-sample statistical estimate, $\beta$, to a population object, $IRF(\theta)$, which need not share the same sampling distribution (see @Christiano2006 and @Castellanos2025 on this point). Indirect inference avoids this problem by comparing two objects that are constructed in exactly the same, finite-sample way. Since the *same* auxiliary model and the *same* estimation procedure are applied to both the real and the simulated data, any bias or small-sample distortion in the auxiliary model tends to affect $\beta$ and $\beta(\theta)$ in a similar way and is approximately removed by the minimum-distance estimator.
+
+@Castellanos2025 shows that these two choices interact: because IRF matching has no robustness to bias in $\beta$, it is best paired with LP's lower bias; because indirect inference is robust to that bias, it is best paired with a VAR's lower variance.^[@Li2024 document this bias-variance trade-off in detail across thousands of simulated data-generating processes: LP is less biased but has substantially higher variance than VAR at intermediate and long horizons.] We follow this pairing below: indirect inference with a VAR as our baseline, and IRF matching with LP as a robustness check. Table 1 summarises the choice of estimator and the choice of auxiliary model side by side, following the results in @Castellanos2025.
+
+**Table 1: Choosing an estimator and an auxiliary model**
+
+| Choice | Option | Key trade-off |
+|:---|:---|:---|
+| Estimator | IRF matching | Fast (no re-simulation); not robust to bias in $\beta$ |
+| Estimator | Indirect inference | Robust to bias in $\beta$; costly (re-estimates the auxiliary model at every trial $\theta$) |
+| Auxiliary model | VAR | Lower variance, more biased at long horizons |
+| Auxiliary model | Local projections (LP) | Lower bias, higher variance |
+
+THIS PARA NEEDS RE-CONSIDERATION.... A further consideration is how well the shock underlying the IRF $\beta$ is identified. At one extreme, the econometrician might directly observe the true  structural (= causally identified) shock; at the other, the shock might be identified only through a set of (possibly invalid) recursive timing assumptions in the auxiliary model. In between lies the empirically relevant case we adopt here: an externally identified shock that is only a *noisy proxy* for the true underlying shock -- for example, because it reflects a mix of the policy action itself and the information the central bank reveals about the economy when it acts [@Bauer2023]. @Castellanos2025 shows that it is precisely in this intermediate, empirically realistic case that indirect inference's robustness advantage over IRF matching is largest, further supporting our choice of indirect inference as the baseline specification below.
+
+Finally, as in @sec-msm, a weighting matrix $W$ has to be chosen. The same three options apply here, now applied to IRF coefficients rather than to unconditional moments:
+
+- **Identity weighting** ($W=I$): treats every IRF coefficient as equally important, ignoring that responses are typically estimated with very different precision across variables and horizons.
+- **Diagonal inverse-variance weighting**: down-weights imprecisely estimated IRF coefficients (e.g. those at long horizons, which are typically noisier).
+- **Fully efficient weighting** ($W=\hat\Omega^{-1}$): uses the inverse of the full variance-covariance matrix of the estimated IRF coefficients, the asymptotically optimal choice.
+
+We return to this choice in the applied example below.
+
+## Applied example: calibrating the New Keynesian 3-equation model with an identified monetary policy shock
+
+Recall the New Keynesian 3-equation model from @Carlin2014, presented in @sec-NK and calibrated by unconditional moments in @sec-msm:
+
+$$y_t = A - a_1 r_{t-1} \qquad \text{(IS curve)}$$
+$$\pi_t = \pi_{t-1} + a_2(y_t - y_e) \qquad \text{(Phillips curve)}$$
+$$r_t = r_s + a_3(\pi_t - \pi^T), \qquad \text{(Monetary policy rule)}$$
+
+with $r_s=(A-y_e)/a_1$ and $a_3 = 1/[a_1(1/(a_2 b)+a_2)]$, where $b$ is the central bank's relative weight on stabilising inflation. 
+As in @sec-msm, we normalise $A=y_e=0$ (so $r_s=0$) and fix the inflation target at $\pi^T=2$, and we add the same stochastic structure -- an AR(1) demand shock and i.i.d. cost-push and monetary-policy shocks:
+
+$$y_t = -a_1 r_{t-1} + \varepsilon_{d,t}, \qquad \varepsilon_{d,t}=\rho_d\varepsilon_{d,t-1}+\mu_{d,t}$$
+$$\pi_t = \pi_{t-1} + a_2 y_t + \varepsilon_{s,t}$$
+$$r_t = a_3(\pi_t-\pi^T) + \varepsilon_{m,t}.$$
+
+### Choosing the parameters to be calibrated
+Unlike in @sec-msm, where all seven free parameters $\theta=(a_1,a_2,b,\rho_d,\sigma_d,\sigma_s,\sigma_m)$ were jointly targeted by a set of unconditional moments, here we target a single object: the impulse responses of $(y,\pi,r)$ to *one* shock, the monetary policy shock $\varepsilon_{m,t}$. This raises the question which of the seven parameters these targets can plausibly pin down.
+
+@sec-analytical-NK shows that the model's dynamics are governed by the parameters appearing in the model's coefficient matrix: $a_1$, $a_2$, and $b$ -- not on $\rho_d$, $\sigma_d$, $\sigma_s$, or $\sigma_m$. Since the shape of the impulse responses from this linear model is entirely determined by the coefficient matrix, it follows that $a_1$, $a_2$, and $b$ are the only parameters that can be identified from the shape of a monetary-shock IRF. We therefore calibrate only $\theta=(a_1,a_2,b)$ here, and fix $\rho_d,\sigma_d,\sigma_s,\sigma_m$ at the values calibrated in @sec-msm.
+
+### Data
+
+As in @sec-msm, we use quarterly US data for output, inflation, and the real policy rate over the same 1996Q1-2007Q4 sample, constructed in the same way: the output gap via the Hamilton regression filter, annualised core PCE inflation, and a de-meaned real federal funds rate. We additionally need a measure of the monetary policy shock itself. To this end, we use the high-frequency monetary policy surprise series constructed by @Bauer2023, which captures the change in short-term interest rate futures within a narrow window around FOMC announcements. This is a measure of the surprise component of monetary policy that is not driven by the central bank's systematic reaction to the economy. We use the *orthogonalised* surprise, `MPS_ORTH`, which additionally purges the surprise of its correlation with a set of macro-financial variables observed just before the announcement. This addresses the concern that part of a raw surprise may reflect information the central bank reveals about its own economic outlook rather than an exogenous policy action. Note that the resulting series should still be considered only an imperfect proxy for the true underlying shock. Bauer and Swanson provide an updated version of this series, spanning 1988-2023 at a monthly frequency; we fetch it directly and aggregate it to quarterly frequency by summing the surprises within each quarter.
+
+```{r}
+#| label: nk-ii-data
+#| output: true
+#| cache: true
+
+# Clear the environment
+rm(list = ls())
+
+# Load relevant libraries
+library(quantmod)
+library(xts)
+library(zoo)
+library(readxl)
+
+# Suppress an unnecessary warning
+options(xts.message.period.apply.mean = FALSE)
+
+# Set desired sample period (same as in the MSM chapter)
+sample_start = as.yearqtr("1996 Q1")
+sample_end   = as.yearqtr("2007 Q4")
+
+# Pull relevant series from Fred (real GDP, CPI, nominal federal funds rate)
+getSymbols(c("GDPC1", "PCEPILFE", "FEDFUNDS"), src = "FRED")
+
+# Align the three series to quarterly frequency and drop missing values
+gdp      = na.omit(GDPC1)
+pcepilfe = apply.quarterly(na.omit(PCEPILFE), mean)  # monthly -> quarterly average
+fedfunds = apply.quarterly(na.omit(FEDFUNDS), mean)  # monthly -> quarterly average
+
+# Put together data frame with the raw series
+data_raw = data.frame(qtr = as.yearqtr(index(gdp)), gdp = as.numeric(gdp))
+data_raw = merge(data_raw, data.frame(qtr = as.yearqtr(index(pcepilfe)),
+                                       pcepilfe = as.numeric(pcepilfe)), by = "qtr", all = TRUE)
+data_raw = merge(data_raw, data.frame(qtr = as.yearqtr(index(fedfunds)),
+                                       fedfunds = as.numeric(fedfunds)), by = "qtr", all = TRUE)
+data_raw = data_raw[order(data_raw$qtr), ]
+
+# Write function to apply the Hamilton filter and return the cyclical component
+# NB: need to check which possible regression observations have no missing or infinite values
+hamilton_filter = function(y, h = 8, p = 4) {
+  n = length(y)
+  t_all = p:(n - h)
+  valid = sapply(t_all, function(tt) all(is.finite(c(y[tt + h], y[(tt - p + 1):tt]))))
+  t = t_all[valid]
+  X = cbind(1, sapply(0:(p - 1), function(j) y[t - j]))
+  model = lm(y[t + h] ~ X - 1)
+  cycle = rep(NA_real_, n)
+  cycle[t + h] = residuals(model)
+  cycle
+}
+
+# Put together data frame for the transformed series
+data_transformed = data.frame(qtr = data_raw$qtr)
+data_transformed$y  = 100 * hamilton_filter(log(data_raw$gdp))    # output gap
+data_transformed$pi = 400 * c(NA, diff(log(data_raw$pcepilfe)))   # annualised inflation
+data_transformed$r  = data_raw$fedfunds - data_transformed$pi     # real policy rate
+
+# Fetch Bauer and Swanson's (2023) high-frequency monetary policy surprise series
+bs_url  = "https://www.frbsf.org/wp-content/uploads/monetary-policy-surprises-data.xlsx"
+bs_file = tempfile(fileext = ".xlsx")
+download.file(bs_url, bs_file, mode = "wb", quiet = TRUE)
+
+# Read the updated monthly series and keep the orthogonalised surprise (MPS_ORTH)
+bs_monthly = as.data.frame(read_excel(bs_file, sheet = "Monthly (update 2023)"))
+bs_monthly = bs_monthly[, c("Year", "Month", "MPS_ORTH")]
+
+# Aggregate the monthly surprises to quarterly by summing within each quarter
+bs_monthly$qtr = as.yearqtr(paste(bs_monthly$Year, ceiling(bs_monthly$Month / 3)), format = "%Y %q")
+bs_quarterly = aggregate(MPS_ORTH ~ qtr, data = bs_monthly, FUN = sum)
+names(bs_quarterly)[names(bs_quarterly) == "MPS_ORTH"] = "shock"
+
+# Merge the monetary policy shock with the other series
+data_transformed = merge(data_transformed, bs_quarterly, by = "qtr", all.x = TRUE)
+
+# Restrict to the desired sample period and remove missing values
+data_transformed = data_transformed[data_transformed$qtr >= sample_start &
+                                     data_transformed$qtr <= sample_end, ]
+data_transformed = na.omit(data_transformed)
+
+# Demean the real policy rate
+data_transformed$r = data_transformed$r - mean(data_transformed$r)
+
+# Report the number of usable quarterly observations
+nrow(data_transformed)
+```
+
+### Estimating the IRF with an auxiliary model: a small VAR
+
+We now use these data to estimate the auxiliary model that will serve as the target of our calibration: a small VAR in the shock and the three model variables, from which we recover the impulse response of output, inflation, and the policy rate to a one-unit monetary policy shock. We order the shock first in the VAR, ahead of $y$, $\pi$, and $r$. Because nothing precedes it, its own reduced-form residual is not contaminated by the contemporaneous effects of the other variables, so a standard Cholesky decomposition of the residual covariance matrix identifies the shock directly -- indeed, @PlagborgMoller2021 show that structural estimation with an externally identified shock can always be carried out this way, by ordering the shock (or instrument) first in a recursive VAR.
+
+Before turning to the code, it is worth being explicit about where an estimated VAR's impulse responses actually come from, since the `vars` package will otherwise compute them for us as a black box. Consider a VAR($p$) for $x_t=(\text{shock}_t, y_t, \pi_t, r_t)'$,
+$$
+x_t = A_0 + \sum_{l=1}^{p} A_l\, x_{t-l} + u_t,
+$$
+and stack its $p$ lags into a single vector $X_t=(x_t', x_{t-1}', \ldots, x_{t-p+1}')'$. This turns the VAR($p$) into an equivalent first-order system,
+$$
+X_t = \tilde{A}_0 + \tilde{A}\, X_{t-1} + \tilde{u}_t, \qquad
+\tilde{A} = \begin{bmatrix} A_1 & A_2 & \cdots & A_p \\ I & 0 & \cdots & 0 \\ 0 & I & \cdots & 0 \\ \vdots & & \ddots & \vdots \end{bmatrix},
+$$
+where $\tilde{A}$ is known as the **companion matrix**. Written this way, the reduced-form response of $X_{t+h}$ to a shock at time $t$ is simply given by powers of the companion matrix, $\partial X_{t+h}/\partial u_t = \tilde{A}^h$, and the response of just the observed variables $x_t$ (rather than the whole stacked vector) to a unit shock in a specific variable is obtained with two selection matrices, $J\tilde{A}^h L$: $J$ picks out the first four rows of $\tilde{A}^h$ (the current-period variables), and $L$ is a unit vector picking out the shocked variable's position -- here, the shock, which we have ordered first.^[Because we set $p=1$ below, our companion matrix collapses to $A_1$ itself and no stacking is actually needed -- the reduced-form IRF is simply $A_1^h$. The same principle scales to any lag length, however.] This reduced-form response is not yet identified: turning it into the response to *one unit of the shock itself*, rather than to a unit of the correlated reduced-form residual $u_t$, still requires the Cholesky step described above. The `irf()` function in the `vars` package carries out both steps for us -- computing the companion-matrix powers and applying the identification -- which is what the short code below actually calls.
+
+Given the modest length of our sample (48 quarters), we keep the lag length short, $p=1$, to avoid consuming too many degrees of freedom,^[@Li2024 show that VAR-based IRFs become more similar to LP-based ones as $p$ increases, but at the cost of higher variance -- exactly the trade-off a short sample forces us to confront directly here.] and restrict the focus to a medium-term horizon of $H=12$ quarters (three years).
+
+```{r}
+#| label: nk-ii-var
+#| output: true
+#| cache: true
+#| dependson: "nk-ii-data"
+
+# Load the vars package for VAR estimation and Cholesky-identified IRFs
+library(vars)
+
+# Set the VAR lag length and the IRF horizon
+p = 1
+H = 12
+
+# Estimate a reduced-form VAR(p) in the shock and the three model variables
+# (the shock ordered first, as discussed above)
+var_data = data_transformed[, c("shock", "y", "pi", "r")]
+var_fit  = VAR(var_data, p = p, type = "const")
+
+# Recover the Cholesky-identified impulse response to the shock: since the
+# shock is ordered first, its own reduced-form residual is not contaminated
+# by the other variables' contemporaneous effects, and "ortho = TRUE" applies
+# the Cholesky decomposition to identify it
+irf_fit = irf(var_fit, impulse = "shock", n.ahead = H, ortho = TRUE, boot = FALSE)
+
+# Collect the responses of y, pi, and r, and rescale so the shock's own
+# contemporaneous impact equals one ("unit effect" normalisation, following
+# Stock and Watson 2018), rather than the package's default of one standard
+# deviation
+beta_var = sapply(c("y", "pi", "r"), function(v) irf_fit$irf$shock[, v])
+beta_var = beta_var / irf_fit$irf$shock[1, "shock"]
+rownames(beta_var) = 0:H
+
+round(beta_var, 3)
+```
+
+Next, we plot the estimated IRFs of output, inflation, and the policy rate to a unit monetary policy shock:
+
+```{r}
+#| label: fig-ii-var-irf
+#| fig-cap: "VAR-estimated response of output, inflation, and the policy rate to a unit monetary policy shock"
+
+par(mfrow = c(1, 3))
+for (v in c("y", "pi", "r")) {
+  plot(0:H, beta_var[, v], type = "l", lwd = 2, col = 1,
+       xlab = "Quarters after shock", ylab = "", main = v)
+  abline(h = 0, lty = 2, col = "grey50")
+}
+```
+
+@fig-ii-var-irf shows that output and inflation both rise for a couple of quarters before eventually turning negative, a pattern reminiscent of the well-known "price puzzle" found in many small-sample monetary VARs.
+
+### Simulated responses: the indirect inference step
+
+We now turn to computing the other half of the indirect inference loss function in @eq-loss-ii: $\beta(\theta)$, the auxiliary-model coefficients re-estimated on data *simulated* from the structural model at a candidate parameter vector $\theta=(a_1,a_2,b)$. To do this, we need a function that (i) simulates the stochastic NK model, and (ii) applies to the simulated data exactly the same VAR estimation and identification procedure used on the real data above.
+
+For step (i), we reuse the `simulate_model()` function from @sec-msm, adapted in two ways. First, since we only calibrate $\theta=(a_1,a_2,b)$ here, the remaining parameters $\rho_d,\sigma_d,\sigma_s,\sigma_m$ are fixed at their values from @sec-msm rather than taken from `theta`. Second, the function now also returns the simulated monetary policy shock itself alongside output, inflation, and the policy rate, so that the simulated data has the same four columns, in the same order, as `data_transformed` above.
+
+```{r}
+#| label: nk-ii-simulate
+#| output: false
+#| cache: true
+
+# Fix the parameters not targeted here at their values calibrated in @sec-msm
+# (its diagonal-weighting estimates)
+pt      = 2
+rho_d   = 0.8506
+sigma_d = 1.0728
+sigma_s = 0.0323
+sigma_m = 1.8468
+
+# Function to simulate the model for a given theta = (a1, a2, b), returning
+# the monetary policy shock alongside output, inflation, and the policy rate
+simulate_model = function(theta, T_sim, burnin = 100) {
+  a1 = theta[1]; a2 = theta[2]; b = theta[3]
+  a3 = (a1 * (1 / (a2 * b) + a2))^(-1)
+
+  y = numeric(T_sim); p = numeric(T_sim); r = numeric(T_sim); eps_d = numeric(T_sim)
+
+  mu_d    = rnorm(T_sim, 0, sigma_d)
+  shock_s = rnorm(T_sim, 0, sigma_s)
+  shock_m = rnorm(T_sim, 0, sigma_m)
+
+  y[1] = 0; p[1] = pt; r[1] = 0
+
+  for (t in 2:T_sim) {
+    eps_d[t] = rho_d * eps_d[t - 1] + mu_d[t]   # AR(1) demand shock
+    y[t] = -a1 * r[t - 1] + eps_d[t]            # IS curve, A = 0
+    p[t] = p[t - 1] + a2 * y[t] + shock_s[t]    # Phillips curve, ye = 0
+    r[t] = a3 * (p[t] - pt) + shock_m[t]        # Policy rule, rs = 0
+  }
+
+  cbind(shock = shock_m, y = y, pi = p, r = r)[(burnin + 1):T_sim, ]
+}
+```
+
+For step (ii), the function below simulates the model `MC` times, each time at an inflated sample length $\tau T$ (where $T$ is the number of quarters in our actual data), re-estimates the same VAR($p$) used above on each simulated sample, and averages the resulting IRFs across the `MC` repetitions to smooth out simulation noise -- exactly the same logic as the `sim_moments()` function in @sec-msm, just applied to a VAR-estimated IRF instead of a vector of moments. We inflate the simulated sample length by a factor $\tau$, rather than simulating at exactly length $T$, purely to reduce simulation noise within each replication; $\tau$ is kept finite (rather than very large) so that each replication's VAR is still re-estimated on a *finite* sample and so retains a comparable degree of finite-sample estimation uncertainty to $\beta$ itself -- which is what the robustness argument for indirect inference in the previous section relies on.
+
+For some candidate parameter vectors -- particularly ones implying highly persistent, near-unit-root dynamics -- a simulated sample can occasionally produce a numerically degenerate VAR (e.g. a residual covariance matrix that is not quite positive definite), which would otherwise cause the whole calibration to crash on a single unlucky replication. We therefore wrap each replication in `tryCatch()` and simply drop it from the average if it fails, mirroring the defensive `if (any(!is.finite(...)))` check already used in `sim_moments()` in @sec-msm.
+
+```{r}
+#| label: nk-ii-simirf
+#| output: false
+#| cache: true
+#| dependson: "nk-ii-simulate"
+
+# Function that computes beta(theta): simulate the model MC times, re-estimate
+# the same VAR on each simulated sample, and average the resulting IRFs
+sim_irf = function(theta, MC = 20, tau = 5) {
+  set.seed(123)
+  Tobs  = nrow(data_transformed)
+  T_sim = tau * Tobs
+
+  all_irfs = array(NA, dim = c(H + 1, 3, MC))
+  for (m in 1:MC) {
+    irf_m = tryCatch({
+      sim_data = simulate_model(theta, T_sim = T_sim)
+      fit_sim  = VAR(sim_data, p = p, type = "const")
+      irf_sim  = irf(fit_sim, impulse = "shock", n.ahead = H, ortho = TRUE, boot = FALSE)
+      beta_sim = sapply(c("y", "pi", "r"), function(v) irf_sim$irf$shock[, v])
+      beta_sim / irf_sim$irf$shock[1, "shock"]
+    }, error = function(e) NA)
+    if (!identical(irf_m, NA)) all_irfs[, , m] = irf_m
+  }
+
+  # Average across the (successful) Monte Carlo replications
+  beta_theta = apply(all_irfs, c(1, 2), mean, na.rm = TRUE)
+  colnames(beta_theta) = c("y", "pi", "r")
+  rownames(beta_theta) = 0:H
+  beta_theta
+}
+```
+
+As a first check, before running any optimisation, we can compute what @eq-loss-ii would compare the data against if we simply reused the parameters already calibrated by unconditional moments in @sec-msm ($a_1=0.294$, $a_2=0.010$, $b=1.435$):
+
+```{r}
+#| label: fig-ii-simirf-check
+#| fig-cap: "VAR-estimated IRF (data) versus the model-implied IRF at the MSM chapter's calibrated parameters"
+#| cache: true
+#| dependson: ["nk-ii-var", "nk-ii-simirf"]
+
+theta_msm = c(a1 = 0.294, a2 = 0.010, b = 1.435)
+beta_msm  = sim_irf(theta_msm)
+
+par(mfrow = c(1, 3))
+for (v in c("y", "pi", "r")) {
+  plot(0:H, beta_var[, v], type = "l", lwd = 2, col = 1,
+       ylim = range(beta_var[, v], beta_msm[, v]),
+       xlab = "Quarters after shock", ylab = "", main = v)
+  lines(0:H, beta_msm[, v], lwd = 2, col = 2, lty = 2)
+  abline(h = 0, lty = 3, col = "grey50")
+}
+legend("topright", legend = c("data (VAR)", "model at MSM estimates"),
+       col = c(1, 2), lty = c(1, 2), lwd = 2, bty = "n", cex = 0.7)
+```
+
+@fig-ii-simirf-check suggests that the MSM chapter's parameterisation -- calibrated to match unconditional variances and autocovariances rather than a monetary-shock IRF -- does not automatically reproduce the dynamic response to a monetary policy shock, which is exactly the gap the calibration in the remainder of this chapter tries to close.
+
+### Speeding this up: parallelising the Monte Carlo loop
+
+Before using `sim_irf()` inside a numerical optimisation routine, it is worth pausing on its computational cost. Unlike `sim_moments()` in @sec-msm, which only has to compute a handful of variances and covariances for each Monte Carlo repetition, every repetition of `sim_irf()` has to simulate a whole dataset *and* re-estimate a VAR on it. With `MC = 20` repetitions per evaluation of the loss function, and the loss function evaluated many times during optimisation, this cost adds up quickly.
+
+Fortunately, the `for` loop inside `sim_irf()` is what is often called **embarrassingly parallel**: each of the `MC` repetitions simulates its own dataset and re-estimates its own VAR entirely independently of the others: repetition 3 does not need to know anything about the outcome of repetition 2. The only place the repetitions interact is right at the end, when we average across them. Loops with this property can be sped up simply by running the repetitions *at the same time* on different processor cores, rather than one after another.
+
+In R, the standard way to do this is the `foreach` package, together with a "parallel backend" that actually farms the work out to multiple cores -- here, `doParallel`. The key change is replacing the loop's `%do%` (run sequentially) with `%dopar%` (run in parallel):
+
+```r
+foreach(m = 1:MC) %do%   { ... }   # ordinary, sequential loop
+foreach(m = 1:MC) %dopar% { ... }   # the same loop, run in parallel
+```
+
+Before we can use `%dopar%`, we need to set up a **cluster**: a set of separate R processes ("workers") that `foreach` can send iterations to. We use `parallel::makeCluster()` with `type = "PSOCK"`, which starts independent R sessions communicating over local sockets -- this works on any operating system, unlike the `FORK`-based clusters common on Mac/Linux, which are not available on Windows. We use one fewer worker than the number of cores available on the machine, so that one core is always left free for other tasks:
+
+```{r}
+#| label: nk-ii-cluster
+#| output: false
+
+# Load the packages needed for parallel computation
+library(foreach)
+library(doParallel)
+library(doRNG)
+
+# Set up a cluster with one fewer worker than the number of available cores
+n_cores = max(1, parallel::detectCores() - 1)
+cl = makeCluster(n_cores, type = "PSOCK")
+registerDoParallel(cl)
+```
+
+One subtlety is worth flagging. When we ran the loop sequentially, a single `set.seed(123)` before the loop was enough to make the *entire sequence* of random draws reproducible, since all repetitions shared one, continuously-advancing random number stream. Once the repetitions run on separate worker processes, however, each worker has its *own* random number stream, and a single `set.seed()` call in the main R session no longer controls what happens on the workers. To keep our results reproducible despite this, we use the `doRNG` package, which gives each parallel repetition its own independent-but-reproducible stream of random numbers: it is a drop-in replacement for `%dopar%`, called `%dorng%`, that otherwise behaves the same way.
+
+We can now rewrite `sim_irf()` to run its Monte Carlo loop in parallel. Because each worker is a separate R process, it starts out with none of the objects available in our main R session: it does not have the `vars` package loaded, and it has no access to `simulate_model()` or the fixed parameters that function relies on (`pt`, `rho_d`, `sigma_d`, `sigma_s`, `sigma_m`). `foreach` can in principle auto-detect and export some of the objects a loop body refers to, but this detection is not fully reliable -- in particular, it can miss objects created in an earlier, cached code chunk, and it never looks *inside* a function to see what that function itself depends on.^[The symptom of getting this wrong is not a helpful error message: the affected function simply fails on every single worker with an "object not found" error, which our `tryCatch()` quietly converts into a dropped repetition for every one of the `MC` repetitions -- worth knowing, since it otherwise looks like a silent, mysterious failure rather than a missing export.] The robust habit is therefore to rely on `foreach`'s `.packages` argument for packages and its `.export` argument for *everything else* the loop body needs, rather than trusting automatic detection.
+
+```{r}
+#| label: nk-ii-simirf-parallel
+#| output: false
+#| cache: false
+#| dependson: "nk-ii-simulate"
+
+# Rewrite of sim_irf() using a parallel (%dorng%) Monte Carlo loop
+sim_irf = function(theta, MC = 20, tau = 5) {
+  Tobs  = nrow(data_transformed)
+  T_sim = tau * Tobs
+
+  irf_list = foreach(m = 1:MC, .packages = "vars",
+                      .export = c("simulate_model", "p", "H",
+                                   "pt", "rho_d", "sigma_d", "sigma_s", "sigma_m")) %dorng% {
+    tryCatch({
+      sim_data = simulate_model(theta, T_sim = T_sim)
+      fit_sim  = VAR(sim_data, p = p, type = "const")
+      irf_sim  = irf(fit_sim, impulse = "shock", n.ahead = H, ortho = TRUE, boot = FALSE)
+      beta_sim = sapply(c("y", "pi", "r"), function(v) irf_sim$irf$shock[, v])
+      beta_sim / irf_sim$irf$shock[1, "shock"]
+    }, error = function(e) NA)
+  }
+
+  # Drop any failed repetitions, then average the remaining IRFs element-wise
+  irf_list = irf_list[!sapply(irf_list, function(x) identical(x, NA))]
+  if (length(irf_list) == 0) stop("All Monte Carlo repetitions failed for this theta")
+  beta_theta = Reduce(`+`, irf_list) / length(irf_list)
+  colnames(beta_theta) = c("y", "pi", "r")
+  rownames(beta_theta) = 0:H
+  beta_theta
+}
+```
+
+Two further points are worth keeping in mind. First, parallelisation is not free: starting the worker processes and shipping data to them takes time, so it only pays off once each individual task -- here, one simulate-and-re-estimate repetition -- is expensive enough to be worth the overhead, which is comfortably the case here but would not be for, say, a loop that only computes a mean and a variance. Second, the same idea applies just as well to the multi-start robustness check later in this chapter, where every starting value's optimisation run is, again, independent of all the others; we return to this below. We keep the cluster (`cl`) open for the rest of the chapter and close it with `stopCluster(cl)` once we are done with it.
+
+### Loss function
+
+As in @sec-msm, we wrap the pieces above into a single objective function that computes the value of the indirect inference loss function in @eq-loss-ii, for a candidate $\theta$ and weighting matrix $W$:
+
+```{r}
+#| label: nk-ii-objective
+#| output: false
+
+# Define function that computes the value of the indirect inference loss function
+objective = function(theta, Wmat) {
+  sim_beta = sim_irf(theta)
+  if (any(!is.finite(sim_beta))) return(1e10)
+  diff = as.vector(sim_beta - beta_var)
+  as.numeric(t(diff) %*% Wmat %*% diff)
+}
+```
+
+### Exploring the parameter space
+
+As discussed in @sec-msm, we minimise this loss function numerically using R's `optim()` function with the `L-BFGS-B` method, which lets us impose bounds on the search -- here, the stability requirement $a_1,a_2,b>0$ from @sec-NK. For this baseline calibration we use identity weighting, $W=I$: a more sophisticated weighting matrix could in principle be constructed analogously to @sec-msm's bootstrap-based diagonal weighting, but doing so here would mean bootstrapping a VAR-estimated IRF rather than a handful of sample moments, at a considerably higher computational cost -- we leave this as a possible extension rather than pursuing it in this already computationally heavier chapter.
+
+```{r}
+#| label: nk-ii-bounds
+#| output: false
+#| cache: true
+
+# Define parameter names and bounds ensuring a1, a2, b > 0
+par_names    = c("a1", "a2", "b")
+bounds_lower = c(0.01, 0.01, 0.01)
+bounds_upper = c(2, 2, 5)
+
+# Identity weighting matrix over the 3*(H+1) = 39 IRF coefficients
+W_identity = diag(3 * (H + 1))
+```
+
+### Baseline calibration
+
+Since a gradient-based optimiser like `L-BFGS-B` only explores the region close to wherever it started, we go straight to multiple, space-filling starting values via Latin Hypercube Sampling, rather than committing to a single arbitrary guess first -- the same approach as @sec-msm's own multi-start robustness check, just with fewer starting points (`N_starts = 8` rather than 30), since each evaluation of the loss function here is considerably more expensive than in the MSM chapter.
+
+One might reasonably ask whether the loop below should itself be parallelised, given the discussion above -- after all, every starting value's optimisation run is just as independent of the others as the Monte Carlo repetitions inside `sim_irf()` were. We keep it sequential here, however: each call to `optim()` already calls `sim_irf()`, which itself dispatches work to our cluster of workers via `%dorng%`. Nesting a second layer of parallelism on top -- sending different starting values to different workers, each of which would then try to parallelise its own inner Monte Carlo loop again -- adds complexity for comparatively little benefit with only `N_starts = 8` runs, and is best avoided unless the outer loop itself becomes the bottleneck.
+
+```{r}
+#| label: nk-ii-multistart
+#| output: true
+#| cache: true
+#| dependson: ["nk-ii-var", "nk-ii-bounds"]
+
+library(lhs)
+
+# Set random seed for reproducibility
+set.seed(6)
+
+# Set number of starting points
+N_starts = 8
+n_par = length(par_names)
+
+# Draw a Latin Hypercube sample on the unit hypercube and rescale to the bounds
+lhs_unit   = randomLHS(N_starts, n_par)
+all_starts = sapply(1:n_par, function(j) qunif(lhs_unit[, j], bounds_lower[j], bounds_upper[j]))
+colnames(all_starts) = par_names
+
+# Create matrices to store the optimal parameterisation and loss for each start
+multistart_par = matrix(NA, N_starts, n_par)
+colnames(multistart_par) = par_names
+multistart_obj = rep(NA, N_starts)
+
+# Calibrate for each start
+for (i in 1:N_starts) {
+  fit_i = tryCatch(
+    optim(all_starts[i, ], function(th) objective(th, W_identity),
+          method = "L-BFGS-B", lower = bounds_lower, upper = bounds_upper,
+          control = list(maxit = 100, factr = 1e10, pgtol = 1e-3)),
+    error = function(e) NULL
+  )
+  if (!is.null(fit_i)) {
+    multistart_par[i, ] = fit_i$par
+    multistart_obj[i]   = fit_i$value
+  }
+}
+
+# We are done with the cluster once the multi-start search has finished.
+# Stopping it is not enough on its own: foreach remembers that a parallel
+# backend was registered and will keep trying to reach it, so we also need
+# to explicitly register the sequential backend to fall back on plain %do%-
+# style execution for any later, one-off calls to sim_irf().
+stopCluster(cl)
+registerDoSEQ()
+
+# Find the parameterisation that minimises the loss function and keep it as
+# our baseline indirect inference estimate
+best_i = which.min(multistart_obj)
+theta_ii = multistart_par[best_i, ]
+
+# Print the estimate we keep, and the full spread across all starting values
+round(c(theta_ii, obj = multistart_obj[best_i]), 4)
+round(cbind(multistart_par, obj = multistart_obj), 4)
+```
+
+The eight starting values converge to visibly different parameterisations, with objective values ranging from 32.3 to 121.0. Looking at the full spread rather than just the best point is more informative here than the single number would be: the four best-fitting runs (objective $\approx$ 32.3-32.7) all share small values of $a_1$ and $a_2$ (both below 0.14), while the two worst-fitting runs both have $a_2$ close to its upper bound of 2 -- suggesting the monetary-shock IRF does carry some information about $a_1$ and $a_2$, at least enough to reject large values. Within that best-fitting cluster, however, $b$ ranges all the way from 0.09 to 5.0 while barely moving the loss at all, indicating that $b$ is essentially unidentified by this target once $a_1$ and $a_2$ are small. One of the near-optimal points sits exactly at the boundary of the parameter space on two parameters at once ($a_1$ at its lower bound and $b$ at its upper bound) and still achieves an almost identically low loss to the actual best (interior) point -- echoing a similar pattern in @sec-msm's identity-weighted first shot. We flag this as a genuine identification concern -- not just a numerical or coding issue -- and return to it in the Caveats below.
+
+### Comparing the fit
+
+To assess how well the calibrated model reproduces the target impulse response, we need some sense of how precisely the target itself, $\beta$, is estimated. As in @sec-msm, we obtain this via a block bootstrap using R's `tsboot()` function: rather than resampling individual quarters independently, a block bootstrap resamples (with replacement) contiguous blocks of quarters, preserving the autocorrelation in the data. We use the same specification as in @sec-msm (`sim = "geom"`, mean block length `l = 8`), applied now to a function that re-estimates our VAR and computes its IRF on each bootstrapped sample, rather than to a function that computes simple moments.
+
+```{r}
+#| label: nk-ii-bootstrap
+#| output: true
+#| cache: true
+#| dependson: "nk-ii-var"
+
+library(boot)
+
+# Set random seed for reproducibility
+set.seed(123)
+
+# Function that computes the same (unit-effect-normalised) VAR-based IRF used
+# above, for use as the statistic passed to tsboot()
+compute_irf_boot = function(data) {
+  colnames(data) = c("shock", "y", "pi", "r")
+  fit_b = VAR(as.data.frame(data), p = p, type = "const")
+  irf_b = irf(fit_b, impulse = "shock", n.ahead = H, ortho = TRUE, boot = FALSE)
+  beta_b = sapply(c("y", "pi", "r"), function(v) irf_b$irf$shock[, v])
+  as.vector(beta_b / irf_b$irf$shock[1, "shock"])
+}
+
+# Create a block-bootstrap sample of the IRF
+boot_out = tsboot(as.matrix(data_transformed[, c("shock", "y", "pi", "r")]),
+                   compute_irf_boot, R = 1000, l = 8, sim = "geom")
+
+# Reshape the bootstrapped standard errors back into (H+1) x 3 matrices,
+# matching the shape of beta_var
+se_var = matrix(apply(boot_out$t, 2, sd, na.rm = TRUE), nrow = H + 1, ncol = 3)
+colnames(se_var) = c("y", "pi", "r")
+rownames(se_var) = 0:H
+
+round(se_var, 3)
+```
+
+We can now compute the model's implied IRF at our calibrated parameters, $\theta_{II}$, and compare it against the data using the same sign-match, percent-deviation, and moment-missing-rate (MMR) diagnostics as in @sec-msm -- now computed for each of the $3\times(H+1)=39$ variable-horizon combinations rather than for 9 unconditional moments.^[Recall from @sec-msm that the MMR expresses a deviation as a percentage of the target's bootstrapped 95% confidence interval: below 100 means the model-implied value falls inside that interval, above 100 means it falls outside.]
+
+```{r}
+#| label: nk-ii-gof
+#| output: true
+#| cache: true
+#| dependson: ["nk-ii-multistart", "nk-ii-bootstrap"]
+
+# Compute the model-implied IRF at the calibrated parameters. This now runs
+# sequentially, since we already closed the parallel cluster above -- fine
+# for a single evaluation like this one, as opposed to repeated ones inside
+# an optimisation routine
+beta_ii = sim_irf(theta_ii)
+
+# Define function to build a goodness-of-fit table, analogous to gof_table()
+# in @sec-msm, but now for a (horizon x variable) grid of IRF coefficients
+# rather than a vector of moments
+gof_table = function(sim, obs, se) {
+  data.frame(
+    variable   = rep(colnames(obs), each = nrow(obs)),
+    horizon    = rep(as.integer(rownames(obs)), times = ncol(obs)),
+    empirical  = round(as.vector(obs), 3),
+    simulated  = round(as.vector(sim), 3),
+    sign_match = sign(as.vector(sim)) == sign(as.vector(obs)),
+    pct_dev    = round(100 * (as.vector(sim) - as.vector(obs)) / as.vector(obs), 1),
+    mmr        = round(100 * abs(as.vector(sim) - as.vector(obs)) / (2 * as.vector(se)), 1)
+  )
+}
+
+table_ii = gof_table(beta_ii, beta_var, se_var)
+
+# Sign-match rate and average MMR, overall and by variable
+mean(table_ii$sign_match)
+round(tapply(table_ii$mmr, table_ii$variable, mean), 1)
+round(mean(table_ii$mmr), 1)
+```
+
+```{r}
+#| label: fig-ii-fit
+#| fig-cap: "VAR-estimated IRF (with a bootstrapped 95% band) versus the calibrated model's IRF"
+
+par(mfrow = c(1, 3))
+for (v in c("y", "pi", "r")) {
+  ci_lo = beta_var[, v] - 2 * se_var[, v]
+  ci_hi = beta_var[, v] + 2 * se_var[, v]
+  plot(0:H, beta_var[, v], type = "l", lwd = 2, col = 1,
+       ylim = range(ci_lo, ci_hi, beta_ii[, v]),
+       xlab = "Quarters after shock", ylab = "", main = v)
+  polygon(c(0:H, rev(0:H)), c(ci_lo, rev(ci_hi)), col = rgb(0, 0, 0, 0.1), border = NA)
+  lines(0:H, beta_ii[, v], lwd = 2, col = 2, lty = 2)
+  abline(h = 0, lty = 3, col = "grey50")
+}
+legend("topright", legend = c("data (VAR) \u00b1 2SE", "calibrated model"),
+       col = c(1, 2), lty = c(1, 2), lwd = 2, bty = "n", cex = 0.7)
+```
+
+The bootstrapped standard errors in `se_var` are large relative to the point estimates themselves -- for instance, more than twice the point estimate for $y$ and $r$ at horizon 0 -- a direct consequence of estimating a VAR from only 48 quarterly observations in which the monetary policy shock explains just a modest share of the overall variation. This matters for how the MMR summary should be read: the sign-match rate across all 39 variable-horizon combinations is a modest 64%, yet the average MMR looks reassuring at 34.3 (20.6 for $\pi$, 36.1 for $r$, 46.2 for $y$) -- comfortably inside the "acceptable" (below 100) region. @fig-ii-fit shows why: the calibrated model's implied response is close to flat for all three variables, and it clears the MMR bar mainly because the empirical confidence bands are so wide, not because it reproduces the data's actual, hump-shaped dynamics. A low MMR here is thus a fairly weak endorsement of the fit -- it mainly reflects how little information a 48-quarter sample carries about the true monetary transmission mechanism, exactly the kind of small-sample problem the Monte Carlo evidence in @Castellanos2025 warns about.
+
+## Robustness: IRF matching with Local Projections
+
+We now check how much the choice of estimator and auxiliary model actually matters here, by re-running the calibration with the pairing @Castellanos2025 associates with IRF matching: Local Projections instead of a VAR. Since IRF matching's model-implied object, $IRF(\theta)$, is computed directly and deterministically from $\theta$ -- no simulation, no re-estimation, no Monte Carlo averaging -- this whole exercise is considerably cheaper than the indirect inference calibration above.
+
+### Estimating the target IRF with Local Projections
+
+A local projection estimates the response of a variable at horizon $h$ directly, via a separate OLS regression for each $h$, rather than iterating a single VAR forward. Since the shock is observed and ordered first exactly as in the VAR above, no contemporaneous controls are needed to isolate it [@PlagborgMoller2021]; we still include $p=1$ lag of all four variables as controls, matching the VAR's lag length so that the two auxiliary models are as comparable as possible [@Li2024].
+
+```{r}
+#| label: nk-ii-lp
+#| output: true
+#| cache: true
+#| dependson: "nk-ii-data"
+
+# Function to estimate the response of y, pi, and r to the shock via local
+# projections, at horizons 0, ..., H
+compute_irf_lp = function(data, p, H) {
+  Tobs = nrow(data)
+  W = as.matrix(data[, c("shock", "y", "pi", "r")])
+
+  irf_lp = matrix(NA, H + 1, 3)
+  colnames(irf_lp) = c("y", "pi", "r")
+
+  for (h in 0:H) {
+    # p lags of all four variables, aligned to the horizon-h estimation sample
+    lag_mat = do.call(cbind, lapply(1:p, function(l) W[(p + 1 - l):(Tobs - h - l), ]))
+    shock_t = W[(p + 1):(Tobs - h), "shock"]
+
+    for (v in c("y", "pi", "r")) {
+      resp  = data[[v]][(p + 1 + h):Tobs]
+      fit_h = lm(resp ~ shock_t + lag_mat)
+      irf_lp[h + 1, v] = coef(fit_h)["shock_t"]
+    }
+  }
+  rownames(irf_lp) = 0:H
+  irf_lp
+}
+
+# Estimate the target IRF from the data via local projections
+beta_lp = compute_irf_lp(data_transformed, p = p, H = H)
+round(beta_lp, 3)
+```
+
+Unlike the VAR, whose Cholesky factor needed an extra unit-effect rescaling to turn a one-standard-deviation shock into a one-unit shock, the LP coefficient on the observed shock variable is, by construction, already the response to one unit of it -- no rescaling is needed.
+
+```{r}
+#| label: fig-ii-var-vs-lp
+#| fig-cap: "VAR- versus LP-estimated response to a unit monetary policy shock"
+
+par(mfrow = c(1, 3))
+for (v in c("y", "pi", "r")) {
+  plot(0:H, beta_var[, v], type = "l", lwd = 2, col = 1,
+       ylim = range(beta_var[, v], beta_lp[, v]),
+       xlab = "Quarters after shock", ylab = "", main = v)
+  lines(0:H, beta_lp[, v], lwd = 2, col = 4, lty = 2)
+  abline(h = 0, lty = 3, col = "grey50")
+}
+legend("topright", legend = c("VAR", "LP"), col = c(1, 4), lty = c(1, 2), lwd = 2,
+       bty = "n", cex = 0.7)
+```
+
+@fig-ii-var-vs-lp shows the two auxiliary models broadly agreeing on the sign and rough shape of the response, but disagreeing noticeably on magnitude at several horizons -- a concrete illustration, on our own data, of the bias-variance trade-off between VAR and LP responses documented by @Li2024.
+
+### IRF matching
+
+Because our model is linear, its theoretical response to a single, one-off unit shock in the monetary policy rule can be computed directly, without simulating any noise at all: we simply set every shock to zero except a single unit shock to $\varepsilon_{m,t}$ and iterate the (now completely deterministic) model forward.
+
+```{r}
+#| label: nk-ii-structural-irf
+#| output: false
+
+# Function to compute the model's theoretical (population) IRF to a unit
+# monetary policy shock directly from theta = (a1, a2, b) -- no simulation
+structural_irf = function(theta, H) {
+  a1 = theta[1]; a2 = theta[2]; b = theta[3]
+  a3 = (a1 * (1 / (a2 * b) + a2))^(-1)
+
+  Tsim = H + 2
+  y = numeric(Tsim); pi_ = numeric(Tsim); r = numeric(Tsim)
+  eps_m = numeric(Tsim)
+  eps_m[2] = 1  # a single unit monetary policy shock, all other shocks off
+
+  for (t in 2:Tsim) {
+    y[t]   = -a1 * r[t - 1]
+    pi_[t] = pi_[t - 1] + a2 * y[t]
+    r[t]   = a3 * pi_[t] + eps_m[t]
+  }
+
+  irf = cbind(y = y, pi = pi_, r = r)[2:(H + 2), ]
+  rownames(irf) = 0:H
+  irf
+}
+```
+
+The IRF matching loss function and optimisation setup otherwise mirror the indirect inference case, with `structural_irf()` in place of `sim_irf()` and `beta_lp` in place of `beta_var`. We reuse the exact same Latin Hypercube starting points as in the indirect inference multi-start check above, so that any difference between the two calibrated parameterisations reflects the estimator, not the search.
+
+```{r}
+#| label: nk-ii-irfmatch
+#| output: true
+#| cache: true
+#| dependson: ["nk-ii-lp", "nk-ii-structural-irf", "nk-ii-multistart"]
+
+# Objective function for IRF matching
+objective_irf = function(theta, Wmat) {
+  model_irf = structural_irf(theta, H)
+  diff = as.vector(model_irf - beta_lp)
+  as.numeric(t(diff) %*% Wmat %*% diff)
+}
+
+# Re-use the same starting points and bounds as the indirect inference case
+multistart_par_irf = matrix(NA, N_starts, n_par)
+colnames(multistart_par_irf) = par_names
+multistart_obj_irf = rep(NA, N_starts)
+
+for (i in 1:N_starts) {
+  fit_i = tryCatch(
+    optim(all_starts[i, ], function(th) objective_irf(th, W_identity),
+          method = "L-BFGS-B", lower = bounds_lower, upper = bounds_upper,
+          control = list(maxit = 100, factr = 1e10, pgtol = 1e-3)),
+    error = function(e) NULL
+  )
+  if (!is.null(fit_i)) {
+    multistart_par_irf[i, ] = fit_i$par
+    multistart_obj_irf[i]   = fit_i$value
+  }
+}
+
+best_i_irf = which.min(multistart_obj_irf)
+theta_irf = multistart_par_irf[best_i_irf, ]
+round(cbind(multistart_par_irf, obj = multistart_obj_irf), 4)
+```
+
+### Comparing the two calibrations
+
+```{r}
+#| label: nk-ii-compare-estimators
+#| output: true
+
+round(rbind(indirect_inference = theta_ii, irf_matching = theta_irf), 4)
+```
+
+Both approaches favour small values of $a_1$ and $a_2$: indirect inference settles on $a_1=0.08$, and IRF matching pins $a_1$ exactly at its lower bound of 0.01 in seven of its eight starting runs. On $b$, however, the two calibrations land on opposite ends of the admissible range -- $b=0.09$ for indirect inference versus $b=5.00$ for IRF matching -- which at first glance looks like a genuine disagreement between the two estimators. Looking at the full spread of the IRF-matching starts tells a different story: once $a_1$ and $a_2$ have settled near their preferred region, essentially every value of $b$ between 1.2 and 5.0 produces virtually the same loss, to two decimal places -- the same flat-$b$ pattern already found for indirect inference in the previous section, only more pronounced. Rather than substantively disagreeing about $b$, both estimators seem simply unable to identify it from a monetary-shock IRF; the specific number each one reports looks more like an artefact of where its optimiser happened to stop than a meaningful point estimate. If anything, this exercise's clearest robustness finding is not a disagreement between indirect inference and IRF matching, but the shared discovery that $b$ is not identified by this target at all -- a conclusion the single-parameterisation view in the comparison above would have missed entirely.
+
+## Caveats
+
+## Summary and discussion
+
+## A simple recipe for calibrating models with indirect inference
+
+1.  Add a minimal stochastic structure to the model, if it is not already stochastic.
+2.  Choose the free parameters of the model to be calibrated, informed by which ones the target shock's IRF can plausibly identify (e.g. via the model's own analytical properties, as in the eigenvalue argument above).
+3.  Choose the shock whose dynamic response you want to target, and how it is identified in the data: as a directly observed/true innovation, via recursive (e.g. Cholesky) timing assumptions, or as a noisy external proxy.
+4.  Choose an auxiliary model to estimate that shock's IRF from the data -- a VAR or local projections -- and estimate it.
+5.  Choose between IRF matching (fast: compares the data's estimated IRF against the model's own theoretical IRF) and indirect inference (slower but more robust: compares it against an IRF re-estimated on simulated data); if only one combination is affordable, pair a VAR with indirect inference and local projections with IRF matching.
+6.  Choose a weighting matrix for the loss function.
+7.  Minimise the loss function numerically, restricting the search to an economically plausible region of the parameter space. If using indirect inference, parallelise the Monte Carlo loop over simulation repetitions, and choose a simulated-sample inflation factor $\tau$ large enough to keep simulation noise manageable without eliminating the finite-sample bias that indirect inference's robustness relies on.
+8.  Assess the fit of the calibrated model along several dimensions (sign matches, percent deviations, moment-missing-rates), keeping in mind that a favourable-looking fit can partly reflect how imprecisely the target itself is estimated rather than genuine success.
+9.  Check the robustness of the numerical solution via multiple starting values, and treat a solution pinned to a parameter bound as a warning sign about identification rather than a result to report at face value.
+10. Interrogate a poor fit or an unidentified parameter: do they reflect problems with the data, the auxiliary model, the identification scheme, or the theoretical model itself?
+
+## References

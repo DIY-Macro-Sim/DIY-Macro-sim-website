@@ -828,6 +828,7 @@ From an modelling point of view, nonlinear dynamic systems are of considerable i
     -   stable ($|\lambda| < 1$) or unstable ($|\lambda| > 1$)
     -   acyclical ($\lambda \in \mathbb{R}$) or cyclical ($\lambda \in \mathbb{C}$)
 -   the (dominant) eigenvectors mediate the impact of the eigenvalues on the dynamics
+-   an unstable system with both stable and unstable eigenvalues (a saddle point) converges only if jump variables place it on the stable arm
 -   nonlinear systems are analysed locally around one of their equilibria
 
 
@@ -859,7 +860,7 @@ The following typology classifies dynamic systems based on their eigenvalues, wh
 
 ![A typology of dynamic systems](tree_diagram_dynamic_systems_website.png){ width=100% }
 
-In this section, we analysed the linear @Samuelson1939 model and showed that it can give rise to either monotonic convergence (if its eigenvalues are real) or damped oscillations (if they are complex). Exponential growth and explosive oscillations are also possible, if the model becomes unstable. 
+In this section, we analysed the linear @Samuelson1939 model and showed that it can give rise to either monotonic convergence (if its eigenvalues are real) or damped oscillations (if they are complex). Exponential growth and explosive oscillations are also possible, if the model becomes unstable. An unstable system that also has stable eigenvalues is a *saddle point*. If it contains forward-looking jump variables, these can place the system on the stable arm of the saddle, so that it converges despite the unstable eigenvalue. 
 
 Based on this typology, we can classify the dynamic models on this website as follows:
 
@@ -874,6 +875,7 @@ Based on this typology, we can classify the dynamic models on this website as fo
 |@sec-kaldor| A Kaldorian Endogenous Business Cycle Model | Limit cycle |
 |@sec-hicks| A Hicksian Business Cycle Model | (Quasi-) Limit cycle |
 |@sec-NK  | A New Keynesian 3-Equation Model | Monotonic convergence |
+|@sec-dornbusch | A Dornbusch Exchange Rate Overshooting Model | Saddle-path convergence |
 |@sec-inflation| A Conflict Inflation Model | Balanced exponential growth |
 |@sec-evolutionary   | An Evolutionary Game Theoretic Model | Monotonic convergence or Lyapunov stability |
 |@sec-sfc   | A Stock-Flow Consistent Model | Damped oscillations |
