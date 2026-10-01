@@ -874,6 +874,7 @@ Based on this typology, we can classify the dynamic models on this website as fo
 |@sec-Sraffian| A Sraffian Supermultiplier Model | Damped oscillations |
 |@sec-kaldor| A Kaldorian Endogenous Business Cycle Model | Limit cycle |
 |@sec-hicks| A Hicksian Business Cycle Model | (Quasi-) Limit cycle |
+|@sec-housing| An Endogenous Housing Cycle Model | Limit cycle |
 |@sec-NK  | A New Keynesian 3-Equation Model | Monotonic convergence |
 |@sec-dornbusch | A Dornbusch Exchange Rate Overshooting Model | Saddle-path convergence |
 |@sec-inflation| A Conflict Inflation Model | Balanced exponential growth |
