@@ -2,11 +2,11 @@
 
 ## Overview
 
-This section presents a model of speculative behaviour in housing markets due to @Dieci2012. Similar to @Kaldor1940 (see @sec-kaldor) and @Hicks1950 (see @sec-hicks), the model generates endogenous boom-bust cycles, but the focus is on housing markets and the interaction of heterogeneous speculators rather than economic activity.
+This section presents a model of speculative behaviour in housing markets due to @Dieci2012. The model generates endogenous boom-bust cycles in house prices that are driven by the interaction of heterogeneous speculators and housing supply. The model thus belongs to the family of endogenous cycle models in the tradition of @Kaldor1940 (see @sec-kaldor) and @Hicks1950 (see @sec-hicks). 
 
-The demand for housing is assumed to consist of a 'real' component and a 'speculative' component. The real demand for housing follows conventional economic behaviour: it declines as house prices rise. However, the speculative component is driven by expectations about future capital gains due to increases in house prices. Speculators are boundedly rational and can switch between two simple heuristics to form expectations: an *extrapolative* rule, that predicts prices to keep moving in the direction of their most recent deviation from the fundamental value, and a *regressive* rule, that predicts prices to revert back towards their fundamental values. The more houses prices deviate from their fundamental value, the more agents use the regressive forecasting rule.
+House prices are assumed to adjust to excess demand for housing. The demand for housing is split into a 'real' component and a 'speculative' component. The real demand for housing follows conventional economic behaviour: it declines as house prices rise. By contrast, the speculative component is driven by expectations about future capital gains via increases in house prices. Speculators are boundedly rational and can switch between two simple heuristics to form expectations: an *extrapolative* rule, that predicts prices to keep moving in the direction of their most recent deviation from the fundamental value, and a *regressive* rule that predicts prices to revert back towards their fundamental values. The more house prices deviate from their fundamental values, the more agents use the regressive forecasting rule.
 
-Housing supply is assumed to respond positively to house prices, and the latter are assumed to adjust to excess demand for housing. A typical housing cycle thus plays out as follows. As prices are relatively close to their fundamental value, small deviations from the fundamental value induce extrapolative behaviour, i.e. speculators begin to buy houses as they expect prices to rise further. The increase in demand for houses drives up prices, making expectations self-fulfilling. At the same time, construction picks up, leading to a housing boom that eases the pressure on house prices. Over time, more and more agents begin to believe that a mean reversion will occur. Eventually, demand will begin to decline, driving down house prices.
+Housing supply is assumed to respond positively to house prices. A typical housing cycle thus plays out as follows. As prices are relatively close to their fundamental values, small deviations from the fundamental value induce extrapolative behaviour, i.e. speculators begin to buy houses as they expect prices to rise further. The increase in demand for houses drives up prices, making expectations self-fulfilling. At the same time, construction picks up, leading to a housing boom that eases the pressure on house prices. Over time, more and more agents begin to believe that a mean reversion will occur. Eventually, demand will begin to decline, driving down house prices.
 
 ## The Model
 
@@ -44,15 +44,15 @@ $$
 w_t = \frac{1}{1+h(P_t - \bar{P})^2}, \quad h>0
 $$ {#eq-housing_w}
 
-where $S_t$, $P_t$, $D_t$, $D_t^R$, $D_t^S$, $D_t^E$, and $D_t^{MR}$ represent the housing stock, the house price, total demand for housing, real (fundamental) demand, total speculative demand, extrapolative speculative demand, and regressive ('mean-reverting') speculative demand, respectively. $\bar{P}$ is the (exogenously given) fundamental house price.
+where $S_t$, $P_t$, $D_t$, $D_t^R$, $D_t^S$, $D_t^E$, and $D_t^{MR}$ represent the housing stock, the house price, total demand for housing, real demand, total speculative demand, extrapolative speculative demand, and regressive ('mean-reverting') speculative demand, respectively. $\bar{P}$ is the (exogenously given) fundamental house price.
 
-@eq-housing_S describes the evolution of the housing stock: a fraction $d$ of the existing stock persists into the next period, and new construction is added, which is assumed to respond to the current house price (with the supply elasticity given by $e$). @eq-housing_P states that the house price adjusts to excess demand for housing in the previous period, with $a$ governing the speed of price adjustment. @eq-housing_D decomposes total demand for housing into a real and a speculative component. By @eq-housing_DR, real demand is a decreasing function of the price, capturing the idea that housing becomes less affordable as the price rises. @eq-housing_DS states that speculative demand is a weighted average of an extrapolative and a regressive demand component, with the weight $w_t$ governing the relative importance of the two. By @eq-housing_DE, extrapolative demand is positively related to the deviation of the price from its fundamental value $\bar{P}$: speculators following this rule buy more housing when the price is above (and thus, in their expectation, still rising above) its fundamental value. By @eq-housing_DMR, regressive demand does the opposite: it is positively related to the gap between the fundamental value and the current price, capturing the expectation that the price will revert towards $\bar{P}$. Finally, @eq-housing_w specifies the weight of extrapolative demand as a bell-shaped function of the squared deviation of the price from its fundamental value: the weight is maximal ($w_t=1$) when the price equals its fundamental value, and declines towards zero as the price moves further away from $\bar{P}$ in either direction. This is what eventually curbs the destabilising extrapolative dynamics, as more and more agents switch to the regressive rule when the deviation of the price from its fundamental value becomes large.
+@eq-housing_S describes the evolution of the housing stock: a fraction $d$ of the existing stock persists into the next period, and new construction is added, which is assumed to respond to the current house price (with the price sensitivity of housing supply given by $e$). @eq-housing_P states that the house price adjusts to excess demand for housing in the previous period, with $a$ governing the speed of price adjustment. @eq-housing_D decomposes total demand for housing into a real and a speculative component. By @eq-housing_DR, real demand is a decreasing function of the price, capturing the idea that housing becomes less affordable as the price rises. @eq-housing_DS states that speculative demand is a weighted average of an extrapolative and a regressive demand component, with the weight $w_t$ governing the relative importance of the two. By @eq-housing_DE, extrapolative demand is positively related to the deviation of the price from its fundamental value $\bar{P}$: speculators following this rule buy more housing when the price is above (and thus, in their expectation, still rising above) its fundamental value. By @eq-housing_DMR, regressive demand does the opposite: it is positively related to the gap between the fundamental value and the current price, capturing the expectation that the price will revert towards $\bar{P}$. Finally, @eq-housing_w specifies the weight of extrapolative demand as a bell-shaped function of the squared deviation of the price from its fundamental value: the weight is maximal ($w_t=1$) when the price equals its fundamental value, and declines towards zero as the price moves further away from $\bar{P}$ in either direction. This is what eventually curbs the destabilising extrapolative dynamics, as more and more agents switch to the regressive rule when the deviation of the price from its fundamental value becomes large.
 
 ## Simulation
 
 ### Parameterisation
 
-Table 1 reports the parameterisation used in the simulation. Starting from a baseline (scenario 1), we will examine the effect of an increase in the sensitivity of extrapolative demand to price deviations, $f$ (scenario 2). Scenario 3 keeps the elevated sensitivity of extrapolative demand to price deviations and additionally raises the supply elasticity $e$. Using the steady state solutions for $\bar{P}$ and $S^*$ (which will be derived in the analytical discussion section below), we set $b$ so as to have a fundamental house price of $\bar{P}=1$ in scenarios 1 and 2, and we initialise the simulation in the steady state with only the house price being slightly perturbed. 
+Table 1 reports the parameterisation used in the simulation. Starting from a baseline (scenario 1), we will examine the effect of an increase in the sensitivity of extrapolative demand to price deviations, $f$ (scenario 2). Scenario 3 keeps the elevated sensitivity of extrapolative demand to price deviations and additionally raises the price sensitivity of housing supply $e$. Using the steady state solutions for $\bar{P}$ and $S^*$ (which will be derived in the analytical discussion section below), we set $b$ so as to have a fundamental house price of $\bar{P}=1$ in scenarios 1 and 2, and we initialise the simulation in the steady state with only the house price being slightly perturbed. 
 
 **Table 1: Parameterisation**
 
@@ -60,7 +60,7 @@ Table 1 reports the parameterisation used in the simulation. Starting from a bas
 |----------|-----|------|------|-----|-----|-----|-----|-----|-----|
 | 1: baseline | 1 | 0.05 | 0.98 | 0.5 | 0.05 | 1 | 1 | 25.05 | 1 |
 | 2: increase in sensitivity of extrapolative demand $f$ | 1 | 0.05 | 0.98 | 0.5 | 0.8 | 1 | 1 | 25.05 | 1 |
-| 3: increase in supply elasticity $e$ | 1 | 0.05 | 0.98 | 1.0 | 0.8 | 1 | 1 | 25.05 | 0.501 |
+| 3: increase in price sensitivity of supply $e$ | 1 | 0.05 | 0.98 | 1.0 | 0.8 | 1 | 1 | 25.05 | 0.500 |
 
 ### Simulation code
 
@@ -86,19 +86,19 @@ w=matrix(data=0, nrow=S_scen, ncol=Q)   # Weight of extrapolative demand
 
 # Set fixed parameter values
 a=1     # Speed of price adjustment
-c=0.05  # Sensitivity of fundamental demand to price
+c=0.05  # Sensitivity of real demand to price
 d=0.98  # Persistence of housing stock
 g=1     # Sensitivity of regressive demand to price gap
 h=1     # Sensitivity of the extrapolative weight to price gap
 
 # Calculate the value of b consistent with a fundamental price of Pbar=1
-# (given the baseline supply elasticity e=0.5)
+# (given the baseline price sensitivity of supply e=0.5)
 b=1*(c + 0.5/(1-d))
 
 # Set parameter values for different scenarios 
 f=matrix(data=0.05, nrow=S_scen, ncol=Q) # scenario 1: baseline
 f[2:3,]=0.8                              # scenarios 2-3: increase in sensitivity of extrapolative demand to price deviations
-e=c(0.5, 0.5, 1.0)                       # scenario 3: higher supply elasticity
+e=c(0.5, 0.5, 1.0)                       # scenario 3: higher price sensitivity of supply
 
 # Calculate the fundamental price and steady-state housing stock implied by e and b
 Pbar=(1-d)*b/(e + c*(1-d))
@@ -125,7 +125,7 @@ for (i in 1:S_scen){
     #(2) Housing stock
     S[i,t] = d*S[i,t-1] + e[i]*P[i,t]
 
-    #(3) Fundamental demand
+    #(3) Real demand
     DR[i,t] = b - c*P[i,t]
 
     #(4) Extrapolative speculative demand
@@ -179,7 +179,7 @@ S_scen = 3
 S = np.zeros((S_scen, Q))    # Housing stock
 P = np.zeros((S_scen, Q))    # House price
 D = np.zeros((S_scen, Q))    # Total demand
-DR = np.zeros((S_scen, Q))   # Fundamental demand
+DR = np.zeros((S_scen, Q))   # Real demand
 DS = np.zeros((S_scen, Q))   # Speculative demand
 DE = np.zeros((S_scen, Q))   # Extrapolative demand
 DMR = np.zeros((S_scen, Q))  # Regressive demand
@@ -187,17 +187,17 @@ w = np.zeros((S_scen, Q))    # Weight of extrapolative demand
 
 # Set fixed parameter values
 a = 1     # Speed of price adjustment
-c = 0.05  # Sensitivity of fundamental demand to price
+c = 0.05  # Sensitivity of real demand to price
 d = 0.98  # Persistence of housing stock
 g = 1     # Sensitivity of regressive demand to price gap
 h = 1     # Sensitivity of the extrapolative weight to price gap
 
 # Calculate the value of b consistent with a fundamental price of Pbar=1
-# (given the baseline supply elasticity e=0.5); b is held fixed across scenarios
+# (given the baseline price sensitivity of supply e=0.5); b is held fixed across scenarios
 b = 1 * (c + 0.5 / (1 - d))
 
 # Set parameter values for different scenarios (e is exogenous; Pbar is implied)
-e = np.array([0.5, 0.5, 1.0])   # scenario 3: higher supply elasticity
+e = np.array([0.5, 0.5, 1.0])   # scenario 3: higher price sensitivity of supply
 f = np.full((S_scen, Q), 0.05)  # scenario 1: damped oscillations
 f[1:3, :] = 0.8                 # scenarios 2-3: limit cycle
 
@@ -225,7 +225,7 @@ for i in range(S_scen):
         # (2) Housing stock
         S[i, t] = d * S[i, t-1] + e[i] * P[i, t]
 
-        # (3) Fundamental demand
+        # (3) Real demand
         DR[i, t] = b - c * P[i, t]
 
         # (4) Extrapolative speculative demand
@@ -284,8 +284,9 @@ Tmax = 60
 
 # Plot house price for scenarios 1 and 2
 plt.figure()
-plt.plot(range(Tmin, Tmax), P[0, Tmin:Tmax], color='black', linewidth=2, linestyle='-', label='1: damped oscillations')
-plt.plot(range(Tmin, Tmax), P[1, Tmin:Tmax], color='black', linewidth=2, linestyle='--', label='2: limit cycle')
+plt.plot(range(Tmin, Tmax), P[0, Tmin:Tmax], color='black', linewidth=2, linestyle='-', label='1: baseline (damped oscillations)')
+plt.plot(range(Tmin, Tmax), P[1, Tmin:Tmax], color='black', linewidth=2, linestyle='--', label='2: increased sensitivity of extrapolative demand (limit cycle)')
+plt.title('House price', fontsize=10)
 plt.xlabel('Time')
 plt.ylabel('P')
 plt.legend(loc='upper right', frameon=False)
@@ -295,23 +296,21 @@ plt.show()
 
 :::
 
-@fig-housing-weight illustrates the switching mechanism that drives the limit cycle in scenario 2 by plotting the weight of extrapolative demand, $w_t$, alongside the price deviation from its fundamental value. Whenever the price is close to its fundamental value, extrapolative demand dominates ($w_t$ close to one), amplifying any small deviation. As the deviation grows, the weight collapses towards zero, so that regressive demand comes to dominate and pulls the price back.
+@fig-housing-weight illustrates the switching mechanism that drives the limit cycle in scenario 2. It plots the simulated weight of extrapolative demand, $w_t$, against the price deviation from its fundamental value, $P_t-\bar P$, together with the bell-shaped weighting function from @eq-housing_w. The simulated points all lie on this curve, and the cycle moves back and forth along it: near the top of the curve, extrapolative demand dominates and pushes the price away from its fundamental value, while further out, the weight of regressive demand rises (to around one half in this simulation), which is sufficient to pull the price back. Since the curve is symmetric, the weight falls in the same way during booms ($P_t>\bar P$) and busts ($P_t<\bar P$).
 
 ```{r}
 #| label: fig-housing-weight
-#| fig-cap: Weight of extrapolative demand and price deviation from fundamental value
+#| fig-cap: Weight of extrapolative demand against price deviation from fundamental value
 
-# Plot the weight of extrapolative demand and price deviation for the limit-cycle scenario
-plot(w[2, Tmin:Tmax], type="l", col=1, lwd=2, lty=1, xlab="Time", ylab="w", ylim=range(0,1))
-title(main="Extrapolative weight and price deviation", cex=0.8)
-par(mar = c(5, 4, 4, 4) + 0.3)
-par(new = TRUE)
-plot(P[2, Tmin:Tmax] - Pbar[2], type="l", col=1, lwd=2, lty=2, font.main=1, cex.main=1, ylab = '', axes=FALSE,
-     xlab = '', ylim = range(P[2, Tmin:Tmax] - Pbar[2]), cex=0.8)
-axis(side = 4, at=pretty(P[2, Tmin:Tmax] - Pbar[2]), tcl = 0.5)
-mtext(expression(P-bar(P)), side = 4, line = 3)
-legend("topright", legend=c("w", expression(P-bar(P))),
-       lty=1:2, cex=0.8, bty = "n", y.intersp=0.8)
+# Plot the weight of extrapolative demand against the price deviation for the limit-cycle scenario
+plot(P[2, Tmin:Tmax] - Pbar[2], w[2, Tmin:Tmax], pch=19, cex=0.8, col=1, xlab=expression(P-bar(P)), ylab="w",
+     ylim=range(0,1))
+title(main="Extrapolative weight against price deviation", cex=0.8)
+
+# Add the weighting function
+curve(1/(1+h*x^2), add=TRUE, lty=2)
+legend("topright", legend=c("simulated", "weighting function"),
+       lty=c(NA,2), pch=c(19,NA), cex=0.8, bty = "n", y.intersp=0.8)
 
 ```
 
@@ -322,24 +321,25 @@ legend("topright", legend=c("w", expression(P-bar(P))),
 #| output: false
 #| collapse: true
 
-# Plot the weight of extrapolative demand and price deviation for the limit-cycle scenario
-fig, ax1 = plt.subplots()
-ax1.plot(range(Tmin, Tmax), w[1, Tmin:Tmax], color='black', linewidth=2, linestyle='-', label='w')
-ax1.set_xlabel('Time')
-ax1.set_ylabel('w')
-ax2 = ax1.twinx()
-ax2.plot(range(Tmin, Tmax), P[1, Tmin:Tmax] - Pbar[1], color='black', linewidth=2, linestyle='--', label=r'$P-\bar{P}$')
-ax2.set_ylabel(r'$P-\bar{P}$')
-lines, labels = ax1.get_legend_handles_labels()
-lines2, labels2 = ax2.get_legend_handles_labels()
-ax2.legend(lines + lines2, labels + labels2, loc=1)
+# Plot the weight of extrapolative demand against the price deviation for the limit-cycle scenario
+plt.figure()
+plt.scatter(P[1, Tmin:Tmax] - Pbar[1], w[1, Tmin:Tmax], color='black', s=15, label='simulated')
+
+# Add the weighting function
+x = np.linspace(min(P[1, Tmin:Tmax] - Pbar[1]), max(P[1, Tmin:Tmax] - Pbar[1]), 200)
+plt.plot(x, 1/(1+h*x**2), color='black', linestyle='--', label='weighting function')
+plt.title('Extrapolative weight against price deviation', fontsize=10)
+plt.xlabel(r'$P-\bar{P}$')
+plt.ylabel('w')
+plt.ylim(0, 1)
+plt.legend(loc='upper right', frameon=False)
 plt.show()
 
 ```
 
 :::
 
-Next, we compare scenarios 2 and 3 to see how an increase in the price sensitivity of housing supply $e$ affects the amplitude of the cycles. Since scenario 3 implies a different fundamental price $\bar P$ than scenario 2, we compare their cycles in *deviations* from the fundamental value, $P_t-\bar P$. @fig-housing-amplitude shows that raising the supply elasticity shortens the cycle and noticeably shrinks its amplitude, since a more responsive supply side allows the housing stock to absorb price pressure more quickly.
+Next, we compare scenarios 2 and 3 to see how an increase in the price sensitivity of housing supply $e$ affects the amplitude of the cycles. Since scenario 3 implies a different fundamental price $\bar P$ than scenario 2, we compare their cycles in *deviations* from the fundamental value, $P_t-\bar P$. @fig-housing-amplitude shows that raising the price sensitivity of housing supply shortens the cycle and noticeably shrinks its amplitude, since a more responsive supply side allows the housing stock to absorb price pressure more quickly.
 
 ```{r}
 #| label: fig-housing-amplitude
@@ -365,7 +365,8 @@ legend("topright", legend=c("2: limit cycle", "3: limit cycle with higher e"),
 # Plot house price deviations from the fundamental value for scenarios 2 and 3
 plt.figure()
 plt.plot(range(Tmin, Tmax), P[1, Tmin:Tmax] - Pbar[1], color='black', linewidth=2, linestyle='-', label='2: limit cycle')
-plt.plot(range(Tmin, Tmax), P[2, Tmin:Tmax] - Pbar[2], color='black', linewidth=2, linestyle='--', label='3: higher e')
+plt.plot(range(Tmin, Tmax), P[2, Tmin:Tmax] - Pbar[2], color='black', linewidth=2, linestyle='--', label='3: limit cycle with higher e')
+plt.title('House price deviations', fontsize=10)
 plt.xlabel('Time')
 plt.ylabel(r'$P-\bar{P}$')
 plt.legend(loc='upper right', frameon=False)
@@ -455,23 +456,24 @@ nx.draw_networkx(G, pos, node_size=400, node_color="lightblue",
                  arrowstyle='->', font_size=9, font_color="black",
                  with_labels=True, labels=nodelabs)
 plt.axis("off")
+plt.title("Directed graph of endogenous housing cycle model")
 plt.show()
 
 ```
 
 :::
 
-@fig-housing-dag highlights the supply elasticity $e$ and the extrapolation sensitivity $f$ as the exogenous variables of interest. The house price $P$ occupies a central position in the graph: it is affected by demand and the housing stock, and it, in turn, affects speculative and real demand, the extrapolative weight, and the housing stock itself. The housing stock $S$, price $P$, and total demand $D$ form the core feedback loop of the model. The supply elasticity $e$ feeds in directly via the housing stock, while $f$ feeds in via speculative demand $D^S$, which -- together with the extrapolative weight $w$ -- determines how strongly and in which direction $P$ feeds back on itself.
+@fig-housing-dag shows that the house price $P$ occupies a central position in the model: it is affected by demand and the housing stock, and it, in turn, affects speculative and real demand, the extrapolative weight, and the housing stock itself. The housing stock $S$, price $P$, and total demand $D$ form the core feedback loop of the model. The price sensitivity of housing supply $e$ feeds in directly via the housing stock, while $f$ feeds in via speculative demand $D^S$, which -- together with the extrapolative weight $w$ -- determines how strongly and in which direction $P$ feeds back on itself.
 
 ## Analytical discussion
 
-To analyse the dynamic properties of the model, it is helpful to reduce it to a two-dimensional system. First, define the auxiliary variable $Z_t=S_{t-1}$ and combine @eq-housing_D with @eq-housing_DR, @eq-housing_DE and @eq-housing_DMR into a single demand function:
+To analyse the dynamic properties of the model, it is helpful to reduce it to a two-dimensional system. First, combine @eq-housing_D with @eq-housing_DR, @eq-housing_DS, @eq-housing_DE and @eq-housing_DMR into a single demand function:
 
 $$
 D_t = b - cP_t + w_t f (P_t-\bar{P}) + (1-w_t)g(\bar{P}-P_t)
 $$ {#eq-housing_D_reduc}
 
-Next, shifting @eq-housing_S back by one period gives $Z_t = dZ_{t-1} + eP_{t-1}$. Substituting @eq-housing_D_reduc (lagged) and $S_{t-1}=Z_t$ into @eq-housing_P and using $Z_t = dZ_{t-1} + eP_{t-1}$ to eliminate $Z_t$ yields the following two-dimensional system in $Z_t$ and $P_t$:
+Next, define the auxiliary variable $Z_t=S_{t-1}$ and shift @eq-housing_S back by one period, giving $Z_t = dZ_{t-1} + eP_{t-1}$. Substituting @eq-housing_D_reduc (lagged) and $S_{t-1}=Z_t$ into @eq-housing_P and using $Z_t = dZ_{t-1} + eP_{t-1}$ to eliminate $Z_t$ yields the following two-dimensional system in $Z_t$ and $P_t$:
 
 $$
 Z_t = dZ_{t-1} + eP_{t-1}
@@ -487,7 +489,7 @@ $$
 Z^*=\frac{e}{1-d}\bar{P}, \qquad \bar{P}=\frac{(1-d)b}{e+c(1-d)}.
 $$ {#eq-housing_Pbar}
 
-Next, define deviations from the steady state $z_t=Z_t-Z^*$ and $p_t=P_t-P^*$. Since $w_t$ is a function of $(P_t-\bar P)^2=p_t^2$, expressing the term in square brackets in @eq-housing_P_reduc in terms of deviations simplifies it to $\frac{fp_{t-1}-ghp_{t-1}^3}{1+hp_{t-1}^2}$, so that the system becomes:
+Next, define deviations from the steady state $z_t=Z_t-Z^*$ and $p_t=P_t-P^*$. Since, by @eq-housing_w, $w_t$ is a function of $(P_t-\bar P)^2=p_t^2$, expressing the term in square brackets in @eq-housing_P_reduc in terms of deviations simplifies it to $\frac{fp_{t-1}-ghp_{t-1}^3}{1+hp_{t-1}^2}$, so that the system becomes:
 
 $$
 z_t = dz_{t-1} + ep_{t-1}
@@ -497,7 +499,7 @@ $$
 p_t = -adz_{t-1} + (1-ac-ae)p_{t-1} + a\frac{fp_{t-1}-ghp_{t-1}^3}{1+hp_{t-1}^2}.
 $$ {#eq-housing_p_dev}
 
-The Jacobian matrix of this nonlinear system is:
+The Jacobian matrix of the nonlinear system given by @eq-housing_z_dev and @eq-housing_p_dev is:
 
 $$
 J(z, p)=\begin{bmatrix} d & e \\[4pt] -ad & 1-a(c+e) + a\dfrac{f-h(f+3g)p^2-gh^2p^4}{(1+hp^2)^2}  \end{bmatrix}.
@@ -542,7 +544,7 @@ $$
 $$ {#eq-housing_cond3}
 
 
-@Dieci2012 show that violating each of the three conditions individually -- while the other two continue to hold -- corresponds to a different type of bifurcation: violating @eq-housing_cond1 triggers a (subcritical) *flip bifurcation*, violating @eq-housing_cond2 triggers a (supercritical) *pitchfork bifurcation* giving rise to two new, stable non-fundamental steady states, and violating @eq-housing_cond3 triggers a (supercritical) *Neimark-Sacker bifurcation*, after which the fundamental steady state turns into a limit cycle (or, for larger deviations from the threshold, more complex quasi-periodic or chaotic dynamics). 
+@Dieci2012 show that violating each of the three conditions individually -- while the other two continue to hold -- corresponds to a different type of bifurcation: violating @eq-housing_cond1 triggers a (subcritical) *flip bifurcation*, violating @eq-housing_cond2 triggers a (supercritical) *pitchfork bifurcation* giving rise to two new, stable non-fundamental steady states, and violating @eq-housing_cond3 triggers a (supercritical) *Neimark-Sacker bifurcation*, after which the fundamental steady state turns into a limit cycle; the amplitude of the fluctuations increases with $f$, and for larger values of $f$, periodic windows and apparently chaotic dynamics emerge.
 
 For our parameterisation, @eq-housing_cond1 and @eq-housing_cond2 are satisfied, while @eq-housing_cond3 is violated once $f$ exceeds $c+\frac{1}{d}-1\approx0.070$ (at $a=1$), thus giving rise to a limit cycle via a Neimark-Sacker bifurcation. Since the nonlinearity in @eq-housing_p_dev bounds the dynamics for large deviations (as $w_t \rightarrow 0$, extrapolative demand is crowded out by regressive demand), the system does not explode once this threshold is crossed, but instead settles into a limit cycle -- exactly the pattern seen in @fig-housing-comparison.
 
@@ -574,8 +576,9 @@ det=det(J)
 # Calculate and print modulus
 (mod=Mod(evals[1]))
 
-# Check analytical cycle condition
-d>((c+e-f_val-1-d)^2)/(4*(1-c+f_val))
+# Check whether eigenvalues are complex (cycle condition)
+Delta=(d + 1 - a*(c+e-f_val))^2 - 4*d*(1 - a*(c-f_val))
+Delta < 0
 
 # Check general stability conditions
 print(1+tr+det>0)
@@ -663,6 +666,6 @@ print(L)
 
 :::
 
-The implied cycle length is around `r round(L,1)` periods, broadly in line with the periodicity visible in @fig-housing-comparison.
+The cycle length implied by the linearised system is around `r round(L,1)` periods. This is only a rough guide to the periodicity of the limit cycle in @fig-housing-comparison, which repeats roughly every 9 periods. The difference arises because the linearisation only captures the dynamics in the immediate neighbourhood of the fundamental steady state.
 
 ## References

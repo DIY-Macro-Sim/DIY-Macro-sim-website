@@ -49,6 +49,7 @@ book:
         - a_sraffian_supermultiplier_model.qmd
         - a_Kaldor_model.qmd
         - a_Hicks_model.qmd
+        - an_endogenous_housing_cycle_model.qmd
         - a_new_keynesian_3_equation_model.qmd
         - a_dornbusch_overshooting_model.qmd
         - a_conflict_inflation_model.qmd
