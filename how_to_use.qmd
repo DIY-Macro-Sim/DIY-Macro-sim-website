@@ -1,7 +1,7 @@
 # Getting Started {#sec-how-to-use}
 
 ## Structure of website
-The website starts off with a general introduction to the numerical simulation of economic models (@sec-how-to-simulate). After that, it jumps right into a series of macroeconomic models. These models are broadly grouped into static and dynamic models. In static models, time plays no role and all variables adjust instantaneously. By contrast, dynamic models characterise the adjustment of variables over time.
+The website starts off with a general introduction to the numerical simulation of economic models (@sec-how-to-simulate). After that, it jumps right into a series of macroeconomic models, followed by a section on empirical applications. The models are broadly grouped into static and dynamic models. In static models, time plays no role and all variables adjust instantaneously. By contrast, dynamic models characterise the adjustment of variables over time.
 
 The first set of models moves from static models of price and output determination (neoclassical, Keynesian, and Post-Keynesian) to models of income distribution and growth, while the second set is grouped into dynamic models of growth and distribution theories, business cycles, inflation and monetary policy, and more general modern modelling frameworks. Within each thematic group, models are ordered roughly chronologically. The model entries are largely self-contained and can be read independently of each other.
 
@@ -12,6 +12,8 @@ For each model, the chapters provide three main components:
 3. **Analytical discussions** for users who are interested in delving deeper into the mathematical properties of the models.
 
 To further facilitate the understanding of dynamic models, @sec-stab_analysis of the section on dynamic models begins with a general introduction into the  mathematical analysis of dynamic models (this is mostly relevant for the analytical discussions of dynamic models).
+
+The final section on empirical applications turns to the question of how simulated models can be confronted with data. 
 
 All simulation codes are written in the open-source programming languages *R* and *Python*. *R* codes are presented in the main text (and images and results in the text are the output of the shown *R* codes), while the corresponding *Python* codes are available by clicking on the callout blocks underneath the *R* codes. 
 

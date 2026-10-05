@@ -55,6 +55,10 @@ book:
         - a_conflict_inflation_model.qmd
         - an_evolutionary_game_theoretic_model.qmd
         - an_sfc_model.qmd
+
+    - part: "Empirical Applications"
+      chapters:
+        - method_of_simulated_moments.qmd
     - additional_resources.qmd
     
 bibliography: references_macrosimulation.bib
