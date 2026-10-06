@@ -8,7 +8,7 @@ New Keynesian dynamic general equilibrium models were developed in the 1990s and
 
 The IS curve establishes a negative relationship between real income and the real interest rate. For a higher real interest rate, households will save more and thus consume less. The Phillips curve models inflation as a function of the output gap. A positive output gap (an economic expansion) leads to higher inflation. The monetary policy rule specifies how the central bank reacts to deviations of actual inflation from a politically determined inflation target.
 
-The simplified version of the 3-equation model we consider here is directly taken from chapter 3 of @Carlin2014.^[A PDF version of the most 2024 edition of the book is freely available [here](https://www.stone-econ.org/resources/free-textbook-in-intermediate-macroeconomics).] This is a short-run model in which prices are flexible but the capital stock is fixed. The focus is thus on goods market equilibrium rather than economic growth. In the Carlin-Soskice version, inflation expectations are assumed to be adaptive and the response of aggregate demand to a change in the interest rate is sluggish. This renders the model dynamic.[^a_new_keynesian_3_equation_model-2]
+The simplified version of the 3-equation model we consider here is directly taken from chapter 3 of @Carlin2014.^[A PDF version of the most recent 2024 edition of the book is freely available [here](https://www.stone-econ.org/resources/free-textbook-in-intermediate-macroeconomics).] This is a short-run model in which prices are flexible but the capital stock is fixed. The focus is thus on goods market equilibrium rather than economic growth. In the Carlin-Soskice version, inflation expectations are assumed to be adaptive and the response of aggregate demand to a change in the interest rate is sluggish. This renders the model dynamic.[^a_new_keynesian_3_equation_model-2]
 
 [^a_new_keynesian_3_equation_model-2]: Note that this is quite different from conventional New Keynesian dynamic stochastic general equilibrium (DSGE) models in which the dynamic element stems from agents with rational expectations that react to serially correlated shocks. See chapter 16 of @Carlin2014 for a comparison of their 3-equation model with New Keynesian DSGE models.
 
@@ -70,8 +70,8 @@ r=matrix(data=0,nrow=S,ncol=Q) # Policy rate
 rs=matrix(data=0,nrow=S,ncol=Q) # Stabilising interest rate
 
 # Set constant parameter values
-a1=0.3  # Sensitivity of inflation with respect to output gap 
-a2=0.7  # Sensitivity of output with respect to interest rate
+a1=0.3  # Sensitivity of output with respect to interest rate
+a2=0.7  # Sensitivity of inflation with respect to output gap
 b=1     # Sensitivity of central bank to inflation gap
 a3=(a1*(1/(b*a2) + a2))^(-1)
 
@@ -139,7 +139,8 @@ Q = 50
 S = 3
 
 # Set period in which shock/shift will occur
-s = 5
+# (Python is 0-based, so s = 4 is the 5th period, as in the R code)
+s = 4
 
 # Create (S x Q) arrays to store simulated data
 y = np.zeros((S, Q))  # Income/output
@@ -148,8 +149,8 @@ r = np.zeros((S, Q))  # Policy rate
 rs = np.zeros((S, Q))  # Stabilizing interest rate
 
 # Set constant parameter values
-a1 = 0.3  # Sensitivity of inflation with respect to output gap
-a2 = 0.7  # Sensitivity of output with respect to interest rate
+a1 = 0.3  # Sensitivity of output with respect to interest rate
+a2 = 0.7  # Sensitivity of inflation with respect to output gap
 b = 1     # Sensitivity of the central bank to inflation gap
 a3 = (a1 * (1 / (b * a2) + a2)) ** (-1)
 
@@ -291,8 +292,8 @@ p=matrix(data=0,nrow=S,ncol=Q) # Inflation rate
 r=matrix(data=0,nrow=S,ncol=Q) # Policy  rate
 
 # Set constant parameter values
-a1=0.3  # Sensitivity of inflation with respect to output gap 
-a2=0.7  # Sensitivity of output with respect to interest rate
+a1=0.3  # Sensitivity of output with respect to interest rate
+a2=0.7  # Sensitivity of inflation with respect to output gap
 b=1     # Sensitivity of central bank to inflation gap
 a3=(a1*(1/(b*a2) + a2))^(-1)
 A=6 # autonomous spending
@@ -390,7 +391,8 @@ Q = 50
 S = 2
 
 # Set period in which shock/shift will occur
-s = 5
+# (Python is 0-based, so s = 4 is the 5th period, as in the R code)
+s = 4
 
 # Create (S x Q)-matrices that will contain the simulated data
 y = np.zeros((S, Q))  # Income/output
@@ -398,8 +400,8 @@ p = np.zeros((S, Q))  # Inflation rate
 r = np.zeros((S, Q))  # Policy rate
 
 # Set constant parameter values
-a1 = 0.3  # Sensitivity of inflation with respect to output gap 
-a2 = 0.7  # Sensitivity of output with respect to interest rate
+a1 = 0.3  # Sensitivity of output with respect to interest rate
+a2 = 0.7  # Sensitivity of inflation with respect to output gap
 b = 1     # Sensitivity of central bank to inflation gap
 a3 = (a1 * (1 / (b * a2) + a2))**(-1)
 A = 6     # Autonomous spending
@@ -602,7 +604,7 @@ plt.show()
 
 :::
 
-In @fig-nk3-dag, it can be seen that aggregate demand ($A$), equilibrium output ($y_e$), and the inflation target ($\pi^T$) are the key exogenous variables of the model. All other variables are endogenous and form a closed loop (or cycle) within the system. The upper-right side of the graph represents the supply side, given by the equilibrium level of output and its effect on inflation. The upper-left side captures the demand side and its effect on actual output. The key endogenous variables, output, inflation, and the interest rate form the centre of the graph, where they stand in a triangular relationship to each other. Output drives inflation, which in turn impacts the real interest rate. The latter then feeds back into output. Structural changes in the relationship between demand and supply (e.g. excess demand) also impact the system through their effect on the stabilising interest rate ($r_s$).
+In @fig-nk3-dag, it can be seen that aggregate demand ($A$), equilibrium output ($y_e$), and the inflation target ($\pi^T$) are the key exogenous variables of the model. All other variables are endogenous and form a closed loop (or cycle) within the system. The supply side is given by the equilibrium level of output and its effect on inflation, while the demand side is given by autonomous demand and its effect on actual output. The key endogenous variables, output, inflation, and the interest rate, stand in a triangular relationship to each other. Output drives inflation, which in turn impacts the real interest rate. The latter then feeds back into output. Structural changes in the relationship between demand and supply (e.g. excess demand) also impact the system through their effect on the stabilising interest rate ($r_s$).
 
 ## Analytical discussion {#sec-analytical-NK}
 
@@ -618,7 +620,7 @@ $$
 
 This consumption Euler equation establishes the negative relationship between the real interest rate and expenditures in @eq-nk_y.
 
-#### PC curve
+#### Phillips curve
 
 The Phillips curve @eq-nk_pi is derived from wage- and price-setting in imperfect labour markets.[^a_new_keynesian_3_equation_model-3] Consider the following wage- and price-setting functions: $$
 \frac{W}{P^E} = B + \alpha(y_t - y_e) + z_w 
@@ -628,13 +630,25 @@ $$ {#eq-nk_P}
 
 [^a_new_keynesian_3_equation_model-3]: See chapter 2 of @Carlin2014 for details.
 
-i.e. the nominal wage $W$, adjusted for the expected price level, is increasing in the output gap, a factor $B$ capturing unemployment benefits and the disutility of work as well as a vector $z_w$ of wage-push factors. Prices are set based on a constant mark-up ($\mu$) on unit labour cost ($\frac{W}{\lambda}$).
+i.e. the nominal wage $W$, adjusted for the expected price level, is increasing in the output gap, a factor $B$ capturing unemployment benefits and the disutility of work as well as a vector $z_w$ of wage-push factors. Prices are set based on a constant mark-up $(\mu)$ on unit labour cost $(\frac{W}{\lambda})$.
 
-In equilibrium, the real wage is given by: $w_e = B + z_w$. In a dynamic setting, wage setters will raise the expected real wage by $\left(\frac{W_t}{P_{t}^E}\right) - \left(\frac{W_{t-1}}{P_{t-1}}\right)=\alpha(y_t - y_e)$. Together with adaptive expectations for prices $\hat{P_t^E} = \hat{P}_{t-1}$ and the approximation $\hat{W_t} - \hat{P_{t-1}} \approx \left(\frac{W_t}{P_{t}^E}\right) - \left(\frac{W_{t-1}}{P_{t-1}}\right)$, this yields the following equation for wage inflation: $$
-\hat{W_t} = \hat{P}_{t-1} +\alpha(y_t - y_e).
+In equilibrium ($y_t=y_e$) the real wage is $w_e = B + z_w$. Price setters are content with the same real wage, $w_e=\lambda/(1+\mu)$, so nothing changes from one period to the next. The Phillips curve describes what happens when output deviates from potential. The logic can be followed in four steps.
+
+**Step 1: Wage setters ask for higher wages when the labour market is tight.** Wages are set before prices are known, so wage setters must form an expectation $P^E_t$ of the price level. For a given expectation, the wage-setting equation says that they aim for a real wage of $w_e+\alpha(y_t-y_e)$, i.e. for a nominal wage $W_t=P^E_t\,[\,w_e+\alpha(y_t-y_e)\,]$. Last period's real wage was $\frac{W_{t-1}}{P_{t-1}}=w_e$, so wage setters want the real wage to rise by $$
+\left(\frac{W_t}{P_{t}^E}\right) - \left(\frac{W_{t-1}}{P_{t-1}}\right)=\alpha(y_t - y_e),
+$$ which in percentage terms is $\frac{\alpha}{w_e}(y_t-y_e)$.
+
+**Step 2: A higher expected real wage requires nominal wage growth above expected inflation.** Hats denote growth rates, e.g. $\hat{W_t} \equiv \frac{W_t}{W_{t-1}}-1$ and $\hat{P_t}=\pi_t$, and $\hat{P_t^E} \equiv \frac{P_t^E}{P_{t-1}}-1$ denotes expected inflation. Since $\frac{W_t}{P^E_t} \big/ \frac{W_{t-1}}{P_{t-1}} = \frac{W_t/W_{t-1}}{P^E_t/P_{t-1}} = \frac{1+\hat{W_t}}{1+\hat{P_t^E}}$, the percentage change in the expected real wage is exactly $\frac{1+\hat{W_t}}{1+\hat{P_t^E}}-1$, which is approximately $\hat{W_t}-\hat{P_t^E}$ when growth rates are small.[^a_new_keynesian_3_equation_model-6] Hence $$
+\hat{W_t} - \hat{P_t^E} \approx \frac{\alpha}{w_e}(y_t-y_e).
+$$
+
+**Step 3: Expectations are adaptive.** Wage setters expect this period's inflation to equal last period's, $\hat{P_t^E}=\hat{P}_{t-1}$. This gives the following equation for wage inflation: $$
+\hat{W_t} = \hat{P}_{t-1} + a_2(y_t - y_e), \qquad a_2 \equiv \frac{\alpha}{w_e}.
 $$ {#eq-nk_W}
 
-Transforming equation @eq-nk_P into growth rates ($\hat{P}=\hat{W}$) and combining it with the wage-inflation equation @eq-nk_W yields the Phillips curve @eq-nk_pi.
+**Step 4: Firms pass wage growth on to prices.** With a constant mark-up and constant productivity, @eq-nk_P says that prices are proportional to wages, so $\hat{P}=\hat{W}$ (for constant $\mu$ and $\lambda$). Price setters therefore undo the real wage increase that wage setters asked for, and the real wage returns to $w_e$. Combining this with @eq-nk_W yields the Phillips curve @eq-nk_pi.
+
+[^a_new_keynesian_3_equation_model-6]: Writing $x \equiv \hat{W_t}$ and $y \equiv \hat{P_t^E}$, we have $\frac{1+x}{1+y}-1=\frac{x-y}{1+y}$. When $y$ is small, the denominator $1+y$ is close to one, so this is approximately $x-y$. For example, for $x=5\%$ and $y=2\%$ the exact value is $0.03/1.02\approx 2.94\%$, compared with $3\%$ for the approximation.
 
 #### Monetary policy rule
 
@@ -666,9 +680,9 @@ $$ {#eq-nk_r_reduc}
 
 The Jacobian matrix of the system in @eq-nk_y, @eq-nk_pi_reduc, and @eq-nk_r_reduc is given by: $$
 J=\begin{bmatrix} 0& 0 &-a_1 \\0 & 1 & -a_1 a_2 \\ 0 & a_3 & -a_1 a_2 a_3 \end{bmatrix}.
-$$ The eigenvalues of the Jacobian can be obtained from the characteristic polynomial $\lambda^3 - Tr(J)\lambda^2 + [Det(J_1) + Det(J_2) + Det(J_3)]\lambda - Det(J) = 0$, where $Tr(J)$ and $Det(J$) are the trace and determinant, respectively, and $Det(J_i)$ refers to the $i_{th}$ principal minor of the matrix. As there is a column in the Jacobian that only contains zeros, it follows that the matrix is singular and will have a zero determinant. In addition, all principal minors turn out to be zero. The characteristic polynomial thus reduces to $\lambda^2[\lambda - Tr(J)]=0$. From this, it is immediate that $\lambda_{1,2}=0$ and $\lambda_{3}=Tr(J)$, where $Tr(J)=1-a_1a_2a_3=\frac{1}{1+a_2^2b}$. Stability requires the single real eigenvalue to be smaller than unity (in absolute terms). With $\lambda_3=\frac{1}{1+a_2^2b}$, stability thus only requires $a_2 \neq 0$ and $b>0$, i.e. the output gap needs to impact inflation (otherwise the key channel through which interest rate policy brings inflation back on target is blocked) and the central bank needs to assign a (non-negative) loss to deviations of actual inflation from its target.[^a_new_keynesian_3_equation_model-5]
+$$ The eigenvalues of the Jacobian can be obtained from the characteristic polynomial $\lambda^3 - Tr(J)\lambda^2 + [Det(J_1) + Det(J_2) + Det(J_3)]\lambda - Det(J) = 0$, where $Tr(J)$ and $Det(J)$ are the trace and determinant, respectively, and $Det(J_i)$ refers to the $i_{th}$ principal minor of the matrix. As there is a column in the Jacobian that only contains zeros, it follows that the matrix is singular and will have a zero determinant. In addition, all principal minors turn out to be zero. The characteristic polynomial thus reduces to $\lambda^2[\lambda - Tr(J)]=0$. From this, it is immediate that $\lambda_{1,2}=0$ and $\lambda_{3}=Tr(J)$, where $Tr(J)=1-a_1a_2a_3=\frac{1}{1+a_2^2b}$. Stability requires the single real eigenvalue to be smaller than unity (in absolute terms). With $\lambda_3=\frac{1}{1+a_2^2b}$, stability thus only requires $a_2 \neq 0$ and $b>0$, i.e. the output gap needs to impact inflation (otherwise the key channel through which interest rate policy brings inflation back on target is blocked) and the central bank needs to assign a (non-negative) loss to deviations of actual inflation from its target.[^a_new_keynesian_3_equation_model-5]
 
-[^a_new_keynesian_3_equation_model-5]: As mentioned in footnote 2, this property of the Carlin-Soskice model is very different from conventional New Keynesian models with rational expectations. In these models, variables such as output and inflation are driven by the 'forward-looking' behaviour of rational agents, i.e. they depend on expectational terms for their current values rather than lagged values. To ensure what is called 'determinancy', these forward-looking variables must adjust fast (or 'jump') to bring the economy back onto a path that is consistent with the optimising equilibrium. This requires the number of jump variables to be matched by an equal number of unstable roots (i.e. being outside the unit circle).
+[^a_new_keynesian_3_equation_model-5]: As mentioned in the overview, this property of the Carlin-Soskice model is very different from conventional New Keynesian models with rational expectations. In these models, variables such as output and inflation are driven by the 'forward-looking' behaviour of rational agents, i.e. they depend on expectational terms for their current values rather than lagged values. To ensure what is called 'determinacy', these forward-looking variables must adjust fast (or 'jump') to bring the economy back onto a path that is consistent with the optimising equilibrium. This requires the number of jump variables to be matched by an equal number of unstable roots (i.e. being outside the unit circle).
 
 We can verify these analytical solutions by comparing them with the results from the numerical solution:
 
