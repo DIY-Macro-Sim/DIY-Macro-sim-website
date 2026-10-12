@@ -34,11 +34,50 @@ Besides being free, a key advantage of both *R* and *Python* is their huge and g
 
 - [Python Cheatsheet for NumPy library](https://assets.datacamp.com/blog_assets/Numpy_Python_Cheat_Sheet.pdf)
 
-Once you have installed *R* or *Python*, you can play with the codes on this website yourself by copy and pasting them into the script panel of your local interface (IDE) and hitting CTRL + Enter to execute them. Don't forget to always comment your code using the "#" symbol and to save your scripts to make sure your future self can seamlessly continue working on it.
+Once you have installed *R* or *Python*, you can play with the codes on this website yourself by copy and pasting them into the script panel of your local interface (IDE) and executing them. In *RStudio*, highlight the lines you want to execute and hit CTRL + Enter. In *Spyder*, highlight the lines you want to execute and press F9 (or press F5 to run the whole script). Don't forget to always comment your code using the "#" symbol and to save your scripts to make sure your future self can seamlessly continue working on it.
 
 
 ## Introduction to *R* and *Python*
 The following codes cover some basic operations.^[We are grateful to Rafael Wildauer for permission to reproduce a slightly modified version of his learning materials. In addition, some of the material below is taken from [here](https://www.w3schools.com/r/default.asp).] There are also some simple exercises to work through. Open *RStudio* or *Spyder* on your machine to get started.
+
+::: {.callout-note collapse="true" title="Python users: three things that trip up beginners"}
+
+**1. Indentation matters**
+
+- in *Python*, the lines that belong to an `if` statement or a `for` loop must be indented (by 4 spaces or one tab)
+- the indentation tells *Python* where the block starts and ends
+- the line before an indented block always ends with a colon `:`
+
+```python
+for i in range(3):
+    print(i)         # indented: belongs to the loop and is executed 3 times
+print("done")        # not indented: executed once, after the loop has finished
+```
+
+- if you get an `IndentationError`, check that all lines of a block are indented by the same amount
+
+**2. Python starts counting at 0**
+
+- the elements of a vector are numbered by their *index*, and the index of the first element is 0, not 1 (unlike in *R*)
+- a vector with 5 elements thus has the indices 0, 1, 2, 3, 4
+
+| Element     | 1st    | 2nd    | 3rd    | 4th    | 5th    |
+| ----------- | ------ | ------ | ------ | ------ | ------ |
+| **Index**   | 0      | 1      | 2      | 3      | 4      |
+| **Access**  | `x[0]` | `x[1]` | `x[2]` | `x[3]` | `x[4]` |
+
+- so `x[2]` is the *third* element, and the last element of a vector with 5 elements is `x[4]`
+- in this example, `x[5]` does not exist and returns an `IndexError`
+- this will matter a lot when we simulate models: the first time period is period 0
+
+**3. The upper bound of a range is not included**
+
+- `range(5)` produces 0, 1, 2, 3, 4: five numbers, starting at 0, and 5 itself is *not* included
+- `range(1, 6)` produces 1, 2, 3, 4, 5
+- the same holds when selecting several elements of a vector: `x[1:3]` returns the elements with index 1 and 2, but not 3
+- conveniently, `for i in range(5):` runs through exactly the indices of a vector with 5 elements
+
+:::
 
 
 ### Setting your working directory
@@ -147,12 +186,6 @@ paste(text1, text2)
 #In the Python script you write code and comments
 #any line starting with # is a comment and it is NOT executed
 
-# Most of what we will do relies on the library NumPy
-# Let's load NumPy and call its commands by the prefix .np
-
-# Load relevant libraries
-import numpy as np 
-
 #Let's define some variables
 s = 0.05
 Y = 10
@@ -160,26 +193,24 @@ Y = 10
 #We can also assign several variables the same value at once
 C = I = R = 2
 
-#For displaying them we simply call the name of the object and 
-# execute the relevant line
-Y
-C
+#For displaying them we use the print() function
+print(Y)
+print(C)
 
 #We can define new variables using existing ones
 W = Y - R
-W
+print(W)
 
-#Python/Numpy has a vast amount of built in functions, for example
-max(10, 2, 100, -3)
-np.sqrt(9)
-abs(-13)
+#Python has a vast amount of built in functions, for example
+print(max(10, 2, 100, -3))
+print(abs(-13))
 
 #you can find out more about these by using the help function, e.g.:
 # help(max)
 
 #How can you delete stuff? Use the del function
 #for individual objects
-del Y, C, I, R
+del Y
 
 #You can also assign text (a string) to a variable
 text1 = 'Reggaeton'
@@ -188,7 +219,7 @@ print(text1 + ' ' + text2)
 
 #Python uses standard operators like +, -, *
 #for exponents use **
-3**2
+print(3**2)
 
 ```
 
@@ -224,15 +255,15 @@ for (i in 1:5){
 }
 
 #Let's use it to solve a simple Keynesian cross model of the form
-#Y=C+I
+#Y=C+G0
 #C=c0+c1Y
-# where Y is output, C is consumption, and I is exogenous investment
+# where Y is output, C is consumption, and G0 is exogenous government spending
 
 
 #Define exogenous parameters
 c0=2
 c1=0.8
-I=10
+G0=10
 
 #set initial values for two endogenous variable
 Y=C=1
@@ -240,14 +271,14 @@ Y=C=1
 #Use a for loop to solve it
 C
 Y
-for (i in 1:100){
-  Y = C+I
+for (i in 1:1000){
+  Y = C+G0
   C = c0+c1*Y
 }
 C
 Y
 
-# NB: equilibrium solution of this model is Y*=(I+c0)/(1-c1)
+# NB: equilibrium solution of this model is Y*=(G0+c0)/(1-c1)
 
 ```
 
@@ -278,30 +309,30 @@ for i in range(1, 6):
 # Note the key role played by indentation in Python!
 
 #Let's use it to solve a simple Keynesian cross model of the form
-#Y=C+I
+#Y=C+G0
 #C=c0+c1Y
-# where Y is output, C is consumption, and I is exogenous investment
+# where Y is output, C is consumption, and G0 is exogenous government spending
 
 #Define exogenous parameters and initialise endogenous variables
 c0 = 2
 c1 = 0.8
-I = 10
+G0 = 10
 Y = C = 1
 
-#Use a for loop that iterates the equations 100 times to solve them
-for i in range(1, 100):
-    Y = C + I
+#Use a for loop that iterates the equations 1000 times to solve them
+for i in range(1000):
+    Y = C + G0
     C = c0 + c1 * Y
-C
-Y
-# NB: equilibrium solution of this model is Y*=(I+c0)/(1-c1)
+print(C)
+print(Y)
+# NB: equilibrium solution of this model is Y*=(G0+c0)/(1-c1)
 
 ```
 
 :::
 
 #### Exercise 1: loops
-Set the parameter values of the Keynesian cross model to $c_0=2$, $c_1=0.8$, and $I=11$, run the loop and check the equilibrium value $Y^*$. Cross-check your result with the analytical solution for $Y^*$. 
+Set the parameter values of the Keynesian cross model to $c_0=2$, $c_1=0.8$, and $G_0=11$, run the loop and check the equilibrium value $Y^*$. Cross-check your result with the analytical solution for $Y^*$. 
 
 ::: {.callout-tip collapse="true" title="R Solution"}
 ```{r}
@@ -311,14 +342,14 @@ Set the parameter values of the Keynesian cross model to $c_0=2$, $c_1=0.8$, and
 #Define exogenous parameters
 c0=2
 c1=0.8
-I=11
+G0=11
 
 #set initial values for two endogenous variable
 Y=C=1
 
 #Use a for loop to solve it
-for (i in 1:100){
-  Y = C+I
+for (i in 1:1000){
+  Y = C+G0
   C = c0+c1*Y
 }
 
@@ -335,112 +366,29 @@ Y
 #Define exogenous parameters and initialise endogenous variables
 c0 = 2
 c1 = 0.8
-I = 11
+G0 = 11
 Y = C = 1
 
-#Use a for loop that iterates the equations 100 times to solve them
-for i in range(1, 100):
-    Y = C + I
+#Use a for loop that iterates the equations 1000 times to solve them
+for i in range(1000):
+    Y = C + G0
     C = c0 + c1 * Y
 
-Y
+print(Y)
+
+# Note: the loop only approximates the solution, and computers store decimal
+# numbers with limited precision. The result can thus differ from the exact
+# solution by a tiny amount. Rounding makes the result easier to read:
+print(round(Y, 4))
 
 ```
 :::
 
 ::: {.callout-tip collapse="true" title="Mathematical solution"}
 
-$Y^*=\frac{I+c_0}{1-c_1}=\frac{11+2}{1-0.8}=65$
+$Y^*=\frac{G_0+c_0}{1-c_1}=\frac{11+2}{1-0.8}=65$
 
 :::
-
-### Functions
-- you can write your own *functions* that can be called and again for different purposes
-- a function consists of a fixed block of code that contains terms (the inputs or arguments of the function) whose values need to be supplied when the function is called
-- this allows running the same type of code many times with changes only to the inputs of the function  
-
-```{r}
-#| output: false
-
-################## Functions ##################################################
-# Let's cast the previous loop that simulates the Keynesian cross
-# into a function called "keynes"
-
-# the terms inside the brackets are the arguments of the function whose 
-# values need to be supplied when the function is called
-
-keynes=function(c0, c1, I){
-  # Initialise
-  Y=C=1
-
-  # Solve
-  for (i in 1:100){
-    Y = C+I
-    C = c0+c1*Y
-    } # close loop
- 
- return(Y) # specify the value that will be return when the function is executed
-
-} # close function
-
-# Execute function for desired parameter combination
-print(keynes(c0=2, c1=0.8, I=10))
-
-```
-
-::: {.callout-note collapse="true" title="Python code"}
-
-```{python}
-#| echo: true
-#| output: false
-#| collapse: true
-
-################## Functions ##################################################
-# Let's cast the previous loop that simulates the Keynesian cross 
-# into a function called "keynes"
-
-# the terms inside the brackets are the arguments of the function whose 
-# values need to be supplied when the function is called
-
-def keynes(c0, c1, I):
-    # Initialize
-    Y = C = 1
-
-    # Solve
-    for i in range(100):
-        Y = C + I
-        C = c0 + c1 * Y
-
-    return Y  # specify the value that will be returned when the function is executed
-
-# Execute function for desired parameter combination
-print(keynes(c0=2, c1=0.8, I=10))
-
-```
-
-:::
-
-#### Exercise 2: functions
-Use the 'keynes' function we've just defined to find the equilibrium solution  $Y^*$ when setting $c_0=3$, $c_1=0.8$, and $I=10$.
-
-::: {.callout-tip collapse="true" title="R solution"}
-```{r}
-#| echo: true
-#| output: true
-print(keynes(c0=3, c1=0.8, I=10))
-
-```
-:::
-
-::: {.callout-tip collapse="true" title="Python solution"}
-```{python}
-#| echo: true
-#| output: true
-print(keynes(c0=3, c1=0.8, I=10))
-
-```
-:::
-
 
 ### Basic data structures: vectors and matrices
 - in most applications we produce outputs which do not consist of a single number
@@ -459,6 +407,11 @@ rm(list=ls(all=TRUE))
 #### Vectors 
 # We can create an empty vector and fill it later (with results of our model for example)
 vec1 = vector(length=3)
+# we can set all elements of the vector to the same value at once
+vec1[] = 5
+# and change a single element (here the 2nd)
+vec1[2] = 6
+vec1
 # we can define vectors explicitly using the c() function (c for column?)
 vec2 = c(1,2,3)
 vec3 = c(6,7,8)
@@ -468,7 +421,11 @@ vec4 = 1:10
 vec5 = seq(1,2,0.1)
 vec5
 # we can call specific entries using square brackets
-vec5[4]
+vec5[1]             # 1st element
+vec5[4]             # 4th element
+vec5[length(vec5)]  # last element
+# and a range of elements
+vec5[1:3]           # first three elements
 # if we want to access more elements at once
 vec5[c(4,1)]
 
@@ -479,7 +436,7 @@ mat1
 # we can also fill it with specific values
 mat2 = matrix(c(1,2,3,4,5,6), nrow = 3, ncol = 2)
 mat2
-# access specific elements (columns,rows)
+# access specific elements (row, column)
 mat2[3,1]
 # access entire rows or columns
 mat2[,1]
@@ -487,10 +444,10 @@ mat2[1,]
 # access sub matrices
 mat2[c(1,2),]
 ## Combine two column vectors in a matrix
-mat3=cbind(vec1, vec2)
+mat3=cbind(vec2, vec3)
 mat3
 ## Combine two row vectors in a matrix
-mat4=rbind(vec1, vec2)
+mat4=rbind(vec2, vec3)
 mat4
 ```
 
@@ -507,8 +464,18 @@ mat4
 import numpy as np
 
 #### Vectors
-# Create an empty vector (numpy array) and fill it later
-vec1 = np.empty(3)  # creates an empty array with 3 elements
+# Create a vector (numpy array) of zeros and fill it later
+vec1 = np.zeros(3)  # creates an array with 3 elements, all equal to 0
+print(vec1)
+
+# Set all elements of the vector to the same value at once using [:]
+vec1[:] = 5
+print(vec1)
+
+# Change a single element: Python starts counting at 0, so the index
+# of the 1st element is 0, of the 2nd element 1, and of the 3rd element 2
+vec1[1] = 6   # changes the 2nd element
+print(vec1)
 
 # Define vectors explicitly using numpy's array function
 vec2 = np.array([1, 2, 3])
@@ -521,9 +488,14 @@ vec4 = np.arange(1, 11)
 vec5 = np.arange(1, 2.1, 0.1)  
 print(vec5)
 
-# Access specific entries using square brackets (note that Python uses zero-based indexing, 
-# i.e. it starts counting the first element of a vector as 0
-print(vec5[3])  # 4th element (index 3, 0-based indexing)
+# Access specific entries using square brackets (note that Python uses zero-based indexing,
+# i.e. it starts counting the first element of a vector as 0)
+print(vec5[0])   # 1st element (index 0)
+print(vec5[3])   # 4th element (index 3)
+print(vec5[-1])  # last element
+
+# Access a range of elements (the upper bound is not included!)
+print(vec5[0:3])  # elements with index 0, 1, 2, i.e. the first three elements
 
 # Access multiple elements at once
 print(vec5[[3, 0]])  # accessing the 4th and 1st elements using numpy
@@ -538,7 +510,7 @@ mat2 = np.array([[1, 2], [3, 4], [5, 6]])
 print(mat2)
 
 # Access specific elements (row, column)
-print(mat2[2, 0])  # 3rd row, 1st column
+print(mat2[2, 0])  # 3rd row (index 2), 1st column (index 0)
 
 # Access entire rows or columns
 print(mat2[:, 0])  # entire first column
@@ -548,11 +520,11 @@ print(mat2[0, :])  # entire first row
 print(mat2[[0, 1], :])  # access the first two rows
 
 # Combine two column vectors in a matrix (equivalent to cbind in R)
-mat3 = np.column_stack((vec1, vec2))
+mat3 = np.column_stack((vec2, vec3))
 print(mat3)
 
 # Combine two row vectors in a matrix (equivalent to rbind in R)
-mat4 = np.row_stack((vec1, vec2))
+mat4 = np.vstack((vec2, vec3))
 print(mat4)
 
 ```
@@ -560,7 +532,7 @@ print(mat4)
 :::
 
 
-#### Exercise 3: vectors and matrices
+#### Exercise 2: vectors and matrices
 a) Write a loop which calculates $x_i=\frac{1}{i^2}$, where $i=1,2,..,10$, and saves each element $x_i$ in a vector.
 
 ::: {.callout-tip collapse="true" title="R solution"}
@@ -593,7 +565,7 @@ import numpy as np
 
 ## Remember that in Python indexing starts with 0, which needs to be taken into account here
 
-# Define a zero vector with and index running from 0 to 9
+# Define a zero vector with an index running from 0 to 9
 x = np.zeros(10)
 
 # Then define the loop, where you have two options to adjust for the zero-based indexing
@@ -604,7 +576,7 @@ for i in range(1, 11):
 
 print(x)
 
-# Option 2: set range of loop from 0 to 9, and add 1 in the index on the RHS
+# Option 2: set range of loop from 0 to 9, and add 1 to i on the RHS
 for i in range(0, 10):  
     x[i] = 1 / ((i+1)**2)
 
@@ -668,10 +640,98 @@ for i in range(1, 11):
 # Combine vectors in a matrix
 mat = np.column_stack((x, X))
 
-mat
+print(mat)
 
 ```
 :::
+
+### Functions (optional)
+- you can write your own *functions* that can be called again and again for different purposes
+- a function consists of a fixed block of code that contains terms (the inputs or arguments of the function) whose values need to be supplied when the function is called
+- this allows running the same type of code many times with changes only to the inputs of the function  
+
+```{r}
+#| output: false
+
+################## Functions ##################################################
+# Let's cast the loop from above that simulates the Keynesian cross
+# into a function called "keynes"
+
+# the terms inside the brackets are the arguments of the function whose 
+# values need to be supplied when the function is called
+
+keynes=function(c0, c1, G0){
+  # Initialise
+  Y=C=1
+
+  # Solve
+  for (i in 1:1000){
+    Y = C+G0
+    C = c0+c1*Y
+    } # close loop
+ 
+ return(Y) # specify the value that will be return when the function is executed
+
+} # close function
+
+# Execute function for desired parameter combination
+print(keynes(c0=2, c1=0.8, G0=10))
+
+```
+
+::: {.callout-note collapse="true" title="Python code"}
+
+```{python}
+#| echo: true
+#| output: false
+#| collapse: true
+
+################## Functions ##################################################
+# Let's cast the loop from above that simulates the Keynesian cross 
+# into a function called "keynes"
+
+# the terms inside the brackets are the arguments of the function whose 
+# values need to be supplied when the function is called
+
+def keynes(c0, c1, G0):
+    # Initialize
+    Y = C = 1
+
+    # Solve
+    for i in range(1000):
+        Y = C + G0
+        C = c0 + c1 * Y
+
+    return Y  # specify the value that will be returned when the function is executed
+
+# Execute function for desired parameter combination
+print(keynes(c0=2, c1=0.8, G0=10))
+
+```
+
+:::
+
+#### Optional exercise: functions
+Use the 'keynes' function we've just defined to find the equilibrium solution  $Y^*$ when setting $c_0=3$, $c_1=0.8$, and $G_0=10$.
+
+::: {.callout-tip collapse="true" title="R solution"}
+```{r}
+#| echo: true
+#| output: true
+print(keynes(c0=3, c1=0.8, G0=10))
+
+```
+:::
+
+::: {.callout-tip collapse="true" title="Python solution"}
+```{python}
+#| echo: true
+#| output: true
+print(keynes(c0=3, c1=0.8, G0=10))
+
+```
+:::
+
 
 ## Coming up next
 You have now successfully covered the elementary coding skills necessary to simulate macroeconomic models. Proceed to @sec-how-to-simulate for a general introduction to model simulation with a final exercise.

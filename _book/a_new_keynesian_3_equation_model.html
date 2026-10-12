@@ -754,9 +754,9 @@ r_t = r_s + a_3(\pi_t-\pi^T)
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>a3 <span class="op">=</span> (a1 <span class="op">*</span> (<span class="dv">1</span> <span class="op">/</span> (b <span class="op">*</span> a2) <span class="op">+</span> a2)) <span class="op">**</span> (<span class="op">-</span><span class="dv">1</span>)</span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameter values for different scenarios</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.full((S, Q), <span class="dv">6</span>)  <span class="co"># Autonomous spending</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>pt <span class="op">=</span> np.full((S, Q), <span class="dv">2</span>)  <span class="co"># Inflation target</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>ye <span class="op">=</span> np.full((S, Q), <span class="dv">5</span>)  <span class="co"># Potential output</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.full((S, Q), <span class="fl">6.0</span>)  <span class="co"># Autonomous spending</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>pt <span class="op">=</span> np.full((S, Q), <span class="fl">2.0</span>)  <span class="co"># Inflation target</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>ye <span class="op">=</span> np.full((S, Q), <span class="fl">5.0</span>)  <span class="co"># Potential output</span></span>
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">0</span>, s:Q] <span class="op">=</span> <span class="dv">7</span>  <span class="co"># Scenario 1: AD boost</span></span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>pt[<span class="dv">1</span>, s:Q] <span class="op">=</span> <span class="dv">3</span>  <span class="co"># Scenario 2: Higher inflation target</span></span>

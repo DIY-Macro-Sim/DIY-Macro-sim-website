@@ -142,8 +142,8 @@ c1 = 0.75
 I0 = 10
 
 # Set baseline parameter values
-Yc = np.full((S, Q), 80)      # output ceiling
-D = np.full((S, Q), 10)       # investment floor (depreciation)
+Yc = np.full((S, Q), 80.0)     # output ceiling
+D = np.full((S, Q), 10.0)      # investment floor (depreciation)
 beta = np.full((S, Q), 1.25)  # accelerator coefficient
 
 # Set parameter values for different scenarios

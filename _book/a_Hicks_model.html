@@ -737,8 +737,8 @@ I_{t} = I_0 + \max[\beta(Y_{t-1} - Y_{t-2}), -D],  \quad \beta &gt; 1, D &gt;0
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>I0 <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Set baseline parameter values</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>Yc <span class="op">=</span> np.full((S, Q), <span class="dv">80</span>)      <span class="co"># output ceiling</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> np.full((S, Q), <span class="dv">10</span>)       <span class="co"># investment floor (depreciation)</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>Yc <span class="op">=</span> np.full((S, Q), <span class="fl">80.0</span>)     <span class="co"># output ceiling</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> np.full((S, Q), <span class="fl">10.0</span>)      <span class="co"># investment floor (depreciation)</span></span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> np.full((S, Q), <span class="fl">1.25</span>)  <span class="co"># accelerator coefficient</span></span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameter values for different scenarios</span></span>

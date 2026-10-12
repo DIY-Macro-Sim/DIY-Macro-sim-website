@@ -1443,7 +1443,7 @@ Y(t+\Delta t)=Y_t + \dot{Y} \Delta t =Y_t + [k(C + G_0 - Y)]\Delta t.
 <span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> np.ones((S, Q))</span>
 <span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the matrix for the exogenous variable</span></span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>G0 <span class="op">=</span> np.full((S, Q), <span class="dv">5</span>)</span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>G0 <span class="op">=</span> np.full((S, Q), <span class="fl">5.0</span>)</span>
 <span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve this system recursively based on the initialization</span></span>
 <span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, Q):</span>

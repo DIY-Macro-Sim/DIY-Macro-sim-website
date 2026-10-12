@@ -839,7 +839,7 @@ Y = np.ones((S, Q))
 C = np.ones((S, Q))
 
 # Initialize the matrix for the exogenous variable
-G0 = np.full((S, Q), 5)
+G0 = np.full((S, Q), 5.0)
 
 # Solve this system recursively based on the initialization
 for t in range(1, Q):

@@ -614,7 +614,7 @@ S = 1
 # Initialize matrices for consumption, investment, and exogenous government spending
 C = np.ones((S, Q))
 I = np.ones((S, Q))
-G0 = np.full((S, Q), 5)
+G0 = np.full((S, Q), 5.0)
 
 # Solve the system recursively based on the initialization
 for t in range(1, Q):

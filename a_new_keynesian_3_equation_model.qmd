@@ -155,9 +155,9 @@ b = 1     # Sensitivity of the central bank to inflation gap
 a3 = (a1 * (1 / (b * a2) + a2)) ** (-1)
 
 # Set parameter values for different scenarios
-A = np.full((S, Q), 6)  # Autonomous spending
-pt = np.full((S, Q), 2)  # Inflation target
-ye = np.full((S, Q), 5)  # Potential output
+A = np.full((S, Q), 6.0)  # Autonomous spending
+pt = np.full((S, Q), 2.0)  # Inflation target
+ye = np.full((S, Q), 5.0)  # Potential output
 
 A[0, s:Q] = 7  # Scenario 1: AD boost
 pt[1, s:Q] = 3  # Scenario 2: Higher inflation target
