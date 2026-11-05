@@ -133,7 +133,7 @@ evecs_norm
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
+use_python("C:/Users/kjoko/anaconda3/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")

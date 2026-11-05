@@ -67,8 +67,8 @@ Table 1 reports the parameterisation used in the simulation. All scenarios are i
 |     Scenario                                    | $L$ | $\lambda$ | $\alpha$ | $\beta$ | $\delta$ | $w^S$ | $\gamma$ |
 |-------------------------------------------------|-----|-----------|----------|---------|------------|-------|----------|
 | 1: baseline                                     | 20  | 10        | 0.9      | 0.7     | 0.5        | 0.4   | 0.12     |
-| 2: rise subsistence wage ($w^S$)                | 20  | 10        | 0.9      | 0.7     | 0.5        | 0.3   | 0.12     |
-| 3: rise in labour supply elasticity ($\gamma$)  | 20  | 10        | 0.9      | 0.7     | 0.5        | 0.4   | 0.17     |
+| 2: fall in subsistence wage ($w^S$)             | 20  | 10        | 0.9      | 0.7     | 0.5        | 0.3   | 0.12     |
+| 3: steeper labour supply curve ($\gamma$)       | 20  | 10        | 0.9      | 0.7     | 0.5        | 0.4   | 0.17     |
 
 
 
@@ -111,7 +111,7 @@ gamma=matrix(data=0.12, nrow=S, ncol=Q) # labour supply coefficient, sector 2
 
 # Set parameter values for different scenarios
 w1[2,s:Q]=0.3         # scenario 2: fall in subsistence wage
-gamma[3,s:Q]=0.17     # scenario 3: rise in labour supply elasticity
+gamma[3,s:Q]=0.17     # scenario 3: steeper labour supply curve (lower labour supply elasticity)
 
 # Create vectors that will record when the turning point occurs and when the simulation ends
 tp = rep(NA, S)
@@ -203,7 +203,7 @@ PS2=(P2)/(Y2)
 #| collapse: true
 
 library(reticulate)
-use_python("C:/Spyder/envs/spyder-runtime/python.exe", required = TRUE)
+use_python("C:/Users/kjoko/anaconda3/python.exe", required = TRUE)
 #py_install("matplotlib")
 #py_config()
 #py_install("numpy")
@@ -249,7 +249,7 @@ gamma = np.full((S, Q), 0.12)  # Labour supply coefficient, sector 2
 
 # Set parameter values for different scenarios
 w1[1, s:Q] = 0.3  # Scenario 2: fall in subsistence wage
-gamma[2, s:Q] = 0.17  # Scenario 3: rise in labour supply elasticity
+gamma[2, s:Q] = 0.17  # Scenario 3: steeper labour supply curve (lower labour supply elasticity)
 
 # Create vectors that will record when the turning point occurs and when the simulation ends
 tp = np.full(S, np.nan)
@@ -377,7 +377,7 @@ legend("bottomright", legend=c(expression(P[2]), expression(K[2])),
 
 ```
 
-@fig-wage and @fig-profshare illustrate the distributional implications of the model. Before the Lewis turning point, the profit share of the modern sector increases, as firms benefit from a real wage that is fixed below the marginal product of labour. After the turning point, real wages jump upwards and begin to increase further, gradually closing the gap with the marginal product. As a result, the profit share falls and embarks on a downward convergence to the level implied by the marginal product of labour.^[In equilibrium, where $L_{2t} - L_{2t-1} =0$, the real wage $w_2$ will be equal to the MPL in sector 2. The profit share is then constant and given by $\frac{P_2}{Y_2} = 1-\beta$.] The aggregate profit share broadly displays an inverted U-shaped pattern.
+@fig-wage and @fig-profshare illustrate the distributional implications of the model. Before the Lewis turning point, the real wage in the modern sector is fixed at $w^S(1+\rho)$, while capital accumulation keeps raising the marginal product of labour. Thanks to the surplus labour in the traditional sector, the modern sector can thus expand employment without having to raise the wage. The real wage is therefore lower than under an upward-sloping labour supply curve starting from the same initial wage, along which the wage would rise with every additional worker hired. Since employment adjusts only gradually (@eq-lewis_L2), the MPL rises above the real wage and the gap widens over time. The gap drives up the profit share.^[With a Cobb-Douglas production function, the wage share is $\frac{w_2 L_2}{Y_2} = \beta \frac{w_2}{MPL_2}$, such that the profit share is given by $\frac{P_2}{Y_2} = 1 - \beta\frac{w_2}{MPL_2}$.] It rises as long as the MPL grows faster than the real wage. After the turning point, real wages jump upwards and begin to increase further, gradually narrowing the gap with the marginal product. As a result, the profit share falls. The aggregate profit share thus displays an inverted U-shaped pattern.
 
 ```{r collapse=TRUE}
 #| label: fig-wage
@@ -409,7 +409,7 @@ abline(v = tp[1], col = "darkred")
 
 ```
 
-@fig-scen2 compares output dynamics in the modern sector for the baseline scenario with scenario 2 in which the subsistence wage $w^s$ is fixed at a lower level and with scenario 3 in which the labour supply elasticity $\gamma$ the modern sector faces after the turning point is higher. It can be seen that for a lower subsistence wage, the modern sector grows faster and the Lewis turning point is reached earlier. For a higher labour supply elasticity, the labour supply curve after the turning point is steeper, which leads to a faster increase in the real wage, a stronger squeeze of profits, and thus slower output growth. These results illustrate the Classical nature of the model, whereby capital accumulation is driven by profits. Thus, any reduction in profits slows down the growth process.
+@fig-scen2 compares output dynamics in the modern sector for the baseline scenario with scenario 2 in which the subsistence wage $w^s$ is fixed at a lower level and with scenario 3 in which the slope $\gamma$ of the labour supply curve the modern sector faces after the turning point is higher (i.e. labour supply is less elastic). It can be seen that for a lower subsistence wage, the modern sector grows faster and the Lewis turning point is reached earlier. For a steeper labour supply curve after the turning point, which leads to a faster increase in the real wage, a stronger squeeze of profits, and thus slower output growth. These results illustrate the Classical nature of the model, whereby capital accumulation is driven by profits. Thus, any reduction in profits slows down the growth process.
 
 
 ```{r collapse=TRUE}
@@ -423,7 +423,7 @@ lines(Y2[2, Tmin:Tmax],lty=2)
 lines(Y2[3, Tmin:Tmax],lty=3)
 abline(v = tp[1], col = "darkred")
 abline(v = tp[2], col = "red")
-legend("bottomright", legend=c("1: baseline", "2: lower subsistence wage", "3: higher labour supply elasticity"),
+legend("bottomright", legend=c("1: baseline", "2: lower subsistence wage", "3: steeper labour supply curve"),
        lty=1:3, cex=0.8, bty = "n", y.intersp=0.8)
 ```
 
@@ -583,7 +583,7 @@ With $tr(J)$ clearly positive, let us focus on $1-tr(J)+det(J)>0$. Plugging in $
 $$
 w_2 - \frac{Y_{2t-1}}{L_{2t-1}}>0.
 $$
-As long as the real wage is below the average product of labour, $\frac{Y_{2}}{L_{2}}$, the condition will be violated, as there are positive profits and thus capital accumulation. With the real wage being lower or equal to the marginal product of labour, this is indeed the case. The system is then dynamically unstable and will generate exponential growth. 
+As long as the real wage is below the average product of labour, $\frac{Y_{2}}{L_{2}}$, the condition will be violated, as there are positive profits and thus capital accumulation. Since the average product of labour is given by $\frac{Y_2}{L_2} = \frac{MPL_2}{\beta}$, it exceeds the MPL by a factor of $\frac{1}{\beta} > 1$. With the real wage close to or below the MPL, it therefore lies below the average product, and the condition is indeed violated. The system is then dynamically unstable and will generate exponential growth. 
 
 We can check this stability analysis numerically:
 

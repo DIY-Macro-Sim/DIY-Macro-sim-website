@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(quarto render *)",
+      "Bash(git fetch *)",
+      "Bash(cd \"C:\\\\Users\\\\Karsten Kohler\\\\Desktop\\\\DIY-Macro-sim-website\" && sed -i 's/smm/msm/g' \"SMM with the New Keynesian 3-equation model.qmd\" && grep -c \"smm\" \"SMM with the New Keynesian 3-equation model.qmd\"; grep -c \"msm\" \"SMM with the New Keynesian 3-equation model.qmd\")"
+    ]
+  }
+}
